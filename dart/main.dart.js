@@ -7464,7 +7464,7 @@ u.setAttribute("class","playhead")},
 eV:function(a){var u,t,s,r,q,p,o,n=this,m="note",l=H.a(H.a(C.d.w(document,"http://www.w3.org/2000/svg","rect"),"$il"),"$iaa"),k=a.c,j=n.ga3()
 if(typeof k!=="number")return k.O()
 j=H.b(k*j-2)
-k=H.b(Math.max(8,(n.db-20)/n.c)-2)
+k=H.b(Math.max(5,(n.db-20)/n.c)-2)
 u=a.b
 t=n.ga3()
 if(typeof u!=="number")return u.O()
@@ -7474,7 +7474,7 @@ s=C.b.A(H.L(u.h(0,m),"$iK").a)
 r=n.x
 q=r==null||r.e<0?0:C.b.A(r.e)
 r=n.c
-p=P.f;(l&&C.i).sG(l,P.h(["class","timeline-note","width",j,"height",k,"x",t,"y",H.b((r-C.e.ac(s-q,r)-1)*Math.max(8,(n.db-20)/r)+20+1)],p,p))
+p=P.f;(l&&C.i).sG(l,P.h(["class","timeline-note","width",j,"height",k,"x",t,"y",H.b((r-C.e.ac(s-q,r)-1)*Math.max(5,(n.db-20)/r)+20+1)],p,p))
 k=H.L(u.h(0,m),"$iK").a
 o=typeof k==="number"&&Math.floor(k)===k?H.b(H.L(u.h(0,m),"$iK").a):C.b.fW(H.L(u.h(0,m),"$iK").a,2)
 k=W.y
