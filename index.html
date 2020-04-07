@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TunePad Drum Circles</title>
+  <link rel="icon" href="images/favicon.ico">
+
+  <!-- FIREBASE -->
+  <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
+
+  <!-- CODEMIRROR -->
+  <script src="packages/editor/codemirror/lib/codemirror.js"></script>
+  <script src="packages/editor/codemirror/addon/edit/matchbrackets.js"></script>
+  <script src="packages/editor/codemirror/addon/selection/active-line.js"></script>
+  <script src="packages/editor/codemirror/mode/python/python.js"></script>
+  <script src="packages/editor/codemirror/addon/search/search.js"></script>
+  <script src="packages/editor/codemirror/addon/search/searchcursor.js"></script>
+  <script src="packages/editor/codemirror/addon/search/jump-to-line.js"></script>
+  <script src="packages/editor/codemirror/addon/fold/foldcode.js"></script>
+  <script src="packages/editor/codemirror/addon/fold/foldgutter.js"></script>
+  <script src="packages/editor/codemirror/addon/fold/indent-fold.js"></script>
+  <script src="packages/editor/codemirror/addon/dialog/dialog.js"></script>
+  <script src="packages/editor/js/codemirror-helper.js"></script>
+  <link href="packages/editor/codemirror/lib/codemirror.css" rel="stylesheet">
+  <link href="packages/editor/css/tunepad-theme-dark.css" rel="stylesheet">
+  <link href="packages/editor/codemirror/addon/dialog/dialog.css" rel="stylesheet">
+  <link href="packages/editor/codemirror/addon/fold/foldgutter.css" rel="stylesheet">
+
+  <!-- font awesome -->
+  <link href="css/fontawesome.all.min.css" rel="stylesheet">
+
+  <!-- Firepad -->
+  <link rel="stylesheet" href="css/firepad.css" />
+  <script src="https://cdn.firebase.com/libs/firepad/1.5.3/firepad.min.js"></script>
+
+  <!-- MP3 Export -->
+  <script src="packages/audio_tools/js/lame.min.js"></script>
+  <script src="packages/audio_tools/js/mp3-helper.js"></script>
+
+  <!-- MIDI Export -->
+  <script src="packages/audio_tools/js/midi-helper.js"></script>
+  <script src="packages/audio_tools/js/jsmidgen.js"></script>
+
+
+  <link rel="stylesheet" href="css/main.css" />
+
+  <script>
+    function firebaseSave(directory, value) {
+      let data = JSON.parse(value);
+      let ref = firebase.database().ref(directory);
+      ref.set(data)
+        .then(function () { })
+        .catch(function(error) { console.log('error saving to firebase'); });
+    }
+
+    function firebaseLoad(directory) {
+      let ref = firebase.database().ref(directory);
+      ref.on("value", function(snapshot) {
+        onFirebaseUpdate(directory, JSON.stringify(snapshot.val()));
+      });
+    }
+    </script>
+
+  <script defer src="dart/main.dart.js"></script>
+</head>
+
+<body>
+
+<main>
+  <!--
+  <nav id="top-nav">
+    <div id="change-time-signature">
+      <span id="time-signature">4/4</span> time
+      <i class="fa fa-angle-down"></i>
+      <ul class='time-signature-menu context-menu hidden'>
+        <li class='menu-item'><i class="fas"></i>2/4</li>
+        <li class='menu-item'><i class="fas"></i>3/4</li>
+        <li class='menu-item'><i class="fas fa-check"></i>4/4</li>
+        <li class='menu-item'><i class="fas"></i>5/4</li>
+        <li class='menu-item'><i class="fas"></i>6/4</li>
+        <li class='menu-item'><i class="fas"></i>7/4</li>
+        <li class='menu-item'><i class="fas"></i>2/8</li>
+        <li class='menu-item'><i class="fas"></i>3/8</li>
+        <li class='menu-item'><i class="fas"></i>4/8</li>
+        <li class='menu-item'><i class="fas"></i>5/8</li>
+        <li class='menu-item'><i class="fas"></i>6/8</li>
+        <li class='menu-item'><i class="fas"></i>7/8</li>
+        <li class='menu-item'><i class="fas"></i>12/8</li>
+      </ul>
+    </div>
+  </nav>
+-->
+  <div class="gadget-container" id="gadget-100">
+
+    <!-- HEADER BAR -->
+    <div class="header-bar">
+      <div class="gadget-icon"></div>
+      <div>
+        <div class="gadget-name">TunePad</div>
+        <div class="gadget-info"></div>
+        <div class="gadget-error">ERROR</div>
+      </div>
+      <div class="expander"></div>
+      <div class="eq-bars"></div>
+    </div>
+
+
+
+    <!-- PIANO ROLL TIMELINE -->
+    <div class="timeline-container"></div>
+
+
+    <!-- BUTTON TOOLBAR -->
+    <div class="toolbar">
+      <button class="play-button" title="Play"><i class="fas fa-play"></i></button>
+      <button class="pause-button hidden" title="Pause"><i class="fas fa-pause"></i></button>
+      <button class="stop-button" title="Stop"><i class="fas fa-stop"></i></button>
+      <button class="step-button" title="Step Forward"><i class="fas fa-step-forward"></i></button>
+      <!-- button class="record-button" title="Record"><i class="fas fa-circle"></i></button -->
+      <div class="voice-selector">
+        <span class="voice-name">PIANO</span>
+        <i class="fa fa-angle-down"></i>
+        <ul class='voice-menu context-menu hidden'>
+          <li class='menu-item' data-voice="bass"><i class="fas"></i>Bass</li>
+          <li class='menu-item' data-voice="guitar"><i class="fas"></i>Guitar</li>
+          <li class='menu-item' data-voice="marimba"><i class="fas"></i>Marimba</li>
+          <li class='menu-item' data-voice="musicbox"><i class="fas"></i>Musicbox</li>
+          <li class='menu-item' data-voice="organ"><i class="fas"></i>Organ</li>
+          <li class='menu-item' data-voice="piano"><i class="fas fa-check"></i>Piano</li>
+          <li class='menu-item' data-voice="party"><i class="fas"></i>Party</li>
+          <li class='menu-item' data-voice="synthesizer"><i class="fas"></i>Synthesizer</li>
+        </ul>
+      </div>
+      <div class="expander"></div>
+      <div class="menu-button">
+        <i class="fas fa-ellipsis-h"></i>
+        <ul class='options-menu context-menu hidden'>
+          <li class='menu-item' data-command="show-timeline"><i class="fas fa-check"></i>Show Timeline</li>
+          <li class='menu-item' data-command="show-editor"><i class="fas fa-check"></i>Show Code</li>
+          <li class='menu-item' data-command="show-instrument"><i class="fas fa-check"></i>Show Instrument</li>
+          <li class='menu-item' data-command="show-output"><i class="fas"></i>Show Python Output</li>
+          <li class='menu-separator'></li>
+          <li class='menu-item' data-command="midi-input"><i class="fas fa-check"></i>Listen to MIDI Input</li>
+          <li class='menu-item' data-command="midi-output"><i class="fas"></i>Send MIDI Output</li>
+          <li class='menu-separator'></li>
+          <li class='menu-item' data-command="note-hints"><i class="fab fa-itunes-note"></i>Toggle Note Names</li>
+          <li class='menu-item' data-command="midi-hints"><i class="fas fa-hashtag"></i>Toggle Note Values</li>
+          <!-- <li class='menu-item' data-command="keyb-hints"><i class="fas fa-keyboard"></i>Toggle Keyboard Hints</li> -->
+          <li class='menu-separator'></li>
+          <li class='menu-item' data-command="export-mp3"><i class="fas fa-download"></i>Export MP3</li>
+          <li class='menu-item' data-command="export-wav"><i class="fas fa-download"></i>Export WAV</li>
+          <li class='menu-item' data-command="export-midi"><i class="fas fa-download"></i>Export MIDI</li>
+          <li class='menu-separator'></li>
+          <li class='menu-item' data-command="share"><i class="fas fa-share"></i>Share</li>
+          <li class='menu-item'><i class="fas fa-code-branch"></i>Remix</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PYTHON CODEMIRROR EDITOR -->
+    <div class="editor-container">
+      <div class="python-editor"></div>
+      <button class="output-hint">PYTHON OUTPUT<div class="output-count">10</div></button>
+    </div>
+
+    <!-- PYTHON OUTPUT -->
+    <div class="output-container hidden">
+      <button class="close-button fas fa-times"></button>
+      <pre class="output"></pre>
+    </div>
+
+    <!-- PYTHON ERROR MESSAGE -->
+    <div class="error-container hidden">
+      <div class="error-name-container">
+        <i class="fas fa-exclamation-circle"></i>
+        <span class="error-name">Python Error</span>
+      </div>
+      <div class="error-description"></div>
+    </div>
+
+    <!-- MUSICAL INSTRUMENT -->
+    <div class="instrument-container" tabindex="3"></div>
+  </div>
+
+  <div id="overlay" class="hidden">
+    <div class="dialog hidden" id="progress-dialog">
+      <div class="progress-message">Exporting audio data...</div>
+      <div class="progress-status">50%</div>
+    </div>
+  </div>
+</main>
+
+
+  <template id="piano-template">
+    <style>
+      @keyframes fade-out {
+        0% { opacity: 1.0; }
+        100% { opacity: 0.0; }
+      }
+      .instrument {
+        width: 100%;
+        height: 140px;
+        position: relative;
+        border: 2px solid rgba(0, 0, 0, 0.2);
+        box-sizing: border-box;
+      }
+      .backdrop {
+        fill: #30303f;
+      }
+      .container {
+        width: 100%;
+        height: 136px;
+      }
+      .piano-key.black {
+        fill: #556;
+        stroke: #222;
+        stroke-width: 1.5;
+        rx: 1.5;
+        filter: url(#drop-shadow);
+      }
+      .piano-key.black:hover { fill: #777; }
+      .piano-key.black.pressed {
+        fill: #222;
+        filter: none;
+      }
+      .piano-key.white {
+        fill: #f9f9f9;
+        stroke: white;
+        stroke-width: 1.5;
+        rx: 1.4;
+        filter: url(#drop-shadow);
+      }
+      .piano-key.white:hover { fill: #eee; }
+      .piano-key.white.pressed {
+        fill: #aaa;
+        stroke: #777;
+      }
+      .note-hint, .midi-hint, .key-hint {
+        font: 9pt sans-serif;
+        fill: #666;
+        text-anchor: middle;
+        opacity: 0.0;
+        pointer-events: none;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+      }
+      .key-hint.black { fill: #aaa; }
+      .midi-hint { font: 9pt sans-serif; }
+      .key-hint { font: 10pt sans-serif; }
+      .note-hint.show, .midi-hint.show, .key-hint.show { opacity: 1.0; }
+      .note-hint.always-show { opacity: 1.0; }
+      .felt {
+        /*fill : #a00;*/
+        fill: #222;
+        stroke : #222;
+        stroke-width : 1;
+      }
+      .animated-slide {
+        transition: transform 0.5s ease-in-out;
+      }
+      .mini-piano {
+        opacity: 0.0;
+        transition: opacity 0.25s;
+      }
+      .mini-piano.show { opacity: 1.0; }
+      .button-row button {
+        top: 0;
+        position: absolute;
+        font-size: 20px;
+        width: 26px;
+        height: 134px;
+        border: none;
+        border-radius: 13px;
+        background-color: transparent;
+        color: rgba(255, 255, 255, 0.5);
+        outline: none;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+      }
+      #up-octave { right: -26px; }
+      #down-octave { left: -26px; }
+      .button-row button:hover { color: rgba(255, 255, 255, 0.75); }
+      .button-row button:active { color: rgba(255, 255, 255, 1); }
+      .button-set { margin: 0 10px; }
+      .button-set.slide { flex: 1; }
+      /*
+      .button-set button { margin: -1px; }
+      .button-set button:first-child {
+        border-top-left-radius: 12px;
+        border-bottom-left-radius: 12px;
+      }
+      .button-set button:last-child {
+        border-top-right-radius: 12px;
+        border-bottom-right-radius: 12px;
+      }
+      */
+    </style>
+    <div class="instrument">
+      <div class="button-row">
+        <div class="button-set slide">
+          <button id="down-octave">❮</button><button id="up-octave">❯</button>
+        </div>
+      </div>
+      <svg class="container" version="1.1" viewBox="0 0 900 230">
+        <defs>
+          <filter id="drop-shadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+            <feOffset dx="1" dy="2" />
+            <feMerge>
+              <feMergeNode />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+      </svg>
+    </div>
+  </template>
+
+
+  <template id="timeline-template">
+    <style>
+      .timeline {
+        height: 100px;
+        background-color: #414251;
+        border: 1px solid #0003;
+      }
+      /* String foreground = "#ddd"; */
+      .playhead {
+/*        fill: #82838C; */
+        fill: orange;
+      }
+
+      .ruler {
+        fill: #2E303F;
+      }
+
+      .ruler-marks {
+        fill: #ccc;
+        text-anchor: start;
+        dominant-baseline: middle;
+        font-family: 'Proxima Nova', sans-serif;
+        font-size: 11px;
+        font-weight: 200;
+        pointer-events: none;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+      }
+
+      .beat-line {
+        stroke: #ccc;
+        stroke-opacity: 0.1;
+        stroke-width: 1.0;
+      }
+      .timeline #note-hint {
+        position: absolute;
+        display: flex;
+        background-color: #87c44e;
+        font-size: 12px;
+        padding: 8px 12px;
+        width: 145px;
+        top: 75px;
+        right: 20px;
+        color: white;
+        font-family: sans-serif;
+        line-height: 150%;
+        box-sizing: border-box;
+        border-radius: 4px;
+        opacity: 0;
+        transition: opacity 0.25s;
+        pointer-events: none;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+      }
+      .timeline #note-hint.show { opacity: 1.0; }
+      #note-hint .note-box {
+        display: flex;
+        border: 1px solid white;
+        padding: 4px;
+        width: 30px;
+        margin-right: 10px;
+        border-radius: 3px;
+      }
+      #note-hint .note-name {
+        font-family: serif;
+        font-size: 24px;
+        line-height: 24px;
+      }
+      #note-hint .note-decorators {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        line-height: 12px;
+        font-size: 12px;
+      }
+      #note-hint .note-info {
+        font-size: 12px;
+        line-height: 140%;
+        padding-top: 5px;
+      }
+      .timeline-note { fill: #2f9aef; }
+      .timeline-note:hover { fill: white; }
+      .timeline-note.highlighted { fill: white; }
+      .timeline-waveform { fill: rgba(255, 255, 255, 0.7); }
+
+    </style>
+    <div class="timeline">
+      <div id="note-hint">
+        <div class="note-box">
+          <div class="note-name">C</div>
+          <div class="note-decorators">
+            <div class="accidental">#</div>
+            <div class="octave">2</div>
+          </div>
+        </div>
+        <div class="note-info">
+          Note: 60 <br>From: line 5
+        </div>
+      </div>
+      <svg class="container" version="1.1" viewBox="0 0 900 200"></svg>
+    </div>
+  </template>
+</body>
+</html>
