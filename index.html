@@ -107,11 +107,6 @@
     </div>
 
 
-
-    <!-- PIANO ROLL TIMELINE -->
-    <div class="timeline-container"></div>
-
-
     <!-- BUTTON TOOLBAR -->
     <div class="toolbar">
       <button class="play-button" title="Play"><i class="fas fa-play"></i></button>
@@ -159,6 +154,11 @@
       </div>
     </div>
 
+
+    <!-- PIANO ROLL TIMELINE -->
+    <div class="timeline-container"></div>
+
+
     <!-- PYTHON CODEMIRROR EDITOR -->
     <div class="editor-container">
       <div class="python-editor"></div>
@@ -173,11 +173,13 @@
 
     <!-- PYTHON ERROR MESSAGE -->
     <div class="error-container hidden">
-      <div class="error-name-container">
-        <i class="fas fa-exclamation-circle"></i>
-        <span class="error-name">Python Error</span>
+      <div class="error-message">
+        <div class="error-name-container">
+          <i class="fas fa-exclamation-circle"></i>
+          <span class="error-name">Python Error</span>
+        </div>
+        <div class="error-description"></div>
       </div>
-      <div class="error-description"></div>
     </div>
 
     <!-- MUSICAL INSTRUMENT -->
@@ -363,7 +365,6 @@
         font-size: 12px;
         padding: 8px 12px;
         width: 145px;
-        top: 75px;
         right: 20px;
         color: white;
         font-family: sans-serif;

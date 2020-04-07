@@ -11,21 +11,30 @@ body {
   max-width: 800px;
   min-width: 150px;
   width: 55%;
-  background-color: #535563;
-  padding: 0 0 5px 0;
-  border-radius: 15px;
+  padding: 0 10px;
+  border-radius: 10px;
   position: relative;
+  background-color: #946161;
+}
+
+.toolbar,
+.timeline-container,
+.instrument-container,
+.editor-container,
+.output-container,
+.error-container {
+  position: relative;
+  padding: 0 20px 10px 20px;
+  border-left: 2px solid #414252;
+  border-right: 2px solid #414252;
+  background-color: #535563;
 }
 
 .timeline-container {
   overflow-y: hidden;
   overflow-x: scroll;
-  margin: 0 20px 10px 20px;
 }
 
-.instrument-container {
-  margin: 0 20px 10px 20px;
-}
 .instrument-container.armed {
   outline: 1.5px solid #fc0;
 }
@@ -33,12 +42,12 @@ body {
 
 /* HEADER BAR */
 .header-bar {
-  border-top-right-radius: 15px;
-  border-top-left-radius: 15px;
   background-color: #2e303f;
   height: 60px;
-  margin-bottom: 15px;
+  border-top: 2px solid #667;
   border-bottom: 2px solid #667;
+  border-left: 2px solid #414252;
+  border-right: 2px solid #414252;
   padding: 13px 20px;
   box-sizing: border-box;
   display: flex;
@@ -79,10 +88,7 @@ body {
 
 
 /* PYTHON EDITOR */
-.editor-container {
-  margin: 0 20px 15px 20px;
-  position: relative;
-}
+.editor-container { }
 
 .python-editor {
   min-height: 200px;
@@ -99,7 +105,7 @@ body {
 /* BUTTON TOOLBAR */
 .toolbar {
   display: flex;
-  margin: 0 20px 10px 20px;
+  padding: 5px 20px 8px 20px;
 }
 .toolbar button,
 .toolbar .voice-selector,
@@ -207,14 +213,12 @@ body {
 
 
 /* ERROR MESSAGES */
-.error-container {
+.error-message {
   background-color: white;
   padding: 15px;
   border-left: 14px solid #da575d;
-  margin: 0 20px 15px 20px;
   font-size: 13px;
 }
-.error-container.hidden { display: none; }
 .error-name-container { font-weight: 200; color: #445; margin-bottom: 5px 0; }
 .error-name-container .fas { color: #da575d; margin-right: 5px; font-size: 120%; }
 .error-name { position: relative; top: -2px; }
@@ -229,26 +233,26 @@ body {
 
 
 /* PYTHON OUTPUT */
-.output-container {
+.output-container { }
+.output-container pre {
   min-height: 100px;
   max-height: 250px;
   overflow: scroll;
   background-color: #fffe;
   box-shadow: 0 0 10px 4px #3331 inset;
-  margin: 0 20px 15px 20px;
-  padding: 15px 25px;
   font-family: monospace;
   color: #333;
   font-size: 13px;
-  position: relative;
+  padding: 10px 15px;
+  margin: 0;
 }
 .output-container .close-button {
   top: 0;
-  right: 0;
+  right: 20px;
   width: 26px;
   height: 26px;
   background-color: transparent;
-  color: #333;
+  color: #555;
   outline: none;
   border-radius: 50%;
   border: 1px solid #333;
@@ -260,8 +264,8 @@ body {
 
 .output-hint {
   position: absolute;
-  bottom: 0px;
-  right: 0px;
+  bottom: 10px;
+  right: 20px;
   color: white;
   background-color: #87c44e;
   padding: 3px 14px;
