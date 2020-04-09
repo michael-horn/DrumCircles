@@ -115,7 +115,7 @@
       <button class="step-button" title="Step Forward"><i class="fas fa-step-forward"></i></button>
       <!-- button class="record-button" title="Record"><i class="fas fa-circle"></i></button -->
       <div class="voice-selector">
-        <span class="voice-name">PIANO</span>
+        <span class="voice-name"></span>
         <i class="fa fa-angle-down"></i>
         <ul class='voice-menu context-menu hidden'>
           <li class='menu-item' data-voice="bass"><i class="fas"></i>Bass</li>
@@ -126,6 +126,8 @@
           <li class='menu-item' data-voice="piano"><i class="fas fa-check"></i>Piano</li>
           <li class='menu-item' data-voice="party"><i class="fas"></i>Party</li>
           <li class='menu-item' data-voice="synthesizer"><i class="fas"></i>Synthesizer</li>
+          <li class="menu-separator">
+          <li class='menu-item' data-voice="808-drums"><i class="fas"></i>808 Drumkit</li>
         </ul>
       </div>
       <div class="expander"></div>
@@ -156,11 +158,11 @@
 
 
     <!-- PIANO ROLL TIMELINE -->
-    <div class="timeline-container"></div>
+    <div class="timeline-container hidden"></div>
 
 
     <!-- PYTHON CODEMIRROR EDITOR -->
-    <div class="editor-container">
+    <div class="editor-container hidden">
       <div class="python-editor"></div>
       <button class="output-hint">PYTHON OUTPUT<div class="output-count">10</div></button>
     </div>
@@ -183,7 +185,7 @@
     </div>
 
     <!-- MUSICAL INSTRUMENT -->
-    <div class="instrument-container" tabindex="3"></div>
+    <div class="instrument-container hidden" tabindex="3"></div>
   </div>
 
   <div id="overlay" class="hidden">
@@ -289,17 +291,6 @@
       .button-row button:active { color: rgba(255, 255, 255, 1); }
       .button-set { margin: 0 10px; }
       .button-set.slide { flex: 1; }
-      /*
-      .button-set button { margin: -1px; }
-      .button-set button:first-child {
-        border-top-left-radius: 12px;
-        border-bottom-left-radius: 12px;
-      }
-      .button-set button:last-child {
-        border-top-right-radius: 12px;
-        border-bottom-right-radius: 12px;
-      }
-      */
     </style>
     <div class="instrument">
       <div class="button-row">
@@ -323,8 +314,68 @@
   </template>
 
 
+
+  <template id="drums-template">
+    <style>
+      .instrument {
+        width: 100%;
+        height: 140px;
+        position: relative;
+        box-sizing: border-box;
+      }
+      .backdrop { fill: #535563; }
+      .container {
+        width: 100%;
+        height: 100%;
+      }
+      .drum-pad {
+        fill: #fff2;
+        stroke: #fff5;
+        stroke-width: 1.5;
+        rx: 1.5;
+        filter: url(#drop-shadow);
+      }
+      .drum-pad:hover { fill: #fff4; }
+      .drum-pad.pressed { fill: #fff8; filter: none; }
+      .drum-name, .key-hint, .midi-hint {
+        font: 9pt sans-serif;
+        fill: #fffc;
+        text-anchor: middle;
+        pointer-events: none;
+        dominant-baseline: central;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+      }
+      .midi-hint, .key-hint { opacity: 0; }
+      .key-hint { font: 11pt sans-serif; fill: #fff6; }
+      .show { opacity: 1.0; }
+    </style>
+    <div class="instrument">
+      <svg class="container" version="1.1" viewBox="0 0 900 230">
+        <defs>
+          <filter id="drop-shadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="6" />
+            <feOffset dx="0" dy="0" />
+            <feMerge>
+              <feMergeNode />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+      </svg>
+    </div>
+  </template>
+
+
+
+
   <template id="timeline-template">
     <style>
+      .scroll-container {
+        overflow-x: scroll;
+        overflow-y: hidden;
+      }
       .timeline {
         height: 100px;
         background-color: #414251;
@@ -364,7 +415,6 @@
         background-color: #87c44e;
         font-size: 12px;
         padding: 8px 12px;
-        width: 145px;
         right: 20px;
         color: white;
         font-family: sans-serif;
@@ -381,16 +431,12 @@
       .timeline #note-hint.show { opacity: 1.0; }
       #note-hint .note-box {
         display: flex;
-        border: 1px solid white;
-        padding: 4px;
-        width: 30px;
         margin-right: 10px;
-        border-radius: 3px;
       }
       #note-hint .note-name {
         font-family: serif;
-        font-size: 24px;
-        line-height: 24px;
+        font-size: 22px;
+        line-height: 22px;
       }
       #note-hint .note-decorators {
         display: flex;
@@ -400,9 +446,8 @@
         font-size: 12px;
       }
       #note-hint .note-info {
-        font-size: 12px;
-        line-height: 140%;
-        padding-top: 5px;
+        font-size: 13px;
+        line-height: 24px;
       }
       .timeline-note { fill: #2f9aef; }
       .timeline-note:hover { fill: white; }
@@ -410,20 +455,22 @@
       .timeline-waveform { fill: rgba(255, 255, 255, 0.7); }
 
     </style>
-    <div class="timeline">
-      <div id="note-hint">
-        <div class="note-box">
-          <div class="note-name">C</div>
-          <div class="note-decorators">
-            <div class="accidental">#</div>
-            <div class="octave">2</div>
+    <div class="scroll-container">
+      <div class="timeline">
+        <div id="note-hint">
+          <div class="note-box">
+            <div class="note-name">C</div>
+            <div class="note-decorators">
+              <div class="accidental">#</div>
+              <div class="octave">2</div>
+            </div>
+          </div>
+          <div class="note-info">
+            Note: 60 from line 5
           </div>
         </div>
-        <div class="note-info">
-          Note: 60 <br>From: line 5
-        </div>
+        <svg class="container" version="1.1" viewBox="0 0 900 200"></svg>
       </div>
-      <svg class="container" version="1.1" viewBox="0 0 900 200"></svg>
     </div>
   </template>
 </body>

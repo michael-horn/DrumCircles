@@ -24,16 +24,13 @@ body {
 .output-container,
 .error-container {
   position: relative;
-  padding: 0 20px 10px 20px;
+  padding: 0 20px 15px 20px;
   border-left: 2px solid #414252;
   border-right: 2px solid #414252;
   background-color: #535563;
 }
 
-.timeline-container {
-  overflow-y: hidden;
-  overflow-x: scroll;
-}
+.timeline-container { }
 
 .instrument-container.armed {
   outline: 1.5px solid #fc0;
@@ -111,9 +108,9 @@ body {
 .toolbar .voice-selector,
 .toolbar .menu-button {
   outline: none;
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   color: rgba(255, 255, 255, 0.75);
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: #fff2;
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
   width: 45px;
   height: 28px;
@@ -207,7 +204,7 @@ body {
 .context-menu li.menu-item .far,
 .context-menu li.menu-item .fab { width: 2.2em; margin-left: 5px; }
 .context-menu li.menu-separator {
-  border-bottom: 1px solid #555;
+  border-bottom: 1px solid #bbb;
   margin: 8px;
 }
 
