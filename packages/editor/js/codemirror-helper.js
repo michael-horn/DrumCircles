@@ -58,17 +58,11 @@ function codemirror(selector) {
 //----------------------------------------------------------
 // concurrent multi-user editing with firepad
 //----------------------------------------------------------
-function connectFirepad(selector, config) {
+function connectFirepad(selector, directory) {
   if (_cmEditors[selector]) {
     editor = _cmEditors[selector];
-
-    firebase.initializeApp(JSON.parse(config));
-
-    // database reference.
-    var firepadRef = getExampleRef();
-
-    // create firepad (with rich text toolbar and shortcuts enabled).
-    var firepad = Firepad.fromCodeMirror(firepadRef, editor, { defaultText: '# TunePad drum circle' });
+    let ref = firebase.database().ref(directory);
+    let firepad = Firepad.fromCodeMirror(ref, editor, { defaultText: '# TunePad Riff' });
   }
 }
 
@@ -146,18 +140,4 @@ function clearTraceMarkers(selector) {
     _cmEditors[selector].removeLineClass(_traceLine, "gutter", "trace");
     _traceLine = null;
   }
-}
-
-
-// Helper to get hash from end of URL or generate a random one.
-function getExampleRef() {
-  var ref = firebase.database().ref();
-  var hash = window.location.hash.replace(/#/g, '');
-  if (hash) {
-    ref = ref.child(hash);
-  } else {
-    ref = ref.push(); // generate unique location.
-    window.location = window.location + '#' + ref.key; // add it as a hash to the URL.
-  }
-  return ref;
 }

@@ -50,6 +50,49 @@
   <link rel="stylesheet" href="css/main.css" />
 
   <script>
+    var DEFAULT_SETTINGS = {
+      "name" : "Free",
+      "voice" : "piano",
+      "show-timeline" : true,
+      "show-editor" : true,
+      "show-instrument" : true,
+      "show-output" : false,
+      "midi-input" : true,
+      "midi-output" : false
+    };
+
+    function firebaseInit(config) {
+      firebase.initializeApp(JSON.parse(config));
+      let ref = firebase.database().ref();
+      let hash = window.location.hash.replace(/#/g, '');
+      let first = false;
+
+      if (hash) {
+        ref = ref.child(hash);
+      } else {
+        first = true;
+        // generate unique location.
+        ref = ref.push();
+        // add it as a hash to the URL.
+        window.location = window.location + '#' + ref.key;
+      }
+
+      // save initial settings object
+      let settings = ref.child("settings");
+      if (first) {
+        settings.set(DEFAULT_SETTINGS)
+          .then(function () { console.log('saved default settings')})
+          .catch(function (error) { console.log('error saving default settings')});
+      }
+
+      // callback function for settings
+      settings.on("value", function(snapshot) {
+        onFirebaseUpdate(JSON.stringify(snapshot.val()));
+      });
+
+      return ref.key;
+    }
+
     function firebaseSave(directory, value) {
       let data = JSON.parse(value);
       let ref = firebase.database().ref(directory);
@@ -58,12 +101,6 @@
         .catch(function(error) { console.log('error saving to firebase'); });
     }
 
-    function firebaseLoad(directory) {
-      let ref = firebase.database().ref(directory);
-      ref.on("value", function(snapshot) {
-        onFirebaseUpdate(directory, JSON.stringify(snapshot.val()));
-      });
-    }
   </script>
 
   <script defer src="dart/main.dart.js"></script>
