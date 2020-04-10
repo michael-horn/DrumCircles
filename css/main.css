@@ -133,6 +133,7 @@ body {
   box-sizing: border-box;
   display: flex;
   position: relative;
+  min-width: 135px;
 }
 .voice-selector .voice-name {
   flex: 1;
