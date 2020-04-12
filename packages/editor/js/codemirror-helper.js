@@ -14,8 +14,8 @@
 
 var _cmEditors = { };
 
-var _errorLines = [ ];
-var _traceLine = null;
+var _errorLines = { };
+var _traceLine = { };
 
 
 function codemirror(selector) {
@@ -51,6 +51,8 @@ function codemirror(selector) {
       onBlur(selector);
     });
     _cmEditors[selector] = editor;
+    _errorLines[selector] = [ ];
+    _traceLine[selector] = null;
   }
 }
 
@@ -107,17 +109,17 @@ function setErrorMarker(selector, line) {
   if (_cmEditors[selector]) {
     var marked = _cmEditors[selector].addLineClass(line - 1, "gutter", "error");
     _cmEditors[selector].addLineClass(line - 1, "text", "error");
-    _errorLines.push(marked);
+    _errorLines[selector].push(marked);
   }
 }
 
 function clearErrorMarkers(selector) {
   if (_cmEditors[selector]) {
-    for (let marked of _errorLines) {
+    for (let marked of _errorLines[selector]) {
       _cmEditors[selector].removeLineClass(marked, "gutter", "error");
       _cmEditors[selector].removeLineClass(marked, "text", "error");
     }
-    _errorLines = [];
+    _errorLines[selector] = [];
   }
 }
 
@@ -128,16 +130,16 @@ function clearErrorMarkers(selector) {
 function setTraceMarker(selector, line) {
   if (_cmEditors[selector]) {
     clearTraceMarkers(selector);
-    _traceLine = _cmEditors[selector].addLineClass(line - 1, "gutter", "trace");
+    _traceLine[selector] = _cmEditors[selector].addLineClass(line - 1, "gutter", "trace");
     _cmEditors[selector].addLineClass(line - 1, "text", "trace");
   }
 }
 
 
 function clearTraceMarkers(selector) {
-  if (_cmEditors[selector] && _traceLine != null) {
-    _cmEditors[selector].removeLineClass(_traceLine, "text", "trace");
-    _cmEditors[selector].removeLineClass(_traceLine, "gutter", "trace");
-    _traceLine = null;
+  if (_cmEditors[selector] && _traceLine[selector] != null) {
+    _cmEditors[selector].removeLineClass(_traceLine[selector], "text", "trace");
+    _cmEditors[selector].removeLineClass(_traceLine[selector], "gutter", "trace");
+    _traceLine[selector] = null;
   }
 }
