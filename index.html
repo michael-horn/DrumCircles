@@ -49,37 +49,146 @@
   <script src="packages/instruments/js/TweenMax.min.js"></script>
 
   <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/cells.css" />
 
   <script defer src="dart/main.dart.js"></script>
 </head>
 
 <body>
-<button id="add-cell">Add Instrument</button>
+
+<nav class="top-nav">
+
+  <div class="project-name">TunePad Riff</div>
+
+  <div class="expander"></div>
+
+  <div class="tabs">
+    <button id="about-tab-button">About</button>
+    <button id="cell-tab-button" class="selected">Cells</button>
+    <button id="help-tab-button">Help</button>
+  </div>
+
+  <div class="expander"></div>
+
+  <div id="change-bpm" class="menu-button">
+    <span id="bpm"></span> bpm
+    <ul class='time-signature-menu context-menu hidden'>
+      <li class='menu-item' data-bpm="20"><i class="fas"></i>20</li>
+      <li class='menu-item' data-bpm="30"><i class="fas"></i>30</li>
+      <li class='menu-item' data-bpm="40"><i class="fas"></i>40</li>
+      <li class='menu-item' data-bpm="50"><i class="fas"></i>50</li>
+      <li class='menu-item' data-bpm="60"><i class="fas"></i>60</li>
+      <li class='menu-item' data-bpm="70"><i class="fas"></i>70</li>
+      <li class='menu-item' data-bpm="80"><i class="fas"></i>80</li>
+      <li class='menu-item' data-bpm="90"><i class="fas"></i>90</li>
+      <li class='menu-item' data-bpm="100"><i class="fas"></i>100</li>
+      <li class='menu-item' data-bpm="110"><i class="fas"></i>110</li>
+      <li class='menu-item' data-bpm="120"><i class="fas fa-check"></i>120</li>
+      <li class='menu-item' data-bpm="130"><i class="fas"></i>130</li>
+      <li class='menu-item' data-bpm="140"><i class="fas"></i>140</li>
+      <li class='menu-item' data-bpm="150"><i class="fas"></i>150</li>
+      <li class='menu-item' data-bpm="160"><i class="fas"></i>160</li>
+      <li class='menu-item' data-bpm="170"><i class="fas"></i>170</li>
+      <li class='menu-item' data-bpm="180"><i class="fas"></i>180</li>
+      <li class='menu-item' data-bpm="190"><i class="fas"></i>190</li>
+      <li class='menu-item' data-bpm="200"><i class="fas"></i>200</li>
+      <li class='menu-item' data-bpm="210"><i class="fas"></i>210</li>
+      <li class='menu-item' data-bpm="220"><i class="fas"></i>220</li>
+      <li class='menu-item' data-bpm="230"><i class="fas"></i>230</li>
+      <li class='menu-item' data-bpm="240"><i class="fas"></i>240</li>
+      <li class='menu-item' data-bpm="250"><i class="fas"></i>250</li>
+      <li class='menu-item' data-bpm="260"><i class="fas"></i>260</li>
+      <li class='menu-item' data-bpm="270"><i class="fas"></i>270</li>
+      <li class='menu-item' data-bpm="280"><i class="fas"></i>280</li>
+      <li class='menu-item' data-bpm="290"><i class="fas"></i>290</li>
+      <li class='menu-item' data-bpm="300"><i class="fas"></i>300</li>
+      <li class='menu-item' data-bpm="310"><i class="fas"></i>310</li>
+      <li class='menu-item' data-bpm="320"><i class="fas"></i>320</li>
+      <li class='menu-item' data-bpm="330"><i class="fas"></i>330</li>
+    </ul>
+  </div>
+
+  <div id="change-time-signature" class="menu-button">
+    <span id="time-signature"></span> time
+    <ul class='context-menu hidden'>
+      <li class='menu-item' data-time="2/4"><i class="fas"></i>2/4</li>
+      <li class='menu-item' data-time="3/4"><i class="fas"></i>3/4</li>
+      <li class='menu-item' data-time="4/4"><i class="fas fa-check"></i>4/4</li>
+      <li class='menu-item' data-time="5/4"><i class="fas"></i>5/4</li>
+      <li class='menu-item' data-time="6/4"><i class="fas"></i>6/4</li>
+      <li class='menu-item' data-time="7/4"><i class="fas"></i>7/4</li>
+      <li class='menu-item' data-time="2/8"><i class="fas"></i>2/8</li>
+      <li class='menu-item' data-time="3/8"><i class="fas"></i>3/8</li>
+      <li class='menu-item' data-time="4/8"><i class="fas"></i>4/8</li>
+      <li class='menu-item' data-time="5/8"><i class="fas"></i>5/8</li>
+      <li class='menu-item' data-time="6/8"><i class="fas"></i>6/8</li>
+      <li class='menu-item' data-time="7/8"><i class="fas"></i>7/8</li>
+      <li class='menu-item' data-time="12/8"><i class="fas"></i>12/8</li>
+    </ul>
+  </div>
+
+  <div id="change-key" class="menu-button">
+    <span id="key-base"></span> <span id="key-scale"></span>
+    <ul class='context-menu hidden'>
+      <li class='menu-item' data-key="C major"><i class="fas fa-check"></i>C major</li>
+      <li class='menu-item' data-key="C♯/D♭ major"><i class="fas"></i>C♯/D♭ major</li>
+      <li class='menu-item' data-key="D major"><i class="fas"></i>D major</li>
+      <li class='menu-item' data-key="E♭ major"><i class="fas"></i>E♭ major</li>
+      <li class='menu-item' data-key="E major"><i class="fas"></i>E major</li>
+      <li class='menu-item' data-key="F major"><i class="fas"></i>F major</li>
+      <li class='menu-item' data-key="F♯/G♭ major"><i class="fas"></i>F♯/G♭ major</li>
+      <li class='menu-item' data-key="G major"><i class="fas"></i>G major</li>
+      <li class='menu-item' data-key="A♭ major"><i class="fas"></i>A♭ major</li>
+      <li class='menu-item' data-key="A major"><i class="fas"></i>A major</li>
+      <li class='menu-item' data-key="B♭ major"><i class="fas"></i>B♭ major</li>
+      <li class='menu-item' data-key="B/C♭ major"><i class="fas"></i>B/C♭ major</li>
+      <li class='menu-separator'></li>
+      <li class='menu-item' data-key="A♭/G♯ minor"><i class="fas"></i>A♭/G♯ minor</li>
+      <li class='menu-item' data-key="A minor"><i class="fas"></i>A minor</li>
+      <li class='menu-item' data-key="A♯/B♭ minor"><i class="fas"></i>A♯/B♭ minor</li>
+      <li class='menu-item' data-key="B minor"><i class="fas"></i>B minor</li>
+      <li class='menu-item' data-key="C minor"><i class="fas"></i>C minor</li>
+      <li class='menu-item' data-key="C♯ minor"><i class="fas"></i>C♯ minor</li>
+      <li class='menu-item' data-key="D minor"><i class="fas"></i>D minor</li>
+      <li class='menu-item' data-key="D♯/E♭ minor"><i class="fas"></i>D♯/E♭ minor</li>
+      <li class='menu-item' data-key="E minor"><i class="fas"></i>E minor</li>
+      <li class='menu-item' data-key="F minor"><i class="fas"></i>F minor</li>
+      <li class='menu-item' data-key="F♯ minor"><i class="fas"></i>F♯ minor</li>
+      <li class='menu-item' data-key="G minor"><i class="fas"></i>G minor</li>
+    </ul>
+  </div>
+
+  <div class="separator"></div>
+
+  <button id="transport-play-button" class="transport-button" title="Play All"><i class="fas fa-play"></i></button>
+  <button id="transport-pause-button" class="transport-button hidden" title="Pause All"><i class="fas fa-pause"></i></button>
+  <button id="transport-stop-button" class="transport-button" title="Stop All"><i class="fas fa-stop"></i></button>
+
+  <div class="separator secondary"></div>
+
+  <div id="master-clock">00:00.00</div>
+
+  <div class="separator secondary"></div>
+
+  <button id="share-button" class="transport-button" title="Share"><i class="fas fa-share"></i></button>
+  <button id="remix-button" class="transport-button" title="Remix"><i class="fas fa-code-branch"></i></button>
+</nav>
+
+<nav class="side-nav">
+  <div class="tunepad-logo"></div>
+</nav>
+
+<nav class="cell-nav">
+  <button id="add-cell-button"><i class="fas fa-plus"></i></button>
+</nav>
 
 <main>
-  <!--
-  <nav id="top-nav">
-    <div id="change-time-signature">
-      <span id="time-signature">4/4</span> time
-      <i class="fa fa-angle-down"></i>
-      <ul class='time-signature-menu context-menu hidden'>
-        <li class='menu-item'><i class="fas"></i>2/4</li>
-        <li class='menu-item'><i class="fas"></i>3/4</li>
-        <li class='menu-item'><i class="fas fa-check"></i>4/4</li>
-        <li class='menu-item'><i class="fas"></i>5/4</li>
-        <li class='menu-item'><i class="fas"></i>6/4</li>
-        <li class='menu-item'><i class="fas"></i>7/4</li>
-        <li class='menu-item'><i class="fas"></i>2/8</li>
-        <li class='menu-item'><i class="fas"></i>3/8</li>
-        <li class='menu-item'><i class="fas"></i>4/8</li>
-        <li class='menu-item'><i class="fas"></i>5/8</li>
-        <li class='menu-item'><i class="fas"></i>6/8</li>
-        <li class='menu-item'><i class="fas"></i>7/8</li>
-        <li class='menu-item'><i class="fas"></i>12/8</li>
-      </ul>
-    </div>
-  </nav>
--->
+  <section class="tab" id="cell-tab">
+  </section>
+
+  <section class="tab hidden" id="help-tab">
+    <iframe src="help.html"></iframe>
+  </section>
 
   <div id="overlay" class="hidden">
     <div class="dialog hidden" id="progress-dialog">
@@ -109,15 +218,17 @@
   <div class="toolbar">
     <button class="play-button" title="Play"><i class="fas fa-play"></i></button>
     <button class="pause-button hidden" title="Pause"><i class="fas fa-pause"></i></button>
-    <button class="stop-button" title="Stop"><i class="fas fa-stop"></i></button>
+    <button class="record-button" title="Start Recording"><i class="fas fa-circle"></i></button>
+    <button class="stop-button" title="Stop Recording"><i class="fas fa-stop"></i></button>
     <button class="step-button" title="Step Forward"><i class="fas fa-step-forward"></i></button>
-    <!-- button class="record-button" title="Record"><i class="fas fa-circle"></i></button -->
     <div class="voice-selector">
       <span class="voice-name"></span>
       <i class="fa fa-angle-down"></i>
       <ul class='voice-menu context-menu hidden'>
         <li class='menu-item' data-voice="bass"><i class="fas"></i>Bass</li>
+        <li class='menu-item' data-voice="pop-bass"><i class="fas"></i>Pop Bass</li>
         <li class='menu-item' data-voice="guitar"><i class="fas"></i>Guitar</li>
+        <li class="menu-separator">
         <li class='menu-item' data-voice="marimba"><i class="fas"></i>Marimba</li>
         <li class='menu-item' data-voice="musicbox"><i class="fas"></i>Musicbox</li>
         <li class='menu-item' data-voice="organ"><i class="fas"></i>Organ</li>
@@ -127,6 +238,7 @@
         <li class="menu-separator">
         <li class='menu-item' data-voice="808-drums"><i class="fas"></i>808 Drumkit</li>
         <li class='menu-item' data-voice="rock-drums"><i class="fas"></i>Rock Drumkit</li>
+        <li class='menu-item' data-voice="shot-drums"><i class="fas"></i>Percussion Sounds</li>
       </ul>
     </div>
     <div class="expander"></div>
@@ -181,6 +293,15 @@
       </div>
       <div class="error-description"></div>
     </div>
+  </div>
+
+  <!-- RECORDING OUTPUT -->
+  <div class="recording-container">
+    <button class="close-button fas fa-times"></button>
+    <pre class="recording-pad">
+--- RECORDING PAD ---
+
+    </pre>
   </div>
 
   <!-- MUSICAL INSTRUMENT -->

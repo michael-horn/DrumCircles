@@ -46,7 +46,7 @@ def trace(line):
 #---------------------------------------------------------------------
 # plays a single midi note
 #---------------------------------------------------------------------
-def playNote(note, beats = 1, velocity = 100, sustain = 0, line = -1):
+def playNote(note, beats = 1, velocity = 90, sustain = 0, line = -1):
     global playhead, _last_playhead
 
     if type(note) is not list: note = [ note ]
@@ -55,7 +55,7 @@ def playNote(note, beats = 1, velocity = 100, sustain = 0, line = -1):
     for n in note:
         params['note'] = n
         printEvent("play", playhead, duration = beats, params = params)
-   
+
     _last_playhead = playhead
     playhead += beats
 
@@ -197,4 +197,3 @@ class notch(effect):
         effect.__init__(self, "notch", beats, start, frequency, Q)
 
 start()
-
