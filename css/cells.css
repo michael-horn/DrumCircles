@@ -2,10 +2,14 @@
 .hidden { display: none; }
 
 .gadget-container {
+  /*
   margin: 40px auto;
   max-width: 600px;
   min-width: 250px;
-  /*width: 45%;*/
+  */
+  margin: 40px 80px;
+  width: calc(100% - 400px);
+  min-width: 350px;
   padding: 0 10px;
   border-radius: 10px;
   position: relative;
@@ -51,26 +55,66 @@
   height: 35px;
   background-color: #2f9af0;
   border-radius: 50%;
-  margin-right: 15px;
+  margin-right: 10px;
   background-image: url('../images/instruments/synth.svg');
   background-size: 70%;
   background-repeat: no-repeat;
   background-position: center;
 }
+.header-bar .gadget-icon.guitar {
+  background-color: #f0c229;
+  background-image: url('../images/instruments/bass.svg');
+}
+.header-bar .gadget-icon.bass {
+  background-color: #ec5eb2;
+  background-image: url('../images/instruments/bass.svg');
+}
+.header-bar .gadget-icon.marimba {
+  background-color: #f6843f;
+  background-image: url('../images/instruments/marimba.svg');
+}
+.header-bar .gadget-icon.piano {
+  background-color: #2f9aef;
+  background-image: url('../images/instruments/synth.svg');
+}
+.header-bar .gadget-icon.drums,
+.header-bar .gadget-icon.drumkit {
+  background-color: #86c44e;
+  background-image: url('../images/instruments/drumkit.svg');
+}
 
 .header-bar .expander { flex: 1; }
 .header-bar .gadget-name {
+  width: 200px;
   color: white;
   font-weight: bold;
   font-size: 15px;
   margin-bottom: 3px;
+  border: 1px solid transparent;
+  outline: none;
+  background-color: transparent;
+  padding: 4px 5px;
+  position: relative;
+  top: -5px;
+}
+.header-bar .gadget-name:hover {
+  background-color: #fff2;
+  border: 1px solid #fff6;
+}
+.header-bar .gadget-name:focus {
+  background-color: #fffd;
+  color: #333;
+  font-weight: normal;
+  border: 1px solid black;
 }
 .header-bar .gadget-info,
 .header-bar .gadget-error {
   color: #fff8;
   font-size: 12px;
   font-weight: 500;
-  padding-left: 2px;
+  padding-left: 7px;
+  position: relative;
+  top: -8px;
 }
 .header-bar .gadget-error {
   color: #da575d;

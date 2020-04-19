@@ -9,6 +9,25 @@ function firebaseRoot() {
 
 function firebaseInit(config) {
   firebase.initializeApp(JSON.parse(config));
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      var displayName = user.displayName;
+      var email = user.email;
+      var emailVerified = user.emailVerified;
+      var photoURL = user.photoURL;
+      var isAnonymous = user.isAnonymous;
+      var uid = user.uid;
+      var providerData = user.providerData;
+      console.log(user);
+      // ...
+    } else {
+      // User is signed out.
+      // ...
+    }
+  });
+
   let datastore = firebase.database().ref();
   let hash = window.location.hash.replace(/#/g, '');
 
@@ -22,6 +41,27 @@ function firebaseInit(config) {
     window.location = window.location + '#' + root.key;
     return true;
   }
+}
+
+
+function firebaseLogin() {
+  firebase.auth().signInWithEmailAndPassword(email, password)
+  .catch(function(error) {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log(errorMessage);
+  });
+}
+
+
+function firebaseJoin() {
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+  .catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log(errorMessage);
+  });
 }
 
 
