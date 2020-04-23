@@ -33,8 +33,10 @@
 
   <!-- Firepad -->
   <link rel="stylesheet" href="css/firepad.css" />
+  <link rel="stylesheet" href="css/firepad-userlist.css">
   <script src="js/firebase-helper.js"></script>
   <script src="https://cdn.firebase.com/libs/firepad/1.5.3/firepad.min.js"></script>
+  <script src="js/firepad-userlist.js"></script>
 
   <!-- MP3 Export -->
   <script src="packages/audio_tools/js/lame.min.js"></script>
@@ -186,6 +188,8 @@
 
 <nav class="side-nav">
   <div class="tunepad-logo"></div>
+
+  <div id="userlist"></div>
 </nav>
 
 <nav class="cell-nav">
@@ -219,7 +223,6 @@
     </div>
   </div>
 </main>
-
 
 <template id="gadget-template">
 
