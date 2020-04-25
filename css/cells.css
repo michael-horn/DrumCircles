@@ -191,7 +191,7 @@
 }
 .context-menu.voice-menu {
   left: unset;
-  top: 13px;
+  top: 15px;
   right: 0;
 }
 .menu-button {
@@ -201,7 +201,7 @@
 .menu-button .context-menu {
   left: unset;
   right: 0;
-  top: 13px;
+  top: 15px;
   width: 250px;
 }
 

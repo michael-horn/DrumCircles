@@ -82,12 +82,20 @@ function firebaseUpdate(directory, jsonString) {
   //let ref = firebase.database().ref(directory);
   let ref = root.child(directory);
   ref.set(data)
-    .then(function () { console.log('updated ' + directory); })
+    .then(function () { })
     .catch(function(error) { console.log('error updating ' + directory); });
 }
 
 
-function firebaseUpdateCallback(directory) {
+function firebaseRemove(directory) {
+  let ref = root.child(directory);
+  ref.remove()
+    .then(function () { })
+    .catch(function(error) { console.log('error deleting ' + directory); });
+}
+
+
+function firebaseUpdatedCallback(directory) {
   let ref = root.child(directory);
   ref.on("value", function(snapshot) {
     if (snapshot.exists()) {
@@ -99,7 +107,17 @@ function firebaseUpdateCallback(directory) {
 
 function firebaseAddedCallback(directory) {
   let ref = root.child(directory);
-  ref.on('child_added', function(snapshot, prevChildKey) {
-    onFirebaseAdded(directory, snapshot.key, JSON.stringify(snapshot.val()));
+  ref.on('child_added', function(snapshot, prevKey) {
+    onFirebaseAdded(directory, snapshot.key, prevKey, JSON.stringify(snapshot.val()));
+  });
+}
+
+
+function firebaseRemovedCallback(directory) {
+  let ref = root.child(directory).parent;
+  ref.on('child_removed', function(oldChild) {
+    if (oldChild.ref.toString().endsWith(directory)) {
+      onFirebaseRemoved(directory, JSON.stringify(oldChild.val()));
+    }
   });
 }

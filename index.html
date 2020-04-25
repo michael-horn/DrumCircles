@@ -169,12 +169,10 @@
   <div class="separator secondary"></div>
 
   <div id="master-clock">00:00.00</div>
-
-  <div class="separator"></div>
 <!--
+  <div class="separator"></div>
   <button id="share-button" class="transport-button" title="Share"><i class="fas fa-share"></i></button>
   <button id="remix-button" class="transport-button" title="Remix"><i class="fas fa-code-branch"></i></button>
--->
   <div id="user-menu" class="menu-button">
     <i class="fas fa-user"></i>
     <ul class='context-menu hidden'>
@@ -183,6 +181,7 @@
       <li class='menu-item' data-action="sign-out"><i class="fas fa-sign-out-alt"></i>Sign out</li>
     </ul>
   </div>
+-->
 
 </nav>
 
@@ -201,7 +200,7 @@
 
 <template id="cell-nav-template">
   <li class="cell-nav-item">
-    <div class="shortcut-cell-name"></div>
+    <div class="shortcut-cell-name">New Track</div>
     <button class="shortcut-play-button"><i class="fas fa-play"></i></button>
     <button class="shortcut-pause-button hidden"><i class="fas fa-pause"></i></button>
     <div class="shortcut-error hidden"><i class="fas fa-exclamation-circle"></i></div>
@@ -270,6 +269,9 @@
     <div class="menu-button">
       <i class="fas fa-ellipsis-h"></i>
       <ul class='options-menu context-menu hidden'>
+        <li class='menu-item' data-command="clone-track"><i class="fas fa-clone"></i>Clone Track</li>
+        <li class='menu-item' data-command="delete-track"><i class="fas fa-trash"></i>Delete Track</li>
+        <li class='menu-separator'></li>
         <li class='menu-item' data-command="show-timeline"><i class="fas fa-check"></i>Show Timeline</li>
         <li class='menu-item' data-command="show-editor"><i class="fas fa-check"></i>Show Code</li>
         <li class='menu-item' data-command="show-instrument"><i class="fas fa-check"></i>Show Instrument</li>
@@ -285,9 +287,10 @@
         <li class='menu-item' data-command="export-mp3"><i class="fas fa-download"></i>Export MP3</li>
         <li class='menu-item' data-command="export-wav"><i class="fas fa-download"></i>Export WAV</li>
         <li class='menu-item' data-command="export-midi"><i class="fas fa-download"></i>Export MIDI</li>
-        <li class='menu-separator'></li>
+        <!--
         <li class='menu-item' data-command="share"><i class="fas fa-share"></i>Share</li>
         <li class='menu-item'><i class="fas fa-code-branch"></i>Remix</li>
+        -->
       </ul>
     </div>
   </div>

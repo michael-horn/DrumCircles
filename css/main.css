@@ -222,6 +222,8 @@ nav.cell-nav {
   width: 220px;
   position: fixed;
   top: 100px;
+  height: calc(100% - 160px);
+  overflow-y: hidden;
   right: 0;
   background-color: #fdfdfd;
   color: #414251;
@@ -251,9 +253,9 @@ nav.cell-nav {
 .cell-list {
   list-style: none;
   padding-left: 0;
-  max-height: 500px;
-  overflow-y: scroll;
+  overflow-y: auto;
   margin-top: 0;
+  height: calc(100% - 55px);
 }
 
 .cell-list li {
