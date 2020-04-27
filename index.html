@@ -33,10 +33,8 @@
 
   <!-- Firepad -->
   <link rel="stylesheet" href="packages/editor/firepad/firepad.css" />
-  <link rel="stylesheet" href="packages/editor/firepad/firepad-userlist.css">
   <script src="js/firebase-helper.js"></script>
   <script src="https://cdn.firebase.com/libs/firepad/1.5.3/firepad.min.js"></script>
-  <script src="packages/editor/firepad/firepad-userlist.js"></script>
 
   <!-- MP3 Export -->
   <script src="packages/audio_tools/js/lame.min.js"></script>
@@ -46,7 +44,7 @@
   <script src="packages/audio_tools/js/midi-helper.js"></script>
   <script src="packages/audio_tools/js/jsmidgen.js"></script>
 
-  <!-- JQUERY -->
+  <!-- jquery -->
   <script src="js/jquery.3.3.1.min.js"></script>
   <script src="packages/instruments/js/TweenMax.min.js"></script>
 
@@ -67,7 +65,7 @@
   <div class="tabs">
     <button id="about-tab-button">About</button>
     <button id="cell-tab-button" class="selected">Cells</button>
-    <button id="help-tab-button">Help</button>
+    <!-- <button id="help-tab-button">Help</button> -->
   </div>
 
   <div class="expander"></div>
@@ -173,22 +171,16 @@
   <div class="separator"></div>
   <button id="share-button" class="transport-button" title="Share"><i class="fas fa-share"></i></button>
   <button id="remix-button" class="transport-button" title="Remix"><i class="fas fa-code-branch"></i></button>
-  <div id="user-menu" class="menu-button">
-    <i class="fas fa-user"></i>
-    <ul class='context-menu hidden'>
-      <li class='menu-item' data-action="sign-in"><i class="fas fa-sign-in-alt"></i>Sign in</li>
-      <li class='menu-item' data-action="sign-in"><i class="fas fa-user-friends"></i>Join</li>
-      <li class='menu-item' data-action="sign-out"><i class="fas fa-sign-out-alt"></i>Sign out</li>
-    </ul>
-  </div>
 -->
 
 </nav>
 
 <nav class="side-nav">
   <div class="tunepad-logo"></div>
-
-  <div id="userlist"></div>
+  <ul id="userlist"></ul>
+  <button id="help-button" title="Help"><i class="far fa-question-circle"></i></button>
+  <button id="login-button" title="Sign In"><i class="fas fa-sign-in-alt"></i></button>
+  <button id="logout-button" class="hidden" title="Sign Out"><i class="fas fa-sign-out-alt"></i></button>
 </nav>
 
 <nav class="cell-nav">
@@ -287,8 +279,9 @@
         <li class='menu-item' data-command="export-mp3"><i class="fas fa-download"></i>Export MP3</li>
         <li class='menu-item' data-command="export-wav"><i class="fas fa-download"></i>Export WAV</li>
         <li class='menu-item' data-command="export-midi"><i class="fas fa-download"></i>Export MIDI</li>
-        <!--
+        <li class="menu-separator">
         <li class='menu-item' data-command="share"><i class="fas fa-share"></i>Share</li>
+        <!--
         <li class='menu-item'><i class="fas fa-code-branch"></i>Remix</li>
         -->
       </ul>

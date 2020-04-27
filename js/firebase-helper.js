@@ -1,6 +1,7 @@
 
 // root of the firebase database
 var root;
+var authProvider;
 
 function firebaseRoot() {
   return root.key;
@@ -9,27 +10,27 @@ function firebaseRoot() {
 
 function firebaseInit(config) {
   firebase.initializeApp(JSON.parse(config));
+  authProvider = new firebase.auth.GoogleAuthProvider();
+
 
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      // User is signed in.
-      var displayName = user.displayName;
-      var email = user.email;
-      var emailVerified = user.emailVerified;
-      var photoURL = user.photoURL;
-      var isAnonymous = user.isAnonymous;
-      var uid = user.uid;
-      var providerData = user.providerData;
-      console.log(user);
-      // ...
+      let auth_object = {
+        displayName : user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        isAnonymous: user.isAnonymous,
+        uid: user.uid
+      };
+      onFirebaseLogin(JSON.stringify(auth_object));
     } else {
-      // User is signed out.
-      // ...
+      onFirebaseLogout();
     }
   });
 
   let datastore = firebase.database().ref();
   let hash = window.location.hash.replace(/#/g, '');
+  let newproj = false;
 
   if (hash) {
     root = datastore.child(hash);
@@ -45,11 +46,30 @@ function firebaseInit(config) {
 
 
 function firebaseLogin() {
-  firebase.auth().signInWithEmailAndPassword(email, password)
-  .catch(function(error) {
+  firebase.auth().signInWithPopup(authProvider).then(function(result) {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = result.credential.accessToken;
+  }).catch(function(error) {
+    // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
-    console.log(errorMessage);
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+  });
+}
+
+
+function firebaseLogout() {
+  firebase.auth().signOut();
+}
+
+
+function firebaseAnonymousLogin() {
+  firebase.auth().signInAnonymously().catch(function(error) {
+    var errorCode = error.code;
+    var errorMessage = error.message;
   });
 }
 

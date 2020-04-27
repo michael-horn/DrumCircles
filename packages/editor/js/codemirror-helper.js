@@ -65,16 +65,8 @@ function connectFirepad(selector, directory) {
     editor = _cmEditors[selector];
     let ref = firebase.database().ref(directory);
 
-    // Create a random ID to use as our user ID (we must give this to firepad and FirepadUserList).
-    let userId = Math.floor(Math.random() * 9999999999).toString();
-
-    let firepad = Firepad.fromCodeMirror(ref, editor, { defaultText: '# TunePad Track', userId : userId });
-
-    //// Create FirepadUserList (with our desired userId).
-    let firepadUserList = FirepadUserList.fromDiv(
-      ref.child('users'),
-      document.getElementById('userlist'),
-      userId);
+    //let firepad = Firepad.fromCodeMirror(ref, editor, { defaultText: '# TunePad Track', userId : userId });
+    let firepad = Firepad.fromCodeMirror(ref, editor, { defaultText: '# TunePad Track' });
   }
 }
 
