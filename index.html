@@ -235,7 +235,7 @@
     <button class="play-button" title="Play"><i class="fas fa-play"></i></button>
     <button class="pause-button hidden" title="Pause"><i class="fas fa-pause"></i></button>
     <button class="record-button" title="Start Recording"><i class="fas fa-circle"></i></button>
-    <button class="stop-button" title="Stop Recording"><i class="fas fa-stop"></i></button>
+<!-- <button class="stop-button" title="Stop Recording"><i class="fas fa-stop"></i></button> -->
     <button class="step-button" title="Step Forward"><i class="fas fa-step-forward"></i></button>
     <div class="voice-selector">
       <span class="voice-name"></span>
@@ -280,7 +280,7 @@
         <li class='menu-item' data-command="export-wav"><i class="fas fa-download"></i>Export WAV</li>
         <li class='menu-item' data-command="export-midi"><i class="fas fa-download"></i>Export MIDI</li>
         <li class="menu-separator">
-        <li class='menu-item' data-command="share"><i class="fas fa-share"></i>Share</li>
+        <li class='menu-item' data-command="share"><i class="fas"></i>Share This Track</li>
         <!--
         <li class='menu-item'><i class="fas fa-code-branch"></i>Remix</li>
         -->
@@ -317,10 +317,19 @@
   </div>
 
   <!-- RECORDING OUTPUT -->
-  <div class="recording-container">
-    <button class="close-button fas fa-times"></button>
+  <div class="recording-container hidden">
+    <div class="toolbar">
+      <button class="record-button" title="Start Recording"><i class="fas fa-circle"></i></button>
+      <button class="stop-button" title="Stop Recording"><i class="fas fa-circle"></i></button>
+      <button class="metronome-button" title="Metronome"></button>
+      <button class="clear-button">Clear</button>
+      <button class="quant-button"><i class="fas fa-check"></i>&nbsp;Quantize</button>
+      <button class="copy-button"><i class="far fa-copy"></i>&nbsp;Copy to Clipboard</button>
+      <div class="expander"></div>
+      <button class="record-close-button fas fa-times"></button>
+    </div>
     <pre class="recording-pad">
---- RECORDING PAD ---
+# RECORDING PAD
 
     </pre>
   </div>
@@ -338,7 +347,7 @@
     }
     .instrument {
       width: 100%;
-      height: 140px;
+      height: 150px;
       position: relative;
       border: 2px solid rgba(0, 0, 0, 0.2);
       box-sizing: border-box;
@@ -348,7 +357,7 @@
     }
     .container {
       width: 100%;
-      height: 136px;
+      height: 146px;
     }
     .piano-key.black {
       fill: #556;

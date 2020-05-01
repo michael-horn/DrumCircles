@@ -159,7 +159,7 @@
   font-size: 12px;
   text-align: center;
 }
-.toolbar button.hidden { display: none; }
+.toolbar button.hidden,
 .toolbar button:hover,
 .toolbar .voice-selector:hover,
 .toolbar .menu-button:hover { background-color: rgba(255, 255, 255, 0.25); }
@@ -336,49 +336,6 @@
   font-size: 13px;
 }
 
-/* RECORDING BOX */
-.gadget-container.recording .record-button {
-  display: none;
-}
-
-.stop-button {
-  color: #da575d !important;
-  display: none;
-}
-
-.gadget-container.recording .stop-button {
-  display: block;
-}
-
-.recording-container {
-  display: none;
-}
-
-.gadget-container.recording .recording-container {
-  display: block;
-}
-
-.recording-container pre {
-  height: 150px;
-  overflow: scroll;
-  background-color: #2E303F;
-  font-family: monospace;
-  color: #29C;
-  font-size: 13px;
-  padding: 10px 15px;
-  margin: 0;
-}
-
-.recording-container .close-button {
-  color: #2E303F;
-  background-color: #eee;
-}
-
-.recording-container .close-button:hover {
-  color: #eee;
-  border: 1px solid #eee;
-}
-
 /* DIALOG BOX */
 #overlay {
   background-color: #000b;
@@ -402,4 +359,55 @@
 .progress-status {
   margin-top: 40px;
   font-size: 200%;
+}
+
+
+/* RECORDING BOX */
+.gadget-container.recording .record-button { display: none; }
+.gadget-container .stop-button { display: none; }
+.gadget-container.recording .stop-button { display: block; }
+.recording-container.hidden { display: none; }
+
+.recording-container pre {
+  height: 150px;
+  overflow: scroll;
+  background-color: #2E303F;
+  font-family: monospace;
+  color: #29C;
+  font-size: 13px;
+  padding: 10px 15px;
+  margin: 0;
+}
+
+.recording-container .toolbar {
+  padding: 0 0 10px 0;
+  border: none;
+}
+
+.metronome-button {
+  background-image: url('../images/metronome.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 55%;
+}
+.metronome-button.playing { background-color: rgba(255, 255, 255, 0.45); }
+.metronome-button.tock {
+  transform: scaleX(-1);
+}
+
+.stop-button {
+  color: #fff9 !important;
+  background: #da575d !important;
+}
+
+.recording-container .clear-button,
+.recording-container .copy-button,
+.recording-container .quant-button {
+  width: auto;
+}
+
+.recording-container .toolbar .button {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
 }
