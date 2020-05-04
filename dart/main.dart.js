@@ -2428,7 +2428,7 @@ n=H.a(H.a(C.b.q(f,k,"g"),"$in"),"$iT")
 o.dy=n
 m=H.a(H.a(C.b.q(f,k,"circle"),"$in"),"$ibp");(m&&C.u).sA(m,P.c(["class","slider-knob","cx","0","cy","0","r","18"],q,q))
 o.dx=m
-f=H.a(H.a(C.b.q(f,k,"image"),"$in"),"$icj");(f&&C.a1).sA(f,P.c(["x","-12.6","y","-12.6","width","25.2","height","25.2","href","/images/instruments/synth.svg"],q,q))
+f=H.a(H.a(C.b.q(f,k,"image"),"$in"),"$icj");(f&&C.a1).sA(f,P.c(["x","-12.6","y","-12.6","width","25.2","height","25.2","pointer-events","none","href","/images/instruments/synth.svg"],q,q))
 o.fr=f
 n.appendChild(m)
 n.appendChild(f)
@@ -9530,7 +9530,7 @@ C.j.E(r,"ERROR")}else{o.classList.remove("error")
 C.j.E(r,H.b(u.dx)+" BEATS")}}q.c.sa4(0,u.fx)
 o=q.d
 o.sa4(0,Math.pow(10,20*Math.log(u.dy)/2.302585092994046/40)/1.78)
-u="/images/instruments/"+H.b(u.f.h(0,p))+".svg"
+u="images/instruments/"+H.b(u.f.h(0,p))+".svg"
 o.fr.setAttribute("href",u)},
 $S:4}
 F.l7.prototype={
