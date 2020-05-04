@@ -64,7 +64,9 @@
 
   <div class="tabs">
     <button id="about-tab-button">About</button>
-    <button id="cell-tab-button" class="selected">Cells</button>
+    <button id="tracks-tab-button">Tracks</button>
+    <button id="code-tab-button" class="selected">Code</button>
+    <button id="mixer-tab-button">Mixer</button>
     <!-- <button id="help-tab-button">Help</button> -->
   </div>
 
@@ -183,24 +185,21 @@
   <button id="logout-button" class="hidden" title="Sign Out"><i class="fas fa-sign-out-alt"></i></button>
 </nav>
 
-<nav class="cell-nav">
-  <div class="button-row">
-    <button id="add-cell-button"><i class="fas fa-plus"></i>ADD TRACK</button>
-  </div>
-  <ul class="cell-list"></ul>
-</nav>
-
-<template id="cell-nav-template">
-  <li class="cell-nav-item">
-    <div class="shortcut-cell-name">New Track</div>
-    <button class="shortcut-play-button"><i class="fas fa-play"></i></button>
-    <button class="shortcut-pause-button hidden"><i class="fas fa-pause"></i></button>
-    <div class="shortcut-error hidden"><i class="fas fa-exclamation-circle"></i></div>
-  </li>
-</template>
-
 <main>
-  <section class="tab" id="cell-tab">
+  <section class="tab hidden" id="tracks-tab">
+  </section>
+
+  <section class="tab" id="code-tab">
+    <nav class="cell-nav">
+      <div class="button-row">
+        <button id="add-cell-button"><i class="fas fa-plus"></i>ADD TRACK</button>
+      </div>
+      <ul class="cell-list"></ul>
+    </nav>
+  </section>
+
+  <section class="tab hidden" id="mixer-tab">
+    <div id="mixer-container"></div>
   </section>
 
   <section class="tab hidden" id="help-tab">
@@ -214,6 +213,33 @@
     </div>
   </div>
 </main>
+
+<template id="cell-nav-template">
+  <li class="cell-nav-item">
+    <div class="shortcut-cell-name">New Track</div>
+    <button class="shortcut-play-button"><i class="fas fa-play"></i></button>
+    <button class="shortcut-pause-button hidden"><i class="fas fa-pause"></i></button>
+    <div class="shortcut-error hidden"><i class="fas fa-exclamation-circle"></i></div>
+  </li>
+</template>
+
+<template id="mixer-template">
+  <div class="mixer-track">
+    <div class="mixer-header">
+      <div class="mixer-cell-name"></div>
+      <div class="mixer-beats"></div>
+    </div>
+    <div class="toolbar">
+      <button class="mixer-play-button" title="Play"><i class="fas fa-play"></i></button>
+      <button class="mixer-pause-button hidden" title="Pause"><i class="fas fa-pause"></i></button>
+      <button class="mixer-solo-button" title="Solo">S</button>
+    </div>
+    <div class="mixer-dial"></div>
+    <div class="mixer-dial-label">PAN</div>
+    <div class="mixer-slider"></div>
+    <div class="mixer-slider-label">GAIN</div>
+  </div>
+</template>
 
 <template id="gadget-template">
 
