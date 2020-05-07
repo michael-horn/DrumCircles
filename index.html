@@ -50,6 +50,8 @@
 
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/cells.css" />
+  <link rel="stylesheet" href="css/mixer.css" />
+  <link rel="stylesheet" href="packages/ui/css/dialog.css" />
 
   <script defer src="dart/main.dart.js"></script>
 </head>
@@ -207,13 +209,35 @@
     <iframe src="help.html"></iframe>
   </section>
 
-  <div id="overlay" class="hidden">
-    <div class="dialog hidden" id="progress-dialog">
-      <div class="progress-message">Exporting audio data...</div>
-      <div class="progress-status">50%</div>
-    </div>
-  </div>
 </main>
+
+
+<template id="export-dialog-template">
+  <div class="dialog progress-dialog">
+    <button class="close-button"><i class="fas fa-times"></i></button>
+    <h1 class="dialog-title">Exporting audio data...</h1>
+    <div class="progress-status">50%</div>
+  </div>
+</template>
+
+
+<template id="help-template">
+  <div class="dialog help">
+    <button class="close-button"><i class="fas fa-times"></i></button>
+    <!--
+    <h1 class="dialog-title">This is a modal dialog</h1>
+    <p>This is modal text</p>
+  -->
+    <iframe src="help.html"></iframe>
+<!--
+    <div class="dialog-button-row">
+      <button class="cancel-button">Cancel</button>
+      <button class="confirm-button">OK</button>
+    </div>
+-->
+  </div>
+</template>
+
 
 <template id="cell-nav-template">
   <li class="cell-nav-item">

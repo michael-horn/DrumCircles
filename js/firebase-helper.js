@@ -50,6 +50,7 @@ function firebaseLogin() {
     // This gives you a Google Access Token. You can use it to access the Google API.
     var token = result.credential.accessToken;
   }).catch(function(error) {
+    console.log(`Login error: [${error.code}] ${error.message}`);
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
