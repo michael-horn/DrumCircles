@@ -1,3 +1,6 @@
+:root {
+  --cell-header-bg-color: #2e303f;
+}
 
 .hidden { display: none; }
 
@@ -16,6 +19,7 @@
   margin: 40px 80px;
   width: calc(100% - 400px);
   min-width: 350px;
+  max-width: 750px;
   padding: 0 10px;
   border-radius: 10px;
   position: relative;
@@ -45,7 +49,7 @@
 
 /* HEADER BAR */
 .header-bar {
-  background-color: #2e303f;
+  background-color: var(--cell-header-bg-color);
   height: 60px;
   border-top: 2px solid #667;
   border-bottom: 2px solid #667;
@@ -56,10 +60,10 @@
   display: flex;
 }
 
-.header-bar .gadget-icon {
+.gadget-icon {
   width: 35px;
   height: 35px;
-  background-color: #2f9af0;
+  background-color: var(--piano-color);
   border-radius: 50%;
   margin-right: 10px;
   background-image: url('../images/instruments/synth.svg');
@@ -67,25 +71,25 @@
   background-repeat: no-repeat;
   background-position: center;
 }
-.header-bar .gadget-icon.guitar {
-  background-color: #f0c229;
+.gadget-icon.guitar {
+  background-color: var(--guitar-color);
   background-image: url('../images/instruments/bass.svg');
 }
-.header-bar .gadget-icon.bass {
-  background-color: #ec5eb2;
+.gadget-icon.bass {
+  background-color: var(--bass-color);
   background-image: url('../images/instruments/bass.svg');
 }
-.header-bar .gadget-icon.marimba {
-  background-color: #f6843f;
+.gadget-icon.marimba {
+  background-color: var(--marimba-color);
   background-image: url('../images/instruments/marimba.svg');
 }
-.header-bar .gadget-icon.piano {
-  background-color: #2f9aef;
+.gadget-icon.piano {
+  background-color: var(--piano-color);
   background-image: url('../images/instruments/synth.svg');
 }
-.header-bar .gadget-icon.drums,
-.header-bar .gadget-icon.drumkit {
-  background-color: #86c44e;
+.gadget-icon.drums,
+.gadget-icon.drumkit {
+  background-color: var(--drum-color);
   background-image: url('../images/instruments/drumkit.svg');
 }
 
@@ -94,6 +98,7 @@
   width: 200px;
   color: white;
   font-weight: bold;
+  font-family: var(--main-font);
   font-size: 15px;
   margin-bottom: 3px;
   border: 1px solid transparent;
@@ -210,6 +215,10 @@
   top: 15px;
   width: 250px;
 }
+
+/* HIDDEN UNLESS AUTHENTICATED */
+.gadget-container .logged-in-only { display: none; }
+main.authenticated .logged-in-only { display: inherit; }
 
 /* PULLDOWN MENUS */
 .context-menu {
@@ -390,4 +399,69 @@
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
+}
+
+/* SHARE DIALOG */
+.dialog.share {
+  color: #555;
+  width: 60%;
+  max-height: 80vh;
+  max-width: 700px;
+  padding: 25px 45px;
+  overflow-y: auto;
+}
+
+.dialog.share .dialog-button-row {
+  margin-top: 0;
+}
+
+.track-info {
+  font-size: 13px;
+  padding: 13px 20px;
+  box-sizing: border-box;
+  display: flex;
+  line-height: 90%;
+}
+
+.track-info .gadget-icon {
+  width: 45px;
+  height: 45px;
+}
+
+.track-details {
+  font-size: 14px;
+  color: #777;
+  width: 500px;
+  margin: 0 0 0 15px;
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  text-align: left;
+}
+
+.track-details.hidden { display: none; }
+
+.track-details dt {
+  flex: 0 0 20%;
+  line-height: 2em;
+  font-weight: bold;
+}
+
+.track-details dd {
+  flex: 0 0 75%;
+  line-height: 2em;
+  font-weight: normal;
+  margin: 0;
+}
+
+.track-details dd.track-description textarea {
+  width: 300px;
+  height: 100px;
+  margin-top: 6px;
+  font-size: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  background-color: #eee;
+  color: #555;
 }

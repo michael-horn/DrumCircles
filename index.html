@@ -8,7 +8,15 @@
   <link rel="icon" href="images/favicon.ico">
 
   <!-- FIREBASE -->
-  <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+
+  <!-- WEBFONTS and FONT AWESOME -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="css/fontawesome.all.min.css" rel="stylesheet">
+
 
   <!-- CODEMIRROR -->
   <script src="packages/editor/codemirror/lib/codemirror.js"></script>
@@ -28,10 +36,8 @@
   <link href="packages/editor/codemirror/addon/dialog/dialog.css" rel="stylesheet">
   <link href="packages/editor/codemirror/addon/fold/foldgutter.css" rel="stylesheet">
 
-  <!-- font awesome -->
-  <link href="css/fontawesome.all.min.css" rel="stylesheet">
 
-  <!-- Firepad -->
+  <!-- FIREPAD -->
   <link rel="stylesheet" href="packages/editor/firepad/firepad.css" />
   <script src="js/firebase-helper.js"></script>
   <script src="https://cdn.firebase.com/libs/firepad/1.5.3/firepad.min.js"></script>
@@ -51,6 +57,7 @@
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/cells.css" />
   <link rel="stylesheet" href="css/mixer.css" />
+  <link rel="stylesheet" href="css/library.css" />
   <link rel="stylesheet" href="packages/ui/css/dialog.css" />
 
   <script defer src="dart/main.dart.js"></script>
@@ -182,9 +189,10 @@
 <nav class="side-nav">
   <div class="tunepad-logo"></div>
   <ul id="userlist"></ul>
-  <button id="help-button" title="Help"><i class="far fa-question-circle"></i></button>
-  <button id="login-button" title="Sign In"><i class="fas fa-sign-in-alt"></i></button>
-  <button id="logout-button" class="hidden" title="Sign Out"><i class="fas fa-sign-out-alt"></i></button>
+  <button id="library-button" class="side-button" title="Track Library"></button>
+  <button id="help-button" class="side-button" title="Help"><i class="far fa-question-circle"></i></button>
+  <button id="login-button" class="side-button" title="Sign In"><i class="fas fa-sign-in-alt"></i></button>
+  <button id="logout-button" class="side-button hidden" title="Sign Out"><i class="fas fa-sign-out-alt"></i></button>
 </nav>
 
 <main>
@@ -235,6 +243,106 @@
       <button class="confirm-button">OK</button>
     </div>
 -->
+  </div>
+</template>
+
+<template id="library-template">
+  <div class="dialog library">
+    <h1 class="dialog-title">TunePad Track Library</h1>
+    <button class="close-button"><i class="fas fa-times"></i></button>
+    <div class="columns">
+      <div class="left-col">
+        <h2>Type</h2>
+        <ul class="filters">
+          <li class="filter-option" data-filter="bass"><i class="fas fa-check-square"></i>Bass</li>
+          <li class="filter-option" data-filter="drums"><i class="fas fa-check-square"></i>Drums</li>
+          <li class="filter-option" data-filter="guitar"><i class="fas fa-check-square"></i>Guitar</li>
+          <li class="filter-option" data-filter="piano"><i class="fas fa-check-square"></i>Keys</li>
+          <li class="filter-option" data-filter="marimba"><i class="fas fa-check-square"></i>Marimba</li>
+          <li class="filter-option" data-filter="sequencer"><i class="fas fa-check-square"></i>Sequencer</li>
+          <li class="filter-option" data-filter="definitions"><i class="fas fa-check-square"></i>Code</li>
+        </ul>
+      </div>
+      <div class="right-col">
+        <h2 class="track-count"></h2>
+        <div class="search-results"></div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="library-track-template">
+  <li class="track-item">
+    <div class="track-summary">
+      <div class="gadget-icon"><i class="fas fa-play"></i></div>
+      <div class="track-title expander"></div>
+      <div class="track-duration"></div>
+      <button class="star-button" title="Favorite"><i class="far fa-star"></i><span class="star-count"></span></button>
+      <!-- button class="like-button" title="Like"><i class="far fa-heart"></i> <span class="like-count"></span></button -->
+      <button class="expand-button" title="More Info"><i class="fas fa-chevron-down"></i></button>
+      <button class="add-button" title="Add to Project"><i class="fas fa-plus"></i>Add</button>
+    </div>
+    <ul class="track-details hidden">
+      <li class="author"></li>
+      <li class="code"></li>
+      <li class="music"></li>
+      <li class="description"></li>
+      <li class="modified"></li>
+    </ul>
+  </li>
+</template>
+
+<template id="share-dialog">
+  <div class="dialog share">
+    <button class="close-button"><i class="fas fa-times"></i></button>
+    <h1 class="dialog-title">Share this Track?</h1>
+    <p>When you share a track, other TunePad users will be able to copy and remix it in their own projects.</p>
+    <div class="track-info">
+      <div class="gadget-icon"></div>
+      <dl class="track-details">
+        <dt>Title:</dt> <dd class="track-name"></dd>
+        <dt>Author:</dt> <dd class="track-author"></dd>
+        <dt>Duration:</dt> <dd class="track-duration"></dd>
+        <dt>Tempo:</dt> <dd class="track-tempo"></dd>
+        <dt>Meter:</dt> <dd class="track-meter"></dd>
+        <dt>Key:</dt> <dd class="track-key"></dd>
+        <dt>Python:</dt> <dd class="track-code"></dd>
+        <dt>Description:</dt>
+        <dd class="track-description">
+          <textarea placeholder="Briefly describe your track here..."></textarea>
+        </dd>
+      </dl>
+    </div>
+    <div class="dialog-button-row">
+      <button class="cancel-button">Cancel</button>
+      <button class="confirm-button">Share</button>
+    </div>
+  </div>
+</template>
+
+
+<template id="share-login-dialog">
+  <div class="dialog">
+    <button class="close-button"><i class="fas fa-times"></i></button>
+    <h1 class="dialog-title">Sign in to share your work</h1>
+    <p>Please sign in to TunePad to share your music with other users.</p>
+    <div class="dialog-button-row">
+      <button class="cancel-button">Cancel</button>
+      <button class="confirm-button">Sign In</button>
+    </div>
+  </div>
+</template>
+
+
+<template id="share-confirm-dialog">
+  <div class="dialog">
+    <button class="close-button"><i class="fas fa-times"></i></button>
+    <h1 class="dialog-title">Success</h1>
+    <p>Thanks for sharing <b class="track-name"></b>.
+       You can now see your track in the TunePad library.</p>
+    <div class="dialog-button-row">
+      <button class="cancel-button">OK</button>
+    </div>
   </div>
 </template>
 
@@ -331,7 +439,7 @@
         <li class='menu-item' data-command="export-wav"><i class="fas fa-download"></i>Export WAV</li>
         <li class='menu-item' data-command="export-midi"><i class="fas fa-download"></i>Export MIDI</li>
         <li class="menu-separator">
-        <li class='menu-item' data-command="share"><i class="fas"></i>Share This Track</li>
+        <li class='menu-item' data-command="share"><i class="fas fa-share-alt"></i>Share This Track</li>
         <!--
         <li class='menu-item'><i class="fas fa-code-branch"></i>Remix</li>
         -->

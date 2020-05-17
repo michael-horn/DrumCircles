@@ -1,6 +1,7 @@
 
 // root of the firebase database
-var root;
+var root;  // project root for this page
+var datastore;
 var authProvider;
 
 function firebaseRoot() {
@@ -28,9 +29,8 @@ function firebaseInit(config) {
     }
   });
 
-  let datastore = firebase.database().ref();
+  datastore = firebase.database().ref();
   let hash = window.location.hash.replace(/#/g, '');
-  let newproj = false;
 
   if (hash) {
     root = datastore.child(hash);
@@ -87,7 +87,7 @@ function firebaseJoin() {
 
 
 function firebaseGenerateChildKey(directory) {
-  let ref = root.child(directory);
+  let ref = datastore.child(directory);
   ref = ref.push();
   return ref.key;
 }
@@ -100,8 +100,7 @@ function firebaseCreate(directory, jsonString) {
 
 function firebaseUpdate(directory, jsonString) {
   let data = JSON.parse(jsonString);
-  //let ref = firebase.database().ref(directory);
-  let ref = root.child(directory);
+  let ref = datastore.child(directory);
   ref.set(data)
     .then(function () { })
     .catch(function(error) { console.log('error updating ' + directory); });
@@ -109,15 +108,24 @@ function firebaseUpdate(directory, jsonString) {
 
 
 function firebaseRemove(directory) {
-  let ref = root.child(directory);
+  let ref = datastore.child(directory);
   ref.remove()
     .then(function () { })
     .catch(function(error) { console.log('error deleting ' + directory); });
 }
 
 
+function firebaseIncrement(directory, field, delta) {
+  let ref = datastore.child(directory);
+  const increment = firebase.firestore.FieldValue.increment(delta);
+  let data = { };
+  data[field] = increment;
+  ref.update(data);
+}
+
+
 function firebaseUpdatedCallback(directory) {
-  let ref = root.child(directory);
+  let ref = datastore.child(directory);
   ref.on("value", function(snapshot) {
     if (snapshot.exists()) {
       onFirebaseUpdate(directory, JSON.stringify(snapshot.val()));
@@ -127,7 +135,7 @@ function firebaseUpdatedCallback(directory) {
 
 
 function firebaseAddedCallback(directory) {
-  let ref = root.child(directory);
+  let ref = datastore.child(directory);
   ref.on('child_added', function(snapshot, prevKey) {
     onFirebaseAdded(directory, snapshot.key, prevKey, JSON.stringify(snapshot.val()));
   });
@@ -135,10 +143,61 @@ function firebaseAddedCallback(directory) {
 
 
 function firebaseRemovedCallback(directory) {
-  let ref = root.child(directory).parent;
+  let ref = datastore.child(directory);
   ref.on('child_removed', function(oldChild) {
-    if (oldChild.ref.toString().endsWith(directory)) {
+    if (oldChild.ref.path.toString().startsWith(directory)) {
       onFirebaseRemoved(directory, JSON.stringify(oldChild.val()));
     }
   });
+}
+
+
+function trackLibraryUpdate(id, jsonString) {
+  let db = firebase.firestore();
+  let data = JSON.parse(jsonString);
+  let base64 = data.preview;
+  delete data.preview;
+
+  let library = db.collection("library");
+  library.doc(id).set(JSON.parse(jsonString));
+
+  let preview = db.collection("previews");
+  preview.doc(id).set( { "mp3-base64" : base64 } );
+}
+
+
+function trackLibraryQuery(searchId, orderBy, sortOrder, filter) {
+  let db = firebase.firestore();
+  let library = db.collection("library");
+  library
+    .where('instrument', 'in', JSON.parse(filter))
+    //.orderBy(orderBy, sortOrder)
+    .get()
+    .then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+        //console.log(doc.id, " => ", doc.data());
+        onFirebaseSearchResult(searchId, JSON.stringify(doc.data()));
+      });
+      onFirebaseSearchDone(searchId);
+    })
+    .catch(function(error) {
+      console.log("Error getting documents: ", error);
+    });
+}
+
+
+
+function trackLibraryPreview(id) {
+  let db = firebase.firestore();
+  let preview = db.collection("previews").doc(id).get().then(
+    function(doc) {
+      if (doc.exists) {
+        onFirebaseSearchResult(JSON.stringify(doc.data()));
+      } else {
+        console.log("No such document!");
+      }
+    }).catch(function(error) {
+      console.log("Error getting document:", error);
+    }
+  );
 }

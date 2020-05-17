@@ -1,8 +1,8 @@
 /* MODAL DIALOG BOX */
 
 body.modal-open {
-  position: fixed;
-  width: 100%;
+/*  position: fixed;
+  width: 100%; */
 }
 
 .overlay {

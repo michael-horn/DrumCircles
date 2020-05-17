@@ -13,13 +13,14 @@
    --header-bg-color: #2e303f;
    --mixer-track-pad: 15px;
    --error-color: #da575d;
+   --main-font: Nunito, sans-serif;
  }
 
 html, body { height: 100%; }
 
 body {
   background-color: #fdfdfd;
-  font-family: sans-serif;
+  font-family: var(--main-font);
   font-weight: 200;
   margin: 0;
   overscroll-behavior: none;
@@ -37,6 +38,7 @@ section#code-tab {
   align-items: flex-start;
   flex-wrap: wrap;
 }
+
 
 .dialog.help {
   width: 80%;
@@ -117,17 +119,17 @@ section.hidden {
 .top-nav .menu-button {
   color: #999;
   font-size: 14px;
-  font-family: sans-serif;
-  font-weight: 500;
+  font-family: var(--main-font);
+  font-weight: 600;
   margin: 0 7px;
   padding: 8px 14px;
   border-radius: 5px;
 }
 
 .top-nav .project-name {
-  font-family: sans-serif;
+  font-family: var(--main-font);
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 700;
   color: #414251;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -165,7 +167,7 @@ section.hidden {
 }
 
 
-#login-button, #logout-button, #help-button {
+nav.side-nav .side-button {
   text-align: center;
   color: #fff9;
   font-size: 130%;
@@ -177,10 +179,18 @@ section.hidden {
   height: 45px;
   margin: 10px 0;
 }
-#login-button:hover, #logout-button:hover, #help-button:hover { color: #fff; }
-#login-button:active, #logout-button:active, #help-button:active { color: #2f9aef; }
-#login-button.hidden, #logout-button.hidden, #help-button.hidden { display: none; }
+nav.side-nav .side-button:hover { color: #fff; }
+nav.side-nav .side-button:active { color: #fff; }
+nav.side-nav .side-button.hidden { display: none; }
 
+#library-button {
+  background-image: url('../images/library.svg');
+  background-repeat: no-repeat;
+  background-size: 70%;
+  background-position: center;
+  opacity: 0.7;
+}
+#library-button:hover { opacity: 1.0; }
 
 #userlist {
   margin: 50px 0;
@@ -227,7 +237,8 @@ section.hidden {
   border: none;
   outline: none;
   font-size: 14px;
-  font-family: sans-serif;
+  font-family: var(--main-font);
+  font-weight: 600;
   background-color: transparent;
 }
 .top-nav .tabs button.selected,

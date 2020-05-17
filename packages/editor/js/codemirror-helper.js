@@ -66,7 +66,7 @@ function connectFirepad(selector, directory) {
     let ref = firebase.database().ref(directory);
 
     //let firepad = Firepad.fromCodeMirror(ref, editor, { defaultText: '# TunePad Track', userId : userId });
-    let firepad = Firepad.fromCodeMirror(ref, editor, { defaultText: '# TunePad Track' });
+    let firepad = Firepad.fromCodeMirror(ref, editor);
   }
 }
 
