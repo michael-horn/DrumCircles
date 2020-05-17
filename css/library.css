@@ -1,0 +1,170 @@
+
+.dialog.library {
+  width: 80%;
+  margin-top: 50px;
+  max-height: calc(100vh - 85px);
+  text-align: left;
+  overflow-y: auto;
+  color: #555;
+  padding: 0.5em 1.5em;
+}
+
+.dialog.library .columns {
+  display: flex;
+}
+
+.dialog.library .left-col {
+  flex: 1 1 30%;
+  margin: 15px 0;
+}
+
+.dialog.library .right-col {
+  flex: 1 1 70%;
+  margin: 15px 0;
+}
+
+.dialog.library .columns h2 {
+  font-size: 13px;
+  font-weight: normal;
+  margin: 0;
+  line-height: 2em;
+  color: #999;
+}
+
+.dialog.library .filters {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  color: #555;
+  font-weight: 600;
+  line-height: 3.5em;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+.dialog.library .filters i {
+  font-size: 25px;
+  margin-right: 20px;
+  color: #403A60;
+  position: relative;
+  top: 5px;
+}
+
+.dialog.library .filters li:hover { text-decoration: underline; }
+.dialog.library .filters i:active { opacity: 0.6; }
+
+.track-list {
+  list-style: none;
+  padding: 0;
+  font-size: 15px;
+  font-weight: normal;
+  font-family: var(--main-font);
+  color: #777;
+}
+.track-item {
+  position: relative;
+  margin-bottom: 1.5em;
+}
+.track-summary {
+  display: flex;
+  line-height: 35px;
+  white-space: nowrap;
+}
+.track-item .gadget-icon {
+  min-width: 35px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin: 0 1em 0 0;
+  color: transparent;
+  padding-left: 3px;
+  padding-top: 1px;
+  text-align: center;
+  box-sizing: border-box;
+}
+@keyframes spin {
+  from { transform:rotate(0deg); }
+  to { transform:rotate(360deg); }
+}
+.track-item .gadget-icon.loading {
+  background-image: none;
+  padding-left: 0;
+  font-size: 130%;
+  color: white;
+  animation: spin 1s infinite;
+}
+.track-item .gadget-icon.playing { padding-left: 0; background-image: none; color: white; }
+.track-item:hover .gadget-icon { background-image: none; color: white; }
+.track-item:hover .gadget-icon:hover { color: #fffb; }
+.track-item:hover .gadget-icon:active { color: #fff9; }
+
+.track-item .track-title {
+  font-weight: bold;
+  color: #333;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 1em;
+  user-select: none;
+}
+.track-item .track-title:hover { text-decoration: underline; }
+.track-item .track-duration {
+  width: 5em;
+  font-size: 14px;
+}
+.track-item .track-details {
+  display: block;
+  list-style: none;
+  margin-left: calc(35px + 1em);
+  padding: 0;
+  width: unset;
+}
+.track-item .track-details.hidden { display: none; }
+
+.track-details li {
+  line-height: 150%;
+}
+
+.track-details li.description {
+  font-weight: bold;
+}
+
+.track-details li a { text-decoration: underline; color: #555; }
+.track-details li a:hover { text-decoration: underline; color: black; }
+
+.track-details li.modified {
+  font-size: 12px;
+  text-align: right;
+  position: relative;
+  top: -20px;
+}
+
+.dialog.library .track-summary button {
+  height: 35px;
+  background-color: transparent;
+  color: #888;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  margin: 0 0.3em;
+}
+.dialog.library .track-summary button:hover {
+  color: black;
+}
+.dialog.library .like-count { font-size: 12px; }
+.dialog.library .like-button i.fas { color: tomato; }
+.dialog.library .star-button i.fas { color: orange; }
+
+.dialog.library .track-summary button.add-button {
+  border: 1px solid #888;
+  width: 75px;
+}
+
+.dialog.library .add-button .fas {
+  margin-right: 0.5em;
+}
+
+.dialog.library .add-button:hover { background-color: #eee; }
+.dialog.library .add-button:active { background-color: #ddd; }
