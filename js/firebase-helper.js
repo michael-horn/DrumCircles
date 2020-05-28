@@ -159,7 +159,9 @@ function trackLibraryUpdate(id, jsonString) {
   delete data.preview;
 
   let library = db.collection("library");
-  library.doc(id).set(JSON.parse(jsonString));
+  library.doc(id).set(JSON.parse(jsonString))
+  .then(function() { })
+  .catch(function(error) { console.log('error adding' + error); });
 
   let preview = db.collection("previews");
   preview.doc(id).set( { "mp3-base64" : base64 } );

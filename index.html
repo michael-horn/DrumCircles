@@ -54,12 +54,15 @@
   <script src="js/jquery.3.3.1.min.js"></script>
   <script src="packages/instruments/js/TweenMax.min.js"></script>
 
+  <!-- TUNEPAD Styles -->
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/cells.css" />
   <link rel="stylesheet" href="css/mixer.css" />
+  <link rel="stylesheet" href="css/login.css" />
   <link rel="stylesheet" href="css/library.css" />
   <link rel="stylesheet" href="packages/ui/css/dialog.css" />
 
+  <!-- TUNEPAD App -->
   <script defer src="dart/main.dart.js"></script>
 </head>
 
@@ -188,11 +191,12 @@
 
 <nav class="side-nav">
   <div class="tunepad-logo"></div>
-  <ul id="userlist"></ul>
+  <button id="profile-button" class="side-button" title="Profile"><i class="far fa-user"></i></button>
   <button id="library-button" class="side-button" title="Track Library"></button>
   <button id="help-button" class="side-button" title="Help"><i class="far fa-question-circle"></i></button>
   <button id="login-button" class="side-button" title="Sign In"><i class="fas fa-sign-in-alt"></i></button>
   <button id="logout-button" class="side-button hidden" title="Sign Out"><i class="fas fa-sign-out-alt"></i></button>
+  <ul id="userlist"></ul>
 </nav>
 
 <main>
@@ -229,6 +233,33 @@
 </template>
 
 
+<template id="login-template">
+  <div class="dialog login">
+    <button class="close-button"><i class="fas fa-times"></i></button>
+    <h1 class="dialog-title">TunePad Sign In</h1>
+    <button id="google-button"></button>
+    <div class="divider"><div class="line"></div><span>OR</span><div class="line"></div></div>
+    <form id="login-form">
+      <input id="username" name="username" placeholder="Username or Email">
+      <div class="message hidden" id="username-message"></div>
+      <input id="password" name="password" placeholder="Password" type="password">
+      <div class="message hidden" id="password-message"></div>
+      <div class="message hidden" id="general-message"></div>
+      <div class="dialog-button-row">
+        <button type="submit" id="login-button" class="btn confirm-button">
+          Sign In
+          <i class="fa fa-spinner"></i>
+        </button>
+      </div>
+    </form>
+    <a href="/account/reset" id="forgot-link" target="_blank">Forgot password?</a>
+    <div class="info">Haven't joined yet?</div>
+    <div class="dialog-button-row">
+      <button id="join-button" class="btn secondary">Create Account</a>
+    </div>
+  </div>
+</template>
+
 <template id="help-template">
   <div class="dialog help">
     <button class="close-button"><i class="fas fa-times"></i></button>
@@ -264,7 +295,22 @@
         </ul>
       </div>
       <div class="right-col">
-        <h2 class="track-count"></h2>
+        <div class="result-header">
+          <h2 class="track-count"></h2>
+          <div class="sort-menu">
+            <span class="sort-criteria">Most Recent</span> <i class="fas fa-angle-down"></i>
+            <ul class='context-menu hidden'>
+              <li class='menu-item' data-sort="modified">Most Recent</li>
+              <li class='menu-item' data-sort="popular">Most Popular</li>
+              <li class='menu-item' data-sort="remixed">Most Remixed</li>
+              <li class='menu-item' data-sort="name">By Name</li>
+              <li class='menu-item' data-sort="duration-up">Duration (shortest)</li>
+              <li class='menu-item' data-sort="duration-dn">Duration (longest)</li>
+              <!-- <li class='menu-item' data-sort="my-favs">My Favorites</li> -->
+              <li class='menu-item' data-sort="my-tracks">My Tracks</li>
+            </ul>
+          </div>
+        </div>
         <div class="search-results"></div>
       </div>
     </div>
@@ -277,10 +323,14 @@
       <div class="gadget-icon"><i class="fas fa-play"></i></div>
       <div class="track-title expander"></div>
       <div class="track-duration"></div>
-      <button class="star-button" title="Favorite"><i class="far fa-star"></i><span class="star-count"></span></button>
-      <!-- button class="like-button" title="Like"><i class="far fa-heart"></i> <span class="like-count"></span></button -->
+      <button class="star-button" title="Favorite">
+        <i class="far fa-star"></i><span class="star-count"></span>
+      </button>
+      <!-- button class="like-button" title="Like"><i class="far fa-heart"></i></button> -->
+
       <button class="expand-button" title="More Info"><i class="fas fa-chevron-down"></i></button>
       <button class="add-button" title="Add to Project"><i class="fas fa-plus"></i>Add</button>
+      <audio></audio>
     </div>
     <ul class="track-details hidden">
       <li class="author"></li>
@@ -329,19 +379,6 @@
     <div class="dialog-button-row">
       <button class="cancel-button">Cancel</button>
       <button class="confirm-button">Sign In</button>
-    </div>
-  </div>
-</template>
-
-
-<template id="share-confirm-dialog">
-  <div class="dialog">
-    <button class="close-button"><i class="fas fa-times"></i></button>
-    <h1 class="dialog-title">Success</h1>
-    <p>Thanks for sharing <b class="track-name"></b>.
-       You can now see your track in the TunePad library.</p>
-    <div class="dialog-button-row">
-      <button class="cancel-button">OK</button>
     </div>
   </div>
 </template>

@@ -23,6 +23,41 @@
   margin: 15px 0;
 }
 
+.dialog.library .result-header {
+  display: flex;
+  margin-bottom: 0.7em;
+}
+
+.dialog.library .track-count {
+  flex: 1;
+}
+
+.dialog.library .sort-menu {
+  text-align: right;
+  font-size: 13px;
+  font-weight: normal;
+  color: #999;
+  line-height: 2em;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  position: relative;
+}
+
+.dialog.library .sort-menu:hover {
+  text-decoration: underline;
+}
+
+.dialog.library .sort-menu i {
+  margin-left: 4px;
+}
+
+.dialog.library .sort-menu .context-menu {
+  left: unset;
+  right: 0;
+  top: 15px;
+}
+
 .dialog.library .columns h2 {
   font-size: 13px;
   font-weight: normal;
@@ -91,7 +126,6 @@
 .track-item .gadget-icon.loading {
   background-image: none;
   padding-left: 0;
-  font-size: 130%;
   color: white;
   animation: spin 1s infinite;
 }
@@ -153,7 +187,7 @@
 .dialog.library .track-summary button:hover {
   color: black;
 }
-.dialog.library .like-count { font-size: 12px; }
+.dialog.library .star-count { font-size: 12px; margin-left: 5px; }
 .dialog.library .like-button i.fas { color: tomato; }
 .dialog.library .star-button i.fas { color: orange; }
 
