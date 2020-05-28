@@ -239,10 +239,10 @@
     <h1 class="dialog-title">TunePad Sign In</h1>
     <button id="google-button"></button>
     <div class="divider"><div class="line"></div><span>OR</span><div class="line"></div></div>
-    <form id="login-form">
-      <input id="username" name="username" placeholder="Username or Email">
+    <form id="login-form" method="post">
+      <input id="username" name="username" placeholder="Username or Email" autocomplete="username">
       <div class="message hidden" id="username-message"></div>
-      <input id="password" name="password" placeholder="Password" type="password">
+      <input id="password" name="password" placeholder="Password" type="password" autocomplete="current-password">
       <div class="message hidden" id="password-message"></div>
       <div class="message hidden" id="general-message"></div>
       <div class="dialog-button-row">
