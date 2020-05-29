@@ -6886,7 +6886,7 @@
     main: function() {
       var $async$goto = 0,
         $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic),
-        t2, t3, t4, t5, t1;
+        t1, t2, t3, t4, t5;
       var $async$main = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
         if ($async$errorCode === 1)
           return P._asyncRethrow($async$result, $async$completer);
@@ -6895,33 +6895,32 @@
             case 0:
               // Function start
               t1 = type$.dynamic;
-              t1 = P.LinkedHashMap_LinkedHashMap$_literal(["apiKey", "AIzaSyBccCx1WaXXMqf8tq-_1dwO2qr76f6RHFo", "authDomain", "tunepadbeta.firebaseapp.com", "databaseURL", "https://tunepadbeta.firebaseio.com", "projectId", "tunepadbeta", "storageBucket", "tunepadbeta.appspot.com", "messagingSenderId", "803854221469", "appId", "1:803854221469:web:59b8d6beedab219d7bd474"], t1, t1);
-              t2 = Y.User$anonymous();
-              t3 = type$.JsLinkedHashMap_of_String_and_List_Function;
-              t4 = type$.JSArray_Function;
-              t4 = new Y.Datastore("https://tunepad.club", t1, t2, new H.JsLinkedHashMap(t3), new H.JsLinkedHashMap(t3), new H.JsLinkedHashMap(t3), H.setRuntimeTypeInfo([], t4), H.setRuntimeTypeInfo([], t4));
-              t3 = $.$get$_context();
-              t3.$indexSet(0, "onFirebaseUpdate", t4.get$_onUpdated());
-              t3.$indexSet(0, "onFirebaseAdded", t4.get$_onAdded());
-              t3.$indexSet(0, "onFirebaseRemoved", t4.get$_onRemoved());
-              t3.$indexSet(0, "onFirebaseLogin", t4.get$_onConnect());
-              t3.$indexSet(0, "onFirebaseLogout", t4.get$_onLogout());
-              t4.isEmpty = H._asBoolNullable(t3.callMethod$2("firebaseInit", [C.C_JsonCodec.encode$2$toEncodable(t1, null)]));
-              t4.root = t3.callMethod$2("firebaseRoot", []);
-              $.datastore = t4;
+              t2 = P.LinkedHashMap_LinkedHashMap$_literal(["apiKey", "AIzaSyBccCx1WaXXMqf8tq-_1dwO2qr76f6RHFo", "authDomain", "tunepadbeta.firebaseapp.com", "databaseURL", "https://tunepadbeta.firebaseio.com", "projectId", "tunepadbeta", "storageBucket", "tunepadbeta.appspot.com", "messagingSenderId", "803854221469", "appId", "1:803854221469:web:59b8d6beedab219d7bd474"], t1, t1);
+              t3 = Y.User$anonymous();
+              t4 = type$.JsLinkedHashMap_of_String_and_List_Function;
+              t5 = type$.JSArray_Function;
+              t5 = new Y.Datastore("https://tunepad.club", t2, t3, new H.JsLinkedHashMap(t4), new H.JsLinkedHashMap(t4), new H.JsLinkedHashMap(t4), H.setRuntimeTypeInfo([], t5), H.setRuntimeTypeInfo([], t5));
+              t4 = $.$get$_context();
+              t4.$indexSet(0, "onFirebaseUpdate", t5.get$_onUpdated());
+              t4.$indexSet(0, "onFirebaseAdded", t5.get$_onAdded());
+              t4.$indexSet(0, "onFirebaseRemoved", t5.get$_onRemoved());
+              t4.$indexSet(0, "onFirebaseLogin", t5.get$_onConnect());
+              t4.$indexSet(0, "onFirebaseLogout", t5.get$_onLogout());
+              t5.isEmpty = H._asBoolNullable(t4.callMethod$2("firebaseInit", [C.C_JsonCodec.encode$2$toEncodable(t2, null)]));
+              t5.root = t4.callMethod$2("firebaseRoot", []);
+              $.datastore = t5;
               $.socket = W.WebSocket_WebSocket("wss://tunepad.club:8765");
-              t4 = $.datastore;
-              $.project = Y.Project$(t4.root, t4);
+              t5 = $.datastore;
+              $.project = Y.Project$(t5.root, t5);
               $.userlist = B.UserList$($.socket);
-              t4 = $.datastore;
-              $.library = new O.TrackLibrary(t4, ["bass", "drums", "drumkit", "guitar", "piano", "marimba", "sequencer", "definitions"]);
-              if (H.boolConversionCheck(t4.isEmpty)) {
-                t4.save$1($.project);
+              $.library = new O.TrackLibrary($.datastore, P.LinkedHashSet_LinkedHashSet$from(["bass", "drums", "drumkit", "guitar", "piano", "marimba", "sequencer", "definitions"], t1));
+              t1 = $.datastore;
+              if (H.boolConversionCheck(t1.isEmpty)) {
+                t1.save$1($.project);
                 $.datastore.createPythonCell$0();
                 t1 = $.datastore;
                 t1.isEmpty = false;
-              } else
-                t1 = t4;
+              }
               t1.addAddedCallback$2("/" + H.S(t1.root) + "/cells", new F.main_closure());
               t1 = type$.Element;
               t2 = document;
@@ -11348,6 +11347,20 @@
       var t1;
       for (t1 = J.get$iterator$ax(H._instanceType(this)._eval$1("Iterable<1>")._as(elements)); t1.moveNext$0();)
         this.add$1(0, t1.get$current());
+    },
+    toList$1$growable: function(_, growable) {
+      var i, i0, _this = this,
+        t1 = H._instanceType(_this),
+        result = H.setRuntimeTypeInfo([], t1._eval$1("JSArray<1>"));
+      C.JSArray_methods.set$length(result, _this._collection$_length);
+      for (t1 = P._LinkedHashSetIterator$(_this, _this._collection$_modifications, t1._precomputed1), i = 0; t1.moveNext$0(); i = i0) {
+        i0 = i + 1;
+        C.JSArray_methods.$indexSet(result, i, t1._collection$_current);
+      }
+      return result;
+    },
+    toList$0: function($receiver) {
+      return this.toList$1$growable($receiver, true);
     },
     toString$0: function(_) {
       return P.IterableBase_iterableToFullString(this, "{", "}");
@@ -21759,7 +21772,7 @@
         _s15_ = "fa-check-square",
         el = this._dialog.querySelector(".filter-option[data-filter='" + H.S(f) + "']"),
         t1 = this.filter;
-      C.JSArray_methods.remove$1(t1, f);
+      t1.remove$1(0, f);
       t2 = type$.Element;
       t3 = type$._FrozenElementList_Element;
       if (off) {
@@ -21774,7 +21787,7 @@
         W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(el.querySelectorAll(_s1_), t3)).remove$1(0, _s15_);
         J.get$classes$x(el).add$1(0, "off");
         if (f === "drums")
-          C.JSArray_methods.remove$1(t1, "drumkit");
+          t1.remove$1(0, "drumkit");
       } else {
         el.toString;
         H.checkTypeBound(t2, t2, _s1_0, _s16_);
@@ -21786,9 +21799,9 @@
         H.checkTypeBound(t2, t2, _s1_0, _s16_);
         W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(el.querySelectorAll(_s1_), t3)).add$1(0, _s15_);
         J.get$classes$x(el).remove$1(0, "off");
-        C.JSArray_methods.add$1(t1, f);
+        t1.add$1(0, f);
         if (f === "drums")
-          C.JSArray_methods.add$1(t1, "drumkit");
+          t1.add$1(0, "drumkit");
       }
     },
     _search$2: function(filter, sort) {
@@ -21815,7 +21828,7 @@
               t1.set$innerHtml($status, "Loading tracks...");
               ++$async$self._searchId;
               $async$goto = 4;
-              return P._asyncAwait($async$self.datastore.searchLibrary$2(filter, sort), $async$_search$2);
+              return P._asyncAwait($async$self.datastore.searchLibrary$2(filter.toList$0(0), sort), $async$_search$2);
             case 4:
               // returning from await.
               tracks = $async$result;
@@ -22048,7 +22061,7 @@
       el.toString;
       f = el.getAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(el))._toHyphenedName$1("filter"));
       t1 = this.$this;
-      t1._setFilterOption$2(f, !C.JSArray_methods.contains$1(t1.filter, f));
+      t1._setFilterOption$2(f, !t1.filter.contains$1(0, f));
       t2 = J.get$onClick$x(el);
       t3 = t2.$ti;
       t1 = t3._eval$1("~(1)")._as(new O.TrackLibrary_show__closure(t1, f, el));
