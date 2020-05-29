@@ -21806,6 +21806,7 @@
               results = type$.DivElement._as($async$self._dialog.querySelector(".search-results"));
               results.children;
               C.DivElement_methods._clearChildren$0(results);
+              P.print(filter);
               $async$goto = $status != null && true ? 2 : 3;
               break;
             case 2:
