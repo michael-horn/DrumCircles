@@ -7,42 +7,44 @@ define(['dart_sdk'], function(dart_sdk) {
   const _js_helper = dart_sdk._js_helper;
   const dart = dart_sdk.dart;
   const dartx = dart_sdk.dartx;
-  const codemirror = Object.create(dart.library);
-  const $parent = dartx.parent;
-  const $_set = dartx._set;
-  const $containsKey = dartx.containsKey;
-  const $_get = dartx._get;
-  let StringAndStringTovoid = () => (StringAndStringTovoid = dart.constFn(dart.fnType(dart.void, [core.String, core.String])))();
-  let StringTovoid = () => (StringTovoid = dart.constFn(dart.fnType(dart.void, [core.String])))();
-  let LinkedMapOfString$Function = () => (LinkedMapOfString$Function = dart.constFn(_js_helper.LinkedMap$(core.String, core.Function)))();
+  var codemirror = Object.create(dart.library);
+  var $parent = dartx.parent;
+  var $_set = dartx._set;
+  var $containsKey = dartx.containsKey;
+  var $_get = dartx._get;
+  var StringLAndStringLTovoid = () => (StringLAndStringLTovoid = dart.constFn(dart.fnType(dart.void, [core.String, core.String])))();
+  var StringLTovoid = () => (StringLTovoid = dart.constFn(dart.fnType(dart.void, [core.String])))();
+  var LinkedMapOfStringL$FunctionL = () => (LinkedMapOfStringL$FunctionL = dart.constFn(_js_helper.LinkedMap$(core.String, core.Function)))();
   const CT = Object.create(null);
+  var L0 = "package:editor/codemirror.dart";
   dart.defineLazy(CT, {
     get C0() {
-      return C0 = dart.fn(codemirror.CodeMirror.onProgramUpdate, StringAndStringTovoid());
+      return C0 = dart.fn(codemirror.CodeMirror.onProgramUpdate, StringLAndStringLTovoid());
     },
     get C1() {
-      return C1 = dart.fn(codemirror.CodeMirror.onCursorActivity, StringAndStringTovoid());
+      return C1 = dart.fn(codemirror.CodeMirror.onCursorActivity, StringLAndStringLTovoid());
     },
     get C2() {
-      return C2 = dart.fn(codemirror.CodeMirror.onEditorBlur, StringTovoid());
+      return C2 = dart.fn(codemirror.CodeMirror.onEditorBlur, StringLTovoid());
     }
-  });
+  }, false);
   codemirror.CodeMirrorListener = class CodeMirrorListener extends core.Object {};
   (codemirror.CodeMirrorListener.new = function() {
     ;
   }).prototype = codemirror.CodeMirrorListener.prototype;
   dart.addTypeTests(codemirror.CodeMirrorListener);
-  dart.setLibraryUri(codemirror.CodeMirrorListener, "package:editor/codemirror.dart");
-  const _dirty = dart.privateName(codemirror, "_dirty");
-  let C0;
-  let C1;
-  let C2;
-  const _onProgramUpdate = dart.privateName(codemirror, "_onProgramUpdate");
-  const _onCursorActivity = dart.privateName(codemirror, "_onCursorActivity");
-  const _onEditorBlur = dart.privateName(codemirror, "_onEditorBlur");
-  const id$ = dart.privateName(codemirror, "CodeMirror.id");
-  const listener$ = dart.privateName(codemirror, "CodeMirror.listener");
-  const parent = dart.privateName(codemirror, "CodeMirror.parent");
+  dart.addTypeCaches(codemirror.CodeMirrorListener);
+  dart.setLibraryUri(codemirror.CodeMirrorListener, L0);
+  var _dirty = dart.privateName(codemirror, "_dirty");
+  var C0;
+  var C1;
+  var C2;
+  var _onProgramUpdate = dart.privateName(codemirror, "_onProgramUpdate");
+  var _onCursorActivity = dart.privateName(codemirror, "_onCursorActivity");
+  var _onEditorBlur = dart.privateName(codemirror, "_onEditorBlur");
+  var id$ = dart.privateName(codemirror, "CodeMirror.id");
+  var listener$ = dart.privateName(codemirror, "CodeMirror.listener");
+  var parent = dart.privateName(codemirror, "CodeMirror.parent");
   codemirror.CodeMirror = class CodeMirror extends core.Object {
     get id() {
       return this[id$];
@@ -72,7 +74,7 @@ define(['dart_sdk'], function(dart_sdk) {
       js.context.callMethod("connectFirepad", [this.id, directory]);
     }
     getCode() {
-      return core.String._check(js.context.callMethod("getCode", [this.id]));
+      return core.String.as(js.context.callMethod("getCode", [this.id]));
     }
     setCode(code) {
       js.context.callMethod("setCode", [this.id, code]);
@@ -146,6 +148,7 @@ define(['dart_sdk'], function(dart_sdk) {
     codemirror.CodeMirror.editorBlurMap[$_set](this.id, dart.bind(this, _onEditorBlur));
   }).prototype = codemirror.CodeMirror.prototype;
   dart.addTypeTests(codemirror.CodeMirror);
+  dart.addTypeCaches(codemirror.CodeMirror);
   dart.setMethodSignature(codemirror.CodeMirror, () => ({
     __proto__: dart.getMethods(codemirror.CodeMirror.__proto__),
     initialize: dart.fnType(dart.void, []),
@@ -166,7 +169,7 @@ define(['dart_sdk'], function(dart_sdk) {
     __proto__: dart.getGetters(codemirror.CodeMirror.__proto__),
     isDirty: core.bool
   }));
-  dart.setLibraryUri(codemirror.CodeMirror, "package:editor/codemirror.dart");
+  dart.setLibraryUri(codemirror.CodeMirror, L0);
   dart.setFieldSignature(codemirror.CodeMirror, () => ({
     __proto__: dart.getFields(codemirror.CodeMirror.__proto__),
     id: dart.fieldType(core.String),
@@ -176,22 +179,22 @@ define(['dart_sdk'], function(dart_sdk) {
   }));
   dart.defineLazy(codemirror.CodeMirror, {
     /*codemirror.CodeMirror.programUpdateMap*/get programUpdateMap() {
-      return new (LinkedMapOfString$Function()).new();
+      return new (LinkedMapOfStringL$FunctionL()).new();
     },
     set programUpdateMap(_) {},
     /*codemirror.CodeMirror.cursorActivityMap*/get cursorActivityMap() {
-      return new (LinkedMapOfString$Function()).new();
+      return new (LinkedMapOfStringL$FunctionL()).new();
     },
     set cursorActivityMap(_) {},
     /*codemirror.CodeMirror.editorBlurMap*/get editorBlurMap() {
-      return new (LinkedMapOfString$Function()).new();
+      return new (LinkedMapOfStringL$FunctionL()).new();
     },
     set editorBlurMap(_) {}
-  });
+  }, true);
   dart.trackLibraries("packages/editor/codemirror", {
     "package:editor/codemirror.dart": codemirror
   }, {
-  }, '{"version":3,"sourceRoot":"","sources":["codemirror.dart"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAqCA;;;;;;;;;;;;;;IAcS;;;;;;IAGY;;;;;;IAOX;;;;;;;AAHY;IAAM;;AA6BmB,MAAxC,AAAQ,sBAAW,cAAc,CAAE;IACxC;mBAG2B;AACiC,MAAvD,AAAQ,sBAAW,kBAAkB,CAAE,SAAI,SAAS;IACzD;;AAGE,gCAAU,AAAQ,sBAAW,WAAW,CAAE;IAC5C;YAEoB;AAC4B,MAA3C,AAAQ,sBAAW,WAAW,CAAE,SAAI,IAAI;AAC9B,MAAb,eAAS;IACX;sBAE2B,MAAU;AACwB,MAAxD,AAAQ,sBAAW,qBAAqB,CAAE,SAAI,IAAI,EAAE;IACzD;mBAEwB;AACtB,UAAI,IAAI,IAAI,QAAa,aAAL,IAAI,IAAG;AAC4B,QAAlD,AAAQ,sBAAW,kBAAkB,CAAE,SAAI,IAAI;;IAEtD;;AAGoD,MAA/C,AAAQ,sBAAW,qBAAqB,CAAE;IAC/C;mBAEwB;AAC+B,MAAlD,AAAQ,sBAAW,kBAAkB,CAAE,SAAI,IAAI;IACpD;;AAGoD,MAA/C,AAAQ,sBAAW,qBAAqB,CAAE;IAC/C;;AAK6B,MAAd,eAAS;IAAO;2BAMI,QAAe;AAChD,oBAAI,AAAiB,qDAAY,MAAM;AAC2B,QAAvD,oBAAM,AAAgB,8CAAC,MAAM,GAAG,CAAE,mBAAW,MAAM;;IAEhE;uBAE0B;AACX,MAAb,eAAS;AACuB,MAAhC,AAAS,8BAAgB,MAAM;AAG/B,qBAA0B,WAAP,WAAf,AAAM,MAAA,QAAC,0BAAiB;AACE,QAA5B,AAAS,0BAAY,MAAM;YACtB,kBAAkB,WAAd,AAAM,MAAA,QAAC,kBAAQ,UAAuB,WAAZ,AAAM,MAAA,QAAC,gBAAM;AAClB,QAA9B,AAAS,4BAAc,MAAM;;IAEjC;4BAMoC,QAAe;AACjD,oBAAI,AAAkB,sDAAY,MAAM;AAC6B,QAA1D,oBAAM,AAAiB,+CAAC,MAAM,GAAG,CAAE,mBAAW,QAAQ;;IAEnE;wBAE2B;AACU,MAAnC,AAAS,+BAAiB,QAAQ;IACpC;wBAOgC;AAC9B,oBAAI,AAAc,kDAAY,MAAM;AACO,QAAhC,oBAAM,AAAa,2CAAC,MAAM,GAAG;;IAE1C;;AAGyB,MAAvB,AAAS;IACX;;wCApHgB,UAAe;IAP1B,eAAS;IAIN;IAGQ;IAAe;AACrB,aAAK,mBAAc;AAC3B,QAAI,EAAE,IAAI,MAAW,AAAkB,cAAT,AAAG,EAAD;AAKhC,QAAO,AAAO,AAAoB,gBAAnB,sBAAsB;AACuB,MAAvD,AAAO,gBAAC;AACiD,MAAzD,AAAO,gBAAC;AACmC,MAA3C,AAAO,gBAAC;;AAM0B,IAAvC,AAAgB,8CAAC,mBAAM;AACkB,IAAzC,AAAiB,+CAAC,mBAAM;AACS,IAAjC,AAAa,2CAAC,mBAAM;EACtB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;MArC6B,sCAAgB;YAAO;;;MACvB,uCAAiB;YAAO;;;MACxB,mCAAa;YAAO","file":"codemirror.ddc.js"}');
+  }, '{"version":3,"sourceRoot":"","sources":["codemirror.dart"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAqCA;;;;;;;;;;;;;;;IAcS;;;;;;IAGY;;;;;;IAOX;;;;;;;AAHY;IAAM;;AA6BmB,MAAxC,AAAQ,sBAAW,cAAc,CAAE;IACxC;mBAG2B;AACiC,MAAvD,AAAQ,sBAAW,kBAAkB,CAAE,SAAI,SAAS;IACzD;;AAGE,4BAAU,AAAQ,sBAAW,WAAW,CAAE;IAC5C;YAEoB;AAC4B,MAA3C,AAAQ,sBAAW,WAAW,CAAE,SAAI,IAAI;AAC9B,MAAb,eAAS;IACX;sBAE2B,MAAU;AACwB,MAAxD,AAAQ,sBAAW,qBAAqB,CAAE,SAAI,IAAI,EAAE;IACzD;mBAEwB;AACtB,UAAI,IAAI,IAAI,QAAa,aAAL,IAAI,IAAG;AAC4B,QAAlD,AAAQ,sBAAW,kBAAkB,CAAE,SAAI,IAAI;;IAEtD;;AAGoD,MAA/C,AAAQ,sBAAW,qBAAqB,CAAE;IAC/C;mBAEwB;AAC+B,MAAlD,AAAQ,sBAAW,kBAAkB,CAAE,SAAI,IAAI;IACpD;;AAGoD,MAA/C,AAAQ,sBAAW,qBAAqB,CAAE;IAC/C;;AAK6B,MAAd,eAAS;IAAO;2BAMI,QAAe;AAChD,oBAAI,AAAiB,qDAAY,MAAM;AAC2B,QAAvD,oBAAM,AAAgB,8CAAC,MAAM,GAAG,CAAE,mBAAW,MAAM;;IAEhE;uBAE0B;AACX,MAAb,eAAS;AACuB,MAAhC,AAAS,8BAAgB,MAAM;AAG/B,qBAA0B,WAAP,WAAf,AAAM,MAAA,QAAC,0BAAiB;AACE,QAA5B,AAAS,0BAAY,MAAM;YACtB,kBAAkB,WAAd,AAAM,MAAA,QAAC,kBAAQ,UAAuB,WAAZ,AAAM,MAAA,QAAC,gBAAM;AAClB,QAA9B,AAAS,4BAAc,MAAM;;IAEjC;4BAMoC,QAAe;AACjD,oBAAI,AAAkB,sDAAY,MAAM;AAC6B,QAA1D,oBAAM,AAAiB,+CAAC,MAAM,GAAG,CAAE,mBAAW,QAAQ;;IAEnE;wBAE2B;AACU,MAAnC,AAAS,+BAAiB,QAAQ;IACpC;wBAOgC;AAC9B,oBAAI,AAAc,kDAAY,MAAM;AACO,QAAhC,oBAAM,AAAa,2CAAC,MAAM,GAAG;;IAE1C;;AAGyB,MAAvB,AAAS;IACX;;wCApHgB,UAAe;IAP1B,eAAS;IAIN;IAGQ;IAAe;AACrB,aAAK,mBAAc;AAC3B,QAAI,EAAE,IAAI,MAAW,AAAkB,cAAT,AAAG,EAAD;AAKhC,QAAO,AAAO,AAAoB,gBAAnB,sBAAsB;AACuB,MAAvD,AAAO,gBAAC;AACiD,MAAzD,AAAO,gBAAC;AACmC,MAA3C,AAAO,gBAAC;;AAM0B,IAAvC,AAAgB,8CAAC,mBAAM;AACkB,IAAzC,AAAiB,+CAAC,mBAAM;AACS,IAAjC,AAAa,2CAAC,mBAAM;EACtB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;MArC6B,sCAAgB;YAAO;;;MACvB,uCAAiB;YAAO;;;MACxB,mCAAa;YAAO","file":"codemirror.ddc.js"}');
   // Exports:
   return {
     codemirror: codemirror

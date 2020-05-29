@@ -714,20 +714,30 @@ class PythonCell extends DataModel with
  * changes the instrument voice
  */
   void setVoice(String voice, String instr) async {
+    print("set voice");
     if (instr == null) instr = "piano";
     root.querySelectorAll(".voice-menu i.fas").classes.remove("fa-check");
     root.querySelectorAll(".voice-menu .menu-item[data-voice='$voice'] .fas").classes.add("fa-check");
+    print("A1");
     if (clock.context != null && synth.voice != voice) {
+      print("A2");
       root.querySelector(".voice-name").innerHtml = "Loading...";
+      print("A3");
       pause();
+      print("A4");
       if (patches[voice] is Map) {
+        print("A5");
         await synth.loadPatch(voice, patches[voice], clock.context);
+        print("A6");
         root.querySelector(".voice-name").innerHtml = voice.toUpperCase();
+        print("A7");
       }
     } else {
       root.querySelector(".voice-name").innerHtml = voice.toUpperCase();
     }
+    print("C3");
     _setInstrument(voice, instr);
+    print("C4");
   }
 
 
@@ -849,10 +859,15 @@ class PythonCell extends DataModel with
   }
 
   void stopMetronome() {
+    print("stop metronome");
     if (clock.isMetronomePlaying(this)) {
+      print("stoppig");
       root.querySelectorAll(".metronome-button").classes.remove('playing');
+      print("removed playing");
       clock.stopMetronome(this);
+      print("clock stop");
       metronome.cancelAllNotes();
+      print("canceled notes");
     }
   }
 

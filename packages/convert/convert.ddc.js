@@ -9,35 +9,45 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
   const dart = dart_sdk.dart;
   const dartx = dart_sdk.dartx;
   const typed_buffers = packages__typed_data__typed_buffers.typed_buffers;
-  const decoder = Object.create(dart.library);
-  const utils = Object.create(dart.library);
-  const byte_accumulator_sink = Object.create(dart.library);
-  const encoder = Object.create(dart.library);
-  const convert$ = Object.create(dart.library);
-  const string_accumulator_sink = Object.create(dart.library);
-  const percent = Object.create(dart.library);
-  const decoder$ = Object.create(dart.library);
-  const encoder$ = Object.create(dart.library);
-  const identity_codec = Object.create(dart.library);
-  const hex = Object.create(dart.library);
-  const accumulator_sink = Object.create(dart.library);
-  const $isEven = dartx.isEven;
-  const $truncate = dartx.truncate;
-  const $codeUnits = dartx.codeUnits;
-  const $_set = dartx._set;
-  const $length = dartx.length;
-  const $_get = dartx._get;
-  const $toRadixString = dartx.toRadixString;
-  const $padLeft = dartx.padLeft;
-  const $clear = dartx.clear;
-  const $abs = dartx.abs;
-  const $substring = dartx.substring;
-  const $asUint8List = dartx.asUint8List;
-  const $add = dartx.add;
-  let ListOfint = () => (ListOfint = dart.constFn(core.List$(core.int)))();
-  let SinkOfListOfint = () => (SinkOfListOfint = dart.constFn(core.Sink$(ListOfint())))();
-  let SinkOfString = () => (SinkOfString = dart.constFn(core.Sink$(core.String)))();
+  var decoder = Object.create(dart.library);
+  var utils = Object.create(dart.library);
+  var byte_accumulator_sink = Object.create(dart.library);
+  var encoder = Object.create(dart.library);
+  var convert$ = Object.create(dart.library);
+  var string_accumulator_sink = Object.create(dart.library);
+  var percent = Object.create(dart.library);
+  var decoder$ = Object.create(dart.library);
+  var encoder$ = Object.create(dart.library);
+  var identity_codec = Object.create(dart.library);
+  var hex = Object.create(dart.library);
+  var accumulator_sink = Object.create(dart.library);
+  var $isEven = dartx.isEven;
+  var $truncate = dartx.truncate;
+  var $codeUnits = dartx.codeUnits;
+  var $_set = dartx._set;
+  var $length = dartx.length;
+  var $_get = dartx._get;
+  var $toRadixString = dartx.toRadixString;
+  var $padLeft = dartx.padLeft;
+  var $clear = dartx.clear;
+  var $abs = dartx.abs;
+  var $substring = dartx.substring;
+  var $asUint8List = dartx.asUint8List;
+  var $add = dartx.add;
+  var ListOfintL = () => (ListOfintL = dart.constFn(core.List$(core.int)))();
+  var SinkOfListLOfintL = () => (SinkOfListLOfintL = dart.constFn(core.Sink$(ListOfintL())))();
+  var SinkOfStringL = () => (SinkOfStringL = dart.constFn(core.Sink$(core.String)))();
   const CT = Object.create(null);
+  var L6 = "package:convert/src/percent/encoder.dart";
+  var L2 = "package:convert/src/hex/encoder.dart";
+  var L1 = "package:convert/src/byte_accumulator_sink.dart";
+  var L9 = "package:convert/src/accumulator_sink.dart";
+  var L7 = "package:convert/src/identity_codec.dart";
+  var L3 = "package:convert/src/string_accumulator_sink.dart";
+  var L5 = "package:convert/src/percent/decoder.dart";
+  var L8 = "package:convert/src/hex.dart";
+  var L0 = "package:convert/src/hex/decoder.dart";
+  var L4 = "package:convert/src/percent.dart";
   dart.defineLazy(CT, {
     get C0() {
       return C0 = dart.const({
@@ -69,10 +79,10 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
         __proto__: hex.HexCodec.prototype
       });
     }
-  });
+  }, false);
   decoder.HexDecoder = class HexDecoder extends convert.Converter$(core.String, core.List$(core.int)) {
     convert(string) {
-      core.String._check(string);
+      core.String.as(string);
       if (!string.length[$isEven]) {
         dart.throw(new core.FormatException.new("Invalid input length, must be even.", string, string.length));
       }
@@ -81,7 +91,7 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
       return bytes;
     }
     startChunkedConversion(sink) {
-      SinkOfListOfint()._check(sink);
+      SinkOfListLOfintL().as(sink);
       return new decoder._HexDecoderSink.new(sink);
     }
   };
@@ -90,15 +100,16 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     ;
   }).prototype = decoder.HexDecoder.prototype;
   dart.addTypeTests(decoder.HexDecoder);
+  dart.addTypeCaches(decoder.HexDecoder);
   dart.setMethodSignature(decoder.HexDecoder, () => ({
     __proto__: dart.getMethods(decoder.HexDecoder.__proto__),
     convert: dart.fnType(core.List$(core.int), [core.Object]),
     startChunkedConversion: dart.fnType(convert.StringConversionSink, [core.Object])
   }));
-  dart.setLibraryUri(decoder.HexDecoder, "package:convert/src/hex/decoder.dart");
-  const _lastDigit = dart.privateName(decoder, "_lastDigit");
-  const _sink$ = dart.privateName(decoder, "_sink");
-  const _close = dart.privateName(decoder, "_close");
+  dart.setLibraryUri(decoder.HexDecoder, L0);
+  var _lastDigit = dart.privateName(decoder, "_lastDigit");
+  var _sink$ = dart.privateName(decoder, "_sink");
+  var _close = dart.privateName(decoder, "_close");
   decoder._HexDecoderSink = class _HexDecoderSink extends convert.StringConversionSinkBase {
     addSlice(string, start, end, isLast) {
       core.RangeError.checkValidRange(start, end, string.length);
@@ -129,9 +140,7 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     close() {
       return this[_close]();
     }
-    [_close](string, index) {
-      if (string === void 0) string = null;
-      if (index === void 0) index = null;
+    [_close](string = null, index = null) {
       if (this[_lastDigit] != null) {
         dart.throw(new core.FormatException.new("Input ended with incomplete encoded byte.", string, index));
       }
@@ -144,13 +153,14 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     ;
   }).prototype = decoder._HexDecoderSink.prototype;
   dart.addTypeTests(decoder._HexDecoderSink);
+  dart.addTypeCaches(decoder._HexDecoderSink);
   dart.setMethodSignature(decoder._HexDecoderSink, () => ({
     __proto__: dart.getMethods(decoder._HexDecoderSink.__proto__),
     addSlice: dart.fnType(dart.void, [core.String, core.int, core.int, core.bool]),
     close: dart.fnType(dart.void, []),
     [_close]: dart.fnType(dart.void, [], [core.String, core.int])
   }));
-  dart.setLibraryUri(decoder._HexDecoderSink, "package:convert/src/hex/decoder.dart");
+  dart.setLibraryUri(decoder._HexDecoderSink, L0);
   dart.setFieldSignature(decoder._HexDecoderSink, () => ({
     __proto__: dart.getFields(decoder._HexDecoderSink.__proto__),
     [_sink$]: dart.finalFieldType(core.Sink$(core.List$(core.int))),
@@ -158,7 +168,7 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
   }));
   decoder._HexDecoderByteSink = class _HexDecoderByteSink extends convert.ByteConversionSinkBase {
     add(chunk) {
-      ListOfint()._check(chunk);
+      ListOfintL().as(chunk);
       return this.addSlice(chunk, 0, chunk[$length], false);
     }
     addSlice(chunk, start, end, isLast) {
@@ -186,9 +196,7 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     close() {
       return this[_close]();
     }
-    [_close](chunk, index) {
-      if (chunk === void 0) chunk = null;
-      if (index === void 0) index = null;
+    [_close](chunk = null, index = null) {
       if (this[_lastDigit] != null) {
         dart.throw(new core.FormatException.new("Input ended with incomplete encoded byte.", chunk, index));
       }
@@ -202,13 +210,14 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     ;
   }).prototype = decoder._HexDecoderByteSink.prototype;
   dart.addTypeTests(decoder._HexDecoderByteSink);
+  dart.addTypeCaches(decoder._HexDecoderByteSink);
   dart.setMethodSignature(decoder._HexDecoderByteSink, () => ({
     __proto__: dart.getMethods(decoder._HexDecoderByteSink.__proto__),
     add: dart.fnType(dart.void, [core.Object]),
     close: dart.fnType(dart.void, []),
     [_close]: dart.fnType(dart.void, [], [core.List$(core.int), core.int])
   }));
-  dart.setLibraryUri(decoder._HexDecoderByteSink, "package:convert/src/hex/decoder.dart");
+  dart.setLibraryUri(decoder._HexDecoderByteSink, L0);
   dart.setFieldSignature(decoder._HexDecoderByteSink, () => ({
     __proto__: dart.getFields(decoder._HexDecoderByteSink.__proto__),
     [_sink$]: dart.finalFieldType(core.Sink$(core.List$(core.int))),
@@ -225,12 +234,12 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     if ((dart.notNull(sourceEnd) - dart.notNull(sourceStart))[$isEven]) return null;
     return 16 * dart.notNull(utils.digitForCodeUnit(codeUnits, dart.notNull(sourceEnd) - 1));
   };
-  let C0;
+  var C0;
   dart.defineLazy(decoder, {
     /*decoder.hexDecoder*/get hexDecoder() {
       return C0 || CT.C0;
     }
-  });
+  }, true);
   utils.digitForCodeUnit = function digitForCodeUnit(codeUnits, index) {
     let codeUnit = codeUnits[$_get](index);
     let digit = (48 ^ dart.notNull(codeUnit)) >>> 0;
@@ -242,8 +251,8 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     }
     dart.throw(new core.FormatException.new("Invalid hexadecimal code unit " + "U+" + codeUnit[$toRadixString](16)[$padLeft](4, "0") + ".", codeUnits, index));
   };
-  const _buffer = dart.privateName(byte_accumulator_sink, "_buffer");
-  const _isClosed = dart.privateName(byte_accumulator_sink, "_isClosed");
+  var _buffer = dart.privateName(byte_accumulator_sink, "_buffer");
+  var _isClosed = dart.privateName(byte_accumulator_sink, "_isClosed");
   byte_accumulator_sink.ByteAccumulatorSink = class ByteAccumulatorSink extends convert.ByteConversionSinkBase {
     get bytes() {
       return typed_data.Uint8List.view(this[_buffer].buffer, 0, this[_buffer].length);
@@ -255,7 +264,7 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
       this[_buffer][$clear]();
     }
     add(bytes) {
-      ListOfint()._check(bytes);
+      ListOfintL().as(bytes);
       if (dart.test(this[_isClosed])) {
         dart.throw(new core.StateError.new("Can't add to a closed sink."));
       }
@@ -279,6 +288,7 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     ;
   }).prototype = byte_accumulator_sink.ByteAccumulatorSink.prototype;
   dart.addTypeTests(byte_accumulator_sink.ByteAccumulatorSink);
+  dart.addTypeCaches(byte_accumulator_sink.ByteAccumulatorSink);
   dart.setMethodSignature(byte_accumulator_sink.ByteAccumulatorSink, () => ({
     __proto__: dart.getMethods(byte_accumulator_sink.ByteAccumulatorSink.__proto__),
     clear: dart.fnType(dart.void, []),
@@ -290,7 +300,7 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     bytes: typed_data.Uint8List,
     isClosed: core.bool
   }));
-  dart.setLibraryUri(byte_accumulator_sink.ByteAccumulatorSink, "package:convert/src/byte_accumulator_sink.dart");
+  dart.setLibraryUri(byte_accumulator_sink.ByteAccumulatorSink, L1);
   dart.setFieldSignature(byte_accumulator_sink.ByteAccumulatorSink, () => ({
     __proto__: dart.getFields(byte_accumulator_sink.ByteAccumulatorSink.__proto__),
     [_buffer]: dart.finalFieldType(typed_buffers.Uint8Buffer),
@@ -298,11 +308,11 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
   }));
   encoder.HexEncoder = class HexEncoder extends convert.Converter$(core.List$(core.int), core.String) {
     convert(bytes) {
-      ListOfint()._check(bytes);
+      ListOfintL().as(bytes);
       return encoder._convert(bytes, 0, bytes[$length]);
     }
     startChunkedConversion(sink) {
-      SinkOfString()._check(sink);
+      SinkOfStringL().as(sink);
       return new encoder._HexEncoderSink.new(sink);
     }
   };
@@ -311,16 +321,17 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     ;
   }).prototype = encoder.HexEncoder.prototype;
   dart.addTypeTests(encoder.HexEncoder);
+  dart.addTypeCaches(encoder.HexEncoder);
   dart.setMethodSignature(encoder.HexEncoder, () => ({
     __proto__: dart.getMethods(encoder.HexEncoder.__proto__),
     convert: dart.fnType(core.String, [core.Object]),
     startChunkedConversion: dart.fnType(convert.ByteConversionSink, [core.Object])
   }));
-  dart.setLibraryUri(encoder.HexEncoder, "package:convert/src/hex/encoder.dart");
-  const _sink$0 = dart.privateName(encoder, "_sink");
+  dart.setLibraryUri(encoder.HexEncoder, L2);
+  var _sink$0 = dart.privateName(encoder, "_sink");
   encoder._HexEncoderSink = class _HexEncoderSink extends convert.ByteConversionSinkBase {
     add(chunk) {
-      ListOfint()._check(chunk);
+      ListOfintL().as(chunk);
       this[_sink$0].add(encoder._convert(chunk, 0, chunk[$length]));
     }
     addSlice(chunk, start, end, isLast) {
@@ -338,12 +349,13 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     ;
   }).prototype = encoder._HexEncoderSink.prototype;
   dart.addTypeTests(encoder._HexEncoderSink);
+  dart.addTypeCaches(encoder._HexEncoderSink);
   dart.setMethodSignature(encoder._HexEncoderSink, () => ({
     __proto__: dart.getMethods(encoder._HexEncoderSink.__proto__),
     add: dart.fnType(dart.void, [core.Object]),
     close: dart.fnType(dart.void, [])
   }));
-  dart.setLibraryUri(encoder._HexEncoderSink, "package:convert/src/hex/encoder.dart");
+  dart.setLibraryUri(encoder._HexEncoderSink, L2);
   dart.setFieldSignature(encoder._HexEncoderSink, () => ({
     __proto__: dart.getFields(encoder._HexEncoderSink.__proto__),
     [_sink$0]: dart.finalFieldType(core.Sink$(core.String))
@@ -370,14 +382,14 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
   encoder._codeUnitForDigit = function _codeUnitForDigit(digit) {
     return dart.notNull(digit) < 10 ? dart.notNull(digit) + 48 : dart.notNull(digit) + 97 - 10;
   };
-  let C1;
+  var C1;
   dart.defineLazy(encoder, {
     /*encoder.hexEncoder*/get hexEncoder() {
       return C1 || CT.C1;
     }
-  });
-  const _buffer$ = dart.privateName(string_accumulator_sink, "_buffer");
-  const _isClosed$ = dart.privateName(string_accumulator_sink, "_isClosed");
+  }, true);
+  var _buffer$ = dart.privateName(string_accumulator_sink, "_buffer");
+  var _isClosed$ = dart.privateName(string_accumulator_sink, "_isClosed");
   string_accumulator_sink.StringAccumulatorSink = class StringAccumulatorSink extends convert.StringConversionSinkBase {
     get string() {
       return dart.toString(this[_buffer$]);
@@ -389,7 +401,7 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
       this[_buffer$].clear();
     }
     add(chunk) {
-      core.String._check(chunk);
+      core.String.as(chunk);
       if (dart.test(this[_isClosed$])) {
         dart.throw(new core.StateError.new("Can't add to a closed sink."));
       }
@@ -412,6 +424,7 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     ;
   }).prototype = string_accumulator_sink.StringAccumulatorSink.prototype;
   dart.addTypeTests(string_accumulator_sink.StringAccumulatorSink);
+  dart.addTypeCaches(string_accumulator_sink.StringAccumulatorSink);
   dart.setMethodSignature(string_accumulator_sink.StringAccumulatorSink, () => ({
     __proto__: dart.getMethods(string_accumulator_sink.StringAccumulatorSink.__proto__),
     clear: dart.fnType(dart.void, []),
@@ -423,7 +436,7 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     string: core.String,
     isClosed: core.bool
   }));
-  dart.setLibraryUri(string_accumulator_sink.StringAccumulatorSink, "package:convert/src/string_accumulator_sink.dart");
+  dart.setLibraryUri(string_accumulator_sink.StringAccumulatorSink, L3);
   dart.setFieldSignature(string_accumulator_sink.StringAccumulatorSink, () => ({
     __proto__: dart.getFields(string_accumulator_sink.StringAccumulatorSink.__proto__),
     [_buffer$]: dart.finalFieldType(core.StringBuffer),
@@ -442,21 +455,22 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     ;
   }).prototype = percent.PercentCodec.prototype;
   dart.addTypeTests(percent.PercentCodec);
+  dart.addTypeCaches(percent.PercentCodec);
   dart.setGetterSignature(percent.PercentCodec, () => ({
     __proto__: dart.getGetters(percent.PercentCodec.__proto__),
     encoder: encoder$.PercentEncoder,
     decoder: decoder$.PercentDecoder
   }));
-  dart.setLibraryUri(percent.PercentCodec, "package:convert/src/percent.dart");
-  let C2;
+  dart.setLibraryUri(percent.PercentCodec, L4);
+  var C2;
   dart.defineLazy(percent, {
     /*percent.percent*/get percent() {
       return C2 || CT.C2;
     }
-  });
+  }, true);
   decoder$.PercentDecoder = class PercentDecoder extends convert.Converter$(core.String, core.List$(core.int)) {
     convert(string) {
-      core.String._check(string);
+      core.String.as(string);
       let buffer = new typed_buffers.Uint8Buffer.new();
       let lastDigit = decoder$._decode(string[$codeUnits], 0, string.length, buffer);
       if (lastDigit != null) {
@@ -465,7 +479,7 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
       return buffer.buffer[$asUint8List](0, buffer.length);
     }
     startChunkedConversion(sink) {
-      SinkOfListOfint()._check(sink);
+      SinkOfListLOfintL().as(sink);
       return new decoder$._PercentDecoderSink.new(sink);
     }
   };
@@ -474,15 +488,16 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     ;
   }).prototype = decoder$.PercentDecoder.prototype;
   dart.addTypeTests(decoder$.PercentDecoder);
+  dart.addTypeCaches(decoder$.PercentDecoder);
   dart.setMethodSignature(decoder$.PercentDecoder, () => ({
     __proto__: dart.getMethods(decoder$.PercentDecoder.__proto__),
     convert: dart.fnType(core.List$(core.int), [core.Object]),
     startChunkedConversion: dart.fnType(convert.StringConversionSink, [core.Object])
   }));
-  dart.setLibraryUri(decoder$.PercentDecoder, "package:convert/src/percent/decoder.dart");
-  const _lastDigit$ = dart.privateName(decoder$, "_lastDigit");
-  const _sink$1 = dart.privateName(decoder$, "_sink");
-  const _close$ = dart.privateName(decoder$, "_close");
+  dart.setLibraryUri(decoder$.PercentDecoder, L5);
+  var _lastDigit$ = dart.privateName(decoder$, "_lastDigit");
+  var _sink$1 = dart.privateName(decoder$, "_sink");
+  var _close$ = dart.privateName(decoder$, "_close");
   decoder$._PercentDecoderSink = class _PercentDecoderSink extends convert.StringConversionSinkBase {
     addSlice(string, start, end, isLast) {
       core.RangeError.checkValidRange(start, end, string.length);
@@ -514,9 +529,7 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     close() {
       return this[_close$]();
     }
-    [_close$](string, index) {
-      if (string === void 0) string = null;
-      if (index === void 0) index = null;
+    [_close$](string = null, index = null) {
       if (this[_lastDigit$] != null) {
         dart.throw(new core.FormatException.new("Input ended with incomplete encoded byte.", string, index));
       }
@@ -529,13 +542,14 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     ;
   }).prototype = decoder$._PercentDecoderSink.prototype;
   dart.addTypeTests(decoder$._PercentDecoderSink);
+  dart.addTypeCaches(decoder$._PercentDecoderSink);
   dart.setMethodSignature(decoder$._PercentDecoderSink, () => ({
     __proto__: dart.getMethods(decoder$._PercentDecoderSink.__proto__),
     addSlice: dart.fnType(dart.void, [core.String, core.int, core.int, core.bool]),
     close: dart.fnType(dart.void, []),
     [_close$]: dart.fnType(dart.void, [], [core.String, core.int])
   }));
-  dart.setLibraryUri(decoder$._PercentDecoderSink, "package:convert/src/percent/decoder.dart");
+  dart.setLibraryUri(decoder$._PercentDecoderSink, L5);
   dart.setFieldSignature(decoder$._PercentDecoderSink, () => ({
     __proto__: dart.getFields(decoder$._PercentDecoderSink.__proto__),
     [_sink$1]: dart.finalFieldType(core.Sink$(core.List$(core.int))),
@@ -543,7 +557,7 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
   }));
   decoder$._PercentDecoderByteSink = class _PercentDecoderByteSink extends convert.ByteConversionSinkBase {
     add(chunk) {
-      ListOfint()._check(chunk);
+      ListOfintL().as(chunk);
       return this.addSlice(chunk, 0, chunk[$length], false);
     }
     addSlice(chunk, start, end, isLast) {
@@ -572,9 +586,7 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     close() {
       return this[_close$]();
     }
-    [_close$](chunk, index) {
-      if (chunk === void 0) chunk = null;
-      if (index === void 0) index = null;
+    [_close$](chunk = null, index = null) {
       if (this[_lastDigit$] != null) {
         dart.throw(new core.FormatException.new("Input ended with incomplete encoded byte.", chunk, index));
       }
@@ -588,13 +600,14 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     ;
   }).prototype = decoder$._PercentDecoderByteSink.prototype;
   dart.addTypeTests(decoder$._PercentDecoderByteSink);
+  dart.addTypeCaches(decoder$._PercentDecoderByteSink);
   dart.setMethodSignature(decoder$._PercentDecoderByteSink, () => ({
     __proto__: dart.getMethods(decoder$._PercentDecoderByteSink.__proto__),
     add: dart.fnType(dart.void, [core.Object]),
     close: dart.fnType(dart.void, []),
     [_close$]: dart.fnType(dart.void, [], [core.List$(core.int), core.int])
   }));
-  dart.setLibraryUri(decoder$._PercentDecoderByteSink, "package:convert/src/percent/decoder.dart");
+  dart.setLibraryUri(decoder$._PercentDecoderByteSink, L5);
   dart.setFieldSignature(decoder$._PercentDecoderByteSink, () => ({
     __proto__: dart.getFields(decoder$._PercentDecoderByteSink.__proto__),
     [_sink$1]: dart.finalFieldType(core.Sink$(core.List$(core.int))),
@@ -640,7 +653,7 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
       dart.throw(new core.FormatException.new("Non-ASCII code unit " + "U+" + codeUnit[$toRadixString](16)[$padLeft](4, "0"), codeUnits, i));
     }
   };
-  let C3;
+  var C3;
   dart.defineLazy(decoder$, {
     /*decoder$.percentDecoder*/get percentDecoder() {
       return C3 || CT.C3;
@@ -648,14 +661,14 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     /*decoder$._lastPercent*/get _lastPercent() {
       return -1;
     }
-  });
+  }, true);
   encoder$.PercentEncoder = class PercentEncoder extends convert.Converter$(core.List$(core.int), core.String) {
     convert(bytes) {
-      ListOfint()._check(bytes);
+      ListOfintL().as(bytes);
       return encoder$._convert(bytes, 0, bytes[$length]);
     }
     startChunkedConversion(sink) {
-      SinkOfString()._check(sink);
+      SinkOfStringL().as(sink);
       return new encoder$._PercentEncoderSink.new(sink);
     }
   };
@@ -664,16 +677,17 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     ;
   }).prototype = encoder$.PercentEncoder.prototype;
   dart.addTypeTests(encoder$.PercentEncoder);
+  dart.addTypeCaches(encoder$.PercentEncoder);
   dart.setMethodSignature(encoder$.PercentEncoder, () => ({
     __proto__: dart.getMethods(encoder$.PercentEncoder.__proto__),
     convert: dart.fnType(core.String, [core.Object]),
     startChunkedConversion: dart.fnType(convert.ByteConversionSink, [core.Object])
   }));
-  dart.setLibraryUri(encoder$.PercentEncoder, "package:convert/src/percent/encoder.dart");
-  const _sink$2 = dart.privateName(encoder$, "_sink");
+  dart.setLibraryUri(encoder$.PercentEncoder, L6);
+  var _sink$2 = dart.privateName(encoder$, "_sink");
   encoder$._PercentEncoderSink = class _PercentEncoderSink extends convert.ByteConversionSinkBase {
     add(chunk) {
-      ListOfint()._check(chunk);
+      ListOfintL().as(chunk);
       this[_sink$2].add(encoder$._convert(chunk, 0, chunk[$length]));
     }
     addSlice(chunk, start, end, isLast) {
@@ -691,12 +705,13 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     ;
   }).prototype = encoder$._PercentEncoderSink.prototype;
   dart.addTypeTests(encoder$._PercentEncoderSink);
+  dart.addTypeCaches(encoder$._PercentEncoderSink);
   dart.setMethodSignature(encoder$._PercentEncoderSink, () => ({
     __proto__: dart.getMethods(encoder$._PercentEncoderSink.__proto__),
     add: dart.fnType(dart.void, [core.Object]),
     close: dart.fnType(dart.void, [])
   }));
-  dart.setLibraryUri(encoder$._PercentEncoderSink, "package:convert/src/percent/encoder.dart");
+  dart.setLibraryUri(encoder$._PercentEncoderSink, L6);
   dart.setFieldSignature(encoder$._PercentEncoderSink, () => ({
     __proto__: dart.getFields(encoder$._PercentEncoderSink.__proto__),
     [_sink$2]: dart.finalFieldType(core.Sink$(core.String))
@@ -727,17 +742,17 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
   encoder$._codeUnitForDigit = function _codeUnitForDigit$(digit) {
     return dart.notNull(digit) < 10 ? dart.notNull(digit) + 48 : dart.notNull(digit) + 65 - 10;
   };
-  let C4;
+  var C4;
   dart.defineLazy(encoder$, {
     /*encoder$.percentEncoder*/get percentEncoder() {
       return C4 || CT.C4;
     }
-  });
+  }, true);
   const _is__IdentityConverter_default = Symbol('_is__IdentityConverter_default');
   identity_codec._IdentityConverter$ = dart.generic(T => {
     class _IdentityConverter extends convert.Converter$(T, T) {
       convert(input) {
-        T._check(input);
+        T.as(input);
         return input;
       }
     }
@@ -747,27 +762,28 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     }).prototype = _IdentityConverter.prototype;
     dart.addTypeTests(_IdentityConverter);
     _IdentityConverter.prototype[_is__IdentityConverter_default] = true;
+    dart.addTypeCaches(_IdentityConverter);
     dart.setMethodSignature(_IdentityConverter, () => ({
       __proto__: dart.getMethods(_IdentityConverter.__proto__),
       convert: dart.fnType(T, [core.Object])
     }));
-    dart.setLibraryUri(_IdentityConverter, "package:convert/src/identity_codec.dart");
+    dart.setLibraryUri(_IdentityConverter, L7);
     return _IdentityConverter;
   });
   identity_codec._IdentityConverter = identity_codec._IdentityConverter$();
   dart.addTypeTests(identity_codec._IdentityConverter, _is__IdentityConverter_default);
   const _is_IdentityCodec_default = Symbol('_is_IdentityCodec_default');
   identity_codec.IdentityCodec$ = dart.generic(T => {
-    let _IdentityConverterOfT = () => (_IdentityConverterOfT = dart.constFn(identity_codec._IdentityConverter$(T)))();
+    var _IdentityConverterOfTL = () => (_IdentityConverterOfTL = dart.constFn(identity_codec._IdentityConverter$(T)))();
     class IdentityCodec extends convert.Codec$(T, T) {
       get decoder() {
-        return new (_IdentityConverterOfT()).new();
+        return new (_IdentityConverterOfTL()).new();
       }
       get encoder() {
-        return new (_IdentityConverterOfT()).new();
+        return new (_IdentityConverterOfTL()).new();
       }
       fuse(R, other) {
-        convert.Codec$(T, R)._check(other);
+        convert.Codec$(T, R).as(other);
         return other;
       }
     }
@@ -777,12 +793,17 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     }).prototype = IdentityCodec.prototype;
     dart.addTypeTests(IdentityCodec);
     IdentityCodec.prototype[_is_IdentityCodec_default] = true;
+    dart.addTypeCaches(IdentityCodec);
+    dart.setMethodSignature(IdentityCodec, () => ({
+      __proto__: dart.getMethods(IdentityCodec.__proto__),
+      fuse: dart.gFnType(R => [convert.Codec$(T, R), [core.Object]])
+    }));
     dart.setGetterSignature(IdentityCodec, () => ({
       __proto__: dart.getGetters(IdentityCodec.__proto__),
       decoder: convert.Converter$(T, T),
       encoder: convert.Converter$(T, T)
     }));
-    dart.setLibraryUri(IdentityCodec, "package:convert/src/identity_codec.dart");
+    dart.setLibraryUri(IdentityCodec, L7);
     return IdentityCodec;
   });
   identity_codec.IdentityCodec = identity_codec.IdentityCodec$();
@@ -800,27 +821,28 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     ;
   }).prototype = hex.HexCodec.prototype;
   dart.addTypeTests(hex.HexCodec);
+  dart.addTypeCaches(hex.HexCodec);
   dart.setGetterSignature(hex.HexCodec, () => ({
     __proto__: dart.getGetters(hex.HexCodec.__proto__),
     encoder: encoder.HexEncoder,
     decoder: decoder.HexDecoder
   }));
-  dart.setLibraryUri(hex.HexCodec, "package:convert/src/hex.dart");
-  let C5;
+  dart.setLibraryUri(hex.HexCodec, L8);
+  var C5;
   dart.defineLazy(hex, {
     /*hex.hex*/get hex() {
       return C5 || CT.C5;
     }
-  });
-  const _events = dart.privateName(accumulator_sink, "_events");
-  const _isClosed$0 = dart.privateName(accumulator_sink, "_isClosed");
+  }, true);
+  var _events = dart.privateName(accumulator_sink, "_events");
+  var _isClosed$0 = dart.privateName(accumulator_sink, "_isClosed");
   const _is_AccumulatorSink_default = Symbol('_is_AccumulatorSink_default');
   accumulator_sink.AccumulatorSink$ = dart.generic(T => {
-    let JSArrayOfT = () => (JSArrayOfT = dart.constFn(_interceptors.JSArray$(T)))();
-    let UnmodifiableListViewOfT = () => (UnmodifiableListViewOfT = dart.constFn(collection.UnmodifiableListView$(T)))();
+    var JSArrayOfTL = () => (JSArrayOfTL = dart.constFn(_interceptors.JSArray$(T)))();
+    var UnmodifiableListViewOfTL = () => (UnmodifiableListViewOfTL = dart.constFn(collection.UnmodifiableListView$(T)))();
     class AccumulatorSink extends core.Object {
       get events() {
-        return new (UnmodifiableListViewOfT()).new(this[_events]);
+        return new (UnmodifiableListViewOfTL()).new(this[_events]);
       }
       get isClosed() {
         return this[_isClosed$0];
@@ -829,7 +851,7 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
         this[_events][$clear]();
       }
       add(event) {
-        T._check(event);
+        T.as(event);
         if (dart.test(this[_isClosed$0])) {
           dart.throw(new core.StateError.new("Can't add to a closed sink."));
         }
@@ -840,12 +862,13 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
       }
     }
     (AccumulatorSink.new = function() {
-      this[_events] = JSArrayOfT().of([]);
+      this[_events] = JSArrayOfTL().of([]);
       this[_isClosed$0] = false;
       ;
     }).prototype = AccumulatorSink.prototype;
     dart.addTypeTests(AccumulatorSink);
     AccumulatorSink.prototype[_is_AccumulatorSink_default] = true;
+    dart.addTypeCaches(AccumulatorSink);
     AccumulatorSink[dart.implements] = () => [core.Sink$(T)];
     dart.setMethodSignature(AccumulatorSink, () => ({
       __proto__: dart.getMethods(AccumulatorSink.__proto__),
@@ -858,7 +881,7 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
       events: core.List$(T),
       isClosed: core.bool
     }));
-    dart.setLibraryUri(AccumulatorSink, "package:convert/src/accumulator_sink.dart");
+    dart.setLibraryUri(AccumulatorSink, L9);
     dart.setFieldSignature(AccumulatorSink, () => ({
       __proto__: dart.getFields(AccumulatorSink.__proto__),
       [_events]: dart.finalFieldType(core.List$(T)),
@@ -882,7 +905,7 @@ define(['dart_sdk', 'packages/typed_data/typed_buffers'], function(dart_sdk, pac
     "package:convert/src/hex.dart": hex,
     "package:convert/src/accumulator_sink.dart": accumulator_sink
   }, {
-  }, '{"version":3,"sourceRoot":"","sources":["src/hex/decoder.dart","src/utils.dart","src/byte_accumulator_sink.dart","src/hex/encoder.dart","src/string_accumulator_sink.dart","src/percent.dart","src/percent/decoder.dart","src/percent/encoder.dart","src/identity_codec.dart","src/hex.dart","src/accumulator_sink.dart"],"names":[],"mappings":"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","file":"convert.ddc.js"}');
+  }, '{"version":3,"sourceRoot":"","sources":["src/hex/decoder.dart","src/utils.dart","src/byte_accumulator_sink.dart","src/hex/encoder.dart","src/string_accumulator_sink.dart","src/percent.dart","src/percent/decoder.dart","src/percent/encoder.dart","src/identity_codec.dart","src/hex.dart","src/accumulator_sink.dart"],"names":[],"mappings":"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","file":"convert.ddc.js"}');
   // Exports:
   return {
     src__hex__decoder: decoder,

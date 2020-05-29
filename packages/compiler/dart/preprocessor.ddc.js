@@ -5,31 +5,32 @@ define(['dart_sdk'], function(dart_sdk) {
   const _interceptors = dart_sdk._interceptors;
   const dart = dart_sdk.dart;
   const dartx = dart_sdk.dartx;
-  const preprocessor = Object.create(dart.library);
-  const $split = dartx.split;
-  const $clear = dartx.clear;
-  const $length = dartx.length;
-  const $_get = dartx._get;
-  const $join = dartx.join;
-  const $_set = dartx._set;
-  const $substring = dartx.substring;
-  const $trim = dartx.trim;
-  const $isNotEmpty = dartx.isNotEmpty;
-  const $startsWith = dartx.startsWith;
-  const $indexOf = dartx.indexOf;
-  const $removeLast = dartx.removeLast;
-  const $add = dartx.add;
-  const $contains = dartx.contains;
-  const $isEmpty = dartx.isEmpty;
-  const $last = dartx.last;
-  let LinkedMapOfint$int = () => (LinkedMapOfint$int = dart.constFn(_js_helper.LinkedMap$(core.int, core.int)))();
-  let JSArrayOfString = () => (JSArrayOfString = dart.constFn(_interceptors.JSArray$(core.String)))();
+  var preprocessor = Object.create(dart.library);
+  var $split = dartx.split;
+  var $clear = dartx.clear;
+  var $length = dartx.length;
+  var $_get = dartx._get;
+  var $join = dartx.join;
+  var $_set = dartx._set;
+  var $substring = dartx.substring;
+  var $trim = dartx.trim;
+  var $isNotEmpty = dartx.isNotEmpty;
+  var $startsWith = dartx.startsWith;
+  var $indexOf = dartx.indexOf;
+  var $removeLast = dartx.removeLast;
+  var $add = dartx.add;
+  var $contains = dartx.contains;
+  var $isEmpty = dartx.isEmpty;
+  var $last = dartx.last;
+  var LinkedMapOfintL$intL = () => (LinkedMapOfintL$intL = dart.constFn(_js_helper.LinkedMap$(core.int, core.int)))();
+  var JSArrayOfStringL = () => (JSArrayOfStringL = dart.constFn(_interceptors.JSArray$(core.String)))();
   const CT = Object.create(null);
-  const _matchings = dart.privateName(preprocessor, "_matchings");
-  const _output = dart.privateName(preprocessor, "_output");
-  const _multiline = dart.privateName(preprocessor, "_multiline");
-  const _lastValidIndent = dart.privateName(preprocessor, "_lastValidIndent");
-  const linemap = dart.privateName(preprocessor, "Preprocessor.linemap");
+  var L0 = "package:compiler/dart/preprocessor.dart";
+  var _matchings = dart.privateName(preprocessor, "_matchings");
+  var _output = dart.privateName(preprocessor, "_output");
+  var _multiline = dart.privateName(preprocessor, "_multiline");
+  var _lastValidIndent = dart.privateName(preprocessor, "_lastValidIndent");
+  var linemap = dart.privateName(preprocessor, "Preprocessor.linemap");
   preprocessor.Preprocessor = class Preprocessor extends core.Object {
     get linemap() {
       return this[linemap];
@@ -37,8 +38,7 @@ define(['dart_sdk'], function(dart_sdk) {
     set linemap(value) {
       this[linemap] = value;
     }
-    process(code, lineOffset) {
-      if (lineOffset === void 0) lineOffset = 0;
+    process(code, lineOffset = 0) {
       let lines = code[$split]("\n");
       this.linemap[$clear]();
       this[_matchings][$clear]();
@@ -133,7 +133,7 @@ define(['dart_sdk'], function(dart_sdk) {
       this[_multiline] = lineExtender || dart.test(this[_matchings][$isNotEmpty]);
     }
     inString() {
-      return dart.test(this[_matchings][$isNotEmpty]) && dart.test(JSArrayOfString().of(["\"", "'", "'''", "\"\"\""])[$contains](this[_matchings][$last]));
+      return dart.test(this[_matchings][$isNotEmpty]) && dart.test(JSArrayOfStringL().of(["\"", "'", "'''", "\"\"\""])[$contains](this[_matchings][$last]));
     }
     matches(c) {
       if (dart.test(this[_matchings][$isEmpty])) return false;
@@ -141,7 +141,7 @@ define(['dart_sdk'], function(dart_sdk) {
       if (c === "]" && l === "[") return true;
       if (c === "}" && l === "{") return true;
       if (c === ")" && l === "(") return true;
-      if (c == l && dart.test(JSArrayOfString().of(["\"", "'", "'''", "\"\"\""])[$contains](c))) return true;
+      if (c == l && dart.test(JSArrayOfStringL().of(["\"", "'", "'''", "\"\"\""])[$contains](c))) return true;
       return false;
     }
     getIndentation(line) {
@@ -160,14 +160,15 @@ define(['dart_sdk'], function(dart_sdk) {
     }
   };
   (preprocessor.Preprocessor.new = function() {
-    this[linemap] = new (LinkedMapOfint$int()).new();
-    this[_matchings] = JSArrayOfString().of([]);
-    this[_output] = JSArrayOfString().of([]);
+    this[linemap] = new (LinkedMapOfintL$intL()).new();
+    this[_matchings] = JSArrayOfStringL().of([]);
+    this[_output] = JSArrayOfStringL().of([]);
     this[_multiline] = false;
     this[_lastValidIndent] = "";
     ;
   }).prototype = preprocessor.Preprocessor.prototype;
   dart.addTypeTests(preprocessor.Preprocessor);
+  dart.addTypeCaches(preprocessor.Preprocessor);
   dart.setMethodSignature(preprocessor.Preprocessor, () => ({
     __proto__: dart.getMethods(preprocessor.Preprocessor.__proto__),
     process: dart.fnType(core.String, [core.String], [core.int]),
@@ -176,7 +177,7 @@ define(['dart_sdk'], function(dart_sdk) {
     matches: dart.fnType(core.bool, [core.String]),
     getIndentation: dart.fnType(core.String, [core.String])
   }));
-  dart.setLibraryUri(preprocessor.Preprocessor, "package:compiler/dart/preprocessor.dart");
+  dart.setLibraryUri(preprocessor.Preprocessor, L0);
   dart.setFieldSignature(preprocessor.Preprocessor, () => ({
     __proto__: dart.getFields(preprocessor.Preprocessor.__proto__),
     linemap: dart.fieldType(core.Map$(core.int, core.int)),
@@ -188,7 +189,7 @@ define(['dart_sdk'], function(dart_sdk) {
   dart.trackLibraries("packages/compiler/dart/preprocessor", {
     "package:compiler/dart/preprocessor.dart": preprocessor
   }, {
-  }, '{"version":3,"sourceRoot":"","sources":["preprocessor.dart"],"names":[],"mappings":"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","file":"preprocessor.ddc.js"}');
+  }, '{"version":3,"sourceRoot":"","sources":["preprocessor.dart"],"names":[],"mappings":"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","file":"preprocessor.ddc.js"}');
   // Exports:
   return {
     dart__preprocessor: preprocessor

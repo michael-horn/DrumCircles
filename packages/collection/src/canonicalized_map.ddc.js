@@ -8,81 +8,86 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
   const dart = dart_sdk.dart;
   const dartx = dart_sdk.dartx;
   const utils = packages__collection__src__utils.src__utils;
-  const canonicalized_map = Object.create(dart.library);
-  const wrappers = Object.create(dart.library);
-  const unmodifiable_wrappers = Object.create(dart.library);
-  const empty_unmodifiable_set = Object.create(dart.library);
-  const $_get = dartx._get;
-  const $_set = dartx._set;
-  const $forEach = dartx.forEach;
-  const $map = dartx.map;
-  const $addEntries = dartx.addEntries;
-  const $cast = dartx.cast;
-  const $clear = dartx.clear;
-  const $containsKey = dartx.containsKey;
-  const $values = dartx.values;
-  const $any = dartx.any;
-  const $entries = dartx.entries;
-  const $isEmpty = dartx.isEmpty;
-  const $isNotEmpty = dartx.isNotEmpty;
-  const $length = dartx.length;
-  const $putIfAbsent = dartx.putIfAbsent;
-  const $remove = dartx.remove;
-  const $removeWhere = dartx.removeWhere;
-  const $update = dartx.update;
-  const $updateAll = dartx.updateAll;
-  const $add = dartx.add;
-  const $last = dartx.last;
-  const $removeLast = dartx.removeLast;
-  const $addAll = dartx.addAll;
-  const $containsValue = dartx.containsValue;
-  const $keys = dartx.keys;
-  const $contains = dartx.contains;
-  const $elementAt = dartx.elementAt;
-  const $every = dartx.every;
-  const $expand = dartx.expand;
-  const $first = dartx.first;
-  const $firstWhere = dartx.firstWhere;
-  const $fold = dartx.fold;
-  const $followedBy = dartx.followedBy;
-  const $iterator = dartx.iterator;
-  const $join = dartx.join;
-  const $lastWhere = dartx.lastWhere;
-  const $reduce = dartx.reduce;
-  const $single = dartx.single;
-  const $singleWhere = dartx.singleWhere;
-  const $skip = dartx.skip;
-  const $skipWhile = dartx.skipWhile;
-  const $take = dartx.take;
-  const $takeWhile = dartx.takeWhile;
-  const $toList = dartx.toList;
-  const $toSet = dartx.toSet;
-  const $where = dartx.where;
-  const $whereType = dartx.whereType;
-  const $toString = dartx.toString;
-  const $plus = dartx['+'];
-  const $asMap = dartx.asMap;
-  const $fillRange = dartx.fillRange;
-  const $getRange = dartx.getRange;
-  const $indexOf = dartx.indexOf;
-  const $indexWhere = dartx.indexWhere;
-  const $insert = dartx.insert;
-  const $insertAll = dartx.insertAll;
-  const $lastIndexOf = dartx.lastIndexOf;
-  const $lastIndexWhere = dartx.lastIndexWhere;
-  const $removeAt = dartx.removeAt;
-  const $removeRange = dartx.removeRange;
-  const $replaceRange = dartx.replaceRange;
-  const $retainWhere = dartx.retainWhere;
-  const $reversed = dartx.reversed;
-  const $setAll = dartx.setAll;
-  const $setRange = dartx.setRange;
-  const $shuffle = dartx.shuffle;
-  const $sort = dartx.sort;
-  const $sublist = dartx.sublist;
-  const $noSuchMethod = dartx.noSuchMethod;
-  let dynamicTobool = () => (dynamicTobool = dart.constFn(dart.fnType(core.bool, [dart.dynamic])))();
+  var canonicalized_map = Object.create(dart.library);
+  var wrappers = Object.create(dart.library);
+  var unmodifiable_wrappers = Object.create(dart.library);
+  var empty_unmodifiable_set = Object.create(dart.library);
+  var $_get = dartx._get;
+  var $_set = dartx._set;
+  var $forEach = dartx.forEach;
+  var $map = dartx.map;
+  var $addEntries = dartx.addEntries;
+  var $cast = dartx.cast;
+  var $clear = dartx.clear;
+  var $containsKey = dartx.containsKey;
+  var $values = dartx.values;
+  var $any = dartx.any;
+  var $entries = dartx.entries;
+  var $isEmpty = dartx.isEmpty;
+  var $isNotEmpty = dartx.isNotEmpty;
+  var $length = dartx.length;
+  var $putIfAbsent = dartx.putIfAbsent;
+  var $remove = dartx.remove;
+  var $removeWhere = dartx.removeWhere;
+  var $update = dartx.update;
+  var $updateAll = dartx.updateAll;
+  var $add = dartx.add;
+  var $last = dartx.last;
+  var $removeLast = dartx.removeLast;
+  var $addAll = dartx.addAll;
+  var $containsValue = dartx.containsValue;
+  var $keys = dartx.keys;
+  var $contains = dartx.contains;
+  var $elementAt = dartx.elementAt;
+  var $every = dartx.every;
+  var $expand = dartx.expand;
+  var $first = dartx.first;
+  var $firstWhere = dartx.firstWhere;
+  var $fold = dartx.fold;
+  var $followedBy = dartx.followedBy;
+  var $iterator = dartx.iterator;
+  var $join = dartx.join;
+  var $lastWhere = dartx.lastWhere;
+  var $reduce = dartx.reduce;
+  var $single = dartx.single;
+  var $singleWhere = dartx.singleWhere;
+  var $skip = dartx.skip;
+  var $skipWhile = dartx.skipWhile;
+  var $take = dartx.take;
+  var $takeWhile = dartx.takeWhile;
+  var $toList = dartx.toList;
+  var $toSet = dartx.toSet;
+  var $where = dartx.where;
+  var $whereType = dartx.whereType;
+  var $toString = dartx.toString;
+  var $plus = dartx['+'];
+  var $asMap = dartx.asMap;
+  var $fillRange = dartx.fillRange;
+  var $getRange = dartx.getRange;
+  var $indexOf = dartx.indexOf;
+  var $indexWhere = dartx.indexWhere;
+  var $insert = dartx.insert;
+  var $insertAll = dartx.insertAll;
+  var $lastIndexOf = dartx.lastIndexOf;
+  var $lastIndexWhere = dartx.lastIndexWhere;
+  var $removeAt = dartx.removeAt;
+  var $removeRange = dartx.removeRange;
+  var $replaceRange = dartx.replaceRange;
+  var $retainWhere = dartx.retainWhere;
+  var $reversed = dartx.reversed;
+  var $setAll = dartx.setAll;
+  var $setRange = dartx.setRange;
+  var $shuffle = dartx.shuffle;
+  var $sort = dartx.sort;
+  var $sublist = dartx.sublist;
+  var $noSuchMethod = dartx.noSuchMethod;
+  var dynamicToboolL = () => (dynamicToboolL = dart.constFn(dart.fnType(core.bool, [dart.dynamic])))();
   const CT = Object.create(null);
+  var L0 = "org-dartlang-app:///packages/collection/src/canonicalized_map.dart";
+  var L3 = "package:collection/src/unmodifiable_wrappers.dart";
+  var L1 = "package:collection/src/canonicalized_map.dart";
+  var L4 = "package:collection/src/empty_unmodifiable_set.dart";
+  var L2 = "package:collection/src/wrappers.dart";
   dart.defineLazy(CT, {
     get C0() {
       return C0 = dart.const(new _js_helper.PrivateSymbol.new('_base', _base$2));
@@ -90,60 +95,66 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
     get C1() {
       return C1 = dart.const(new _js_helper.PrivateSymbol.new('_setBase', _setBase$));
     }
-  });
-  const _base = dart.privateName(canonicalized_map, "_base");
-  const _canonicalize = dart.privateName(canonicalized_map, "_canonicalize");
-  const _isValidKeyFn = dart.privateName(canonicalized_map, "_isValidKeyFn");
-  const _isValidKey = dart.privateName(canonicalized_map, "_isValidKey");
+  }, false);
+  var _base = dart.privateName(canonicalized_map, "_base");
+  var _canonicalize = dart.privateName(canonicalized_map, "_canonicalize");
+  var _isValidKeyFn = dart.privateName(canonicalized_map, "_isValidKeyFn");
+  var _isValidKey = dart.privateName(canonicalized_map, "_isValidKey");
   const _is_CanonicalizedMap_default = Symbol('_is_CanonicalizedMap_default');
   canonicalized_map.CanonicalizedMap$ = dart.generic((C, K, V) => {
-    let LinkedMapOfC$PairOfK$V = () => (LinkedMapOfC$PairOfK$V = dart.constFn(_js_helper.LinkedMap$(C, PairOfK$V())))();
-    let MapEntryOfC$PairOfK$V = () => (MapEntryOfC$PairOfK$V = dart.constFn(core.MapEntry$(C, PairOfK$V())))();
-    let MapEntryOfK$VToMapEntryOfC$PairOfK$V = () => (MapEntryOfK$VToMapEntryOfC$PairOfK$V = dart.constFn(dart.fnType(MapEntryOfC$PairOfK$V(), [MapEntryOfK$V()])))();
-    let MapEntryOfC$PairOfK$VToMapEntryOfK$V = () => (MapEntryOfC$PairOfK$VToMapEntryOfK$V = dart.constFn(dart.fnType(MapEntryOfK$V(), [MapEntryOfC$PairOfK$V()])))();
-    let CAndPairOfK$VTovoid = () => (CAndPairOfK$VTovoid = dart.constFn(dart.fnType(dart.void, [C, PairOfK$V()])))();
-    let CAndPairOfK$VTobool = () => (CAndPairOfK$VTobool = dart.constFn(dart.fnType(core.bool, [C, PairOfK$V()])))();
-    let CAndPairOfK$VToPairOfK$V = () => (CAndPairOfK$VToPairOfK$V = dart.constFn(dart.fnType(PairOfK$V(), [C, PairOfK$V()])))();
-    let PairOfK$V = () => (PairOfK$V = dart.constFn(utils.Pair$(K, V)))();
-    let MapOfK$V = () => (MapOfK$V = dart.constFn(core.Map$(K, V)))();
-    let KAndVToV = () => (KAndVToV = dart.constFn(dart.fnType(V, [K, V])))();
-    let MapEntryOfK$V = () => (MapEntryOfK$V = dart.constFn(core.MapEntry$(K, V)))();
-    let IterableOfMapEntryOfK$V = () => (IterableOfMapEntryOfK$V = dart.constFn(core.Iterable$(MapEntryOfK$V())))();
-    let PairOfK$VTobool = () => (PairOfK$VTobool = dart.constFn(dart.fnType(core.bool, [PairOfK$V()])))();
-    let PairOfK$VToK = () => (PairOfK$VToK = dart.constFn(dart.fnType(K, [PairOfK$V()])))();
-    let VoidToPairOfK$V = () => (VoidToPairOfK$V = dart.constFn(dart.fnType(PairOfK$V(), [])))();
-    let PairOfK$VToPairOfK$V = () => (PairOfK$VToPairOfK$V = dart.constFn(dart.fnType(PairOfK$V(), [PairOfK$V()])))();
-    let PairOfK$VToV = () => (PairOfK$VToV = dart.constFn(dart.fnType(V, [PairOfK$V()])))();
-    let KAndVToNull = () => (KAndVToNull = dart.constFn(dart.fnType(core.Null, [K, V])))();
-    let VoidToV = () => (VoidToV = dart.constFn(dart.fnType(V, [])))();
-    let VToV = () => (VToV = dart.constFn(dart.fnType(V, [V])))();
+    var LinkedMapOfCL$PairLOfKL$VL = () => (LinkedMapOfCL$PairLOfKL$VL = dart.constFn(_js_helper.LinkedMap$(C, PairOfKL$VL())))();
+    var MapEntryOfCL$PairLOfKL$VL = () => (MapEntryOfCL$PairLOfKL$VL = dart.constFn(core.MapEntry$(C, PairOfKL$VL())))();
+    var MapEntryLOfKL$VLToMapEntryLOfCL$PairLOfKL$VL = () => (MapEntryLOfKL$VLToMapEntryLOfCL$PairLOfKL$VL = dart.constFn(dart.fnType(MapEntryOfCL$PairLOfKL$VL(), [MapEntryOfKL$VL()])))();
+    var MapEntryLOfCL$PairLOfKL$VLToMapEntryLOfKL$VL = () => (MapEntryLOfCL$PairLOfKL$VLToMapEntryLOfKL$VL = dart.constFn(dart.fnType(MapEntryOfKL$VL(), [MapEntryOfCL$PairLOfKL$VL()])))();
+    var CLAndPairLOfKL$VLTovoid = () => (CLAndPairLOfKL$VLTovoid = dart.constFn(dart.fnType(dart.void, [C, PairOfKL$VL()])))();
+    var CLAndPairLOfKL$VLToboolL = () => (CLAndPairLOfKL$VLToboolL = dart.constFn(dart.fnType(core.bool, [C, PairOfKL$VL()])))();
+    var CLAndPairLOfKL$VLToPairLOfKL$VL = () => (CLAndPairLOfKL$VLToPairLOfKL$VL = dart.constFn(dart.fnType(PairOfKL$VL(), [C, PairOfKL$VL()])))();
+    var PairOfKL$VL = () => (PairOfKL$VL = dart.constFn(utils.Pair$(K, V)))();
+    var MapOfKL$VL = () => (MapOfKL$VL = dart.constFn(core.Map$(K, V)))();
+    var KLAndVLToVL = () => (KLAndVLToVL = dart.constFn(dart.fnType(V, [K, V])))();
+    var MapEntryOfKL$VL = () => (MapEntryOfKL$VL = dart.constFn(core.MapEntry$(K, V)))();
+    var IterableOfMapEntryLOfKL$VL = () => (IterableOfMapEntryLOfKL$VL = dart.constFn(core.Iterable$(MapEntryOfKL$VL())))();
+    var PairLOfKL$VLToboolL = () => (PairLOfKL$VLToboolL = dart.constFn(dart.fnType(core.bool, [PairOfKL$VL()])))();
+    var PairLOfKL$VLToKL = () => (PairLOfKL$VLToKL = dart.constFn(dart.fnType(K, [PairOfKL$VL()])))();
+    var VoidToPairLOfKL$VL = () => (VoidToPairLOfKL$VL = dart.constFn(dart.fnType(PairOfKL$VL(), [])))();
+    var PairLOfKL$VLToPairLOfKL$VL = () => (PairLOfKL$VLToPairLOfKL$VL = dart.constFn(dart.fnType(PairOfKL$VL(), [PairOfKL$VL()])))();
+    var KLAndVLToLVL = () => (KLAndVLToLVL = dart.constFn(dart.fnType(V, [K, V])))();
+    var PairLOfKL$VLToVL = () => (PairLOfKL$VLToVL = dart.constFn(dart.fnType(V, [PairOfKL$VL()])))();
+    var KLAndVLToNullN = () => (KLAndVLToNullN = dart.constFn(dart.fnType(core.Null, [K, V])))();
+    var VoidToLVL = () => (VoidToLVL = dart.constFn(dart.fnType(V, [])))();
+    var VLToLVL = () => (VLToLVL = dart.constFn(dart.fnType(V, [V])))();
     class CanonicalizedMap extends core.Object {
       _get(key) {
+        let t0;
         if (!dart.test(this[_isValidKey](key))) return null;
-        let pair = this[_base][$_get](this[_canonicalize](K.as(key)));
+        let pair = this[_base][$_get]((t0 = K.as(key), this[_canonicalize](t0)));
         return pair == null ? null : pair.last;
       }
       _set(key, value$) {
         let value = value$;
-        K._check(key);
-        V._check(value);
+        let t0;
+        K.as(key);
+        V.as(value);
         if (!dart.test(this[_isValidKey](key))) return value$;
-        this[_base][$_set](this[_canonicalize](key), new (PairOfK$V()).new(key, value));
+        this[_base][$_set]((t0 = key, this[_canonicalize](t0)), new (PairOfKL$VL()).new(key, value));
         return value$;
       }
       addAll(other) {
-        MapOfK$V()._check(other);
+        MapOfKL$VL().as(other);
         other[$forEach](dart.fn((key, value) => {
           let t1, t0;
           t0 = key;
           t1 = value;
           this._set(t0, t1);
           return t1;
-        }, KAndVToV()));
+        }, KLAndVLToVL()));
       }
       addEntries(entries) {
-        IterableOfMapEntryOfK$V()._check(entries);
-        return this[_base][$addEntries](entries[$map](MapEntryOfC$PairOfK$V(), dart.fn(e => new (MapEntryOfC$PairOfK$V()).__(this[_canonicalize](e.key), new (PairOfK$V()).new(e.key, e.value)), MapEntryOfK$VToMapEntryOfC$PairOfK$V())));
+        IterableOfMapEntryLOfKL$VL().as(entries);
+        return this[_base][$addEntries](entries[$map](MapEntryOfCL$PairLOfKL$VL(), dart.fn(e => {
+          let t0;
+          return new (MapEntryOfCL$PairLOfKL$VL()).__((t0 = e.key, this[_canonicalize](t0)), new (PairOfKL$VL()).new(e.key, e.value));
+        }, MapEntryLOfKL$VLToMapEntryLOfCL$PairLOfKL$VL())));
       }
       cast(K2, V2) {
         return this[_base][$cast](K2, V2);
@@ -152,17 +163,18 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
         this[_base][$clear]();
       }
       containsKey(key) {
+        let t0;
         if (!dart.test(this[_isValidKey](key))) return false;
-        return this[_base][$containsKey](this[_canonicalize](K.as(key)));
+        return this[_base][$containsKey]((t0 = K.as(key), this[_canonicalize](t0)));
       }
       containsValue(value) {
-        return this[_base][$values][$any](dart.fn(pair => dart.equals(pair.last, value), PairOfK$VTobool()));
+        return this[_base][$values][$any](dart.fn(pair => dart.equals(pair.last, value), PairLOfKL$VLToboolL()));
       }
       get entries() {
-        return this[_base][$entries][$map](MapEntryOfK$V(), dart.fn(e => new (MapEntryOfK$V()).__(e.value.first, e.value.last), MapEntryOfC$PairOfK$VToMapEntryOfK$V()));
+        return this[_base][$entries][$map](MapEntryOfKL$VL(), dart.fn(e => new (MapEntryOfKL$VL()).__(e.value.first, e.value.last), MapEntryLOfCL$PairLOfKL$VLToMapEntryLOfKL$VL()));
       }
       forEach(f) {
-        this[_base][$forEach](dart.fn((key, pair) => f(pair.first, pair.last), CAndPairOfK$VTovoid()));
+        this[_base][$forEach](dart.fn((key, pair) => f(pair.first, pair.last), CLAndPairLOfKL$VLTovoid()));
       }
       get isEmpty() {
         return this[_base][$isEmpty];
@@ -171,43 +183,46 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
         return this[_base][$isNotEmpty];
       }
       get keys() {
-        return this[_base][$values][$map](K, dart.fn(pair => pair.first, PairOfK$VToK()));
+        return this[_base][$values][$map](K, dart.fn(pair => pair.first, PairLOfKL$VLToKL()));
       }
       get length() {
         return this[_base][$length];
       }
       map(K2, V2, transform) {
-        return this[_base][$map](K2, V2, dart.fn((_, pair) => transform(pair.first, pair.last), dart.fnType(core.MapEntry$(K2, V2), [C, PairOfK$V()])));
+        return this[_base][$map](K2, V2, dart.fn((_, pair) => transform(pair.first, pair.last), dart.fnType(core.MapEntry$(K2, V2), [C, PairOfKL$VL()])));
       }
       putIfAbsent(key, ifAbsent) {
-        K._check(key);
-        VoidToV()._check(ifAbsent);
-        return this[_base][$putIfAbsent](this[_canonicalize](key), dart.fn(() => new (PairOfK$V()).new(key, ifAbsent()), VoidToPairOfK$V())).last;
+        let t0;
+        K.as(key);
+        VoidToLVL().as(ifAbsent);
+        return this[_base][$putIfAbsent]((t0 = key, this[_canonicalize](t0)), dart.fn(() => new (PairOfKL$VL()).new(key, ifAbsent()), VoidToPairLOfKL$VL())).last;
       }
       remove(key) {
+        let t0;
         if (!dart.test(this[_isValidKey](key))) return null;
-        let pair = this[_base][$remove](this[_canonicalize](K.as(key)));
+        let pair = this[_base][$remove]((t0 = K.as(key), this[_canonicalize](t0)));
         return pair == null ? null : pair.last;
       }
       removeWhere(test) {
-        return this[_base][$removeWhere](dart.fn((_, pair) => test(pair.first, pair.last), CAndPairOfK$VTobool()));
+        return this[_base][$removeWhere](dart.fn((_, pair) => test(pair.first, pair.last), CLAndPairLOfKL$VLToboolL()));
       }
       retype(K2, V2) {
         return this.cast(K2, V2);
       }
       update(key, update, opts) {
-        K._check(key);
-        VToV()._check(update);
+        let t0;
+        K.as(key);
+        VLToLVL().as(update);
         let ifAbsent = opts && 'ifAbsent' in opts ? opts.ifAbsent : null;
-        VoidToV()._check(ifAbsent);
-        return this[_base][$update](this[_canonicalize](key), dart.fn(pair => new (PairOfK$V()).new(key, update(pair.last)), PairOfK$VToPairOfK$V()), {ifAbsent: ifAbsent == null ? null : dart.fn(() => new (PairOfK$V()).new(key, ifAbsent()), VoidToPairOfK$V())}).last;
+        VoidToLVL().as(ifAbsent);
+        return this[_base][$update]((t0 = key, this[_canonicalize](t0)), dart.fn(pair => new (PairOfKL$VL()).new(key, update(pair.last)), PairLOfKL$VLToPairLOfKL$VL()), {ifAbsent: ifAbsent == null ? null : dart.fn(() => new (PairOfKL$VL()).new(key, ifAbsent()), VoidToPairLOfKL$VL())}).last;
       }
       updateAll(update) {
-        KAndVToV()._check(update);
-        return this[_base][$updateAll](dart.fn((_, pair) => new (PairOfK$V()).new(pair.first, update(pair.first, pair.last)), CAndPairOfK$VToPairOfK$V()));
+        KLAndVLToLVL().as(update);
+        return this[_base][$updateAll](dart.fn((_, pair) => new (PairOfKL$VL()).new(pair.first, update(pair.first, pair.last)), CLAndPairLOfKL$VLToPairLOfKL$VL()));
       }
       get values() {
-        return this[_base][$values][$map](V, dart.fn(pair => pair.last, PairOfK$VToV()));
+        return this[_base][$values][$map](V, dart.fn(pair => pair.last, PairLOfKL$VLToVL()));
       }
       toString() {
         if (dart.test(canonicalized_map._isToStringVisiting(this))) {
@@ -224,28 +239,29 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
             }
             first = false;
             result.write(dart.str(k) + ": " + dart.str(v));
-          }, KAndVToNull()));
+          }, KLAndVLToNullN()));
           result.write("}");
         } finally {
-          if (!(canonicalized_map._toStringVisiting[$last] === this)) dart.assertFailed(null, "org-dartlang-app:///packages/collection/src/canonicalized_map.dart", 155, 14, "identical(_toStringVisiting.last, this)");
+          if (!(canonicalized_map._toStringVisiting[$last] === this)) dart.assertFailed(null, L0, 155, 14, "identical(_toStringVisiting.last, this)");
           canonicalized_map._toStringVisiting[$removeLast]();
         }
         return result.toString();
       }
       [_isValidKey](key) {
-        return (key == null || K.is(key)) && (this[_isValidKeyFn] == null || dart.test(this[_isValidKeyFn](key)));
+        let t0;
+        return (key == null || K.is(key)) && (this[_isValidKeyFn] == null || dart.test((t0 = key, this[_isValidKeyFn](t0))));
       }
     }
     (CanonicalizedMap.new = function(canonicalize, opts) {
       let isValidKey = opts && 'isValidKey' in opts ? opts.isValidKey : null;
-      this[_base] = new (LinkedMapOfC$PairOfK$V()).new();
+      this[_base] = new (LinkedMapOfCL$PairLOfKL$VL()).new();
       this[_canonicalize] = canonicalize;
       this[_isValidKeyFn] = isValidKey;
       ;
     }).prototype = CanonicalizedMap.prototype;
     (CanonicalizedMap.from = function(other, canonicalize, opts) {
       let isValidKey = opts && 'isValidKey' in opts ? opts.isValidKey : null;
-      this[_base] = new (LinkedMapOfC$PairOfK$V()).new();
+      this[_base] = new (LinkedMapOfCL$PairLOfKL$VL()).new();
       this[_canonicalize] = canonicalize;
       this[_isValidKeyFn] = isValidKey;
       this.addAll(other);
@@ -253,6 +269,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
     CanonicalizedMap.prototype[dart.isMap] = true;
     dart.addTypeTests(CanonicalizedMap);
     CanonicalizedMap.prototype[_is_CanonicalizedMap_default] = true;
+    dart.addTypeCaches(CanonicalizedMap);
     CanonicalizedMap[dart.implements] = () => [core.Map$(K, V)];
     dart.setMethodSignature(CanonicalizedMap, () => ({
       __proto__: dart.getMethods(CanonicalizedMap.__proto__),
@@ -304,7 +321,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
       values: core.Iterable$(V),
       [$values]: core.Iterable$(V)
     }));
-    dart.setLibraryUri(CanonicalizedMap, "package:collection/src/canonicalized_map.dart");
+    dart.setLibraryUri(CanonicalizedMap, L1);
     dart.setFieldSignature(CanonicalizedMap, () => ({
       __proto__: dart.getFields(CanonicalizedMap.__proto__),
       [_canonicalize]: dart.finalFieldType(dart.fnType(C, [K])),
@@ -342,19 +359,19 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
   canonicalized_map.CanonicalizedMap = canonicalized_map.CanonicalizedMap$();
   dart.addTypeTests(canonicalized_map.CanonicalizedMap, _is_CanonicalizedMap_default);
   canonicalized_map._isToStringVisiting = function _isToStringVisiting(o) {
-    return canonicalized_map._toStringVisiting[$any](dart.fn(e => core.identical(o, e), dynamicTobool()));
+    return canonicalized_map._toStringVisiting[$any](dart.fn(e => core.identical(o, e), dynamicToboolL()));
   };
   dart.defineLazy(canonicalized_map, {
     /*canonicalized_map._toStringVisiting*/get _toStringVisiting() {
       return [];
     }
-  });
-  const _base$ = dart.privateName(wrappers, "_base");
+  }, true);
+  var _base$ = dart.privateName(wrappers, "_base");
   const _is__DelegatingIterableBase_default = Symbol('_is__DelegatingIterableBase_default');
   wrappers._DelegatingIterableBase$ = dart.generic(E => {
-    let VoidToE = () => (VoidToE = dart.constFn(dart.fnType(E, [])))();
-    let IterableOfE = () => (IterableOfE = dart.constFn(core.Iterable$(E)))();
-    let EAndEToE = () => (EAndEToE = dart.constFn(dart.fnType(E, [E, E])))();
+    var VoidToLEL = () => (VoidToLEL = dart.constFn(dart.fnType(E, [])))();
+    var IterableOfEL = () => (IterableOfEL = dart.constFn(core.Iterable$(E)))();
+    var ELAndELToLEL = () => (ELAndELToLEL = dart.constFn(dart.fnType(E, [E, E])))();
     class _DelegatingIterableBase extends core.Object {
       any(test) {
         return this[_base$][$any](test);
@@ -379,14 +396,14 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
       }
       firstWhere(test, opts) {
         let orElse = opts && 'orElse' in opts ? opts.orElse : null;
-        VoidToE()._check(orElse);
+        VoidToLEL().as(orElse);
         return this[_base$][$firstWhere](test, {orElse: orElse});
       }
       fold(T, initialValue, combine) {
         return this[_base$][$fold](T, initialValue, combine);
       }
       followedBy(other) {
-        IterableOfE()._check(other);
+        IterableOfEL().as(other);
         return this[_base$][$followedBy](other);
       }
       forEach(f) {
@@ -404,8 +421,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
       [Symbol.iterator]() {
         return new dart.JsIterator(this[$iterator]);
       }
-      join(separator) {
-        if (separator === void 0) separator = "";
+      join(separator = "") {
         return this[_base$][$join](separator);
       }
       get last() {
@@ -413,7 +429,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
       }
       lastWhere(test, opts) {
         let orElse = opts && 'orElse' in opts ? opts.orElse : null;
-        VoidToE()._check(orElse);
+        VoidToLEL().as(orElse);
         return this[_base$][$lastWhere](test, {orElse: orElse});
       }
       get length() {
@@ -423,7 +439,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
         return this[_base$][$map](T, f);
       }
       reduce(combine) {
-        EAndEToE()._check(combine);
+        ELAndELToLEL().as(combine);
         return this[_base$][$reduce](combine);
       }
       retype(T) {
@@ -434,7 +450,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
       }
       singleWhere(test, opts) {
         let orElse = opts && 'orElse' in opts ? opts.orElse : null;
-        VoidToE()._check(orElse);
+        VoidToLEL().as(orElse);
         return this[_base$][$singleWhere](test, {orElse: orElse});
       }
       skip(n) {
@@ -472,6 +488,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
     _DelegatingIterableBase.prototype[dart.isIterable] = true;
     dart.addTypeTests(_DelegatingIterableBase);
     _DelegatingIterableBase.prototype[_is__DelegatingIterableBase_default] = true;
+    dart.addTypeCaches(_DelegatingIterableBase);
     _DelegatingIterableBase[dart.implements] = () => [core.Iterable$(E)];
     dart.setMethodSignature(_DelegatingIterableBase, () => ({
       __proto__: dart.getMethods(_DelegatingIterableBase.__proto__),
@@ -540,7 +557,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
       single: E,
       [$single]: E
     }));
-    dart.setLibraryUri(_DelegatingIterableBase, "package:collection/src/wrappers.dart");
+    dart.setLibraryUri(_DelegatingIterableBase, L2);
     dart.defineExtensionMethods(_DelegatingIterableBase, [
       'any',
       'cast',
@@ -581,7 +598,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
   wrappers._DelegatingIterableBase = wrappers._DelegatingIterableBase$();
   dart.addTypeTests(wrappers._DelegatingIterableBase, _is__DelegatingIterableBase_default);
   const _is_DelegatingIterable_default = Symbol('_is_DelegatingIterable_default');
-  const _base$0 = dart.privateName(wrappers, "DelegatingIterable._base");
+  var _base$0 = dart.privateName(wrappers, "DelegatingIterable._base");
   wrappers.DelegatingIterable$ = dart.generic(E => {
     class DelegatingIterable extends wrappers._DelegatingIterableBase$(E) {
       get [_base$]() {
@@ -601,7 +618,8 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
     }).prototype = DelegatingIterable.prototype;
     dart.addTypeTests(DelegatingIterable);
     DelegatingIterable.prototype[_is_DelegatingIterable_default] = true;
-    dart.setLibraryUri(DelegatingIterable, "package:collection/src/wrappers.dart");
+    dart.addTypeCaches(DelegatingIterable);
+    dart.setLibraryUri(DelegatingIterable, L2);
     dart.setFieldSignature(DelegatingIterable, () => ({
       __proto__: dart.getFields(DelegatingIterable.__proto__),
       [_base$]: dart.finalFieldType(core.Iterable$(E))
@@ -610,37 +628,37 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
   });
   wrappers.DelegatingIterable = wrappers.DelegatingIterable$();
   dart.addTypeTests(wrappers.DelegatingIterable, _is_DelegatingIterable_default);
-  const _listBase = dart.privateName(wrappers, "_listBase");
+  var _listBase = dart.privateName(wrappers, "_listBase");
   const _is_DelegatingList_default = Symbol('_is_DelegatingList_default');
   wrappers.DelegatingList$ = dart.generic(E => {
-    let ListOfE = () => (ListOfE = dart.constFn(core.List$(E)))();
-    let IterableOfE = () => (IterableOfE = dart.constFn(core.Iterable$(E)))();
+    var ListOfEL = () => (ListOfEL = dart.constFn(core.List$(E)))();
+    var IterableOfEL = () => (IterableOfEL = dart.constFn(core.Iterable$(E)))();
     class DelegatingList extends wrappers.DelegatingIterable$(E) {
       static typed(E, base) {
         return base[$cast](E);
       }
       get [_listBase]() {
-        return ListOfE()._check(this[_base$]);
+        return ListOfEL().as(this[_base$]);
       }
       _get(index) {
         return this[_listBase][$_get](index);
       }
       _set(index, value$) {
         let value = value$;
-        E._check(value);
+        E.as(value);
         this[_listBase][$_set](index, value);
         return value$;
       }
       ['+'](other) {
-        ListOfE()._check(other);
+        ListOfEL().as(other);
         return this[_listBase][$plus](other);
       }
       add(value) {
-        E._check(value);
+        E.as(value);
         this[_listBase][$add](value);
       }
       addAll(iterable) {
-        IterableOfE()._check(iterable);
+        IterableOfEL().as(iterable);
         this[_listBase][$addAll](iterable);
       }
       asMap() {
@@ -652,13 +670,12 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
       clear() {
         this[_listBase][$clear]();
       }
-      fillRange(start, end, fillValue) {
-        if (fillValue === void 0) fillValue = null;
-        E._check(fillValue);
+      fillRange(start, end, fillValue = null) {
+        E.as(fillValue);
         this[_listBase][$fillRange](start, end, fillValue);
       }
       set first(value) {
-        E._check(value);
+        E.as(value);
         if (dart.test(this.isEmpty)) dart.throw(new core.IndexError.new(0, this));
         this._set(0, value);
       }
@@ -668,38 +685,34 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
       getRange(start, end) {
         return this[_listBase][$getRange](start, end);
       }
-      indexOf(element, start) {
-        E._check(element);
-        if (start === void 0) start = 0;
+      indexOf(element, start = 0) {
+        E.as(element);
         return this[_listBase][$indexOf](element, start);
       }
-      indexWhere(test, start) {
-        if (start === void 0) start = 0;
+      indexWhere(test, start = 0) {
         return this[_listBase][$indexWhere](test, start);
       }
       insert(index, element) {
-        E._check(element);
+        E.as(element);
         this[_listBase][$insert](index, element);
       }
       insertAll(index, iterable) {
-        IterableOfE()._check(iterable);
+        IterableOfEL().as(iterable);
         this[_listBase][$insertAll](index, iterable);
       }
       set last(value) {
-        E._check(value);
+        E.as(value);
         if (dart.test(this.isEmpty)) dart.throw(new core.IndexError.new(0, this));
         this._set(dart.notNull(this.length) - 1, value);
       }
       get last() {
         return super.last;
       }
-      lastIndexOf(element, start) {
-        E._check(element);
-        if (start === void 0) start = null;
+      lastIndexOf(element, start = null) {
+        E.as(element);
         return this[_listBase][$lastIndexOf](element, start);
       }
-      lastIndexWhere(test, start) {
-        if (start === void 0) start = null;
+      lastIndexWhere(test, start = null) {
         return this[_listBase][$lastIndexWhere](test, start);
       }
       set length(newLength) {
@@ -724,7 +737,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
         this[_listBase][$removeWhere](test);
       }
       replaceRange(start, end, iterable) {
-        IterableOfE()._check(iterable);
+        IterableOfEL().as(iterable);
         this[_listBase][$replaceRange](start, end, iterable);
       }
       retainWhere(test) {
@@ -737,24 +750,20 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
         return this[_listBase][$reversed];
       }
       setAll(index, iterable) {
-        IterableOfE()._check(iterable);
+        IterableOfEL().as(iterable);
         this[_listBase][$setAll](index, iterable);
       }
-      setRange(start, end, iterable, skipCount) {
-        IterableOfE()._check(iterable);
-        if (skipCount === void 0) skipCount = 0;
+      setRange(start, end, iterable, skipCount = 0) {
+        IterableOfEL().as(iterable);
         this[_listBase][$setRange](start, end, iterable, skipCount);
       }
-      shuffle(random) {
-        if (random === void 0) random = null;
+      shuffle(random = null) {
         this[_listBase][$shuffle](random);
       }
-      sort(compare) {
-        if (compare === void 0) compare = null;
+      sort(compare = null) {
         this[_listBase][$sort](compare);
       }
-      sublist(start, end) {
-        if (end === void 0) end = null;
+      sublist(start, end = null) {
         return this[_listBase][$sublist](start, end);
       }
     }
@@ -765,6 +774,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
     DelegatingList.prototype[dart.isList] = true;
     dart.addTypeTests(DelegatingList);
     DelegatingList.prototype[_is_DelegatingList_default] = true;
+    dart.addTypeCaches(DelegatingList);
     DelegatingList[dart.implements] = () => [core.List$(E)];
     dart.setMethodSignature(DelegatingList, () => ({
       __proto__: dart.getMethods(DelegatingList.__proto__),
@@ -841,7 +851,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
       length: core.int,
       [$length]: core.int
     }));
-    dart.setLibraryUri(DelegatingList, "package:collection/src/wrappers.dart");
+    dart.setLibraryUri(DelegatingList, L2);
     dart.defineExtensionMethods(DelegatingList, [
       '_get',
       '_set',
@@ -877,25 +887,25 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
   });
   wrappers.DelegatingList = wrappers.DelegatingList$();
   dart.addTypeTests(wrappers.DelegatingList, _is_DelegatingList_default);
-  const _setBase = dart.privateName(wrappers, "_setBase");
+  var _setBase = dart.privateName(wrappers, "_setBase");
   const _is_DelegatingSet_default = Symbol('_is_DelegatingSet_default');
   wrappers.DelegatingSet$ = dart.generic(E => {
-    let SetOfE = () => (SetOfE = dart.constFn(core.Set$(E)))();
-    let IterableOfE = () => (IterableOfE = dart.constFn(core.Iterable$(E)))();
-    let DelegatingSetOfE = () => (DelegatingSetOfE = dart.constFn(wrappers.DelegatingSet$(E)))();
+    var SetOfEL = () => (SetOfEL = dart.constFn(core.Set$(E)))();
+    var IterableOfEL = () => (IterableOfEL = dart.constFn(core.Iterable$(E)))();
+    var DelegatingSetOfEL = () => (DelegatingSetOfEL = dart.constFn(wrappers.DelegatingSet$(E)))();
     class DelegatingSet extends wrappers.DelegatingIterable$(E) {
       static typed(E, base) {
         return base.cast(E);
       }
       get [_setBase]() {
-        return SetOfE()._check(this[_base$]);
+        return SetOfEL().as(this[_base$]);
       }
       add(value) {
-        E._check(value);
+        E.as(value);
         return this[_setBase].add(value);
       }
       addAll(elements) {
-        IterableOfE()._check(elements);
+        IterableOfEL().as(elements);
         this[_setBase].addAll(elements);
       }
       cast(T) {
@@ -935,11 +945,11 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
         this[_setBase].retainWhere(test);
       }
       union(other) {
-        SetOfE()._check(other);
+        SetOfEL().as(other);
         return this[_setBase].union(other);
       }
       toSet() {
-        return new (DelegatingSetOfE()).new(this[_setBase].toSet());
+        return new (DelegatingSetOfEL()).new(this[_setBase].toSet());
       }
     }
     (DelegatingSet.new = function(base) {
@@ -948,6 +958,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
     }).prototype = DelegatingSet.prototype;
     dart.addTypeTests(DelegatingSet);
     DelegatingSet.prototype[_is_DelegatingSet_default] = true;
+    dart.addTypeCaches(DelegatingSet);
     DelegatingSet[dart.implements] = () => [core.Set$(E)];
     dart.setMethodSignature(DelegatingSet, () => ({
       __proto__: dart.getMethods(DelegatingSet.__proto__),
@@ -972,38 +983,38 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
       __proto__: dart.getGetters(DelegatingSet.__proto__),
       [_setBase]: core.Set$(E)
     }));
-    dart.setLibraryUri(DelegatingSet, "package:collection/src/wrappers.dart");
+    dart.setLibraryUri(DelegatingSet, L2);
     dart.defineExtensionMethods(DelegatingSet, ['cast', 'toSet']);
     return DelegatingSet;
   });
   wrappers.DelegatingSet = wrappers.DelegatingSet$();
   dart.addTypeTests(wrappers.DelegatingSet, _is_DelegatingSet_default);
-  const _baseQueue = dart.privateName(wrappers, "_baseQueue");
+  var _baseQueue = dart.privateName(wrappers, "_baseQueue");
   const _is_DelegatingQueue_default = Symbol('_is_DelegatingQueue_default');
   wrappers.DelegatingQueue$ = dart.generic(E => {
-    let QueueOfE = () => (QueueOfE = dart.constFn(collection.Queue$(E)))();
-    let IterableOfE = () => (IterableOfE = dart.constFn(core.Iterable$(E)))();
+    var QueueOfEL = () => (QueueOfEL = dart.constFn(collection.Queue$(E)))();
+    var IterableOfEL = () => (IterableOfEL = dart.constFn(core.Iterable$(E)))();
     class DelegatingQueue extends wrappers.DelegatingIterable$(E) {
       static typed(E, base) {
         return base.cast(E);
       }
       get [_baseQueue]() {
-        return QueueOfE()._check(this[_base$]);
+        return QueueOfEL().as(this[_base$]);
       }
       add(value) {
-        E._check(value);
+        E.as(value);
         this[_baseQueue].add(value);
       }
       addAll(iterable) {
-        IterableOfE()._check(iterable);
+        IterableOfEL().as(iterable);
         this[_baseQueue].addAll(iterable);
       }
       addFirst(value) {
-        E._check(value);
+        E.as(value);
         this[_baseQueue].addFirst(value);
       }
       addLast(value) {
-        E._check(value);
+        E.as(value);
         this[_baseQueue].addLast(value);
       }
       cast(T) {
@@ -1037,6 +1048,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
     }).prototype = DelegatingQueue.prototype;
     dart.addTypeTests(DelegatingQueue);
     DelegatingQueue.prototype[_is_DelegatingQueue_default] = true;
+    dart.addTypeCaches(DelegatingQueue);
     DelegatingQueue[dart.implements] = () => [collection.Queue$(E)];
     dart.setMethodSignature(DelegatingQueue, () => ({
       __proto__: dart.getMethods(DelegatingQueue.__proto__),
@@ -1058,21 +1070,21 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
       __proto__: dart.getGetters(DelegatingQueue.__proto__),
       [_baseQueue]: collection.Queue$(E)
     }));
-    dart.setLibraryUri(DelegatingQueue, "package:collection/src/wrappers.dart");
+    dart.setLibraryUri(DelegatingQueue, L2);
     dart.defineExtensionMethods(DelegatingQueue, ['cast']);
     return DelegatingQueue;
   });
   wrappers.DelegatingQueue = wrappers.DelegatingQueue$();
   dart.addTypeTests(wrappers.DelegatingQueue, _is_DelegatingQueue_default);
   const _is_DelegatingMap_default = Symbol('_is_DelegatingMap_default');
-  const _base$1 = dart.privateName(wrappers, "DelegatingMap._base");
+  var _base$1 = dart.privateName(wrappers, "DelegatingMap._base");
   wrappers.DelegatingMap$ = dart.generic((K, V) => {
-    let MapOfK$V = () => (MapOfK$V = dart.constFn(core.Map$(K, V)))();
-    let MapEntryOfK$V = () => (MapEntryOfK$V = dart.constFn(core.MapEntry$(K, V)))();
-    let IterableOfMapEntryOfK$V = () => (IterableOfMapEntryOfK$V = dart.constFn(core.Iterable$(MapEntryOfK$V())))();
-    let KAndVToV = () => (KAndVToV = dart.constFn(dart.fnType(V, [K, V])))();
-    let VoidToV = () => (VoidToV = dart.constFn(dart.fnType(V, [])))();
-    let VToV = () => (VToV = dart.constFn(dart.fnType(V, [V])))();
+    var MapOfKL$VL = () => (MapOfKL$VL = dart.constFn(core.Map$(K, V)))();
+    var MapEntryOfKL$VL = () => (MapEntryOfKL$VL = dart.constFn(core.MapEntry$(K, V)))();
+    var IterableOfMapEntryLOfKL$VL = () => (IterableOfMapEntryLOfKL$VL = dart.constFn(core.Iterable$(MapEntryOfKL$VL())))();
+    var KLAndVLToLVL = () => (KLAndVLToLVL = dart.constFn(dart.fnType(V, [K, V])))();
+    var VoidToLVL = () => (VoidToLVL = dart.constFn(dart.fnType(V, [])))();
+    var VLToLVL = () => (VLToLVL = dart.constFn(dart.fnType(V, [V])))();
     class DelegatingMap extends core.Object {
       get [_base$]() {
         return this[_base$1];
@@ -1088,17 +1100,17 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
       }
       _set(key, value$) {
         let value = value$;
-        K._check(key);
-        V._check(value);
+        K.as(key);
+        V.as(value);
         this[_base$][$_set](key, value);
         return value$;
       }
       addAll(other) {
-        MapOfK$V()._check(other);
+        MapOfKL$VL().as(other);
         this[_base$][$addAll](other);
       }
       addEntries(entries) {
-        IterableOfMapEntryOfK$V()._check(entries);
+        IterableOfMapEntryLOfKL$VL().as(entries);
         this[_base$][$addEntries](entries);
       }
       clear() {
@@ -1135,8 +1147,8 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
         return this[_base$][$map](K2, V2, transform);
       }
       putIfAbsent(key, ifAbsent) {
-        K._check(key);
-        VoidToV()._check(ifAbsent);
+        K.as(key);
+        VoidToLVL().as(ifAbsent);
         return this[_base$][$putIfAbsent](key, ifAbsent);
       }
       remove(key) {
@@ -1155,14 +1167,14 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
         return dart.toString(this[_base$]);
       }
       update(key, update, opts) {
-        K._check(key);
-        VToV()._check(update);
+        K.as(key);
+        VLToLVL().as(update);
         let ifAbsent = opts && 'ifAbsent' in opts ? opts.ifAbsent : null;
-        VoidToV()._check(ifAbsent);
+        VoidToLVL().as(ifAbsent);
         return this[_base$][$update](key, update, {ifAbsent: ifAbsent});
       }
       updateAll(update) {
-        KAndVToV()._check(update);
+        KLAndVLToLVL().as(update);
         return this[_base$][$updateAll](update);
       }
     }
@@ -1173,6 +1185,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
     DelegatingMap.prototype[dart.isMap] = true;
     dart.addTypeTests(DelegatingMap);
     DelegatingMap.prototype[_is_DelegatingMap_default] = true;
+    dart.addTypeCaches(DelegatingMap);
     DelegatingMap[dart.implements] = () => [core.Map$(K, V)];
     dart.setMethodSignature(DelegatingMap, () => ({
       __proto__: dart.getMethods(DelegatingMap.__proto__),
@@ -1223,7 +1236,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
       values: core.Iterable$(V),
       [$values]: core.Iterable$(V)
     }));
-    dart.setLibraryUri(DelegatingMap, "package:collection/src/wrappers.dart");
+    dart.setLibraryUri(DelegatingMap, L2);
     dart.setFieldSignature(DelegatingMap, () => ({
       __proto__: dart.getFields(DelegatingMap.__proto__),
       [_base$]: dart.finalFieldType(core.Map$(K, V))
@@ -1258,20 +1271,20 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
   });
   wrappers.DelegatingMap = wrappers.DelegatingMap$();
   dart.addTypeTests(wrappers.DelegatingMap, _is_DelegatingMap_default);
-  const _baseMap = dart.privateName(wrappers, "_baseMap");
+  var _baseMap = dart.privateName(wrappers, "_baseMap");
   const _is_UnmodifiableSetMixin_default = Symbol('_is_UnmodifiableSetMixin_default');
   unmodifiable_wrappers.UnmodifiableSetMixin$ = dart.generic(E => {
-    let IterableOfE = () => (IterableOfE = dart.constFn(core.Iterable$(E)))();
+    var IterableOfEL = () => (IterableOfEL = dart.constFn(core.Iterable$(E)))();
     class UnmodifiableSetMixin extends core.Object {
       static _throw(T) {
         dart.throw(new core.UnsupportedError.new("Cannot modify an unmodifiable Set"));
       }
       add(value) {
-        E._check(value);
+        E.as(value);
         return unmodifiable_wrappers.UnmodifiableSetMixin._throw(core.bool);
       }
       addAll(elements) {
-        IterableOfE()._check(elements);
+        IterableOfEL().as(elements);
         return unmodifiable_wrappers.UnmodifiableSetMixin._throw(dart.void);
       }
       remove(value) {
@@ -1301,6 +1314,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
     }).prototype = UnmodifiableSetMixin.prototype;
     dart.addTypeTests(UnmodifiableSetMixin);
     UnmodifiableSetMixin.prototype[_is_UnmodifiableSetMixin_default] = true;
+    dart.addTypeCaches(UnmodifiableSetMixin);
     UnmodifiableSetMixin[dart.implements] = () => [core.Set$(E)];
     dart.setMethodSignature(UnmodifiableSetMixin, () => ({
       __proto__: dart.getMethods(UnmodifiableSetMixin.__proto__),
@@ -1313,15 +1327,15 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
       retainWhere: dart.fnType(dart.void, [dart.fnType(core.bool, [E])]),
       clear: dart.fnType(dart.void, [])
     }));
-    dart.setLibraryUri(UnmodifiableSetMixin, "package:collection/src/unmodifiable_wrappers.dart");
+    dart.setLibraryUri(UnmodifiableSetMixin, L3);
     return UnmodifiableSetMixin;
   });
   unmodifiable_wrappers.UnmodifiableSetMixin = unmodifiable_wrappers.UnmodifiableSetMixin$();
   dart.addTypeTests(unmodifiable_wrappers.UnmodifiableSetMixin, _is_UnmodifiableSetMixin_default);
   const _is_MapKeySet_default = Symbol('_is_MapKeySet_default');
   wrappers.MapKeySet$ = dart.generic(E => {
-    let ETobool = () => (ETobool = dart.constFn(dart.fnType(core.bool, [E])))();
-    let SetOfE = () => (SetOfE = dart.constFn(core.Set$(E)))();
+    var ELToboolL = () => (ELToboolL = dart.constFn(dart.fnType(core.bool, [E])))();
+    var SetOfEL = () => (SetOfEL = dart.constFn(core.Set$(E)))();
     const _DelegatingIterableBase_UnmodifiableSetMixin$36 = class _DelegatingIterableBase_UnmodifiableSetMixin extends wrappers._DelegatingIterableBase$(E) {};
     (_DelegatingIterableBase_UnmodifiableSetMixin$36.new = function() {
       _DelegatingIterableBase_UnmodifiableSetMixin$36.__proto__.new.call(this);
@@ -1356,7 +1370,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
         return other[$every](dart.bind(this, 'contains'));
       }
       difference(other) {
-        return this.where(dart.fn(element => !dart.test(other.contains(element)), ETobool()))[$toSet]();
+        return this.where(dart.fn(element => !dart.test(other.contains(element)), ELToboolL()))[$toSet]();
       }
       intersection(other) {
         return this.where(dart.bind(other, 'contains'))[$toSet]();
@@ -1369,7 +1383,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
       }
       union(other) {
         let t0;
-        SetOfE()._check(other);
+        SetOfEL().as(other);
         t0 = this.toSet();
         t0.addAll(other);
         return t0;
@@ -1382,6 +1396,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
     }).prototype = MapKeySet.prototype;
     dart.addTypeTests(MapKeySet);
     MapKeySet.prototype[_is_MapKeySet_default] = true;
+    dart.addTypeCaches(MapKeySet);
     dart.setMethodSignature(MapKeySet, () => ({
       __proto__: dart.getMethods(MapKeySet.__proto__),
       cast: dart.gFnType(T => [core.Set$(T), []]),
@@ -1397,7 +1412,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
       __proto__: dart.getGetters(MapKeySet.__proto__),
       [_base$]: core.Iterable$(E)
     }));
-    dart.setLibraryUri(MapKeySet, "package:collection/src/wrappers.dart");
+    dart.setLibraryUri(MapKeySet, L2);
     dart.setFieldSignature(MapKeySet, () => ({
       __proto__: dart.getFields(MapKeySet.__proto__),
       [_baseMap]: dart.finalFieldType(core.Map$(E, dart.dynamic))
@@ -1408,15 +1423,15 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
   });
   wrappers.MapKeySet = wrappers.MapKeySet$();
   dart.addTypeTests(wrappers.MapKeySet, _is_MapKeySet_default);
-  const _keyForValue = dart.privateName(wrappers, "_keyForValue");
+  var _keyForValue = dart.privateName(wrappers, "_keyForValue");
   const _is_MapValueSet_default = Symbol('_is_MapValueSet_default');
   wrappers.MapValueSet$ = dart.generic((K, V) => {
-    let KAndVToNull = () => (KAndVToNull = dart.constFn(dart.fnType(core.Null, [K, V])))();
-    let VoidToV = () => (VoidToV = dart.constFn(dart.fnType(V, [])))();
-    let IterableOfV = () => (IterableOfV = dart.constFn(core.Iterable$(V)))();
-    let VTobool = () => (VTobool = dart.constFn(dart.fnType(core.bool, [V])))();
-    let _IdentityHashSetOfV = () => (_IdentityHashSetOfV = dart.constFn(collection._IdentityHashSet$(V)))();
-    let SetOfV = () => (SetOfV = dart.constFn(core.Set$(V)))();
+    var KLAndVLToNullN = () => (KLAndVLToNullN = dart.constFn(dart.fnType(core.Null, [K, V])))();
+    var VoidToVL = () => (VoidToVL = dart.constFn(dart.fnType(V, [])))();
+    var IterableOfVL = () => (IterableOfVL = dart.constFn(core.Iterable$(V)))();
+    var VLToboolL = () => (VLToboolL = dart.constFn(dart.fnType(core.bool, [V])))();
+    var _IdentityHashSetOfVL = () => (_IdentityHashSetOfVL = dart.constFn(collection._IdentityHashSet$(V)))();
+    var SetOfVL = () => (SetOfVL = dart.constFn(core.Set$(V)))();
     class MapValueSet extends wrappers._DelegatingIterableBase$(V) {
       get [_base$]() {
         return this[_baseMap][$values];
@@ -1428,8 +1443,9 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
         return core.Set.castFrom(V, T, this);
       }
       contains(element) {
+        let t0;
         if (element != null && !V.is(element)) return false;
-        let key = this[_keyForValue](V.as(element));
+        let key = (t0 = V.as(element), this[_keyForValue](t0));
         return this[_baseMap][$containsKey](key);
       }
       get isEmpty() {
@@ -1445,17 +1461,18 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
         return dart.toString(this.toSet());
       }
       add(value) {
-        V._check(value);
-        let key = this[_keyForValue](value);
+        let t0;
+        V.as(value);
+        let key = (t0 = value, this[_keyForValue](t0));
         let result = false;
         this[_baseMap][$putIfAbsent](key, dart.fn(() => {
           result = true;
           return value;
-        }, VoidToV()));
+        }, VoidToVL()));
         return result;
       }
       addAll(elements) {
-        IterableOfV()._check(elements);
+        IterableOfVL().as(elements);
         return elements[$forEach](dart.bind(this, 'add'));
       }
       clear() {
@@ -1465,19 +1482,21 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
         return other[$every](dart.bind(this, 'contains'));
       }
       difference(other) {
-        return this.where(dart.fn(element => !dart.test(other.contains(element)), VTobool()))[$toSet]();
+        return this.where(dart.fn(element => !dart.test(other.contains(element)), VLToboolL()))[$toSet]();
       }
       intersection(other) {
         return this.where(dart.bind(other, 'contains'))[$toSet]();
       }
       lookup(element) {
+        let t0;
         if (element != null && !V.is(element)) return null;
-        let key = this[_keyForValue](V.as(element));
+        let key = (t0 = V.as(element), this[_keyForValue](t0));
         return this[_baseMap][$_get](key);
       }
       remove(element) {
+        let t0;
         if (element != null && !V.is(element)) return false;
-        let key = this[_keyForValue](V.as(element));
+        let key = (t0 = V.as(element), this[_keyForValue](t0));
         if (!dart.test(this[_baseMap][$containsKey](key))) return false;
         this[_baseMap][$remove](key);
         return true;
@@ -1489,32 +1508,33 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
         let toRemove = [];
         this[_baseMap][$forEach](dart.fn((key, value) => {
           if (dart.test(test(value))) toRemove[$add](key);
-        }, KAndVToNull()));
+        }, KLAndVLToNullN()));
         toRemove[$forEach](dart.bind(this[_baseMap], $remove));
       }
       retainAll(elements) {
-        let valuesToRetain = new (_IdentityHashSetOfV()).new();
+        let t0;
+        let valuesToRetain = new (_IdentityHashSetOfVL()).new();
         for (let element of elements) {
           if (element != null && !V.is(element)) continue;
-          let key = this[_keyForValue](V.as(element));
+          let key = (t0 = V.as(element), this[_keyForValue](t0));
           if (!dart.test(this[_baseMap][$containsKey](key))) continue;
           valuesToRetain.add(this[_baseMap][$_get](key));
         }
         let keysToRemove = [];
         this[_baseMap][$forEach](dart.fn((k, v) => {
           if (!dart.test(valuesToRetain.contains(v))) keysToRemove[$add](k);
-        }, KAndVToNull()));
+        }, KLAndVLToNullN()));
         keysToRemove[$forEach](dart.bind(this[_baseMap], $remove));
       }
       retainWhere(test) {
-        return this.removeWhere(dart.fn(element => !dart.test(test(element)), VTobool()));
+        return this.removeWhere(dart.fn(element => !dart.test(test(element)), VLToboolL()));
       }
       retype(T) {
         return core.Set.castFrom(V, T, this);
       }
       union(other) {
         let t0;
-        SetOfV()._check(other);
+        SetOfVL().as(other);
         t0 = this.toSet();
         t0.addAll(other);
         return t0;
@@ -1528,6 +1548,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
     }).prototype = MapValueSet.prototype;
     dart.addTypeTests(MapValueSet);
     MapValueSet.prototype[_is_MapValueSet_default] = true;
+    dart.addTypeCaches(MapValueSet);
     MapValueSet[dart.implements] = () => [core.Set$(V)];
     dart.setMethodSignature(MapValueSet, () => ({
       __proto__: dart.getMethods(MapValueSet.__proto__),
@@ -1552,7 +1573,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
       __proto__: dart.getGetters(MapValueSet.__proto__),
       [_base$]: core.Iterable$(V)
     }));
-    dart.setLibraryUri(MapValueSet, "package:collection/src/wrappers.dart");
+    dart.setLibraryUri(MapValueSet, L2);
     dart.setFieldSignature(MapValueSet, () => ({
       __proto__: dart.getFields(MapValueSet.__proto__),
       [_baseMap]: dart.finalFieldType(core.Map$(K, V)),
@@ -1566,7 +1587,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
   dart.addTypeTests(wrappers.MapValueSet, _is_MapValueSet_default);
   const _is_NonGrowableListMixin_default = Symbol('_is_NonGrowableListMixin_default');
   unmodifiable_wrappers.NonGrowableListMixin$ = dart.generic(E => {
-    let IterableOfE = () => (IterableOfE = dart.constFn(core.Iterable$(E)))();
+    var IterableOfEL = () => (IterableOfEL = dart.constFn(core.Iterable$(E)))();
     class NonGrowableListMixin extends core.Object {
       static _throw(T) {
         dart.throw(new core.UnsupportedError.new("Cannot change the length of a fixed-length list"));
@@ -1575,19 +1596,19 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
         return unmodifiable_wrappers.NonGrowableListMixin._throw(dart.void);
       }
       add(value) {
-        E._check(value);
+        E.as(value);
         return unmodifiable_wrappers.NonGrowableListMixin._throw(core.bool);
       }
       addAll(iterable) {
-        IterableOfE()._check(iterable);
+        IterableOfEL().as(iterable);
         return unmodifiable_wrappers.NonGrowableListMixin._throw(dart.void);
       }
       insert(index, element) {
-        E._check(element);
+        E.as(element);
         return unmodifiable_wrappers.NonGrowableListMixin._throw(dart.void);
       }
       insertAll(index, iterable) {
-        IterableOfE()._check(iterable);
+        IterableOfEL().as(iterable);
         return unmodifiable_wrappers.NonGrowableListMixin._throw(dart.void);
       }
       remove(value) {
@@ -1609,7 +1630,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
         return unmodifiable_wrappers.NonGrowableListMixin._throw(dart.void);
       }
       replaceRange(start, end, iterable) {
-        IterableOfE()._check(iterable);
+        IterableOfEL().as(iterable);
         return unmodifiable_wrappers.NonGrowableListMixin._throw(dart.void);
       }
       clear() {
@@ -1625,6 +1646,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
     NonGrowableListMixin.prototype[dart.isList] = true;
     dart.addTypeTests(NonGrowableListMixin);
     NonGrowableListMixin.prototype[_is_NonGrowableListMixin_default] = true;
+    dart.addTypeCaches(NonGrowableListMixin);
     NonGrowableListMixin[dart.implements] = () => [core.List$(E)];
     dart.setMethodSignature(NonGrowableListMixin, () => ({
       __proto__: dart.getMethods(NonGrowableListMixin.__proto__),
@@ -1658,7 +1680,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
       length: core.int,
       [$length]: core.int
     }));
-    dart.setLibraryUri(NonGrowableListMixin, "package:collection/src/unmodifiable_wrappers.dart");
+    dart.setLibraryUri(NonGrowableListMixin, L3);
     dart.defineExtensionMethods(NonGrowableListMixin, [
       'add',
       'addAll',
@@ -1692,7 +1714,8 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
     }).prototype = NonGrowableListView.prototype;
     dart.addTypeTests(NonGrowableListView);
     NonGrowableListView.prototype[_is_NonGrowableListView_default] = true;
-    dart.setLibraryUri(NonGrowableListView, "package:collection/src/unmodifiable_wrappers.dart");
+    dart.addTypeCaches(NonGrowableListView);
+    dart.setLibraryUri(NonGrowableListView, L3);
     return NonGrowableListView;
   });
   unmodifiable_wrappers.NonGrowableListView = unmodifiable_wrappers.NonGrowableListView$();
@@ -1711,33 +1734,34 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
     }).prototype = UnmodifiableSetView.prototype;
     dart.addTypeTests(UnmodifiableSetView);
     UnmodifiableSetView.prototype[_is_UnmodifiableSetView_default] = true;
-    dart.setLibraryUri(UnmodifiableSetView, "package:collection/src/unmodifiable_wrappers.dart");
+    dart.addTypeCaches(UnmodifiableSetView);
+    dart.setLibraryUri(UnmodifiableSetView, L3);
     return UnmodifiableSetView;
   });
   unmodifiable_wrappers.UnmodifiableSetView = unmodifiable_wrappers.UnmodifiableSetView$();
   dart.addTypeTests(unmodifiable_wrappers.UnmodifiableSetView, _is_UnmodifiableSetView_default);
   const _is_UnmodifiableMapMixin_default = Symbol('_is_UnmodifiableMapMixin_default');
   unmodifiable_wrappers.UnmodifiableMapMixin$ = dart.generic((K, V) => {
-    let MapOfK$V = () => (MapOfK$V = dart.constFn(core.Map$(K, V)))();
-    let VoidToV = () => (VoidToV = dart.constFn(dart.fnType(V, [])))();
+    var MapOfKL$VL = () => (MapOfKL$VL = dart.constFn(core.Map$(K, V)))();
+    var VoidToLVL = () => (VoidToLVL = dart.constFn(dart.fnType(V, [])))();
     class UnmodifiableMapMixin extends core.Object {
       static _throw(T) {
         dart.throw(new core.UnsupportedError.new("Cannot modify an unmodifiable Map"));
       }
       _set(key, value$) {
         let value = value$;
-        K._check(key);
-        V._check(value);
+        K.as(key);
+        V.as(value);
         unmodifiable_wrappers.UnmodifiableMapMixin._throw(dart.void);
         return value$;
       }
       putIfAbsent(key, ifAbsent) {
-        K._check(key);
-        VoidToV()._check(ifAbsent);
+        K.as(key);
+        VoidToLVL().as(ifAbsent);
         return unmodifiable_wrappers.UnmodifiableMapMixin._throw(V);
       }
       addAll(other) {
-        MapOfK$V()._check(other);
+        MapOfKL$VL().as(other);
         return unmodifiable_wrappers.UnmodifiableMapMixin._throw(dart.void);
       }
       remove(key) {
@@ -1759,6 +1783,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
     UnmodifiableMapMixin.prototype[dart.isMap] = true;
     dart.addTypeTests(UnmodifiableMapMixin);
     UnmodifiableMapMixin.prototype[_is_UnmodifiableMapMixin_default] = true;
+    dart.addTypeCaches(UnmodifiableMapMixin);
     UnmodifiableMapMixin[dart.implements] = () => [core.Map$(K, V)];
     dart.setMethodSignature(UnmodifiableMapMixin, () => ({
       __proto__: dart.getMethods(UnmodifiableMapMixin.__proto__),
@@ -1778,7 +1803,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
       first: dart.dynamic,
       last: dart.dynamic
     }));
-    dart.setLibraryUri(UnmodifiableMapMixin, "package:collection/src/unmodifiable_wrappers.dart");
+    dart.setLibraryUri(UnmodifiableMapMixin, L3);
     dart.defineExtensionMethods(UnmodifiableMapMixin, [
       '_set',
       'putIfAbsent',
@@ -1790,24 +1815,24 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
   });
   unmodifiable_wrappers.UnmodifiableMapMixin = unmodifiable_wrappers.UnmodifiableMapMixin$();
   dart.addTypeTests(unmodifiable_wrappers.UnmodifiableMapMixin, _is_UnmodifiableMapMixin_default);
-  const _base$2 = dart.privateName(empty_unmodifiable_set, "_base");
-  let C0;
-  const _setBase$ = dart.privateName(empty_unmodifiable_set, "_setBase");
-  let C1;
+  var _base$2 = dart.privateName(empty_unmodifiable_set, "_base");
+  var C0;
+  var _setBase$ = dart.privateName(empty_unmodifiable_set, "_setBase");
+  var C1;
   const _is_EmptyUnmodifiableSet_default = Symbol('_is_EmptyUnmodifiableSet_default');
   empty_unmodifiable_set.EmptyUnmodifiableSet$ = dart.generic(E => {
-    let EmptyIterableOfE = () => (EmptyIterableOfE = dart.constFn(_internal.EmptyIterable$(E)))();
-    let IterableOfE = () => (IterableOfE = dart.constFn(core.Iterable$(E)))();
-    let LinkedHashSetOfE = () => (LinkedHashSetOfE = dart.constFn(collection.LinkedHashSet$(E)))();
-    let VoidToE = () => (VoidToE = dart.constFn(dart.fnType(E, [])))();
-    let _HashSetOfE = () => (_HashSetOfE = dart.constFn(collection._HashSet$(E)))();
-    let SetOfE = () => (SetOfE = dart.constFn(core.Set$(E)))();
+    var EmptyIterableOfEL = () => (EmptyIterableOfEL = dart.constFn(_internal.EmptyIterable$(E)))();
+    var IterableOfEL = () => (IterableOfEL = dart.constFn(core.Iterable$(E)))();
+    var LinkedHashSetOfEL = () => (LinkedHashSetOfEL = dart.constFn(collection.LinkedHashSet$(E)))();
+    var VoidToLEL = () => (VoidToLEL = dart.constFn(dart.fnType(E, [])))();
+    var _HashSetOfEL = () => (_HashSetOfEL = dart.constFn(collection._HashSet$(E)))();
+    var SetOfEL = () => (SetOfEL = dart.constFn(core.Set$(E)))();
     class EmptyUnmodifiableSet extends collection.IterableBase$(E) {
       static _throw(T) {
         dart.throw(new core.UnsupportedError.new("Cannot modify an unmodifiable Set"));
       }
       get iterator() {
-        return new (EmptyIterableOfE()).new()[$iterator];
+        return new (EmptyIterableOfEL()).new()[$iterator];
       }
       get length() {
         return 0;
@@ -1822,8 +1847,8 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
         return other[$isEmpty];
       }
       followedBy(other) {
-        IterableOfE()._check(other);
-        return LinkedHashSetOfE().from(other);
+        IterableOfEL().as(other);
+        return LinkedHashSetOfEL().from(other);
       }
       lookup(element) {
         return null;
@@ -1833,31 +1858,31 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
       }
       singleWhere(test, opts) {
         let orElse = opts && 'orElse' in opts ? opts.orElse : null;
-        VoidToE()._check(orElse);
+        VoidToLEL().as(orElse);
         return super[$singleWhere](test);
       }
       whereType(T) {
         return new (empty_unmodifiable_set.EmptyUnmodifiableSet$(T)).new();
       }
       toSet() {
-        return new (_HashSetOfE()).new();
+        return new (_HashSetOfEL()).new();
       }
       union(other) {
-        SetOfE()._check(other);
-        return LinkedHashSetOfE().from(other);
+        SetOfEL().as(other);
+        return LinkedHashSetOfEL().from(other);
       }
       intersection(other) {
-        return new (_HashSetOfE()).new();
+        return new (_HashSetOfEL()).new();
       }
       difference(other) {
-        return new (_HashSetOfE()).new();
+        return new (_HashSetOfEL()).new();
       }
       add(value) {
-        E._check(value);
+        E.as(value);
         return empty_unmodifiable_set.EmptyUnmodifiableSet._throw(core.bool);
       }
       addAll(elements) {
-        IterableOfE()._check(elements);
+        IterableOfEL().as(elements);
         return empty_unmodifiable_set.EmptyUnmodifiableSet._throw(dart.void);
       }
       clear() {
@@ -1879,10 +1904,10 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
         return empty_unmodifiable_set.EmptyUnmodifiableSet._throw(dart.void);
       }
       get [_base$]() {
-        return IterableOfE()._check(this[$noSuchMethod](new core._Invocation.getter(C0 || CT.C0)));
+        return IterableOfEL().as(this[$noSuchMethod](new core._Invocation.getter(C0 || CT.C0)));
       }
       get [_setBase]() {
-        return SetOfE()._check(this[$noSuchMethod](new core._Invocation.getter(C1 || CT.C1)));
+        return SetOfEL().as(this[$noSuchMethod](new core._Invocation.getter(C1 || CT.C1)));
       }
     }
     (EmptyUnmodifiableSet.new = function() {
@@ -1891,6 +1916,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
     }).prototype = EmptyUnmodifiableSet.prototype;
     dart.addTypeTests(EmptyUnmodifiableSet);
     EmptyUnmodifiableSet.prototype[_is_EmptyUnmodifiableSet_default] = true;
+    dart.addTypeCaches(EmptyUnmodifiableSet);
     EmptyUnmodifiableSet[dart.implements] = () => [unmodifiable_wrappers.UnmodifiableSetView$(E)];
     dart.setMethodSignature(EmptyUnmodifiableSet, () => ({
       __proto__: dart.getMethods(EmptyUnmodifiableSet.__proto__),
@@ -1899,6 +1925,8 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
       containsAll: dart.fnType(core.bool, [core.Iterable$(core.Object)]),
       lookup: dart.fnType(E, [core.Object]),
       retype: dart.gFnType(T => [empty_unmodifiable_set.EmptyUnmodifiableSet$(T), []]),
+      whereType: dart.gFnType(T => [core.Iterable$(T), []]),
+      [$whereType]: dart.gFnType(T => [core.Iterable$(T), []]),
       union: dart.fnType(core.Set$(E), [core.Object]),
       intersection: dart.fnType(core.Set$(E), [core.Set$(core.Object)]),
       difference: dart.fnType(core.Set$(E), [core.Set$(core.Object)]),
@@ -1918,7 +1946,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
       [_base$]: core.Iterable$(E),
       [_setBase]: core.Set$(E)
     }));
-    dart.setLibraryUri(EmptyUnmodifiableSet, "package:collection/src/empty_unmodifiable_set.dart");
+    dart.setLibraryUri(EmptyUnmodifiableSet, L4);
     dart.defineExtensionMethods(EmptyUnmodifiableSet, [
       'cast',
       'contains',
@@ -1938,7 +1966,7 @@ define(['dart_sdk', 'packages/collection/src/utils'], function(dart_sdk, package
     "package:collection/src/unmodifiable_wrappers.dart": unmodifiable_wrappers,
     "package:collection/src/empty_unmodifiable_set.dart": empty_unmodifiable_set
   }, {
-  }, '{"version":3,"sourceRoot":"","sources":["canonicalized_map.dart","wrappers.dart","unmodifiable_wrappers.dart","empty_unmodifiable_set.dart"],"names":[],"mappings":"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","file":"canonicalized_map.ddc.js"}');
+  }, '{"version":3,"sourceRoot":"","sources":["canonicalized_map.dart","wrappers.dart","unmodifiable_wrappers.dart","empty_unmodifiable_set.dart"],"names":[],"mappings":"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","file":"canonicalized_map.ddc.js"}');
   // Exports:
   return {
     src__canonicalized_map: canonicalized_map,

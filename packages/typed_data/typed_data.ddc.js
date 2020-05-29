@@ -3,7 +3,7 @@ define(['dart_sdk'], function(dart_sdk) {
   const core = dart_sdk.core;
   const dart = dart_sdk.dart;
   const dartx = dart_sdk.dartx;
-  const typed_data = Object.create(dart.library);
+  var typed_data = Object.create(dart.library);
   const CT = Object.create(null);
   dart.trackLibraries("packages/typed_data/typed_data", {
     "package:typed_data/typed_data.dart": typed_data

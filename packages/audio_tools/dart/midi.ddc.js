@@ -9,22 +9,23 @@ define(['dart_sdk'], function(dart_sdk) {
   const html = dart_sdk.html;
   const dart = dart_sdk.dart;
   const dartx = dart_sdk.dartx;
-  const midi$ = Object.create(dart.library);
-  const $codeUnits = dartx.codeUnits;
-  const $_get = dartx._get;
-  const $_set = dartx._set;
-  const $remove = dartx.remove;
-  const $toString = dartx.toString;
-  const $round = dartx.round;
-  let LinkedMapOfint$Map = () => (LinkedMapOfint$Map = dart.constFn(_js_helper.LinkedMap$(core.int, core.Map)))();
-  let StreamControllerOfMIDIEvent = () => (StreamControllerOfMIDIEvent = dart.constFn(async.StreamController$(midi$.MIDIEvent)))();
+  var midi$ = Object.create(dart.library);
+  var $codeUnits = dartx.codeUnits;
+  var $_get = dartx._get;
+  var $_set = dartx._set;
+  var $remove = dartx.remove;
+  var $toString = dartx.toString;
+  var $round = dartx.round;
+  var LinkedMapOfintL$MapL = () => (LinkedMapOfintL$MapL = dart.constFn(_js_helper.LinkedMap$(core.int, core.Map)))();
+  var StreamControllerOfMIDIEventL = () => (StreamControllerOfMIDIEventL = dart.constFn(async.StreamController$(midi$.MIDIEvent)))();
   const CT = Object.create(null);
-  const _stateStream = dart.privateName(midi$, "_stateStream");
-  const _messageStream = dart.privateName(midi$, "_messageStream");
-  const _midiEvent = dart.privateName(midi$, "_midiEvent");
-  const _midiConnection = dart.privateName(midi$, "_midiConnection");
-  const inputs = dart.privateName(midi$, "MIDIManager.inputs");
-  const outputs = dart.privateName(midi$, "MIDIManager.outputs");
+  var L0 = "package:audio_tools/dart/midi.dart";
+  var _stateStream = dart.privateName(midi$, "_stateStream");
+  var _messageStream = dart.privateName(midi$, "_messageStream");
+  var _midiEvent = dart.privateName(midi$, "_midiEvent");
+  var _midiConnection = dart.privateName(midi$, "_midiConnection");
+  var inputs = dart.privateName(midi$, "MIDIManager.inputs");
+  var outputs = dart.privateName(midi$, "MIDIManager.outputs");
   midi$.MIDIManager = class MIDIManager extends core.Object {
     get inputs() {
       return this[inputs];
@@ -47,18 +48,16 @@ define(['dart_sdk'], function(dart_sdk) {
     static new() {
       return midi$.MIDIManager._singleton;
     }
-    sendNoteOn(note, velocity, port) {
-      if (port === void 0) port = null;
+    sendNoteOn(note, velocity, port = null) {
       let command = 144;
       js.context.callMethod("midiSendMessage", [port, command, note, velocity]);
     }
-    sendNoteOff(note, port) {
-      if (port === void 0) port = null;
+    sendNoteOff(note, port = null) {
       let command = 128;
       js.context.callMethod("midiSendMessage", [port, command, note, 0]);
     }
     exportMidi(bpm, trace) {
-      let bytes = core.String._check(js.context.callMethod("exportMidi", [bpm, convert.jsonEncode(trace)]));
+      let bytes = core.String.as(js.context.callMethod("exportMidi", [bpm, convert.jsonEncode(trace)]));
       if (bytes != null) {
         let buffer = _native_typed_data.NativeUint8List.fromList(bytes[$codeUnits]);
         return html.Blob.new([buffer], "audio/midi");
@@ -67,7 +66,7 @@ define(['dart_sdk'], function(dart_sdk) {
       }
     }
     [_midiConnection](jsonString) {
-      let midi = core.Map._check(convert.jsonDecode(jsonString));
+      let midi = core.Map.as(convert.jsonDecode(jsonString));
       let port = midi$._toInt(midi[$_get]("port"), 0);
       if (dart.equals(midi[$_get]("type"), "input") && dart.equals(midi[$_get]("state"), "connected") && port !== 0) {
         this.inputs[$_set](port, midi);
@@ -81,22 +80,23 @@ define(['dart_sdk'], function(dart_sdk) {
       this[_stateStream].add(new midi$.MIDIEvent.new(midi));
     }
     [_midiEvent](jsonString) {
-      let midi = core.Map._check(convert.jsonDecode(jsonString));
+      let midi = core.Map.as(convert.jsonDecode(jsonString));
       this[_messageStream].add(new midi$.MIDIEvent.new(midi));
     }
   };
   (midi$.MIDIManager._internal = function() {
-    this[inputs] = new (LinkedMapOfint$Map()).new();
-    this[outputs] = new (LinkedMapOfint$Map()).new();
+    this[inputs] = new (LinkedMapOfintL$MapL()).new();
+    this[outputs] = new (LinkedMapOfintL$MapL()).new();
     this[_stateStream] = null;
     this[_messageStream] = null;
-    this[_stateStream] = StreamControllerOfMIDIEvent().broadcast();
-    this[_messageStream] = StreamControllerOfMIDIEvent().broadcast();
+    this[_stateStream] = StreamControllerOfMIDIEventL().broadcast();
+    this[_messageStream] = StreamControllerOfMIDIEventL().broadcast();
     js.context._set("midiEvent", dart.bind(this, _midiEvent));
     js.context._set("midiConnection", dart.bind(this, _midiConnection));
     js.context.callMethod("midiInit", []);
   }).prototype = midi$.MIDIManager.prototype;
   dart.addTypeTests(midi$.MIDIManager);
+  dart.addTypeCaches(midi$.MIDIManager);
   dart.setMethodSignature(midi$.MIDIManager, () => ({
     __proto__: dart.getMethods(midi$.MIDIManager.__proto__),
     sendNoteOn: dart.fnType(dart.void, [core.int, core.int], [core.int]),
@@ -110,7 +110,7 @@ define(['dart_sdk'], function(dart_sdk) {
     onStateChange: async.Stream$(midi$.MIDIEvent),
     onMessage: async.Stream$(midi$.MIDIEvent)
   }));
-  dart.setLibraryUri(midi$.MIDIManager, "package:audio_tools/dart/midi.dart");
+  dart.setLibraryUri(midi$.MIDIManager, L0);
   dart.setFieldSignature(midi$.MIDIManager, () => ({
     __proto__: dart.getFields(midi$.MIDIManager.__proto__),
     inputs: dart.fieldType(core.Map$(core.int, core.Map)),
@@ -122,8 +122,8 @@ define(['dart_sdk'], function(dart_sdk) {
     /*midi$.MIDIManager._singleton*/get _singleton() {
       return new midi$.MIDIManager._internal();
     }
-  });
-  const data$ = dart.privateName(midi$, "MIDIEvent.data");
+  }, true);
+  var data$ = dart.privateName(midi$, "MIDIEvent.data");
   midi$.MIDIEvent = class MIDIEvent extends core.Object {
     get data() {
       return this[data$];
@@ -135,16 +135,16 @@ define(['dart_sdk'], function(dart_sdk) {
       return midi$._toInt(this.data[$_get]("port"));
     }
     get name() {
-      return core.String._check(this.data[$_get]("name"));
+      return core.String.as(this.data[$_get]("name"));
     }
     get state() {
-      return core.String._check(this.data[$_get]("state"));
+      return core.String.as(this.data[$_get]("state"));
     }
     get connection() {
-      return core.String._check(this.data[$_get]("connection"));
+      return core.String.as(this.data[$_get]("connection"));
     }
     get manufacturer() {
-      return core.String._check(this.data[$_get]("manufacturer"));
+      return core.String.as(this.data[$_get]("manufacturer"));
     }
     get command() {
       return midi$._toInt(this.data[$_get]("command"));
@@ -159,7 +159,7 @@ define(['dart_sdk'], function(dart_sdk) {
       return midi$._toInt(this.data[$_get]("velocity"));
     }
     get timestamp() {
-      return core.num._check(this.data[$_get]("timestamp"));
+      return core.num.as(this.data[$_get]("timestamp"));
     }
     toString() {
       return dart.toString(this.data);
@@ -170,6 +170,7 @@ define(['dart_sdk'], function(dart_sdk) {
     ;
   }).prototype = midi$.MIDIEvent.prototype;
   dart.addTypeTests(midi$.MIDIEvent);
+  dart.addTypeCaches(midi$.MIDIEvent);
   dart.setGetterSignature(midi$.MIDIEvent, () => ({
     __proto__: dart.getGetters(midi$.MIDIEvent.__proto__),
     port: core.int,
@@ -183,14 +184,13 @@ define(['dart_sdk'], function(dart_sdk) {
     velocity: core.int,
     timestamp: core.num
   }));
-  dart.setLibraryUri(midi$.MIDIEvent, "package:audio_tools/dart/midi.dart");
+  dart.setLibraryUri(midi$.MIDIEvent, L0);
   dart.setFieldSignature(midi$.MIDIEvent, () => ({
     __proto__: dart.getFields(midi$.MIDIEvent.__proto__),
     data: dart.fieldType(core.Map)
   }));
   dart.defineExtensionMethods(midi$.MIDIEvent, ['toString']);
-  midi$._toInt = function _toInt(d, defaultValue) {
-    if (defaultValue === void 0) defaultValue = 0;
+  midi$._toInt = function _toInt(d, defaultValue = 0) {
     if (d == null) {
       return defaultValue;
     } else if (core.int.is(d)) {
@@ -212,7 +212,7 @@ define(['dart_sdk'], function(dart_sdk) {
   dart.trackLibraries("packages/audio_tools/dart/midi", {
     "package:audio_tools/dart/midi.dart": midi$
   }, {
-  }, '{"version":3,"sourceRoot":"","sources":["midi.dart"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;IA0BgB;;;;;;IAGA;;;;;;;AAIyB,YAAA,AAAa;IAAM;;AAIvB,YAAA,AAAe;IAAM;;AAOtD,YAAO;IACT;eAGoB,MAAU,UAAgB;;AACxC,oBAAU;AAC6D,MAAxE,AAAQ,sBAAW,mBAAmB,CAAE,IAAI,EAAE,OAAO,EAAE,IAAI,EAAE,QAAQ;IAC1E;gBAGqB,MAAY;;AAC3B,oBAAU;AACsD,MAAjE,AAAQ,sBAAW,mBAAmB,CAAE,IAAI,EAAE,OAAO,EAAE,IAAI,EAAE;IAClE;eAQoB,KAAU;AACrB,qCAAW,AAAQ,sBAAW,cAAc,CAAE,GAAG,EAAE,mBAAW,KAAK;AAC1E,UAAI,KAAK,IAAI;AACD,qBAAa,4CAAmB,AAAM,KAAD;AAC/C,cAAW,eAAK,CAAE,MAAM,GAAI;;AAE5B,cAAO;;IAEX;sBAmB4B;AACtB,iCAAO,mBAAW,UAAU;AAC5B,iBAAO,aAAO,AAAI,IAAA,QAAC,SAAS;AAChC,UAAiB,YAAb,AAAI,IAAA,QAAC,SAAW,YAAyB,YAAd,AAAI,IAAA,QAAC,UAAY,gBAAe,IAAI,KAAI;AAClD,QAAnB,AAAM,mBAAC,IAAI,EAAI,IAAI;YAEhB,KAAiB,YAAb,AAAI,IAAA,QAAC,SAAW,YAAyB,YAAd,AAAI,IAAA,QAAC,UAAY,mBAAkB,IAAI,KAAI;AAC1D,QAAnB,AAAO,qBAAO,IAAI;YAEf,KAAiB,YAAb,AAAI,IAAA,QAAC,SAAW,aAA0B,YAAd,AAAI,IAAA,QAAC,UAAY,gBAAe,IAAI,KAAI;AACvD,QAApB,AAAO,oBAAC,IAAI,EAAI,IAAI;YAEjB,KAAiB,YAAb,AAAI,IAAA,QAAC,SAAW,aAA0B,YAAd,AAAI,IAAA,QAAC,UAAY,mBAAkB,IAAI,KAAI;AAC1D,QAApB,AAAQ,sBAAO,IAAI;;AAEgB,MAArC,AAAa,uBAAQ,wBAAU,IAAI;IACrC;iBAOuB;AACjB,iCAAO,mBAAW,UAAU;AACO,MAAvC,AAAe,yBAAQ,wBAAU,IAAI;IACvC;;;IA5Fc,eAAa;IAGb,gBAAc;IAGA;IAIA;AA4CgC,IAA1D,qBAAmB;AACyC,IAA5D,uBAAqB;AACe,IAAjC,AAAO,gBAAC,uBAAe;AACoB,IAA3C,AAAO,gBAAC,4BAAoB;AACO,IAAnC,AAAQ,sBAAW,YAAY;EACpC;;;;;;;;;;;;;;;;;;;;;;;;MA7CyB,4BAAU;YAAO;;;;;IAqGtC;;;;;;;AAjBY,0BAAO,AAAI,iBAAC;IAAQ;;AAGjB,gCAAA,AAAI,iBAAC;IAAO;;AAGX,gCAAA,AAAI,iBAAC;IAAQ;;AACR,gCAAA,AAAI,iBAAC;IAAa;;AAChB,gCAAA,AAAI,iBAAC;IAAe;;AAG5B,0BAAO,AAAI,iBAAC;IAAW;;AACvB,0BAAO,AAAI,iBAAC;IAAW;;AAC1B,0BAAO,AAAI,iBAAC;IAAQ;;AAChB,0BAAO,AAAI,iBAAC;IAAY;;AACvB,6BAAA,AAAI,iBAAC;IAAY;;AAOjB,YAAK,eAAL;IAAe;;;IAFrB;;EAAK;;;;;;;;;;;;;;;;;;;;;iCAOP,GAAS;;AACtB,QAAI,AAAE,CAAD,IAAI;AACP,YAAO,aAAY;UAEhB,KAAM,YAAF,CAAC;AACR,YAAO,EAAC;UAEL,KAAM,OAAF,CAAC;AACR,YAAO,AAAE,EAAD;;AAGR;AACE,cAAW,gBAAQ,cAAF,CAAC;;;AAClB;AACA,gBAAO,aAAY;;;;;EAGzB","file":"midi.ddc.js"}');
+  }, '{"version":3,"sourceRoot":"","sources":["midi.dart"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;IA0BgB;;;;;;IAGA;;;;;;;AAIyB,YAAA,AAAa;IAAM;;AAIvB,YAAA,AAAe;IAAM;;AAOtD,YAAO;IACT;eAGoB,MAAU,UAAgB;AACxC,oBAAU;AAC6D,MAAxE,AAAQ,sBAAW,mBAAmB,CAAE,IAAI,EAAE,OAAO,EAAE,IAAI,EAAE,QAAQ;IAC1E;gBAGqB,MAAY;AAC3B,oBAAU;AACsD,MAAjE,AAAQ,sBAAW,mBAAmB,CAAE,IAAI,EAAE,OAAO,EAAE,IAAI,EAAE;IAClE;eAQoB,KAAU;AACrB,iCAAW,AAAQ,sBAAW,cAAc,CAAE,GAAG,EAAE,mBAAW,KAAK;AAC1E,UAAI,KAAK,IAAI;AACD,qBAAa,4CAAmB,AAAM,KAAD;AAC/C,cAAW,eAAK,CAAE,MAAM,GAAI;;AAE5B,cAAO;;IAEX;sBAmB4B;AACtB,6BAAO,mBAAW,UAAU;AAC5B,iBAAO,aAAO,AAAI,IAAA,QAAC,SAAS;AAChC,UAAiB,YAAb,AAAI,IAAA,QAAC,SAAW,YAAyB,YAAd,AAAI,IAAA,QAAC,UAAY,gBAAe,IAAI,KAAI;AAClD,QAAnB,AAAM,mBAAC,IAAI,EAAI,IAAI;YAEhB,KAAiB,YAAb,AAAI,IAAA,QAAC,SAAW,YAAyB,YAAd,AAAI,IAAA,QAAC,UAAY,mBAAkB,IAAI,KAAI;AAC1D,QAAnB,AAAO,qBAAO,IAAI;YAEf,KAAiB,YAAb,AAAI,IAAA,QAAC,SAAW,aAA0B,YAAd,AAAI,IAAA,QAAC,UAAY,gBAAe,IAAI,KAAI;AACvD,QAApB,AAAO,oBAAC,IAAI,EAAI,IAAI;YAEjB,KAAiB,YAAb,AAAI,IAAA,QAAC,SAAW,aAA0B,YAAd,AAAI,IAAA,QAAC,UAAY,mBAAkB,IAAI,KAAI;AAC1D,QAApB,AAAQ,sBAAO,IAAI;;AAEgB,MAArC,AAAa,uBAAQ,wBAAU,IAAI;IACrC;iBAOuB;AACjB,6BAAO,mBAAW,UAAU;AACO,MAAvC,AAAe,yBAAQ,wBAAU,IAAI;IACvC;;;IA5Fc,eAAa;IAGb,gBAAc;IAGA;IAIA;AA4CgC,IAA1D,qBAAmB;AACyC,IAA5D,uBAAqB;AACe,IAAjC,AAAO,gBAAC,uBAAe;AACoB,IAA3C,AAAO,gBAAC,4BAAoB;AACO,IAAnC,AAAQ,sBAAW,YAAY;EACpC;;;;;;;;;;;;;;;;;;;;;;;;;MA7CyB,4BAAU;YAAO;;;;;IAqGtC;;;;;;;AAjBY,0BAAO,AAAI,iBAAC;IAAQ;;AAGjB,4BAAA,AAAI,iBAAC;IAAO;;AAGX,4BAAA,AAAI,iBAAC;IAAQ;;AACR,4BAAA,AAAI,iBAAC;IAAa;;AAChB,4BAAA,AAAI,iBAAC;IAAe;;AAG5B,0BAAO,AAAI,iBAAC;IAAW;;AACvB,0BAAO,AAAI,iBAAC;IAAW;;AAC1B,0BAAO,AAAI,iBAAC;IAAQ;;AAChB,0BAAO,AAAI,iBAAC;IAAY;;AACvB,yBAAA,AAAI,iBAAC;IAAY;;AAOjB,YAAK,eAAL;IAAe;;;IAFrB;;EAAK;;;;;;;;;;;;;;;;;;;;;;iCAOP,GAAS;AACtB,QAAI,AAAE,CAAD,IAAI;AACP,YAAO,aAAY;UAEhB,KAAM,YAAF,CAAC;AACR,YAAO,EAAC;UAEL,KAAM,OAAF,CAAC;AACR,YAAO,AAAE,EAAD;;AAGR;AACE,cAAW,gBAAQ,cAAF,CAAC;;;AAClB;AACA,gBAAO,aAAY;;;;;EAGzB","file":"midi.ddc.js"}');
   // Exports:
   return {
     dart__midi: midi$

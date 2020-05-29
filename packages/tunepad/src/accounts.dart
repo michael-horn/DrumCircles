@@ -48,6 +48,7 @@ class UserAccounts {
       window.open("${datastore.host}/join", "_blank");
     });
 
+
     //-------------------------------------------------------
     // clear error messages when user types
     //-------------------------------------------------------
@@ -55,77 +56,76 @@ class UserAccounts {
       dialog.querySelectorAll(".message").classes.add('hidden');
     });
 
+
     //-------------------------------------------------------
     // LOGIN button
     //-------------------------------------------------------
-    dialog.querySelectorAll("#login-form").onSubmit.listen((e) async {
-      print("got 1");
-      e.preventDefault(); // make sure the form doesn't submit
-
-      bool errors = false;
-      bool email = false;
-      dialog.querySelectorAll(".message").classes.add('hidden');
-      print("got 2");
-
-      //-------------------------------------------------------
-      // 1. validate username
-      //-------------------------------------------------------
-      String username = _getInputValue(dialog, "#username");
-      if (username == null || username == "" ) {
-        _showError(dialog, "#username-message", "Please enter your username or email.");
-        errors = true;
-      }
-      print("got 3");
-
-      //-------------------------------------------------------
-      // 2. validate password
-      //-------------------------------------------------------
-      String password = _getInputValue(dialog, "#password");
-      if (password == null || password == "" ) {
-        _showError(dialog, "#password-message", "Please enter your password.");
-        errors = true;
-      }
-      print("got 4");
-
-      if (errors) return false;
-
-      //-------------------------------------------------------
-      // 3. decide if this is an email address or username
-      //-------------------------------------------------------
-      email = datastore.isValidEmail(username);
-      print("got 5");
-
-      //-------------------------------------------------------
-      // 4. ask the database to login
-      //-------------------------------------------------------
-      dialog.querySelectorAll(".btn").classes.add("loading");
-      try {
-        if (email) {
-          await datastore.login(null, username, password);
-        } else {
-          await datastore.login(username, null, password);
-        }
-        Dialog.closeModal();
-        Dialog.message("Sign in successful.");
+    FormElement form = dialog.querySelector("#login-form");
+    if (form != null) {
+      form.onSubmit.listen((e) {
+        e.preventDefault(); // make sure the form doesn't submit
+        _onSubmit(dialog, datastore);
         return false;
+      });
+    }
+  }
+
+  static void _onSubmit(DivElement dialog, Datastore datastore) async {
+    bool errors = false;
+    bool email = false;
+    dialog.querySelectorAll(".message").classes.add('hidden');
+
+    //-------------------------------------------------------
+    // 1. validate username
+    //-------------------------------------------------------
+    String username = _getInputValue(dialog, "#username");
+    if (username == null || username == "" ) {
+      _showError(dialog, "#username-message", "Please enter your username or email.");
+      errors = true;
+    }
+
+    //-------------------------------------------------------
+    // 2. validate password
+    //-------------------------------------------------------
+    String password = _getInputValue(dialog, "#password");
+    if (password == null || password == "" ) {
+      _showError(dialog, "#password-message", "Please enter your password.");
+      errors = true;
+    }
+
+    if (errors) return;
+
+    //-------------------------------------------------------
+    // 3. decide if this is an email address or username
+    //-------------------------------------------------------
+    email = datastore.isValidEmail(username);
+
+    //-------------------------------------------------------
+    // 4. ask the database to login
+    //-------------------------------------------------------
+    dialog.querySelectorAll(".btn").classes.add("loading");
+    try {
+      if (email) {
+        await datastore.login(null, username, password);
+      } else {
+        await datastore.login(username, null, password);
       }
-      on DatastoreException catch (e) {
-        if (email) {
-          _showError(dialog, "#general-message", "Invalid email or password.");
-        } else {
-          _showError(dialog, "#general-message", "Invalid username or password.");
-        }
+      Dialog.closeModal();
+      Dialog.message("Sign in successful.");
+    }
+    on DatastoreException catch (e) {
+      if (email) {
+        _showError(dialog, "#general-message", "Invalid email or password.");
+      } else {
+        _showError(dialog, "#general-message", "Invalid username or password.");
       }
-      catch (e) {
-        _showError(dialog, "#general-message", "There was a problem signing in.");
-      }
-      finally {
-        dialog.querySelectorAll(".btn").classes.remove("loading");
-        return false;
-      }
-      print("got 6");
-      return false;
-    });
+    }
+    catch (e) {
+      _showError(dialog, "#general-message", "There was a problem signing in.");
+    }
+    finally {
+      dialog.querySelectorAll(".btn").classes.remove("loading");
+    }
   }
 
 

@@ -8,26 +8,28 @@ define(['dart_sdk', 'packages/compiler/dart/preprocessor'], function(dart_sdk, p
   const dart = dart_sdk.dart;
   const dartx = dart_sdk.dartx;
   const preprocessor = packages__compiler__dart__preprocessor.dart__preprocessor;
-  const compiler = Object.create(dart.library);
-  const $length = dartx.length;
-  const $split = dartx.split;
-  const $postMessage = dartx.postMessage;
-  const $onMessage = dartx.onMessage;
-  const $data = dartx.data;
-  const $toString = dartx.toString;
-  const $containsKey = dartx.containsKey;
-  const $_get = dartx._get;
-  let JSArrayOfString = () => (JSArrayOfString = dart.constFn(_interceptors.JSArray$(core.String)))();
+  var compiler = Object.create(dart.library);
+  var $length = dartx.length;
+  var $split = dartx.split;
+  var $postMessage = dartx.postMessage;
+  var $onMessage = dartx.onMessage;
+  var $data = dartx.data;
+  var $toString = dartx.toString;
+  var $containsKey = dartx.containsKey;
+  var $_get = dartx._get;
+  var JSArrayOfStringL = () => (JSArrayOfStringL = dart.constFn(_interceptors.JSArray$(core.String)))();
   const CT = Object.create(null);
+  var L0 = "package:compiler/dart/compiler.dart";
   compiler.PythonListener = class PythonListener extends core.Object {};
   (compiler.PythonListener.new = function() {
     ;
   }).prototype = compiler.PythonListener.prototype;
   dart.addTypeTests(compiler.PythonListener);
-  dart.setLibraryUri(compiler.PythonListener, "package:compiler/dart/compiler.dart");
-  const _compiling = dart.privateName(compiler, "_compiling");
-  const listener$ = dart.privateName(compiler, "PythonCompiler.listener");
-  const pp = dart.privateName(compiler, "PythonCompiler.pp");
+  dart.addTypeCaches(compiler.PythonListener);
+  dart.setLibraryUri(compiler.PythonListener, L0);
+  var _compiling = dart.privateName(compiler, "_compiling");
+  var listener$ = dart.privateName(compiler, "PythonCompiler.listener");
+  var pp = dart.privateName(compiler, "PythonCompiler.pp");
   compiler.PythonCompiler = class PythonCompiler extends core.Object {
     get listener() {
       return this[listener$];
@@ -52,7 +54,7 @@ define(['dart_sdk', 'packages/compiler/dart/preprocessor'], function(dart_sdk, p
         let pcode = this.pp.process(code, bplate[$split]("\n")[$length]);
         let worker = html.Worker.new("packages/compiler/js/skulpt-webworker.js");
         try {
-          let message = convert.jsonDecode(convert.jsonEncode(JSArrayOfString().of([dart.notNull(bplate) + "\n" + dart.notNull(pcode)])));
+          let message = convert.jsonDecode(convert.jsonEncode(JSArrayOfStringL().of([dart.notNull(bplate) + "\n" + dart.notNull(pcode)])));
           worker[$postMessage](message);
           let error = false;
           let iter = async.StreamIterator.new(worker[$onMessage]);
@@ -61,11 +63,11 @@ define(['dart_sdk', 'packages/compiler/dart/preprocessor'], function(dart_sdk, p
               let e = iter.current;
               {
                 if (dart.equals(dart.dsend(e[$data], '_get', [0]), "error")) {
-                  this.pythonError(core.String._check(dart.dsend(e[$data], '_get', [1])), core.String._check(dart.dsend(e[$data], '_get', [2])), core.String._check(dart.dsend(e[$data], '_get', [3])), core.int._check(dart.dsend(e[$data], '_get', [4])));
+                  this.pythonError(core.String.as(dart.dsend(e[$data], '_get', [1])), core.String.as(dart.dsend(e[$data], '_get', [2])), core.String.as(dart.dsend(e[$data], '_get', [3])), core.int.as(dart.dsend(e[$data], '_get', [4])));
                   error = true;
                 } else if (dart.equals(dart.dsend(e[$data], '_get', [0]), "done")) {
                   this[_compiling] = false;
-                  this.pythonDone(core.List._check(dart.dsend(e[$data], '_get', [1])));
+                  this.pythonDone(core.List.as(dart.dsend(e[$data], '_get', [1])));
                   return !error;
                 }
               }
@@ -99,6 +101,7 @@ define(['dart_sdk', 'packages/compiler/dart/preprocessor'], function(dart_sdk, p
     ;
   }).prototype = compiler.PythonCompiler.prototype;
   dart.addTypeTests(compiler.PythonCompiler);
+  dart.addTypeCaches(compiler.PythonCompiler);
   dart.setMethodSignature(compiler.PythonCompiler, () => ({
     __proto__: dart.getMethods(compiler.PythonCompiler.__proto__),
     compile: dart.fnType(async.Future$(core.bool), [core.String]),
@@ -109,7 +112,7 @@ define(['dart_sdk', 'packages/compiler/dart/preprocessor'], function(dart_sdk, p
     __proto__: dart.getGetters(compiler.PythonCompiler.__proto__),
     isCompiling: core.bool
   }));
-  dart.setLibraryUri(compiler.PythonCompiler, "package:compiler/dart/compiler.dart");
+  dart.setLibraryUri(compiler.PythonCompiler, L0);
   dart.setFieldSignature(compiler.PythonCompiler, () => ({
     __proto__: dart.getFields(compiler.PythonCompiler.__proto__),
     listener: dart.fieldType(compiler.PythonListener),
@@ -119,7 +122,7 @@ define(['dart_sdk', 'packages/compiler/dart/preprocessor'], function(dart_sdk, p
   dart.trackLibraries("packages/compiler/dart/compiler", {
     "package:compiler/dart/compiler.dart": compiler
   }, {
-  }, '{"version":3,"sourceRoot":"","sources":["compiler.dart"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;EA8BA;;;;;;;IASiB;;;;;;IAOF;;;;;;;AAHW;IAAU;YAWN;AAAR;AAED,QAAjB,mBAAa;AAEN,qBAAU,AAAS,iBAAG,OAAQ,AAAS,iCAAmB;AACjE,YAAI,AAAO,MAAD,IAAI,MAAM,MAAO;AAEpB,oBAAQ,AAAG,gBAAQ,IAAI,EAAE,AAAO,AAAY,MAAb,SAAO;AAEtC,qBAAa,gBAAO;AAE3B;AAEM,wBAAU,mBAAW,mBAAY,sBAAS,AAAO,aAAd,MAAM,IAAG,oBAAO,KAAK;AACjC,UAA3B,AAAO,MAAD,eAAa,OAAO;AACrB,sBAAQ;AAEb,8CAA6B,AAAO,MAAD;;;kBAAX;;AACtB,oBAAc,YAAJ,WAAN,AAAE,CAAD,kBAAM,KAAM;AACwC,kBAAvD,oCAAkB,WAAN,AAAE,CAAD,kBAAM,yBAAU,WAAN,AAAE,CAAD,kBAAM,yBAAU,WAAN,AAAE,CAAD,kBAAM,sBAAU,WAAN,AAAE,CAAD,kBAAM;AACxC,kBAAZ,QAAQ;sBAEL,KAAc,YAAJ,WAAN,AAAE,CAAD,kBAAM,KAAM;AACF,kBAAlB,mBAAa;AACQ,kBAArB,iCAAiB,WAAN,AAAE,CAAD,kBAAM;AAClB,wBAAO,EAAC,KAAK;;;;;YARO;;;cAYpB;AACe,UAAnB,WAAQ,cAAF,CAAC;;MAEX;;gBAMwB,MAAa,SAAgB,SAAa;AAChE,UAAI,AAAQ,OAAD,IAAI,QAAQ,AAAQ,OAAD,KAAI,IAAI,AAAmB,UAAT;AAEhD,UAAS,aAAL,IAAI,KAAI,eAAK,AAAG,AAAQ,8BAAY,IAAI;AACnB,QAAvB,OAAO,AAAG,AAAO,uBAAC,IAAI;;AAEb,QAAT,OAAO,CAAC;;AAEV,UAAI,iBAAY,MAAM,AAAS,AAA2C,4BAA7B,IAAI,EAAE,OAAO,EAAE,OAAO,EAAE,IAAI;IAC3E;eAMqB;AACnB,UAAI,iBAAY,MAAM,AAAS,AAAqB,2BAAR,OAAO;IACrD;;0CA5DoB;IAPf,mBAAa;IAIL,WAAS;IAGF;;EAAS","file":"compiler.ddc.js"}');
+  }, '{"version":3,"sourceRoot":"","sources":["compiler.dart"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;EA8BA;;;;;;;;IASiB;;;;;;IAOF;;;;;;;AAHW;IAAU;YAWN;AAAR;AAED,QAAjB,mBAAa;AAEN,qBAAU,AAAS,iBAAG,OAAQ,AAAS,iCAAmB;AACjE,YAAI,AAAO,MAAD,IAAI,MAAM,MAAO;AAEpB,oBAAQ,AAAG,gBAAQ,IAAI,EAAE,AAAO,AAAY,MAAb,SAAO;AAEtC,qBAAa,gBAAO;AAE3B;AAEM,wBAAU,mBAAW,mBAAY,uBAAS,AAAO,aAAd,MAAM,IAAG,oBAAO,KAAK;AACjC,UAA3B,AAAO,MAAD,eAAa,OAAO;AACrB,sBAAQ;AAEb,8CAA6B,AAAO,MAAD;;;kBAAX;;AACtB,oBAAc,YAAJ,WAAN,AAAE,CAAD,kBAAM,KAAM;AACwC,kBAAvD,gCAAkB,WAAN,AAAE,CAAD,kBAAM,qBAAU,WAAN,AAAE,CAAD,kBAAM,qBAAU,WAAN,AAAE,CAAD,kBAAM,kBAAU,WAAN,AAAE,CAAD,kBAAM;AACxC,kBAAZ,QAAQ;sBAEL,KAAc,YAAJ,WAAN,AAAE,CAAD,kBAAM,KAAM;AACF,kBAAlB,mBAAa;AACQ,kBAArB,6BAAiB,WAAN,AAAE,CAAD,kBAAM;AAClB,wBAAO,EAAC,KAAK;;;;;YARO;;;cAYpB;AACe,UAAnB,WAAQ,cAAF,CAAC;;MAEX;;gBAMwB,MAAa,SAAgB,SAAa;AAChE,UAAI,AAAQ,OAAD,IAAI,QAAQ,AAAQ,OAAD,KAAI,IAAI,AAAmB,UAAT;AAEhD,UAAS,aAAL,IAAI,KAAI,eAAK,AAAG,AAAQ,8BAAY,IAAI;AACnB,QAAvB,OAAO,AAAG,AAAO,uBAAC,IAAI;;AAEb,QAAT,OAAO,CAAC;;AAEV,UAAI,iBAAY,MAAM,AAAS,AAA2C,4BAA7B,IAAI,EAAE,OAAO,EAAE,OAAO,EAAE,IAAI;IAC3E;eAMqB;AACnB,UAAI,iBAAY,MAAM,AAAS,AAAqB,2BAAR,OAAO;IACrD;;0CA5DoB;IAPf,mBAAa;IAIL,WAAS;IAGF;;EAAS","file":"compiler.ddc.js"}');
   // Exports:
   return {
     dart__compiler: compiler

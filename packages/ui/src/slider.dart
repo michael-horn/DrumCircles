@@ -140,7 +140,7 @@ class MixSlider {
         "width" : "${knobRadius * 1.4}",
         "height" : "${knobRadius * 1.4}",
         "pointer-events" : "none",
-        "href" : "/images/instruments/synth.svg"
+        "href" : "images/instruments/synth.svg"
       };
     _knobGroup.append(_knob);
     _knobGroup.append(_knobImage);

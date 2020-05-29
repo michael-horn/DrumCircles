@@ -3,25 +3,26 @@ define(['dart_sdk'], function(dart_sdk) {
   const core = dart_sdk.core;
   const dart = dart_sdk.dart;
   const dartx = dart_sdk.dartx;
-  const utils = Object.create(dart.library);
-  const $compareTo = dartx.compareTo;
+  var utils = Object.create(dart.library);
+  var $compareTo = dartx.compareTo;
   const CT = Object.create(null);
+  var L0 = "package:collection/src/utils.dart";
   const _is_Pair_default = Symbol('_is_Pair_default');
-  const first$ = dart.privateName(utils, "Pair.first");
-  const last$ = dart.privateName(utils, "Pair.last");
+  var first$ = dart.privateName(utils, "Pair.first");
+  var last$ = dart.privateName(utils, "Pair.last");
   utils.Pair$ = dart.generic((E, F) => {
     class Pair extends core.Object {
       get first() {
         return this[first$];
       }
       set first(value) {
-        this[first$] = E._check(value);
+        this[first$] = E.as(value);
       }
       get last() {
         return this[last$];
       }
       set last(value) {
-        this[last$] = F._check(value);
+        this[last$] = F.as(value);
       }
     }
     (Pair.new = function(first, last) {
@@ -31,7 +32,8 @@ define(['dart_sdk'], function(dart_sdk) {
     }).prototype = Pair.prototype;
     dart.addTypeTests(Pair);
     Pair.prototype[_is_Pair_default] = true;
-    dart.setLibraryUri(Pair, "package:collection/src/utils.dart");
+    dart.addTypeCaches(Pair);
+    dart.setLibraryUri(Pair, L0);
     dart.setFieldSignature(Pair, () => ({
       __proto__: dart.getFields(Pair.__proto__),
       first: dart.fieldType(E),
@@ -47,7 +49,7 @@ define(['dart_sdk'], function(dart_sdk) {
   dart.trackLibraries("packages/collection/src/utils", {
     "package:collection/src/utils.dart": utils
   }, {
-  }, '{"version":3,"sourceRoot":"","sources":["utils.dart"],"names":[],"mappings":";;;;;;;;;;;;;MAMI;;;;;;MACA;;;;;;;yBAEQ,OAAY;MAAZ;MAAY;;IAAK;;;;;;;;;;;;;;AAKzB,oBAAC,QAAQ,WAAmB,AAAe,mBAAtB,MAAM,cAA0B,MAAM;EAAC","file":"utils.ddc.js"}');
+  }, '{"version":3,"sourceRoot":"","sources":["utils.dart"],"names":[],"mappings":";;;;;;;;;;;;;;MAMI;;;;;;MACA;;;;;;;yBAEQ,OAAY;MAAZ;MAAY;;IAAK;;;;;;;;;;;;;;;AAKzB,oBAAC,QAAQ,WAAmB,AAAe,mBAAtB,MAAM,cAA0B,MAAM;EAAC","file":"utils.ddc.js"}');
   // Exports:
   return {
     src__utils: utils

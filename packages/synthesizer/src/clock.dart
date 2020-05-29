@@ -139,6 +139,7 @@ class PlayClock {
  */
   void pause(ClockSubscriber subscriber) {
     listeners.add(subscriber);
+    print("added listener");
     if (isPlaying(subscriber)) {
       subscribers.remove(subscriber);
       if (isPaused && context != null) {
@@ -155,7 +156,7 @@ class PlayClock {
     _elapsedBeats = 0;
     _start = 0;
     subscribers.clear();
-    listeners.forEach((ClockSubscriber s) => s.onClockReset());
+    listeners.forEach((s) => s.onClockReset());
   }
 
 
@@ -165,7 +166,7 @@ class PlayClock {
   void setTime(num elapsedBeats) {
     _elapsedBeats = elapsedBeats;
     _start = 0;
-    listeners.forEach((ClockSubscriber s) => s.onClockTimeChange());
+    listeners.forEach((s) => s.onClockTimeChange());
     subscribers.clear();
   }
 
@@ -176,7 +177,7 @@ class PlayClock {
     if (context != null) {
       _elapsedBeats = (lastBeats * 60 / _bpm) - context.currentTime;
     }
-    listeners.forEach((ClockSubscriber s) => s.onTempoChange());
+    listeners.forEach((s) => s.onTempoChange());
   }
 
 
@@ -192,7 +193,7 @@ class PlayClock {
     }
 
     _meter = "${_beatsPerMeasure}/${_beatValue}";
-    listeners.forEach((ClockSubscriber s) => s.onTimeSignatureChange());
+    listeners.forEach((s) => s.onTimeSignatureChange());
   }
 
 

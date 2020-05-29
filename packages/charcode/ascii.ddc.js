@@ -3,7 +3,7 @@ define(['dart_sdk'], function(dart_sdk) {
   const core = dart_sdk.core;
   const dart = dart_sdk.dart;
   const dartx = dart_sdk.dartx;
-  const ascii = Object.create(dart.library);
+  var ascii = Object.create(dart.library);
   const CT = Object.create(null);
   dart.defineLazy(ascii, {
     /*ascii.$nul*/get $nul() {
@@ -486,7 +486,7 @@ define(['dart_sdk'], function(dart_sdk) {
     /*ascii.$tilde*/get $tilde() {
       return 126;
     }
-  });
+  }, true);
   dart.trackLibraries("packages/charcode/ascii", {
     "package:charcode/ascii.dart": ascii
   }, {
