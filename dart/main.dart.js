@@ -6914,7 +6914,7 @@
               $.project = Y.Project$(t4.root, t4);
               $.userlist = B.UserList$($.socket);
               t4 = $.datastore;
-              $.library = new O.TrackLibrary(t4, ["bass", "drums", "guitar", "piano", "marimba", "sequencer", "definitions"]);
+              $.library = new O.TrackLibrary(t4, ["bass", "drums", "drumkit", "guitar", "piano", "marimba", "sequencer", "definitions"]);
               if (H.boolConversionCheck(t4.isEmpty)) {
                 t4.save$1($.project);
                 $.datastore.createPythonCell$0();
@@ -21773,6 +21773,8 @@
         H.checkTypeBound(t2, t2, _s1_0, _s16_);
         W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(el.querySelectorAll(_s1_), t3)).remove$1(0, _s15_);
         J.get$classes$x(el).add$1(0, "off");
+        if (f === "drums")
+          C.JSArray_methods.remove$1(t1, "drumkit");
       } else {
         el.toString;
         H.checkTypeBound(t2, t2, _s1_0, _s16_);
@@ -21785,6 +21787,8 @@
         W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(el.querySelectorAll(_s1_), t3)).add$1(0, _s15_);
         J.get$classes$x(el).remove$1(0, "off");
         C.JSArray_methods.add$1(t1, f);
+        if (f === "drums")
+          C.JSArray_methods.add$1(t1, "drumkit");
       }
     },
     _search$2: function(filter, sort) {
@@ -22314,8 +22318,6 @@
         _s16_ = "querySelectorAll";
       type$.User._as(user);
       t1 = $.userlist;
-      t1.toString;
-      P.print("userlist logout");
       t1._sendAction$1("userlist-leave");
       t1.me = user;
       t1 = document;
