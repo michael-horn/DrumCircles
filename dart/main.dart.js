@@ -35,7 +35,7 @@
     pathParts.shift();
   }
   if (pathParts.length > 1 && pathParts[1] == "test") {
-    return "/" + pathParts.slice(0, 2).join("/") + "/";
+    return pathParts.slice(0, 2).join("/") + "/";
   }
   // Attempt to detect base url using <base href> html tag
   // base href should start and end with "/"
