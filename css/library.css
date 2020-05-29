@@ -4,7 +4,7 @@
   margin-top: 50px;
   max-height: calc(100vh - 85px);
   text-align: left;
-  overflow-y: auto;
+  overflow-y: hidden;
   color: #555;
   padding: 0.5em 1.5em;
 }
@@ -25,7 +25,7 @@
 
 .dialog.library .result-header {
   display: flex;
-  margin-bottom: 0.7em;
+  margin-bottom: 0.3em;
 }
 
 .dialog.library .track-count {
@@ -64,6 +64,11 @@
   margin: 0;
   line-height: 2em;
   color: #999;
+}
+
+.dialog.library .search-results {
+  overflow-y: auto;
+  height: 60vh;
 }
 
 .dialog.library .filters {
@@ -147,6 +152,8 @@
 .track-item .track-duration {
   width: 5em;
   font-size: 14px;
+  text-align: right;
+  margin-right: 0.8em;
 }
 .track-item .track-details {
   display: block;
@@ -171,8 +178,6 @@
 .track-details li.modified {
   font-size: 12px;
   text-align: right;
-  position: relative;
-  top: -20px;
 }
 
 .dialog.library .track-summary button {
@@ -187,6 +192,12 @@
 .dialog.library .track-summary button:hover {
   color: black;
 }
+
+.dialog.library .track-summary button.star-button {
+  min-width: 3em;
+  text-align: left;
+}
+
 .dialog.library .star-count { font-size: 12px; margin-left: 5px; }
 .dialog.library .like-button i.fas { color: tomato; }
 .dialog.library .star-button i.fas { color: orange; }
