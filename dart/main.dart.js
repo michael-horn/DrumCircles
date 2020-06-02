@@ -533,25 +533,25 @@
     },
     ListIterator: function ListIterator(t0, t1, t2) {
       var _ = this;
-      _.__internal$_iterable = t0;
-      _.__internal$_length = t1;
-      _.__internal$_index = 0;
-      _.__internal$_current = null;
+      _._iterable = t0;
+      _._length = t1;
+      _._index = 0;
+      _._current = null;
       _.$ti = t2;
     },
     MappedIterable: function MappedIterable(t0, t1, t2) {
-      this.__internal$_iterable = t0;
+      this._iterable = t0;
       this._f = t1;
       this.$ti = t2;
     },
     EfficientLengthMappedIterable: function EfficientLengthMappedIterable(t0, t1, t2) {
-      this.__internal$_iterable = t0;
+      this._iterable = t0;
       this._f = t1;
       this.$ti = t2;
     },
     MappedIterator: function MappedIterator(t0, t1, t2) {
       var _ = this;
-      _.__internal$_current = null;
+      _._current = null;
       _._iterator = t0;
       _._f = t1;
       _.$ti = t2;
@@ -562,7 +562,7 @@
       this.$ti = t2;
     },
     WhereIterable: function WhereIterable(t0, t1, t2) {
-      this.__internal$_iterable = t0;
+      this._iterable = t0;
       this._f = t1;
       this.$ti = t2;
     },
@@ -572,12 +572,12 @@
       this.$ti = t2;
     },
     TakeIterable: function TakeIterable(t0, t1, t2) {
-      this.__internal$_iterable = t0;
+      this._iterable = t0;
       this._takeCount = t1;
       this.$ti = t2;
     },
     EfficientLengthTakeIterable: function EfficientLengthTakeIterable(t0, t1, t2) {
-      this.__internal$_iterable = t0;
+      this._iterable = t0;
       this._takeCount = t1;
       this.$ti = t2;
     },
@@ -587,12 +587,12 @@
       this.$ti = t2;
     },
     SkipIterable: function SkipIterable(t0, t1, t2) {
-      this.__internal$_iterable = t0;
+      this._iterable = t0;
       this._skipCount = t1;
       this.$ti = t2;
     },
     EfficientLengthSkipIterable: function EfficientLengthSkipIterable(t0, t1, t2) {
-      this.__internal$_iterable = t0;
+      this._iterable = t0;
       this._skipCount = t1;
       this.$ti = t2;
     },
@@ -1710,7 +1710,7 @@
     BoundClosure: function BoundClosure(t0, t1, t2, t3) {
       var _ = this;
       _._self = t0;
-      _._target = t1;
+      _.__js_helper$_target = t1;
       _._receiver = t2;
       _._name = t3;
     },
@@ -1778,6 +1778,10 @@
     },
     NativeInt8List__create1: function(arg) {
       return new Int8Array(arg);
+    },
+    NativeUint8List_NativeUint8List$view: function(buffer, offsetInBytes, $length) {
+      var t1 = new Uint8Array(buffer, offsetInBytes);
+      return t1;
     },
     _checkValidIndex: function(index, list, $length) {
       if (index >>> 0 !== index || index >= $length)
@@ -3303,13 +3307,6 @@
         return receiver;
       return J.getNativeInterceptor(receiver);
     },
-    getInterceptor$z: function(receiver) {
-      if (receiver == null)
-        return receiver;
-      if (!(receiver instanceof P.Object))
-        return J.UnknownJavaScriptObject.prototype;
-      return receiver;
-    },
     set$innerHtml$x: function(receiver, value) {
       return J.getInterceptor$x(receiver).set$innerHtml(receiver, value);
     },
@@ -3352,6 +3349,9 @@
     get$onMouseDown$x: function(receiver) {
       return J.getInterceptor$x(receiver).get$onMouseDown(receiver);
     },
+    get$target$x: function(receiver) {
+      return J.getInterceptor$x(receiver).get$target(receiver);
+    },
     $add$ansx: function(receiver, a0) {
       if (typeof receiver == "number" && typeof a0 == "number")
         return receiver + a0;
@@ -3393,6 +3393,11 @@
     },
     $indexSet$ax: function(receiver, a0, a1) {
       return J.getInterceptor$ax(receiver).$indexSet(receiver, a0, a1);
+    },
+    $lt$n: function(receiver, a0) {
+      if (typeof receiver == "number" && typeof a0 == "number")
+        return receiver < a0;
+      return J.getInterceptor$n(receiver).$lt(receiver, a0);
     },
     $or$bn: function(receiver, a0) {
       if (typeof receiver == "number" && typeof a0 == "number")
@@ -3461,8 +3466,11 @@
     insertAdjacentElement$2$x: function(receiver, a0, a1) {
       return J.getInterceptor$x(receiver).insertAdjacentElement$2(receiver, a0, a1);
     },
-    load$1$z: function(receiver, a0) {
-      return J.getInterceptor$z(receiver).load$1(receiver, a0);
+    lastIndexOf$1$s: function(receiver, a0) {
+      return J.getInterceptor$s(receiver).lastIndexOf$1(receiver, a0);
+    },
+    load$1$x: function(receiver, a0) {
+      return J.getInterceptor$x(receiver).load$1(receiver, a0);
     },
     map$1$1$ax: function(receiver, a0, $T1) {
       return J.getInterceptor$ax(receiver).map$1$1(receiver, a0, $T1);
@@ -3509,6 +3517,9 @@
     toString$0$: function(receiver) {
       return J.getInterceptor$(receiver).toString$0(receiver);
     },
+    toStringAsFixed$1$n: function(receiver, a0) {
+      return J.getInterceptor$n(receiver).toStringAsFixed$1(receiver, a0);
+    },
     trim$0$s: function(receiver) {
       return J.getInterceptor$s(receiver).trim$0(receiver);
     },
@@ -3534,10 +3545,10 @@
     },
     ArrayIterator: function ArrayIterator(t0, t1, t2) {
       var _ = this;
-      _._iterable = t0;
-      _._length = t1;
-      _._index = 0;
-      _._current = null;
+      _.__interceptors$_iterable = t0;
+      _.__interceptors$_length = t1;
+      _.__interceptors$_index = 0;
+      _.__interceptors$_current = null;
       _.$ti = t2;
     },
     JSNumber: function JSNumber() {
@@ -3874,7 +3885,7 @@
       return new P._StreamIterator(t1, $T._eval$1("_StreamIterator<0>"));
     },
     _cancelAndValue: function(subscription, future, value) {
-      var cancelFuture = subscription.cancel$0();
+      var cancelFuture = subscription.cancel$0(0);
       if (cancelFuture != null && cancelFuture !== $.$get$Future__nullFuture())
         cancelFuture.whenComplete$1(new P._cancelAndValue_closure(future, value));
       else
@@ -4356,7 +4367,7 @@
           break;
         if (!it.moveNext$0())
           return;
-        next = H.S(it.get$current());
+        next = H.S(it.get$current(it));
         C.JSArray_methods.add$1(parts, next);
         $length += next.length + 2;
         ++count;
@@ -4371,7 +4382,7 @@
           return H.ioore(parts, -1);
         penultimateString = parts.pop();
       } else {
-        penultimate = it.get$current();
+        penultimate = it.get$current(it);
         ++count;
         if (!it.moveNext$0()) {
           if (count <= 4) {
@@ -4384,10 +4395,10 @@
           penultimateString = parts.pop();
           $length += ultimateString.length + 2;
         } else {
-          ultimate = it.get$current();
+          ultimate = it.get$current(it);
           ++count;
           for (; it.moveNext$0(); penultimate = ultimate, ultimate = ultimate0) {
-            ultimate0 = it.get$current();
+            ultimate0 = it.get$current(it);
             ++count;
             if (count > 100) {
               while (true) {
@@ -4459,6 +4470,16 @@
       t1 = result._contents;
       return t1.charCodeAt(0) == 0 ? t1 : t1;
     },
+    ListQueue$: function($E) {
+      var t1 = new P.ListQueue($E._eval$1("ListQueue<0>")),
+        t2 = new Array(8);
+      t2.fixed$length = Array;
+      t1.set$_table(H.setRuntimeTypeInfo(t2, $E._eval$1("JSArray<0>")));
+      return t1;
+    },
+    _ListQueueIterator$: function(queue, $E) {
+      return new P._ListQueueIterator(queue, queue._tail, queue._modificationCount, queue._head, $E._eval$1("_ListQueueIterator<0>"));
+    },
     _LinkedHashSet: function _LinkedHashSet(t0) {
       var _ = this;
       _._collection$_length = 0;
@@ -4511,7 +4532,7 @@
       _._queue = t0;
       _._end = t1;
       _._modificationCount = t2;
-      _._collection$_position = t3;
+      _._position = t3;
       _._collection$_current = null;
       _.$ti = t4;
     },
@@ -4916,7 +4937,7 @@
       var t1,
         list = H.setRuntimeTypeInfo([], $E._eval$1("JSArray<0>"));
       for (t1 = J.get$iterator$ax(elements); t1.moveNext$0();)
-        C.JSArray_methods.add$1(list, $E._as(t1.get$current()));
+        C.JSArray_methods.add$1(list, $E._as(t1.get$current(t1)));
       if (growable)
         return list;
       return $E._eval$1("List<0>")._as(J.JSArray_markFixedList(list));
@@ -4944,7 +4965,7 @@
           throw H.wrapException(P.RangeError$range(start, 0, i, null, null));
       list = [];
       for (; it.moveNext$0();)
-        list.push(it.__internal$_current);
+        list.push(it._current);
       return H.Primitives_stringFromCharCodes(list);
     },
     RegExp_RegExp: function(source) {
@@ -4956,12 +4977,12 @@
         return string;
       if (separator.length === 0) {
         do
-          string += H.S(iterator.get$current());
+          string += H.S(iterator.get$current(iterator));
         while (iterator.moveNext$0());
       } else {
-        string += H.S(iterator.get$current());
+        string += H.S(iterator.get$current(iterator));
         for (; iterator.moveNext$0();)
-          string = string + separator + H.S(iterator.get$current());
+          string = string + separator + H.S(iterator.get$current(iterator));
       }
       return string;
     },
@@ -5304,6 +5325,18 @@
     },
     Symbol0: function Symbol0() {
     },
+    convertNativeToDart_Dictionary: function(object) {
+      var dict, keys, t1, _i, t2;
+      if (object == null)
+        return null;
+      dict = P.LinkedHashMap_LinkedHashMap$_empty(type$.String, type$.dynamic);
+      keys = Object.getOwnPropertyNames(object);
+      for (t1 = keys.length, _i = 0; _i < keys.length; keys.length === t1 || (0, H.throwConcurrentModificationError)(keys), ++_i) {
+        t2 = H._asStringNullable(keys[_i]);
+        dict.$indexSet(0, t2, object[t2]);
+      }
+      return dict;
+    },
     convertDartToNative_Dictionary: function(dict) {
       var object = {};
       dict.forEach$1(0, new P.convertDartToNative_Dictionary_closure(object));
@@ -5381,6 +5414,8 @@
     FilteredElementList_removeRange_closure: function FilteredElementList_removeRange_closure() {
     },
     KeyRange: function KeyRange() {
+    },
+    VersionChangeEvent: function VersionChangeEvent() {
     },
     _callDartFunction: function(callback, captureThis, $self, $arguments) {
       var arguments0, t1, dartArgs;
@@ -5506,6 +5541,10 @@
     },
     _JSRandom: function _JSRandom() {
     },
+    _RectangleBase: function _RectangleBase() {
+    },
+    Rectangle: function Rectangle() {
+    },
     SvgSvgElement_SvgSvgElement: function() {
       var el = type$.SvgElement._as(C.HtmlDocument_methods.createElementNS$2(document, "http://www.w3.org/2000/svg", "svg"));
       el.setAttribute("version", "1.1");
@@ -5521,13 +5560,25 @@
     },
     ImageElement0: function ImageElement0() {
     },
+    Length: function Length() {
+    },
+    LengthList: function LengthList() {
+    },
     LineElement: function LineElement() {
     },
+    Number: function Number() {
+    },
+    NumberList: function NumberList() {
+    },
     PathElement: function PathElement() {
+    },
+    PointList: function PointList() {
     },
     RectElement: function RectElement() {
     },
     ScriptElement0: function ScriptElement0() {
+    },
+    StringList: function StringList() {
     },
     AttributeClassSet: function AttributeClassSet(t0) {
       this._svg$_element = t0;
@@ -5542,7 +5593,29 @@
     },
     TextPositioningElement: function TextPositioningElement() {
     },
+    Transform: function Transform() {
+    },
+    TransformList: function TransformList() {
+    },
+    _LengthList_Interceptor_ListMixin: function _LengthList_Interceptor_ListMixin() {
+    },
+    _LengthList_Interceptor_ListMixin_ImmutableListMixin: function _LengthList_Interceptor_ListMixin_ImmutableListMixin() {
+    },
+    _NumberList_Interceptor_ListMixin: function _NumberList_Interceptor_ListMixin() {
+    },
+    _NumberList_Interceptor_ListMixin_ImmutableListMixin: function _NumberList_Interceptor_ListMixin_ImmutableListMixin() {
+    },
+    _StringList_Interceptor_ListMixin: function _StringList_Interceptor_ListMixin() {
+    },
+    _StringList_Interceptor_ListMixin_ImmutableListMixin: function _StringList_Interceptor_ListMixin_ImmutableListMixin() {
+    },
+    _TransformList_Interceptor_ListMixin: function _TransformList_Interceptor_ListMixin() {
+    },
+    _TransformList_Interceptor_ListMixin_ImmutableListMixin: function _TransformList_Interceptor_ListMixin_ImmutableListMixin() {
+    },
     Float32List: function Float32List() {
+    },
+    AnalyserNode: function AnalyserNode() {
     },
     AudioBuffer: function AudioBuffer() {
     },
@@ -5560,13 +5633,24 @@
     },
     AudioParam: function AudioParam() {
     },
+    AudioParamMap: function AudioParamMap() {
+    },
+    AudioParamMap_keys_closure: function AudioParamMap_keys_closure(t0) {
+      this.keys = t0;
+    },
     AudioProcessingEvent: function AudioProcessingEvent() {
     },
     AudioScheduledSourceNode: function AudioScheduledSourceNode() {
     },
+    AudioTrack: function AudioTrack() {
+    },
+    AudioTrackList: function AudioTrackList() {
+    },
     BaseAudioContext: function BaseAudioContext() {
     },
     BiquadFilterNode: function BiquadFilterNode() {
+    },
+    ConvolverNode: function ConvolverNode() {
     },
     DelayNode: function DelayNode() {
     },
@@ -5574,11 +5658,23 @@
     },
     GainNode: function GainNode() {
     },
+    MediaStreamAudioSourceNode: function MediaStreamAudioSourceNode() {
+    },
     OfflineAudioContext: function OfflineAudioContext() {
     },
     OscillatorNode: function OscillatorNode() {
     },
+    ScriptProcessorNode: function ScriptProcessorNode() {
+    },
     StereoPannerNode: function StereoPannerNode() {
+    },
+    _AudioParamMap_Interceptor_MapMixin: function _AudioParamMap_Interceptor_MapMixin() {
+    },
+    SqlResultSetRowList: function SqlResultSetRowList() {
+    },
+    _SqlResultSetRowList_Interceptor_ListMixin: function _SqlResultSetRowList_Interceptor_ListMixin() {
+    },
+    _SqlResultSetRowList_Interceptor_ListMixin_ImmutableListMixin: function _SqlResultSetRowList_Interceptor_ListMixin_ImmutableListMixin() {
     }
   },
   W = {
@@ -5616,9 +5712,9 @@
     },
     HttpRequest_getString: function(url) {
       var _null = null;
-      return W.HttpRequest_request(url, _null, _null, _null, _null).then$1$1(new W.HttpRequest_getString_closure(), type$.String);
+      return W.HttpRequest_request(url, _null, _null, _null, _null, _null).then$1$1(new W.HttpRequest_getString_closure(), type$.String);
     },
-    HttpRequest_request: function(url, method, onProgress, sendData, withCredentials) {
+    HttpRequest_request: function(url, method, onProgress, responseType, sendData, withCredentials) {
       var t2, t3, t4,
         t1 = new P._Future($.Zone__current, type$._Future_HttpRequest),
         completer = new P._AsyncCompleter(t1, type$._AsyncCompleter_HttpRequest),
@@ -5626,6 +5722,8 @@
       C.HttpRequest_methods.open$3$async(xhr, method == null ? "GET" : method, url, true);
       if (withCredentials != null)
         xhr.withCredentials = withCredentials;
+      if (responseType != null)
+        xhr.responseType = responseType;
       t2 = type$.void_Function_ProgressEvent;
       t3 = t2._as(new W.HttpRequest_request_closure(xhr, completer));
       type$.void_Function._as(null);
@@ -5750,13 +5848,19 @@
     },
     HtmlElement: function HtmlElement() {
     },
+    AccessibleNodeList: function AccessibleNodeList() {
+    },
     AnchorElement: function AnchorElement() {
+    },
+    Animation: function Animation() {
     },
     AreaElement: function AreaElement() {
     },
     AudioElement: function AudioElement() {
     },
     BackgroundFetchEvent: function BackgroundFetchEvent() {
+    },
+    BackgroundFetchRegistration: function BackgroundFetchRegistration() {
     },
     BaseElement: function BaseElement() {
     },
@@ -5770,13 +5874,33 @@
     },
     ButtonElement: function ButtonElement() {
     },
+    CacheStorage: function CacheStorage() {
+    },
     CharacterData: function CharacterData() {
     },
+    Client: function Client() {
+    },
     CompositionEvent: function CompositionEvent() {
+    },
+    Credential: function Credential() {
+    },
+    CssPerspective: function CssPerspective() {
+    },
+    CssRule: function CssRule() {
     },
     CssStyleDeclaration: function CssStyleDeclaration() {
     },
     CssStyleDeclarationBase: function CssStyleDeclarationBase() {
+    },
+    CssStyleValue: function CssStyleValue() {
+    },
+    CssTransformComponent: function CssTransformComponent() {
+    },
+    CssTransformValue: function CssTransformValue() {
+    },
+    CssUnparsedValue: function CssUnparsedValue() {
+    },
+    DataTransferItemList: function DataTransferItemList() {
     },
     DivElement: function DivElement() {
     },
@@ -5786,7 +5910,11 @@
     },
     DomException: function DomException() {
     },
+    DomRectList: function DomRectList() {
+    },
     DomRectReadOnly: function DomRectReadOnly() {
+    },
+    DomStringList: function DomStringList() {
     },
     DomTokenList: function DomTokenList() {
     },
@@ -5802,6 +5930,14 @@
     },
     Element_Element$html_closure: function Element_Element$html_closure() {
     },
+    Entry: function Entry() {
+    },
+    Entry_remove_closure: function Entry_remove_closure(t0) {
+      this.completer = t0;
+    },
+    Entry_remove_closure0: function Entry_remove_closure0(t0) {
+      this.completer = t0;
+    },
     Event: function Event() {
     },
     EventTarget: function EventTarget() {
@@ -5812,7 +5948,17 @@
     },
     File: function File() {
     },
+    FileList: function FileList() {
+    },
+    FileReader: function FileReader() {
+    },
+    FileWriter: function FileWriter() {
+    },
     FormElement: function FormElement() {
+    },
+    Gamepad: function Gamepad() {
+    },
+    History: function History() {
     },
     HtmlCollection: function HtmlCollection() {
     },
@@ -5840,13 +5986,49 @@
     },
     MediaElement: function MediaElement() {
     },
+    MediaKeySession: function MediaKeySession() {
+    },
+    MediaList: function MediaList() {
+    },
+    MediaStream: function MediaStream() {
+    },
+    MediaStreamTrack: function MediaStreamTrack() {
+    },
     MessageEvent: function MessageEvent() {
     },
     MessagePort: function MessagePort() {
     },
+    MidiInputMap: function MidiInputMap() {
+    },
+    MidiInputMap_keys_closure: function MidiInputMap_keys_closure(t0) {
+      this.keys = t0;
+    },
     MidiMessageEvent: function MidiMessageEvent() {
     },
+    MidiOutputMap: function MidiOutputMap() {
+    },
+    MidiOutputMap_keys_closure: function MidiOutputMap_keys_closure(t0) {
+      this.keys = t0;
+    },
+    MidiPort: function MidiPort() {
+    },
+    MimeType: function MimeType() {
+    },
+    MimeTypeArray: function MimeTypeArray() {
+    },
     MouseEvent: function MouseEvent() {
+    },
+    Navigator: function Navigator() {
+    },
+    Navigator_getUserMedia_closure: function Navigator_getUserMedia_closure(t0) {
+      this.completer = t0;
+    },
+    Navigator_getUserMedia_closure0: function Navigator_getUserMedia_closure0(t0) {
+      this.completer = t0;
+    },
+    NavigatorConcurrentHardware: function NavigatorConcurrentHardware() {
+    },
+    NavigatorUserMediaError: function NavigatorUserMediaError() {
     },
     _ChildNodeListLazy: function _ChildNodeListLazy(t0) {
       this._this = t0;
@@ -5855,22 +6037,55 @@
     },
     NodeList: function NodeList() {
     },
+    PaymentInstruments: function PaymentInstruments() {
+    },
+    PaymentRequest: function PaymentRequest() {
+    },
+    Plugin: function Plugin() {
+    },
+    PluginArray: function PluginArray() {
+    },
     PreElement: function PreElement() {
+    },
+    PresentationConnection: function PresentationConnection() {
     },
     ProgressEvent: function ProgressEvent() {
     },
     PushEvent: function PushEvent() {
     },
+    RelatedApplication: function RelatedApplication() {
+    },
+    RtcDataChannel: function RtcDataChannel() {
+    },
+    RtcLegacyStatsReport: function RtcLegacyStatsReport() {
+    },
+    RtcStatsReport: function RtcStatsReport() {
+    },
+    RtcStatsReport_keys_closure: function RtcStatsReport_keys_closure(t0) {
+      this.keys = t0;
+    },
     SelectElement: function SelectElement() {
     },
     ShadowRoot: function ShadowRoot() {
     },
+    SourceBuffer: function SourceBuffer() {
+    },
+    SourceBufferList: function SourceBufferList() {
+    },
     SpanElement: function SpanElement() {
+    },
+    SpeechGrammar: function SpeechGrammar() {
+    },
+    SpeechGrammarList: function SpeechGrammarList() {
+    },
+    SpeechRecognitionResult: function SpeechRecognitionResult() {
     },
     Storage: function Storage() {
     },
     Storage_keys_closure: function Storage_keys_closure(t0) {
       this.keys = t0;
+    },
+    StyleSheet: function StyleSheet() {
     },
     TableElement: function TableElement() {
     },
@@ -5884,9 +6099,33 @@
     },
     TextEvent: function TextEvent() {
     },
+    TextTrack: function TextTrack() {
+    },
+    TextTrackCue: function TextTrackCue() {
+    },
+    TextTrackCueList: function TextTrackCueList() {
+    },
+    TextTrackList: function TextTrackList() {
+    },
+    TimeRanges: function TimeRanges() {
+    },
+    Touch: function Touch() {
+    },
+    TouchList: function TouchList() {
+    },
+    TrackDefaultList: function TrackDefaultList() {
+    },
     UIEvent: function UIEvent() {
     },
     UListElement: function UListElement() {
+    },
+    Url: function Url() {
+    },
+    VideoTrack: function VideoTrack() {
+    },
+    VideoTrackList: function VideoTrackList() {
+    },
+    VttRegion: function VttRegion() {
     },
     WebSocket: function WebSocket() {
     },
@@ -5909,9 +6148,17 @@
     },
     _Attr: function _Attr() {
     },
+    _CssRuleList: function _CssRuleList() {
+    },
     _DomRect: function _DomRect() {
     },
+    _GamepadList: function _GamepadList() {
+    },
     _NamedNodeMap: function _NamedNodeMap() {
+    },
+    _SpeechRecognitionResultList: function _SpeechRecognitionResultList() {
+    },
+    _StyleSheetList: function _StyleSheetList() {
     },
     _AttributeMap: function _AttributeMap() {
     },
@@ -5959,14 +6206,14 @@
     },
     _EventStream: function _EventStream(t0, t1, t2, t3) {
       var _ = this;
-      _._html$_target = t0;
+      _._target = t0;
       _._eventType = t1;
       _._useCapture = t2;
       _.$ti = t3;
     },
     _ElementEventStreamImpl: function _ElementEventStreamImpl(t0, t1, t2, t3) {
       var _ = this;
-      _._html$_target = t0;
+      _._target = t0;
       _._eventType = t1;
       _._useCapture = t2;
       _.$ti = t3;
@@ -5981,7 +6228,7 @@
     _EventStreamSubscription: function _EventStreamSubscription(t0, t1, t2, t3, t4) {
       var _ = this;
       _._pauseCount = 0;
-      _._html$_target = t0;
+      _._target = t0;
       _._eventType = t1;
       _._onData = t2;
       _._useCapture = t3;
@@ -6037,7 +6284,7 @@
       var _ = this;
       _._array = t0;
       _._html$_length = t1;
-      _._position = -1;
+      _._html$_position = -1;
       _._html$_current = null;
       _.$ti = t2;
     },
@@ -6060,19 +6307,81 @@
     },
     _CssStyleDeclaration_Interceptor_CssStyleDeclarationBase: function _CssStyleDeclaration_Interceptor_CssStyleDeclarationBase() {
     },
+    _DomRectList_Interceptor_ListMixin: function _DomRectList_Interceptor_ListMixin() {
+    },
+    _DomRectList_Interceptor_ListMixin_ImmutableListMixin: function _DomRectList_Interceptor_ListMixin_ImmutableListMixin() {
+    },
+    _DomStringList_Interceptor_ListMixin: function _DomStringList_Interceptor_ListMixin() {
+    },
+    _DomStringList_Interceptor_ListMixin_ImmutableListMixin: function _DomStringList_Interceptor_ListMixin_ImmutableListMixin() {
+    },
+    _FileList_Interceptor_ListMixin: function _FileList_Interceptor_ListMixin() {
+    },
+    _FileList_Interceptor_ListMixin_ImmutableListMixin: function _FileList_Interceptor_ListMixin_ImmutableListMixin() {
+    },
     _HtmlCollection_Interceptor_ListMixin: function _HtmlCollection_Interceptor_ListMixin() {
     },
     _HtmlCollection_Interceptor_ListMixin_ImmutableListMixin: function _HtmlCollection_Interceptor_ListMixin_ImmutableListMixin() {
+    },
+    _MidiInputMap_Interceptor_MapMixin: function _MidiInputMap_Interceptor_MapMixin() {
+    },
+    _MidiOutputMap_Interceptor_MapMixin: function _MidiOutputMap_Interceptor_MapMixin() {
+    },
+    _MimeTypeArray_Interceptor_ListMixin: function _MimeTypeArray_Interceptor_ListMixin() {
+    },
+    _MimeTypeArray_Interceptor_ListMixin_ImmutableListMixin: function _MimeTypeArray_Interceptor_ListMixin_ImmutableListMixin() {
     },
     _NodeList_Interceptor_ListMixin: function _NodeList_Interceptor_ListMixin() {
     },
     _NodeList_Interceptor_ListMixin_ImmutableListMixin: function _NodeList_Interceptor_ListMixin_ImmutableListMixin() {
     },
+    _PluginArray_Interceptor_ListMixin: function _PluginArray_Interceptor_ListMixin() {
+    },
+    _PluginArray_Interceptor_ListMixin_ImmutableListMixin: function _PluginArray_Interceptor_ListMixin_ImmutableListMixin() {
+    },
+    _RtcStatsReport_Interceptor_MapMixin: function _RtcStatsReport_Interceptor_MapMixin() {
+    },
+    _SourceBufferList_EventTarget_ListMixin: function _SourceBufferList_EventTarget_ListMixin() {
+    },
+    _SourceBufferList_EventTarget_ListMixin_ImmutableListMixin: function _SourceBufferList_EventTarget_ListMixin_ImmutableListMixin() {
+    },
+    _SpeechGrammarList_Interceptor_ListMixin: function _SpeechGrammarList_Interceptor_ListMixin() {
+    },
+    _SpeechGrammarList_Interceptor_ListMixin_ImmutableListMixin: function _SpeechGrammarList_Interceptor_ListMixin_ImmutableListMixin() {
+    },
     _Storage_Interceptor_MapMixin: function _Storage_Interceptor_MapMixin() {
+    },
+    _TextTrackCueList_Interceptor_ListMixin: function _TextTrackCueList_Interceptor_ListMixin() {
+    },
+    _TextTrackCueList_Interceptor_ListMixin_ImmutableListMixin: function _TextTrackCueList_Interceptor_ListMixin_ImmutableListMixin() {
+    },
+    _TextTrackList_EventTarget_ListMixin: function _TextTrackList_EventTarget_ListMixin() {
+    },
+    _TextTrackList_EventTarget_ListMixin_ImmutableListMixin: function _TextTrackList_EventTarget_ListMixin_ImmutableListMixin() {
+    },
+    _TouchList_Interceptor_ListMixin: function _TouchList_Interceptor_ListMixin() {
+    },
+    _TouchList_Interceptor_ListMixin_ImmutableListMixin: function _TouchList_Interceptor_ListMixin_ImmutableListMixin() {
+    },
+    __CssRuleList_Interceptor_ListMixin: function __CssRuleList_Interceptor_ListMixin() {
+    },
+    __CssRuleList_Interceptor_ListMixin_ImmutableListMixin: function __CssRuleList_Interceptor_ListMixin_ImmutableListMixin() {
+    },
+    __GamepadList_Interceptor_ListMixin: function __GamepadList_Interceptor_ListMixin() {
+    },
+    __GamepadList_Interceptor_ListMixin_ImmutableListMixin: function __GamepadList_Interceptor_ListMixin_ImmutableListMixin() {
     },
     __NamedNodeMap_Interceptor_ListMixin: function __NamedNodeMap_Interceptor_ListMixin() {
     },
     __NamedNodeMap_Interceptor_ListMixin_ImmutableListMixin: function __NamedNodeMap_Interceptor_ListMixin_ImmutableListMixin() {
+    },
+    __SpeechRecognitionResultList_Interceptor_ListMixin: function __SpeechRecognitionResultList_Interceptor_ListMixin() {
+    },
+    __SpeechRecognitionResultList_Interceptor_ListMixin_ImmutableListMixin: function __SpeechRecognitionResultList_Interceptor_ListMixin_ImmutableListMixin() {
+    },
+    __StyleSheetList_Interceptor_ListMixin: function __StyleSheetList_Interceptor_ListMixin() {
+    },
+    __StyleSheetList_Interceptor_ListMixin_ImmutableListMixin: function __StyleSheetList_Interceptor_ListMixin_ImmutableListMixin() {
     }
   },
   D = {GrowableAudioBuffer: function GrowableAudioBuffer(t0, t1) {
@@ -6093,7 +6402,7 @@
         t2 = t1.$ti;
         t3 = t2._eval$1("~(1)")._as(new D.DropdownMenu_armMenu_closure(target));
         type$.void_Function._as(null);
-        W._EventStreamSubscription$(t1._html$_target, t1._eventType, t3, false, t2._precomputed1);
+        W._EventStreamSubscription$(t1._target, t1._eventType, t3, false, t2._precomputed1);
         t2 = type$.Element;
         H.checkTypeBound(t2, t2, "T", "querySelectorAll");
         new W._ElementListEventStreamImpl(type$.ElementList_Element._as(new W._FrozenElementList(target.querySelectorAll(".menu-item"), type$._FrozenElementList_Element)), false, "mousedown", type$._ElementListEventStreamImpl_MouseEvent).listen$1(new D.DropdownMenu_armMenu_closure0(onSelected));
@@ -6274,7 +6583,7 @@
     CodeMirror: function CodeMirror(t0, t1) {
       this.id = t0;
       this.listener = t1;
-      this._dirty = false;
+      this._codemirror$_dirty = false;
     },
     MixSlider: function MixSlider(t0, t1, t2) {
       var _ = this;
@@ -6285,8 +6594,8 @@
       _.maxValue = 1;
       _.onAdjusted = _.onChanged = null;
       _.ticks = t2;
-      _._dragging = false;
-      _._touchY = _._slider$_value = 0;
+      _._slider$_dragging = false;
+      _._slider$_touchY = _._slider$_value = 0;
       _._knobImage = _._knobGroup = _._knob = _._slider$_line = null;
     },
     MixSlider_buildUI_closure: function MixSlider_buildUI_closure(t0) {
@@ -6333,7 +6642,7 @@
       _.drums = t0;
       _.selector = t1;
       _.name = t2;
-      _._stream = t3;
+      _._instruments$_stream = t3;
       _.container = _.root = null;
       _.parent = t4;
       _.width = 700;
@@ -6378,7 +6687,7 @@
       var _ = this;
       _.pads = t0;
       _.name = t1;
-      _._stream = t2;
+      _._instruments$_stream = t2;
       _.container = _.root = null;
       _.parent = t3;
       _.width = 700;
@@ -6433,7 +6742,7 @@
       _.mini = null;
       _.allKeys = t1;
       _.name = t2;
-      _._stream = t3;
+      _._instruments$_stream = t3;
       _.container = _.root = null;
       _.parent = t4;
       _.width = 700;
@@ -6510,11 +6819,16 @@
     }, PlayClock_startMetronome__closure: function PlayClock_startMetronome__closure(t0) {
       this._box_0 = t0;
     },
-    Dialog_message: function(message) {
-      var dialog = document.createElement("div");
+    Dialog_message: function(message, title, $confirm) {
+      var t1,
+        dialog = document.createElement("div");
       dialog.className = "dialog";
-      C.DivElement_methods.setInnerHtml$1(dialog, "    <p>" + message + "</p>\n    <div class='dialog-button-row'>\n      <button class=\"cancel-button primary\">OK</button>\n    </div>");
+      C.DivElement_methods.setInnerHtml$1(dialog, '    <button class="close-button"><i class="fas fa-times"></i></button>\n    <h1 class="dialog-title">' + title + "</h1>\n    <p>" + message + '</p>\n    <div class="dialog-button-row">\n      <button class="confirm-button">' + $confirm + "</button>\n    </div>");
       E.Dialog__showModal(dialog);
+      t1 = type$.Element;
+      H.checkTypeBound(t1, t1, "T", "querySelectorAll");
+      new W._ElementListEventStreamImpl(type$.ElementList_Element._as(new W._FrozenElementList(dialog.querySelectorAll(".confirm-button"), type$._FrozenElementList_Element)), false, "click", type$._ElementListEventStreamImpl_MouseEvent).listen$1(new E.Dialog_message_closure());
+      return dialog;
     },
     Dialog_openModal: function(templateSelector, fieldValues) {
       var dialog, t1, t2, t3, el,
@@ -6523,7 +6837,7 @@
         dialog = type$.DivElement._as(type$.DocumentFragment._as(template.content.cloneNode(true)).querySelector(".dialog"));
         if (dialog != null && fieldValues != null)
           for (t1 = fieldValues.get$keys(fieldValues), t1 = t1.get$iterator(t1), t2 = type$.HtmlElement; t1.moveNext$0();) {
-            t3 = t1.get$current();
+            t3 = t1.get$current(t1);
             el = t2._as(dialog.querySelector(t3));
             if (el != null)
               J.setInnerHtml$1$x(el, H.S(fieldValues.$index(0, t3)));
@@ -6574,6 +6888,8 @@
         overlay.appendChild(dialog);
         t1.body.appendChild(overlay);
       }
+    },
+    Dialog_message_closure: function Dialog_message_closure() {
     },
     Dialog_closeModal_closure: function Dialog_closeModal_closure() {
     },
@@ -6909,14 +7225,26 @@
               t5.isEmpty = H._asBoolNullable(t4.callMethod$2("firebaseInit", [C.C_JsonCodec.encode$2$toEncodable(t2, null)]));
               t5.root = t4.callMethod$2("firebaseRoot", []);
               $.datastore = t5;
-              $.socket = W.WebSocket_WebSocket("wss://tunepad.club:8765");
+              $.socket = W.WebSocket_WebSocket("wss://tunepad.club/websocket/");
               t5 = $.datastore;
               $.project = Y.Project$(t5.root, t5);
               $.userlist = B.UserList$($.socket);
               $.library = new O.TrackLibrary($.datastore, P.LinkedHashSet_LinkedHashSet$from(["bass", "drums", "drumkit", "guitar", "piano", "marimba", "sequencer", "definitions"], t1));
               t1 = $.datastore;
+              t5 = type$.JSArray_List_Float32List;
+              t4 = type$.List_num;
+              t2 = new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], t5), P.ListQueue$(t4));
+              t2.reshape$2(1, 44100);
+              t3 = new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], t5), P.ListQueue$(t4));
+              t3.reshape$2(1, 44100);
+              t2 = new Y.Recording(t2, t3, new H.JsLinkedHashMap(type$.JsLinkedHashMap_String_num), -1, new P.DateTime(Date.now(), false), new P.DateTime(Date.now(), false));
+              t2.name = "My Recording";
+              t4 = new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], t5), P.ListQueue$(t4));
+              t4.reshape$2(1, 44100);
+              $.rstudio = new Y.RecordingStudio(t2, t4, t1);
+              t1 = $.datastore;
               if (H.boolConversionCheck(t1.isEmpty)) {
-                t1.save$1($.project);
+                t1.save$1(0, $.project);
                 $.datastore.createPythonCell$0();
                 t1 = $.datastore;
                 t1.isEmpty = false;
@@ -6939,7 +7267,9 @@
               new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#help-button"), t3)), false, "click", t5).listen$1(new F.main_closure5());
               H.checkTypeBound(t1, t1, "T", "querySelectorAll");
               new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#library-button"), t3)), false, "click", t5).listen$1(new F.main_closure6());
-              t5 = type$.void_Function_MouseEvent._as(new F.main_closure7());
+              H.checkTypeBound(t1, t1, "T", "querySelectorAll");
+              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#recorder-button"), t3)), false, "click", t5).listen$1(new F.main_closure7());
+              t5 = type$.void_Function_MouseEvent._as(new F.main_closure8());
               type$.void_Function._as(null);
               W._EventStreamSubscription$(t2, "mousedown", t5, false, type$.MouseEvent);
               $.datastore.connect$0();
@@ -6950,7 +7280,7 @@
       return P._asyncStartSync($async$main, $async$completer);
     },
     _addMixTrack: function(cell, prevKey) {
-      var track, prev, dial, t3, t4, t5, t6, dialContainer, slider, t7, slideContainer,
+      var track, prev, dial, dialContainer, t3, slider, t4, t5, t6, t7, slideContainer,
         _s26_ = "http://www.w3.org/2000/svg",
         _s16_ = "querySelectorAll",
         _s5_ = "click",
@@ -6967,20 +7297,7 @@
             C.DivElement_methods.insertAdjacentElement$2(prev, "afterEnd", track);
           else
             C.DivElement_methods.insertAdjacentElement$2(container, "afterBegin", track);
-          dial = new V.EffectsDial();
-          t3 = type$.SvgElement;
-          t4 = type$.PathElement;
-          t5 = t4._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "path")));
-          t6 = type$.String;
-          (t5 && C.PathElement_methods).set$attributes(t5, P.LinkedHashMap_LinkedHashMap$_literal(["class", "dial-track", "d", dial._describeArc$5(0, 0, 37, 0, 4.71238898038469)], t6, t6));
-          dial._track = t5;
-          t4 = t4._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "path")));
-          (t4 && C.PathElement_methods).set$attributes(t4, P.LinkedHashMap_LinkedHashMap$_literal(["class", "dial-track-fill", "d", dial._describeArc$5(0, 0, 37, 0, dial._dial$_value * 4.71238898038469)], t6, t6));
-          dial._arc = t4;
-          t4 = type$.LineElement;
-          t5 = t4._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "line")));
-          (t5 && C.LineElement_methods).set$attributes(t5, P.LinkedHashMap_LinkedHashMap$_literal(["class", "dial-pointer", "x1", "0", "y1", "0", "x2", H.S(25 * Math.cos(dial._dial$_value * 4.71238898038469)), "y2", H.S(25 * Math.sin(dial._dial$_value * 4.71238898038469))], t6, t6));
-          dial._line = t5;
+          dial = V.EffectsDial$("PAN: 0.0");
           dial.minValue = -1;
           dial.maxValue = 1;
           dial.set$value(0, cell._pan);
@@ -6990,28 +7307,30 @@
           dialContainer = t2._as(track.querySelector(".mixer-dial"));
           if (dialContainer != null)
             dial.buildUI$1(dialContainer);
-          t5 = H.setRuntimeTypeInfo([], type$.JSArray_Map_dynamic_dynamic);
-          slider = new R.MixSlider(100, 300, t5);
-          t7 = P.SvgSvgElement_SvgSvgElement();
-          C.SvgSvgElement_methods.set$attributes(t7, P.LinkedHashMap_LinkedHashMap$_literal(["viewBox", "0 0 100 300", "preserveAspectRatio", "none"], t6, t6));
-          slider.parent = t7;
-          t4 = t4._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "line")));
-          (t4 && C.LineElement_methods).set$attributes(t4, P.LinkedHashMap_LinkedHashMap$_literal(["class", "slider-track", "x1", "50", "y1", "18", "x2", "50", "y2", "282"], t6, t6));
-          slider._slider$_line = t4;
-          t4 = type$.GElement._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g")));
-          slider._knobGroup = t4;
-          t7 = type$.CircleElement._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "circle")));
-          (t7 && C.CircleElement_methods).set$attributes(t7, P.LinkedHashMap_LinkedHashMap$_literal(["class", "slider-knob", "cx", "0", "cy", "0", "r", "18"], t6, t6));
+          t3 = H.setRuntimeTypeInfo([], type$.JSArray_Map_dynamic_dynamic);
+          slider = new R.MixSlider(100, 300, t3);
+          t4 = P.SvgSvgElement_SvgSvgElement();
+          t5 = type$.String;
+          C.SvgSvgElement_methods.set$attributes(t4, P.LinkedHashMap_LinkedHashMap$_literal(["viewBox", "0 0 100 300", "preserveAspectRatio", "none"], t5, t5));
+          slider.parent = t4;
+          t4 = type$.SvgElement;
+          t6 = type$.LineElement._as(t4._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "line")));
+          (t6 && C.LineElement_methods).set$attributes(t6, P.LinkedHashMap_LinkedHashMap$_literal(["class", "slider-track", "x1", "50", "y1", "18", "x2", "50", "y2", "282"], t5, t5));
+          slider._slider$_line = t6;
+          t6 = type$.GElement._as(t4._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g")));
+          slider._knobGroup = t6;
+          t7 = type$.CircleElement._as(t4._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "circle")));
+          (t7 && C.CircleElement_methods).set$attributes(t7, P.LinkedHashMap_LinkedHashMap$_literal(["class", "slider-knob", "cx", "0", "cy", "0", "r", "18"], t5, t5));
           slider._knob = t7;
-          t1 = type$.ImageElement._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "image")));
-          (t1 && C.ImageElement_methods).set$attributes(t1, P.LinkedHashMap_LinkedHashMap$_literal(["x", "-12.6", "y", "-12.6", "width", "25.2", "height", "25.2", "pointer-events", "none", "href", "images/instruments/synth.svg"], t6, t6));
+          t1 = type$.ImageElement._as(t4._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "image")));
+          (t1 && C.ImageElement_methods).set$attributes(t1, P.LinkedHashMap_LinkedHashMap$_literal(["x", "-12.6", "y", "-12.6", "width", "25.2", "height", "25.2", "pointer-events", "none", "href", "images/instruments/synth.svg"], t5, t5));
           slider._knobImage = t1;
-          t4.appendChild(t7);
-          t4.appendChild(t1);
+          t6.appendChild(t7);
+          t6.appendChild(t1);
           slider.set$value(0, Math.pow(10, 20 * Math.log(cell._gain) / 2.302585092994046 / 40) / 1.78);
           C.JSArray_methods.forEach$1(H.setRuntimeTypeInfo([10, 5, 0, -5, -10, -20, -30], type$.JSArray_int), new F._addMixTrack_closure1(slider));
           t1 = type$.dynamic;
-          C.JSArray_methods.add$1(t5, P.LinkedHashMap_LinkedHashMap$_literal(["label", "-INF \u2014", "value", 0], t1, t1));
+          C.JSArray_methods.add$1(t3, P.LinkedHashMap_LinkedHashMap$_literal(["label", "-INF \u2014", "value", 0], t1, t1));
           slider.onAdjusted = new F._addMixTrack_closure2(cell, track);
           slider.onChanged = new F._addMixTrack_closure3(cell);
           slideContainer = t2._as(track.querySelector(".mixer-slider"));
@@ -7097,6 +7416,8 @@
     main_closure6: function main_closure6() {
     },
     main_closure7: function main_closure7() {
+    },
+    main_closure8: function main_closure8() {
     },
     _addMixTrack_closure: function _addMixTrack_closure(t0, t1) {
       this.track = t0;
@@ -7284,7 +7605,7 @@
             case 8:
               // join
               E.Dialog_closeModal();
-              E.Dialog_message("Sign in successful.");
+              E.Dialog_message("Sign in successful.", "", "OK");
               $async$next.push(6);
               // goto finally
               $async$goto = 5;
@@ -7380,6 +7701,16 @@
       var t1 = type$.ClockSubscriber;
       t1 = new Y.Project(datastore, new E.PlayClock(new D.Key(H.setRuntimeTypeInfo([0, 2, 4, 5, 7, 9, 11], type$.JSArray_int), "C major"), P.LinkedHashSet_LinkedHashSet(t1), P.LinkedHashSet_LinkedHashSet(t1), P.LinkedHashSet_LinkedHashSet(type$.Metronome)), H.setRuntimeTypeInfo([], type$.JSArray_PythonCell), id, new P.DateTime(Date.now(), false), new P.DateTime(Date.now(), false));
       t1.Project$2(id, datastore);
+      return t1;
+    },
+    EffectsChain$: function(color, studio) {
+      var t1 = new Y.EffectsChain(new H.JsLinkedHashMap(type$.JsLinkedHashMap_dynamic_dynamic), studio);
+      t1.EffectsChain$2(color, studio);
+      return t1;
+    },
+    GraphicEq$: function(container, onColor) {
+      var t1 = new Y.GraphicEq(container, H.setRuntimeTypeInfo([], type$.JSArray_CircleElement), onColor);
+      t1.GraphicEq$2(container, onColor);
       return t1;
     },
     User$anonymous: function() {
@@ -7613,6 +7944,198 @@
       _.sustain = _.duration = -1;
       _.next = null;
     },
+    EffectsChain: function EffectsChain(t0, t1) {
+      var _ = this;
+      _.masterDial = _.midDial = _.trebleDial = _.bassDial = _.crushDial = _.reverbDial = _.pitchDial = _.master = _.rDry = _.rWet = _.convolve = _.midNode = _.trebleNode = _.bassNode = _.recorder = _.source = null;
+      _.sounds = t0;
+      _._adjusted = false;
+      _.studio = t1;
+      _._absn = null;
+    },
+    EffectsChain_closure: function EffectsChain_closure(t0) {
+      this.$this = t0;
+    },
+    EffectsChain_closure0: function EffectsChain_closure0(t0) {
+      this.$this = t0;
+    },
+    EffectsChain_closure1: function EffectsChain_closure1(t0) {
+      this.$this = t0;
+    },
+    EffectsChain_closure2: function EffectsChain_closure2(t0) {
+      this.$this = t0;
+    },
+    EffectsChain_closure3: function EffectsChain_closure3(t0) {
+      this.$this = t0;
+    },
+    EffectsChain_closure4: function EffectsChain_closure4(t0) {
+      this.$this = t0;
+    },
+    EffectsChain_closure5: function EffectsChain_closure5(t0) {
+      this.$this = t0;
+    },
+    EffectsChain_playAudio_closure: function EffectsChain_playAudio_closure(t0, t1, t2) {
+      this._box_0 = t0;
+      this.$this = t1;
+      this.processed = t2;
+    },
+    EffectsChain_playSlice_closure: function EffectsChain_playSlice_closure(t0) {
+      this.$this = t0;
+    },
+    EffectsChain_loadSoundEffects_closure: function EffectsChain_loadSoundEffects_closure(t0, t1, t2) {
+      this.$this = t0;
+      this.context = t1;
+      this.request = t2;
+    },
+    EffectsChain_loadSoundEffects_closure0: function EffectsChain_loadSoundEffects_closure0() {
+    },
+    GraphicEq: function GraphicEq(t0, t1, t2) {
+      var _ = this;
+      _.container = t0;
+      _.parent = null;
+      _.dots = t1;
+      _.onColor = t2;
+    },
+    AudioRecorder: function AudioRecorder(t0) {
+      var _ = this;
+      _._stream = null;
+      _._recording = false;
+      _.recorder = _.analyzer = _.input = null;
+      _.context = t0;
+      _.fftData = null;
+    },
+    Recording: function Recording(t0, t1, t2, t3, t4, t5) {
+      var _ = this;
+      _.duration = 0;
+      _.original = t0;
+      _.processed = t1;
+      _.settings = t2;
+      _.id = t3;
+      _.name = "";
+      _.created = t4;
+      _.modified = t5;
+    },
+    RecordingStudio: function RecordingStudio(t0, t1, t2) {
+      var _ = this;
+      _.recording = t0;
+      _.buffer = t1;
+      _.dialog = _.context = _.synth = _.recorder = _.wf = _.eq = null;
+      _.datastore = t2;
+      _._looping = false;
+      _._lastTime = _._lastPosition = 0;
+      _._dirty = _._clean = false;
+      _.rightTrim = _.leftTrim = -1;
+      _.saving = false;
+    },
+    RecordingStudio_show_closure: function RecordingStudio_show_closure(t0) {
+      this.$this = t0;
+    },
+    RecordingStudio_loadUserRecordings_closure: function RecordingStudio_loadUserRecordings_closure(t0) {
+      this.$this = t0;
+    },
+    RecordingStudio_uploadAudioFile_closure: function RecordingStudio_uploadAudioFile_closure(t0, t1, t2) {
+      this._box_0 = t0;
+      this.$this = t1;
+      this.reader = t2;
+    },
+    RecordingStudio__registerEvents_closure: function RecordingStudio__registerEvents_closure(t0) {
+      this.$this = t0;
+    },
+    RecordingStudio__registerEvents_closure0: function RecordingStudio__registerEvents_closure0(t0, t1) {
+      this.$this = t0;
+      this.fileInput = t1;
+    },
+    RecordingStudio__registerEvents_closure1: function RecordingStudio__registerEvents_closure1(t0, t1) {
+      this.$this = t0;
+      this.fileInput = t1;
+    },
+    RecordingStudio__registerEvents_closure2: function RecordingStudio__registerEvents_closure2(t0) {
+      this.$this = t0;
+    },
+    RecordingStudio__registerEvents_closure3: function RecordingStudio__registerEvents_closure3(t0) {
+      this.$this = t0;
+    },
+    RecordingStudio__registerEvents_closure4: function RecordingStudio__registerEvents_closure4(t0) {
+      this.$this = t0;
+    },
+    RecordingStudio__registerEvents_closure5: function RecordingStudio__registerEvents_closure5(t0) {
+      this.$this = t0;
+    },
+    RecordingStudio__registerEvents_closure6: function RecordingStudio__registerEvents_closure6(t0) {
+      this.$this = t0;
+    },
+    RecordingStudio__registerEvents_closure7: function RecordingStudio__registerEvents_closure7(t0) {
+      this.$this = t0;
+    },
+    RecordingStudio__registerEvents_closure8: function RecordingStudio__registerEvents_closure8(t0) {
+      this.$this = t0;
+    },
+    RecordingStudio__registerEvents_closure9: function RecordingStudio__registerEvents_closure9(t0) {
+      this.$this = t0;
+    },
+    RecordingStudio__registerEvents_closure10: function RecordingStudio__registerEvents_closure10(t0) {
+      this.$this = t0;
+    },
+    RecordingStudio__registerEvents_closure11: function RecordingStudio__registerEvents_closure11(t0) {
+      this.$this = t0;
+    },
+    RecordingStudio__registerEvents_closure12: function RecordingStudio__registerEvents_closure12(t0) {
+      this.$this = t0;
+    },
+    RecordingStudio__registerRowEvents_closure: function RecordingStudio__registerRowEvents_closure(t0) {
+      this.$this = t0;
+    },
+    RecordingStudio__registerRowEvents_closure0: function RecordingStudio__registerRowEvents_closure0(t0, t1) {
+      this.$this = t0;
+      this.item = t1;
+    },
+    RecordingStudio__registerRowEvents_closure1: function RecordingStudio__registerRowEvents_closure1(t0) {
+      this.item = t0;
+    },
+    RecordingStudio__registerRowEvents_closure2: function RecordingStudio__registerRowEvents_closure2(t0, t1, t2, t3, t4, t5) {
+      var _ = this;
+      _.$this = t0;
+      _.list = t1;
+      _.item = t2;
+      _.id = t3;
+      _.rec = t4;
+      _.count = t5;
+    },
+    RecordingStudio__playPreview_closure: function RecordingStudio__playPreview_closure(t0, t1) {
+      this.$this = t0;
+      this.item = t1;
+    },
+    RecordingStudio__playPreview_closure0: function RecordingStudio__playPreview_closure0(t0, t1) {
+      this.$this = t0;
+      this.item = t1;
+    },
+    RecordingStudio__playPreview_closure1: function RecordingStudio__playPreview_closure1(t0, t1) {
+      this.$this = t0;
+      this.item = t1;
+    },
+    WaveformTrace: function WaveformTrace(t0, t1, t2, t3) {
+      var _ = this;
+      _.w = t0;
+      _.h = t1;
+      _.bw = 5;
+      _.info = _.rclip = _.lclip = _.clip = _.playhead = _.bars = null;
+      _.color = t2;
+      _.recorder = t3;
+      _.disabled = false;
+    },
+    WaveformTrace__buildClipLine_closure: function WaveformTrace__buildClipLine_closure(t0, t1, t2) {
+      this._box_0 = t0;
+      this.$this = t1;
+      this.clip = t2;
+    },
+    WaveformTrace__buildClipLine_closure0: function WaveformTrace__buildClipLine_closure0(t0, t1, t2) {
+      this._box_0 = t0;
+      this.$this = t1;
+      this.clip = t2;
+    },
+    WaveformTrace__buildClipLine_closure1: function WaveformTrace__buildClipLine_closure1(t0, t1) {
+      this._box_0 = t0;
+      this.$this = t1;
+    },
     TimelineListener: function TimelineListener() {
     },
     Timeline: function Timeline(t0, t1, t2, t3) {
@@ -7697,21 +8220,46 @@
     _PythonCell_DataModel_PythonListener_CodeMirrorListener_TimelineListener_ClockSubscriber_Metronome: function _PythonCell_DataModel_PythonListener_CodeMirrorListener_TimelineListener_ClockSubscriber_Metronome() {
     }
   },
-  V = {EffectsDial: function EffectsDial() {
+  V = {
+    EffectsDial$: function($name) {
+      var _s26_ = "http://www.w3.org/2000/svg",
+        t1 = new V.EffectsDial(),
+        t2 = document,
+        t3 = type$.SvgElement,
+        t4 = type$.PathElement,
+        t5 = t4._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, _s26_, "path"))),
+        t6 = type$.String;
+      (t5 && C.PathElement_methods).set$attributes(t5, P.LinkedHashMap_LinkedHashMap$_literal(["class", "dial-track", "d", t1._describeArc$5(0, 0, 37, 0, 4.71238898038469)], t6, t6));
+      t1._track = t5;
+      t4 = t4._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, _s26_, "path")));
+      (t4 && C.PathElement_methods).set$attributes(t4, P.LinkedHashMap_LinkedHashMap$_literal(["class", "dial-track-fill", "d", t1._describeArc$5(0, 0, 37, 0, t1._dial$_value * 4.71238898038469)], t6, t6));
+      t1._arc = t4;
+      t2 = type$.LineElement._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, _s26_, "line")));
+      (t2 && C.LineElement_methods).set$attributes(t2, P.LinkedHashMap_LinkedHashMap$_literal(["class", "dial-pointer", "x1", "0", "y1", "0", "x2", H.S(25 * Math.cos(t1._dial$_value * 4.71238898038469)), "y2", H.S(25 * Math.sin(t1._dial$_value * 4.71238898038469))], t6, t6));
+      t1._line = t2;
+      return t1;
+    },
+    EffectsDial: function EffectsDial() {
       var _ = this;
       _.minValue = 0;
       _.maxValue = 1;
-      _.onAdjusted = _.onChanged = _.step = null;
-      _._dial$_dragging = false;
-      _._dial$_touchY = _._dial$_value = 0;
+      _.onAdjusted = _.onChanged = _.values = _.step = null;
+      _._dragging = false;
+      _._dial$_value = 0;
+      _._disabled = false;
+      _._touchY = 0;
       _.knob = _._track = _._line = _._arc = null;
-    }, EffectsDial_buildUI_closure: function EffectsDial_buildUI_closure(t0) {
+    },
+    EffectsDial_buildUI_closure: function EffectsDial_buildUI_closure(t0) {
       this.$this = t0;
-    }, EffectsDial_buildUI_closure0: function EffectsDial_buildUI_closure0(t0) {
+    },
+    EffectsDial_buildUI_closure0: function EffectsDial_buildUI_closure0(t0) {
       this.$this = t0;
-    }, EffectsDial_buildUI_closure1: function EffectsDial_buildUI_closure1(t0) {
+    },
+    EffectsDial_buildUI_closure1: function EffectsDial_buildUI_closure1(t0) {
       this.$this = t0;
-    }},
+    }
+  },
   O = {TrackLibrary: function TrackLibrary(t0, t1) {
       var _ = this;
       _.datastore = t0;
@@ -7867,7 +8415,7 @@
       if (!!receiver.fixed$length)
         H.throwExpression(P.UnsupportedError$("addAll"));
       for (t1 = J.get$iterator$ax(collection); t1.moveNext$0();)
-        receiver.push(t1.get$current());
+        receiver.push(t1.get$current(t1));
     },
     clear$0: function(receiver) {
       this.set$length(receiver, 0);
@@ -7959,6 +8507,15 @@
       }
       return false;
     },
+    indexOf$1: function(receiver, element) {
+      var i;
+      if (0 >= receiver.length)
+        return -1;
+      for (i = 0; i < receiver.length; ++i)
+        if (J.$eq$(receiver[i], element))
+          return i;
+      return -1;
+    },
     contains$1: function(receiver, other) {
       var i;
       for (i = 0; i < receiver.length; ++i)
@@ -8031,26 +8588,26 @@
   };
   J.JSUnmodifiableArray.prototype = {};
   J.ArrayIterator.prototype = {
-    get$current: function() {
-      return this._current;
+    get$current: function(_) {
+      return this.__interceptors$_current;
     },
     moveNext$0: function() {
       var t2, _this = this,
-        t1 = _this._iterable,
+        t1 = _this.__interceptors$_iterable,
         $length = t1.length;
-      if (_this._length !== $length)
+      if (_this.__interceptors$_length !== $length)
         throw H.wrapException(H.throwConcurrentModificationError(t1));
-      t2 = _this._index;
+      t2 = _this.__interceptors$_index;
       if (t2 >= $length) {
-        _this.set$_current(null);
+        _this.set$__interceptors$_current(null);
         return false;
       }
-      _this.set$_current(t1[t2]);
-      ++_this._index;
+      _this.set$__interceptors$_current(t1[t2]);
+      ++_this.__interceptors$_index;
       return true;
     },
-    set$_current: function(_current) {
-      this._current = this.$ti._precomputed1._as(_current);
+    set$__interceptors$_current: function(_current) {
+      this.__interceptors$_current = this.$ti._precomputed1._as(_current);
     },
     $isIterator: 1
   };
@@ -8395,6 +8952,13 @@
     indexOf$1: function($receiver, pattern) {
       return this.indexOf$2($receiver, pattern, 0);
     },
+    lastIndexOf$1: function(receiver, pattern) {
+      var start = receiver.length,
+        t1 = pattern.length;
+      if (start + t1 > start)
+        start -= t1;
+      return receiver.lastIndexOf(pattern, start);
+    },
     contains$2: function(receiver, other, startIndex) {
       var t1 = receiver.length;
       if (startIndex > t1)
@@ -8482,42 +9046,42 @@
     }
   };
   H.ListIterator.prototype = {
-    get$current: function() {
-      return this.__internal$_current;
+    get$current: function(_) {
+      return this._current;
     },
     moveNext$0: function() {
       var t3, _this = this,
-        t1 = _this.__internal$_iterable,
+        t1 = _this._iterable,
         t2 = J.getInterceptor$asx(t1),
         $length = t2.get$length(t1);
-      if (_this.__internal$_length != $length)
+      if (_this._length != $length)
         throw H.wrapException(P.ConcurrentModificationError$(t1));
-      t3 = _this.__internal$_index;
+      t3 = _this._index;
       if (typeof $length !== "number")
         return H.iae($length);
       if (t3 >= $length) {
-        _this.set$__internal$_current(null);
+        _this.set$_current(null);
         return false;
       }
-      _this.set$__internal$_current(t2.elementAt$1(t1, t3));
-      ++_this.__internal$_index;
+      _this.set$_current(t2.elementAt$1(t1, t3));
+      ++_this._index;
       return true;
     },
-    set$__internal$_current: function(_current) {
-      this.__internal$_current = this.$ti._precomputed1._as(_current);
+    set$_current: function(_current) {
+      this._current = this.$ti._precomputed1._as(_current);
     },
     $isIterator: 1
   };
   H.MappedIterable.prototype = {
     get$iterator: function(_) {
       var t1 = H._instanceType(this);
-      return new H.MappedIterator(J.get$iterator$ax(this.__internal$_iterable), this._f, t1._eval$1("@<1>")._bind$1(t1._rest[1])._eval$1("MappedIterator<1,2>"));
+      return new H.MappedIterator(J.get$iterator$ax(this._iterable), this._f, t1._eval$1("@<1>")._bind$1(t1._rest[1])._eval$1("MappedIterator<1,2>"));
     },
     get$length: function(_) {
-      return J.get$length$asx(this.__internal$_iterable);
+      return J.get$length$asx(this._iterable);
     },
     elementAt$1: function(_, index) {
-      return this._f.call$1(J.elementAt$1$ax(this.__internal$_iterable, index));
+      return this._f.call$1(J.elementAt$1$ax(this._iterable, index));
     }
   };
   H.EfficientLengthMappedIterable.prototype = {$isEfficientLengthIterable: 1};
@@ -8526,17 +9090,17 @@
       var _this = this,
         t1 = _this._iterator;
       if (t1.moveNext$0()) {
-        _this.set$__internal$_current(_this._f.call$1(t1.get$current()));
+        _this.set$_current(_this._f.call$1(t1.get$current(t1)));
         return true;
       }
-      _this.set$__internal$_current(null);
+      _this.set$_current(null);
       return false;
     },
-    get$current: function() {
-      return this.__internal$_current;
+    get$current: function(_) {
+      return this._current;
     },
-    set$__internal$_current: function(_current) {
-      this.__internal$_current = this.$ti._rest[1]._as(_current);
+    set$_current: function(_current) {
+      this._current = this.$ti._rest[1]._as(_current);
     }
   };
   H.MappedListIterable.prototype = {
@@ -8549,29 +9113,30 @@
   };
   H.WhereIterable.prototype = {
     get$iterator: function(_) {
-      return new H.WhereIterator(J.get$iterator$ax(this.__internal$_iterable), this._f, this.$ti._eval$1("WhereIterator<1>"));
+      return new H.WhereIterator(J.get$iterator$ax(this._iterable), this._f, this.$ti._eval$1("WhereIterator<1>"));
     }
   };
   H.WhereIterator.prototype = {
     moveNext$0: function() {
       var t1, t2;
       for (t1 = this._iterator, t2 = this._f; t1.moveNext$0();)
-        if (H.boolConversionCheck(t2.call$1(t1.get$current())))
+        if (H.boolConversionCheck(t2.call$1(t1.get$current(t1))))
           return true;
       return false;
     },
-    get$current: function() {
-      return this._iterator.get$current();
+    get$current: function(_) {
+      var t1 = this._iterator;
+      return t1.get$current(t1);
     }
   };
   H.TakeIterable.prototype = {
     get$iterator: function(_) {
-      return new H.TakeIterator(J.get$iterator$ax(this.__internal$_iterable), this._takeCount, H._instanceType(this)._eval$1("TakeIterator<1>"));
+      return new H.TakeIterator(J.get$iterator$ax(this._iterable), this._takeCount, H._instanceType(this)._eval$1("TakeIterator<1>"));
     }
   };
   H.EfficientLengthTakeIterable.prototype = {
     get$length: function(_) {
-      var iterableLength = J.get$length$asx(this.__internal$_iterable),
+      var iterableLength = J.get$length$asx(this._iterable),
         t1 = this._takeCount;
       if (typeof iterableLength !== "number")
         return iterableLength.$gt();
@@ -8588,21 +9153,23 @@
       this._remaining = -1;
       return false;
     },
-    get$current: function() {
+    get$current: function(_) {
+      var t1;
       if (this._remaining < 0)
         return null;
-      return this._iterator.get$current();
+      t1 = this._iterator;
+      return t1.get$current(t1);
     }
   };
   H.SkipIterable.prototype = {
     get$iterator: function(_) {
-      return new H.SkipIterator(J.get$iterator$ax(this.__internal$_iterable), this._skipCount, H._instanceType(this)._eval$1("SkipIterator<1>"));
+      return new H.SkipIterator(J.get$iterator$ax(this._iterable), this._skipCount, H._instanceType(this)._eval$1("SkipIterator<1>"));
     }
   };
   H.EfficientLengthSkipIterable.prototype = {
     get$length: function(_) {
       var $length,
-        t1 = J.get$length$asx(this.__internal$_iterable);
+        t1 = J.get$length$asx(this._iterable);
       if (typeof t1 !== "number")
         return t1.$sub();
       $length = t1 - this._skipCount;
@@ -8620,8 +9187,9 @@
       this._skipCount = 0;
       return t1.moveNext$0();
     },
-    get$current: function() {
-      return this._iterator.get$current();
+    get$current: function(_) {
+      var t1 = this._iterator;
+      return t1.get$current(t1);
     }
   };
   H.FixedLengthListMixin.prototype = {
@@ -8782,7 +9350,7 @@
       C.JSArray_methods.add$1(this.$arguments, argument);
       ++t1.argumentCount;
     },
-    $signature: 54
+    $signature: 82
   };
   H.TypeErrorDecoder.prototype = {
     matchTypeError$1: function(message) {
@@ -8844,7 +9412,7 @@
           error.$thrownJsError = this.ex;
       return error;
     },
-    $signature: 5
+    $signature: 7
   };
   H._StackTrace.prototype = {
     toString$0: function(_) {
@@ -8890,7 +9458,7 @@
         return true;
       if (!(other instanceof H.BoundClosure))
         return false;
-      return _this._self === other._self && _this._target === other._target && _this._receiver === other._receiver;
+      return _this._self === other._self && _this.__js_helper$_target === other.__js_helper$_target && _this._receiver === other._receiver;
     },
     get$hashCode: function(_) {
       var receiverHashCode,
@@ -8899,7 +9467,7 @@
         receiverHashCode = H.Primitives_objectHashCode(this._self);
       else
         receiverHashCode = typeof t1 !== "object" ? J.get$hashCode$(t1) : H.Primitives_objectHashCode(t1);
-      return (receiverHashCode ^ H.Primitives_objectHashCode(this._target)) >>> 0;
+      return (receiverHashCode ^ H.Primitives_objectHashCode(this.__js_helper$_target)) >>> 0;
     },
     toString$0: function(_) {
       var receiver = this._receiver;
@@ -9201,7 +9769,7 @@
     }
   };
   H.LinkedHashMapKeyIterator.prototype = {
-    get$current: function() {
+    get$current: function(_) {
       return this.__js_helper$_current;
     },
     moveNext$0: function() {
@@ -9230,19 +9798,19 @@
     call$1: function(o) {
       return this.getTag(o);
     },
-    $signature: 5
+    $signature: 7
   };
   H.initHooks_closure0.prototype = {
     call$2: function(o, tag) {
       return this.getUnknownTag(o, tag);
     },
-    $signature: 70
+    $signature: 53
   };
   H.initHooks_closure1.prototype = {
     call$1: function(tag) {
       return this.prototypeForTag(H._asStringNullable(tag));
     },
-    $signature: 67
+    $signature: 50
   };
   H.JSSyntaxRegExp.prototype = {
     toString$0: function(_) {
@@ -9382,7 +9950,7 @@
       t1.storedCallback = null;
       f.call$0();
     },
-    $signature: 4
+    $signature: 6
   };
   P._AsyncRun__initializeScheduleImmediate_closure.prototype = {
     call$1: function(callback) {
@@ -9392,7 +9960,7 @@
       t2 = this.span;
       t1.firstChild ? t1.removeChild(t2) : t1.appendChild(t2);
     },
-    $signature: 79
+    $signature: 76
   };
   P._AsyncRun__scheduleImmediateJsOverride_internalCallback.prototype = {
     call$0: function() {
@@ -9423,9 +9991,10 @@
       else
         throw H.wrapException(P.UnsupportedError$("Periodic timer."));
     },
-    cancel$0: function() {
+    cancel$0: function(_) {
+      var t1;
       if (self.setTimeout != null) {
-        var t1 = this._handle;
+        t1 = this._handle;
         if (t1 == null)
           return;
         if (this._once)
@@ -9494,7 +10063,7 @@
     call$1: function(result) {
       return this.bodyFunction.call$2(0, result);
     },
-    $signature: 15
+    $signature: 12
   };
   P._awaitOnObject_closure0.prototype = {
     call$2: function(error, stackTrace) {
@@ -9502,13 +10071,13 @@
     },
     "call*": "call$2",
     $requiredArgCount: 2,
-    $signature: 51
+    $signature: 83
   };
   P._wrapJsFunctionForAsync_closure.prototype = {
     call$2: function(errorCode, result) {
       this.$protected(H._asIntNullable(errorCode), result);
     },
-    $signature: 62
+    $signature: 58
   };
   P._BroadcastStream.prototype = {};
   P._BroadcastSubscription.prototype = {
@@ -9689,7 +10258,7 @@
         return;
       if (t1 === _this._lastSubscription) {
         _this._state |= 2;
-        t1._add$1(data);
+        t1._add$1(0, data);
         _this._state &= 4294967293;
         if (_this._firstSubscription == null)
           _this._callOnCancel$0();
@@ -9707,7 +10276,7 @@
   };
   P._SyncBroadcastStreamController__sendData_closure.prototype = {
     call$1: function(subscription) {
-      this.$this.$ti._eval$1("_BufferingStreamSubscription<1>")._as(subscription)._add$1(this.data);
+      this.$this.$ti._eval$1("_BufferingStreamSubscription<1>")._as(subscription)._add$1(0, this.data);
     },
     $signature: function() {
       return this.$this.$ti._eval$1("Null(_BufferingStreamSubscription<1>)");
@@ -9764,6 +10333,9 @@
       if (t1._state !== 0)
         throw H.wrapException(P.StateError$("Future already completed"));
       t1._asyncComplete$1(value);
+    },
+    complete$0: function($receiver) {
+      return this.complete$1($receiver, null);
     },
     _completeError$2: function(error, stackTrace) {
       this.future._asyncCompleteError$2(error, stackTrace);
@@ -9984,7 +10556,7 @@
       t1._state = 0;
       t1._complete$1(value);
     },
-    $signature: 4
+    $signature: 6
   };
   P._Future__chainForeignFuture_closure0.prototype = {
     call$2: function(error, stackTrace) {
@@ -9998,7 +10570,7 @@
     $defaultValues: function() {
       return [null];
     },
-    $signature: 81
+    $signature: 51
   };
   P._Future__chainForeignFuture_closure1.prototype = {
     call$0: function() {
@@ -10070,7 +10642,7 @@
     call$1: function(_) {
       return this.originalSource;
     },
-    $signature: 46
+    $signature: 52
   };
   P._Future__propagateToListeners_handleValueCallback.prototype = {
     call$0: function() {
@@ -10254,7 +10826,7 @@
       t1._eval$1("StreamSubscription<1>")._as(subscription);
       result = null;
       if ((_this._state & 8) !== 0)
-        result = t1._eval$1("_StreamControllerAddStreamState<1>")._as(_this._varData).cancel$0();
+        result = C.JSNull_methods.cancel$0(t1._eval$1("_StreamControllerAddStreamState<1>")._as(_this._varData));
       _this._varData = null;
       _this._state = _this._state & 4294967286 | 2;
       t1 = new P._StreamController__recordCancel_complete(_this);
@@ -10301,7 +10873,7 @@
   P._SyncStreamControllerDispatch.prototype = {
     _sendData$1: function(data) {
       this.$ti._precomputed1._as(data);
-      this.get$_subscription()._add$1(data);
+      this.get$_subscription()._add$1(0, data);
     }
   };
   P._AsyncStreamControllerDispatch.prototype = {
@@ -10397,7 +10969,7 @@
           }
       }
     },
-    cancel$0: function() {
+    cancel$0: function(_) {
       var _this = this,
         t1 = (_this._state & 4294967279) >>> 0;
       _this._state = t1;
@@ -10418,7 +10990,7 @@
         _this.set$_pending(null);
       _this._cancelFuture = _this._onCancel$0();
     },
-    _add$1: function(data) {
+    _add$1: function(_, data) {
       var t2, _this = this,
         t1 = H._instanceType(_this);
       t1._precomputed1._as(data);
@@ -10569,10 +11141,10 @@
     }
   };
   P._DelayedEvent.prototype = {
-    set$next: function(next) {
+    set$next: function(_, next) {
       this.next = type$._DelayedEvent_dynamic._as(next);
     },
-    get$next: function() {
+    get$next: function(receiver) {
       return this.next;
     }
   };
@@ -10585,10 +11157,10 @@
     perform$1: function(dispatch) {
       dispatch._sendDone$0();
     },
-    get$next: function() {
+    get$next: function(_) {
       return null;
     },
-    set$next: function(_) {
+    set$next: function(_, _0) {
       throw H.wrapException(P.StateError$("No events after a done."));
     },
     $is_DelayedEvent: 1
@@ -10618,7 +11190,7 @@
         return;
       t2 = t1.$ti._eval$1("_EventDispatch<1>")._as(this.dispatch);
       $event = t1.firstPendingEvent;
-      t3 = $event.get$next();
+      t3 = $event.get$next($event);
       t1.firstPendingEvent = t3;
       if (t3 == null)
         t1.lastPendingEvent = null;
@@ -10633,7 +11205,7 @@
       if (t1 == null)
         _this.firstPendingEvent = _this.lastPendingEvent = $event;
       else {
-        t1.set$next($event);
+        t1.set$next(0, $event);
         _this.lastPendingEvent = $event;
       }
     }
@@ -10657,7 +11229,7 @@
           this._schedule$0();
       }
     },
-    cancel$0: function() {
+    cancel$0: function(_) {
       return $.$get$Future__nullFuture();
     },
     _sendDone$0: function() {
@@ -10671,7 +11243,7 @@
     $isStreamSubscription: 1
   };
   P._StreamIterator.prototype = {
-    get$current: function() {
+    get$current: function(_) {
       var _this = this;
       if (_this._subscription != null && _this._isPaused)
         return _this.$ti._precomputed1._as(_this._stateData);
@@ -10701,7 +11273,7 @@
       }
       return $.$get$Future__falseFuture();
     },
-    cancel$0: function() {
+    cancel$0: function(_) {
       var _this = this,
         subscription = _this.$ti._eval$1("StreamSubscription<1>")._as(_this._subscription),
         stateData = _this._stateData;
@@ -10710,7 +11282,7 @@
         _this._subscription = null;
         if (!_this._isPaused)
           type$._Future_bool._as(stateData)._asyncComplete$1(false);
-        return subscription.cancel$0();
+        return subscription.cancel$0(0);
       }
       return $.$get$Future__nullFuture();
     },
@@ -10914,9 +11486,9 @@
         nums = _this._collection$_nums;
         return _this._collection$_addHashTableEntry$2(nums == null ? _this._collection$_nums = P._LinkedHashSet__newHashTable() : nums, element);
       } else
-        return _this._collection$_add$1(element);
+        return _this._collection$_add$1(0, element);
     },
-    _collection$_add$1: function(element) {
+    _collection$_add$1: function(_, element) {
       var rest, hash, bucket, _this = this;
       H._instanceType(_this)._precomputed1._as(element);
       rest = _this._collection$_rest;
@@ -10940,9 +11512,9 @@
       else if (typeof object == "number" && (object & 1073741823) === object)
         return _this._collection$_removeHashTableEntry$2(_this._collection$_nums, object);
       else
-        return _this._remove$1(object);
+        return _this._remove$1(0, object);
     },
-    _remove$1: function(object) {
+    _remove$1: function(_, object) {
       var hash, bucket, index, cell, _this = this,
         rest = _this._collection$_rest;
       if (rest == null)
@@ -11048,7 +11620,7 @@
   };
   P._LinkedHashSetCell.prototype = {};
   P._LinkedHashSetIterator.prototype = {
-    get$current: function() {
+    get$current: function(_) {
       return this._collection$_current;
     },
     moveNext$0: function() {
@@ -11077,7 +11649,7 @@
     call$2: function(k, v) {
       this.result.$indexSet(0, this.K._as(k), this.V._as(v));
     },
-    $signature: 7
+    $signature: 4
   };
   P.ListBase.prototype = {$isEfficientLengthIterable: 1, $isIterable: 1, $isList: 1};
   P.ListMixin.prototype = {
@@ -11169,14 +11741,14 @@
       t1._contents = t2 + ": ";
       t1._contents += H.S(v);
     },
-    $signature: 7
+    $signature: 4
   };
   P.MapMixin.prototype = {
     forEach$1: function(receiver, action) {
       var t1, key;
       H.instanceType(receiver)._eval$1("~(MapMixin.K,MapMixin.V)")._as(action);
       for (t1 = J.get$iterator$ax(this.get$keys(receiver)); t1.moveNext$0();) {
-        key = t1.get$current();
+        key = t1.get$current(t1);
         action.call$2(key, this.$index(receiver, key));
       }
     },
@@ -11269,7 +11841,7 @@
     toString$0: function(_) {
       return P.IterableBase_iterableToFullString(this, "{", "}");
     },
-    _collection$_add$1: function(element) {
+    _collection$_add$1: function(_, element) {
       var t2, t3, newTable, split, _this = this,
         t1 = _this.$ti;
       t1._precomputed1._as(element);
@@ -11299,7 +11871,7 @@
     $isQueue: 1
   };
   P._ListQueueIterator.prototype = {
-    get$current: function() {
+    get$current: function(_) {
       return this._collection$_current;
     },
     moveNext$0: function() {
@@ -11307,7 +11879,7 @@
         t1 = _this._queue;
       if (_this._modificationCount !== t1._modificationCount)
         H.throwExpression(P.ConcurrentModificationError$(t1));
-      t2 = _this._collection$_position;
+      t2 = _this._position;
       if (t2 === _this._end) {
         _this.set$_collection$_current(null);
         return false;
@@ -11316,7 +11888,7 @@
       if (t2 >= t3.length)
         return H.ioore(t3, t2);
       _this.set$_collection$_current(t3[t2]);
-      _this._collection$_position = (_this._collection$_position + 1 & t1._table.length - 1) >>> 0;
+      _this._position = (_this._position + 1 & t1._table.length - 1) >>> 0;
       return true;
     },
     set$_collection$_current: function(_current) {
@@ -11346,7 +11918,7 @@
     addAll$1: function(_, elements) {
       var t1;
       for (t1 = J.get$iterator$ax(H._instanceType(this)._eval$1("Iterable<1>")._as(elements)); t1.moveNext$0();)
-        this.add$1(0, t1.get$current());
+        this.add$1(0, t1.get$current(t1));
     },
     toList$1$growable: function(_, growable) {
       var i, i0, _this = this,
@@ -11810,7 +12382,7 @@
       C.JSArray_methods.$indexSet(t1, t2.i++, key);
       C.JSArray_methods.$indexSet(t1, t2.i++, value);
     },
-    $signature: 7
+    $signature: 4
   };
   P._JsonStringStringifier.prototype = {
     get$_partialResult: function() {
@@ -11822,7 +12394,7 @@
     call$2: function(key, value) {
       this.result.$indexSet(0, type$.Symbol._as(key).__internal$_name, value);
     },
-    $signature: 28
+    $signature: 29
   };
   P.NoSuchMethodError_toString_closure.prototype = {
     call$2: function(key, value) {
@@ -11836,7 +12408,7 @@
       t1._contents += P.Error_safeToString(value);
       t2.comma = ", ";
     },
-    $signature: 28
+    $signature: 29
   };
   P.bool.prototype = {};
   P.DateTime.prototype = {
@@ -11881,7 +12453,7 @@
         return 0;
       return P.int_parse(matched);
     },
-    $signature: 31
+    $signature: 38
   };
   P.DateTime_parse_parseMilliAndMicroseconds.prototype = {
     call$1: function(matched) {
@@ -11895,7 +12467,7 @@
       }
       return result;
     },
-    $signature: 31
+    $signature: 38
   };
   P.double.prototype = {};
   P.Duration.prototype = {
@@ -11948,7 +12520,7 @@
         return "0000" + n;
       return "00000" + n;
     },
-    $signature: 33
+    $signature: 34
   };
   P.Duration_toString_twoDigits.prototype = {
     call$1: function(n) {
@@ -11956,7 +12528,7 @@
         return "" + n;
       return "0" + n;
     },
-    $signature: 33
+    $signature: 34
   };
   P.Error.prototype = {
     get$stackTrace: function() {
@@ -12193,7 +12765,7 @@
       var t1;
       H._instanceType(this)._eval$1("~(Iterable.E)")._as(f);
       for (t1 = this.get$iterator(this); t1.moveNext$0();)
-        f.call$1(t1.get$current());
+        f.call$1(t1.get$current(t1));
     },
     get$length: function(_) {
       var count,
@@ -12207,7 +12779,7 @@
         it = this.get$iterator(this);
       if (!it.moveNext$0())
         throw H.wrapException(H.IterableElementError_noElement());
-      result = it.get$current();
+      result = it.get$current(it);
       if (it.moveNext$0())
         throw H.wrapException(H.IterableElementError_tooMany());
       return result;
@@ -12217,7 +12789,7 @@
       P.ArgumentError_checkNotNull(index, _s5_, type$.int);
       P.RangeError_checkNotNegative(index, _s5_);
       for (t1 = this.get$iterator(this), elementIndex = 0; t1.moveNext$0();) {
-        element = t1.get$current();
+        element = t1.get$current(t1);
         if (index === elementIndex)
           return element;
         ++elementIndex;
@@ -12279,11 +12851,21 @@
   };
   P.Symbol0.prototype = {};
   W.HtmlElement.prototype = {$isHtmlElement: 1};
+  W.AccessibleNodeList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    }
+  };
   W.AnchorElement.prototype = {
     toString$0: function(receiver) {
       return String(receiver);
     },
     $isAnchorElement: 1
+  };
+  W.Animation.prototype = {
+    get$id: function(receiver) {
+      return receiver.id;
+    }
   };
   W.AreaElement.prototype = {
     toString$0: function(receiver) {
@@ -12292,6 +12874,11 @@
   };
   W.AudioElement.prototype = {$isAudioElement: 1};
   W.BackgroundFetchEvent.prototype = {
+    get$id: function(receiver) {
+      return receiver.id;
+    }
+  };
+  W.BackgroundFetchRegistration.prototype = {
     get$id: function(receiver) {
       return receiver.id;
     }
@@ -12306,9 +12893,19 @@
   };
   W.BodyElement.prototype = {$isBodyElement: 1};
   W.ButtonElement.prototype = {$isButtonElement: 1};
+  W.CacheStorage.prototype = {
+    keys$0: function(receiver) {
+      return P.promiseToFuture(receiver.keys(), type$.dynamic);
+    }
+  };
   W.CharacterData.prototype = {
     get$length: function(receiver) {
       return receiver.length;
+    }
+  };
+  W.Client.prototype = {
+    get$id: function(receiver) {
+      return receiver.id;
     }
   };
   W.CompositionEvent.prototype = {
@@ -12316,6 +12913,17 @@
       return receiver.data;
     }
   };
+  W.Credential.prototype = {
+    get$id: function(receiver) {
+      return receiver.id;
+    }
+  };
+  W.CssPerspective.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    }
+  };
+  W.CssRule.prototype = {$isCssRule: 1};
   W.CssStyleDeclaration.prototype = {
     _browserPropertyName$1: function(receiver, propertyName) {
       var t1 = $.$get$CssStyleDeclaration__propertyCache(),
@@ -12345,6 +12953,26 @@
     }
   };
   W.CssStyleDeclarationBase.prototype = {};
+  W.CssStyleValue.prototype = {};
+  W.CssTransformComponent.prototype = {};
+  W.CssTransformValue.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    }
+  };
+  W.CssUnparsedValue.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    }
+  };
+  W.DataTransferItemList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $index: function(receiver, index) {
+      return receiver[H._asIntNullable(index)];
+    }
+  };
   W.DivElement.prototype = {$isDivElement: 1};
   W.Document.prototype = {
     createElementNS$2: function(receiver, namespaceURI, qualifiedName) {
@@ -12370,19 +12998,91 @@
     },
     $isDomException: 1
   };
+  W.DomRectList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $index: function(receiver, index) {
+      H._asIntNullable(index);
+      if (index >>> 0 !== index || index >= receiver.length)
+        throw H.wrapException(P.IndexError$(index, receiver, null, null, null));
+      return receiver[index];
+    },
+    $indexSet: function(receiver, index, value) {
+      H._asIntNullable(index);
+      type$.Rectangle_num._as(value);
+      throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
+    },
+    set$length: function(receiver, value) {
+      throw H.wrapException(P.UnsupportedError$("Cannot resize immutable List."));
+    },
+    elementAt$1: function(receiver, index) {
+      return this.$index(receiver, index);
+    },
+    $isJSIndexable: 1,
+    $isEfficientLengthIterable: 1,
+    $isJavaScriptIndexingBehavior: 1,
+    $isIterable: 1,
+    $isList: 1
+  };
   W.DomRectReadOnly.prototype = {
     toString$0: function(receiver) {
-      return "Rectangle (" + H.S(receiver.left) + ", " + H.S(receiver.top) + ") " + H.S(receiver.width) + " x " + H.S(receiver.height);
+      return "Rectangle (" + H.S(receiver.left) + ", " + H.S(receiver.top) + ") " + H.S(this.get$width(receiver)) + " x " + H.S(this.get$height(receiver));
     },
     $eq: function(receiver, other) {
+      var t1;
       if (other == null)
         return false;
-      return type$.Rectangle_num._is(other) && receiver.left == other.left && receiver.top == other.top && receiver.width == other.width && receiver.height == other.height;
+      if (type$.Rectangle_num._is(other))
+        if (receiver.left == other.left)
+          if (receiver.top == other.top) {
+            t1 = J.getInterceptor$x(other);
+            t1 = this.get$width(receiver) == t1.get$width(other) && this.get$height(receiver) == t1.get$height(other);
+          } else
+            t1 = false;
+        else
+          t1 = false;
+      else
+        t1 = false;
+      return t1;
     },
     get$hashCode: function(receiver) {
-      return W._JenkinsSmiHash_hash4(J.get$hashCode$(receiver.left), J.get$hashCode$(receiver.top), J.get$hashCode$(receiver.width), J.get$hashCode$(receiver.height));
+      return W._JenkinsSmiHash_hash4(J.get$hashCode$(receiver.left), J.get$hashCode$(receiver.top), J.get$hashCode$(this.get$width(receiver)), J.get$hashCode$(this.get$height(receiver)));
+    },
+    get$height: function(receiver) {
+      return receiver.height;
+    },
+    get$width: function(receiver) {
+      return receiver.width;
     },
     $isRectangle: 1
+  };
+  W.DomStringList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $index: function(receiver, index) {
+      H._asIntNullable(index);
+      if (index >>> 0 !== index || index >= receiver.length)
+        throw H.wrapException(P.IndexError$(index, receiver, null, null, null));
+      return receiver[index];
+    },
+    $indexSet: function(receiver, index, value) {
+      H._asIntNullable(index);
+      H._asStringNullable(value);
+      throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
+    },
+    set$length: function(receiver, value) {
+      throw H.wrapException(P.UnsupportedError$("Cannot resize immutable List."));
+    },
+    elementAt$1: function(receiver, index) {
+      return this.$index(receiver, index);
+    },
+    $isJSIndexable: 1,
+    $isEfficientLengthIterable: 1,
+    $isJavaScriptIndexingBehavior: 1,
+    $isIterable: 1,
+    $isList: 1
   };
   W.DomTokenList.prototype = {
     get$length: function(receiver) {
@@ -12419,7 +13119,7 @@
       var t1, t2;
       type$.Iterable_Element._as(iterable);
       for (t1 = iterable.get$iterator(iterable), t2 = this._html$_element; t1.moveNext$0();)
-        t2.appendChild(t1._current);
+        t2.appendChild(t1.__interceptors$_current);
     }
   };
   W._FrozenElementList.prototype = {
@@ -12448,7 +13148,7 @@
       type$.Map_String_String._as(value);
       new W._ElementAttributeMap(receiver).clear$0(0);
       for (t1 = value.get$keys(value), t1 = t1.get$iterator(t1); t1.moveNext$0();) {
-        t2 = t1.get$current();
+        t2 = t1.get$current(t1);
         receiver.setAttribute(t2, value.$index(0, t2));
       }
     },
@@ -12584,9 +13284,39 @@
     call$1: function(e) {
       return type$.Element._is(type$.Node._as(e));
     },
-    $signature: 23
+    $signature: 26
+  };
+  W.Entry.prototype = {
+    _html$_remove$2: function(receiver, successCallback, errorCallback) {
+      type$.void_Function._as(successCallback);
+      type$.void_Function_DomException._as(errorCallback);
+      return receiver.remove(H.convertDartClosureToJS(successCallback, 0), H.convertDartClosureToJS(errorCallback, 1));
+    },
+    remove$0: function(receiver) {
+      var t1 = new P._Future($.Zone__current, type$._Future_dynamic),
+        completer = new P._AsyncCompleter(t1, type$._AsyncCompleter_dynamic);
+      this._html$_remove$2(receiver, new W.Entry_remove_closure(completer), new W.Entry_remove_closure0(completer));
+      return t1;
+    }
+  };
+  W.Entry_remove_closure.prototype = {
+    call$0: function() {
+      this.completer.complete$0(0);
+    },
+    "call*": "call$0",
+    $requiredArgCount: 0,
+    $signature: 1
+  };
+  W.Entry_remove_closure0.prototype = {
+    call$1: function(error) {
+      this.completer.completeError$1(type$.DomException._as(error));
+    },
+    $signature: 37
   };
   W.Event.prototype = {
+    get$target: function(receiver) {
+      return W._convertNativeToDart_EventTarget(receiver.target);
+    },
     preventDefault$0: function(receiver) {
       return receiver.preventDefault();
     },
@@ -12613,11 +13343,63 @@
     }
   };
   W.File.prototype = {$isFile: 1};
+  W.FileList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $index: function(receiver, index) {
+      H._asIntNullable(index);
+      if (index >>> 0 !== index || index >= receiver.length)
+        throw H.wrapException(P.IndexError$(index, receiver, null, null, null));
+      return receiver[index];
+    },
+    $indexSet: function(receiver, index, value) {
+      H._asIntNullable(index);
+      type$.File._as(value);
+      throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
+    },
+    set$length: function(receiver, value) {
+      throw H.wrapException(P.UnsupportedError$("Cannot resize immutable List."));
+    },
+    elementAt$1: function(receiver, index) {
+      return this.$index(receiver, index);
+    },
+    $isJSIndexable: 1,
+    $isEfficientLengthIterable: 1,
+    $isJavaScriptIndexingBehavior: 1,
+    $isIterable: 1,
+    $isList: 1,
+    $isFileList: 1
+  };
+  W.FileReader.prototype = {
+    get$result: function(receiver) {
+      var res = receiver.result;
+      if (type$.ByteBuffer._is(res))
+        return H.NativeUint8List_NativeUint8List$view(res, 0, null);
+      return res;
+    }
+  };
+  W.FileWriter.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    }
+  };
   W.FormElement.prototype = {
     get$length: function(receiver) {
       return receiver.length;
     },
     $isFormElement: 1
+  };
+  W.Gamepad.prototype = {
+    get$id: function(receiver) {
+      return receiver.id;
+    },
+    $isGamepad: 1
+  };
+  W.History.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    }
   };
   W.HtmlCollection.prototype = {
     get$length: function(receiver) {
@@ -12658,7 +13440,7 @@
     call$1: function(xhr) {
       return type$.HttpRequest._as(xhr).responseText;
     },
-    $signature: 44
+    $signature: 72
   };
   W.HttpRequest_request_closure.prototype = {
     call$1: function(e) {
@@ -12677,7 +13459,7 @@
       else
         t3.completeError$1(e);
     },
-    $signature: 45
+    $signature: 75
   };
   W.HttpRequestEventTarget.prototype = {};
   W.ImageData.prototype = {$isImageData: 1};
@@ -12691,6 +13473,27 @@
     $isLocation: 1
   };
   W.MediaElement.prototype = {};
+  W.MediaKeySession.prototype = {
+    remove$0: function(receiver) {
+      return P.promiseToFuture(receiver.remove(), type$.dynamic);
+    }
+  };
+  W.MediaList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    }
+  };
+  W.MediaStream.prototype = {
+    get$id: function(receiver) {
+      return receiver.id;
+    },
+    $isMediaStream: 1
+  };
+  W.MediaStreamTrack.prototype = {
+    get$id: function(receiver) {
+      return receiver.id;
+    }
+  };
   W.MessageEvent.prototype = {
     get$data: function(receiver) {
       return new P._AcceptStructuredCloneDart2Js([], []).convertNativeToDart_AcceptStructuredClone$2$mustCopy(receiver.data, true);
@@ -12706,12 +13509,155 @@
     },
     $isMessagePort: 1
   };
+  W.MidiInputMap.prototype = {
+    containsKey$1: function(receiver, key) {
+      return P.convertNativeToDart_Dictionary(receiver.get(key)) != null;
+    },
+    $index: function(receiver, key) {
+      return P.convertNativeToDart_Dictionary(receiver.get(H._asStringNullable(key)));
+    },
+    forEach$1: function(receiver, f) {
+      var entries, entry;
+      type$.void_Function_String_dynamic._as(f);
+      entries = receiver.entries();
+      for (; true;) {
+        entry = entries.next();
+        if (entry.done)
+          return;
+        f.call$2(entry.value[0], P.convertNativeToDart_Dictionary(entry.value[1]));
+      }
+    },
+    get$keys: function(receiver) {
+      var keys = H.setRuntimeTypeInfo([], type$.JSArray_String);
+      this.forEach$1(receiver, new W.MidiInputMap_keys_closure(keys));
+      return keys;
+    },
+    get$length: function(receiver) {
+      return receiver.size;
+    },
+    get$isEmpty: function(receiver) {
+      return receiver.size === 0;
+    },
+    $indexSet: function(receiver, key, value) {
+      throw H.wrapException(P.UnsupportedError$("Not supported"));
+    },
+    $isMap: 1
+  };
+  W.MidiInputMap_keys_closure.prototype = {
+    call$2: function(k, v) {
+      return C.JSArray_methods.add$1(this.keys, k);
+    },
+    $signature: 14
+  };
   W.MidiMessageEvent.prototype = {
     get$data: function(receiver) {
       return receiver.data;
     }
   };
+  W.MidiOutputMap.prototype = {
+    containsKey$1: function(receiver, key) {
+      return P.convertNativeToDart_Dictionary(receiver.get(key)) != null;
+    },
+    $index: function(receiver, key) {
+      return P.convertNativeToDart_Dictionary(receiver.get(H._asStringNullable(key)));
+    },
+    forEach$1: function(receiver, f) {
+      var entries, entry;
+      type$.void_Function_String_dynamic._as(f);
+      entries = receiver.entries();
+      for (; true;) {
+        entry = entries.next();
+        if (entry.done)
+          return;
+        f.call$2(entry.value[0], P.convertNativeToDart_Dictionary(entry.value[1]));
+      }
+    },
+    get$keys: function(receiver) {
+      var keys = H.setRuntimeTypeInfo([], type$.JSArray_String);
+      this.forEach$1(receiver, new W.MidiOutputMap_keys_closure(keys));
+      return keys;
+    },
+    get$length: function(receiver) {
+      return receiver.size;
+    },
+    get$isEmpty: function(receiver) {
+      return receiver.size === 0;
+    },
+    $indexSet: function(receiver, key, value) {
+      throw H.wrapException(P.UnsupportedError$("Not supported"));
+    },
+    $isMap: 1
+  };
+  W.MidiOutputMap_keys_closure.prototype = {
+    call$2: function(k, v) {
+      return C.JSArray_methods.add$1(this.keys, k);
+    },
+    $signature: 14
+  };
+  W.MidiPort.prototype = {
+    get$id: function(receiver) {
+      return receiver.id;
+    }
+  };
+  W.MimeType.prototype = {$isMimeType: 1};
+  W.MimeTypeArray.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $index: function(receiver, index) {
+      H._asIntNullable(index);
+      if (index >>> 0 !== index || index >= receiver.length)
+        throw H.wrapException(P.IndexError$(index, receiver, null, null, null));
+      return receiver[index];
+    },
+    $indexSet: function(receiver, index, value) {
+      H._asIntNullable(index);
+      type$.MimeType._as(value);
+      throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
+    },
+    set$length: function(receiver, value) {
+      throw H.wrapException(P.UnsupportedError$("Cannot resize immutable List."));
+    },
+    elementAt$1: function(receiver, index) {
+      return this.$index(receiver, index);
+    },
+    $isJSIndexable: 1,
+    $isEfficientLengthIterable: 1,
+    $isJavaScriptIndexingBehavior: 1,
+    $isIterable: 1,
+    $isList: 1
+  };
   W.MouseEvent.prototype = {$isMouseEvent: 1};
+  W.Navigator.prototype = {
+    getUserMedia$1$audio: function(receiver, audio) {
+      var t1 = new P._Future($.Zone__current, type$._Future_MediaStream),
+        completer = new P._AsyncCompleter(t1, type$._AsyncCompleter_MediaStream),
+        options = P.LinkedHashMap_LinkedHashMap$_literal(["audio", true, "video", false], type$.String, type$.dynamic);
+      if (!receiver.getUserMedia)
+        receiver.getUserMedia = receiver.getUserMedia || receiver.webkitGetUserMedia || receiver.mozGetUserMedia || receiver.msGetUserMedia;
+      this._getUserMedia$3(receiver, new P._StructuredCloneDart2Js([], []).walk$1(options), new W.Navigator_getUserMedia_closure(completer), new W.Navigator_getUserMedia_closure0(completer));
+      return t1;
+    },
+    _getUserMedia$3: function(receiver, options, success, error) {
+      type$.void_Function_MediaStream._as(success);
+      type$.void_Function_NavigatorUserMediaError._as(error);
+      return receiver.getUserMedia(options, H.convertDartClosureToJS(success, 1), H.convertDartClosureToJS(error, 1));
+    }
+  };
+  W.Navigator_getUserMedia_closure.prototype = {
+    call$1: function(stream) {
+      this.completer.complete$1(0, type$.MediaStream._as(stream));
+    },
+    $signature: 87
+  };
+  W.Navigator_getUserMedia_closure0.prototype = {
+    call$1: function(error) {
+      this.completer.completeError$1(type$.NavigatorUserMediaError._as(error));
+    },
+    $signature: 47
+  };
+  W.NavigatorConcurrentHardware.prototype = {};
+  W.NavigatorUserMediaError.prototype = {$isNavigatorUserMediaError: 1};
   W._ChildNodeListLazy.prototype = {
     get$single: function(_) {
       var t1 = this._this,
@@ -12813,12 +13759,115 @@
     $isIterable: 1,
     $isList: 1
   };
+  W.PaymentInstruments.prototype = {
+    keys$0: function(receiver) {
+      return P.promiseToFuture(receiver.keys(), type$.List_dynamic);
+    }
+  };
+  W.PaymentRequest.prototype = {
+    get$id: function(receiver) {
+      return receiver.id;
+    }
+  };
+  W.Plugin.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $isPlugin: 1
+  };
+  W.PluginArray.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $index: function(receiver, index) {
+      H._asIntNullable(index);
+      if (index >>> 0 !== index || index >= receiver.length)
+        throw H.wrapException(P.IndexError$(index, receiver, null, null, null));
+      return receiver[index];
+    },
+    $indexSet: function(receiver, index, value) {
+      H._asIntNullable(index);
+      type$.Plugin._as(value);
+      throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
+    },
+    set$length: function(receiver, value) {
+      throw H.wrapException(P.UnsupportedError$("Cannot resize immutable List."));
+    },
+    elementAt$1: function(receiver, index) {
+      return this.$index(receiver, index);
+    },
+    $isJSIndexable: 1,
+    $isEfficientLengthIterable: 1,
+    $isJavaScriptIndexingBehavior: 1,
+    $isIterable: 1,
+    $isList: 1
+  };
   W.PreElement.prototype = {$isPreElement: 1};
+  W.PresentationConnection.prototype = {
+    get$id: function(receiver) {
+      return receiver.id;
+    }
+  };
   W.ProgressEvent.prototype = {$isProgressEvent: 1};
   W.PushEvent.prototype = {
     get$data: function(receiver) {
       return receiver.data;
     }
+  };
+  W.RelatedApplication.prototype = {
+    get$id: function(receiver) {
+      return receiver.id;
+    }
+  };
+  W.RtcDataChannel.prototype = {
+    get$id: function(receiver) {
+      return receiver.id;
+    }
+  };
+  W.RtcLegacyStatsReport.prototype = {
+    get$id: function(receiver) {
+      return receiver.id;
+    }
+  };
+  W.RtcStatsReport.prototype = {
+    containsKey$1: function(receiver, key) {
+      return P.convertNativeToDart_Dictionary(receiver.get(key)) != null;
+    },
+    $index: function(receiver, key) {
+      return P.convertNativeToDart_Dictionary(receiver.get(H._asStringNullable(key)));
+    },
+    forEach$1: function(receiver, f) {
+      var entries, entry;
+      type$.void_Function_String_dynamic._as(f);
+      entries = receiver.entries();
+      for (; true;) {
+        entry = entries.next();
+        if (entry.done)
+          return;
+        f.call$2(entry.value[0], P.convertNativeToDart_Dictionary(entry.value[1]));
+      }
+    },
+    get$keys: function(receiver) {
+      var keys = H.setRuntimeTypeInfo([], type$.JSArray_String);
+      this.forEach$1(receiver, new W.RtcStatsReport_keys_closure(keys));
+      return keys;
+    },
+    get$length: function(receiver) {
+      return receiver.size;
+    },
+    get$isEmpty: function(receiver) {
+      return receiver.size === 0;
+    },
+    $indexSet: function(receiver, key, value) {
+      throw H.wrapException(P.UnsupportedError$("Not supported"));
+    },
+    $isMap: 1
+  };
+  W.RtcStatsReport_keys_closure.prototype = {
+    call$2: function(k, v) {
+      return C.JSArray_methods.add$1(this.keys, k);
+    },
+    $signature: 14
   };
   W.SelectElement.prototype = {
     get$length: function(receiver) {
@@ -12831,7 +13880,69 @@
     },
     $isShadowRoot: 1
   };
+  W.SourceBuffer.prototype = {$isSourceBuffer: 1};
+  W.SourceBufferList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $index: function(receiver, index) {
+      H._asIntNullable(index);
+      if (index >>> 0 !== index || index >= receiver.length)
+        throw H.wrapException(P.IndexError$(index, receiver, null, null, null));
+      return receiver[index];
+    },
+    $indexSet: function(receiver, index, value) {
+      H._asIntNullable(index);
+      type$.SourceBuffer._as(value);
+      throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
+    },
+    set$length: function(receiver, value) {
+      throw H.wrapException(P.UnsupportedError$("Cannot resize immutable List."));
+    },
+    elementAt$1: function(receiver, index) {
+      return this.$index(receiver, index);
+    },
+    $isJSIndexable: 1,
+    $isEfficientLengthIterable: 1,
+    $isJavaScriptIndexingBehavior: 1,
+    $isIterable: 1,
+    $isList: 1
+  };
   W.SpanElement.prototype = {$isSpanElement: 1};
+  W.SpeechGrammar.prototype = {$isSpeechGrammar: 1};
+  W.SpeechGrammarList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $index: function(receiver, index) {
+      H._asIntNullable(index);
+      if (index >>> 0 !== index || index >= receiver.length)
+        throw H.wrapException(P.IndexError$(index, receiver, null, null, null));
+      return receiver[index];
+    },
+    $indexSet: function(receiver, index, value) {
+      H._asIntNullable(index);
+      type$.SpeechGrammar._as(value);
+      throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
+    },
+    set$length: function(receiver, value) {
+      throw H.wrapException(P.UnsupportedError$("Cannot resize immutable List."));
+    },
+    elementAt$1: function(receiver, index) {
+      return this.$index(receiver, index);
+    },
+    $isJSIndexable: 1,
+    $isEfficientLengthIterable: 1,
+    $isJavaScriptIndexingBehavior: 1,
+    $isIterable: 1,
+    $isList: 1
+  };
+  W.SpeechRecognitionResult.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $isSpeechRecognitionResult: 1
+  };
   W.Storage.prototype = {
     containsKey$1: function(receiver, key) {
       return receiver.getItem(key) != null;
@@ -12874,8 +13985,9 @@
     call$2: function(k, v) {
       return C.JSArray_methods.add$1(this.keys, k);
     },
-    $signature: 9
+    $signature: 10
   };
+  W.StyleSheet.prototype = {$isStyleSheet: 1};
   W.TableElement.prototype = {
     createFragment$3$treeSanitizer$validator: function(receiver, html, treeSanitizer, validator) {
       var table, fragment;
@@ -12944,20 +14056,147 @@
       return receiver.data;
     }
   };
+  W.TextTrack.prototype = {
+    get$id: function(receiver) {
+      return receiver.id;
+    },
+    $isTextTrack: 1
+  };
+  W.TextTrackCue.prototype = {
+    get$id: function(receiver) {
+      return receiver.id;
+    },
+    $isTextTrackCue: 1
+  };
+  W.TextTrackCueList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $index: function(receiver, index) {
+      H._asIntNullable(index);
+      if (index >>> 0 !== index || index >= receiver.length)
+        throw H.wrapException(P.IndexError$(index, receiver, null, null, null));
+      return receiver[index];
+    },
+    $indexSet: function(receiver, index, value) {
+      H._asIntNullable(index);
+      type$.TextTrackCue._as(value);
+      throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
+    },
+    set$length: function(receiver, value) {
+      throw H.wrapException(P.UnsupportedError$("Cannot resize immutable List."));
+    },
+    elementAt$1: function(receiver, index) {
+      return this.$index(receiver, index);
+    },
+    $isJSIndexable: 1,
+    $isEfficientLengthIterable: 1,
+    $isJavaScriptIndexingBehavior: 1,
+    $isIterable: 1,
+    $isList: 1
+  };
+  W.TextTrackList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $index: function(receiver, index) {
+      H._asIntNullable(index);
+      if (index >>> 0 !== index || index >= receiver.length)
+        throw H.wrapException(P.IndexError$(index, receiver, null, null, null));
+      return receiver[index];
+    },
+    $indexSet: function(receiver, index, value) {
+      H._asIntNullable(index);
+      type$.TextTrack._as(value);
+      throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
+    },
+    set$length: function(receiver, value) {
+      throw H.wrapException(P.UnsupportedError$("Cannot resize immutable List."));
+    },
+    elementAt$1: function(receiver, index) {
+      return this.$index(receiver, index);
+    },
+    $isJSIndexable: 1,
+    $isEfficientLengthIterable: 1,
+    $isJavaScriptIndexingBehavior: 1,
+    $isIterable: 1,
+    $isList: 1
+  };
+  W.TimeRanges.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    }
+  };
+  W.Touch.prototype = {$isTouch: 1};
+  W.TouchList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $index: function(receiver, index) {
+      H._asIntNullable(index);
+      if (index >>> 0 !== index || index >= receiver.length)
+        throw H.wrapException(P.IndexError$(index, receiver, null, null, null));
+      return receiver[index];
+    },
+    $indexSet: function(receiver, index, value) {
+      H._asIntNullable(index);
+      type$.Touch._as(value);
+      throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
+    },
+    set$length: function(receiver, value) {
+      throw H.wrapException(P.UnsupportedError$("Cannot resize immutable List."));
+    },
+    elementAt$1: function(receiver, index) {
+      return this.$index(receiver, index);
+    },
+    $isJSIndexable: 1,
+    $isEfficientLengthIterable: 1,
+    $isJavaScriptIndexingBehavior: 1,
+    $isIterable: 1,
+    $isList: 1
+  };
+  W.TrackDefaultList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    }
+  };
   W.UIEvent.prototype = {};
   W.UListElement.prototype = {$isUListElement: 1};
+  W.Url.prototype = {
+    toString$0: function(receiver) {
+      return String(receiver);
+    }
+  };
+  W.VideoTrack.prototype = {
+    get$id: function(receiver) {
+      return receiver.id;
+    }
+  };
+  W.VideoTrackList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    }
+  };
+  W.VttRegion.prototype = {
+    get$id: function(receiver) {
+      return receiver.id;
+    }
+  };
   W.WebSocket.prototype = {$isWebSocket: 1};
   W.Window.prototype = {
     get$animationFrame: function(receiver) {
-      var t1 = new P._Future($.Zone__current, type$._Future_num),
-        t2 = type$.void_Function_num._as(new W.Window_animationFrame_closure(new P._SyncCompleter(t1, type$._SyncCompleter_num)));
-      this._ensureRequestAnimationFrame$0(receiver);
-      this._requestAnimationFrame$1(receiver, W._wrapZone(t2, type$.num));
+      var t1 = new P._Future($.Zone__current, type$._Future_num);
+      this.requestAnimationFrame$1(receiver, new W.Window_animationFrame_closure(new P._SyncCompleter(t1, type$._SyncCompleter_num)));
       return t1;
     },
     open$2: function(receiver, url, $name) {
       var t1 = W._DOMWindowCrossFrame__createSafe(receiver.open(url, $name));
       return t1;
+    },
+    requestAnimationFrame$1: function(receiver, callback) {
+      type$.void_Function_num._as(callback);
+      this._ensureRequestAnimationFrame$0(receiver);
+      return this._requestAnimationFrame$1(receiver, W._wrapZone(callback, type$.num));
     },
     _requestAnimationFrame$1: function(receiver, callback) {
       return receiver.requestAnimationFrame(H.convertDartClosureToJS(type$.void_Function_num._as(callback), 1));
@@ -12994,7 +14233,7 @@
     call$1: function(time) {
       this.completer.complete$1(0, H._asNumNullable(time));
     },
-    $signature: 47
+    $signature: 74
   };
   W._BeforeUnloadEvent.prototype = {$isBeforeUnloadEvent: 1};
   W._BeforeUnloadEventStreamProvider.prototype = {
@@ -13011,7 +14250,7 @@
     call$1: function($event) {
       this.controller.add$1(0, new W._BeforeUnloadEvent(type$.BeforeUnloadEvent._as($event)));
     },
-    $signature: 48
+    $signature: 70
   };
   W.Worker.prototype = {
     postMessage$1: function(receiver, message) {
@@ -13022,18 +14261,90 @@
   };
   W.WorkerGlobalScope.prototype = {$isWorkerGlobalScope: 1};
   W._Attr.prototype = {$is_Attr: 1};
+  W._CssRuleList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $index: function(receiver, index) {
+      H._asIntNullable(index);
+      if (index >>> 0 !== index || index >= receiver.length)
+        throw H.wrapException(P.IndexError$(index, receiver, null, null, null));
+      return receiver[index];
+    },
+    $indexSet: function(receiver, index, value) {
+      H._asIntNullable(index);
+      type$.CssRule._as(value);
+      throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
+    },
+    set$length: function(receiver, value) {
+      throw H.wrapException(P.UnsupportedError$("Cannot resize immutable List."));
+    },
+    elementAt$1: function(receiver, index) {
+      return this.$index(receiver, index);
+    },
+    $isJSIndexable: 1,
+    $isEfficientLengthIterable: 1,
+    $isJavaScriptIndexingBehavior: 1,
+    $isIterable: 1,
+    $isList: 1
+  };
   W._DomRect.prototype = {
     toString$0: function(receiver) {
       return "Rectangle (" + H.S(receiver.left) + ", " + H.S(receiver.top) + ") " + H.S(receiver.width) + " x " + H.S(receiver.height);
     },
     $eq: function(receiver, other) {
+      var t1;
       if (other == null)
         return false;
-      return type$.Rectangle_num._is(other) && receiver.left == other.left && receiver.top == other.top && receiver.width == other.width && receiver.height == other.height;
+      if (type$.Rectangle_num._is(other))
+        if (receiver.left == other.left)
+          if (receiver.top == other.top) {
+            t1 = J.getInterceptor$x(other);
+            t1 = receiver.width == t1.get$width(other) && receiver.height == t1.get$height(other);
+          } else
+            t1 = false;
+        else
+          t1 = false;
+      else
+        t1 = false;
+      return t1;
     },
     get$hashCode: function(receiver) {
       return W._JenkinsSmiHash_hash4(J.get$hashCode$(receiver.left), J.get$hashCode$(receiver.top), J.get$hashCode$(receiver.width), J.get$hashCode$(receiver.height));
+    },
+    get$height: function(receiver) {
+      return receiver.height;
+    },
+    get$width: function(receiver) {
+      return receiver.width;
     }
+  };
+  W._GamepadList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $index: function(receiver, index) {
+      H._asIntNullable(index);
+      if (index >>> 0 !== index || index >= receiver.length)
+        throw H.wrapException(P.IndexError$(index, receiver, null, null, null));
+      return receiver[index];
+    },
+    $indexSet: function(receiver, index, value) {
+      H._asIntNullable(index);
+      type$.Gamepad._as(value);
+      throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
+    },
+    set$length: function(receiver, value) {
+      throw H.wrapException(P.UnsupportedError$("Cannot resize immutable List."));
+    },
+    elementAt$1: function(receiver, index) {
+      return this.$index(receiver, index);
+    },
+    $isJSIndexable: 1,
+    $isEfficientLengthIterable: 1,
+    $isJavaScriptIndexingBehavior: 1,
+    $isIterable: 1,
+    $isList: 1
   };
   W._NamedNodeMap.prototype = {
     get$length: function(receiver) {
@@ -13048,6 +14359,60 @@
     $indexSet: function(receiver, index, value) {
       H._asIntNullable(index);
       type$.Node._as(value);
+      throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
+    },
+    set$length: function(receiver, value) {
+      throw H.wrapException(P.UnsupportedError$("Cannot resize immutable List."));
+    },
+    elementAt$1: function(receiver, index) {
+      return this.$index(receiver, index);
+    },
+    $isJSIndexable: 1,
+    $isEfficientLengthIterable: 1,
+    $isJavaScriptIndexingBehavior: 1,
+    $isIterable: 1,
+    $isList: 1
+  };
+  W._SpeechRecognitionResultList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $index: function(receiver, index) {
+      H._asIntNullable(index);
+      if (index >>> 0 !== index || index >= receiver.length)
+        throw H.wrapException(P.IndexError$(index, receiver, null, null, null));
+      return receiver[index];
+    },
+    $indexSet: function(receiver, index, value) {
+      H._asIntNullable(index);
+      type$.SpeechRecognitionResult._as(value);
+      throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
+    },
+    set$length: function(receiver, value) {
+      throw H.wrapException(P.UnsupportedError$("Cannot resize immutable List."));
+    },
+    elementAt$1: function(receiver, index) {
+      return this.$index(receiver, index);
+    },
+    $isJSIndexable: 1,
+    $isEfficientLengthIterable: 1,
+    $isJavaScriptIndexingBehavior: 1,
+    $isIterable: 1,
+    $isList: 1
+  };
+  W._StyleSheetList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $index: function(receiver, index) {
+      H._asIntNullable(index);
+      if (index >>> 0 !== index || index >= receiver.length)
+        throw H.wrapException(P.IndexError$(index, receiver, null, null, null));
+      return receiver[index];
+    },
+    $indexSet: function(receiver, index, value) {
+      H._asIntNullable(index);
+      type$.StyleSheet._as(value);
       throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
     },
     set$length: function(receiver, value) {
@@ -13160,14 +14525,14 @@
       if (J.getInterceptor$s(key).startsWith$1(key, "data-"))
         this.f.call$2(this.$this._toCamelCase$1(C.JSString_methods.substring$1(key, 5)), value);
     },
-    $signature: 24
+    $signature: 27
   };
   W._DataAttributeMap_keys_closure.prototype = {
     call$2: function(key, value) {
       if (J.getInterceptor$s(key).startsWith$1(key, "data-"))
         C.JSArray_methods.add$1(this.keys, this.$this._toCamelCase$1(C.JSString_methods.substring$1(key, 5)));
     },
-    $signature: 24
+    $signature: 27
   };
   W.CssClassSet.prototype = {$isEfficientLengthIterable: 1, $isIterable: 1, $isSet: 1};
   W._MultiElementCssClassSet.prototype = {
@@ -13180,9 +14545,9 @@
       var t1,
         classes = type$.Set_String._as(s).join$1(0, " ");
       for (t1 = this._elementIterable, t1 = new H.ListIterator(t1, t1.get$length(t1), t1.$ti._eval$1("ListIterator<ListMixin.E>")); t1.moveNext$0();)
-        t1.__internal$_current.className = classes;
+        t1._current.className = classes;
     },
-    modify$1: function(f) {
+    modify$1: function(_, f) {
       C.JSArray_methods.forEach$1(this._sets, new W._MultiElementCssClassSet_modify_closure(type$.dynamic_Function_Set_String._as(f)));
     },
     toggle$2: function(_, value, shouldAdd) {
@@ -13199,33 +14564,33 @@
     call$1: function(e) {
       return J.get$classes$x(type$.Element._as(e));
     },
-    $signature: 52
+    $signature: 67
   };
   W._MultiElementCssClassSet_readClasses_closure.prototype = {
     call$1: function(e) {
       return this.s.addAll$1(0, type$.CssClassSetImpl._as(e).readClasses$0());
     },
-    $signature: 38
+    $signature: 64
   };
   W._MultiElementCssClassSet_modify_closure.prototype = {
     call$1: function(e) {
-      return type$.CssClassSetImpl._as(e).modify$1(this.f);
+      return type$.CssClassSetImpl._as(e).modify$1(0, this.f);
     },
-    $signature: 60
+    $signature: 63
   };
   W._MultiElementCssClassSet_toggle_closure.prototype = {
     call$2: function(changed, e) {
       H._asBoolNullable(changed);
       return H.boolConversionCheck(type$.CssClassSetImpl._as(e).toggle$2(0, this.value, this.shouldAdd)) || H.boolConversionCheck(changed);
     },
-    $signature: 25
+    $signature: 28
   };
   W._MultiElementCssClassSet_remove_closure.prototype = {
     call$2: function(changed, e) {
       H._asBoolNullable(changed);
       return H.boolConversionCheck(type$.CssClassSetImpl._as(e).remove$1(0, this.value)) || H.boolConversionCheck(changed);
     },
-    $signature: 25
+    $signature: 28
   };
   W._ElementCssClassSet.prototype = {
     readClasses$0: function() {
@@ -13274,7 +14639,7 @@
       var t1 = H._instanceType(this);
       t1._eval$1("~(1)")._as(onData);
       type$.void_Function._as(onDone);
-      return W._EventStreamSubscription$(this._html$_target, this._eventType, onData, false, t1._precomputed1);
+      return W._EventStreamSubscription$(this._target, this._eventType, onData, false, t1._precomputed1);
     }
   };
   W._ElementEventStreamImpl.prototype = {};
@@ -13287,7 +14652,7 @@
       pool = new W._StreamPool(new H.JsLinkedHashMap(t1._eval$1("@<Stream<1>>")._bind$1(t1._eval$1("StreamSubscription<1>"))._eval$1("JsLinkedHashMap<1,2>")), t1._eval$1("_StreamPool<1>"));
       pool.set$_controller(P.StreamController_StreamController$broadcast(pool.get$close(pool), true, t1._precomputed1));
       for (t2 = this._targetList, t2 = new H.ListIterator(t2, t2.get$length(t2), t2.$ti._eval$1("ListIterator<ListMixin.E>")), t3 = this._eventType, t1 = t1._eval$1("_EventStream<1>"); t2.moveNext$0();)
-        pool.add$1(0, new W._EventStream(t2.__internal$_current, t3, false, t1));
+        pool.add$1(0, new W._EventStream(t2._current, t3, false, t1));
       t1 = pool._controller;
       t1.toString;
       return new P._BroadcastStream(t1, H._instanceType(t1)._eval$1("_BroadcastStream<1>")).listen$4$cancelOnError$onDone$onError(onData, cancelOnError, onDone, onError);
@@ -13297,24 +14662,24 @@
     }
   };
   W._EventStreamSubscription.prototype = {
-    cancel$0: function() {
+    cancel$0: function(_) {
       var _this = this;
-      if (_this._html$_target == null)
+      if (_this._target == null)
         return null;
       _this._unlisten$0();
-      _this._html$_target = null;
+      _this._target = null;
       _this.set$_onData(null);
       return null;
     },
     pause$0: function(_) {
-      if (this._html$_target == null)
+      if (this._target == null)
         return;
       ++this._pauseCount;
       this._unlisten$0();
     },
     resume$0: function(_) {
       var _this = this;
-      if (_this._html$_target == null || _this._pauseCount <= 0)
+      if (_this._target == null || _this._pauseCount <= 0)
         return;
       --_this._pauseCount;
       _this._tryResume$0();
@@ -13323,14 +14688,14 @@
       var _this = this,
         t1 = _this._onData;
       if (t1 != null && _this._pauseCount <= 0)
-        J.addEventListener$3$x(_this._html$_target, _this._eventType, t1, false);
+        J.addEventListener$3$x(_this._target, _this._eventType, t1, false);
     },
     _unlisten$0: function() {
       var t3,
         t1 = this._onData,
         t2 = t1 != null;
       if (t2) {
-        t3 = this._html$_target;
+        t3 = this._target;
         t3.toString;
         type$.dynamic_Function_Event._as(t1);
         if (t2)
@@ -13345,7 +14710,7 @@
     call$1: function(e) {
       return this.onData.call$1(type$.Event._as(e));
     },
-    $signature: 65
+    $signature: 88
   };
   W._StreamPool.prototype = {
     add$1: function(_, stream) {
@@ -13358,12 +14723,12 @@
       t3 = stream.$ti;
       t2 = t3._eval$1("~(1)")._as(t2.get$add(t2));
       type$.void_Function._as(new W._StreamPool_add_closure(_this, stream));
-      t1.$indexSet(0, stream, W._EventStreamSubscription$(stream._html$_target, stream._eventType, t2, false, t3._precomputed1));
+      t1.$indexSet(0, stream, W._EventStreamSubscription$(stream._target, stream._eventType, t2, false, t3._precomputed1));
     },
     close$0: function(_) {
       var t1, t2;
       for (t1 = this._subscriptions, t2 = t1.get$values(t1), t2 = t2.get$iterator(t2); t2.moveNext$0();)
-        t2.get$current().cancel$0();
+        t2.get$current(t2).cancel$0(0);
       t1.clear$0(0);
       this._controller.close$0(0);
     },
@@ -13376,7 +14741,7 @@
       var t1 = this.$this,
         subscription = t1._subscriptions.remove$1(0, t1.$ti._eval$1("Stream<1>")._as(this.stream));
       if (subscription != null)
-        subscription.cancel$0();
+        subscription.cancel$0(0);
       return null;
     },
     $signature: 2
@@ -13426,13 +14791,13 @@
     call$1: function(v) {
       return type$.NodeValidator._as(v).allowsElement$1(this.element);
     },
-    $signature: 26
+    $signature: 30
   };
   W.NodeValidatorBuilder_allowsAttribute_closure.prototype = {
     call$1: function(v) {
       return type$.NodeValidator._as(v).allowsAttribute$3(this.element, this.attributeName, this.value);
     },
-    $signature: 26
+    $signature: 30
   };
   W._SimpleNodeValidator.prototype = {
     _SimpleNodeValidator$4$allowedAttributes$allowedElements$allowedUriAttributes: function(uriPolicy, allowedAttributes, allowedElements, allowedUriAttributes) {
@@ -13475,13 +14840,13 @@
     call$1: function(x) {
       return !C.JSArray_methods.contains$1(C.List_yrN, H._asStringNullable(x));
     },
-    $signature: 6
+    $signature: 8
   };
   W._SimpleNodeValidator_closure0.prototype = {
     call$1: function(x) {
       return C.JSArray_methods.contains$1(C.List_yrN, H._asStringNullable(x));
     },
-    $signature: 6
+    $signature: 8
   };
   W._TemplatingNodeValidator.prototype = {
     allowsAttribute$3: function(element, attributeName, value) {
@@ -13498,7 +14863,7 @@
     call$1: function(attr) {
       return "TEMPLATE::" + H.S(H._asStringNullable(attr));
     },
-    $signature: 71
+    $signature: 56
   };
   W._SvgNodeValidator.prototype = {
     allowsElement$1: function(element) {
@@ -13522,18 +14887,18 @@
   W.FixedSizeListIterator.prototype = {
     moveNext$0: function() {
       var _this = this,
-        nextPosition = _this._position + 1,
+        nextPosition = _this._html$_position + 1,
         t1 = _this._html$_length;
       if (nextPosition < t1) {
         _this.set$_html$_current(J.$index$asx(_this._array, nextPosition));
-        _this._position = nextPosition;
+        _this._html$_position = nextPosition;
         return true;
       }
       _this.set$_html$_current(null);
-      _this._position = t1;
+      _this._html$_position = t1;
       return false;
     },
-    get$current: function() {
+    get$current: function(_) {
       return this._html$_current;
     },
     set$_html$_current: function(_current) {
@@ -13543,6 +14908,9 @@
   };
   W._DOMWindowCrossFrame.prototype = {$isEventTarget: 1, $isWindowBase: 1};
   W._WrappedEvent.prototype = {
+    get$target: function(_) {
+      return J.get$target$x(this.wrapped);
+    },
     preventDefault$0: function(_) {
       J.preventDefault$0$x(this.wrapped);
     },
@@ -13723,16 +15091,47 @@
         child = nextChild;
       }
     },
-    $signature: 74
+    $signature: 49
   };
   W._CssStyleDeclaration_Interceptor_CssStyleDeclarationBase.prototype = {};
+  W._DomRectList_Interceptor_ListMixin.prototype = {};
+  W._DomRectList_Interceptor_ListMixin_ImmutableListMixin.prototype = {};
+  W._DomStringList_Interceptor_ListMixin.prototype = {};
+  W._DomStringList_Interceptor_ListMixin_ImmutableListMixin.prototype = {};
+  W._FileList_Interceptor_ListMixin.prototype = {};
+  W._FileList_Interceptor_ListMixin_ImmutableListMixin.prototype = {};
   W._HtmlCollection_Interceptor_ListMixin.prototype = {};
   W._HtmlCollection_Interceptor_ListMixin_ImmutableListMixin.prototype = {};
+  W._MidiInputMap_Interceptor_MapMixin.prototype = {};
+  W._MidiOutputMap_Interceptor_MapMixin.prototype = {};
+  W._MimeTypeArray_Interceptor_ListMixin.prototype = {};
+  W._MimeTypeArray_Interceptor_ListMixin_ImmutableListMixin.prototype = {};
   W._NodeList_Interceptor_ListMixin.prototype = {};
   W._NodeList_Interceptor_ListMixin_ImmutableListMixin.prototype = {};
+  W._PluginArray_Interceptor_ListMixin.prototype = {};
+  W._PluginArray_Interceptor_ListMixin_ImmutableListMixin.prototype = {};
+  W._RtcStatsReport_Interceptor_MapMixin.prototype = {};
+  W._SourceBufferList_EventTarget_ListMixin.prototype = {};
+  W._SourceBufferList_EventTarget_ListMixin_ImmutableListMixin.prototype = {};
+  W._SpeechGrammarList_Interceptor_ListMixin.prototype = {};
+  W._SpeechGrammarList_Interceptor_ListMixin_ImmutableListMixin.prototype = {};
   W._Storage_Interceptor_MapMixin.prototype = {};
+  W._TextTrackCueList_Interceptor_ListMixin.prototype = {};
+  W._TextTrackCueList_Interceptor_ListMixin_ImmutableListMixin.prototype = {};
+  W._TextTrackList_EventTarget_ListMixin.prototype = {};
+  W._TextTrackList_EventTarget_ListMixin_ImmutableListMixin.prototype = {};
+  W._TouchList_Interceptor_ListMixin.prototype = {};
+  W._TouchList_Interceptor_ListMixin_ImmutableListMixin.prototype = {};
+  W.__CssRuleList_Interceptor_ListMixin.prototype = {};
+  W.__CssRuleList_Interceptor_ListMixin_ImmutableListMixin.prototype = {};
+  W.__GamepadList_Interceptor_ListMixin.prototype = {};
+  W.__GamepadList_Interceptor_ListMixin_ImmutableListMixin.prototype = {};
   W.__NamedNodeMap_Interceptor_ListMixin.prototype = {};
   W.__NamedNodeMap_Interceptor_ListMixin_ImmutableListMixin.prototype = {};
+  W.__SpeechRecognitionResultList_Interceptor_ListMixin.prototype = {};
+  W.__SpeechRecognitionResultList_Interceptor_ListMixin_ImmutableListMixin.prototype = {};
+  W.__StyleSheetList_Interceptor_ListMixin.prototype = {};
+  W.__StyleSheetList_Interceptor_ListMixin_ImmutableListMixin.prototype = {};
   P._StructuredClone.prototype = {
     findSlot$1: function(value) {
       var i,
@@ -13762,6 +15161,8 @@
       if (type$.File._is(e))
         return e;
       if (type$.Blob._is(e))
+        return e;
+      if (type$.FileList._is(e))
         return e;
       if (type$.ImageData._is(e))
         return e;
@@ -13825,13 +15226,13 @@
     call$2: function(key, value) {
       this._box_0.copy[key] = this.$this.walk$1(value);
     },
-    $signature: 7
+    $signature: 4
   };
   P._StructuredClone_walk_closure0.prototype = {
     call$2: function(key, value) {
       this._box_0.copy[key] = this.$this.walk$1(value);
     },
-    $signature: 7
+    $signature: 4
   };
   P._AcceptStructuredClone.prototype = {
     findSlot$1: function(value) {
@@ -13905,7 +15306,7 @@
       return e;
     },
     convertNativeToDart_AcceptStructuredClone$2$mustCopy: function(object, mustCopy) {
-      this.mustCopy = true;
+      this.mustCopy = mustCopy;
       return this.walk$1(object);
     }
   };
@@ -13916,13 +15317,13 @@
       J.$indexSet$ax(t1, key, t2);
       return t2;
     },
-    $signature: 75
+    $signature: 44
   };
   P.convertDartToNative_Dictionary_closure.prototype = {
     call$2: function(key, value) {
       this.object[key] = value;
     },
-    $signature: 7
+    $signature: 4
   };
   P._StructuredCloneDart2Js.prototype = {
     forEachObjectKey$2: function(object, action) {
@@ -13987,7 +15388,7 @@
     },
     add$1: function(_, value) {
       this._validateToken$1(value);
-      return H._asBoolNullable(this.modify$1(new P.CssClassSetImpl_add_closure(value)));
+      return H._asBoolNullable(this.modify$1(0, new P.CssClassSetImpl_add_closure(value)));
     },
     remove$1: function(_, value) {
       var s, result;
@@ -13998,15 +15399,15 @@
       return result;
     },
     removeWhere$1: function(_, test) {
-      this.modify$1(new P.CssClassSetImpl_removeWhere_closure(type$.bool_Function_String._as(test)));
+      this.modify$1(0, new P.CssClassSetImpl_removeWhere_closure(type$.bool_Function_String._as(test)));
     },
     elementAt$1: function(_, index) {
       return this.readClasses$0().elementAt$1(0, index);
     },
     clear$0: function(_) {
-      this.modify$1(new P.CssClassSetImpl_clear_closure());
+      this.modify$1(0, new P.CssClassSetImpl_clear_closure());
     },
-    modify$1: function(f) {
+    modify$1: function(_, f) {
       var s, ret;
       type$.dynamic_Function_Set_String._as(f);
       s = this.readClasses$0();
@@ -14019,7 +15420,7 @@
     call$1: function(s) {
       return type$.Set_String._as(s).add$1(0, this.value);
     },
-    $signature: 77
+    $signature: 43
   };
   P.CssClassSetImpl_removeWhere_closure.prototype = {
     call$1: function(s) {
@@ -14027,13 +15428,13 @@
       s._filterWhere$2(H._instanceType(s)._eval$1("bool(1)")._as(this.test), true);
       return null;
     },
-    $signature: 27
+    $signature: 42
   };
   P.CssClassSetImpl_clear_closure.prototype = {
     call$1: function(s) {
       return type$.Set_String._as(s).clear$0(0);
     },
-    $signature: 27
+    $signature: 42
   };
   P.FilteredElementList.prototype = {
     get$_html_common$_iterable: function() {
@@ -14050,10 +15451,10 @@
       H._asIntNullable(index);
       type$.Element._as(value);
       t1 = this.get$_html_common$_iterable();
-      J.replaceWith$1$x(t1._f.call$1(J.elementAt$1$ax(t1.__internal$_iterable, index)), value);
+      J.replaceWith$1$x(t1._f.call$1(J.elementAt$1$ax(t1._iterable, index)), value);
     },
     set$length: function(_, newLength) {
-      var len = J.get$length$asx(this.get$_html_common$_iterable().__internal$_iterable);
+      var len = J.get$length$asx(this.get$_html_common$_iterable()._iterable);
       if (typeof len !== "number")
         return H.iae(len);
       if (newLength >= len)
@@ -14073,13 +15474,13 @@
       C.JSArray_methods.forEach$1(P.List_List$from(H.TakeIterable_TakeIterable(t1, end - start, H._instanceType(t1)._eval$1("Iterable.E")), true, type$.dynamic), new P.FilteredElementList_removeRange_closure());
     },
     get$length: function(_) {
-      return J.get$length$asx(this.get$_html_common$_iterable().__internal$_iterable);
+      return J.get$length$asx(this.get$_html_common$_iterable()._iterable);
     },
     $index: function(_, index) {
       var t1;
       H._asIntNullable(index);
       t1 = this.get$_html_common$_iterable();
-      return t1._f.call$1(J.elementAt$1$ax(t1.__internal$_iterable, index));
+      return t1._f.call$1(J.elementAt$1$ax(t1._iterable, index));
     },
     get$iterator: function(_) {
       var t1 = P.List_List$from(this.get$_html_common$_iterable(), false, type$.Element);
@@ -14090,21 +15491,26 @@
     call$1: function(n) {
       return type$.Element._is(type$.Node._as(n));
     },
-    $signature: 23
+    $signature: 26
   };
   P.FilteredElementList__iterable_closure0.prototype = {
     call$1: function(n) {
       return type$.Element._as(type$.Node._as(n));
     },
-    $signature: 80
+    $signature: 89
   };
   P.FilteredElementList_removeRange_closure.prototype = {
     call$1: function(el) {
       return J.remove$0$ax(el);
     },
-    $signature: 5
+    $signature: 7
   };
   P.KeyRange.prototype = {$isKeyRange: 1};
+  P.VersionChangeEvent.prototype = {
+    get$target: function(receiver) {
+      return receiver.target;
+    }
+  };
   P._convertToJS_closure.prototype = {
     call$1: function(o) {
       var jsFunction;
@@ -14117,31 +15523,31 @@
       P._defineProperty(jsFunction, $.$get$DART_CLOSURE_PROPERTY_NAME(), o);
       return jsFunction;
     },
-    $signature: 5
+    $signature: 7
   };
   P._convertToJS_closure0.prototype = {
     call$1: function(o) {
       return new this.ctor(o);
     },
-    $signature: 5
+    $signature: 7
   };
   P._wrapToDart_closure.prototype = {
     call$1: function(o) {
       return new P.JsFunction(o);
     },
-    $signature: 39
+    $signature: 45
   };
   P._wrapToDart_closure0.prototype = {
     call$1: function(o) {
       return new P.JsArray(o, type$.JsArray_dynamic);
     },
-    $signature: 40
+    $signature: 46
   };
   P._wrapToDart_closure1.prototype = {
     call$1: function(o) {
       return new P.JsObject(o);
     },
-    $signature: 41
+    $signature: 57
   };
   P.JsObject.prototype = {
     $index: function(_, property) {
@@ -14228,13 +15634,13 @@
     call$1: function(r) {
       return this.completer.complete$1(0, this.T._eval$1("0/")._as(r));
     },
-    $signature: 15
+    $signature: 12
   };
   P.promiseToFuture_closure0.prototype = {
     call$1: function(e) {
       return this.completer.completeError$1(e);
     },
-    $signature: 15
+    $signature: 12
   };
   P._JSRandom.prototype = {
     nextInt$1: function(max) {
@@ -14247,15 +15653,99 @@
     },
     $isRandom: 1
   };
+  P._RectangleBase.prototype = {};
+  P.Rectangle.prototype = {};
   P.CircleElement.prototype = {$isCircleElement: 1};
   P.GElement.prototype = {$isGElement: 1};
   P.GeometryElement.prototype = {};
   P.GraphicsElement.prototype = {};
   P.ImageElement0.prototype = {$isImageElement0: 1};
+  P.Length.prototype = {$isLength: 1};
+  P.LengthList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $index: function(receiver, index) {
+      H._asIntNullable(index);
+      if (index >>> 0 !== index || index >= receiver.length)
+        throw H.wrapException(P.IndexError$(index, receiver, null, null, null));
+      return receiver.getItem(index);
+    },
+    $indexSet: function(receiver, index, value) {
+      H._asIntNullable(index);
+      type$.Length._as(value);
+      throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
+    },
+    set$length: function(receiver, value) {
+      throw H.wrapException(P.UnsupportedError$("Cannot resize immutable List."));
+    },
+    elementAt$1: function(receiver, index) {
+      return this.$index(receiver, index);
+    },
+    $isEfficientLengthIterable: 1,
+    $isIterable: 1,
+    $isList: 1
+  };
   P.LineElement.prototype = {$isLineElement: 1};
+  P.Number.prototype = {$isNumber: 1};
+  P.NumberList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $index: function(receiver, index) {
+      H._asIntNullable(index);
+      if (index >>> 0 !== index || index >= receiver.length)
+        throw H.wrapException(P.IndexError$(index, receiver, null, null, null));
+      return receiver.getItem(index);
+    },
+    $indexSet: function(receiver, index, value) {
+      H._asIntNullable(index);
+      type$.Number._as(value);
+      throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
+    },
+    set$length: function(receiver, value) {
+      throw H.wrapException(P.UnsupportedError$("Cannot resize immutable List."));
+    },
+    elementAt$1: function(receiver, index) {
+      return this.$index(receiver, index);
+    },
+    $isEfficientLengthIterable: 1,
+    $isIterable: 1,
+    $isList: 1
+  };
   P.PathElement.prototype = {$isPathElement: 1};
+  P.PointList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    }
+  };
   P.RectElement.prototype = {$isRectElement: 1};
   P.ScriptElement0.prototype = {$isScriptElement0: 1};
+  P.StringList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $index: function(receiver, index) {
+      H._asIntNullable(index);
+      if (index >>> 0 !== index || index >= receiver.length)
+        throw H.wrapException(P.IndexError$(index, receiver, null, null, null));
+      return receiver.getItem(index);
+    },
+    $indexSet: function(receiver, index, value) {
+      H._asIntNullable(index);
+      H._asStringNullable(value);
+      throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
+    },
+    set$length: function(receiver, value) {
+      throw H.wrapException(P.UnsupportedError$("Cannot resize immutable List."));
+    },
+    elementAt$1: function(receiver, index) {
+      return this.$index(receiver, index);
+    },
+    $isEfficientLengthIterable: 1,
+    $isIterable: 1,
+    $isList: 1
+  };
   P.AttributeClassSet.prototype = {
     readClasses$0: function() {
       var t1, t2, _i, trimmed,
@@ -14326,7 +15816,42 @@
   P.TextContentElement.prototype = {};
   P.TextElement.prototype = {$isTextElement: 1};
   P.TextPositioningElement.prototype = {};
+  P.Transform.prototype = {$isTransform: 1};
+  P.TransformList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $index: function(receiver, index) {
+      H._asIntNullable(index);
+      if (index >>> 0 !== index || index >= receiver.length)
+        throw H.wrapException(P.IndexError$(index, receiver, null, null, null));
+      return receiver.getItem(index);
+    },
+    $indexSet: function(receiver, index, value) {
+      H._asIntNullable(index);
+      type$.Transform._as(value);
+      throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
+    },
+    set$length: function(receiver, value) {
+      throw H.wrapException(P.UnsupportedError$("Cannot resize immutable List."));
+    },
+    elementAt$1: function(receiver, index) {
+      return this.$index(receiver, index);
+    },
+    $isEfficientLengthIterable: 1,
+    $isIterable: 1,
+    $isList: 1
+  };
+  P._LengthList_Interceptor_ListMixin.prototype = {};
+  P._LengthList_Interceptor_ListMixin_ImmutableListMixin.prototype = {};
+  P._NumberList_Interceptor_ListMixin.prototype = {};
+  P._NumberList_Interceptor_ListMixin_ImmutableListMixin.prototype = {};
+  P._StringList_Interceptor_ListMixin.prototype = {};
+  P._StringList_Interceptor_ListMixin_ImmutableListMixin.prototype = {};
+  P._TransformList_Interceptor_ListMixin.prototype = {};
+  P._TransformList_Interceptor_ListMixin_ImmutableListMixin.prototype = {};
   P.Float32List.prototype = {$isEfficientLengthIterable: 1, $isIterable: 1, $isList: 1, $isTypedData: 1};
+  P.AnalyserNode.prototype = {$isAnalyserNode: 1};
   P.AudioBuffer.prototype = {
     get$length: function(receiver) {
       return receiver.length;
@@ -14348,8 +15873,16 @@
         return receiver.createGainNode();
     },
     createScriptProcessor$3: function(receiver, bufferSize, numberOfInputChannels, numberOfOutputChannels) {
-      var t1 = (receiver.createScriptProcessor || receiver.createJavaScriptNode).call(receiver, bufferSize, numberOfInputChannels, numberOfOutputChannels);
-      return t1;
+      var t1,
+        $function = receiver.createScriptProcessor || receiver.createJavaScriptNode;
+      if (numberOfOutputChannels != null)
+        return $function.call(receiver, bufferSize, numberOfInputChannels, numberOfOutputChannels);
+      else if (numberOfInputChannels != null)
+        return $function.call(receiver, bufferSize, numberOfInputChannels);
+      else {
+        t1 = $function.call(receiver, bufferSize);
+        return t1;
+      }
     },
     _decodeAudioData$3: function(receiver, audioData, successCallback, errorCallback) {
       type$.void_Function_AudioBuffer._as(successCallback);
@@ -14371,7 +15904,7 @@
     call$1: function(value) {
       this.completer.complete$1(0, type$.AudioBuffer._as(value));
     },
-    $signature: 42
+    $signature: 48
   };
   P.AudioContext_decodeAudioData_closure0.prototype = {
     call$1: function(error) {
@@ -14383,7 +15916,7 @@
       else
         t1.completeError$1(error);
     },
-    $signature: 43
+    $signature: 37
   };
   P.AudioNode.prototype = {
     _connect$3: function(receiver, destination, output, input) {
@@ -14406,8 +15939,58 @@
     },
     $isAudioParam: 1
   };
+  P.AudioParamMap.prototype = {
+    containsKey$1: function(receiver, key) {
+      return P.convertNativeToDart_Dictionary(receiver.get(key)) != null;
+    },
+    $index: function(receiver, key) {
+      return P.convertNativeToDart_Dictionary(receiver.get(H._asStringNullable(key)));
+    },
+    forEach$1: function(receiver, f) {
+      var entries, entry;
+      type$.void_Function_String_dynamic._as(f);
+      entries = receiver.entries();
+      for (; true;) {
+        entry = entries.next();
+        if (entry.done)
+          return;
+        f.call$2(entry.value[0], P.convertNativeToDart_Dictionary(entry.value[1]));
+      }
+    },
+    get$keys: function(receiver) {
+      var keys = H.setRuntimeTypeInfo([], type$.JSArray_String);
+      this.forEach$1(receiver, new P.AudioParamMap_keys_closure(keys));
+      return keys;
+    },
+    get$length: function(receiver) {
+      return receiver.size;
+    },
+    get$isEmpty: function(receiver) {
+      return receiver.size === 0;
+    },
+    $indexSet: function(receiver, key, value) {
+      throw H.wrapException(P.UnsupportedError$("Not supported"));
+    },
+    $isMap: 1
+  };
+  P.AudioParamMap_keys_closure.prototype = {
+    call$2: function(k, v) {
+      return C.JSArray_methods.add$1(this.keys, k);
+    },
+    $signature: 14
+  };
   P.AudioProcessingEvent.prototype = {$isAudioProcessingEvent: 1};
   P.AudioScheduledSourceNode.prototype = {};
+  P.AudioTrack.prototype = {
+    get$id: function(receiver) {
+      return receiver.id;
+    }
+  };
+  P.AudioTrackList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    }
+  };
   P.BaseAudioContext.prototype = {
     createGain$0: function(receiver) {
       return receiver.createGain();
@@ -14415,17 +15998,56 @@
     $isBaseAudioContext: 1
   };
   P.BiquadFilterNode.prototype = {$isBiquadFilterNode: 1};
+  P.ConvolverNode.prototype = {$isConvolverNode: 1};
   P.DelayNode.prototype = {$isDelayNode: 1};
   P.DynamicsCompressorNode.prototype = {$isDynamicsCompressorNode: 1};
   P.GainNode.prototype = {$isGainNode: 1};
+  P.MediaStreamAudioSourceNode.prototype = {$isMediaStreamAudioSourceNode: 1};
   P.OfflineAudioContext.prototype = {
     get$length: function(receiver) {
       return receiver.length;
     }
   };
   P.OscillatorNode.prototype = {$isOscillatorNode: 1};
+  P.ScriptProcessorNode.prototype = {$isScriptProcessorNode: 1};
   P.StereoPannerNode.prototype = {$isStereoPannerNode: 1};
+  P._AudioParamMap_Interceptor_MapMixin.prototype = {};
+  P.SqlResultSetRowList.prototype = {
+    get$length: function(receiver) {
+      return receiver.length;
+    },
+    $index: function(receiver, index) {
+      H._asIntNullable(index);
+      if (index >>> 0 !== index || index >= receiver.length)
+        throw H.wrapException(P.IndexError$(index, receiver, null, null, null));
+      return P.convertNativeToDart_Dictionary(receiver.item(index));
+    },
+    $indexSet: function(receiver, index, value) {
+      H._asIntNullable(index);
+      type$.Map_dynamic_dynamic._as(value);
+      throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
+    },
+    set$length: function(receiver, value) {
+      throw H.wrapException(P.UnsupportedError$("Cannot resize immutable List."));
+    },
+    elementAt$1: function(receiver, index) {
+      return this.$index(receiver, index);
+    },
+    $isEfficientLengthIterable: 1,
+    $isIterable: 1,
+    $isList: 1
+  };
+  P._SqlResultSetRowList_Interceptor_ListMixin.prototype = {};
+  P._SqlResultSetRowList_Interceptor_ListMixin_ImmutableListMixin.prototype = {};
   D.GrowableAudioBuffer.prototype = {
+    clone$0: function(_) {
+      var t1 = this._channels.length,
+        t2 = this.sampleRate,
+        b = new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], type$.JSArray_List_Float32List), P.ListQueue$(type$.List_num));
+      b.reshape$2(t1, t2);
+      b.append$1(0, this.toAudioBuffer$0());
+      return b;
+    },
     clear$0: function(_) {
       var t1, t2, _this = this,
         _i = _this.samples = 0;
@@ -14440,8 +16062,64 @@
       this.sampleRate = sampleRate;
       t1 = this._channels;
       C.JSArray_methods.set$length(t1, 0);
+      if (typeof channels !== "number")
+        return channels.$lt();
+      if (channels < 0)
+        channels = 1;
       for (t2 = type$.JSArray_Float32List, c = 0; c < channels; ++c)
         C.JSArray_methods.add$1(t1, H.setRuntimeTypeInfo([], t2));
+    },
+    trim$2: function(_, start, end) {
+      var $A, len, _i, channel, c, src, dst, i, _this = this,
+        t1 = _this.samples,
+        t2 = _this.sampleRate;
+      if (typeof t2 !== "number")
+        return H.iae(t2);
+      end = J.clamp$2$n(end, 0, t1 / t2);
+      t2 = _this.samples;
+      t1 = _this.sampleRate;
+      if (typeof t1 !== "number")
+        return H.iae(t1);
+      start = J.clamp$2$n(start, 0, t2 / t1);
+      if (end <= start || _this.samples <= 0) {
+        _this.clear$0(0);
+        return;
+      }
+      if (_this._buffer == null)
+        _this.toAudioBuffer$0();
+      if (_this._buffer == null)
+        return null;
+      t1 = _this.sampleRate;
+      if (typeof t1 !== "number")
+        return H.iae(t1);
+      $A = C.JSNumber_methods.round$0(start * t1);
+      len = C.JSNumber_methods.round$0(end * t1) - $A;
+      for (t1 = _this._channels, t2 = t1.length, _i = 0; _i < t1.length; t1.length === t2 || (0, H.throwConcurrentModificationError)(t1), ++_i) {
+        channel = t1[_i];
+        C.JSArray_methods.clear$0(channel);
+        C.JSArray_methods.add$1(channel, new Float32Array(len));
+      }
+      _this.waveform.clear$0(0);
+      for (c = 0; c < t1.length; ++c) {
+        src = _this._buffer.getChannelData(c);
+        if (c >= t1.length)
+          return H.ioore(t1, c);
+        t2 = t1[c];
+        if (0 >= t2.length)
+          return H.ioore(t2, 0);
+        dst = t2[0];
+        for (i = 0; i < len; ++i) {
+          t2 = i + $A;
+          if (t2 < 0 || t2 >= src.length)
+            return H.ioore(src, t2);
+          t2 = src[t2];
+          if (i >= dst.length)
+            return H.ioore(dst, i);
+          dst[i] = t2;
+        }
+      }
+      _this.samples = len;
+      _this._buffer = null;
     },
     append$1: function(_, b) {
       var t1, t2, t3, t4, amax, amin, c, t5, src, dest, t6, t7, i, t8, t9, _this = this;
@@ -14478,8 +16156,8 @@
             t9 = src[i];
             amax = Math.max(amax, t9);
             amin = Math.min(amin, t9);
-            if ((t8 + 1) % 2205 === 0) {
-              t2._collection$_add$1(t4._as(H.setRuntimeTypeInfo([amin, amax], t3)));
+            if (C.JSInt_methods.$mod(t8 + 1, 2205) === 0) {
+              t2._collection$_add$1(0, t4._as(H.setRuntimeTypeInfo([amin, amax], t3)));
               amax = 0;
               amin = 0;
             }
@@ -14490,6 +16168,75 @@
         C.JSArray_methods.add$1(t1[c], dest);
         ++c;
       }
+    },
+    loadAudio$2: function(context, url) {
+      return this.loadAudio$body$GrowableAudioBuffer(context, url);
+    },
+    loadAudio$body$GrowableAudioBuffer: function(context, url) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.bool),
+        $async$returnValue, $async$handler = 2, $async$currentError, $async$next = [], $async$self = this, request, buffer, e, exception, $async$exception;
+      var $async$loadAudio$2 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1) {
+          $async$currentError = $async$result;
+          $async$goto = $async$handler;
+        }
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              $async$handler = 4;
+              $async$goto = 7;
+              return P._asyncAwait(W.HttpRequest_request(url, "GET", null, "arraybuffer", null, null), $async$loadAudio$2);
+            case 7:
+              // returning from await.
+              request = $async$result;
+              $async$goto = 8;
+              return P._asyncAwait((context && C.AudioContext_methods).decodeAudioData$1(context, type$.ByteBuffer._as(W._convertNativeToDart_XHR_Response(request.response))), $async$loadAudio$2);
+            case 8:
+              // returning from await.
+              buffer = $async$result;
+              if (buffer != null) {
+                $async$self.reshape$2(buffer.numberOfChannels, H._asIntNullable(buffer.sampleRate));
+                $async$self.append$1(0, buffer);
+                $async$returnValue = true;
+                // goto return
+                $async$goto = 1;
+                break;
+              }
+              $async$handler = 2;
+              // goto after finally
+              $async$goto = 6;
+              break;
+            case 4:
+              // catch
+              $async$handler = 3;
+              $async$exception = $async$currentError;
+              e = H.unwrapException($async$exception);
+              P.print(e);
+              $async$returnValue = false;
+              // goto return
+              $async$goto = 1;
+              break;
+              // goto after finally
+              $async$goto = 6;
+              break;
+            case 3:
+              // uncaught
+              // goto rethrow
+              $async$goto = 2;
+              break;
+            case 6:
+              // after finally
+            case 1:
+              // return
+              return P._asyncReturn($async$returnValue, $async$completer);
+            case 2:
+              // rethrow
+              return P._asyncRethrow($async$currentError, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$loadAudio$2, $async$completer);
     },
     toAudioBuffer$0: function() {
       var t2, t3, c, index, _i, b, t4, _this = this,
@@ -14597,6 +16344,8 @@
         return H.ioore(wav, 11);
       wav[11] = channels;
       t3 = _this.sampleRate;
+      if (typeof t3 !== "number")
+        return t3.$and();
       if (12 >= t1)
         return H.ioore(wav, 12);
       wav[12] = t3 & 65535;
@@ -14650,9 +16399,74 @@
             return H.ioore(wav, t3);
           wav[t3] = t4;
         }
-      t1 = wav.buffer;
-      t1 = new Uint8Array(t1, 0);
+      return H.NativeUint8List_NativeUint8List$view(wav.buffer, 0, null);
+    },
+    downloadWAV$1: function(filename) {
+      var objectUrl = (self.URL || self.webkitURL).createObjectURL(W.Blob_Blob([this.toWAV$0()], "audio/wav")),
+        link = W.AnchorElement_AnchorElement();
+      link.href = objectUrl;
+      link.download = filename;
+      link.click();
+      (self.URL || self.webkitURL).revokeObjectURL(objectUrl);
+    },
+    downloadMP3$1: function(filename) {
+      var objectUrl = (self.URL || self.webkitURL).createObjectURL(W.Blob_Blob([this.toMP3$0()], "audio/mp3")),
+        link = W.AnchorElement_AnchorElement();
+      link.href = objectUrl;
+      link.download = filename;
+      link.click();
+      (self.URL || self.webkitURL).revokeObjectURL(objectUrl);
+    },
+    toWAVBase64$0: function() {
+      var t1,
+        wav = this.toWAV$0();
+      if (wav != null) {
+        type$.Base64Codec._eval$1("Codec.S")._as(wav);
+        t1 = "data:audio/wav;base64," + C.C_Base64Codec.get$encoder().convert$1(wav);
+      } else
+        t1 = null;
       return t1;
+    },
+    generateWaveform$1: function(samples) {
+      var ab, left, t2, right, stride, t3, t4, amax, amin, i, t5, t6,
+        t1 = this.waveform;
+      t1.clear$0(0);
+      ab = this.toAudioBuffer$0();
+      if (ab == null)
+        return;
+      left = ab.getChannelData(0);
+      t2 = ab.numberOfChannels;
+      if (typeof t2 !== "number")
+        return t2.$gt();
+      right = t2 > 1 ? ab.getChannelData(1) : left;
+      t2 = left.length;
+      stride = C.JSInt_methods.$tdiv(t2, samples);
+      for (t3 = type$.JSArray_num, t4 = t1.$ti._precomputed1, amax = 0, amin = 0, i = 0; i < t2;) {
+        t5 = left[i];
+        if (i >= right.length)
+          return H.ioore(right, i);
+        t6 = right[i];
+        amax = Math.max(amax, Math.max(t5, t6));
+        amin = Math.min(amin, Math.min(t5, t6));
+        ++i;
+        if (i % stride === 0) {
+          t1._collection$_add$1(0, t4._as(H.setRuntimeTypeInfo([amin, amax], t3)));
+          amax = 0;
+          amin = 0;
+        }
+      }
+    },
+    trimWaveform$1: function(samples) {
+      var t1, t2, t3, t4, t5;
+      for (t1 = this.waveform; t2 = t1._tail, t3 = t1._head, t4 = t1._table, t5 = t4.length, (t2 - t3 & t5 - 1) >>> 0 > samples;) {
+        if (t3 === t2)
+          H.throwExpression(H.IterableElementError_noElement());
+        ++t1._modificationCount;
+        if (t3 >= t5)
+          return H.ioore(t4, t3);
+        C.JSArray_methods.$indexSet(t4, t3, null);
+        t1._head = (t1._head + 1 & t1._table.length - 1) >>> 0;
+      }
     }
   };
   U.MIDIManager.prototype = {
@@ -14743,7 +16557,7 @@
                 $async$goto = 11;
                 break;
               }
-              e = t2.get$current();
+              e = t2.get$current(t2);
               t6 = e.data;
               t7 = new P._AcceptStructuredCloneDart2Js([], []);
               t7.mustCopy = true;
@@ -14849,7 +16663,7 @@
               // finally
               $async$handler = 4;
               $async$goto = 13;
-              return P._asyncAwait(t2.cancel$0(), $async$compile$1);
+              return P._asyncAwait(t2.cancel$0(0), $async$compile$1);
             case 13:
               // returning from await.
               // goto the next finally handler
@@ -15056,7 +16870,7 @@
     _onProgramUpdate$1: function(change) {
       var t1;
       type$.Map_dynamic_dynamic._as(change);
-      this._dirty = true;
+      this._codemirror$_dirty = true;
       t1 = J.getInterceptor$asx(change);
       if (J.$gt$n(J.get$length$asx(t1.$index(change, "text")), 1))
         this.listener.compile$0();
@@ -15066,7 +16880,7 @@
     _onCursorActivity$1: function(position) {
       var t1 = this.listener,
         line = H._asIntNullable(J.$index$asx(type$.Map_dynamic_dynamic._as(position), "line"));
-      if (t1.editor._dirty && line != t1._lastline)
+      if (t1.editor._codemirror$_dirty && line != t1._lastline)
         t1.compile$0();
       t1._lastline = line;
     },
@@ -15085,7 +16899,7 @@
           t8 = t2[_i];
           if (J.$eq$(t8.$index(0, "type"), "sample") && t1._is(t8.$index(0, "samples")))
             for (t8 = J.get$iterator$ax(t4._as(t8.$index(0, "samples"))); t8.moveNext$0();) {
-              sample = t5._as(t8.get$current());
+              sample = t5._as(t8.get$current(t8));
               t9 = J.getInterceptor$asx(sample);
               if (H._isInt(t9.$index(sample, "step"))) {
                 midi = H._asIntNullable(t9.$index(sample, "step"));
@@ -15126,7 +16940,7 @@
           if (index < 0 || index >= t1.length)
             return H.ioore(t1, index);
           drum = t1[index];
-          _this._stream.add$1(0, new Z.NoteEvent("on", "keyboard", drum.midi, 90));
+          _this._instruments$_stream.add$1(0, new Z.NoteEvent("on", "keyboard", drum.midi, 90));
           drum.press$0();
         }
       }
@@ -15143,7 +16957,7 @@
           drum = t1[index];
           t1 = new Z.NoteEvent("on", "keyboard", drum.midi, 0);
           t1.message = "off";
-          _this._stream.add$1(0, t1);
+          _this._instruments$_stream.add$1(0, t1);
           drum.pressed = false;
         }
       }
@@ -15191,7 +17005,7 @@
     call$1: function(e) {
       var _this = this;
       type$.MouseEvent._as(e);
-      _this.$this._stream.add$1(0, new Z.NoteEvent("on", "mouse", _this.midi, 90));
+      _this.$this._instruments$_stream.add$1(0, new Z.NoteEvent("on", "mouse", _this.midi, 90));
       _this._box_0._instruments$_down = true;
       _this.drum.press$0();
     },
@@ -15203,7 +17017,7 @@
       type$.MouseEvent._as(e);
       t1 = new Z.NoteEvent("on", "mouse", _this.midi, 0);
       t1.message = "off";
-      _this.$this._stream.add$1(0, t1);
+      _this.$this._instruments$_stream.add$1(0, t1);
       _this._box_0._instruments$_down = false;
       _this.drum.pressed = false;
     },
@@ -15216,7 +17030,7 @@
       if (typeof t1 !== "number")
         return t1.$gt();
       if (t1 > 0 && !_this.drum.pressed) {
-        _this.$this._stream.add$1(0, new Z.NoteEvent("on", "mouse", _this.midi, 90));
+        _this.$this._instruments$_stream.add$1(0, new Z.NoteEvent("on", "mouse", _this.midi, 90));
         _this.drum.press$0();
       }
       t1 = _this.drum;
@@ -15235,7 +17049,7 @@
       if (_this._box_0._instruments$_down) {
         t1 = new Z.NoteEvent("on", "mouse", _this.midi, 0);
         t1.message = "off";
-        _this.$this._stream.add$1(0, t1);
+        _this.$this._instruments$_stream.add$1(0, t1);
         _this.drum.pressed = false;
       }
       t1 = _this.$this.root;
@@ -15261,7 +17075,7 @@
           t8 = t2[_i];
           if (J.$eq$(t8.$index(0, "type"), "sample") && t1._is(t8.$index(0, "samples")))
             for (t8 = J.get$iterator$ax(t4._as(t8.$index(0, "samples"))); t8.moveNext$0();) {
-              sample = t5._as(t8.get$current());
+              sample = t5._as(t8.get$current(t8));
               t9 = J.getInterceptor$asx(sample);
               if (H._isInt(t9.$index(sample, "step"))) {
                 pad = Z.DrumPad$(this, C.JSInt_methods._tdivFast$1(index, 6), C.JSInt_methods.$mod(index, 6), H._asIntNullable(t9.$index(sample, "step")), H.S(t9.$index(sample, "name")));
@@ -15318,7 +17132,7 @@
           if (index < 0 || index >= t1.length)
             return H.ioore(t1, index);
           pad = t1[index];
-          _this._stream.add$1(0, new Z.NoteEvent("on", "keyboard", pad.midi, 90));
+          _this._instruments$_stream.add$1(0, new Z.NoteEvent("on", "keyboard", pad.midi, 90));
           pad.press$0();
         }
       }
@@ -15335,7 +17149,7 @@
           pad = t1[index];
           t1 = new Z.NoteEvent("on", "keyboard", pad.midi, 0);
           t1.message = "off";
-          _this._stream.add$1(0, t1);
+          _this._instruments$_stream.add$1(0, t1);
           pad.release$0(0);
         }
       }
@@ -15444,7 +17258,7 @@
       var t1;
       type$.MouseEvent._as(e);
       t1 = this.$this;
-      t1.drums._stream.add$1(0, new Z.NoteEvent("on", "mouse", t1.midi, 90));
+      t1.drums._instruments$_stream.add$1(0, new Z.NoteEvent("on", "mouse", t1.midi, 90));
       t1.press$0();
     },
     $signature: 0
@@ -15456,7 +17270,7 @@
       t1 = this.$this;
       t2 = new Z.NoteEvent("on", "mouse", t1.midi, 0);
       t2.message = "off";
-      t1.drums._stream.add$1(0, t2);
+      t1.drums._instruments$_stream.add$1(0, t2);
       t1.release$0(0);
     },
     $signature: 0
@@ -15469,7 +17283,7 @@
       if (t1._instruments$_down) {
         t2 = new Z.NoteEvent("on", "mouse", t1.midi, 0);
         t2.message = "off";
-        t1.drums._stream.add$1(0, t2);
+        t1.drums._instruments$_stream.add$1(0, t2);
         t1.release$0(0);
       }
     },
@@ -15482,7 +17296,7 @@
         return t1.$gt();
       if (t1 > 0) {
         t1 = this.$this;
-        t1.drums._stream.add$1(0, new Z.NoteEvent("on", "mouse", t1.midi, 90));
+        t1.drums._instruments$_stream.add$1(0, new Z.NoteEvent("on", "mouse", t1.midi, 90));
         t1.press$0();
       }
     },
@@ -15557,13 +17371,13 @@
     call$1: function(e) {
       return this.$this._resize$0();
     },
-    $signature: 16
+    $signature: 19
   };
   Z.Instrument_unload_closure.prototype = {
     call$1: function(child) {
       return J.remove$0$ax(type$.Element._as(child));
     },
-    $signature: 49
+    $signature: 54
   };
   Z.NoteEvent.prototype = {
     toString$0: function(_) {
@@ -15619,7 +17433,7 @@
           if (t2 < 0 || t2 >= t1.length)
             return H.ioore(t1, t2);
           key = t1[t2];
-          _this._stream.add$1(0, new Z.NoteEvent("on", "keyboard", key.key + 12, 90));
+          _this._instruments$_stream.add$1(0, new Z.NoteEvent("on", "keyboard", key.key + 12, 90));
           key.press$0();
         } else {
           t1 = e.keyCode;
@@ -15647,7 +17461,7 @@
           key = t1[t2];
           t2 = new Z.NoteEvent("on", "keyboard", key.key + 12, 0);
           t2.message = "off";
-          _this._stream.add$1(0, t2);
+          _this._instruments$_stream.add$1(0, t2);
           key.release$0(0);
         }
       }
@@ -15795,7 +17609,7 @@
         t1 = key.piano;
         t2 = new Z.NoteEvent("on", "system", key.key + 12, 0);
         t2.message = "off";
-        t1._stream.add$1(0, t2);
+        t1._instruments$_stream.add$1(0, t2);
         key._instruments$_down = false;
         t2 = key.rect;
         t2.toString;
@@ -15803,7 +17617,7 @@
       }
       return null;
     },
-    $signature: 50
+    $signature: 55
   };
   Z.MiniPiano.prototype = {
     slide$1: function(dx) {
@@ -15815,7 +17629,7 @@
       C.CssStyleDeclaration_methods._setPropertyHelper$3(t1, C.CssStyleDeclaration_methods._browserPropertyName$1(t1, "transform"), t2, "");
       t1 = _this._instruments$_timer;
       if (t1 != null)
-        t1.cancel$0();
+        t1.cancel$0(0);
       _this._instruments$_timer = P.Timer_Timer(C.Duration_2000000, new Z.MiniPiano_slide_closure(_this));
     },
     render$0: function() {
@@ -15960,7 +17774,7 @@
       var t1;
       type$.MouseEvent._as(e);
       t1 = this.$this;
-      t1.piano._stream.add$1(0, new Z.NoteEvent("on", "mouse", t1.key + 12, 90));
+      t1.piano._instruments$_stream.add$1(0, new Z.NoteEvent("on", "mouse", t1.key + 12, 90));
       t1.press$0();
     },
     $signature: 0
@@ -15972,7 +17786,7 @@
       t1 = this.$this;
       t2 = new Z.NoteEvent("on", "mouse", t1.key + 12, 0);
       t2.message = "off";
-      t1.piano._stream.add$1(0, t2);
+      t1.piano._instruments$_stream.add$1(0, t2);
       t1.release$0(0);
     },
     $signature: 0
@@ -15985,7 +17799,7 @@
       if (t1._instruments$_down) {
         t2 = new Z.NoteEvent("on", "mouse", t1.key + 12, 0);
         t2.message = "off";
-        t1.piano._stream.add$1(0, t2);
+        t1.piano._instruments$_stream.add$1(0, t2);
         t1.release$0(0);
       }
     },
@@ -15998,7 +17812,7 @@
         return t1.$gt();
       if (t1 > 0) {
         t1 = this.$this;
-        t1.piano._stream.add$1(0, new Z.NoteEvent("on", "mouse", t1.key + 12, 90));
+        t1.piano._instruments$_stream.add$1(0, new Z.NoteEvent("on", "mouse", t1.key + 12, 90));
         t1.press$0();
       }
     },
@@ -16013,7 +17827,7 @@
       t2 = type$.List_dynamic;
       if (t2._is(t1.$index(config, "nodes")))
         for (t3 = J.get$iterator$ax(type$.Iterable_dynamic._as(t1.$index(config, "nodes"))), t4 = type$.Map_dynamic_dynamic, t5 = _this.context, t6 = _this.nodes, t7 = J.getInterceptor$x(t5); t3.moveNext$0();) {
-          node = t3.get$current();
+          node = t3.get$current(t3);
           if (t4._is(node)) {
             t8 = J.getInterceptor$asx(node);
             switch (t8.$index(node, "type")) {
@@ -16119,7 +17933,7 @@
           }
         }
       for (t1 = J.get$iterator$ax(type$.Iterable_dynamic._as(t1.$index(config, "routing"))), t2 = _this.nodes; t1.moveNext$0();) {
-        r = t1.get$current();
+        r = t1.get$current(t1);
         t3 = J.getInterceptor$asx(r);
         source = t2.$index(0, t3.$index(r, "source"));
         dest = t2.$index(0, t3.$index(r, "dest"));
@@ -16169,36 +17983,36 @@
         t1.maxD = Math.max(t1.maxD, node.sampleDuration);
       }
     },
-    $signature: 29
+    $signature: 39
   };
   U.SynthChain_pitchBend_closure.prototype = {
     call$1: function(node) {
       return type$.SynthNode._as(node).pitchBend$1(this.cents);
     },
-    $signature: 18
+    $signature: 20
   };
   U.SynthChain_schedulePitchBend_closure.prototype = {
     call$1: function(node) {
       return type$.SynthNode._as(node).schedulePitchBend$3(this.start, this.duration, this.cents);
     },
-    $signature: 18
+    $signature: 20
   };
   U.SynthChain_releaseNote_closure.prototype = {
     call$1: function(node) {
       type$.SynthNode._as(node).release$0(0);
     },
-    $signature: 29
+    $signature: 39
   };
   U.SynthChain_destroy_closure.prototype = {
     call$1: function(node) {
       return type$.SynthNode._as(node).destroy$0();
     },
-    $signature: 18
+    $signature: 20
   };
   E.ClockSubscriber.prototype = {};
   E.Metronome.prototype = {};
   E.PlayClock.prototype = {
-    get$time: function() {
+    get$time: function(_) {
       var _this = this,
         t1 = _this._subscribers._collection$_length === 0 || _this.context == null,
         t2 = _this._start;
@@ -16214,9 +18028,10 @@
       return t1;
     },
     get$beats: function() {
-      var t1 = this.get$time(),
-        t2 = this._clock$_bpm,
-        t3 = this._elapsedBeats;
+      var _this = this,
+        t1 = _this.get$time(_this),
+        t2 = _this._clock$_bpm,
+        t3 = _this._elapsedBeats;
       if (typeof t3 !== "number")
         return H.iae(t3);
       return t1 * t2 / 60 + t3;
@@ -16314,31 +18129,31 @@
     call$1: function(s) {
       return type$.ClockSubscriber._as(s).onClockReset$0();
     },
-    $signature: 13
+    $signature: 16
   };
   E.PlayClock_setTime_closure.prototype = {
     call$1: function(s) {
       return type$.ClockSubscriber._as(s).onClockTimeChange$0();
     },
-    $signature: 13
+    $signature: 16
   };
   E.PlayClock_setTempo_closure.prototype = {
     call$1: function(s) {
       return type$.ClockSubscriber._as(s).onTempoChange$0();
     },
-    $signature: 13
+    $signature: 16
   };
   E.PlayClock_setTimeSignature_closure.prototype = {
     call$1: function(s) {
       return type$.ClockSubscriber._as(s).onTimeSignatureChange$0();
     },
-    $signature: 13
+    $signature: 16
   };
   E.PlayClock_startMetronome_closure.prototype = {
     call$1: function(m) {
       return type$.Metronome._as(m).pulse$1(0);
     },
-    $signature: 30
+    $signature: 41
   };
   E.PlayClock_startMetronome_closure0.prototype = {
     call$1: function(t) {
@@ -16347,7 +18162,7 @@
       t1 = this.$this;
       t2 = t1._metronomes;
       if (t2._collection$_length === 0) {
-        t1._clock$_timer.cancel$0();
+        t1._clock$_timer.cancel$0(0);
         t1._clock$_timer = null;
       } else {
         t3 = t1._clock$_bpm;
@@ -16369,13 +18184,13 @@
         }
       }
     },
-    $signature: 55
+    $signature: 60
   };
   E.PlayClock_startMetronome__closure.prototype = {
     call$1: function(m) {
       return type$.Metronome._as(m).pulse$1(this._box_0.beat);
     },
-    $signature: 30
+    $signature: 41
   };
   K.Effect.prototype = {
     Effect$_internal$2: function($name, params) {
@@ -16384,11 +18199,11 @@
       _this.beats = B.toNum(params.$index(0, "beats"), 0);
       _this.set$oparams(params);
       for (t1 = J.get$iterator$ax(type$.Iterable_dynamic._as(params.$index(0, "values"))), t2 = _this.params, t3 = type$.List_dynamic, t4 = type$.JSArray_num; t1.moveNext$0();) {
-        c = t1.get$current();
+        c = t1.get$current(t1);
         values = H.setRuntimeTypeInfo([], t4);
         if (t3._is(c))
           for (t5 = J.get$iterator$ax(c); t5.moveNext$0();)
-            C.JSArray_methods.add$1(values, B.toNum(t5.get$current(), 0));
+            C.JSArray_methods.add$1(values, B.toNum(t5.get$current(t5), 0));
         else if (typeof c == "number")
           C.JSArray_methods.add$1(values, c);
         C.JSArray_methods.add$1(t2, values);
@@ -16884,7 +18699,7 @@
       _this.source = t1;
       t1.connect(_this.level, 0, 0);
       for (t1 = J.get$iterator$ax(_this.samples), step = -1, score = 100000, delta = 0, sample = null; t1.moveNext$0();) {
-        s = t1.get$current();
+        s = t1.get$current(t1);
         t2 = note._note;
         t3 = J.getInterceptor$asx(s);
         t4 = H._asNumNullable(t3.$index(s, "step"));
@@ -16996,7 +18811,7 @@
       H.checkNum(t1);
       return Math.pow(this.semitoneRatio, t1);
     },
-    $signature: 56
+    $signature: 61
   };
   B.SynthDelayNode.prototype = {
     connectFromSource$2: function(source, type) {
@@ -17123,12 +18938,12 @@
               t1 = type$.List_dynamic;
               if (t1._is(J.$index$asx(patch, "nodes")))
                 for (t2 = type$.Iterable_dynamic, t3 = J.get$iterator$ax(t2._as(J.$index$asx($async$self.config, "nodes"))), t4 = type$.Map_dynamic_dynamic; t3.moveNext$0();) {
-                  node = t4._as(t3.get$current());
+                  node = t4._as(t3.get$current(t3));
                   t5 = J.getInterceptor$asx(node);
                   if (J.$eq$(t5.$index(node, "type"), "sample"))
                     if (t1._is(t5.$index(node, "samples")))
                       for (t5 = J.get$iterator$ax(t2._as(t5.$index(node, "samples"))); t5.moveNext$0();) {
-                        sample = t4._as(t5.get$current());
+                        sample = t4._as(t5.get$current(t5));
                         t6 = J.getInterceptor$asx(sample);
                         if (t6.$index(sample, "sample") != null) {
                           ++_box_0.load_count;
@@ -17416,7 +19231,7 @@
     call$1: function(n) {
       --this._box_0.load_count;
     },
-    $signature: 4
+    $signature: 6
   };
   L.Synthesizer_playNote_closure.prototype = {
     call$0: function() {
@@ -17460,7 +19275,7 @@
     call$1: function($event) {
       return type$.SynthEvent._as($event).pitchBend$1(this.cents);
     },
-    $signature: 57
+    $signature: 62
   };
   L.Synthesizer_loadAudioBuffer_closure.prototype = {
     call$1: function(e) {
@@ -17494,14 +19309,14 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 58
+    $signature: 21
   };
   L.Synthesizer_loadAudioBuffer_closure0.prototype = {
     call$1: function(e) {
       type$.ProgressEvent._as(e);
       return P.print("BufferLoader: XHR error");
     },
-    $signature: 59
+    $signature: 33
   };
   Y.Trace.prototype = {
     get$length: function(_) {
@@ -17510,7 +19325,7 @@
     $index: function(_, index) {
       return C.JSArray_methods.$index(this.trace, H._asIntNullable(index));
     },
-    advance$0: function() {
+    advance$0: function(_) {
       var t1 = this.bug,
         t2 = this.trace,
         t3 = t2.length;
@@ -17603,13 +19418,19 @@
       _this.time = B.toNum(t1.$index(json, "time"), 0);
       _this.duration = B.toNum(t1.$index(json, "duration"), 1);
       if (type$.Map_dynamic_dynamic._is(t1.$index(json, _s6_)))
-        for (t2 = J.get$iterator$ax(J.get$keys$x(t1.$index(json, _s6_))), t3 = _this.params, note = null; t2.moveNext$0();) {
-          key = H._asStringNullable(t2.get$current());
+        for (t2 = J.get$iterator$ax(type$.Iterable_dynamic._as(J.get$keys$x(t1.$index(json, _s6_)))), t3 = _this.params, note = null; t2.moveNext$0();) {
+          key = H._asStringNullable(t2.get$current(t2));
           if (key === "note") {
             note = new F.Note();
             note._note = Math.max(0, H.checkNum(B.toNum(J.$index$asx(t1.$index(json, _s6_), key), 60)));
             note.duration = _this.duration;
             t3.$indexSet(0, key, note);
+          } else if (key === "sound") {
+            note = new F.Note();
+            note._note = Math.max(0, 48);
+            note.duration = _this.duration;
+            t3.$indexSet(0, "note", note);
+            t3.$indexSet(0, key, J.$index$asx(t1.$index(json, _s6_), key));
           } else
             t3.$indexSet(0, key, J.$index$asx(t1.$index(json, _s6_), key));
         }
@@ -17628,7 +19449,7 @@
         t1 = type$.dynamic,
         json = P.LinkedHashMap_LinkedHashMap$_literal(["command", _this.command, "time", _this.time, "duration", _this.duration, "params", P.LinkedHashMap_LinkedHashMap$_empty(t1, t1)], type$.String, t1);
       for (t1 = _this.params, t2 = t1.get$keys(t1), t2 = t2.get$iterator(t2), t3 = type$.Map_dynamic_dynamic, t4 = type$.Note; t2.moveNext$0();) {
-        t5 = t2.get$current();
+        t5 = t2.get$current(t2);
         if (t5 === "note")
           J.$indexSet$ax(t3._as(json.$index(0, "params")), t5, t4._as(t1.$index(0, "note"))._note);
         else
@@ -17669,7 +19490,7 @@
       Y.UserAccounts__onSubmit(this.dialog, this.datastore);
       return false;
     },
-    $signature: 61
+    $signature: 66
   };
   Y.PythonCell.prototype = {
     set$gain: function(_, g) {
@@ -17880,11 +19701,11 @@
         t2 = H._asStringNullable(J.$index$asx(_this.settings, "code"));
         t1.toString;
         $.$get$_context().callMethod$2("setCode", [t1.id, t2]);
-        t1._dirty = true;
+        t1._codemirror$_dirty = true;
         J.$indexSet$ax(_this.settings, "cloned", false);
       }
     },
-    save$0: function() {
+    save$0: function(_) {
       var t1, t2, t3, t4, _this = this,
         _s11_ = "description";
       J.$indexSet$ax(_this.settings, "id", _this.id);
@@ -17950,7 +19771,7 @@
               t2 = $.$get$_context();
               t2.callMethod$2("clearErrorMarkers", [t1.id]);
               t2.callMethod$2("clearTraceMarkers", [$async$self.editor.id]);
-              t1 = $async$self.editor._dirty = false;
+              t1 = $async$self.editor._codemirror$_dirty = false;
               t3 = $async$self.root;
               t4 = type$.Element;
               t3.toString;
@@ -18010,7 +19831,7 @@
       t1._beats = t1._timer = t1.bug = 0;
       t1._maxNote = t1._minNote = -1;
       for (t5 = J.get$iterator$ax(outputs), t6 = type$.JsLinkedHashMap_String_dynamic, out_count = 0; t5.moveNext$0();) {
-        output = t5.get$current();
+        output = t5.get$current(t5);
         if (output != null && typeof output == "string") {
           t7 = J.getInterceptor$s(output);
           if (t7.startsWith$1(output, "**TRACE**"))
@@ -18047,13 +19868,13 @@
         J.set$innerHtml$x(_this.root.querySelector(".output-count"), "" + out_count);
         P.Timer_Timer(C.Duration_3000000, new Y.PythonCell_onPythonDone_closure(_this));
       }
-      _this.datastore.save$1(_this);
+      _this.datastore.save$1(0, _this);
     },
     play$0: function(_) {
       var t1, t2, t3, t4, t5, b, _this = this, _s1_ = "T",
         _s16_ = "querySelectorAll",
         _s6_ = "hidden";
-      if (_this.editor._dirty)
+      if (_this.editor._codemirror$_dirty)
         _this.compile$1(true);
       else {
         t1 = _this.clock;
@@ -18196,7 +20017,7 @@
       }
       t2 = H.setRuntimeTypeInfo([], type$.JSArray_TraceEvent);
       t3 = _this.trace;
-      e = t3.advance$0();
+      e = t3.advance$0(0);
       t4 = t3.trace;
       advance = 0;
       while (true) {
@@ -18399,7 +20220,7 @@
         old.unload$0();
         _this.instrument.insert$1(0, container);
         _this._setMidiInput$1(B.toBool(J.$index$asx(_this.settings, "midi-input"), false));
-        t1 = _this.instrument._stream;
+        t1 = _this.instrument._instruments$_stream;
         new P._ControllerStream(t1, H._instanceType(t1)._eval$1("_ControllerStream<1>")).listen$1(new Y.PythonCell__setInstrument_closure0(_this));
       }
     },
@@ -18511,7 +20332,7 @@
     _downloadAudio$1: function(format) {
       var $async$goto = 0,
         $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic),
-        $async$returnValue, $async$self = this, t1, objectUrl, link, processed;
+        $async$returnValue, $async$self = this, t1, processed;
       var $async$_downloadAudio$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
         if ($async$errorCode === 1)
           return P._asyncRethrow($async$result, $async$completer);
@@ -18530,23 +20351,10 @@
                 break;
               }
               t1 = $async$self.name;
-              if (format === "mp3") {
-                t1 = "tunepad-" + H.S(t1) + ".mp3";
-                objectUrl = (self.URL || self.webkitURL).createObjectURL(W.Blob_Blob([processed.toMP3$0()], "audio/mp3"));
-                link = W.AnchorElement_AnchorElement();
-                link.href = objectUrl;
-                link.download = t1;
-                link.click();
-                (self.URL || self.webkitURL).revokeObjectURL(objectUrl);
-              } else {
-                t1 = "tunepad-" + H.S(t1) + ".wav";
-                objectUrl = (self.URL || self.webkitURL).createObjectURL(W.Blob_Blob([processed.toWAV$0()], "audio/wav"));
-                link = W.AnchorElement_AnchorElement();
-                link.href = objectUrl;
-                link.download = t1;
-                link.click();
-                (self.URL || self.webkitURL).revokeObjectURL(objectUrl);
-              }
+              if (format === "mp3")
+                processed.downloadMP3$1("tunepad-" + H.S(t1) + ".mp3");
+              else
+                processed.downloadWAV$1("tunepad-" + H.S(t1) + ".wav");
             case 1:
               // return
               return P._asyncReturn($async$returnValue, $async$completer);
@@ -18557,7 +20365,7 @@
     _exportAudio$1: function(format) {
       var $async$goto = 0,
         $async$completer = P._makeAsyncAwaitCompleter(type$.GrowableAudioBuffer),
-        $async$returnValue, $async$handler = 2, $async$currentError, $async$next = [], $async$self = this, processed, gain, recorder, total_length, e, c, src, progress, context, t2, t3, t4, processed0, gain0, dialog, m, t5, t6, t1, $async$temp1;
+        $async$returnValue, $async$handler = 2, $async$currentError, $async$next = [], $async$self = this, processed, gain, recorder, total_length, e, c, src, progress, context, processed0, gain0, t2, t3, dialog, m, t4, t5, t6, t1, $async$temp1;
       var $async$_exportAudio$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
         if ($async$errorCode === 1) {
           $async$currentError = $async$result;
@@ -18578,12 +20386,7 @@
                 $async$self._pauseHelper$0();
                 t1.pause$1(0, $async$self);
                 context = t1.context;
-                t2 = H.setRuntimeTypeInfo([], type$.JSArray_List_Float32List);
-                t3 = new P.ListQueue(type$.ListQueue_List_num);
-                t4 = new Array(8);
-                t4.fixed$length = Array;
-                t3.set$_table(H.setRuntimeTypeInfo(t4, type$.JSArray_List_num));
-                processed0 = new D.GrowableAudioBuffer(t2, t3);
+                processed0 = new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], type$.JSArray_List_Float32List), P.ListQueue$(type$.List_num));
                 processed0.reshape$2(2, 44100);
                 processed = processed0;
                 gain0 = (context && C.AudioContext_methods).createGain$0(context);
@@ -18592,17 +20395,17 @@
                 recorder = C.AudioContext_methods.createScriptProcessor$3(context, 1024, 2, 2);
                 J._connect$3$x(recorder, type$.AudioNode._as(gain), 0, 0);
                 J._connect$3$x(gain, context.destination, 0, 0);
-                t3 = $async$self.synth;
+                t2 = $async$self.synth;
                 t1 = t1._clock$_bpm;
-                t3._bpm = t1;
-                t2 = $async$self.beats;
-                if (typeof t2 !== "number") {
-                  $async$returnValue = t2.$mul();
+                t2._bpm = t1;
+                t3 = $async$self.beats;
+                if (typeof t3 !== "number") {
+                  $async$returnValue = t3.$mul();
                   // goto return
                   $async$goto = 1;
                   break;
                 }
-                total_length = t2 * 60 / t1;
+                total_length = t3 * 60 / t1;
                 dialog = E.Dialog_openModal("#export-dialog-template", null);
                 if (dialog != null) {
                   m = dialog.querySelector(".progress-status");
@@ -18610,10 +20413,10 @@
                     J.set$innerHtml$x(m, "Exporting audio data...");
                 }
                 $async$self._setProgressStatus$1("0%");
-                t3.scheduleNotes$2($async$self.trace, recorder);
+                t2.scheduleNotes$2($async$self.trace, recorder);
                 t1 = P._StreamIterator$(new W._EventStream(type$.EventTarget._as(recorder), "audioprocess", false, type$._EventStream_AudioProcessingEvent), type$.AudioProcessingEvent);
                 $async$handler = 3;
-                t2 = type$.HtmlElement, t3 = t3.notes;
+                t3 = type$.HtmlElement, t2 = t2.notes;
               case 6:
                 // for condition
                 $async$temp1 = H;
@@ -18626,7 +20429,7 @@
                   $async$goto = 7;
                   break;
                 }
-                e = t1.get$current();
+                e = t1.get$current(t1);
                 J.append$1$x(processed, e.inputBuffer);
                 c = 0;
                 while (true) {
@@ -18662,7 +20465,7 @@
                   }
                   c = t4 + 1;
                 }
-                if (t3.length === 0) {
+                if (t2.length === 0) {
                   J.disconnect$0$x(gain);
                   J.disconnect$0$x(recorder);
                   gain = null;
@@ -18677,6 +20480,13 @@
                   t4 = processed;
                   t5 = t4.samples;
                   t4 = t4.sampleRate;
+                  if (typeof t4 !== "number") {
+                    $async$returnValue = H.iae(t4);
+                    $async$next = [1];
+                    // goto finally
+                    $async$goto = 4;
+                    break;
+                  }
                   t6 = total_length;
                   if (typeof t6 !== "number") {
                     $async$returnValue = H.iae(t6);
@@ -18695,7 +20505,7 @@
                     break;
                   }
                   t6 = "" + C.JSNumber_methods.round$0(t6 * 100) + "%";
-                  m = t2._as(document.querySelector(".progress-dialog .progress-status"));
+                  m = t3._as(document.querySelector(".progress-dialog .progress-status"));
                   if (m != null)
                     J.setInnerHtml$1$x(m, t6);
                 }
@@ -18715,7 +20525,7 @@
                 // finally
                 $async$handler = 2;
                 $async$goto = 9;
-                return P._asyncAwait(t1.cancel$0(), $async$_exportAudio$1);
+                return P._asyncAwait(t1.cancel$0(0), $async$_exportAudio$1);
               case 9:
                 // returning from await.
                 // goto the next finally handler
@@ -18873,7 +20683,7 @@
           P.Timer_Timer(C.Duration_200000, new Y.PythonCell__doContextMenu_closure(_this));
           return;
         case "clone-track":
-          _this.datastore.clonePythonCell$1(_this.save$0());
+          _this.datastore.clonePythonCell$1(_this.save$0(0));
           return;
         case "show-instrument":
           _this._toggleElement$1("instrument");
@@ -18927,13 +20737,13 @@
           _this._shareTrack$0();
           break;
       }
-      _this.datastore.save$1(_this);
+      _this.datastore.save$1(0, _this);
     }
   };
   Y.PythonCell_closure.prototype = {
     call$1: function(data) {
     },
-    $signature: 4
+    $signature: 6
   };
   Y.PythonCell_closure0.prototype = {
     call$1: function(e) {
@@ -18989,7 +20799,7 @@
           t1.updateRecording$0();
       }
     },
-    $signature: 63
+    $signature: 68
   };
   Y.PythonCell_closure1.prototype = {
     call$1: function(e) {
@@ -19188,7 +20998,7 @@
       t3 = t3._as(W._convertNativeToDart_EventTarget(e.currentTarget));
       t3.toString;
       J.$indexSet$ax(t4, _s10_, t3.getAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(t3))._toHyphenedName$1(_s10_)));
-      t1.datastore.save$1(t1);
+      t1.datastore.save$1(0, t1);
     },
     $signature: 0
   };
@@ -19200,7 +21010,7 @@
       nameField = type$.InputElement._as(t1.root.querySelector(".gadget-name"));
       if (nameField != null) {
         t1.name = nameField.value;
-        t1.datastore.save$1(t1);
+        t1.datastore.save$1(0, t1);
       }
     },
     $signature: 3
@@ -19210,7 +21020,7 @@
       if (type$.KeyboardEvent._as(e).keyCode === 13)
         J.blur$0$x(this.$this.root.querySelector(".gadget-name"));
     },
-    $signature: 64
+    $signature: 69
   };
   Y.PythonCell_closure17.prototype = {
     call$1: function(e) {
@@ -19218,7 +21028,7 @@
       type$.MouseEvent._as(e);
       t1 = this.$this;
       t1._showElement$1("output");
-      t1.datastore.save$1(t1);
+      t1.datastore.save$1(0, t1);
     },
     $signature: 0
   };
@@ -19228,7 +21038,7 @@
       type$.MouseEvent._as(e);
       t1 = this.$this;
       t1._hideElement$1("output");
-      t1.datastore.save$1(t1);
+      t1.datastore.save$1(0, t1);
     },
     $signature: 0
   };
@@ -19255,7 +21065,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 19
+    $signature: 5
   };
   Y.PythonCell_closure20.prototype = {
     call$1: function(e) {
@@ -19283,7 +21093,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 19
+    $signature: 5
   };
   Y.PythonCell_onPythonDone_closure.prototype = {
     call$0: function() {
@@ -19299,7 +21109,7 @@
     call$1: function(item) {
       return H._asStringNullable(item) !== "gadget-icon";
     },
-    $signature: 6
+    $signature: 8
   };
   Y.PythonCell__setInstrument_closure0.prototype = {
     call$1: function(e) {
@@ -19340,7 +21150,7 @@
       if (t1.recorder.recording)
         t1.updateRecording$0();
     },
-    $signature: 66
+    $signature: 71
   };
   Y.PythonCell__shareTrack_closure.prototype = {
     call$1: function(e) {
@@ -19393,7 +21203,7 @@
               return P._asyncAwait(t1.datastore.publishTrack$2(t1, t2), $async$call$1);
             case 9:
               // returning from await.
-              E.Dialog_message("Thanks for sharing <b>" + H.S(t1.name) + "</b>!<br>You can now see your track in the TunePad library.");
+              E.Dialog_message("Thanks for sharing <b>" + H.S(t1.name) + "</b>!<br>You can now see your track in the TunePad library.", "", "OK");
               $async$handler = 1;
               // goto after finally
               $async$goto = 8;
@@ -19403,7 +21213,7 @@
               $async$handler = 5;
               $async$exception = $async$currentError;
               H.unwrapException($async$exception);
-              E.Dialog_message("There was a problem publishing your track<br>in the TunePad library.");
+              E.Dialog_message("There was a problem publishing your track<br>in the TunePad library.", "", "OK");
               // goto after finally
               $async$goto = 8;
               break;
@@ -19425,7 +21235,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 19
+    $signature: 5
   };
   Y.PythonCell__doContextMenu_closure.prototype = {
     call$0: function() {
@@ -19449,7 +21259,7 @@
       if (this.menu !== m)
         J.get$classes$x(m).add$1(0, "hidden");
     },
-    $signature: 11
+    $signature: 17
   };
   Y.DataModel.prototype = {
     $eq: function(_, other) {
@@ -19690,7 +21500,7 @@
       t1 = this._updates;
       if (t1.containsKey$1(0, directory))
         for (t1 = J.get$iterator$ax(t1.$index(0, directory)); t1.moveNext$0();) {
-          t2 = t1.get$current();
+          t2 = t1.get$current(t1);
           t3 = C.C_JsonCodec.decode$2$reviver(0, jsonString, null);
           H.Primitives_applyFunction(t2, [t3], null);
         }
@@ -19704,7 +21514,7 @@
       t1 = this._adds;
       if (t1.containsKey$1(0, directory))
         for (t1 = J.get$iterator$ax(t1.$index(0, directory)); t1.moveNext$0();) {
-          t2 = t1.get$current();
+          t2 = t1.get$current(t1);
           t3 = C.C_JsonCodec.decode$2$reviver(0, jsonString, null);
           H.Primitives_applyFunction(t2, [key, prevKey, t3], null);
         }
@@ -19716,7 +21526,7 @@
       t1 = this._removes;
       if (t1.containsKey$1(0, directory))
         for (t1 = J.get$iterator$ax(t1.$index(0, directory)); t1.moveNext$0();) {
-          t2 = t1.get$current();
+          t2 = t1.get$current(t1);
           t3 = C.C_JsonCodec.decode$2$reviver(0, jsonString, null);
           H.Primitives_applyFunction(t2, [t3], null);
         }
@@ -19747,7 +21557,7 @@
       J.add$1$ax(t1.$index(0, directory), callback);
       $.$get$_context().callMethod$2("firebaseAddedCallback", [directory]);
     },
-    save$1: function(item) {
+    save$1: function(_, item) {
       var t1, t2, t3, t4, t5, t6, t7, t8;
       item.modified = new P.DateTime(Date.now(), false);
       if (item instanceof Y.Project) {
@@ -19775,7 +21585,7 @@
           switch ($async$goto) {
             case 0:
               // Function start
-              data = cell.save$0();
+              data = cell.save$0(0);
               directory = "/" + H.S($async$self.root) + "/cells/" + H.S(cell.id) + "/settings";
               $.$get$_context().callMethod$2("firebaseUpdate", [directory, C.C_JsonCodec.encode$2$toEncodable(data, null)]);
               // implicit return
@@ -19829,7 +21639,7 @@
                   gadget_id = t2 + t3;
                   ++i;
                 }
-                data = cell.save$0();
+                data = cell.save$0(0);
                 t1 = type$.dynamic;
                 track = P.LinkedHashMap_LinkedHashMap$from(data, t1, t1);
                 J.$indexSet$ax(track, "username", $async$self.user.displayName);
@@ -20039,6 +21849,191 @@
       settings.$indexSet(0, "original-author", t1.$index(cellData, "author"));
       t2.callMethod$2("firebaseUpdate", [directory, C.C_JsonCodec.encode$2$toEncodable(settings, null)]);
     },
+    createRecording$1: function(recording) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.Recording),
+        $async$returnValue, $async$self = this, data, t1, t2, t3, t4;
+      var $async$createRecording$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              $async$goto = 3;
+              return P._asyncAwait($async$self._sendJSON$3("/api/recording/", "POST", recording.save$0(0)), $async$createRecording$1);
+            case 3:
+              // returning from await.
+              data = $async$result;
+              t1 = H._asIntNullable(J.$index$asx(data, "id"));
+              t2 = type$.JSArray_List_Float32List;
+              t3 = type$.List_num;
+              t4 = new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], t2), P.ListQueue$(t3));
+              t4.reshape$2(1, 44100);
+              t3 = new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], t2), P.ListQueue$(t3));
+              t3.reshape$2(1, 44100);
+              t1 = new Y.Recording(t4, t3, new H.JsLinkedHashMap(type$.JsLinkedHashMap_String_num), t1, new P.DateTime(Date.now(), false), new P.DateTime(Date.now(), false));
+              t1.name = "My Recording";
+              t1.load$1(0, type$.Map_dynamic_dynamic._as(data));
+              $async$returnValue = t1;
+              // goto return
+              $async$goto = 1;
+              break;
+            case 1:
+              // return
+              return P._asyncReturn($async$returnValue, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$createRecording$1, $async$completer);
+    },
+    getRecording$1: function(id) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.Recording),
+        $async$returnValue, $async$self = this, t1, t2, t3, data;
+      var $async$getRecording$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              $async$goto = 3;
+              return P._asyncAwait($async$self._sendJSON$1("/api/recording/" + id + "/"), $async$getRecording$1);
+            case 3:
+              // returning from await.
+              data = $async$result;
+              if (data == null)
+                throw H.wrapException(Y.DatastoreException$(404));
+              t1 = type$.JSArray_List_Float32List;
+              t2 = type$.List_num;
+              t3 = new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], t1), P.ListQueue$(t2));
+              t3.reshape$2(1, 44100);
+              t2 = new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], t1), P.ListQueue$(t2));
+              t2.reshape$2(1, 44100);
+              t1 = new Y.Recording(t3, t2, new H.JsLinkedHashMap(type$.JsLinkedHashMap_String_num), id, new P.DateTime(Date.now(), false), new P.DateTime(Date.now(), false));
+              t1.name = "My Recording";
+              t1.load$1(0, type$.Map_dynamic_dynamic._as(data));
+              $async$returnValue = t1;
+              // goto return
+              $async$goto = 1;
+              break;
+            case 1:
+              // return
+              return P._asyncReturn($async$returnValue, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$getRecording$1, $async$completer);
+    },
+    updateRecording$1: function(recording) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.Recording),
+        $async$returnValue, $async$self = this, t1, t2, t3, t4, data;
+      var $async$updateRecording$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              $async$goto = 3;
+              return P._asyncAwait($async$self._sendJSON$3("/api/recording/" + H.S(recording.id) + "/", "PUT", recording.save$0(0)), $async$updateRecording$1);
+            case 3:
+              // returning from await.
+              data = $async$result;
+              if (data == null)
+                throw H.wrapException(Y.DatastoreException$(404));
+              t1 = H._asIntNullable(J.$index$asx(data, "id"));
+              t2 = type$.JSArray_List_Float32List;
+              t3 = type$.List_num;
+              t4 = new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], t2), P.ListQueue$(t3));
+              t4.reshape$2(1, 44100);
+              t3 = new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], t2), P.ListQueue$(t3));
+              t3.reshape$2(1, 44100);
+              t1 = new Y.Recording(t4, t3, new H.JsLinkedHashMap(type$.JsLinkedHashMap_String_num), t1, new P.DateTime(Date.now(), false), new P.DateTime(Date.now(), false));
+              t1.name = "My Recording";
+              t1.load$1(0, type$.Map_dynamic_dynamic._as(data));
+              $async$returnValue = t1;
+              // goto return
+              $async$goto = 1;
+              break;
+            case 1:
+              // return
+              return P._asyncReturn($async$returnValue, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$updateRecording$1, $async$completer);
+    },
+    deleteRecording$1: function(recording) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic),
+        $async$self = this, data;
+      var $async$deleteRecording$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              data = recording.save$0(0);
+              if (data.containsKey$1(0, "original"))
+                data.$indexSet(0, "original", null);
+              if (data.containsKey$1(0, "processed"))
+                data.$indexSet(0, "processed", null);
+              $async$goto = 2;
+              return P._asyncAwait($async$self._sendJSON$3("/api/recording/" + H.S(recording.id) + "/", "DELETE", data), $async$deleteRecording$1);
+            case 2:
+              // returning from await.
+              // implicit return
+              return P._asyncReturn(null, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$deleteRecording$1, $async$completer);
+    },
+    getUserRecordings$0: function() {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.List_Recording),
+        $async$returnValue, $async$self = this, results, t1, t2, t3, t4, t5, rec, t6, t7, t8, data;
+      var $async$getUserRecordings$0 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              $async$goto = 3;
+              return P._asyncAwait($async$self._sendJSON$1("/api/recordings/"), $async$getUserRecordings$0);
+            case 3:
+              // returning from await.
+              data = $async$result;
+              if (data == null)
+                throw H.wrapException(Y.DatastoreException$(404));
+              results = H.setRuntimeTypeInfo([], type$.JSArray_Recording);
+              if (type$.List_dynamic._is(data))
+                for (t1 = J.get$iterator$ax(data), t2 = type$.Map_dynamic_dynamic, t3 = type$.JsLinkedHashMap_String_num, t4 = type$.JSArray_List_Float32List, t5 = type$.List_num; t1.moveNext$0();) {
+                  rec = t1.get$current(t1);
+                  if (t2._is(rec)) {
+                    t6 = H._asIntNullable(J.$index$asx(rec, "id"));
+                    t7 = new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], t4), P.ListQueue$(t5));
+                    t7.reshape$2(1, 44100);
+                    t8 = new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], t4), P.ListQueue$(t5));
+                    t8.reshape$2(1, 44100);
+                    t6 = new Y.Recording(t7, t8, new H.JsLinkedHashMap(t3), t6, new P.DateTime(Date.now(), false), new P.DateTime(Date.now(), false));
+                    t6.name = "My Recording";
+                    t6.load$1(0, rec);
+                    C.JSArray_methods.add$1(results, t6);
+                  }
+                }
+              $async$returnValue = results;
+              // goto return
+              $async$goto = 1;
+              break;
+            case 1:
+              // return
+              return P._asyncReturn($async$returnValue, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$getUserRecordings$0, $async$completer);
+    },
     _sendJSON$3: function(url, method, data) {
       return this._sendJSON$body$Datastore(url, method, data);
     },
@@ -20063,7 +22058,7 @@
               // Function start
               $async$handler = 4;
               $async$goto = 7;
-              return P._asyncAwait(W.HttpRequest_request($async$self.host + url, method, null, C.C_JsonCodec.encode$2$toEncodable(data, null), true), $async$_sendJSON$3);
+              return P._asyncAwait(W.HttpRequest_request($async$self.host + url, method, null, null, C.C_JsonCodec.encode$2$toEncodable(data, null), true), $async$_sendJSON$3);
             case 7:
               // returning from await.
               request = $async$result;
@@ -20083,7 +22078,7 @@
               t1 = H.unwrapException($async$exception);
               if (type$.ProgressEvent._is(t1)) {
                 e = t1;
-                throw H.wrapException(Y.DatastoreException$(type$.HttpRequest._as(W._convertNativeToDart_EventTarget(e.target)).status));
+                throw H.wrapException(Y.DatastoreException$(type$.HttpRequest._as(J.get$target$x(e)).status));
               } else
                 throw $async$exception;
               // goto after finally
@@ -20173,7 +22168,7 @@
               $async$handler = 7;
               $async$exception1 = $async$currentError;
               H.unwrapException($async$exception1);
-              E.Dialog_message("Failed to login with Google account.");
+              E.Dialog_message("Failed to login with Google account.", "", "OK");
               $.$get$_context().callMethod$1("firebaseLogout");
               // goto after finally
               $async$goto = 10;
@@ -20204,25 +22199,25 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 69
+    $signature: 25
   };
   Y.Datastore_addUpdateCallback_closure.prototype = {
     call$0: function() {
       return H.setRuntimeTypeInfo([], type$.JSArray_Function);
     },
-    $signature: 20
+    $signature: 23
   };
   Y.Datastore_addRemovedCallback_closure.prototype = {
     call$0: function() {
       return H.setRuntimeTypeInfo([], type$.JSArray_Function);
     },
-    $signature: 20
+    $signature: 23
   };
   Y.Datastore_addAddedCallback_closure.prototype = {
     call$0: function() {
       return H.setRuntimeTypeInfo([], type$.JSArray_Function);
     },
-    $signature: 20
+    $signature: 23
   };
   Y.DatastoreException.prototype = {$isException: 1};
   Y.Project.prototype = {
@@ -20277,9 +22272,9 @@
       mc = type$.HtmlElement._as(document.querySelector("#master-clock"));
       if (mc != null) {
         t1 = _this.clock;
-        m = "" + C.JSInt_methods.$mod(C.JSNumber_methods._tdivFast$1(t1.get$time(), 60), 60);
-        s = "" + C.JSInt_methods.$mod(C.JSNumber_methods.round$0(t1.get$time()), 60);
-        c = "" + C.JSInt_methods.$mod(C.JSNumber_methods.floor$0(t1.get$time() * 100), 100);
+        m = "" + C.JSInt_methods.$mod(C.JSNumber_methods._tdivFast$1(t1.get$time(t1), 60), 60);
+        s = "" + C.JSInt_methods.$mod(C.JSNumber_methods.round$0(t1.get$time(t1)), 60);
+        c = "" + C.JSInt_methods.$mod(C.JSNumber_methods.floor$0(t1.get$time(t1) * 100), 100);
         if (m.length === 1)
           m = "0" + m;
         if (s.length === 1)
@@ -20459,13 +22454,13 @@
     call$1: function(cell) {
       type$.PythonCell._as(cell).initAudio$0();
     },
-    $signature: 21
+    $signature: 24
   };
   Y.Project_playAll_closure.prototype = {
     call$1: function(cell) {
       type$.PythonCell._as(cell).play$0(0);
     },
-    $signature: 21
+    $signature: 24
   };
   Y.Project_pauseAll_closure.prototype = {
     call$1: function(cell) {
@@ -20473,7 +22468,7 @@
       cell._pauseHelper$0();
       cell.clock.pause$1(0, cell);
     },
-    $signature: 21
+    $signature: 24
   };
   Y.Project__registerEvents_closure.prototype = {
     call$1: function(e) {
@@ -20528,7 +22523,7 @@
       t1._setBpm$0();
       Y.toggleContextMenu(document.querySelector("#change-bpm .context-menu"));
       e.stopPropagation();
-      t1.datastore.save$1(t1);
+      t1.datastore.save$1(0, t1);
     },
     $signature: 0
   };
@@ -20552,7 +22547,7 @@
       t1._setKey$0();
       Y.toggleContextMenu(document.querySelector("#change-key .context-menu"));
       e.stopPropagation();
-      t1.datastore.save$1(t1);
+      t1.datastore.save$1(0, t1);
     },
     $signature: 0
   };
@@ -20575,7 +22570,7 @@
       t1._setTimeSignature$0();
       Y.toggleContextMenu(document.querySelector("#change-time-signature .context-menu"));
       e.stopPropagation();
-      t1.datastore.save$1(t1);
+      t1.datastore.save$1(0, t1);
     },
     $signature: 0
   };
@@ -20700,6 +22695,2859 @@
       return false;
     }
   };
+  Y.EffectsChain.prototype = {
+    EffectsChain$2: function(color, studio) {
+      var t2, _this = this,
+        t1 = V.EffectsDial$(color);
+      t1.minValue = 0.4;
+      t1.maxValue = 2.7;
+      t1.step = 0.1;
+      t1.set$value(0, 1);
+      t1.onAdjusted = new Y.EffectsChain_closure(_this);
+      _this.pitchDial = t1;
+      t1 = V.EffectsDial$(color);
+      t1.set$value(0, 0);
+      t1.step = 0.1;
+      t1.onAdjusted = new Y.EffectsChain_closure0(_this);
+      _this.reverbDial = t1;
+      t1 = V.EffectsDial$(color);
+      t1.minValue = 0;
+      t1.maxValue = 14;
+      t1.set$values(0, H.setRuntimeTypeInfo([16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4], type$.JSArray_num));
+      t1.set$value(0, 16);
+      t1.onAdjusted = new Y.EffectsChain_closure1(_this);
+      _this.crushDial = t1;
+      t1 = V.EffectsDial$(color);
+      t1.minValue = -30;
+      t1.maxValue = 10;
+      t1.set$value(0, 0);
+      t1.step = 1;
+      t1.onAdjusted = new Y.EffectsChain_closure2(_this);
+      _this.bassDial = t1;
+      t1 = V.EffectsDial$(color);
+      t1.minValue = -30;
+      t1.maxValue = 10;
+      t1.set$value(0, 0);
+      t1.step = 1;
+      t1.onAdjusted = new Y.EffectsChain_closure3(_this);
+      _this.midDial = t1;
+      t1 = V.EffectsDial$(color);
+      t1.minValue = -30;
+      t1.maxValue = 10;
+      t1.set$value(0, 0);
+      t1.step = 1;
+      t1.onAdjusted = new Y.EffectsChain_closure4(_this);
+      _this.trebleDial = t1;
+      t1 = V.EffectsDial$(color);
+      t1.minValue = 0;
+      t1.maxValue = 2;
+      t1.set$value(0, 1);
+      t1.step = 0.1;
+      t1.onAdjusted = new Y.EffectsChain_closure5(_this);
+      _this.masterDial = t1;
+      t2 = _this.studio;
+      t1.buildUI$1(t2.dialog.querySelector("#volume-dial"));
+      _this.pitchDial.buildUI$1(t2.dialog.querySelector("#pitch-dial"));
+      _this.bassDial.buildUI$1(t2.dialog.querySelector("#bass-dial"));
+      _this.midDial.buildUI$1(t2.dialog.querySelector("#mid-dial"));
+      _this.trebleDial.buildUI$1(t2.dialog.querySelector("#treble-dial"));
+      _this.reverbDial.buildUI$1(t2.dialog.querySelector("#reverb-dial"));
+      _this.crushDial.buildUI$1(t2.dialog.querySelector("#crush-dial"));
+    },
+    _updateSettings$0: function() {
+      var t2, _this = this,
+        t1 = _this.studio,
+        out = t1.dialog.querySelector("#pitch-dial .value");
+      if (out != null) {
+        t2 = _this.pitchDial;
+        J.set$innerHtml$x(out, C.JSNumber_methods.toStringAsFixed$1(t2.get$value(t2), 1));
+      }
+      out = t1.dialog.querySelector("#reverb-dial .value");
+      if (out != null) {
+        t2 = _this.reverbDial;
+        J.set$innerHtml$x(out, "" + C.JSNumber_methods.round$0(t2.get$value(t2) * 100) + "%");
+      }
+      out = t1.dialog.querySelector("#bass-dial .value");
+      if (out != null) {
+        t2 = _this.bassDial;
+        J.set$innerHtml$x(out, "" + C.JSNumber_methods.round$0(t2.get$value(t2)) + "dB");
+      }
+      out = t1.dialog.querySelector("#mid-dial .value");
+      if (out != null) {
+        t2 = _this.midDial;
+        J.set$innerHtml$x(out, "" + C.JSNumber_methods.round$0(t2.get$value(t2)) + "dB");
+      }
+      out = t1.dialog.querySelector("#treble-dial .value");
+      if (out != null) {
+        t2 = _this.trebleDial;
+        J.set$innerHtml$x(out, "" + C.JSNumber_methods.round$0(t2.get$value(t2)) + "dB");
+      }
+      out = t1.dialog.querySelector("#volume-dial .value");
+      if (out != null) {
+        t1 = _this.masterDial;
+        J.set$innerHtml$x(out, "" + C.JSNumber_methods.round$0(t1.get$value(t1) * 100) + "%");
+      }
+    },
+    playAudio$5: function(original, processed, dest, start, end) {
+      return this.playAudio$body$EffectsChain(original, processed, dest, start, end);
+    },
+    playAudio$body$EffectsChain: function(original, processed, dest, start, end) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.bool),
+        $async$returnValue, $async$handler = 2, $async$currentError, $async$next = [], $async$self = this, channels, context, t1, t2, t3, countdown, _box_0, $async$temp1;
+      var $async$playAudio$5 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1) {
+          $async$currentError = $async$result;
+          $async$goto = $async$handler;
+        }
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              _box_0 = {};
+              $async$self._adjusted = false;
+              channels = original._channels.length;
+              context = type$.AudioContext._as(dest.context);
+              t1 = context.createBufferSource();
+              t1.buffer = original.toAudioBuffer$0();
+              t2 = t1.playbackRate;
+              t3 = $async$self.pitchDial;
+              t2.value = t3.get$value(t3);
+              $async$self.source = t1;
+              t1 = context.createConvolver();
+              $async$self.convolve = t1;
+              t1.buffer = type$.AudioBuffer._as($async$self.sounds.$index(0, "impulse"));
+              t1 = C.AudioContext_methods.createGain$0(context);
+              t3 = t1.gain;
+              t2 = $async$self.reverbDial;
+              t3.value = t2.get$value(t2);
+              $async$self.rWet = t1;
+              t1 = C.AudioContext_methods.createGain$0(context);
+              t2 = t1.gain;
+              t3 = $async$self.reverbDial;
+              t2.value = 1 - t3.get$value(t3);
+              $async$self.rDry = t1;
+              t1 = C.AudioContext_methods.createGain$0(context);
+              t1.gain.value = 1;
+              $async$self.master = t1;
+              $async$self.recorder = C.AudioContext_methods.createScriptProcessor$3(context, 1024, channels, channels);
+              t1 = context.createBiquadFilter();
+              t1.type = "lowshelf";
+              t1.frequency.value = 200;
+              t3 = t1.gain;
+              t2 = $async$self.bassDial;
+              t3.value = t2.get$value(t2);
+              $async$self.bassNode = t1;
+              t1 = context.createBiquadFilter();
+              t1.type = "highshelf";
+              t1.frequency.value = 2000;
+              t2 = t1.gain;
+              t3 = $async$self.trebleDial;
+              t2.value = t3.get$value(t3);
+              $async$self.trebleNode = t1;
+              t1 = context.createBiquadFilter();
+              t1.type = "peaking";
+              t1.frequency.value = 440;
+              t3 = t1.gain;
+              t2 = $async$self.midDial;
+              t3.value = t2.get$value(t2);
+              $async$self.midNode = t1;
+              $async$self.source.connect($async$self.bassNode, 0, 0);
+              $async$self.bassNode.connect($async$self.midNode, 0, 0);
+              $async$self.midNode.connect($async$self.trebleNode, 0, 0);
+              $async$self.trebleNode.connect($async$self.convolve, 0, 0);
+              $async$self.trebleNode.connect($async$self.rDry, 0, 0);
+              $async$self.rDry.connect($async$self.master, 0, 0);
+              $async$self.convolve.connect($async$self.rWet, 0, 0);
+              $async$self.rWet.connect($async$self.master, 0, 0);
+              $async$self.master.connect($async$self.recorder, 0, 0);
+              $async$self.recorder.connect(dest, 0, 0);
+              t1 = end - start;
+              t2 = $async$self.pitchDial;
+              t2 = t2.get$value(t2);
+              t3 = original.sampleRate;
+              if (typeof t3 !== "number") {
+                $async$returnValue = H.iae(t3);
+                // goto return
+                $async$goto = 1;
+                break;
+              }
+              countdown = C.JSDouble_methods.round$0(t1 / t2 * t3);
+              _box_0.countdown = countdown;
+              _box_0.countdown = countdown + 2048;
+              $async$self.source.start(0, start, t1);
+              t1 = $async$self.recorder;
+              t1.toString;
+              t3 = type$.void_Function_AudioProcessingEvent._as(new Y.EffectsChain_playAudio_closure(_box_0, $async$self, processed));
+              type$.void_Function._as(null);
+              W._EventStreamSubscription$(t1, "audioprocess", t3, false, type$.AudioProcessingEvent);
+              t3 = $async$self.source;
+              t3.toString;
+              t3 = P._StreamIterator$(new W._EventStream(t3, "ended", false, type$._EventStream_Event), type$.Event);
+              $async$handler = 3;
+              $async$temp1 = H;
+              $async$goto = 6;
+              return P._asyncAwait(t3.moveNext$0(), $async$playAudio$5);
+            case 6:
+              // returning from await.
+              if ($async$temp1.boolConversionCheck($async$result)) {
+                t3.get$current(t3);
+                t1 = $async$self._adjusted;
+                $async$returnValue = !t1;
+                $async$next = [1];
+                // goto finally
+                $async$goto = 4;
+                break;
+              }
+              $async$next.push(5);
+              // goto finally
+              $async$goto = 4;
+              break;
+            case 3:
+              // uncaught
+              $async$next = [2];
+            case 4:
+              // finally
+              $async$handler = 2;
+              $async$goto = 7;
+              return P._asyncAwait(t3.cancel$0(0), $async$playAudio$5);
+            case 7:
+              // returning from await.
+              // goto the next finally handler
+              $async$goto = $async$next.pop();
+              break;
+            case 5:
+              // after finally
+            case 1:
+              // return
+              return P._asyncReturn($async$returnValue, $async$completer);
+            case 2:
+              // rethrow
+              return P._asyncRethrow($async$currentError, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$playAudio$5, $async$completer);
+    },
+    _stop$0: function() {
+      var _this = this,
+        t1 = _this.source;
+      if (t1 != null) {
+        t1.stop();
+        _this.convolve.disconnect();
+        _this.source.disconnect();
+        _this.rWet.disconnect();
+        _this.rDry.disconnect();
+        _this.recorder.disconnect();
+        _this.master.disconnect();
+        _this.bassNode.disconnect();
+        _this.midNode.disconnect();
+        _this.trebleNode.disconnect();
+        _this.midNode = _this.trebleNode = _this.bassNode = _this.master = _this.rDry = _this.rWet = _this.recorder = _this.convolve = _this.source = null;
+      }
+    },
+    playSlice$4: function(buffer, dest, start, duration) {
+      var t1, t2, _this = this;
+      if (_this._absn == null) {
+        t1 = type$.AudioContext._as(dest.context).createBufferSource();
+        t1.buffer = buffer.toAudioBuffer$0();
+        _this._absn = t1;
+        t1.connect(dest, 0, 0);
+        _this._absn.start(0, start, duration);
+        t1 = _this._absn;
+        t1.toString;
+        t2 = type$.void_Function_Event._as(new Y.EffectsChain_playSlice_closure(_this));
+        type$.void_Function._as(null);
+        W._EventStreamSubscription$(t1, "ended", t2, false, type$.Event);
+      }
+    },
+    loadSoundEffects$1: function(context) {
+      var t1, t2, t3,
+        request = new XMLHttpRequest();
+      C.HttpRequest_methods.open$3$async(request, "GET", "sounds/impulses/bright-hall.wav", true);
+      request.responseType = "arraybuffer";
+      t1 = type$.void_Function_ProgressEvent;
+      t2 = t1._as(new Y.EffectsChain_loadSoundEffects_closure(this, context, request));
+      type$.void_Function._as(null);
+      t3 = type$.ProgressEvent;
+      W._EventStreamSubscription$(request, "load", t2, false, t3);
+      W._EventStreamSubscription$(request, "error", t1._as(new Y.EffectsChain_loadSoundEffects_closure0()), false, t3);
+      request.send();
+    }
+  };
+  Y.EffectsChain_closure.prototype = {
+    call$2: function(d, v) {
+      var t2,
+        t1 = this.$this;
+      t1.studio.set$dirty(true);
+      t2 = t1.source;
+      if (t2 != null) {
+        t2.playbackRate.setTargetAtTime(H._asNumNullable(v), 0, 0.2);
+        t1._adjusted = true;
+      }
+      t1._updateSettings$0();
+    },
+    "call*": "call$2",
+    $requiredArgCount: 2,
+    $signature: 4
+  };
+  Y.EffectsChain_closure0.prototype = {
+    call$2: function(d, v) {
+      var t2,
+        t1 = this.$this;
+      t1.studio.set$dirty(true);
+      t2 = t1.rWet;
+      if (t2 != null && t1.rDry != null) {
+        t2 = t2.gain;
+        H._asNumNullable(v);
+        t2.setTargetAtTime(v, 0, 0.2);
+        t2 = t1.rDry.gain;
+        if (typeof v !== "number")
+          return H.iae(v);
+        t2.setTargetAtTime(1 - v, 0, 0.2);
+        t1._adjusted = true;
+      }
+      t1._updateSettings$0();
+    },
+    "call*": "call$2",
+    $requiredArgCount: 2,
+    $signature: 4
+  };
+  Y.EffectsChain_closure1.prototype = {
+    call$2: function(d, v) {
+      this.$this.studio.set$dirty(true);
+    },
+    "call*": "call$2",
+    $requiredArgCount: 2,
+    $signature: 4
+  };
+  Y.EffectsChain_closure2.prototype = {
+    call$2: function(d, v) {
+      var t2,
+        t1 = this.$this;
+      t1.studio.set$dirty(true);
+      t2 = t1.bassNode;
+      if (t2 != null) {
+        t2.gain.setTargetAtTime(H._asNumNullable(v), 0, 0.2);
+        t1._adjusted = true;
+      }
+      t1._updateSettings$0();
+    },
+    "call*": "call$2",
+    $requiredArgCount: 2,
+    $signature: 4
+  };
+  Y.EffectsChain_closure3.prototype = {
+    call$2: function(d, v) {
+      var t2,
+        t1 = this.$this;
+      t1.studio.set$dirty(true);
+      t2 = t1.midNode;
+      if (t2 != null) {
+        t2.gain.setTargetAtTime(H._asNumNullable(v), 0, 0.2);
+        t1._adjusted = true;
+      }
+      t1._updateSettings$0();
+    },
+    "call*": "call$2",
+    $requiredArgCount: 2,
+    $signature: 4
+  };
+  Y.EffectsChain_closure4.prototype = {
+    call$2: function(d, v) {
+      var t2,
+        t1 = this.$this;
+      t1.studio.set$dirty(true);
+      t2 = t1.trebleNode;
+      if (t2 != null) {
+        t2.gain.setTargetAtTime(H._asNumNullable(v), 0, 0.2);
+        t1._adjusted = true;
+      }
+      t1._updateSettings$0();
+    },
+    "call*": "call$2",
+    $requiredArgCount: 2,
+    $signature: 4
+  };
+  Y.EffectsChain_closure5.prototype = {
+    call$2: function(d, v) {
+      var t2,
+        t1 = this.$this;
+      t1.studio.set$dirty(true);
+      t2 = t1.master;
+      if (t2 != null) {
+        t2.gain.setTargetAtTime(H._asNumNullable(v), 0, 0.2);
+        t1._adjusted = true;
+      }
+      t1._updateSettings$0();
+    },
+    "call*": "call$2",
+    $requiredArgCount: 2,
+    $signature: 4
+  };
+  Y.EffectsChain_playAudio_closure.prototype = {
+    call$1: function(e) {
+      var t1, t2, c, t3, src, countdown;
+      type$.AudioProcessingEvent._as(e);
+      t1 = this._box_0;
+      t2 = t1.countdown;
+      if (t2 > 0)
+        this.processed.append$1(0, e.inputBuffer);
+      c = 0;
+      while (true) {
+        t2 = e.inputBuffer;
+        t3 = t2.numberOfChannels;
+        if (typeof t3 !== "number")
+          return H.iae(t3);
+        if (!(c < t3))
+          break;
+        src = t2.getChannelData(c);
+        e.outputBuffer.copyToChannel(src, c, 0);
+        ++c;
+      }
+      t3 = t1.countdown;
+      t2 = t2.length;
+      if (typeof t2 !== "number")
+        return H.iae(t2);
+      countdown = t3 - t2;
+      t1.countdown = countdown;
+      if (countdown < 0)
+        this.$this._stop$0();
+    },
+    $signature: 77
+  };
+  Y.EffectsChain_playSlice_closure.prototype = {
+    call$1: function(e) {
+      var t1 = this.$this;
+      t1._absn.disconnect();
+      t1._absn = null;
+    },
+    $signature: 3
+  };
+  Y.EffectsChain_loadSoundEffects_closure.prototype = {
+    call$1: function(e) {
+      return this.$call$body$EffectsChain_loadSoundEffects_closure(type$.ProgressEvent._as(e));
+    },
+    $call$body$EffectsChain_loadSoundEffects_closure: function(e) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.Null),
+        $async$self = this, t1, buffer;
+      var $async$call$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              t1 = $async$self.context;
+              $async$goto = 2;
+              return P._asyncAwait((t1 && C.AudioContext_methods).decodeAudioData$1(t1, type$.ByteBuffer._as(W._convertNativeToDart_XHR_Response($async$self.request.response))), $async$call$1);
+            case 2:
+              // returning from await.
+              buffer = $async$result;
+              if (buffer != null)
+                $async$self.$this.sounds.$indexSet(0, "impulse", buffer);
+              // implicit return
+              return P._asyncReturn(null, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$call$1, $async$completer);
+    },
+    $signature: 21
+  };
+  Y.EffectsChain_loadSoundEffects_closure0.prototype = {
+    call$1: function(e) {
+      type$.ProgressEvent._as(e);
+      return P.print("BufferLoader: XHR error");
+    },
+    $signature: 33
+  };
+  Y.GraphicEq.prototype = {
+    GraphicEq$2: function(container, onColor) {
+      if (this.container == null)
+        return;
+      this._render$0();
+    },
+    animate$1: function(_, fft) {
+      var t2, t3, index, col, v, b, index0, t4, row, t5,
+        t1 = fft.length,
+        bins = t1 / 8 | 0;
+      for (t2 = this.dots, t3 = this.onColor, index = 0, col = 0; col < 8; ++col) {
+        for (v = 0, b = 0; b < bins; ++b, index = index0) {
+          index0 = index + 1;
+          if (index < 0 || index >= t1)
+            return H.ioore(fft, index);
+          v += fft[index];
+        }
+        v /= 32 * (bins - col);
+        for (t4 = col * 8, row = 0; row < 8; ++row) {
+          t5 = t4 + row;
+          if (t5 >= t2.length)
+            return H.ioore(t2, t5);
+          t5 = t2[t5];
+          t5.setAttribute("fill", v > row ? t3 : "rgba(0, 0, 0, 0.3)");
+        }
+      }
+    },
+    clear$0: function(_) {
+      var t1, t2, _i;
+      for (t1 = this.dots, t2 = t1.length, _i = 0; _i < t1.length; t1.length === t2 || (0, H.throwConcurrentModificationError)(t1), ++_i)
+        t1[_i].setAttribute("fill", "rgba(0, 0, 0, 0.3)");
+    },
+    _render$0: function() {
+      var t2, t3, t4, t5, col, dx, row, temp, _i, dot, _this = this,
+        t1 = _this.container;
+      if (t1 == null)
+        return;
+      t2 = _this.parent;
+      if (t2 != null)
+        C.GElement_methods.remove$0(t2);
+      t2 = document;
+      t3 = type$.SvgElement;
+      t4 = type$.GElement._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, "http://www.w3.org/2000/svg", "g")));
+      t5 = type$.String;
+      (t4 && C.GElement_methods).set$attributes(t4, P.LinkedHashMap_LinkedHashMap$_literal(["transform", "scale(1.0, -1.0) translate(0, -200)"], t5, t5));
+      _this.parent = t4;
+      t1.appendChild(t4);
+      for (t1 = type$.CircleElement, t4 = _this.dots, col = 0; col < 8; ++col)
+        for (dx = col * 25 + 12.5, row = 0; row < 8; ++row) {
+          temp = t2.createElementNS("http://www.w3.org/2000/svg", "circle");
+          temp = t1._as(t3._as(temp));
+          C.CircleElement_methods.set$attributes(temp, P.LinkedHashMap_LinkedHashMap$_literal(["cx", H.S(dx), "cy", H.S(row * 25 + 12.5), "r", "7.5", "fill", "rgba(0, 0, 0, 0.3)"], t5, t5));
+          C.JSArray_methods.add$1(t4, temp);
+        }
+      for (t1 = t4.length, _i = 0; _i < t4.length; t4.length === t1 || (0, H.throwConcurrentModificationError)(t4), ++_i) {
+        dot = t4[_i];
+        _this.parent.appendChild(dot);
+      }
+    }
+  };
+  Y.AudioRecorder.prototype = {
+    startMicrophone$0: function() {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.bool),
+        $async$returnValue, $async$handler = 2, $async$currentError, $async$next = [], $async$self = this, e, t1, exception, t2, $async$exception;
+      var $async$startMicrophone$0 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1) {
+          $async$currentError = $async$result;
+          $async$goto = $async$handler;
+        }
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              if ($async$self._stream != null) {
+                $async$returnValue = false;
+                // goto return
+                $async$goto = 1;
+                break;
+              }
+              $async$handler = 4;
+              t1 = window.navigator;
+              $async$goto = 7;
+              return P._asyncAwait((t1 && C.Navigator_methods).getUserMedia$1$audio(t1, true), $async$startMicrophone$0);
+            case 7:
+              // returning from await.
+              $async$self.set$_stream($async$result);
+              $async$handler = 2;
+              // goto after finally
+              $async$goto = 6;
+              break;
+            case 4:
+              // catch
+              $async$handler = 3;
+              $async$exception = $async$currentError;
+              e = H.unwrapException($async$exception);
+              window.alert("TunePad was unable to connect to the microphone. Please make sure you have allowed access. " + H.S(e));
+              $async$returnValue = false;
+              // goto return
+              $async$goto = 1;
+              break;
+              // goto after finally
+              $async$goto = 6;
+              break;
+            case 3:
+              // uncaught
+              // goto rethrow
+              $async$goto = 2;
+              break;
+            case 6:
+              // after finally
+              t1 = $async$self.context;
+              $async$self.input = t1.createMediaStreamSource($async$self._stream);
+              t2 = t1.createAnalyser();
+              t2.fftSize = 1024;
+              $async$self.analyzer = t2;
+              t2 = $async$self.input.channelCount;
+              $async$self.recorder = C.AudioContext_methods.createScriptProcessor$3(t1, 2048, t2, t2);
+              $async$self.input.connect($async$self.analyzer, 0, 0);
+              $async$self.analyzer.connect($async$self.recorder, 0, 0);
+              $async$self.recorder.connect(t1.destination, 0, 0);
+              t1 = $async$self.analyzer.frequencyBinCount;
+              t1 = H._isInt(t1) ? t1 : H.throwExpression(P.ArgumentError$("Invalid length " + H.S(t1)));
+              $async$self.fftData = new Uint8Array(t1);
+              $async$returnValue = true;
+              // goto return
+              $async$goto = 1;
+              break;
+            case 1:
+              // return
+              return P._asyncReturn($async$returnValue, $async$completer);
+            case 2:
+              // rethrow
+              return P._asyncRethrow($async$currentError, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$startMicrophone$0, $async$completer);
+    },
+    stopMicrophone$0: function() {
+      var t1, _this = this;
+      if (_this._stream != null) {
+        _this.input.disconnect();
+        _this.analyzer.disconnect();
+        _this.recorder.disconnect();
+        for (t1 = J.get$iterator$ax(_this._stream.getTracks()); t1.moveNext$0();)
+          t1.get$current(t1).stop();
+        _this._stream = _this.fftData = _this.recorder = _this.analyzer = _this.input = null;
+      }
+    },
+    getFrequencyData$0: function() {
+      var t1 = this.analyzer;
+      if (t1 != null) {
+        t1.getByteFrequencyData(this.fftData);
+        return this.fftData;
+      }
+      return null;
+    },
+    record$2: function(seconds, buffer) {
+      return this.record$body$AudioRecorder(seconds, buffer);
+    },
+    record$body$AudioRecorder: function(seconds, buffer) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.bool),
+        $async$returnValue, $async$handler = 2, $async$currentError, $async$next = [], $async$self = this, elapsed, e, t1, t2, t3, $async$temp1;
+      var $async$record$2 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1) {
+          $async$currentError = $async$result;
+          $async$goto = $async$handler;
+        }
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              if ($async$self._stream == null) {
+                $async$returnValue = false;
+                // goto return
+                $async$goto = 1;
+                break;
+              }
+              $async$self._recording = true;
+              elapsed = 0;
+              buffer.reshape$2($async$self.input.channelCount, H._asIntNullable($async$self.context.sampleRate));
+              t1 = $async$self.recorder;
+              t1.toString;
+              t1 = P._StreamIterator$(new W._EventStream(t1, "audioprocess", false, type$._EventStream_AudioProcessingEvent), type$.AudioProcessingEvent);
+              $async$handler = 3;
+            case 6:
+              // for condition
+              $async$temp1 = H;
+              $async$goto = 8;
+              return P._asyncAwait(t1.moveNext$0(), $async$record$2);
+            case 8:
+              // returning from await.
+              if (!$async$temp1.boolConversionCheck($async$result)) {
+                // goto after for
+                $async$goto = 7;
+                break;
+              }
+              e = t1.get$current(t1);
+              t2 = elapsed;
+              t3 = e.inputBuffer.duration;
+              if (typeof t2 !== "number") {
+                $async$returnValue = t2.$add();
+                $async$next = [1];
+                // goto finally
+                $async$goto = 4;
+                break;
+              }
+              if (typeof t3 !== "number") {
+                $async$returnValue = H.iae(t3);
+                $async$next = [1];
+                // goto finally
+                $async$goto = 4;
+                break;
+              }
+              elapsed = t2 + t3;
+              buffer.append$1(0, e.inputBuffer);
+              buffer.trimWaveform$1(70);
+              t2 = elapsed;
+              if (typeof t2 !== "number") {
+                $async$returnValue = t2.$ge();
+                $async$next = [1];
+                // goto finally
+                $async$goto = 4;
+                break;
+              }
+              if (t2 >= seconds || $async$self._stream == null || !$async$self._recording) {
+                $async$self._recording = false;
+                $async$returnValue = true;
+                $async$next = [1];
+                // goto finally
+                $async$goto = 4;
+                break;
+              }
+              // goto for condition
+              $async$goto = 6;
+              break;
+            case 7:
+              // after for
+              $async$next.push(5);
+              // goto finally
+              $async$goto = 4;
+              break;
+            case 3:
+              // uncaught
+              $async$next = [2];
+            case 4:
+              // finally
+              $async$handler = 2;
+              $async$goto = 9;
+              return P._asyncAwait(t1.cancel$0(0), $async$record$2);
+            case 9:
+              // returning from await.
+              // goto the next finally handler
+              $async$goto = $async$next.pop();
+              break;
+            case 5:
+              // after finally
+            case 1:
+              // return
+              return P._asyncReturn($async$returnValue, $async$completer);
+            case 2:
+              // rethrow
+              return P._asyncRethrow($async$currentError, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$record$2, $async$completer);
+    },
+    set$_stream: function(_stream) {
+      this._stream = type$.MediaStream._as(_stream);
+    }
+  };
+  Y.Recording.prototype = {
+    clone$0: function(_) {
+      var r, _this = this,
+        t1 = type$.JSArray_List_Float32List,
+        t2 = type$.List_num,
+        t3 = new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], t1), P.ListQueue$(t2));
+      t3.reshape$2(1, 44100);
+      t2 = new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], t1), P.ListQueue$(t2));
+      t2.reshape$2(1, 44100);
+      t1 = new H.JsLinkedHashMap(type$.JsLinkedHashMap_String_num);
+      r = new Y.Recording(t3, t2, t1, -1, new P.DateTime(Date.now(), false), new P.DateTime(Date.now(), false));
+      r.name = "My Recording";
+      r.name = _this.name;
+      r.duration = _this.duration;
+      r.original = _this.original.clone$0(0);
+      r.processed = _this.processed.clone$0(0);
+      for (t2 = _this.settings, t2 = t2.get$keys(t2), t2 = t2.get$iterator(t2); t2.moveNext$0();) {
+        t3 = t2.get$current(t2);
+        t1.$indexSet(0, t3, _this.settings.$index(0, t3));
+      }
+      return r;
+    },
+    save$0: function(_) {
+      var t1, t2, t3, t4, t5, _this = this;
+      _this.modified = new P.DateTime(Date.now(), false);
+      t1 = _this.id;
+      t2 = _this.name;
+      t3 = _this.duration;
+      t4 = _this.original;
+      t5 = type$.dynamic;
+      return P.LinkedHashMap_LinkedHashMap$_literal(["id", t1, "name", t2, "duration", t3, "channels", t4._channels.length, "rate", t4.sampleRate, "settings", _this.settings, "created", _this.created.toString$0(0), "modified", _this.modified.toString$0(0), "original", _this.original.toWAVBase64$0(), "processed", _this.processed.toWAVBase64$0()], t5, t5);
+    },
+    load$1: function(_, json) {
+      var t1, t2, c, rate, setting, _this = this,
+        _s8_ = "settings";
+      if (J.$lt$n(_this.id, 0))
+        _this.id = B.toInt(J.$index$asx(json, "id"), -1);
+      t1 = J.getInterceptor$asx(json);
+      t2 = t1.$index(json, "name");
+      _this.name = t2 == null ? "My Recording" : J.toString$0$(t2);
+      _this.duration = B.toNum(t1.$index(json, "duration"), 0);
+      _this.created = B.toDateTime(t1.$index(json, "created"));
+      _this.modified = B.toDateTime(t1.$index(json, "modified"));
+      c = B.toInt(t1.$index(json, "channels"), 0);
+      rate = B.toInt(t1.$index(json, "rate"), 0);
+      _this.original.reshape$2(c, rate);
+      _this.processed.reshape$2(c, rate);
+      if (type$.Map_dynamic_dynamic._is(t1.$index(json, _s8_)))
+        for (t2 = J.get$iterator$ax(type$.Iterable_dynamic._as(J.get$keys$x(t1.$index(json, _s8_)))); t2.moveNext$0();) {
+          setting = H._asStringNullable(t2.get$current(t2));
+          _this.settings.$indexSet(0, setting, B.toNum(J.$index$asx(t1.$index(json, _s8_), setting), 0));
+        }
+    },
+    loadAudioData$2: function(context, datastore) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic),
+        $async$self = this, t1, t2;
+      var $async$loadAudioData$2 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              t1 = $async$self.original;
+              t2 = datastore.host;
+              $async$goto = 2;
+              return P._asyncAwait(t1.loadAudio$2(context, t2 + "/recorder/audio/original/" + H.S($async$self.id)), $async$loadAudioData$2);
+            case 2:
+              // returning from await.
+              $async$goto = 3;
+              return P._asyncAwait($async$self.processed.loadAudio$2(context, t2 + "/recorder/audio/" + H.S($async$self.id)), $async$loadAudioData$2);
+            case 3:
+              // returning from await.
+              // implicit return
+              return P._asyncReturn(null, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$loadAudioData$2, $async$completer);
+    },
+    set$settings: function(settings) {
+      this.settings = type$.Map_String_num._as(settings);
+    }
+  };
+  Y.RecordingStudio.prototype = {
+    set$dirty: function(d) {
+      var t1, clipped, _this = this;
+      _this._dirty = d;
+      if (d) {
+        t1 = type$.ButtonElement;
+        t1._as(_this.dialog.querySelector("#save-button")).disabled = false;
+        clipped = _this.wf.getClipStart$0() <= 0 && _this.wf.getClipEnd$0() >= 1;
+        t1._as(_this.dialog.querySelector("#trim-button")).disabled = clipped;
+        _this._clean = false;
+      }
+    },
+    show$0: function(_) {
+      var t1, t2, t3, _this = this,
+        _s7_ = "#f0c229";
+      if (_this.datastore.user.anonymous) {
+        t1 = J.get$onClick$x(E.Dialog_message("Sign in to TunePad to upload and record your own sounds.", "Sign In", "Sign In").querySelector(".confirm-button"));
+        t2 = t1.$ti;
+        t3 = t2._eval$1("~(1)")._as(new Y.RecordingStudio_show_closure(_this));
+        type$.void_Function._as(null);
+        W._EventStreamSubscription$(t1._target, t1._eventType, t3, false, t2._precomputed1);
+        return;
+      }
+      t1 = E.Dialog_openModal("#recording-studio-template", null);
+      _this.dialog = t1;
+      if (t1 == null)
+        return;
+      t1 = type$.JSArray_List_Float32List;
+      t2 = type$.List_num;
+      new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], t1), P.ListQueue$(t2)).reshape$2(1, 44100);
+      new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], t1), P.ListQueue$(t2)).reshape$2(1, 44100);
+      Date.now();
+      Date.now();
+      t1 = type$.SvgElement._as(_this.dialog.querySelector("#waveform-container svg"));
+      t2 = new Y.WaveformTrace(470, 125, _s7_, _this);
+      t3 = new Array(94);
+      t3.fixed$length = Array;
+      t2.set$bars(H.setRuntimeTypeInfo(t3, type$.JSArray_RectElement));
+      t2.bw = 5;
+      t2._render$1(t1);
+      _this.wf = t2;
+      _this.eq = Y.GraphicEq$(type$.SvgSvgElement._as(_this.dialog.querySelector("#eq-container svg")), _s7_);
+      _this.synth = Y.EffectsChain$(_s7_, _this);
+      C.Window_methods.requestAnimationFrame$1(window, _this.get$tick());
+      _this._registerEvents$0();
+      _this.loadUserRecordings$0();
+    },
+    loadUserRecordings$0: function() {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic),
+        $async$self = this, recordings, t2, counter, t1;
+      var $async$loadUserRecordings$0 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              counter = document.querySelector("#sample-count");
+              t1 = counter != null;
+              if (t1)
+                J.set$innerHtml$x(counter, "LOADING...");
+              $async$goto = 2;
+              return P._asyncAwait($async$self.datastore.getUserRecordings$0(), $async$loadUserRecordings$0);
+            case 2:
+              // returning from await.
+              recordings = $async$result;
+              t2 = J.getInterceptor$ax(recordings);
+              t2.forEach$1(recordings, new Y.RecordingStudio_loadUserRecordings_closure($async$self));
+              if (t1)
+                J.set$innerHtml$x(counter, H.S(t2.get$length(recordings)));
+              // implicit return
+              return P._asyncReturn(null, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$loadUserRecordings$0, $async$completer);
+    },
+    initAudio$0: function() {
+      var t1, _this = this;
+      if (_this.context == null) {
+        t1 = _this.context = new (window.AudioContext || window.webkitAudioContext)();
+        _this.recorder = new Y.AudioRecorder(t1);
+        _this.buffer.reshape$2(2, H._asIntNullable(t1.sampleRate));
+        _this.recording.original.reshape$2(2, H._asIntNullable(_this.context.sampleRate));
+        _this.recording.processed.reshape$2(2, H._asIntNullable(_this.context.sampleRate));
+        _this.synth.loadSoundEffects$1(_this.context);
+      }
+    },
+    clear$0: function(_) {
+      var t1, t2, t3, _this = this,
+        _s16_ = "querySelectorAll",
+        _s6_ = "hidden";
+      _this.pause$0(0);
+      _this.set$dirty(false);
+      _this.resetEffects$0();
+      _this.recording.id = -1;
+      _this.wf.clear$0(0);
+      _this.eq.clear$0(0);
+      _this.buffer.clear$0(0);
+      _this.recording.original.clear$0(0);
+      _this.recording.processed.clear$0(0);
+      t1 = _this.wf.info;
+      t1.toString;
+      C.TextElement_methods.setInnerHtml$1(t1, "0.00 s");
+      _this.recorder.stopMicrophone$0();
+      type$.ButtonElement._as(_this.dialog.querySelector("#save-button")).disabled = true;
+      type$.InputElement._as(_this.dialog.querySelector("#edit-name")).value = "";
+      t1 = _this.dialog;
+      t2 = type$.Element;
+      t1.toString;
+      H.checkTypeBound(t2, t2, "T", _s16_);
+      t3 = type$._FrozenElementList_Element;
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("#effects-container"), t3)).add$1(0, _s6_);
+      t1 = _this.dialog;
+      t1.toString;
+      H.checkTypeBound(t2, t2, "T", _s16_);
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("#record-button"), t3)).remove$1(0, _s6_);
+      t1 = _this.dialog;
+      t1.toString;
+      H.checkTypeBound(t2, t2, "T", _s16_);
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("#stop-button"), t3)).add$1(0, _s6_);
+      t1 = _this.dialog;
+      t1.toString;
+      H.checkTypeBound(t2, t2, "T", _s16_);
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("#waveform-container"), t3)).remove$1(0, "recording");
+    },
+    tick$1: function(t) {
+      var t1, t2, t3, t4, t5, position, _this = this;
+      H._asNumNullable(t);
+      if (_this.dialog == null)
+        return;
+      t1 = _this.recorder;
+      if (t1 != null && t1._stream != null)
+        _this.eq.animate$1(0, t1.getFrequencyData$0());
+      t1 = _this.recorder;
+      if (t1 != null && t1._recording)
+        _this.wf.animate$0(0);
+      else {
+        t1 = _this.synth;
+        if (t1.source != null) {
+          t2 = _this.recording.processed;
+          t3 = t2.samples;
+          t2 = t2.sampleRate;
+          if (typeof t2 !== "number")
+            return H.iae(t2);
+          t4 = _this._lastTime;
+          t5 = _this._lastPosition;
+          t1 = t1.pitchDial;
+          position = t5 + (t3 / t2 - t4) * t1.get$value(t1);
+          t1 = _this.wf;
+          t4 = _this.buffer;
+          t2 = t4.samples;
+          t4 = t4.sampleRate;
+          if (typeof t4 !== "number")
+            return H.iae(t4);
+          t1.animate$1(0, position / (t2 / t4));
+          _this._lastPosition = position;
+          t4 = _this.recording.processed;
+          t2 = t4.samples;
+          t4 = t4.sampleRate;
+          if (typeof t4 !== "number")
+            return H.iae(t4);
+          _this._lastTime = t2 / t4;
+        } else {
+          if (_this._looping) {
+            t1 = _this.dialog;
+            t2 = type$.Element;
+            t1.toString;
+            H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+            t1 = W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("#loop-button"), type$._FrozenElementList_Element)).contains$1(0, "checked");
+          } else
+            t1 = false;
+          if (t1)
+            _this.play$0(0);
+          else if (_this._looping)
+            _this.pause$0(0);
+        }
+      }
+      C.Window_methods.requestAnimationFrame$1(window, _this.get$tick());
+    },
+    uploadAudioFile$1: function(fileInput) {
+      return this.uploadAudioFile$body$RecordingStudio(fileInput);
+    },
+    uploadAudioFile$body$RecordingStudio: function(fileInput) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic),
+        $async$returnValue, $async$self = this, maxSize, t3, reader, filename, index, t1, t2;
+      var $async$uploadAudioFile$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              t1 = {};
+              t2 = $async$self.recorder;
+              if (t2 != null && t2._recording) {
+                // goto return
+                $async$goto = 1;
+                break;
+              }
+              if (fileInput.files.length === 0) {
+                // goto return
+                $async$goto = 1;
+                break;
+              }
+              $async$self.clear$0(0);
+              maxSize = Math.pow(2, 20);
+              t2 = fileInput.files;
+              if (0 >= t2.length) {
+                $async$returnValue = H.ioore(t2, 0);
+                // goto return
+                $async$goto = 1;
+                break;
+              }
+              t2 = t2[0].size;
+              if (typeof t2 !== "number") {
+                $async$returnValue = t2.$lt();
+                // goto return
+                $async$goto = 1;
+                break;
+              }
+              if (t2 < maxSize) {
+                t2 = $async$self.dialog;
+                t3 = type$.Element;
+                t2.toString;
+                H.checkTypeBound(t3, t3, "T", "querySelectorAll");
+                W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t2.querySelectorAll("#waveform-container"), type$._FrozenElementList_Element)).add$1(0, "loading");
+                t2 = $async$self.wf.info;
+                t2.toString;
+                C.TextElement_methods.setInnerHtml$1(t2, "Upoading...");
+                reader = new FileReader();
+                t2 = fileInput.files;
+                if (0 >= t2.length) {
+                  $async$returnValue = H.ioore(t2, 0);
+                  // goto return
+                  $async$goto = 1;
+                  break;
+                }
+                reader.readAsArrayBuffer(t2[0]);
+                t2 = fileInput.files;
+                if (0 >= t2.length) {
+                  $async$returnValue = H.ioore(t2, 0);
+                  // goto return
+                  $async$goto = 1;
+                  break;
+                }
+                filename = t1.filename = t2[0].name;
+                index = J.lastIndexOf$1$s(filename, ".");
+                if (index > 3)
+                  t1.filename = C.JSString_methods.substring$2(filename, 0, index);
+                t1 = type$.void_Function_ProgressEvent._as(new Y.RecordingStudio_uploadAudioFile_closure(t1, $async$self, reader));
+                type$.void_Function._as(null);
+                W._EventStreamSubscription$(reader, "load", t1, false, type$.ProgressEvent);
+              } else
+                window.alert("The maximum audio file upload size is 2MB");
+            case 1:
+              // return
+              return P._asyncReturn($async$returnValue, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$uploadAudioFile$1, $async$completer);
+    },
+    recordAudio$0: function() {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic),
+        $async$self = this, t1, t2, t3, now;
+      var $async$recordAudio$0 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              $async$goto = !$async$self.recorder._recording ? 2 : 3;
+              break;
+            case 2:
+              // then
+              $async$self.clear$0(0);
+              t1 = $async$self.dialog;
+              t2 = type$.Element;
+              t1.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              t3 = type$._FrozenElementList_Element;
+              W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("#record-button"), t3)).add$1(0, "hidden");
+              t1 = $async$self.dialog;
+              t1.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("#stop-button"), t3)).remove$1(0, "hidden");
+              t1 = $async$self.dialog;
+              t1.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("#waveform-container"), t3)).add$1(0, "recording");
+              $async$goto = 4;
+              return P._asyncAwait($async$self.recorder.startMicrophone$0(), $async$recordAudio$0);
+            case 4:
+              // returning from await.
+              $async$goto = 5;
+              return P._asyncAwait($async$self.recorder.record$2(10, $async$self.buffer), $async$recordAudio$0);
+            case 5:
+              // returning from await.
+              $async$self.recorder.stopMicrophone$0();
+              $async$self.recording.original = $async$self.buffer.clone$0(0);
+              $async$self.buffer.generateWaveform$1($async$self.wf.bars.length);
+              t1 = $async$self.recording;
+              now = new P.DateTime(Date.now(), false);
+              t1.name = "Recording " + ($async$self._twoDigit$1(H.Primitives_getYear(now)) + "-" + $async$self._twoDigit$1(H.Primitives_getMonth(now)) + "-" + $async$self._twoDigit$1(H.Primitives_getDay(now)) + " " + $async$self._twoDigit$1(H.Primitives_getHours(now)) + ":" + $async$self._twoDigit$1(H.Primitives_getMinutes(now)) + ":" + $async$self._twoDigit$1(H.Primitives_getSeconds(now)));
+              type$.InputElement._as($async$self.dialog.querySelector("#edit-name")).value = $async$self.recording.name;
+              $async$self.set$dirty(true);
+              $async$self.wf.animate$1(0, 0);
+              $async$self.eq.clear$0(0);
+              t1 = $async$self.dialog;
+              t1.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("#record-button"), t3)).remove$1(0, "hidden");
+              t1 = $async$self.dialog;
+              t1.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("#stop-button"), t3)).add$1(0, "hidden");
+              t1 = $async$self.dialog;
+              t1.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("#waveform-container"), t3)).remove$1(0, "recording");
+              t1 = $async$self.dialog;
+              t1.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("#effects-container"), t3)).remove$1(0, "hidden");
+              type$.ButtonElement._as($async$self.dialog.querySelector("#save-button")).disabled = false;
+            case 3:
+              // join
+              // implicit return
+              return P._asyncReturn(null, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$recordAudio$0, $async$completer);
+    },
+    play$1$mute: function(_, mute) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic),
+        $async$returnValue, $async$self = this, t1, t2, t3, t4, t5, t6, end, start, gain;
+      var $async$play$1$mute = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              if ($async$self.synth.source == null) {
+                t1 = $async$self.recorder;
+                t1 = !(t1 != null && t1._recording) && $async$self.buffer.samples > 0;
+              } else
+                t1 = false;
+              $async$goto = t1 ? 3 : 4;
+              break;
+            case 3:
+              // then
+              t1 = $async$self.dialog;
+              t2 = type$.Element;
+              t1.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              t3 = type$._FrozenElementList_Element;
+              W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("#play-button"), t3)).add$1(0, "hidden");
+              t1 = $async$self.dialog;
+              t1.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("#pause-button"), t3)).remove$1(0, "hidden");
+              t1 = $async$self.dialog;
+              t1.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("#waveform-container"), t3)).add$1(0, "playing");
+              t3 = $async$self.wf.getClipStart$0();
+              t1 = $async$self.buffer;
+              t2 = t1.samples;
+              t1 = t1.sampleRate;
+              if (typeof t1 !== "number") {
+                $async$returnValue = H.iae(t1);
+                // goto return
+                $async$goto = 1;
+                break;
+              }
+              t4 = $async$self.wf.getClipEnd$0();
+              t5 = $async$self.buffer;
+              t6 = t5.samples;
+              t5 = t5.sampleRate;
+              if (typeof t5 !== "number") {
+                $async$returnValue = H.iae(t5);
+                // goto return
+                $async$goto = 1;
+                break;
+              }
+              end = t4 * (t6 / t5);
+              t5 = $async$self.recording;
+              t6 = t5.processed;
+              t5 = t5.original;
+              t6.reshape$2(t5._channels.length, t5.sampleRate);
+              $async$self._looping = true;
+              start = $async$self._lastPosition = t3 * (t2 / t1);
+              $async$self._lastTime = 0;
+              t1 = $async$self.context;
+              gain = (t1 && C.AudioContext_methods).createGain$0(t1);
+              t1 = gain.gain;
+              t1.value = mute ? 0 : 1;
+              gain.connect($async$self.context.destination, 0, 0);
+              $async$goto = 5;
+              return P._asyncAwait($async$self.synth.playAudio$5($async$self.buffer, $async$self.recording.processed, gain, start, end), $async$play$1$mute);
+            case 5:
+              // returning from await.
+              $async$self.set$_clean($async$result);
+              if (H.boolConversionCheck($async$self._clean))
+                $async$self.recording.processed.trim$2(0, 0, end - start);
+            case 4:
+              // join
+            case 1:
+              // return
+              return P._asyncReturn($async$returnValue, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$play$1$mute, $async$completer);
+    },
+    play$0: function($receiver) {
+      return this.play$1$mute($receiver, false);
+    },
+    pause$0: function(_) {
+      var t1, t2, t3, _this = this,
+        _s16_ = "querySelectorAll";
+      _this._looping = false;
+      t1 = _this.dialog;
+      t2 = type$.Element;
+      t1.toString;
+      H.checkTypeBound(t2, t2, "T", _s16_);
+      t3 = type$._FrozenElementList_Element;
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("#play-button"), t3)).remove$1(0, "hidden");
+      t1 = _this.dialog;
+      t1.toString;
+      H.checkTypeBound(t2, t2, "T", _s16_);
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("#pause-button"), t3)).add$1(0, "hidden");
+      t1 = _this.dialog;
+      t1.toString;
+      H.checkTypeBound(t2, t2, "T", _s16_);
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("#waveform-container"), t3)).remove$1(0, "playing");
+      t3 = _this.synth;
+      t3._adjusted = true;
+      t3._stop$0();
+    },
+    resetEffects$0: function() {
+      var t2, _this = this,
+        t1 = _this.synth;
+      t1.pitchDial.set$value(0, 1);
+      t1.reverbDial.set$value(0, 0);
+      t1.crushDial.set$value(0, 16);
+      t1.bassDial.set$value(0, 0);
+      t1.midDial.set$value(0, 0);
+      t1.trebleDial.set$value(0, 0);
+      t1.masterDial.set$value(0, 1);
+      t1._updateSettings$0();
+      _this.wf.setClip$2(0, 1);
+      _this.rightTrim = _this.leftTrim = -1;
+      t1 = _this.dialog;
+      t2 = type$.Element;
+      t1.toString;
+      H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("#loop-button"), type$._FrozenElementList_Element)).remove$1(0, "checked");
+    },
+    saveRecording$0: function() {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic),
+        $async$returnValue, $async$handler = 2, $async$currentError, $async$next = [], $async$self = this, saved, t1, button, t2, t3, clipped, t4, t5, t6, t7, t8, t9, t10, t11, t12, item, $name, audio, exception, $async$exception;
+      var $async$saveRecording$0 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1) {
+          $async$currentError = $async$result;
+          $async$goto = $async$handler;
+        }
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              if ($async$self.recording.original.samples <= 0) {
+                // goto return
+                $async$goto = 1;
+                break;
+              }
+              t1 = $async$self.wf.info;
+              t1.toString;
+              C.TextElement_methods.setInnerHtml$1(t1, "Saving...");
+              $async$goto = !H.boolConversionCheck($async$self._clean) ? 3 : 4;
+              break;
+            case 3:
+              // then
+              $async$self.saving = true;
+              t1 = type$.ButtonElement;
+              button = t1._as($async$self.dialog.querySelector("#record-button"));
+              if (button != null)
+                button.disabled = true;
+              button = t1._as($async$self.dialog.querySelector("#upload-button"));
+              if (button != null)
+                button.disabled = true;
+              button = t1._as($async$self.dialog.querySelector("#trim-button"));
+              if (button != null)
+                button.disabled = true;
+              button = t1._as($async$self.dialog.querySelector("#play-button"));
+              if (button != null)
+                button.disabled = true;
+              button = t1._as($async$self.dialog.querySelector("#pause-button"));
+              if (button != null)
+                button.disabled = true;
+              button = t1._as($async$self.dialog.querySelector("#reset-button"));
+              if (button != null)
+                button.disabled = true;
+              button = t1._as($async$self.dialog.querySelector("#save-button"));
+              if (button != null)
+                button.disabled = true;
+              t2 = $async$self.synth;
+              t3 = t2.pitchDial;
+              t3._disabled = true;
+              t3._updateDrawing$0();
+              t3 = t2.reverbDial;
+              t3._disabled = true;
+              t3._updateDrawing$0();
+              t3 = t2.crushDial;
+              t3._disabled = true;
+              t3._updateDrawing$0();
+              t3 = t2.bassDial;
+              t3._disabled = true;
+              t3._updateDrawing$0();
+              t3 = t2.midDial;
+              t3._disabled = true;
+              t3._updateDrawing$0();
+              t3 = t2.trebleDial;
+              t3._disabled = true;
+              t3._updateDrawing$0();
+              t2 = t2.masterDial;
+              t2._disabled = true;
+              t2._updateDrawing$0();
+              $async$self.wf.disabled = true;
+              $async$goto = 5;
+              return P._asyncAwait($async$self.play$1$mute(0, true), $async$saveRecording$0);
+            case 5:
+              // returning from await.
+              button = t1._as($async$self.dialog.querySelector("#record-button"));
+              if (button != null)
+                button.disabled = false;
+              button = t1._as($async$self.dialog.querySelector("#upload-button"));
+              if (button != null)
+                button.disabled = false;
+              clipped = $async$self.wf.getClipStart$0() > 0 && $async$self.wf.getClipEnd$0() < 1;
+              button = t1._as($async$self.dialog.querySelector("#trim-button"));
+              if (button != null)
+                button.disabled = !clipped;
+              button = t1._as($async$self.dialog.querySelector("#play-button"));
+              if (button != null)
+                button.disabled = false;
+              button = t1._as($async$self.dialog.querySelector("#pause-button"));
+              if (button != null)
+                button.disabled = false;
+              button = t1._as($async$self.dialog.querySelector("#reset-button"));
+              if (button != null)
+                button.disabled = false;
+              button = t1._as($async$self.dialog.querySelector("#save-button"));
+              if (button != null)
+                button.disabled = false;
+              t1 = $async$self.synth;
+              t2 = t1.pitchDial;
+              t2._disabled = false;
+              t2._updateDrawing$0();
+              t2 = t1.reverbDial;
+              t2._disabled = false;
+              t2._updateDrawing$0();
+              t2 = t1.crushDial;
+              t2._disabled = false;
+              t2._updateDrawing$0();
+              t2 = t1.bassDial;
+              t2._disabled = false;
+              t2._updateDrawing$0();
+              t2 = t1.midDial;
+              t2._disabled = false;
+              t2._updateDrawing$0();
+              t2 = t1.trebleDial;
+              t2._disabled = false;
+              t2._updateDrawing$0();
+              t1 = t1.masterDial;
+              t1._disabled = false;
+              t1._updateDrawing$0();
+              $async$self.saving = $async$self.wf.disabled = false;
+            case 4:
+              // join
+              t1 = $async$self.recording;
+              t2 = t1.processed;
+              t3 = t2.samples;
+              if (t3 <= 0) {
+                t2 = $async$self.buffer;
+                t3 = t2.samples;
+                t2 = t2.sampleRate;
+                if (typeof t2 !== "number") {
+                  $async$returnValue = H.iae(t2);
+                  // goto return
+                  $async$goto = 1;
+                  break;
+                }
+                t2 = t3 / t2;
+              } else {
+                t2 = t2.sampleRate;
+                if (typeof t2 !== "number") {
+                  $async$returnValue = H.iae(t2);
+                  // goto return
+                  $async$goto = 1;
+                  break;
+                }
+                t2 = t3 / t2;
+              }
+              t1.duration = t2;
+              t2 = $async$self.wf.getClipStart$0();
+              t3 = $async$self.wf.getClipEnd$0();
+              t4 = $async$self.leftTrim;
+              t5 = $async$self.rightTrim;
+              t6 = $async$self.synth.masterDial;
+              t6 = t6.get$value(t6);
+              t7 = $async$self.synth.pitchDial;
+              t7 = t7.get$value(t7);
+              t8 = $async$self.synth.reverbDial;
+              t8 = t8.get$value(t8);
+              t9 = $async$self.synth.bassDial;
+              t9 = t9.get$value(t9);
+              t10 = $async$self.synth.midDial;
+              t10 = t10.get$value(t10);
+              t11 = $async$self.synth.trebleDial;
+              t11 = t11.get$value(t11);
+              t12 = $async$self.synth.crushDial;
+              t1.set$settings(P.LinkedHashMap_LinkedHashMap$_literal(["leftClip", t2, "rightClip", t3, "leftTrim", t4, "rightTrim", t5, "volume", t6, "playback", t7, "reverb", t8, "bass", t9, "mid", t10, "treble", t11, "crush", C.JSNumber_methods.round$0(t12.get$value(t12))], type$.String, type$.num));
+              $async$handler = 7;
+              t1 = J.$lt$n($async$self.recording.id, 0);
+              t2 = $async$self.datastore;
+              t3 = $async$self.recording;
+              $async$goto = t1 ? 10 : 12;
+              break;
+            case 10:
+              // then
+              $async$goto = 13;
+              return P._asyncAwait(t2.createRecording$1(t3), $async$saveRecording$0);
+            case 13:
+              // returning from await.
+              saved = $async$result;
+              t1 = $async$self.recording;
+              t1.id = saved.id;
+              $async$self.addRow$1(0, t1);
+              // goto join
+              $async$goto = 11;
+              break;
+            case 12:
+              // else
+              $async$goto = 14;
+              return P._asyncAwait(t2.updateRecording$1(t3), $async$saveRecording$0);
+            case 14:
+              // returning from await.
+              t1 = $async$self.recording;
+              item = $async$self.dialog.querySelector(".sample-item[data-id='" + H.S(t1.id) + "']");
+              P.print(item);
+              if (item != null) {
+                $name = type$.HtmlElement._as(item.querySelector(".sample-name"));
+                if ($name != null)
+                  J.setInnerHtml$1$x($name, t1.name);
+                J.set$innerHtml$x(item.querySelector(".sample-duration"), J.toStringAsFixed$1$n(t1.duration, 1) + "s");
+                audio = type$.AudioElement._as(item.querySelector("audio"));
+                if (audio != null)
+                  audio.load();
+              }
+            case 11:
+              // join
+              $async$self.set$dirty(false);
+              $async$handler = 2;
+              // goto after finally
+              $async$goto = 9;
+              break;
+            case 7:
+              // catch
+              $async$handler = 6;
+              $async$exception = $async$currentError;
+              H.unwrapException($async$exception);
+              t1 = $async$self.wf;
+              t1 = t1.info;
+              t1.toString;
+              C.TextElement_methods.setInnerHtml$1(t1, "Error saving audio");
+              // goto after finally
+              $async$goto = 9;
+              break;
+            case 6:
+              // uncaught
+              // goto rethrow
+              $async$goto = 2;
+              break;
+            case 9:
+              // after finally
+              $async$self.wf.animate$0(0);
+            case 1:
+              // return
+              return P._asyncReturn($async$returnValue, $async$completer);
+            case 2:
+              // rethrow
+              return P._asyncRethrow($async$currentError, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$saveRecording$0, $async$completer);
+    },
+    loadRecording$1: function(id) {
+      return this.loadRecording$body$RecordingStudio(id);
+    },
+    loadRecording$body$RecordingStudio: function(id) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic),
+        $async$returnValue, $async$handler = 2, $async$currentError, $async$next = [], $async$self = this, rec, leftClip, rightClip, e, t1, t2, t3, t4, t5, exception, $async$exception;
+      var $async$loadRecording$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1) {
+          $async$currentError = $async$result;
+          $async$goto = $async$handler;
+        }
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              $async$self.wf.clear$0(0);
+              t1 = $async$self.wf.info;
+              t1.toString;
+              C.TextElement_methods.setInnerHtml$1(t1, "Loading...");
+              t1 = $async$self.dialog;
+              t2 = type$.Element;
+              t1.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              t3 = type$._FrozenElementList_Element;
+              W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("#waveform-container"), t3)).add$1(0, "loading");
+              $async$handler = 4;
+              t1 = $async$self.datastore;
+              $async$goto = 7;
+              return P._asyncAwait(t1.getRecording$1(id), $async$loadRecording$1);
+            case 7:
+              // returning from await.
+              rec = $async$result;
+              if (rec == null) {
+                t1 = $async$self.wf.info;
+                t1.toString;
+                C.TextElement_methods.setInnerHtml$1(t1, "Sound not found.");
+                // goto return
+                $async$goto = 1;
+                break;
+              }
+              $async$self.set$recording(rec);
+              t4 = $async$self.synth;
+              t5 = $async$self.recording.settings;
+              t4.pitchDial.set$value(0, B.toNum(t5.$index(0, "playback"), 1));
+              t4.reverbDial.set$value(0, B.toNum(t5.$index(0, "reverb"), 0));
+              t4.bassDial.set$value(0, B.toNum(t5.$index(0, "bass"), 0));
+              t4.midDial.set$value(0, B.toNum(t5.$index(0, "mid"), 0));
+              t4.trebleDial.set$value(0, B.toNum(t5.$index(0, "treble"), 0));
+              t4.masterDial.set$value(0, B.toNum(t5.$index(0, "volume"), 0));
+              t4.crushDial.set$value(0, B.toNum(t5.$index(0, "crush"), 16));
+              t4._updateSettings$0();
+              type$.InputElement._as($async$self.dialog.querySelector("#edit-name")).value = $async$self.recording.name;
+              t4 = $async$self.dialog;
+              t4.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t4.querySelectorAll("#effects-container"), t3)).remove$1(0, "hidden");
+              t4 = $async$self.recording.original;
+              t5 = $async$self.context;
+              t1 = t1.host;
+              $async$goto = 8;
+              return P._asyncAwait(t4.loadAudio$2(t5, t1 + "/recorder/audio/original/" + id), $async$loadRecording$1);
+            case 8:
+              // returning from await.
+              $async$goto = 9;
+              return P._asyncAwait($async$self.recording.processed.loadAudio$2($async$self.context, t1 + "/recorder/audio/" + id), $async$loadRecording$1);
+            case 9:
+              // returning from await.
+              $async$self.buffer = $async$self.recording.original.clone$0(0);
+              $async$self.leftTrim = B.toNum($async$self.recording.settings.$index(0, "leftTrim"), -1);
+              t1 = $async$self.rightTrim = B.toNum($async$self.recording.settings.$index(0, "rightTrim"), -1);
+              t4 = $async$self.leftTrim;
+              if (typeof t4 !== "number") {
+                $async$returnValue = t4.$ge();
+                // goto return
+                $async$goto = 1;
+                break;
+              }
+              if (t4 >= 0) {
+                if (typeof t1 !== "number") {
+                  $async$returnValue = t1.$ge();
+                  // goto return
+                  $async$goto = 1;
+                  break;
+                }
+                t5 = t1 >= 0 && t4 < t1;
+              } else
+                t5 = false;
+              if (t5)
+                $async$self.buffer.trim$2(0, t4, t1);
+              $async$self.buffer.generateWaveform$1($async$self.wf.bars.length);
+              leftClip = B.toNum($async$self.recording.settings.$index(0, "leftClip"), 0);
+              rightClip = B.toNum($async$self.recording.settings.$index(0, "rightClip"), 1);
+              $async$self.wf.setClip$2(leftClip, rightClip);
+              type$.ButtonElement._as($async$self.dialog.querySelector("#save-button")).disabled = false;
+              $async$self.wf.animate$0(0);
+              $async$self.set$dirty(false);
+              $async$handler = 2;
+              // goto after finally
+              $async$goto = 6;
+              break;
+            case 4:
+              // catch
+              $async$handler = 3;
+              $async$exception = $async$currentError;
+              e = H.unwrapException($async$exception);
+              P.print("Error loading audio recording: " + H.S(e));
+              t1 = $async$self.wf;
+              t1 = t1.info;
+              t1.toString;
+              C.TextElement_methods.setInnerHtml$1(t1, "Error Loading Audio");
+              // goto after finally
+              $async$goto = 6;
+              break;
+            case 3:
+              // uncaught
+              // goto rethrow
+              $async$goto = 2;
+              break;
+            case 6:
+              // after finally
+              t1 = $async$self.dialog;
+              t1.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("#waveform-container"), t3)).remove$1(0, "loading");
+            case 1:
+              // return
+              return P._asyncReturn($async$returnValue, $async$completer);
+            case 2:
+              // rethrow
+              return P._asyncRethrow($async$currentError, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$loadRecording$1, $async$completer);
+    },
+    addRow$1: function(_, rec) {
+      var item, t1, t2, sid, $name, list, t3, t4, len, count,
+        template = type$.TemplateElement._as(document.querySelector("#recording-studio-item-template"));
+      if (template != null) {
+        item = template.content.querySelector(".sample-item");
+        if (item != null) {
+          t1 = type$.Element;
+          item = t1._as(item.cloneNode(true));
+          item.toString;
+          t2 = H.S(rec.id);
+          item.setAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(item))._toHyphenedName$1("id"), t2);
+          sid = type$.SpanElement._as(item.querySelector(".sound-id"));
+          if (sid != null)
+            C.SpanElement_methods.setInnerHtml$1(sid, H.S(rec.id));
+          t2 = type$.HtmlElement;
+          $name = t2._as(item.querySelector(".sample-name"));
+          if ($name != null)
+            J.setInnerHtml$1$x($name, rec.name);
+          J.set$innerHtml$x(item.querySelector(".sample-duration"), J.toStringAsFixed$1$n(rec.duration, 1) + "s");
+          list = t2._as(this.dialog.querySelector(".sample-list"));
+          if (list != null) {
+            t3 = list.children;
+            t4 = t3.length;
+            if (0 === t4)
+              list.appendChild(item);
+            else {
+              if (0 >= t4)
+                return H.ioore(t3, 0);
+              list.insertBefore(item, t1._as(t3[0]));
+            }
+            this._registerRowEvents$3(list, item, rec);
+            len = list.children.length;
+            count = t2._as(this.dialog.querySelector("#sample-count"));
+            if (count != null)
+              J.setInnerHtml$1$x(count, "" + len);
+          }
+        }
+      }
+    },
+    _registerEvents$0: function() {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic),
+        $async$self = this, t3, t4, t5, fileInput, t6, t1, t2;
+      var $async$_registerEvents$0 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              t1 = $async$self.dialog;
+              t2 = type$.Element;
+              t1.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              t3 = type$._FrozenElementList_Element;
+              t4 = type$.ElementList_Element;
+              t5 = type$._ElementListEventStreamImpl_MouseEvent;
+              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll(".close-button"), t3)), false, "click", t5).listen$1(new Y.RecordingStudio__registerEvents_closure($async$self));
+              fileInput = type$.InputElement._as($async$self.dialog.querySelector("#file-input"));
+              if (fileInput != null) {
+                t1 = $async$self.dialog;
+                t1.toString;
+                H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+                new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll("#upload-button"), t3)), false, "click", t5).listen$1(new Y.RecordingStudio__registerEvents_closure0($async$self, fileInput));
+                t1 = type$._ElementEventStreamImpl_Event;
+                t6 = t1._eval$1("~(1)")._as(new Y.RecordingStudio__registerEvents_closure1($async$self, fileInput));
+                type$.void_Function._as(null);
+                W._EventStreamSubscription$(fileInput, "input", t6, false, t1._precomputed1);
+              }
+              t1 = $async$self.dialog;
+              t1.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll("#eq-container"), t3)), false, "click", t5).listen$1(new Y.RecordingStudio__registerEvents_closure2($async$self));
+              t1 = $async$self.dialog;
+              t1.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll("#stop-button"), t3)), false, "click", t5).listen$1(new Y.RecordingStudio__registerEvents_closure3($async$self));
+              t1 = $async$self.dialog;
+              t1.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll("#record-button"), t3)), false, "click", t5).listen$1(new Y.RecordingStudio__registerEvents_closure4($async$self));
+              t1 = $async$self.dialog;
+              t1.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll("#loop-button"), t3)), false, "click", t5).listen$1(new Y.RecordingStudio__registerEvents_closure5($async$self));
+              t1 = $async$self.dialog;
+              t1.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll("#play-button"), t3)), false, "click", t5).listen$1(new Y.RecordingStudio__registerEvents_closure6($async$self));
+              t1 = $async$self.dialog;
+              t1.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll("#pause-button"), t3)), false, "click", t5).listen$1(new Y.RecordingStudio__registerEvents_closure7($async$self));
+              t1 = $async$self.dialog;
+              t1.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll("#save-button"), t3)), false, "click", t5).listen$1(new Y.RecordingStudio__registerEvents_closure8($async$self));
+              t1 = $async$self.dialog;
+              t1.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll("#trim-button"), t3)), false, "click", t5).listen$1(new Y.RecordingStudio__registerEvents_closure9($async$self));
+              t1 = $async$self.dialog;
+              t1.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll("#reset-button"), t3)), false, "click", t5).listen$1(new Y.RecordingStudio__registerEvents_closure10($async$self));
+              t5 = $async$self.dialog;
+              t5.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              t1 = type$._ElementListEventStreamImpl_Event;
+              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t5.querySelectorAll("#edit-name"), t3)), false, "change", t1).listen$1(new Y.RecordingStudio__registerEvents_closure11($async$self));
+              t5 = $async$self.dialog;
+              t5.toString;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t5.querySelectorAll("#edit-name"), t3)), false, "input", t1).listen$1(new Y.RecordingStudio__registerEvents_closure12($async$self));
+              // implicit return
+              return P._asyncReturn(null, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$_registerEvents$0, $async$completer);
+    },
+    _registerRowEvents$3: function(list, item, rec) {
+      var count, t1, t2, t3, t4, audio, source, _this = this,
+        _s16_ = "querySelectorAll",
+        _s5_ = "click",
+        id = H._asIntNullable(rec.id);
+      if (typeof id !== "number")
+        return id.$ge();
+      if (id >= 0) {
+        count = type$.HtmlElement._as(_this.dialog.querySelector("#sample-count"));
+        t1 = type$.Element;
+        H.checkTypeBound(t1, t1, "T", _s16_);
+        t2 = type$._FrozenElementList_Element;
+        t3 = type$.ElementList_Element;
+        t4 = type$._ElementListEventStreamImpl_MouseEvent;
+        new W._ElementListEventStreamImpl(t3._as(new W._FrozenElementList(item.querySelectorAll(".edit-sample"), t2)), false, _s5_, t4).listen$1(new Y.RecordingStudio__registerRowEvents_closure(_this));
+        audio = type$.AudioElement._as(item.querySelector("audio"));
+        if (audio != null) {
+          source = document.createElement("source");
+          source.src = _this.datastore.host + "/recorder/audio/" + id;
+          audio.appendChild(source);
+        }
+        H.checkTypeBound(t1, t1, "T", _s16_);
+        new W._ElementListEventStreamImpl(t3._as(new W._FrozenElementList(item.querySelectorAll(".sample-badge, .sample-name"), t2)), false, _s5_, t4).listen$1(new Y.RecordingStudio__registerRowEvents_closure0(_this, item));
+        H.checkTypeBound(t1, t1, "T", _s16_);
+        new W._ElementListEventStreamImpl(t3._as(new W._FrozenElementList(item.querySelectorAll(".add-sample-button"), t2)), false, _s5_, t4).listen$1(new Y.RecordingStudio__registerRowEvents_closure1(item));
+        D.DropdownMenu_armMenu(item.querySelector(".sample-menu-button"), new Y.RecordingStudio__registerRowEvents_closure2(_this, list, item, id, rec, count));
+      }
+    },
+    _playPreview$1: function(item) {
+      var t1, t2, t3, _this = this,
+        audio = type$.AudioElement._as(item.querySelector("audio"));
+      if (audio == null)
+        return;
+      P.promiseToFuture(audio.play(), type$.dynamic);
+      item.getAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(item))._toHyphenedName$1("id"));
+      _this._showLoading$1(item);
+      t1 = type$._ElementEventStreamImpl_Event;
+      t2 = t1._eval$1("~(1)");
+      t3 = t2._as(new Y.RecordingStudio__playPreview_closure(_this, item));
+      type$.void_Function._as(null);
+      t1 = t1._precomputed1;
+      W._EventStreamSubscription$(audio, "play", t3, false, t1);
+      W._EventStreamSubscription$(audio, "ended", t2._as(new Y.RecordingStudio__playPreview_closure0(_this, item)), false, t1);
+      W._EventStreamSubscription$(audio, "pause", t2._as(new Y.RecordingStudio__playPreview_closure1(_this, item)), false, t1);
+    },
+    _showLoading$1: function(item) {
+      var t2,
+        _s15_ = ".sample-badge i",
+        _s16_ = "querySelectorAll",
+        _s13_ = ".sample-badge",
+        t1 = type$.Element;
+      H.checkTypeBound(t1, t1, "T", _s16_);
+      t2 = type$._FrozenElementList_Element;
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(item.querySelectorAll(_s15_), t2)).remove$1(0, "fa-play");
+      H.checkTypeBound(t1, t1, "T", _s16_);
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(item.querySelectorAll(_s15_), t2)).remove$1(0, "fa-pause");
+      H.checkTypeBound(t1, t1, "T", _s16_);
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(item.querySelectorAll(_s15_), t2)).add$1(0, "fa-headphones");
+      H.checkTypeBound(t1, t1, "T", _s16_);
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(item.querySelectorAll(_s13_), t2)).add$1(0, "loading");
+      H.checkTypeBound(t1, t1, "T", _s16_);
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(item.querySelectorAll(_s13_), t2)).remove$1(0, "playing");
+    },
+    _hideLoading$1: function(item) {
+      var t2,
+        _s15_ = ".sample-badge i",
+        _s16_ = "querySelectorAll",
+        _s13_ = ".sample-badge",
+        t1 = type$.Element;
+      H.checkTypeBound(t1, t1, "T", _s16_);
+      t2 = type$._FrozenElementList_Element;
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(item.querySelectorAll(_s15_), t2)).add$1(0, "fa-play");
+      H.checkTypeBound(t1, t1, "T", _s16_);
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(item.querySelectorAll(_s15_), t2)).remove$1(0, "fa-pause");
+      H.checkTypeBound(t1, t1, "T", _s16_);
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(item.querySelectorAll(_s15_), t2)).remove$1(0, "fa-headphones");
+      H.checkTypeBound(t1, t1, "T", _s16_);
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(item.querySelectorAll(_s13_), t2)).remove$1(0, "loading");
+      H.checkTypeBound(t1, t1, "T", _s16_);
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(item.querySelectorAll(_s13_), t2)).remove$1(0, "playing");
+    },
+    _twoDigit$1: function(d) {
+      return d >= 0 && d < 10 ? "0" + d : "" + d;
+    },
+    set$recording: function(recording) {
+      this.recording = type$.Recording._as(recording);
+    },
+    set$_clean: function(_clean) {
+      this._clean = H._asBoolNullable(_clean);
+    }
+  };
+  Y.RecordingStudio_show_closure.prototype = {
+    call$1: function(e) {
+      type$.MouseEvent._as(e);
+      Y.UserAccounts_login(this.$this.datastore);
+    },
+    $signature: 0
+  };
+  Y.RecordingStudio_loadUserRecordings_closure.prototype = {
+    call$1: function(r) {
+      return this.$this.addRow$1(0, type$.Recording._as(r));
+    },
+    $signature: 78
+  };
+  Y.RecordingStudio_uploadAudioFile_closure.prototype = {
+    call$1: function(e) {
+      return this.$call$body$RecordingStudio_uploadAudioFile_closure(type$.ProgressEvent._as(e));
+    },
+    $call$body$RecordingStudio_uploadAudioFile_closure: function(e) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.Null),
+        $async$handler = 1, $async$currentError, $async$next = [], $async$self = this, ab, t1, t2, t3, exception, $async$exception;
+      var $async$call$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1) {
+          $async$currentError = $async$result;
+          $async$goto = $async$handler;
+        }
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              $async$handler = 3;
+              t1 = $async$self.$this;
+              t2 = t1.context;
+              $async$goto = 6;
+              return P._asyncAwait((t2 && C.AudioContext_methods).decodeAudioData$1(t2, type$.Uint8List._as(C.FileReader_methods.get$result($async$self.reader)).buffer), $async$call$1);
+            case 6:
+              // returning from await.
+              ab = $async$result;
+              t1.buffer.reshape$2(ab.numberOfChannels, H._asIntNullable(ab.sampleRate));
+              t1.recording.original.reshape$2(ab.numberOfChannels, H._asIntNullable(ab.sampleRate));
+              t1.recording.processed.reshape$2(ab.numberOfChannels, H._asIntNullable(ab.sampleRate));
+              t1.buffer.append$1(0, ab);
+              t1.recording.original.append$1(0, ab);
+              t1.buffer.generateWaveform$1(t1.wf.bars.length);
+              t1.recording.name = $async$self._box_0.filename;
+              type$.InputElement._as(t1.dialog.querySelector("#edit-name")).value = t1.recording.name;
+              t1.set$dirty(true);
+              t2 = t1.dialog;
+              t3 = type$.Element;
+              t2.toString;
+              H.checkTypeBound(t3, t3, "T", "querySelectorAll");
+              W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t2.querySelectorAll("#effects-container"), type$._FrozenElementList_Element)).remove$1(0, "hidden");
+              type$.ButtonElement._as(t1.dialog.querySelector("#save-button")).disabled = false;
+              t1.wf.animate$0(0);
+              $async$handler = 1;
+              // goto after finally
+              $async$goto = 5;
+              break;
+            case 3:
+              // catch
+              $async$handler = 2;
+              $async$exception = $async$currentError;
+              H.unwrapException($async$exception);
+              t1 = $async$self.$this.wf;
+              t1 = t1.info;
+              t1.toString;
+              C.TextElement_methods.setInnerHtml$1(t1, "0.00 s");
+              window.alert("Error decoding audio file. Check to make sure your file is a WAV or MP3 audio file.");
+              // goto after finally
+              $async$goto = 5;
+              break;
+            case 2:
+              // uncaught
+              // goto rethrow
+              $async$goto = 1;
+              break;
+            case 5:
+              // after finally
+              // implicit return
+              return P._asyncReturn(null, $async$completer);
+            case 1:
+              // rethrow
+              return P._asyncRethrow($async$currentError, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$call$1, $async$completer);
+    },
+    $signature: 21
+  };
+  Y.RecordingStudio__registerEvents_closure.prototype = {
+    call$1: function(e) {
+      var t1;
+      type$.MouseEvent._as(e);
+      t1 = this.$this;
+      t1.pause$0(0);
+      if (H.boolConversionCheck(!t1._dirty || window.confirm("You have unsaved changes. Are you sure you want to close?"))) {
+        E.Dialog_closeModal();
+        t1.dialog = null;
+      }
+    },
+    $signature: 0
+  };
+  Y.RecordingStudio__registerEvents_closure0.prototype = {
+    call$1: function(e) {
+      var t1;
+      type$.MouseEvent._as(e);
+      t1 = this.$this.recorder;
+      if (!(t1 != null && t1._recording))
+        this.fileInput.click();
+    },
+    $signature: 0
+  };
+  Y.RecordingStudio__registerEvents_closure1.prototype = {
+    call$1: function(e) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.Null),
+        $async$self = this, t1;
+      var $async$call$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              t1 = $async$self.$this;
+              t1.initAudio$0();
+              t1.uploadAudioFile$1($async$self.fileInput);
+              // implicit return
+              return P._asyncReturn(null, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$call$1, $async$completer);
+    },
+    $signature: 79
+  };
+  Y.RecordingStudio__registerEvents_closure2.prototype = {
+    call$1: function(e) {
+      var t1, t2, t3;
+      type$.MouseEvent._as(e);
+      t1 = this.$this;
+      t1.initAudio$0();
+      t2 = t1.recorder;
+      t3 = t2 != null;
+      if (t3 && t2._recording)
+        t2._recording = false;
+      else if (t3 && t2._stream != null) {
+        t2.stopMicrophone$0();
+        t1.eq.clear$0(0);
+      } else
+        t2.startMicrophone$0();
+    },
+    $signature: 0
+  };
+  Y.RecordingStudio__registerEvents_closure3.prototype = {
+    call$1: function(e) {
+      return this.$call$body$RecordingStudio__registerEvents_closure5(type$.MouseEvent._as(e));
+    },
+    $call$body$RecordingStudio__registerEvents_closure5: function(e) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.Null),
+        $async$self = this, t1;
+      var $async$call$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              t1 = $async$self.$this.recorder;
+              if (t1._recording)
+                t1._recording = false;
+              // implicit return
+              return P._asyncReturn(null, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$call$1, $async$completer);
+    },
+    $signature: 5
+  };
+  Y.RecordingStudio__registerEvents_closure4.prototype = {
+    call$1: function(e) {
+      return this.$call$body$RecordingStudio__registerEvents_closure4(type$.MouseEvent._as(e));
+    },
+    $call$body$RecordingStudio__registerEvents_closure4: function(e) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.Null),
+        $async$self = this, t1;
+      var $async$call$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              t1 = $async$self.$this;
+              t1.initAudio$0();
+              t1.recordAudio$0();
+              // implicit return
+              return P._asyncReturn(null, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$call$1, $async$completer);
+    },
+    $signature: 5
+  };
+  Y.RecordingStudio__registerEvents_closure5.prototype = {
+    call$1: function(e) {
+      var t1, t2, t3;
+      type$.MouseEvent._as(e);
+      t1 = this.$this;
+      t2 = t1.dialog;
+      t3 = type$.Element;
+      t2.toString;
+      H.checkTypeBound(t3, t3, "T", "querySelectorAll");
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t2.querySelectorAll("#loop-button"), type$._FrozenElementList_Element)).toggle$1(0, "checked");
+      t1.initAudio$0();
+      t1.pause$0(0);
+    },
+    $signature: 0
+  };
+  Y.RecordingStudio__registerEvents_closure6.prototype = {
+    call$1: function(e) {
+      return this.$call$body$RecordingStudio__registerEvents_closure3(type$.MouseEvent._as(e));
+    },
+    $call$body$RecordingStudio__registerEvents_closure3: function(e) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.Null),
+        $async$self = this, t1;
+      var $async$call$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              t1 = $async$self.$this;
+              t1.initAudio$0();
+              t1.play$0(0);
+              // implicit return
+              return P._asyncReturn(null, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$call$1, $async$completer);
+    },
+    $signature: 5
+  };
+  Y.RecordingStudio__registerEvents_closure7.prototype = {
+    call$1: function(e) {
+      return this.$call$body$RecordingStudio__registerEvents_closure2(type$.MouseEvent._as(e));
+    },
+    $call$body$RecordingStudio__registerEvents_closure2: function(e) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.Null),
+        $async$self = this, t1;
+      var $async$call$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              t1 = $async$self.$this;
+              t1.initAudio$0();
+              t1.pause$0(0);
+              // implicit return
+              return P._asyncReturn(null, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$call$1, $async$completer);
+    },
+    $signature: 5
+  };
+  Y.RecordingStudio__registerEvents_closure8.prototype = {
+    call$1: function(e) {
+      return this.$call$body$RecordingStudio__registerEvents_closure1(type$.MouseEvent._as(e));
+    },
+    $call$body$RecordingStudio__registerEvents_closure1: function(e) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.Null),
+        $async$self = this;
+      var $async$call$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              $async$goto = 2;
+              return P._asyncAwait($async$self.$this.saveRecording$0(), $async$call$1);
+            case 2:
+              // returning from await.
+              // implicit return
+              return P._asyncReturn(null, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$call$1, $async$completer);
+    },
+    $signature: 5
+  };
+  Y.RecordingStudio__registerEvents_closure9.prototype = {
+    call$1: function(e) {
+      return this.$call$body$RecordingStudio__registerEvents_closure0(type$.MouseEvent._as(e));
+    },
+    $call$body$RecordingStudio__registerEvents_closure0: function(e) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.Null),
+        $async$returnValue, $async$self = this, t2, t3, t4, t5, t1;
+      var $async$call$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              t1 = $async$self.$this;
+              t1.initAudio$0();
+              t1.pause$0(0);
+              t2 = t1.leftTrim;
+              if (typeof t2 !== "number") {
+                $async$returnValue = t2.$gt();
+                // goto return
+                $async$goto = 1;
+                break;
+              }
+              t3 = t1.wf;
+              if (t2 > 0) {
+                t3 = t3.getClipStart$0();
+                t4 = t1.buffer;
+                t5 = t4.samples;
+                t4 = t4.sampleRate;
+                if (typeof t4 !== "number") {
+                  $async$returnValue = H.iae(t4);
+                  // goto return
+                  $async$goto = 1;
+                  break;
+                }
+                t1.leftTrim = t2 + t3 * (t5 / t4);
+                t4 = t1.rightTrim;
+                t5 = t1.wf.getClipEnd$0();
+                t3 = t1.buffer;
+                t2 = t3.samples;
+                t3 = t3.sampleRate;
+                if (typeof t3 !== "number") {
+                  $async$returnValue = H.iae(t3);
+                  // goto return
+                  $async$goto = 1;
+                  break;
+                }
+                if (typeof t4 !== "number") {
+                  $async$returnValue = t4.$sub();
+                  // goto return
+                  $async$goto = 1;
+                  break;
+                }
+                t1.rightTrim = t4 - (1 - t5) * (t2 / t3);
+              } else {
+                t2 = t3.getClipStart$0();
+                t3 = t1.buffer;
+                t4 = t3.samples;
+                t3 = t3.sampleRate;
+                if (typeof t3 !== "number") {
+                  $async$returnValue = H.iae(t3);
+                  // goto return
+                  $async$goto = 1;
+                  break;
+                }
+                t1.leftTrim = t2 * (t4 / t3);
+                t3 = t1.wf.getClipEnd$0();
+                t4 = t1.buffer;
+                t2 = t4.samples;
+                t4 = t4.sampleRate;
+                if (typeof t4 !== "number") {
+                  $async$returnValue = H.iae(t4);
+                  // goto return
+                  $async$goto = 1;
+                  break;
+                }
+                t1.rightTrim = t3 * (t2 / t4);
+              }
+              t2 = t1.recording.original.clone$0(0);
+              t1.buffer = t2;
+              t2.trim$2(0, t1.leftTrim, t1.rightTrim);
+              t1.buffer.generateWaveform$1(t1.wf.bars.length);
+              t1.wf.setClip$2(0, 1);
+              t1.wf.animate$0(0);
+              type$.ButtonElement._as(t1.dialog.querySelector("#trim-button")).disabled = true;
+            case 1:
+              // return
+              return P._asyncReturn($async$returnValue, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$call$1, $async$completer);
+    },
+    $signature: 5
+  };
+  Y.RecordingStudio__registerEvents_closure10.prototype = {
+    call$1: function(e) {
+      return this.$call$body$RecordingStudio__registerEvents_closure(type$.MouseEvent._as(e));
+    },
+    $call$body$RecordingStudio__registerEvents_closure: function(e) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.Null),
+        $async$self = this, t2, t1;
+      var $async$call$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              t1 = $async$self.$this;
+              t1.initAudio$0();
+              t1.pause$0(0);
+              t1.resetEffects$0();
+              t2 = t1.recording.original.clone$0(0);
+              t1.buffer = t2;
+              t2.generateWaveform$1(t1.wf.bars.length);
+              t1.wf.animate$0(0);
+              t1.set$dirty(true);
+              // implicit return
+              return P._asyncReturn(null, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$call$1, $async$completer);
+    },
+    $signature: 5
+  };
+  Y.RecordingStudio__registerEvents_closure11.prototype = {
+    call$1: function(e) {
+      var t1;
+      type$.Event._as(e);
+      t1 = this.$this;
+      t1.recording.name = type$.InputElement._as(J.get$target$x(e)).value;
+      t1.set$dirty(true);
+    },
+    $signature: 3
+  };
+  Y.RecordingStudio__registerEvents_closure12.prototype = {
+    call$1: function(e) {
+      type$.Event._as(e);
+      this.$this.set$dirty(true);
+    },
+    $signature: 3
+  };
+  Y.RecordingStudio__registerRowEvents_closure.prototype = {
+    call$1: function(e) {
+      type$.MouseEvent._as(e);
+      this.$this.initAudio$0();
+    },
+    $signature: 0
+  };
+  Y.RecordingStudio__registerRowEvents_closure0.prototype = {
+    call$1: function(e) {
+      return this.$call$body$RecordingStudio__registerRowEvents_closure0(type$.MouseEvent._as(e));
+    },
+    $call$body$RecordingStudio__registerRowEvents_closure0: function(e) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.Null),
+        $async$self = this, audio, t1, t2;
+      var $async$call$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              t1 = $async$self.item;
+              t2 = type$.Element;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              if (W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll(".sample-badge"), type$._FrozenElementList_Element)).contains$1(0, "playing")) {
+                audio = type$.AudioElement._as(t1.querySelector("audio"));
+                if (audio != null)
+                  audio.pause();
+              } else
+                $async$self.$this._playPreview$1(t1);
+              // implicit return
+              return P._asyncReturn(null, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$call$1, $async$completer);
+    },
+    $signature: 5
+  };
+  Y.RecordingStudio__registerRowEvents_closure1.prototype = {
+    call$1: function(e) {
+      return this.$call$body$RecordingStudio__registerRowEvents_closure(type$.MouseEvent._as(e));
+    },
+    $call$body$RecordingStudio__registerRowEvents_closure: function(e) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.Null),
+        $async$self = this, t3, t1, t2;
+      var $async$call$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              t1 = $async$self.item;
+              t2 = type$.Element;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              t3 = type$._FrozenElementList_Element;
+              W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll(".add-sample-button i.fas"), t3)).toggle$1(0, "fa-angle-down");
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll(".add-sample-button i.fas"), t3)).toggle$1(0, "fa-angle-up");
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll(".use-it"), t3)).toggle$1(0, "hidden");
+              // implicit return
+              return P._asyncReturn(null, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$call$1, $async$completer);
+    },
+    $signature: 5
+  };
+  Y.RecordingStudio__registerRowEvents_closure2.prototype = {
+    call$1: function(menu) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.Null),
+        $async$self = this, t2, action, t3, t1;
+      var $async$call$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              t1 = $async$self.$this;
+              t1.initAudio$0();
+              t2 = J.get$dataset$x(menu);
+              action = t2._attributes._html$_element.getAttribute("data-" + t2._toHyphenedName$1("action"));
+              $async$goto = action === "edit" ? 2 : 4;
+              break;
+            case 2:
+              // then
+              t2 = type$.Element;
+              H.checkTypeBound(t2, t2, "T", "querySelectorAll");
+              W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList($async$self.list.querySelectorAll(".sample-item"), type$._FrozenElementList_Element)).remove$1(0, "selected");
+              t2 = $async$self.item;
+              J.get$classes$x(t2).add$1(0, "selected");
+              t1._showLoading$1(t2);
+              $async$goto = 5;
+              return P._asyncAwait(t1.loadRecording$1($async$self.id), $async$call$1);
+            case 5:
+              // returning from await.
+              t3 = t1.dialog;
+              (t3 && C.DivElement_methods).scrollTo$2(t3, 0, 0);
+              t1._hideLoading$1(t2);
+              // goto join
+              $async$goto = 3;
+              break;
+            case 4:
+              // else
+              $async$goto = action === "delete" ? 6 : 8;
+              break;
+            case 6:
+              // then
+              if (H.boolConversionCheck(window.confirm("Are you sure you want to delete this sound?"))) {
+                J.remove$0$ax($async$self.item);
+                t1.datastore.deleteRecording$1($async$self.rec);
+                t1 = $async$self.count;
+                t2 = "" + $async$self.list.children.length;
+                t1.toString;
+                J.setInnerHtml$1$x(t1, t2);
+              }
+              // goto join
+              $async$goto = 7;
+              break;
+            case 8:
+              // else
+              $async$goto = action === "copy" ? 9 : 11;
+              break;
+            case 9:
+              // then
+              t2 = $async$self.item;
+              t1._showLoading$1(t2);
+              t3 = $async$self.rec;
+              $async$goto = 12;
+              return P._asyncAwait(t3.loadAudioData$2(t1.context, t1.datastore), $async$call$1);
+            case 12:
+              // returning from await.
+              t3 = t1.recording = t3.clone$0(0);
+              t3.id = -1;
+              t3.name = C.JSString_methods.$add("Copy of ", t3.name);
+              $async$goto = 13;
+              return P._asyncAwait(t1.saveRecording$0(), $async$call$1);
+            case 13:
+              // returning from await.
+              t1._hideLoading$1(t2);
+              // goto join
+              $async$goto = 10;
+              break;
+            case 11:
+              // else
+              $async$goto = action === "wav" ? 14 : 16;
+              break;
+            case 14:
+              // then
+              t2 = $async$self.item;
+              t1._showLoading$1(t2);
+              t3 = $async$self.rec;
+              $async$goto = 17;
+              return P._asyncAwait(t3.loadAudioData$2(t1.context, t1.datastore), $async$call$1);
+            case 17:
+              // returning from await.
+              $async$goto = 18;
+              return P._asyncAwait(t3.processed.downloadWAV$1(J.$add$ansx(t3.name, ".wav")), $async$call$1);
+            case 18:
+              // returning from await.
+              t1._hideLoading$1(t2);
+              // goto join
+              $async$goto = 15;
+              break;
+            case 16:
+              // else
+              $async$goto = action === "mp3" ? 19 : 20;
+              break;
+            case 19:
+              // then
+              t2 = $async$self.item;
+              t1._showLoading$1(t2);
+              t3 = $async$self.rec;
+              $async$goto = 21;
+              return P._asyncAwait(t3.loadAudioData$2(t1.context, t1.datastore), $async$call$1);
+            case 21:
+              // returning from await.
+              $async$goto = 22;
+              return P._asyncAwait(t3.processed.downloadMP3$1(J.$add$ansx(t3.name, ".mp3")), $async$call$1);
+            case 22:
+              // returning from await.
+              t1._hideLoading$1(t2);
+            case 20:
+              // join
+            case 15:
+              // join
+            case 10:
+              // join
+            case 7:
+              // join
+            case 3:
+              // join
+              // implicit return
+              return P._asyncReturn(null, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$call$1, $async$completer);
+    },
+    $signature: 25
+  };
+  Y.RecordingStudio__playPreview_closure.prototype = {
+    call$1: function(e) {
+      var t2, t3,
+        _s15_ = ".sample-badge i",
+        _s16_ = "querySelectorAll",
+        t1 = this.item;
+      this.$this._hideLoading$1(t1);
+      t2 = type$.Element;
+      H.checkTypeBound(t2, t2, "T", _s16_);
+      t3 = type$._FrozenElementList_Element;
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll(_s15_), t3)).remove$1(0, "fa-play");
+      H.checkTypeBound(t2, t2, "T", _s16_);
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll(_s15_), t3)).add$1(0, "fa-pause");
+      H.checkTypeBound(t2, t2, "T", _s16_);
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll(".sample-badge"), t3)).add$1(0, "playing");
+    },
+    $signature: 3
+  };
+  Y.RecordingStudio__playPreview_closure0.prototype = {
+    call$1: function(e) {
+      this.$this._hideLoading$1(this.item);
+    },
+    $signature: 3
+  };
+  Y.RecordingStudio__playPreview_closure1.prototype = {
+    call$1: function(e) {
+      this.$this._hideLoading$1(this.item);
+    },
+    $signature: 3
+  };
+  Y.WaveformTrace.prototype = {
+    clear$0: function(_) {
+      var t1, t2, _i, _this = this;
+      for (t1 = _this.bars, t2 = t1.length, _i = 0; _i < t2; ++_i)
+        t1[_i].setAttribute("height", "0");
+      _this.playhead.setAttribute("x1", "0");
+      _this.playhead.setAttribute("x2", "0");
+      _this.setClip$2(0, 1);
+    },
+    setClip$2: function(start, end) {
+      var t2, _this = this,
+        _s9_ = "transform",
+        _s8_ = "position",
+        t1 = _this.w;
+      if (typeof start !== "number")
+        return start.$mul();
+      start *= t1;
+      if (typeof end !== "number")
+        return end.$mul();
+      end *= t1;
+      t1 = _this.lclip;
+      t1.toString;
+      t1.setAttribute(_s9_, "translate(" + H.S(start) + ", 0)");
+      t1 = _this.lclip;
+      t1.toString;
+      t2 = H.S(start);
+      t1.setAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(t1))._toHyphenedName$1(_s8_), t2);
+      t2 = _this.rclip;
+      t2.toString;
+      t2.setAttribute(_s9_, "translate(" + H.S(end) + ", 0)");
+      t2 = _this.rclip;
+      t2.toString;
+      t1 = H.S(end);
+      t2.setAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(t2))._toHyphenedName$1(_s8_), t1);
+      _this._renderClipRegion$0();
+      _this._renderTimestamp$1(false);
+    },
+    getClipStart$0: function() {
+      var c1, c2,
+        _s8_ = "position",
+        t1 = this.lclip;
+      t1.toString;
+      c1 = P.num_parse(t1.getAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(t1))._toHyphenedName$1(_s8_)));
+      t1 = this.rclip;
+      t1.toString;
+      c2 = P.num_parse(t1.getAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(t1))._toHyphenedName$1(_s8_)));
+      return Math.max(0, Math.min(H.checkNum(c1), H.checkNum(c2))) / this.w;
+    },
+    getClipEnd$0: function() {
+      var c1, c2,
+        _s8_ = "position",
+        t1 = this.lclip;
+      t1.toString;
+      c1 = P.num_parse(t1.getAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(t1))._toHyphenedName$1(_s8_)));
+      t1 = this.rclip;
+      t1.toString;
+      c2 = P.num_parse(t1.getAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(t1))._toHyphenedName$1(_s8_)));
+      t1 = this.w;
+      return Math.min(t1, Math.max(H.checkNum(c1), H.checkNum(c2))) / t1;
+    },
+    animate$1: function(_, position) {
+      var t1, i, t2, t3, amin, amax, bh, php, _this = this,
+        m = _this.h / 2;
+      for (t1 = _this.recorder.buffer.waveform, t1 = P._ListQueueIterator$(t1, t1.$ti._precomputed1), i = 0; t1.moveNext$0();) {
+        t2 = t1._collection$_current;
+        if (i < _this.bars.length) {
+          t3 = J.getInterceptor$asx(t2);
+          amin = t3.$index(t2, 0);
+          amax = t3.$index(t2, 1);
+          if (typeof amax !== "number")
+            return amax.$sub();
+          if (typeof amin !== "number")
+            return H.iae(amin);
+          bh = Math.max(4, m * (amax - amin));
+          t2 = _this.bars;
+          if (i >= t2.length)
+            return H.ioore(t2, i);
+          t2 = t2[i];
+          t2.toString;
+          t2.setAttribute("height", H.S(bh));
+          t2 = _this.bars;
+          if (i >= t2.length)
+            return H.ioore(t2, i);
+          t2 = t2[i];
+          t2.toString;
+          t2.setAttribute("y", H.S(m - bh * 0.5));
+          ++i;
+        }
+      }
+      php = i * _this.bw;
+      if (position >= 0)
+        php = _this.w * Math.max(0, Math.min(1, Math.min(position, _this.getClipEnd$0())));
+      t1 = _this.playhead;
+      t1.toString;
+      t1.setAttribute("x1", H.S(php));
+      t1 = _this.playhead;
+      t1.toString;
+      t1.setAttribute("x2", H.S(php));
+      _this._renderTimestamp$1(false);
+    },
+    animate$0: function($receiver) {
+      return this.animate$1($receiver, -1);
+    },
+    _render$1: function(container) {
+      var t1, t2, $parent, t3, t4, t5, t6, t7, line, t8, i, temp, _this = this,
+        _s26_ = "http://www.w3.org/2000/svg";
+      if (container == null)
+        return;
+      t1 = document;
+      t2 = type$.SvgElement;
+      $parent = type$.GElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g")));
+      container.appendChild($parent);
+      t3 = type$.RectElement;
+      t4 = t3._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "rect")));
+      t5 = _this.w;
+      t6 = _this.h;
+      t7 = type$.String;
+      (t4 && C.RectElement_methods).set$attributes(t4, P.LinkedHashMap_LinkedHashMap$_literal(["x", "0", "y", "0", "width", "" + t5, "height", "" + t6, "fill", "#2e303f", "fill-opacity", "1.0", "pointer-events", "none"], t7, t7));
+      _this.clip = t4;
+      $parent.appendChild(t4);
+      t4 = type$.LineElement;
+      line = t4._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "line")));
+      t8 = t6 / 2;
+      (line && C.LineElement_methods).set$attributes(line, P.LinkedHashMap_LinkedHashMap$_literal(["x1", "0", "y1", H.S(t8), "x2", "" + t5, "y2", H.S(t8), "stroke", "#fff3"], t7, t7));
+      $parent.appendChild(line);
+      for (t8 = _this.color, i = 0; i < _this.bars.length; ++i) {
+        temp = t1.createElementNS("http://www.w3.org/2000/svg", "rect");
+        temp = t3._as(t2._as(temp));
+        C.RectElement_methods.set$attributes(temp, P.LinkedHashMap_LinkedHashMap$_literal(["width", H.S(_this.bw - 2), "height", "0", "x", H.S(_this.bw * i), "y", "0", "rx", H.S(_this.bw * 0.3), "fill", t8], t7, t7));
+        C.JSArray_methods.$indexSet(_this.bars, i, temp);
+        $parent.appendChild(temp);
+      }
+      t3 = t4._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "line")));
+      (t3 && C.LineElement_methods).set$attributes(t3, P.LinkedHashMap_LinkedHashMap$_literal(["x1", "0", "y1", "0", "x2", "0", "y2", "" + t6, "stroke", "white", "stroke-width", "1.5", "class", "playhead"], t7, t7));
+      _this.playhead = t3;
+      $parent.appendChild(t3);
+      t3 = _this._buildClipLine$1(0);
+      _this.lclip = t3;
+      $parent.appendChild(t3);
+      t3 = _this._buildClipLine$1(t5);
+      _this.rclip = t3;
+      $parent.appendChild(t3);
+      t1 = type$.TextElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "text")));
+      (t1 && C.TextElement_methods).set$attributes(t1, P.LinkedHashMap_LinkedHashMap$_literal(["x", "" + (t5 - 10), "y", "" + (t6 - 10), "class", "info-text"], t7, t7));
+      _this.info = t1;
+      C.TextElement_methods.setInnerHtml$1(t1, "0.00 s");
+      $parent.appendChild(_this.info);
+    },
+    _renderClipRegion$0: function() {
+      var i, t2, t3, bx, _this = this,
+        t1 = _this.w,
+        start = _this.getClipStart$0() * t1,
+        end = _this.getClipEnd$0() * t1;
+      for (t1 = _this.color, i = 0; t2 = _this.bars, i < t2.length; ++i) {
+        t3 = _this.bw;
+        bx = t3 * i;
+        if (bx + t3 / 2 < start || bx > end)
+          t2[i].setAttribute("fill", "#777");
+        else
+          t2[i].setAttribute("fill", t1);
+      }
+      t1 = _this.clip;
+      t1.toString;
+      t1.setAttribute("x", H.S(start));
+      t1 = _this.clip;
+      t1.toString;
+      t1.setAttribute("width", H.S(end - start));
+    },
+    _renderTimestamp$1: function(dragging) {
+      var duration, start, end, _this = this,
+        t1 = _this.recorder,
+        t2 = t1.buffer,
+        t3 = t2.samples;
+      t2 = t2.sampleRate;
+      if (typeof t2 !== "number")
+        return H.iae(t2);
+      duration = t3 / t2;
+      start = _this.getClipStart$0() * duration;
+      end = _this.getClipEnd$0() * duration;
+      if (t1.saving) {
+        t1 = _this.info;
+        t1.toString;
+        C.TextElement_methods.setInnerHtml$1(t1, "Saving...");
+      } else {
+        t1 = _this.info;
+        if (dragging) {
+          t2 = "[" + C.JSNumber_methods.toStringAsFixed$1(start, 2) + " - " + C.JSNumber_methods.toStringAsFixed$1(end, 2) + "]";
+          t1.toString;
+          C.TextElement_methods.setInnerHtml$1(t1, t2);
+        } else {
+          t2 = C.JSNumber_methods.toStringAsFixed$1(end - start, 2) + " s";
+          t1.toString;
+          C.TextElement_methods.setInnerHtml$1(t1, t2);
+        }
+      }
+    },
+    _buildClipLine$1: function(startPos) {
+      var t2, t3, t4, clip, t5, line, t6, handle, dot, ring, _this = this,
+        _s26_ = "http://www.w3.org/2000/svg",
+        t1 = {};
+      t1.dragging = false;
+      t1.pos = startPos;
+      t2 = document;
+      t3 = type$.SvgElement;
+      t4 = type$.GElement;
+      clip = t4._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, _s26_, "g")));
+      clip.setAttribute("transform", "translate(0, 0)");
+      clip.setAttribute("class", "clip-handle");
+      t5 = "" + startPos;
+      clip.setAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(clip))._toHyphenedName$1("position"), t5);
+      line = type$.LineElement._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, _s26_, "line")));
+      t5 = _this.h;
+      t6 = type$.String;
+      (line && C.LineElement_methods).set$attributes(line, P.LinkedHashMap_LinkedHashMap$_literal(["x1", "0", "y1", "0", "x2", "0", "y2", "" + t5, "stroke", "white", "stroke-width", "1.5"], t6, t6));
+      clip.appendChild(line);
+      handle = t4._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, _s26_, "g")));
+      (handle && C.GElement_methods).set$attributes(handle, P.LinkedHashMap_LinkedHashMap$_literal(["transform", "translate(0, " + H.S(t5 / 2) + ")"], t6, t6));
+      t5 = type$.CircleElement;
+      dot = t5._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, _s26_, "circle")));
+      (dot && C.CircleElement_methods).set$attributes(dot, P.LinkedHashMap_LinkedHashMap$_literal(["cx", "0", "cy", "0", "r", "6", "fill", "white"], t6, t6));
+      ring = t5._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, _s26_, "circle")));
+      (ring && C.CircleElement_methods).set$attributes(ring, P.LinkedHashMap_LinkedHashMap$_literal(["cx", "0", "cy", "0", "r", "10", "stroke", "white", "stroke-width", "1.5", "fill", "none"], t6, t6));
+      handle.appendChild(dot);
+      handle.appendChild(ring);
+      clip.appendChild(handle);
+      t6 = type$._ElementEventStreamImpl_MouseEvent;
+      t3 = t6._eval$1("~(1)")._as(new Y.WaveformTrace__buildClipLine_closure(t1, _this, clip));
+      type$.void_Function._as(null);
+      W._EventStreamSubscription$(clip, "mousedown", t3, false, t6._precomputed1);
+      t6 = type$.void_Function_MouseEvent;
+      t3 = type$.MouseEvent;
+      W._EventStreamSubscription$(t2, "mousemove", t6._as(new Y.WaveformTrace__buildClipLine_closure0(t1, _this, clip)), false, t3);
+      W._EventStreamSubscription$(t2, "mouseup", t6._as(new Y.WaveformTrace__buildClipLine_closure1(t1, _this)), false, t3);
+      return clip;
+    },
+    set$bars: function(bars) {
+      this.bars = type$.List_RectElement._as(bars);
+    }
+  };
+  Y.WaveformTrace__buildClipLine_closure.prototype = {
+    call$1: function(e) {
+      var t1, t2;
+      type$.MouseEvent._as(e);
+      if (this.$this.disabled)
+        return;
+      t1 = this._box_0;
+      t1.dragging = true;
+      t2 = this.clip;
+      t1.pos = P.num_parse(t2.getAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(t2))._toHyphenedName$1("position")));
+    },
+    $signature: 0
+  };
+  Y.WaveformTrace__buildClipLine_closure0.prototype = {
+    call$1: function(e) {
+      var t1, t2, t3, pos, x, t4, t5, duration, _this = this;
+      type$.MouseEvent._as(e);
+      t1 = _this._box_0;
+      if (t1.dragging && !_this.$this.disabled) {
+        t2 = t1.pos;
+        t3 = e.movementX;
+        e.movementY;
+        if (typeof t2 !== "number")
+          return t2.$add();
+        if (typeof t3 !== "number")
+          return H.iae(t3);
+        pos = t2 + t3;
+        t1.pos = pos;
+        t1 = _this.$this;
+        t3 = t1.w;
+        x = Math.max(0, Math.min(t3, pos));
+        t2 = _this.clip;
+        t2.setAttribute("transform", "translate(" + H.S(x) + ", 0)");
+        t4 = H.S(x);
+        t2.setAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(t2))._toHyphenedName$1("position"), t4);
+        t1._renderClipRegion$0();
+        t1._renderTimestamp$1(true);
+        t4 = t1.recorder;
+        t2 = t4.buffer;
+        t5 = t2.samples;
+        t2 = t2.sampleRate;
+        if (typeof t2 !== "number")
+          return H.iae(t2);
+        duration = t5 / t2;
+        t1 = t1.bars;
+        t4.pause$0(0);
+        t2 = t4.buffer;
+        if (t2.samples > 0 && t4.context != null)
+          t4.synth.playSlice$4(t2, t4.context.destination, x / t3 * duration, duration / t1.length);
+        t4.set$dirty(true);
+      }
+    },
+    $signature: 0
+  };
+  Y.WaveformTrace__buildClipLine_closure1.prototype = {
+    call$1: function(e) {
+      var t1;
+      type$.MouseEvent._as(e);
+      this._box_0.dragging = false;
+      t1 = this.$this;
+      t1._renderClipRegion$0();
+      t1._renderTimestamp$1(false);
+    },
+    $signature: 0
+  };
   Y.TimelineListener.prototype = {};
   Y.Timeline.prototype = {
     setInstrument$1: function(instrument) {
@@ -20733,7 +25581,7 @@
       _this._playhead = p;
       _this._renderPlayhead$0();
       for (t1 = _this.notes, t2 = t1.get$keys(t1), t2 = t2.get$iterator(t2), t3 = _this.listener, t4 = t3.synth, t5 = type$.Note; t2.moveNext$0();) {
-        t6 = t2.get$current();
+        t6 = t2.get$current(t2);
         if (typeof p !== "number")
           return p.$le();
         if (!(p <= 0)) {
@@ -20769,7 +25617,7 @@
         }
       }
       for (t2 = t1.get$keys(t1), t2 = t2.get$iterator(t2), t6 = t3.clock; t2.moveNext$0();) {
-        t7 = t2.get$current();
+        t7 = t2.get$current(t2);
         if (typeof p !== "number")
           return p.$gt();
         if (p > 0) {
@@ -21068,13 +25916,13 @@
     call$1: function(c) {
       return H._asStringNullable(c) !== "container";
     },
-    $signature: 6
+    $signature: 8
   };
   Y.Timeline_insert_closure.prototype = {
     call$1: function(e) {
       return this.$this._render$0();
     },
-    $signature: 16
+    $signature: 19
   };
   Y.Timeline__render_closure.prototype = {
     call$1: function(e) {
@@ -21098,7 +25946,7 @@
       type$.SvgElement._as(note);
       return this.$this.parent.appendChild(note);
     },
-    $signature: 72
+    $signature: 80
   };
   Y.Timeline__registerTouchEvents_closure.prototype = {
     call$1: function(e) {
@@ -21311,11 +26159,19 @@
   Y._PythonCell_DataModel_PythonListener_CodeMirrorListener_TimelineListener_ClockSubscriber_Metronome.prototype = {};
   V.EffectsDial.prototype = {
     get$value: function(_) {
-      var _this = this,
-        t1 = _this._dial$_value,
-        t2 = _this.maxValue,
-        t3 = _this.minValue,
-        v = t1 * (t2 - t3) + t3;
+      var index, t2, t3, v, _this = this,
+        t1 = _this.values;
+      if (t1 != null && true) {
+        t1.length;
+        index = C.JSNumber_methods.round$0(12 * _this._dial$_value);
+        if (index < 0 || index >= 13)
+          return H.ioore(t1, index);
+        return t1[index];
+      }
+      t1 = _this._dial$_value;
+      t2 = _this.maxValue;
+      t3 = _this.minValue;
+      v = t1 * (t2 - t3) + t3;
       t1 = _this.step;
       if (t1 != null)
         return C.JSDouble_methods.round$0(v / t1) * t1;
@@ -21324,10 +26180,28 @@
     },
     set$value: function(_, v) {
       var _this = this,
-        t1 = _this.minValue,
-        t2 = _this.maxValue;
-      _this._dial$_value = Math.max(0, Math.min(1, (v - t1) / (t2 - t1)));
-      _this._dial$_updateDrawing$0();
+        t1 = _this.values;
+      if (t1 != null)
+        if (C.JSArray_methods.contains$1(t1, v)) {
+          _this.values.length;
+          t1 = true;
+        } else
+          t1 = false;
+      else
+        t1 = false;
+      if (t1) {
+        t1 = _this.values;
+        t1 = (t1 && C.JSArray_methods).indexOf$1(t1, v);
+        _this.values.length;
+        v = t1 / 12;
+      } else {
+        t1 = _this.minValue;
+        if (typeof v !== "number")
+          return v.$sub();
+        v = (v - t1) / (_this.maxValue - t1);
+      }
+      _this._dial$_value = Math.max(0, Math.min(1, v));
+      _this._updateDrawing$0();
     },
     buildUI$1: function(container) {
       var t2, t3, t4, widgetGroup, knobGroup, t5, overlay, _this = this,
@@ -21376,21 +26250,34 @@
         large = endAngle >= 3.141592653589793 ? 1 : 0;
       return C.JSArray_methods.join$1(["M", radius * t3, radius * t4, "A", radius, radius, 0, large, 1, radius * t1, radius * t2], " ");
     },
-    _dial$_updateDrawing$0: function() {
-      var t1, _this = this,
+    _updateDrawing$0: function() {
+      var t1, t2, _this = this,
         _s14_ = "stroke-opacity";
       if (_this._line != null) {
-        t1 = _this._track;
-        t1.setAttribute(_s14_, "0.5");
-        _this._arc.setAttribute(_s14_, "1.0");
-        _this._line.setAttribute("x1", "0");
-        _this._line.setAttribute("y1", "0");
-        _this._line.setAttribute("x2", H.S(23 * Math.cos(_this._dial$_value * 4.71238898038469)));
-        _this._line.setAttribute("y2", H.S(23 * Math.sin(_this._dial$_value * 4.71238898038469)));
+        t1 = _this._disabled;
+        t2 = _this._track;
+        if (t1) {
+          t2.setAttribute(_s14_, "0");
+          _this._arc.setAttribute(_s14_, "0");
+          _this._line.setAttribute("x1", H.S(23 * Math.cos(1.3194689145077132)));
+          _this._line.setAttribute("y1", H.S(23 * Math.sin(1.3194689145077132)));
+          _this._line.setAttribute("x2", H.S(23 * Math.cos(4.476769531365455)));
+          _this._line.setAttribute("y2", H.S(23 * Math.sin(4.476769531365455)));
+        } else {
+          t2.setAttribute(_s14_, "0.5");
+          _this._arc.setAttribute(_s14_, "1.0");
+          _this._line.setAttribute("x1", "0");
+          _this._line.setAttribute("y1", "0");
+          _this._line.setAttribute("x2", H.S(23 * Math.cos(_this._dial$_value * 4.71238898038469)));
+          _this._line.setAttribute("y2", H.S(23 * Math.sin(_this._dial$_value * 4.71238898038469)));
+        }
       }
       t1 = _this._arc;
       if (t1 != null)
         t1.setAttribute("d", _this._describeArc$5(0, 0, 37, 0, _this._dial$_value * 3 * 3.141592653589793 / 2));
+    },
+    set$values: function(_, values) {
+      this.values = type$.List_num._as(values);
     }
   };
   V.EffectsDial_buildUI_closure.prototype = {
@@ -21398,26 +26285,24 @@
       var t1;
       type$.MouseEvent._as(e);
       t1 = this.$this;
-      t1._dial$_dragging = true;
+      if (t1._disabled)
+        return;
+      t1._dragging = true;
       e.clientX;
-      t1._dial$_touchY = e.clientY;
+      t1._touchY = e.clientY;
       t1.knob.setAttribute("fill", "#ccc");
     },
     $signature: 0
   };
   V.EffectsDial_buildUI_closure0.prototype = {
     call$1: function(e) {
-      var t1, t2;
+      var t1;
       type$.MouseEvent._as(e);
       t1 = this.$this;
-      if (t1._dial$_dragging)
-        t2 = t1.onChanged != null;
-      else
-        t2 = false;
-      if (t2)
+      if (t1._dragging && !t1._disabled && t1.onChanged != null)
         P.Function_apply(t1.onChanged, [t1, t1.get$value(t1)], null);
       t1.knob.setAttribute("fill", "none");
-      t1._dial$_dragging = false;
+      t1._dragging = false;
     },
     $signature: 0
   };
@@ -21426,17 +26311,17 @@
       var t1, t2, t3;
       type$.MouseEvent._as(e);
       t1 = this.$this;
-      if (t1._dial$_dragging && true) {
-        t2 = t1._dial$_touchY;
+      if (t1._dragging && !t1._disabled) {
+        t2 = t1._touchY;
         e.clientX;
         t3 = e.clientY;
         if (typeof t2 !== "number")
           return t2.$sub();
         if (typeof t3 !== "number")
           return H.iae(t3);
-        t1._dial$_touchY = t3;
+        t1._touchY = t3;
         t1._dial$_value = Math.max(0, Math.min(1, t1._dial$_value + (t2 - t3) / 50));
-        t1._dial$_updateDrawing$0();
+        t1._updateDrawing$0();
         t2 = t1.onAdjusted;
         if (t2 != null)
           P.Function_apply(t2, [t1, t1.get$value(t1)], null);
@@ -21444,11 +26329,18 @@
     },
     $signature: 0
   };
+  E.Dialog_message_closure.prototype = {
+    call$1: function(e) {
+      type$.MouseEvent._as(e);
+      E.Dialog_closeModal();
+    },
+    $signature: 0
+  };
   E.Dialog_closeModal_closure.prototype = {
     call$1: function(o) {
       J.remove$0$ax(type$.Element._as(o));
     },
-    $signature: 11
+    $signature: 17
   };
   E.Dialog__showModal_closure.prototype = {
     call$1: function(e) {
@@ -21503,7 +26395,7 @@
       if (this.menu !== m)
         J.get$classes$x(m).add$1(0, "hidden");
     },
-    $signature: 11
+    $signature: 17
   };
   R.MixSlider.prototype = {
     get$value: function(_) {
@@ -21516,7 +26408,7 @@
       var _this = this,
         t1 = _this.minValue;
       _this._slider$_value = Math.max(0, Math.min(1, (v - t1) / (_this.maxValue - t1)));
-      _this._updateDrawing$0();
+      _this._slider$_updateDrawing$0();
     },
     valueToY$1: function(v) {
       H._asNumNullable(v);
@@ -21565,7 +26457,7 @@
       W._EventStreamSubscription$(t1, "mouseup", t3._as(new R.MixSlider_buildUI_closure0(_this)), false, t4);
       W._EventStreamSubscription$(t1, "mousemove", t3._as(new R.MixSlider_buildUI_closure1(_this)), false, t4);
     },
-    _updateDrawing$0: function() {
+    _slider$_updateDrawing$0: function() {
       var _this = this,
         t1 = _this._knobGroup;
       if (t1 != null)
@@ -21579,9 +26471,9 @@
       var t1;
       type$.MouseEvent._as(e);
       t1 = this.$this;
-      t1._dragging = true;
+      t1._slider$_dragging = true;
       e.clientX;
-      t1._touchY = e.clientY;
+      t1._slider$_touchY = e.clientY;
       t1 = t1._knob;
       t1.toString;
       new P.AttributeClassSet(t1).add$1(0, "dragging");
@@ -21593,18 +26485,18 @@
       var t1, t2;
       type$.MouseEvent._as(e);
       t1 = this.$this;
-      if (t1._dragging)
+      if (t1._slider$_dragging)
         t2 = t1.onChanged != null;
       else
         t2 = false;
       if (t2)
         P.Function_apply(t1.onChanged, [t1, t1.get$value(t1)], null);
-      if (t1._dragging) {
+      if (t1._slider$_dragging) {
         t2 = t1._knob;
         t2.toString;
         new P.AttributeClassSet(t2).remove$1(0, "dragging");
       }
-      t1._dragging = false;
+      t1._slider$_dragging = false;
     },
     $signature: 0
   };
@@ -21613,17 +26505,17 @@
       var t1, t2, t3;
       type$.MouseEvent._as(e);
       t1 = this.$this;
-      if (t1._dragging && true) {
-        t2 = t1._touchY;
+      if (t1._slider$_dragging && true) {
+        t2 = t1._slider$_touchY;
         e.clientX;
         t3 = e.clientY;
         if (typeof t2 !== "number")
           return t2.$sub();
         if (typeof t3 !== "number")
           return H.iae(t3);
-        t1._touchY = t3;
+        t1._slider$_touchY = t3;
         t1._slider$_value = 1 - C.JSDouble_methods.clamp$2((t1.valueToY$1(t1._slider$_value) - (t2 - t3) - 18) / (t1.height - 36), 0, 1);
-        t1._updateDrawing$0();
+        t1._slider$_updateDrawing$0();
         t2 = t1.onAdjusted;
         if (t2 != null)
           P.Function_apply(t2, [t1, t1.get$value(t1)], null);
@@ -21819,7 +26711,6 @@
               results = type$.DivElement._as($async$self._dialog.querySelector(".search-results"));
               results.children;
               C.DivElement_methods._clearChildren$0(results);
-              P.print(filter);
               $async$goto = $status != null && true ? 2 : 3;
               break;
             case 2:
@@ -21835,7 +26726,7 @@
               trackList = document.createElement("ul");
               trackList.className = "track-list";
               for (t2 = J.getInterceptor$ax(tracks), t3 = t2.get$iterator(tracks), t4 = type$.Map_dynamic_dynamic; t3.moveNext$0();) {
-                track = $async$self._buildTrack$1(t4._as(t3.get$current()));
+                track = $async$self._buildTrack$1(t4._as(t3.get$current(t3)));
                 if (track != null)
                   trackList.appendChild(track);
               }
@@ -22066,9 +26957,9 @@
       t3 = t2.$ti;
       t1 = t3._eval$1("~(1)")._as(new O.TrackLibrary_show__closure(t1, f, el));
       type$.void_Function._as(null);
-      W._EventStreamSubscription$(t2._html$_target, t2._eventType, t1, false, t3._precomputed1);
+      W._EventStreamSubscription$(t2._target, t2._eventType, t1, false, t3._precomputed1);
     },
-    $signature: 11
+    $signature: 17
   };
   O.TrackLibrary_show__closure.prototype = {
     call$1: function(e) {
@@ -22092,7 +26983,7 @@
       t1.sort = t2;
       t1._search$2(t1.filter, t2);
     },
-    $signature: 4
+    $signature: 6
   };
   O.TrackLibrary__buildTrack__toggleStar.prototype = {
     call$2: function(track, id) {
@@ -22102,7 +26993,7 @@
       else
         t1._starTrack$2(track, id);
     },
-    $signature: 73
+    $signature: 81
   };
   O.TrackLibrary__buildTrack_closure.prototype = {
     call$1: function(e) {
@@ -22247,7 +27138,7 @@
     call$1: function(data) {
       F._updateCellMenu(this.cell);
     },
-    $signature: 4
+    $signature: 6
   };
   F.main__closure0.prototype = {
     call$1: function(data) {
@@ -22262,7 +27153,7 @@
       if (track != null)
         C.DivElement_methods.remove$0(track);
     },
-    $signature: 4
+    $signature: 6
   };
   F.main_closure0.prototype = {
     call$1: function(e) {
@@ -22324,7 +27215,7 @@
         W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t2.querySelectorAll(_s4_), t3)).add$1(0, "authenticated");
       }
     },
-    $signature: 34
+    $signature: 36
   };
   F.main_closure2.prototype = {
     call$1: function(user) {
@@ -22350,7 +27241,7 @@
       H.checkTypeBound(t2, t2, "T", _s16_);
       W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("main"), t3)).clear$0(0);
     },
-    $signature: 34
+    $signature: 36
   };
   F.main_closure3.prototype = {
     call$1: function(e) {
@@ -22381,6 +27272,13 @@
     $signature: 0
   };
   F.main_closure7.prototype = {
+    call$1: function(e) {
+      type$.MouseEvent._as(e);
+      $.rstudio.show$0(0);
+    },
+    $signature: 0
+  };
+  F.main_closure8.prototype = {
     call$1: function(e) {
       var t1, t2;
       type$.MouseEvent._as(e);
@@ -22414,7 +27312,7 @@
     call$2: function(d, value) {
       type$.EffectsDial._as(d);
       H._asNumNullable(value);
-      $.datastore.save$1(this.cell);
+      $.datastore.save$1(0, this.cell);
     },
     "call*": "call$2",
     $requiredArgCount: 2,
@@ -22430,7 +27328,7 @@
       t2 = type$.dynamic;
       C.JSArray_methods.add$1(this.slider.ticks, P.LinkedHashMap_LinkedHashMap$_literal(["label", t1, "value", Math.pow(10, db / 40) / 1.78], t2, t2));
     },
-    $signature: 76
+    $signature: 84
   };
   F._addMixTrack_closure2.prototype = {
     call$2: function(s, value) {
@@ -22447,17 +27345,17 @@
     },
     "call*": "call$2",
     $requiredArgCount: 2,
-    $signature: 36
+    $signature: 31
   };
   F._addMixTrack_closure3.prototype = {
     call$2: function(s, value) {
       type$.MixSlider._as(s);
       H._asNumNullable(value);
-      $.datastore.save$1(this.cell);
+      $.datastore.save$1(0, this.cell);
     },
     "call*": "call$2",
     $requiredArgCount: 2,
-    $signature: 36
+    $signature: 31
   };
   F._addMixTrack_closure4.prototype = {
     call$1: function(e) {
@@ -22517,13 +27415,13 @@
       t2 = "images/instruments/" + H.S(J.$index$asx(t2.settings, _s10_)) + ".svg";
       t1._knobImage.setAttribute("href", t2);
     },
-    $signature: 4
+    $signature: 6
   };
   F._addMixTrack__closure.prototype = {
     call$1: function(cname) {
       return cname !== "mixer-track";
     },
-    $signature: 6
+    $signature: 8
   };
   F._addCellMenu_closure.prototype = {
     call$1: function(e) {
@@ -22560,7 +27458,7 @@
     call$1: function(cname) {
       return cname !== "shortcut-cell-name";
     },
-    $signature: 6
+    $signature: 8
   };
   B.UserList.prototype = {
     UserList$1: function(socket) {
@@ -22625,7 +27523,7 @@
           return;
         t1 = J.$index$asx(userData, "id");
         visitor = new Y.User(C.C__JSRandom, t1, new P.DateTime(Date.now(), false), new P.DateTime(Date.now(), false));
-        J.load$1$z(visitor, userData);
+        J.load$1$x(visitor, userData);
         if (J.$eq$(action, "userlist-join") || J.$eq$(action, _s16_)) {
           t1 = _this.visitors;
           if (!C.JSArray_methods.contains$1(t1, visitor)) {
@@ -22709,7 +27607,7 @@
       type$.Event._as(e);
       return this.$this._sendAction$1("userlist-leave");
     },
-    $signature: 16
+    $signature: 19
   };
   B.UserList__buildUserList_closure.prototype = {
     call$2: function(a, b) {
@@ -22718,7 +27616,7 @@
       t1._as(b);
       return J.compareTo$1$ns(J.toString$0$(a.id), J.toString$0$(b.id));
     },
-    $signature: 78
+    $signature: 86
   };
   (function aliases() {
     var _ = J.Interceptor.prototype;
@@ -22758,71 +27656,74 @@
       _instance_0_i = hunkHelpers._instance_0i,
       _static_2 = hunkHelpers._static_2,
       _instance_2_u = hunkHelpers._instance_2u;
-    _static_1(P, "async__AsyncRun__scheduleImmediateJsOverride$closure", "_AsyncRun__scheduleImmediateJsOverride", 17);
-    _static_1(P, "async__AsyncRun__scheduleImmediateWithSetImmediate$closure", "_AsyncRun__scheduleImmediateWithSetImmediate", 17);
-    _static_1(P, "async__AsyncRun__scheduleImmediateWithTimer$closure", "_AsyncRun__scheduleImmediateWithTimer", 17);
+    _static_1(P, "async__AsyncRun__scheduleImmediateJsOverride$closure", "_AsyncRun__scheduleImmediateJsOverride", 18);
+    _static_1(P, "async__AsyncRun__scheduleImmediateWithSetImmediate$closure", "_AsyncRun__scheduleImmediateWithSetImmediate", 18);
+    _static_1(P, "async__AsyncRun__scheduleImmediateWithTimer$closure", "_AsyncRun__scheduleImmediateWithTimer", 18);
     _static_0(P, "async___startMicrotaskLoop$closure", "_startMicrotaskLoop", 2);
     _static(P, "async___nullErrorHandler$closure", 1, null, ["call$2", "call$1"], ["_nullErrorHandler", function(error) {
       return P._nullErrorHandler(error, null);
-    }], 12, 0);
+    }], 13, 0);
     _static_0(P, "async___nullDoneHandler$closure", "_nullDoneHandler", 2);
     var _;
     _instance_0_u(_ = P._BroadcastSubscription.prototype, "get$_onPause", "_onPause$0", 2);
     _instance_0_u(_, "get$_onResume", "_onResume$0", 2);
-    _instance_1_i(P._BroadcastStreamController.prototype, "get$add", "add$1", 37);
-    _instance(P._Completer.prototype, "get$completeError", 0, 1, null, ["call$2", "call$1"], ["completeError$2", "completeError$1"], 12, 0);
+    _instance_1_i(P._BroadcastStreamController.prototype, "get$add", "add$1", 40);
+    _instance(P._Completer.prototype, "get$completeError", 0, 1, null, ["call$2", "call$1"], ["completeError$2", "completeError$1"], 13, 0);
     _instance(P._Future.prototype, "get$_completeError", 0, 1, function() {
       return [null];
-    }, ["call$2", "call$1"], ["_completeError$2", "_completeError$1"], 12, 0);
+    }, ["call$2", "call$1"], ["_completeError$2", "_completeError$1"], 13, 0);
     _instance_0_u(_ = P._ControllerSubscription.prototype, "get$_onPause", "_onPause$0", 2);
     _instance_0_u(_, "get$_onResume", "_onResume$0", 2);
     _instance_0_u(_ = P._BufferingStreamSubscription.prototype, "get$_onPause", "_onPause$0", 2);
     _instance_0_u(_, "get$_onResume", "_onResume$0", 2);
     _instance_0_u(P._DoneStreamSubscription.prototype, "get$_sendDone", "_sendDone$0", 2);
-    _instance_1_u(_ = P._StreamIterator.prototype, "get$_async$_onData", "_async$_onData$1", 37);
+    _instance_1_u(_ = P._StreamIterator.prototype, "get$_async$_onData", "_async$_onData$1", 40);
     _instance(_, "get$_onError", 0, 1, function() {
       return [null];
-    }, ["call$2", "call$1"], ["_onError$2", "_onError$1"], 12, 0);
+    }, ["call$2", "call$1"], ["_onError$2", "_onError$1"], 13, 0);
     _instance_0_u(_, "get$_onDone", "_onDone$0", 2);
-    _static_1(P, "convert___defaultToEncodable$closure", "_defaultToEncodable", 5);
-    _static(W, "html__Html5NodeValidator__standardAttributeValidator$closure", 4, null, ["call$4"], ["_Html5NodeValidator__standardAttributeValidator"], 22, 0);
-    _static(W, "html__Html5NodeValidator__uriAttributeValidator$closure", 4, null, ["call$4"], ["_Html5NodeValidator__uriAttributeValidator"], 22, 0);
+    _static_1(P, "convert___defaultToEncodable$closure", "_defaultToEncodable", 7);
+    _static(W, "html__Html5NodeValidator__standardAttributeValidator$closure", 4, null, ["call$4"], ["_Html5NodeValidator__standardAttributeValidator"], 32, 0);
+    _static(W, "html__Html5NodeValidator__uriAttributeValidator$closure", 4, null, ["call$4"], ["_Html5NodeValidator__uriAttributeValidator"], 32, 0);
+    _instance_0_i(W.CacheStorage.prototype, "get$keys", "keys$0", 65);
+    _instance_0_i(W.PaymentInstruments.prototype, "get$keys", "keys$0", 85);
     _instance_0_i(W._StreamPool.prototype, "get$close", "close$0", 2);
-    _static_1(P, "js___convertToJS$closure", "_convertToJS", 5);
-    _static_1(P, "js___convertToDart$closure", "_convertToDart", 53);
-    _instance_1_u(_ = U.MIDIManager.prototype, "get$_midiConnection", "_midiConnection$1", 10);
-    _instance_1_u(_, "get$_midiEvent", "_midiEvent$1", 10);
-    _static_2(R, "codemirror_CodeMirror_onProgramUpdate$closure", "CodeMirror_onProgramUpdate", 9);
-    _static_2(R, "codemirror_CodeMirror_onCursorActivity$closure", "CodeMirror_onCursorActivity", 9);
-    _static_1(R, "codemirror_CodeMirror_onEditorBlur$closure", "CodeMirror_onEditorBlur", 10);
-    _instance_1_u(_ = R.CodeMirror.prototype, "get$_onProgramUpdate", "_onProgramUpdate$1", 14);
-    _instance_1_u(_, "get$_onCursorActivity", "_onCursorActivity$1", 14);
+    _static_1(P, "js___convertToJS$closure", "_convertToJS", 7);
+    _static_1(P, "js___convertToDart$closure", "_convertToDart", 59);
+    _instance_1_u(_ = U.MIDIManager.prototype, "get$_midiConnection", "_midiConnection$1", 11);
+    _instance_1_u(_, "get$_midiEvent", "_midiEvent$1", 11);
+    _static_2(R, "codemirror_CodeMirror_onProgramUpdate$closure", "CodeMirror_onProgramUpdate", 10);
+    _static_2(R, "codemirror_CodeMirror_onCursorActivity$closure", "CodeMirror_onCursorActivity", 10);
+    _static_1(R, "codemirror_CodeMirror_onEditorBlur$closure", "CodeMirror_onEditorBlur", 11);
+    _instance_1_u(_ = R.CodeMirror.prototype, "get$_onProgramUpdate", "_onProgramUpdate$1", 15);
+    _instance_1_u(_, "get$_onCursorActivity", "_onCursorActivity$1", 15);
     _instance_0_u(_, "get$_onEditorBlur", "_onEditorBlur$0", 2);
-    _instance_1_u(_ = Z.DrumKit.prototype, "get$_onKeyDown", "_onKeyDown$1", 8);
-    _instance_1_u(_, "get$_onKeyUp", "_onKeyUp$1", 8);
-    _instance_1_u(_ = Z.Drums.prototype, "get$_onKeyDown", "_onKeyDown$1", 8);
-    _instance_1_u(_, "get$_onKeyUp", "_onKeyUp$1", 8);
-    _instance_1_u(_ = Z.Piano.prototype, "get$_onKeyDown", "_onKeyDown$1", 8);
-    _instance_1_u(_, "get$_onKeyUp", "_onKeyUp$1", 8);
-    _instance_1_i(_ = Y.PythonCell.prototype, "get$load", "load$1", 14);
-    _instance_1_i(_, "get$animate", "animate$1", 32);
-    _instance_1_u(_ = Y.Datastore.prototype, "get$_onLogin", "_onLogin$1", 10);
-    _instance_1_u(_, "get$_onConnect", "_onConnect$1", 10);
+    _instance_1_u(_ = Z.DrumKit.prototype, "get$_onKeyDown", "_onKeyDown$1", 9);
+    _instance_1_u(_, "get$_onKeyUp", "_onKeyUp$1", 9);
+    _instance_1_u(_ = Z.Drums.prototype, "get$_onKeyDown", "_onKeyDown$1", 9);
+    _instance_1_u(_, "get$_onKeyUp", "_onKeyUp$1", 9);
+    _instance_1_u(_ = Z.Piano.prototype, "get$_onKeyDown", "_onKeyDown$1", 9);
+    _instance_1_u(_, "get$_onKeyUp", "_onKeyUp$1", 9);
+    _instance_1_i(_ = Y.PythonCell.prototype, "get$load", "load$1", 15);
+    _instance_1_i(_, "get$animate", "animate$1", 22);
+    _instance_1_u(_ = Y.Datastore.prototype, "get$_onLogin", "_onLogin$1", 11);
+    _instance_1_u(_, "get$_onConnect", "_onConnect$1", 11);
     _instance_0_u(_, "get$_onLogout", "_onLogout$0", 2);
-    _instance_2_u(_, "get$_onUpdated", "_onUpdated$2", 9);
-    _instance(_, "get$_onAdded", 0, 4, null, ["call$4"], ["_onAdded$4"], 68, 0);
-    _instance_2_u(_, "get$_onRemoved", "_onRemoved$2", 9);
-    _instance_1_i(_ = Y.Project.prototype, "get$animate", "animate$1", 32);
-    _instance_1_i(_, "get$load", "load$1", 14);
-    _instance_1_u(B.UserList.prototype, "get$_handleMessage", "_handleMessage$1", 15);
+    _instance_2_u(_, "get$_onUpdated", "_onUpdated$2", 10);
+    _instance(_, "get$_onAdded", 0, 4, null, ["call$4"], ["_onAdded$4"], 73, 0);
+    _instance_2_u(_, "get$_onRemoved", "_onRemoved$2", 10);
+    _instance_1_i(_ = Y.Project.prototype, "get$animate", "animate$1", 22);
+    _instance_1_i(_, "get$load", "load$1", 15);
+    _instance_1_u(Y.RecordingStudio.prototype, "get$tick", "tick$1", 22);
+    _instance_1_u(B.UserList.prototype, "get$_handleMessage", "_handleMessage$1", 12);
   })();
   (function inheritance() {
     var _mixin = hunkHelpers.mixin,
       _inherit = hunkHelpers.inherit,
       _inheritMany = hunkHelpers.inheritMany;
     _inherit(P.Object, null);
-    _inheritMany(P.Object, [H.JS_CONST, J.Interceptor, J.ArrayIterator, P._ListBase_Object_ListMixin, P.Iterable, H.ListIterator, P.Iterator, H.FixedLengthListMixin, H.UnmodifiableListMixin, H.Symbol, P.MapView, H.ConstantMap, H.JSInvocationMirror, H.Closure, H.TypeErrorDecoder, P.Error, H.ExceptionAndStackTrace, H._StackTrace, P.MapMixin, H.LinkedHashMapCell, H.LinkedHashMapKeyIterator, H.JSSyntaxRegExp, H._MatchImplementation, H.Rti, H._FunctionParameters, P._TimerImpl, P._AsyncAwaitCompleter, P.Stream, P._BufferingStreamSubscription, P._BroadcastStreamController, P.Future, P._Completer, P._FutureListener, P._Future, P._AsyncCallbackEntry, P.StreamSubscription, P.StreamTransformerBase, P._StreamController, P._SyncStreamControllerDispatch, P._AsyncStreamControllerDispatch, P._DelayedEvent, P._DelayedDone, P._PendingEvents, P._DoneStreamSubscription, P._StreamIterator, P.Timer, P.AsyncError, P._Zone, P._SetBase, P._LinkedHashSetCell, P._LinkedHashSetIterator, P.ListMixin, P._UnmodifiableMapMixin, P._ListQueueIterator, P.SetMixin, P._SetBase_Object_SetMixin, P.Codec, P._Base64Encoder, P._Base64Decoder, P._JsonStringifier, P.bool, P.DateTime, P.num, P.Duration, P.OutOfMemoryError, P.StackOverflowError, P._Exception, P.FormatException, P.Function, P.List, P.Map, P.Null, P.StackTrace, P._StringStackTrace, P.String, P.StringBuffer, P.Symbol0, W.CssStyleDeclarationBase, W._WrappedEvent, W._BeforeUnloadEventStreamProvider, W.CssClassSet, W.EventStreamProvider, W._StreamPool, W._Html5NodeValidator, W.ImmutableListMixin, W.NodeValidatorBuilder, W._SimpleNodeValidator, W._SvgNodeValidator, W.FixedSizeListIterator, W._DOMWindowCrossFrame, W.NodeValidator, W._SameOriginUriPolicy, W._ValidatingTreeSanitizer, P._StructuredClone, P._AcceptStructuredClone, P.JsObject, P._JSRandom, P.Float32List, D.GrowableAudioBuffer, U.MIDIManager, U.MIDIEvent, X.PythonListener, X.PythonCompiler, S.Preprocessor, R.CodeMirrorListener, R.CodeMirror, Z.Instrument, Z.Drum, Z.DrumPad, Z.NoteEvent, Z.MiniPiano, Z.PianoKey, U.SynthChain, E.ClockSubscriber, E.Metronome, E.PlayClock, K.Effect, X.SynthEvent, D.Key, B.SynthNode, F.Note, L.Synthesizer, Y.Trace, Y.TraceEvent, Y.DataModel, Y.Datastore, Y.DatastoreException, Y._NoteRecorder_Object_ClockSubscriber, Y.NoteSpacer, Y.TimelineListener, Y.Timeline, V.EffectsDial, R.MixSlider, K.Uuid, O.TrackLibrary, B.UserList]);
-    _inheritMany(J.Interceptor, [J.JSBool, J.JSNull, J.JavaScriptObject, J.JSArray, J.JSNumber, J.JSString, H.NativeByteBuffer, H.NativeTypedData, W.EventTarget, W.Event, W.Blob, W._CssStyleDeclaration_Interceptor_CssStyleDeclarationBase, W.DomException, W.DomRectReadOnly, W.DomTokenList, W._HtmlCollection_Interceptor_ListMixin, W.ImageData, W.Location, W._NodeList_Interceptor_ListMixin, W._Storage_Interceptor_MapMixin, W.__NamedNodeMap_Interceptor_ListMixin, P.KeyRange, P.AudioBuffer, P.AudioParam]);
+    _inheritMany(P.Object, [H.JS_CONST, J.Interceptor, J.ArrayIterator, P._ListBase_Object_ListMixin, P.Iterable, H.ListIterator, P.Iterator, H.FixedLengthListMixin, H.UnmodifiableListMixin, H.Symbol, P.MapView, H.ConstantMap, H.JSInvocationMirror, H.Closure, H.TypeErrorDecoder, P.Error, H.ExceptionAndStackTrace, H._StackTrace, P.MapMixin, H.LinkedHashMapCell, H.LinkedHashMapKeyIterator, H.JSSyntaxRegExp, H._MatchImplementation, H.Rti, H._FunctionParameters, P._TimerImpl, P._AsyncAwaitCompleter, P.Stream, P._BufferingStreamSubscription, P._BroadcastStreamController, P.Future, P._Completer, P._FutureListener, P._Future, P._AsyncCallbackEntry, P.StreamSubscription, P.StreamTransformerBase, P._StreamController, P._SyncStreamControllerDispatch, P._AsyncStreamControllerDispatch, P._DelayedEvent, P._DelayedDone, P._PendingEvents, P._DoneStreamSubscription, P._StreamIterator, P.Timer, P.AsyncError, P._Zone, P._SetBase, P._LinkedHashSetCell, P._LinkedHashSetIterator, P.ListMixin, P._UnmodifiableMapMixin, P._ListQueueIterator, P.SetMixin, P._SetBase_Object_SetMixin, P.Codec, P._Base64Encoder, P._Base64Decoder, P._JsonStringifier, P.bool, P.DateTime, P.num, P.Duration, P.OutOfMemoryError, P.StackOverflowError, P._Exception, P.FormatException, P.Function, P.List, P.Map, P.Null, P.StackTrace, P._StringStackTrace, P.String, P.StringBuffer, P.Symbol0, W.CssStyleDeclarationBase, W._WrappedEvent, W._BeforeUnloadEventStreamProvider, W.CssClassSet, W.EventStreamProvider, W._StreamPool, W._Html5NodeValidator, W.ImmutableListMixin, W.NodeValidatorBuilder, W._SimpleNodeValidator, W._SvgNodeValidator, W.FixedSizeListIterator, W._DOMWindowCrossFrame, W.NodeValidator, W._SameOriginUriPolicy, W._ValidatingTreeSanitizer, P._StructuredClone, P._AcceptStructuredClone, P.JsObject, P._JSRandom, P._RectangleBase, P.Float32List, D.GrowableAudioBuffer, U.MIDIManager, U.MIDIEvent, X.PythonListener, X.PythonCompiler, S.Preprocessor, R.CodeMirrorListener, R.CodeMirror, Z.Instrument, Z.Drum, Z.DrumPad, Z.NoteEvent, Z.MiniPiano, Z.PianoKey, U.SynthChain, E.ClockSubscriber, E.Metronome, E.PlayClock, K.Effect, X.SynthEvent, D.Key, B.SynthNode, F.Note, L.Synthesizer, Y.Trace, Y.TraceEvent, Y.DataModel, Y.Datastore, Y.DatastoreException, Y._NoteRecorder_Object_ClockSubscriber, Y.NoteSpacer, Y.EffectsChain, Y.GraphicEq, Y.AudioRecorder, Y.RecordingStudio, Y.WaveformTrace, Y.TimelineListener, Y.Timeline, V.EffectsDial, R.MixSlider, K.Uuid, O.TrackLibrary, B.UserList]);
+    _inheritMany(J.Interceptor, [J.JSBool, J.JSNull, J.JavaScriptObject, J.JSArray, J.JSNumber, J.JSString, H.NativeByteBuffer, H.NativeTypedData, W.EventTarget, W.AccessibleNodeList, W.Event, W.Blob, W.CacheStorage, W.Client, W.Credential, W.CssTransformComponent, W.CssRule, W._CssStyleDeclaration_Interceptor_CssStyleDeclarationBase, W.CssStyleValue, W.DataTransferItemList, W.DomException, W._DomRectList_Interceptor_ListMixin, W.DomRectReadOnly, W._DomStringList_Interceptor_ListMixin, W.DomTokenList, W.Entry, W._FileList_Interceptor_ListMixin, W.Gamepad, W.History, W._HtmlCollection_Interceptor_ListMixin, W.ImageData, W.Location, W.MediaList, W._MidiInputMap_Interceptor_MapMixin, W._MidiOutputMap_Interceptor_MapMixin, W.MimeType, W._MimeTypeArray_Interceptor_ListMixin, W.NavigatorConcurrentHardware, W.NavigatorUserMediaError, W._NodeList_Interceptor_ListMixin, W.PaymentInstruments, W.Plugin, W._PluginArray_Interceptor_ListMixin, W.RelatedApplication, W.RtcLegacyStatsReport, W._RtcStatsReport_Interceptor_MapMixin, W.SpeechGrammar, W._SpeechGrammarList_Interceptor_ListMixin, W.SpeechRecognitionResult, W._Storage_Interceptor_MapMixin, W.StyleSheet, W._TextTrackCueList_Interceptor_ListMixin, W.TimeRanges, W.Touch, W._TouchList_Interceptor_ListMixin, W.TrackDefaultList, W.Url, W.VideoTrack, W.VttRegion, W.__CssRuleList_Interceptor_ListMixin, W.__GamepadList_Interceptor_ListMixin, W.__NamedNodeMap_Interceptor_ListMixin, W.__SpeechRecognitionResultList_Interceptor_ListMixin, W.__StyleSheetList_Interceptor_ListMixin, P.KeyRange, P.Length, P._LengthList_Interceptor_ListMixin, P.Number, P._NumberList_Interceptor_ListMixin, P.PointList, P._StringList_Interceptor_ListMixin, P.Transform, P._TransformList_Interceptor_ListMixin, P.AudioBuffer, P.AudioParam, P._AudioParamMap_Interceptor_MapMixin, P.AudioTrack, P._SqlResultSetRowList_Interceptor_ListMixin]);
     _inheritMany(J.JavaScriptObject, [J.PlainJavaScriptObject, J.UnknownJavaScriptObject, J.JavaScriptFunction]);
     _inherit(J.JSUnmodifiableArray, J.JSArray);
     _inheritMany(J.JSNumber, [J.JSInt, J.JSDouble]);
@@ -22840,7 +27741,7 @@
     _inherit(P.UnmodifiableMapView, P._UnmodifiableMapView_MapView__UnmodifiableMapMixin);
     _inherit(H.ConstantMapView, P.UnmodifiableMapView);
     _inherit(H.ConstantStringMap, H.ConstantMap);
-    _inheritMany(H.Closure, [H.Primitives_functionNoSuchMethod_closure, H.unwrapException_saveStackTrace, H.TearOffClosure, H.JsLinkedHashMap_values_closure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P._TimerImpl$periodic_closure, P._awaitOnObject_closure, P._awaitOnObject_closure0, P._wrapJsFunctionForAsync_closure, P._SyncBroadcastStreamController__sendData_closure, P._SyncBroadcastStreamController__sendDone_closure, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__asyncComplete_closure, P._Future__chainFuture_closure, P._Future__asyncCompleteError_closure, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P.Stream_length_closure, P.Stream_length_closure0, P.Stream_first_closure, P.Stream_first_closure0, P._StreamController__subscribe_closure, P._StreamController__recordCancel_complete, P._BufferingStreamSubscription__sendDone_sendDone, P._PendingEvents_schedule_closure, P._cancelAndValue_closure, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P._RootZone_bindUnaryCallbackGuarded_closure, P.LinkedHashMap_LinkedHashMap$from_closure, P.MapBase_mapToString_closure, P._JsonStringifier_writeMap_closure, P._symbolMapToStringMap_closure, P.NoSuchMethodError_toString_closure, P.DateTime_parse_parseIntOrZero, P.DateTime_parse_parseMilliAndMicroseconds, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, W.Element_Element$html_closure, W.HttpRequest_getString_closure, W.HttpRequest_request_closure, W.Storage_keys_closure, W.Window_animationFrame_closure, W._BeforeUnloadEventStreamProvider_forTarget_closure, W._DataAttributeMap_forEach_closure, W._DataAttributeMap_keys_closure, W._MultiElementCssClassSet__MultiElementCssClassSet_closure, W._MultiElementCssClassSet_readClasses_closure, W._MultiElementCssClassSet_modify_closure, W._MultiElementCssClassSet_toggle_closure, W._MultiElementCssClassSet_remove_closure, W._EventStreamSubscription_closure, W._StreamPool_add_closure, W.NodeValidatorBuilder_allowsElement_closure, W.NodeValidatorBuilder_allowsAttribute_closure, W._SimpleNodeValidator_closure, W._SimpleNodeValidator_closure0, W._TemplatingNodeValidator_closure, W._ValidatingTreeSanitizer_sanitizeTree_walk, P._StructuredClone_walk_closure, P._StructuredClone_walk_closure0, P._AcceptStructuredClone_walk_closure, P.convertDartToNative_Dictionary_closure, P.CssClassSetImpl_add_closure, P.CssClassSetImpl_removeWhere_closure, P.CssClassSetImpl_clear_closure, P.FilteredElementList__iterable_closure, P.FilteredElementList__iterable_closure0, P.FilteredElementList_removeRange_closure, P._convertToJS_closure, P._convertToJS_closure0, P._wrapToDart_closure, P._wrapToDart_closure0, P._wrapToDart_closure1, P.promiseToFuture_closure, P.promiseToFuture_closure0, P.AudioContext_decodeAudioData_closure, P.AudioContext_decodeAudioData_closure0, Z.DrumKit__render_closure, Z.DrumKit__render_closure0, Z.DrumKit__render_closure1, Z.DrumKit__render_closure2, Z.DrumPad_closure, Z.DrumPad_closure0, Z.DrumPad_closure1, Z.DrumPad_closure2, Z.Instrument_insert_closure, Z.Instrument_unload_closure, Z.Piano__render_closure, Z.Piano__render_closure0, Z.Piano__slideKeyboard_closure, Z.MiniPiano_slide_closure, Z.PianoKey_closure, Z.PianoKey_closure0, Z.PianoKey_closure1, Z.PianoKey_closure2, U.SynthChain_playNote_closure, U.SynthChain_pitchBend_closure, U.SynthChain_schedulePitchBend_closure, U.SynthChain_releaseNote_closure, U.SynthChain_destroy_closure, E.PlayClock_stopAll_closure, E.PlayClock_setTime_closure, E.PlayClock_setTempo_closure, E.PlayClock_setTimeSignature_closure, E.PlayClock_startMetronome_closure, E.PlayClock_startMetronome_closure0, E.PlayClock_startMetronome__closure, X.SynthEvent_releaseNote_closure, X.SynthEvent_scheduleNote_closure, B.SynthSampleNode_schedulePitchBend_closure, L.Synthesizer_loadPatch_closure, L.Synthesizer_playNote_closure, L.Synthesizer_scheduleNote_closure, L.Synthesizer_pitchBend_closure, L.Synthesizer_loadAudioBuffer_closure, L.Synthesizer_loadAudioBuffer_closure0, Y.UserAccounts_login_closure, Y.UserAccounts_login_closure0, Y.UserAccounts_login_closure1, Y.UserAccounts_login_closure2, Y.PythonCell_closure, Y.PythonCell_closure0, Y.PythonCell_closure1, Y.PythonCell_closure2, Y.PythonCell_closure3, Y.PythonCell_closure4, Y.PythonCell_closure5, Y.PythonCell_closure6, Y.PythonCell_closure7, Y.PythonCell_closure8, Y.PythonCell_closure9, Y.PythonCell_closure10, Y.PythonCell_closure11, Y.PythonCell_closure12, Y.PythonCell_closure13, Y.PythonCell_closure14, Y.PythonCell_closure15, Y.PythonCell_closure16, Y.PythonCell_closure17, Y.PythonCell_closure18, Y.PythonCell_closure19, Y.PythonCell_closure20, Y.PythonCell_onPythonDone_closure, Y.PythonCell__setInstrument_closure, Y.PythonCell__setInstrument_closure0, Y.PythonCell__shareTrack_closure, Y.PythonCell__shareTrack_closure0, Y.PythonCell__doContextMenu_closure, Y.toggleContextMenu_closure, Y.Datastore_loginWithGoogle_closure, Y.Datastore_addUpdateCallback_closure, Y.Datastore_addRemovedCallback_closure, Y.Datastore_addAddedCallback_closure, Y.Project_closure, Y.Project__closure, Y.Project_playAll_closure, Y.Project_pauseAll_closure, Y.Project__registerEvents_closure, Y.Project__registerEvents_closure0, Y.Project__registerEvents_closure1, Y.Project__registerEvents_closure2, Y.Project__registerEvents_closure3, Y.Project__registerEvents_closure4, Y.Project__registerEvents_closure5, Y.Project__registerEvents_closure6, Y.Project__registerEvents_closure7, Y.Project__registerEvents_closure8, Y.Project__registerEvents_closure9, Y.Project__registerEvents_closure10, Y.Timeline_setInstrument_closure, Y.Timeline_insert_closure, Y.Timeline__render_closure, Y.Timeline__render_closure0, Y.Timeline__registerTouchEvents_closure, Y.Timeline__registerTouchEvents_closure0, Y.Timeline__registerTouchEvents_closure1, Y.Timeline__registerTouchEvents_closure2, Y.Timeline__renderNote_closure, Y.Timeline__renderNote_closure0, Y.Timeline__renderNote_closure1, Y.Timeline__renderNote_closure2, V.EffectsDial_buildUI_closure, V.EffectsDial_buildUI_closure0, V.EffectsDial_buildUI_closure1, E.Dialog_closeModal_closure, E.Dialog__showModal_closure, E.Dialog__showModal_closure0, E.Dialog__showModal_closure1, E.Dialog__showModal_closure2, D.DropdownMenu_armMenu_closure, D.DropdownMenu_armMenu_closure0, D.DropdownMenu__toggleMenu_closure, R.MixSlider_buildUI_closure, R.MixSlider_buildUI_closure0, R.MixSlider_buildUI_closure1, O.TrackLibrary_show_closure, O.TrackLibrary_show__closure, O.TrackLibrary_show_closure0, O.TrackLibrary__buildTrack__toggleStar, O.TrackLibrary__buildTrack_closure, O.TrackLibrary__buildTrack_closure0, O.TrackLibrary__buildTrack_closure1, O.TrackLibrary__buildTrack_closure2, O.TrackLibrary__buildTrack_closure3, O.TrackLibrary__buildTrack_closure4, O.TrackLibrary__playTrackPreview_closure, O.TrackLibrary__playTrackPreview_closure0, O.TrackLibrary__playTrackPreview_closure1, F.main_closure, F.main__closure, F.main__closure0, F.main_closure0, F.main_closure1, F.main_closure2, F.main_closure3, F.main_closure4, F.main_closure5, F.main_closure6, F.main_closure7, F._addMixTrack_closure, F._addMixTrack_closure0, F._addMixTrack_closure1, F._addMixTrack_closure2, F._addMixTrack_closure3, F._addMixTrack_closure4, F._addMixTrack_closure5, F._addMixTrack_closure6, F._addMixTrack_closure7, F._addMixTrack__closure, F._addCellMenu_closure, F._addCellMenu_closure0, F._addCellMenu_closure1, F._updateCellMenu_closure, B.UserList_closure, B.UserList_closure0, B.UserList_closure1, B.UserList__buildUserList_closure]);
+    _inheritMany(H.Closure, [H.Primitives_functionNoSuchMethod_closure, H.unwrapException_saveStackTrace, H.TearOffClosure, H.JsLinkedHashMap_values_closure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P._TimerImpl$periodic_closure, P._awaitOnObject_closure, P._awaitOnObject_closure0, P._wrapJsFunctionForAsync_closure, P._SyncBroadcastStreamController__sendData_closure, P._SyncBroadcastStreamController__sendDone_closure, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__asyncComplete_closure, P._Future__chainFuture_closure, P._Future__asyncCompleteError_closure, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P.Stream_length_closure, P.Stream_length_closure0, P.Stream_first_closure, P.Stream_first_closure0, P._StreamController__subscribe_closure, P._StreamController__recordCancel_complete, P._BufferingStreamSubscription__sendDone_sendDone, P._PendingEvents_schedule_closure, P._cancelAndValue_closure, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P._RootZone_bindUnaryCallbackGuarded_closure, P.LinkedHashMap_LinkedHashMap$from_closure, P.MapBase_mapToString_closure, P._JsonStringifier_writeMap_closure, P._symbolMapToStringMap_closure, P.NoSuchMethodError_toString_closure, P.DateTime_parse_parseIntOrZero, P.DateTime_parse_parseMilliAndMicroseconds, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, W.Element_Element$html_closure, W.Entry_remove_closure, W.Entry_remove_closure0, W.HttpRequest_getString_closure, W.HttpRequest_request_closure, W.MidiInputMap_keys_closure, W.MidiOutputMap_keys_closure, W.Navigator_getUserMedia_closure, W.Navigator_getUserMedia_closure0, W.RtcStatsReport_keys_closure, W.Storage_keys_closure, W.Window_animationFrame_closure, W._BeforeUnloadEventStreamProvider_forTarget_closure, W._DataAttributeMap_forEach_closure, W._DataAttributeMap_keys_closure, W._MultiElementCssClassSet__MultiElementCssClassSet_closure, W._MultiElementCssClassSet_readClasses_closure, W._MultiElementCssClassSet_modify_closure, W._MultiElementCssClassSet_toggle_closure, W._MultiElementCssClassSet_remove_closure, W._EventStreamSubscription_closure, W._StreamPool_add_closure, W.NodeValidatorBuilder_allowsElement_closure, W.NodeValidatorBuilder_allowsAttribute_closure, W._SimpleNodeValidator_closure, W._SimpleNodeValidator_closure0, W._TemplatingNodeValidator_closure, W._ValidatingTreeSanitizer_sanitizeTree_walk, P._StructuredClone_walk_closure, P._StructuredClone_walk_closure0, P._AcceptStructuredClone_walk_closure, P.convertDartToNative_Dictionary_closure, P.CssClassSetImpl_add_closure, P.CssClassSetImpl_removeWhere_closure, P.CssClassSetImpl_clear_closure, P.FilteredElementList__iterable_closure, P.FilteredElementList__iterable_closure0, P.FilteredElementList_removeRange_closure, P._convertToJS_closure, P._convertToJS_closure0, P._wrapToDart_closure, P._wrapToDart_closure0, P._wrapToDart_closure1, P.promiseToFuture_closure, P.promiseToFuture_closure0, P.AudioContext_decodeAudioData_closure, P.AudioContext_decodeAudioData_closure0, P.AudioParamMap_keys_closure, Z.DrumKit__render_closure, Z.DrumKit__render_closure0, Z.DrumKit__render_closure1, Z.DrumKit__render_closure2, Z.DrumPad_closure, Z.DrumPad_closure0, Z.DrumPad_closure1, Z.DrumPad_closure2, Z.Instrument_insert_closure, Z.Instrument_unload_closure, Z.Piano__render_closure, Z.Piano__render_closure0, Z.Piano__slideKeyboard_closure, Z.MiniPiano_slide_closure, Z.PianoKey_closure, Z.PianoKey_closure0, Z.PianoKey_closure1, Z.PianoKey_closure2, U.SynthChain_playNote_closure, U.SynthChain_pitchBend_closure, U.SynthChain_schedulePitchBend_closure, U.SynthChain_releaseNote_closure, U.SynthChain_destroy_closure, E.PlayClock_stopAll_closure, E.PlayClock_setTime_closure, E.PlayClock_setTempo_closure, E.PlayClock_setTimeSignature_closure, E.PlayClock_startMetronome_closure, E.PlayClock_startMetronome_closure0, E.PlayClock_startMetronome__closure, X.SynthEvent_releaseNote_closure, X.SynthEvent_scheduleNote_closure, B.SynthSampleNode_schedulePitchBend_closure, L.Synthesizer_loadPatch_closure, L.Synthesizer_playNote_closure, L.Synthesizer_scheduleNote_closure, L.Synthesizer_pitchBend_closure, L.Synthesizer_loadAudioBuffer_closure, L.Synthesizer_loadAudioBuffer_closure0, Y.UserAccounts_login_closure, Y.UserAccounts_login_closure0, Y.UserAccounts_login_closure1, Y.UserAccounts_login_closure2, Y.PythonCell_closure, Y.PythonCell_closure0, Y.PythonCell_closure1, Y.PythonCell_closure2, Y.PythonCell_closure3, Y.PythonCell_closure4, Y.PythonCell_closure5, Y.PythonCell_closure6, Y.PythonCell_closure7, Y.PythonCell_closure8, Y.PythonCell_closure9, Y.PythonCell_closure10, Y.PythonCell_closure11, Y.PythonCell_closure12, Y.PythonCell_closure13, Y.PythonCell_closure14, Y.PythonCell_closure15, Y.PythonCell_closure16, Y.PythonCell_closure17, Y.PythonCell_closure18, Y.PythonCell_closure19, Y.PythonCell_closure20, Y.PythonCell_onPythonDone_closure, Y.PythonCell__setInstrument_closure, Y.PythonCell__setInstrument_closure0, Y.PythonCell__shareTrack_closure, Y.PythonCell__shareTrack_closure0, Y.PythonCell__doContextMenu_closure, Y.toggleContextMenu_closure, Y.Datastore_loginWithGoogle_closure, Y.Datastore_addUpdateCallback_closure, Y.Datastore_addRemovedCallback_closure, Y.Datastore_addAddedCallback_closure, Y.Project_closure, Y.Project__closure, Y.Project_playAll_closure, Y.Project_pauseAll_closure, Y.Project__registerEvents_closure, Y.Project__registerEvents_closure0, Y.Project__registerEvents_closure1, Y.Project__registerEvents_closure2, Y.Project__registerEvents_closure3, Y.Project__registerEvents_closure4, Y.Project__registerEvents_closure5, Y.Project__registerEvents_closure6, Y.Project__registerEvents_closure7, Y.Project__registerEvents_closure8, Y.Project__registerEvents_closure9, Y.Project__registerEvents_closure10, Y.EffectsChain_closure, Y.EffectsChain_closure0, Y.EffectsChain_closure1, Y.EffectsChain_closure2, Y.EffectsChain_closure3, Y.EffectsChain_closure4, Y.EffectsChain_closure5, Y.EffectsChain_playAudio_closure, Y.EffectsChain_playSlice_closure, Y.EffectsChain_loadSoundEffects_closure, Y.EffectsChain_loadSoundEffects_closure0, Y.RecordingStudio_show_closure, Y.RecordingStudio_loadUserRecordings_closure, Y.RecordingStudio_uploadAudioFile_closure, Y.RecordingStudio__registerEvents_closure, Y.RecordingStudio__registerEvents_closure0, Y.RecordingStudio__registerEvents_closure1, Y.RecordingStudio__registerEvents_closure2, Y.RecordingStudio__registerEvents_closure3, Y.RecordingStudio__registerEvents_closure4, Y.RecordingStudio__registerEvents_closure5, Y.RecordingStudio__registerEvents_closure6, Y.RecordingStudio__registerEvents_closure7, Y.RecordingStudio__registerEvents_closure8, Y.RecordingStudio__registerEvents_closure9, Y.RecordingStudio__registerEvents_closure10, Y.RecordingStudio__registerEvents_closure11, Y.RecordingStudio__registerEvents_closure12, Y.RecordingStudio__registerRowEvents_closure, Y.RecordingStudio__registerRowEvents_closure0, Y.RecordingStudio__registerRowEvents_closure1, Y.RecordingStudio__registerRowEvents_closure2, Y.RecordingStudio__playPreview_closure, Y.RecordingStudio__playPreview_closure0, Y.RecordingStudio__playPreview_closure1, Y.WaveformTrace__buildClipLine_closure, Y.WaveformTrace__buildClipLine_closure0, Y.WaveformTrace__buildClipLine_closure1, Y.Timeline_setInstrument_closure, Y.Timeline_insert_closure, Y.Timeline__render_closure, Y.Timeline__render_closure0, Y.Timeline__registerTouchEvents_closure, Y.Timeline__registerTouchEvents_closure0, Y.Timeline__registerTouchEvents_closure1, Y.Timeline__registerTouchEvents_closure2, Y.Timeline__renderNote_closure, Y.Timeline__renderNote_closure0, Y.Timeline__renderNote_closure1, Y.Timeline__renderNote_closure2, V.EffectsDial_buildUI_closure, V.EffectsDial_buildUI_closure0, V.EffectsDial_buildUI_closure1, E.Dialog_message_closure, E.Dialog_closeModal_closure, E.Dialog__showModal_closure, E.Dialog__showModal_closure0, E.Dialog__showModal_closure1, E.Dialog__showModal_closure2, D.DropdownMenu_armMenu_closure, D.DropdownMenu_armMenu_closure0, D.DropdownMenu__toggleMenu_closure, R.MixSlider_buildUI_closure, R.MixSlider_buildUI_closure0, R.MixSlider_buildUI_closure1, O.TrackLibrary_show_closure, O.TrackLibrary_show__closure, O.TrackLibrary_show_closure0, O.TrackLibrary__buildTrack__toggleStar, O.TrackLibrary__buildTrack_closure, O.TrackLibrary__buildTrack_closure0, O.TrackLibrary__buildTrack_closure1, O.TrackLibrary__buildTrack_closure2, O.TrackLibrary__buildTrack_closure3, O.TrackLibrary__buildTrack_closure4, O.TrackLibrary__playTrackPreview_closure, O.TrackLibrary__playTrackPreview_closure0, O.TrackLibrary__playTrackPreview_closure1, F.main_closure, F.main__closure, F.main__closure0, F.main_closure0, F.main_closure1, F.main_closure2, F.main_closure3, F.main_closure4, F.main_closure5, F.main_closure6, F.main_closure7, F.main_closure8, F._addMixTrack_closure, F._addMixTrack_closure0, F._addMixTrack_closure1, F._addMixTrack_closure2, F._addMixTrack_closure3, F._addMixTrack_closure4, F._addMixTrack_closure5, F._addMixTrack_closure6, F._addMixTrack_closure7, F._addMixTrack__closure, F._addCellMenu_closure, F._addCellMenu_closure0, F._addCellMenu_closure1, F._updateCellMenu_closure, B.UserList_closure, B.UserList_closure0, B.UserList_closure1, B.UserList__buildUserList_closure]);
     _inheritMany(P.Error, [H.NullError, H.JsNoSuchMethodError, H.UnknownJsTypeError, H.RuntimeError, P.AssertionError, H._Error, P.JsonUnsupportedObjectError, P.NullThrownError, P.ArgumentError, P.NoSuchMethodError, P.UnsupportedError, P.UnimplementedError, P.StateError, P.ConcurrentModificationError, P.CyclicInitializationError]);
     _inheritMany(H.TearOffClosure, [H.StaticClosure, H.BoundClosure]);
     _inherit(H._AssertionError, P.AssertionError);
@@ -22875,28 +27776,62 @@
     _inherit(P._JsonStringStringifier, P._JsonStringifier);
     _inheritMany(P.num, [P.double, P.int]);
     _inheritMany(P.ArgumentError, [P.RangeError, P.IndexError]);
-    _inheritMany(W.EventTarget, [W.Node, W.HttpRequestEventTarget, W.MessagePort, W.WebSocket, W.Window, W.Worker, W.WorkerGlobalScope, P.AudioNode, P.BaseAudioContext]);
+    _inheritMany(W.EventTarget, [W.Node, W.Animation, W.BackgroundFetchRegistration, W.FileReader, W.FileWriter, W.HttpRequestEventTarget, W.MediaKeySession, W.MediaStream, W.MediaStreamTrack, W.MessagePort, W.MidiPort, W.PaymentRequest, W.PresentationConnection, W.RtcDataChannel, W.SourceBuffer, W._SourceBufferList_EventTarget_ListMixin, W.TextTrack, W.TextTrackCue, W._TextTrackList_EventTarget_ListMixin, W.VideoTrackList, W.WebSocket, W.Window, W.Worker, W.WorkerGlobalScope, P.AudioNode, P.BaseAudioContext, P.AudioTrackList]);
     _inheritMany(W.Node, [W.Element, W.CharacterData, W.Document, W.DocumentFragment, W._Attr]);
     _inheritMany(W.Element, [W.HtmlElement, P.SvgElement]);
     _inheritMany(W.HtmlElement, [W.AnchorElement, W.AreaElement, W.MediaElement, W.BaseElement, W.BodyElement, W.ButtonElement, W.DivElement, W.FormElement, W.InputElement, W.LIElement, W.PreElement, W.SelectElement, W.SpanElement, W.TableElement, W.TableRowElement, W.TableSectionElement, W.TemplateElement, W.TextAreaElement, W.UListElement]);
     _inherit(W.AudioElement, W.MediaElement);
-    _inheritMany(W.Event, [W.ExtendableEvent, W.BeforeUnloadEvent, W.BlobEvent, W.UIEvent, W.MessageEvent, W.MidiMessageEvent, W.ProgressEvent, P.AudioProcessingEvent]);
+    _inheritMany(W.Event, [W.ExtendableEvent, W.BeforeUnloadEvent, W.BlobEvent, W.UIEvent, W.MessageEvent, W.MidiMessageEvent, W.ProgressEvent, P.VersionChangeEvent, P.AudioProcessingEvent]);
     _inheritMany(W.ExtendableEvent, [W.BackgroundFetchEvent, W.ExtendableMessageEvent, W.PushEvent]);
     _inheritMany(W.UIEvent, [W.CompositionEvent, W.KeyboardEvent, W.MouseEvent, W.TextEvent]);
+    _inherit(W.CssPerspective, W.CssTransformComponent);
     _inherit(W.CssStyleDeclaration, W._CssStyleDeclaration_Interceptor_CssStyleDeclarationBase);
+    _inheritMany(W.CssStyleValue, [W.CssTransformValue, W.CssUnparsedValue]);
+    _inherit(W._DomRectList_Interceptor_ListMixin_ImmutableListMixin, W._DomRectList_Interceptor_ListMixin);
+    _inherit(W.DomRectList, W._DomRectList_Interceptor_ListMixin_ImmutableListMixin);
+    _inherit(W._DomStringList_Interceptor_ListMixin_ImmutableListMixin, W._DomStringList_Interceptor_ListMixin);
+    _inherit(W.DomStringList, W._DomStringList_Interceptor_ListMixin_ImmutableListMixin);
     _inherit(W.File, W.Blob);
+    _inherit(W._FileList_Interceptor_ListMixin_ImmutableListMixin, W._FileList_Interceptor_ListMixin);
+    _inherit(W.FileList, W._FileList_Interceptor_ListMixin_ImmutableListMixin);
     _inherit(W._HtmlCollection_Interceptor_ListMixin_ImmutableListMixin, W._HtmlCollection_Interceptor_ListMixin);
     _inherit(W.HtmlCollection, W._HtmlCollection_Interceptor_ListMixin_ImmutableListMixin);
     _inherit(W.HtmlDocument, W.Document);
     _inherit(W.HttpRequest, W.HttpRequestEventTarget);
+    _inherit(W.MidiInputMap, W._MidiInputMap_Interceptor_MapMixin);
+    _inherit(W.MidiOutputMap, W._MidiOutputMap_Interceptor_MapMixin);
+    _inherit(W._MimeTypeArray_Interceptor_ListMixin_ImmutableListMixin, W._MimeTypeArray_Interceptor_ListMixin);
+    _inherit(W.MimeTypeArray, W._MimeTypeArray_Interceptor_ListMixin_ImmutableListMixin);
+    _inherit(W.Navigator, W.NavigatorConcurrentHardware);
     _inherit(W._NodeList_Interceptor_ListMixin_ImmutableListMixin, W._NodeList_Interceptor_ListMixin);
     _inherit(W.NodeList, W._NodeList_Interceptor_ListMixin_ImmutableListMixin);
+    _inherit(W._PluginArray_Interceptor_ListMixin_ImmutableListMixin, W._PluginArray_Interceptor_ListMixin);
+    _inherit(W.PluginArray, W._PluginArray_Interceptor_ListMixin_ImmutableListMixin);
+    _inherit(W.RtcStatsReport, W._RtcStatsReport_Interceptor_MapMixin);
     _inherit(W.ShadowRoot, W.DocumentFragment);
+    _inherit(W._SourceBufferList_EventTarget_ListMixin_ImmutableListMixin, W._SourceBufferList_EventTarget_ListMixin);
+    _inherit(W.SourceBufferList, W._SourceBufferList_EventTarget_ListMixin_ImmutableListMixin);
+    _inherit(W._SpeechGrammarList_Interceptor_ListMixin_ImmutableListMixin, W._SpeechGrammarList_Interceptor_ListMixin);
+    _inherit(W.SpeechGrammarList, W._SpeechGrammarList_Interceptor_ListMixin_ImmutableListMixin);
     _inherit(W.Storage, W._Storage_Interceptor_MapMixin);
+    _inherit(W._TextTrackCueList_Interceptor_ListMixin_ImmutableListMixin, W._TextTrackCueList_Interceptor_ListMixin);
+    _inherit(W.TextTrackCueList, W._TextTrackCueList_Interceptor_ListMixin_ImmutableListMixin);
+    _inherit(W._TextTrackList_EventTarget_ListMixin_ImmutableListMixin, W._TextTrackList_EventTarget_ListMixin);
+    _inherit(W.TextTrackList, W._TextTrackList_EventTarget_ListMixin_ImmutableListMixin);
+    _inherit(W._TouchList_Interceptor_ListMixin_ImmutableListMixin, W._TouchList_Interceptor_ListMixin);
+    _inherit(W.TouchList, W._TouchList_Interceptor_ListMixin_ImmutableListMixin);
     _inherit(W._BeforeUnloadEvent, W._WrappedEvent);
+    _inherit(W.__CssRuleList_Interceptor_ListMixin_ImmutableListMixin, W.__CssRuleList_Interceptor_ListMixin);
+    _inherit(W._CssRuleList, W.__CssRuleList_Interceptor_ListMixin_ImmutableListMixin);
     _inherit(W._DomRect, W.DomRectReadOnly);
+    _inherit(W.__GamepadList_Interceptor_ListMixin_ImmutableListMixin, W.__GamepadList_Interceptor_ListMixin);
+    _inherit(W._GamepadList, W.__GamepadList_Interceptor_ListMixin_ImmutableListMixin);
     _inherit(W.__NamedNodeMap_Interceptor_ListMixin_ImmutableListMixin, W.__NamedNodeMap_Interceptor_ListMixin);
     _inherit(W._NamedNodeMap, W.__NamedNodeMap_Interceptor_ListMixin_ImmutableListMixin);
+    _inherit(W.__SpeechRecognitionResultList_Interceptor_ListMixin_ImmutableListMixin, W.__SpeechRecognitionResultList_Interceptor_ListMixin);
+    _inherit(W._SpeechRecognitionResultList, W.__SpeechRecognitionResultList_Interceptor_ListMixin_ImmutableListMixin);
+    _inherit(W.__StyleSheetList_Interceptor_ListMixin_ImmutableListMixin, W.__StyleSheetList_Interceptor_ListMixin);
+    _inherit(W._StyleSheetList, W.__StyleSheetList_Interceptor_ListMixin_ImmutableListMixin);
     _inherit(W._ElementAttributeMap, W._AttributeMap);
     _inherit(P.CssClassSetImpl, P.SetBase);
     _inheritMany(P.CssClassSetImpl, [W._MultiElementCssClassSet, W._ElementCssClassSet, P.AttributeClassSet]);
@@ -22907,19 +27842,31 @@
     _inherit(P._AcceptStructuredCloneDart2Js, P._AcceptStructuredClone);
     _inheritMany(P.JsObject, [P.JsFunction, P._JsArray_JsObject_ListMixin]);
     _inherit(P.JsArray, P._JsArray_JsObject_ListMixin);
+    _inherit(P.Rectangle, P._RectangleBase);
     _inheritMany(P.SvgElement, [P.GraphicsElement, P.ScriptElement0]);
     _inheritMany(P.GraphicsElement, [P.GeometryElement, P.GElement, P.ImageElement0, P.SvgSvgElement, P.TextContentElement]);
     _inheritMany(P.GeometryElement, [P.CircleElement, P.LineElement, P.PathElement, P.RectElement]);
+    _inherit(P._LengthList_Interceptor_ListMixin_ImmutableListMixin, P._LengthList_Interceptor_ListMixin);
+    _inherit(P.LengthList, P._LengthList_Interceptor_ListMixin_ImmutableListMixin);
+    _inherit(P._NumberList_Interceptor_ListMixin_ImmutableListMixin, P._NumberList_Interceptor_ListMixin);
+    _inherit(P.NumberList, P._NumberList_Interceptor_ListMixin_ImmutableListMixin);
+    _inherit(P._StringList_Interceptor_ListMixin_ImmutableListMixin, P._StringList_Interceptor_ListMixin);
+    _inherit(P.StringList, P._StringList_Interceptor_ListMixin_ImmutableListMixin);
     _inherit(P.TextPositioningElement, P.TextContentElement);
     _inherit(P.TextElement, P.TextPositioningElement);
-    _inheritMany(P.AudioNode, [P.AudioScheduledSourceNode, P.BiquadFilterNode, P.DelayNode, P.DynamicsCompressorNode, P.GainNode, P.StereoPannerNode]);
+    _inherit(P._TransformList_Interceptor_ListMixin_ImmutableListMixin, P._TransformList_Interceptor_ListMixin);
+    _inherit(P.TransformList, P._TransformList_Interceptor_ListMixin_ImmutableListMixin);
+    _inheritMany(P.AudioNode, [P.AnalyserNode, P.AudioScheduledSourceNode, P.BiquadFilterNode, P.ConvolverNode, P.DelayNode, P.DynamicsCompressorNode, P.GainNode, P.MediaStreamAudioSourceNode, P.ScriptProcessorNode, P.StereoPannerNode]);
     _inheritMany(P.AudioScheduledSourceNode, [P.AudioBufferSourceNode, P.OscillatorNode]);
     _inheritMany(P.BaseAudioContext, [P.AudioContext, P.OfflineAudioContext]);
+    _inherit(P.AudioParamMap, P._AudioParamMap_Interceptor_MapMixin);
+    _inherit(P._SqlResultSetRowList_Interceptor_ListMixin_ImmutableListMixin, P._SqlResultSetRowList_Interceptor_ListMixin);
+    _inherit(P.SqlResultSetRowList, P._SqlResultSetRowList_Interceptor_ListMixin_ImmutableListMixin);
     _inheritMany(Z.Instrument, [Z.DrumKit, Z.Drums, Z.Piano]);
     _inheritMany(K.Effect, [K.BiquadFilter, K.PitchBendEffect, K.PanEffect, K.GainEffect]);
     _inheritMany(B.SynthNode, [B.ADSRNode, B.FMNode, B.SynthSampleNode, B.SynthDelayNode, B.SynthCompressorNode, B.FilterNode]);
     _inherit(B.SchedulerSynth, L.Synthesizer);
-    _inheritMany(Y.DataModel, [Y._PythonCell_DataModel_PythonListener, Y._Project_DataModel_ClockSubscriber, Y.User]);
+    _inheritMany(Y.DataModel, [Y._PythonCell_DataModel_PythonListener, Y._Project_DataModel_ClockSubscriber, Y.Recording, Y.User]);
     _inherit(Y._PythonCell_DataModel_PythonListener_CodeMirrorListener, Y._PythonCell_DataModel_PythonListener);
     _inherit(Y._PythonCell_DataModel_PythonListener_CodeMirrorListener_TimelineListener, Y._PythonCell_DataModel_PythonListener_CodeMirrorListener);
     _inherit(Y._PythonCell_DataModel_PythonListener_CodeMirrorListener_TimelineListener_ClockSubscriber, Y._PythonCell_DataModel_PythonListener_CodeMirrorListener_TimelineListener);
@@ -22938,14 +27885,56 @@
     _mixin(P._SetBase_Object_SetMixin, P.SetMixin);
     _mixin(P._UnmodifiableMapView_MapView__UnmodifiableMapMixin, P._UnmodifiableMapMixin);
     _mixin(W._CssStyleDeclaration_Interceptor_CssStyleDeclarationBase, W.CssStyleDeclarationBase);
+    _mixin(W._DomRectList_Interceptor_ListMixin, P.ListMixin);
+    _mixin(W._DomRectList_Interceptor_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
+    _mixin(W._DomStringList_Interceptor_ListMixin, P.ListMixin);
+    _mixin(W._DomStringList_Interceptor_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
+    _mixin(W._FileList_Interceptor_ListMixin, P.ListMixin);
+    _mixin(W._FileList_Interceptor_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
     _mixin(W._HtmlCollection_Interceptor_ListMixin, P.ListMixin);
     _mixin(W._HtmlCollection_Interceptor_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
+    _mixin(W._MidiInputMap_Interceptor_MapMixin, P.MapMixin);
+    _mixin(W._MidiOutputMap_Interceptor_MapMixin, P.MapMixin);
+    _mixin(W._MimeTypeArray_Interceptor_ListMixin, P.ListMixin);
+    _mixin(W._MimeTypeArray_Interceptor_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
     _mixin(W._NodeList_Interceptor_ListMixin, P.ListMixin);
     _mixin(W._NodeList_Interceptor_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
+    _mixin(W._PluginArray_Interceptor_ListMixin, P.ListMixin);
+    _mixin(W._PluginArray_Interceptor_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
+    _mixin(W._RtcStatsReport_Interceptor_MapMixin, P.MapMixin);
+    _mixin(W._SourceBufferList_EventTarget_ListMixin, P.ListMixin);
+    _mixin(W._SourceBufferList_EventTarget_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
+    _mixin(W._SpeechGrammarList_Interceptor_ListMixin, P.ListMixin);
+    _mixin(W._SpeechGrammarList_Interceptor_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
     _mixin(W._Storage_Interceptor_MapMixin, P.MapMixin);
+    _mixin(W._TextTrackCueList_Interceptor_ListMixin, P.ListMixin);
+    _mixin(W._TextTrackCueList_Interceptor_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
+    _mixin(W._TextTrackList_EventTarget_ListMixin, P.ListMixin);
+    _mixin(W._TextTrackList_EventTarget_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
+    _mixin(W._TouchList_Interceptor_ListMixin, P.ListMixin);
+    _mixin(W._TouchList_Interceptor_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
+    _mixin(W.__CssRuleList_Interceptor_ListMixin, P.ListMixin);
+    _mixin(W.__CssRuleList_Interceptor_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
+    _mixin(W.__GamepadList_Interceptor_ListMixin, P.ListMixin);
+    _mixin(W.__GamepadList_Interceptor_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
     _mixin(W.__NamedNodeMap_Interceptor_ListMixin, P.ListMixin);
     _mixin(W.__NamedNodeMap_Interceptor_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
+    _mixin(W.__SpeechRecognitionResultList_Interceptor_ListMixin, P.ListMixin);
+    _mixin(W.__SpeechRecognitionResultList_Interceptor_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
+    _mixin(W.__StyleSheetList_Interceptor_ListMixin, P.ListMixin);
+    _mixin(W.__StyleSheetList_Interceptor_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
     _mixin(P._JsArray_JsObject_ListMixin, P.ListMixin);
+    _mixin(P._LengthList_Interceptor_ListMixin, P.ListMixin);
+    _mixin(P._LengthList_Interceptor_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
+    _mixin(P._NumberList_Interceptor_ListMixin, P.ListMixin);
+    _mixin(P._NumberList_Interceptor_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
+    _mixin(P._StringList_Interceptor_ListMixin, P.ListMixin);
+    _mixin(P._StringList_Interceptor_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
+    _mixin(P._TransformList_Interceptor_ListMixin, P.ListMixin);
+    _mixin(P._TransformList_Interceptor_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
+    _mixin(P._AudioParamMap_Interceptor_MapMixin, P.MapMixin);
+    _mixin(P._SqlResultSetRowList_Interceptor_ListMixin, P.ListMixin);
+    _mixin(P._SqlResultSetRowList_Interceptor_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
     _mixin(Y._NoteRecorder_Object_ClockSubscriber, E.ClockSubscriber);
     _mixin(Y._Project_DataModel_ClockSubscriber, E.ClockSubscriber);
     _mixin(Y._PythonCell_DataModel_PythonListener, X.PythonListener);
@@ -22960,13 +27949,13 @@
     mangledNames: {},
     getTypeFromName: getGlobalFromName,
     metadata: [],
-    types: ["Null(MouseEvent)", "Null()", "~()", "Null(Event)", "Null(@)", "@(@)", "bool(String)", "Null(@,@)", "~(KeyboardEvent)", "~(String,String)", "~(String)", "Null(Element)", "~(Object[StackTrace])", "~(ClockSubscriber)", "~(Map<@,@>)", "~(@)", "~(Event)", "~(~())", "~(SynthNode)", "Future<Null>(MouseEvent)", "List<Function>()", "Null(PythonCell)", "bool(Element,String,String,_Html5NodeValidator)", "bool(Node)", "Null(String,String)", "bool(bool,CssClassSetImpl)", "bool(NodeValidator)", "~(Set<String>)", "Null(Symbol0,@)", "Null(SynthNode)", "~(Metronome)", "int(String)", "~(num)", "String(int)", "Null(User)", "Null(EffectsDial,num)", "Null(MixSlider,num)", "~(Object)", "~(CssClassSetImpl)", "JsFunction(@)", "JsArray<@>(@)", "JsObject(@)", "Null(AudioBuffer)", "Null(DomException)", "String(HttpRequest)", "Null(ProgressEvent)", "_Future<@>(@)", "Null(num)", "Null(BeforeUnloadEvent)", "~(Element)", "~(PianoKey)", "Null(@,StackTrace)", "CssClassSet(Element)", "Object(@)", "Null(String,@)", "Null(Timer)", "num(num)", "~(SynthEvent)", "Future<Null>(ProgressEvent)", "~(ProgressEvent)", "@(CssClassSetImpl)", "bool(Event)", "Null(int,@)", "Null(MIDIEvent)", "Null(KeyboardEvent)", "@(Event)", "Null(NoteEvent)", "@(String)", "~(String,String,String,String)", "Future<Null>(@)", "@(@,String)", "String(String)", "Node(SvgElement)", "~(LIElement,int)", "~(Node,Node)", "@(@,@)", "Null(int)", "bool(Set<String>)", "int(User,User)", "Null(~())", "Element(Node)", "Null(@[StackTrace])"],
+    types: ["Null(MouseEvent)", "Null()", "~()", "Null(Event)", "Null(@,@)", "Future<Null>(MouseEvent)", "Null(@)", "@(@)", "bool(String)", "~(KeyboardEvent)", "~(String,String)", "~(String)", "~(@)", "~(Object[StackTrace])", "~(String,@)", "~(Map<@,@>)", "~(ClockSubscriber)", "Null(Element)", "~(~())", "~(Event)", "~(SynthNode)", "Future<Null>(ProgressEvent)", "~(num)", "List<Function>()", "Null(PythonCell)", "Future<Null>(@)", "bool(Node)", "Null(String,String)", "bool(bool,CssClassSetImpl)", "Null(Symbol0,@)", "bool(NodeValidator)", "Null(MixSlider,num)", "bool(Element,String,String,_Html5NodeValidator)", "~(ProgressEvent)", "String(int)", "Null(EffectsDial,num)", "Null(User)", "Null(DomException)", "int(String)", "Null(SynthNode)", "~(Object)", "~(Metronome)", "~(Set<String>)", "bool(Set<String>)", "@(@,@)", "JsFunction(@)", "JsArray<@>(@)", "Null(NavigatorUserMediaError)", "Null(AudioBuffer)", "~(Node,Node)", "@(String)", "Null(@[StackTrace])", "_Future<@>(@)", "@(@,String)", "~(Element)", "~(PianoKey)", "String(String)", "JsObject(@)", "Null(int,@)", "Object(@)", "Null(Timer)", "num(num)", "~(SynthEvent)", "@(CssClassSetImpl)", "~(CssClassSetImpl)", "Future<@>()", "bool(Event)", "CssClassSet(Element)", "Null(MIDIEvent)", "Null(KeyboardEvent)", "Null(BeforeUnloadEvent)", "Null(NoteEvent)", "String(HttpRequest)", "~(String,String,String,String)", "Null(num)", "Null(ProgressEvent)", "Null(~())", "Null(AudioProcessingEvent)", "~(Recording)", "Future<Null>(Event)", "Node(SvgElement)", "~(LIElement,int)", "Null(String,@)", "Null(@,StackTrace)", "Null(int)", "Future<List<@>>()", "int(User,User)", "Null(MediaStream)", "@(Event)", "Element(Node)"],
     interceptorsByTag: null,
     leafTags: null,
     arrayRti: typeof Symbol == "function" && typeof Symbol() == "symbol" ? Symbol("$ti") : "$ti"
   };
-  H._Universe_addRules(init.typeUniverse, JSON.parse('{"JavaScriptFunction":"JavaScriptObject","PlainJavaScriptObject":"JavaScriptObject","UnknownJavaScriptObject":"JavaScriptObject","AnimationEvent":"Event","AnalyserNode":"AudioNode","ConstantSourceNode":"AudioScheduledSourceNode","AnimateElement":"SvgElement","AnimationElement":"SvgElement","AElement":"GraphicsElement","TextPathElement":"TextContentElement","TSpanElement":"TextPositioningElement","EllipseElement":"GeometryElement","_ResourceProgressEvent":"ProgressEvent","BRElement":"HtmlElement","_DocumentType":"Node","_Clipboard":"EventTarget","XmlDocument":"Document","PointerEvent":"MouseEvent","VideoElement":"MediaElement","FocusEvent":"UIEvent","AbortPaymentEvent":"ExtendableEvent","DedicatedWorkerGlobalScope":"WorkerGlobalScope","CDataSection":"CharacterData","Text":"CharacterData","HtmlFormControlsCollection":"HtmlCollection","BackgroundFetchClickEvent":"BackgroundFetchEvent","NativeFloat64List":"NativeTypedArrayOfDouble","NativeByteData":"NativeTypedData","JSBool":{"bool":[]},"JSNull":{"Null":[]},"JavaScriptObject":{"JSObject":[],"Function":[]},"JSArray":{"List":["1"],"EfficientLengthIterable":["1"],"JSIndexable":["@"],"Iterable":["1"]},"JSUnmodifiableArray":{"JSArray":["1"],"List":["1"],"EfficientLengthIterable":["1"],"JSIndexable":["@"],"Iterable":["1"]},"ArrayIterator":{"Iterator":["1"]},"JSNumber":{"double":[],"num":[]},"JSInt":{"int":[],"double":[],"num":[]},"JSDouble":{"double":[],"num":[]},"JSString":{"String":[],"JSIndexable":["@"],"Pattern":[]},"CodeUnits":{"UnmodifiableListMixin":["int"],"ListMixin":["int"],"List":["int"],"EfficientLengthIterable":["int"],"Iterable":["int"],"ListMixin.E":"int","UnmodifiableListMixin.E":"int"},"EfficientLengthIterable":{"Iterable":["1"]},"ListIterable":{"EfficientLengthIterable":["1"],"Iterable":["1"]},"ListIterator":{"Iterator":["1"]},"MappedIterable":{"Iterable":["2"],"Iterable.E":"2"},"EfficientLengthMappedIterable":{"MappedIterable":["1","2"],"EfficientLengthIterable":["2"],"Iterable":["2"],"Iterable.E":"2"},"MappedIterator":{"Iterator":["2"]},"MappedListIterable":{"ListIterable":["2"],"EfficientLengthIterable":["2"],"Iterable":["2"],"ListIterable.E":"2","Iterable.E":"2"},"WhereIterable":{"Iterable":["1"],"Iterable.E":"1"},"WhereIterator":{"Iterator":["1"]},"TakeIterable":{"Iterable":["1"],"Iterable.E":"1"},"EfficientLengthTakeIterable":{"TakeIterable":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"Iterable.E":"1"},"TakeIterator":{"Iterator":["1"]},"SkipIterable":{"Iterable":["1"],"Iterable.E":"1"},"EfficientLengthSkipIterable":{"SkipIterable":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"Iterable.E":"1"},"SkipIterator":{"Iterator":["1"]},"UnmodifiableListBase":{"UnmodifiableListMixin":["1"],"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"Symbol":{"Symbol0":[]},"ConstantMapView":{"UnmodifiableMapView":["1","2"],"_UnmodifiableMapView_MapView__UnmodifiableMapMixin":["1","2"],"MapView":["1","2"],"_UnmodifiableMapMixin":["1","2"],"Map":["1","2"]},"ConstantMap":{"Map":["1","2"]},"ConstantStringMap":{"ConstantMap":["1","2"],"Map":["1","2"]},"_ConstantMapKeyIterable":{"Iterable":["1"],"Iterable.E":"1"},"JSInvocationMirror":{"Invocation":[]},"NullError":{"Error":[]},"JsNoSuchMethodError":{"Error":[]},"UnknownJsTypeError":{"Error":[]},"_StackTrace":{"StackTrace":[]},"Closure":{"Function":[]},"TearOffClosure":{"Function":[]},"StaticClosure":{"Function":[]},"BoundClosure":{"Function":[]},"RuntimeError":{"Error":[]},"_AssertionError":{"Error":[]},"JsLinkedHashMap":{"LinkedHashMap":["1","2"],"MapMixin":["1","2"],"Map":["1","2"],"MapMixin.K":"1","MapMixin.V":"2"},"LinkedHashMapKeyIterable":{"EfficientLengthIterable":["1"],"Iterable":["1"],"Iterable.E":"1"},"LinkedHashMapKeyIterator":{"Iterator":["1"]},"JSSyntaxRegExp":{"RegExp":[],"Pattern":[]},"NativeByteBuffer":{"ByteBuffer":[]},"NativeTypedData":{"TypedData":[]},"NativeTypedArray":{"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"TypedData":[],"JSIndexable":["@"]},"NativeTypedArrayOfDouble":{"ListMixin":["double"],"JavaScriptIndexingBehavior":["@"],"List":["double"],"NativeTypedData":[],"EfficientLengthIterable":["double"],"FixedLengthListMixin":["double"],"TypedData":[],"JSIndexable":["@"],"Iterable":["double"],"ListMixin.E":"double","FixedLengthListMixin.E":"double"},"NativeTypedArrayOfInt":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"]},"NativeFloat32List":{"Float32List":[],"ListMixin":["double"],"JavaScriptIndexingBehavior":["@"],"List":["double"],"NativeTypedData":[],"EfficientLengthIterable":["double"],"FixedLengthListMixin":["double"],"TypedData":[],"JSIndexable":["@"],"Iterable":["double"],"ListMixin.E":"double","FixedLengthListMixin.E":"double"},"NativeInt16List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeInt32List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeInt8List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint16List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint32List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint8ClampedList":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint8List":{"Uint8List":[],"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"_Error":{"Error":[]},"_TypeError":{"Error":[]},"_TimerImpl":{"Timer":[]},"_BroadcastStream":{"_ControllerStream":["1"],"_StreamImpl":["1"],"Stream":["1"]},"_BroadcastSubscription":{"_ControllerSubscription":["1"],"_BufferingStreamSubscription":["1"],"_EventDispatch":["1"],"StreamSubscription":["1"]},"_BroadcastStreamController":{"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_SyncBroadcastStreamController":{"_BroadcastStreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_AsyncBroadcastStreamController":{"_BroadcastStreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_AsyncCompleter":{"_Completer":["1"]},"_SyncCompleter":{"_Completer":["1"]},"_Future":{"Future":["1"]},"_StreamController":{"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_AsyncStreamController":{"_AsyncStreamControllerDispatch":["1"],"_StreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_SyncStreamController":{"_SyncStreamControllerDispatch":["1"],"_StreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_ControllerStream":{"_StreamImpl":["1"],"Stream":["1"]},"_ControllerSubscription":{"_BufferingStreamSubscription":["1"],"_EventDispatch":["1"],"StreamSubscription":["1"]},"_BufferingStreamSubscription":{"_EventDispatch":["1"],"StreamSubscription":["1"]},"_StreamImpl":{"Stream":["1"]},"_DelayedData":{"_DelayedEvent":["1"]},"_DelayedDone":{"_DelayedEvent":["@"]},"_StreamImplEvents":{"_PendingEvents":["1"]},"_DoneStreamSubscription":{"StreamSubscription":["1"]},"AsyncError":{"Error":[]},"_Zone":{"Zone":[]},"_RootZone":{"Zone":[]},"_LinkedHashSet":{"_SetBase":["1"],"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_LinkedHashSetIterator":{"Iterator":["1"]},"ListBase":{"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"MapBase":{"MapMixin":["1","2"],"Map":["1","2"]},"MapMixin":{"Map":["1","2"]},"MapView":{"Map":["1","2"]},"UnmodifiableMapView":{"_UnmodifiableMapView_MapView__UnmodifiableMapMixin":["1","2"],"MapView":["1","2"],"_UnmodifiableMapMixin":["1","2"],"Map":["1","2"]},"ListQueue":{"ListIterable":["1"],"Queue":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"ListIterable.E":"1","Iterable.E":"1"},"_ListQueueIterator":{"Iterator":["1"]},"SetBase":{"SetMixin":["1"],"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_SetBase":{"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_JsonMap":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"_JsonMapKeyIterable":{"ListIterable":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"ListIterable.E":"String","Iterable.E":"String"},"Base64Codec":{"Codec":["List<int>","String"],"Codec.S":"List<int>"},"Base64Encoder":{"Converter":["List<int>","String"]},"Base64Decoder":{"Converter":["String","List<int>"]},"JsonUnsupportedObjectError":{"Error":[]},"JsonCyclicError":{"Error":[]},"JsonCodec":{"Codec":["Object","String"],"Codec.S":"Object"},"JsonEncoder":{"Converter":["Object","String"]},"JsonDecoder":{"Converter":["String","Object"]},"double":{"num":[]},"AssertionError":{"Error":[]},"NullThrownError":{"Error":[]},"ArgumentError":{"Error":[]},"RangeError":{"Error":[]},"IndexError":{"Error":[]},"NoSuchMethodError":{"Error":[]},"UnsupportedError":{"Error":[]},"UnimplementedError":{"Error":[]},"StateError":{"Error":[]},"ConcurrentModificationError":{"Error":[]},"OutOfMemoryError":{"Error":[]},"StackOverflowError":{"Error":[]},"CyclicInitializationError":{"Error":[]},"_Exception":{"Exception":[]},"FormatException":{"Exception":[]},"int":{"num":[]},"List":{"EfficientLengthIterable":["1"],"Iterable":["1"]},"Set":{"EfficientLengthIterable":["1"],"Iterable":["1"]},"_StringStackTrace":{"StackTrace":[]},"String":{"Pattern":[]},"StringBuffer":{"StringSink":[]},"HtmlElement":{"Element":[],"Node":[],"EventTarget":[]},"AnchorElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"AreaElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"AudioElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"BackgroundFetchEvent":{"Event":[]},"BaseElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"BeforeUnloadEvent":{"Event":[]},"BlobEvent":{"Event":[]},"BodyElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"ButtonElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"CharacterData":{"Node":[],"EventTarget":[]},"CompositionEvent":{"Event":[]},"DivElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"Document":{"Node":[],"EventTarget":[]},"DocumentFragment":{"Node":[],"EventTarget":[]},"DomRectReadOnly":{"Rectangle":["num"]},"_ChildrenElementList":{"ListMixin":["Element"],"List":["Element"],"EfficientLengthIterable":["Element"],"Iterable":["Element"],"ListMixin.E":"Element"},"_FrozenElementList":{"ElementList":["1"],"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"ListMixin.E":"1"},"Element":{"Node":[],"EventTarget":[]},"ExtendableEvent":{"Event":[]},"ExtendableMessageEvent":{"Event":[]},"File":{"Blob":[]},"FormElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"HtmlCollection":{"ImmutableListMixin":["Node"],"ListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"JSIndexable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"HtmlDocument":{"Document":[],"Node":[],"EventTarget":[]},"HttpRequest":{"EventTarget":[]},"HttpRequestEventTarget":{"EventTarget":[]},"InputElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"KeyboardEvent":{"Event":[]},"LIElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"MediaElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"MessageEvent":{"Event":[]},"MessagePort":{"EventTarget":[]},"MidiMessageEvent":{"Event":[]},"MouseEvent":{"Event":[]},"_ChildNodeListLazy":{"ListMixin":["Node"],"List":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"ListMixin.E":"Node"},"Node":{"EventTarget":[]},"NodeList":{"ImmutableListMixin":["Node"],"ListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"JSIndexable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"PreElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"ProgressEvent":{"Event":[]},"PushEvent":{"Event":[]},"SelectElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"ShadowRoot":{"DocumentFragment":[],"Node":[],"EventTarget":[]},"SpanElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"Storage":{"MapMixin":["String","String"],"Map":["String","String"],"MapMixin.K":"String","MapMixin.V":"String"},"TableElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TableRowElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TableSectionElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TemplateElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextAreaElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextEvent":{"Event":[]},"UIEvent":{"Event":[]},"UListElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"WebSocket":{"EventTarget":[]},"Window":{"WindowBase":[],"EventTarget":[]},"_BeforeUnloadEvent":{"BeforeUnloadEvent":[],"Event":[]},"Worker":{"EventTarget":[]},"WorkerGlobalScope":{"EventTarget":[]},"_Attr":{"Node":[],"EventTarget":[]},"_DomRect":{"Rectangle":["num"]},"_NamedNodeMap":{"ImmutableListMixin":["Node"],"ListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"JSIndexable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"_AttributeMap":{"MapMixin":["String","String"],"Map":["String","String"]},"_ElementAttributeMap":{"MapMixin":["String","String"],"Map":["String","String"],"MapMixin.K":"String","MapMixin.V":"String"},"_DataAttributeMap":{"MapMixin":["String","String"],"Map":["String","String"],"MapMixin.K":"String","MapMixin.V":"String"},"CssClassSet":{"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"_MultiElementCssClassSet":{"CssClassSetImpl":[],"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"_ElementCssClassSet":{"CssClassSetImpl":[],"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"_EventStream":{"Stream":["1"]},"_ElementEventStreamImpl":{"_EventStream":["1"],"Stream":["1"]},"_ElementListEventStreamImpl":{"Stream":["1"]},"_EventStreamSubscription":{"StreamSubscription":["1"]},"_Html5NodeValidator":{"NodeValidator":[]},"NodeValidatorBuilder":{"NodeValidator":[]},"_SimpleNodeValidator":{"NodeValidator":[]},"_TemplatingNodeValidator":{"NodeValidator":[]},"_SvgNodeValidator":{"NodeValidator":[]},"FixedSizeListIterator":{"Iterator":["1"]},"_DOMWindowCrossFrame":{"WindowBase":[],"EventTarget":[]},"_WrappedEvent":{"Event":[]},"_SameOriginUriPolicy":{"UriPolicy":[]},"_ValidatingTreeSanitizer":{"NodeTreeSanitizer":[]},"CssClassSetImpl":{"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"FilteredElementList":{"ListMixin":["Element"],"List":["Element"],"EfficientLengthIterable":["Element"],"Iterable":["Element"],"ListMixin.E":"Element"},"JsFunction":{"JsObject":[]},"JsArray":{"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"JsObject":[],"Iterable":["1"],"ListMixin.E":"1"},"_JSRandom":{"Random":[]},"CircleElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"GElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"GeometryElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"GraphicsElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"ImageElement0":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"LineElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"PathElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"RectElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"ScriptElement0":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"AttributeClassSet":{"CssClassSetImpl":[],"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"SvgElement":{"Element":[],"Node":[],"EventTarget":[]},"SvgSvgElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextContentElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextPositioningElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"Float32List":{"List":["double"],"EfficientLengthIterable":["double"],"TypedData":[],"Iterable":["double"]},"AudioBufferSourceNode":{"AudioNode":[],"EventTarget":[]},"AudioContext":{"BaseAudioContext":[],"EventTarget":[]},"AudioNode":{"EventTarget":[]},"AudioProcessingEvent":{"Event":[]},"AudioScheduledSourceNode":{"AudioNode":[],"EventTarget":[]},"BaseAudioContext":{"EventTarget":[]},"BiquadFilterNode":{"AudioNode":[],"EventTarget":[]},"DelayNode":{"AudioNode":[],"EventTarget":[]},"DynamicsCompressorNode":{"AudioNode":[],"EventTarget":[]},"GainNode":{"AudioNode":[],"EventTarget":[]},"OfflineAudioContext":{"BaseAudioContext":[],"EventTarget":[]},"OscillatorNode":{"AudioNode":[],"EventTarget":[]},"StereoPannerNode":{"AudioNode":[],"EventTarget":[]},"HexCodec":{"Codec":["List<int>","String"],"Codec.S":"List<int>"},"HexEncoder":{"Converter":["List<int>","String"]},"DrumKit":{"Instrument":[]},"Drums":{"Instrument":[]},"Piano":{"Instrument":[]},"BiquadFilter":{"Effect":[]},"PitchBendEffect":{"Effect":[]},"PanEffect":{"Effect":[]},"GainEffect":{"Effect":[]},"ADSRNode":{"SynthNode":[]},"FMNode":{"SynthNode":[]},"SynthSampleNode":{"SynthNode":[]},"SynthDelayNode":{"SynthNode":[]},"SynthCompressorNode":{"SynthNode":[]},"FilterNode":{"SynthNode":[]},"SchedulerSynth":{"Synthesizer":[]},"PythonCell":{"Metronome":[],"ClockSubscriber":[],"TimelineListener":[],"CodeMirrorListener":[],"DataModel":[],"PythonListener":[]},"DatastoreException":{"Exception":[]},"Project":{"DataModel":[],"ClockSubscriber":[]},"NoteRecorder":{"ClockSubscriber":[]},"User":{"DataModel":[]}}'));
-  H._Universe_addErasedTypes(init.typeUniverse, JSON.parse('{"EfficientLengthIterable":1,"UnmodifiableListBase":1,"StreamTransformerBase":2,"ListBase":1,"MapBase":2,"SetBase":1,"_ListBase_Object_ListMixin":1,"_SetBase_Object_SetMixin":1,"_JsArray_JsObject_ListMixin":1}'));
+  H._Universe_addRules(init.typeUniverse, JSON.parse('{"JavaScriptFunction":"JavaScriptObject","PlainJavaScriptObject":"JavaScriptObject","UnknownJavaScriptObject":"JavaScriptObject","AnimationEvent":"Event","AudioDestinationNode":"AudioNode","ConstantSourceNode":"AudioScheduledSourceNode","AnimateElement":"SvgElement","AnimationElement":"SvgElement","AElement":"GraphicsElement","TextPathElement":"TextContentElement","TSpanElement":"TextPositioningElement","EllipseElement":"GeometryElement","AbsoluteOrientationSensor":"EventTarget","OrientationSensor":"EventTarget","Sensor":"EventTarget","_ResourceProgressEvent":"ProgressEvent","BRElement":"HtmlElement","_DocumentType":"Node","XmlDocument":"Document","PointerEvent":"MouseEvent","VttCue":"TextTrackCue","VideoElement":"MediaElement","FocusEvent":"UIEvent","AbortPaymentEvent":"ExtendableEvent","DedicatedWorkerGlobalScope":"WorkerGlobalScope","CDataSection":"CharacterData","Text":"CharacterData","MidiInput":"MidiPort","HttpRequestUpload":"HttpRequestEventTarget","HtmlFormControlsCollection":"HtmlCollection","CssCharsetRule":"CssRule","CssStyleSheet":"StyleSheet","CanvasCaptureMediaStreamTrack":"MediaStreamTrack","BackgroundFetchClickEvent":"BackgroundFetchEvent","NativeFloat64List":"NativeTypedArrayOfDouble","NativeByteData":"NativeTypedData","JSBool":{"bool":[]},"JSNull":{"Null":[]},"JavaScriptObject":{"JSObject":[],"Function":[]},"JSArray":{"List":["1"],"EfficientLengthIterable":["1"],"JSIndexable":["@"],"Iterable":["1"]},"JSUnmodifiableArray":{"JSArray":["1"],"List":["1"],"EfficientLengthIterable":["1"],"JSIndexable":["@"],"Iterable":["1"]},"ArrayIterator":{"Iterator":["1"]},"JSNumber":{"double":[],"num":[]},"JSInt":{"int":[],"double":[],"num":[]},"JSDouble":{"double":[],"num":[]},"JSString":{"String":[],"JSIndexable":["@"],"Pattern":[]},"CodeUnits":{"UnmodifiableListMixin":["int"],"ListMixin":["int"],"List":["int"],"EfficientLengthIterable":["int"],"Iterable":["int"],"ListMixin.E":"int","UnmodifiableListMixin.E":"int"},"EfficientLengthIterable":{"Iterable":["1"]},"ListIterable":{"EfficientLengthIterable":["1"],"Iterable":["1"]},"ListIterator":{"Iterator":["1"]},"MappedIterable":{"Iterable":["2"],"Iterable.E":"2"},"EfficientLengthMappedIterable":{"MappedIterable":["1","2"],"EfficientLengthIterable":["2"],"Iterable":["2"],"Iterable.E":"2"},"MappedIterator":{"Iterator":["2"]},"MappedListIterable":{"ListIterable":["2"],"EfficientLengthIterable":["2"],"Iterable":["2"],"ListIterable.E":"2","Iterable.E":"2"},"WhereIterable":{"Iterable":["1"],"Iterable.E":"1"},"WhereIterator":{"Iterator":["1"]},"TakeIterable":{"Iterable":["1"],"Iterable.E":"1"},"EfficientLengthTakeIterable":{"TakeIterable":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"Iterable.E":"1"},"TakeIterator":{"Iterator":["1"]},"SkipIterable":{"Iterable":["1"],"Iterable.E":"1"},"EfficientLengthSkipIterable":{"SkipIterable":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"Iterable.E":"1"},"SkipIterator":{"Iterator":["1"]},"UnmodifiableListBase":{"UnmodifiableListMixin":["1"],"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"Symbol":{"Symbol0":[]},"ConstantMapView":{"UnmodifiableMapView":["1","2"],"_UnmodifiableMapView_MapView__UnmodifiableMapMixin":["1","2"],"MapView":["1","2"],"_UnmodifiableMapMixin":["1","2"],"Map":["1","2"]},"ConstantMap":{"Map":["1","2"]},"ConstantStringMap":{"ConstantMap":["1","2"],"Map":["1","2"]},"_ConstantMapKeyIterable":{"Iterable":["1"],"Iterable.E":"1"},"JSInvocationMirror":{"Invocation":[]},"NullError":{"Error":[]},"JsNoSuchMethodError":{"Error":[]},"UnknownJsTypeError":{"Error":[]},"_StackTrace":{"StackTrace":[]},"Closure":{"Function":[]},"TearOffClosure":{"Function":[]},"StaticClosure":{"Function":[]},"BoundClosure":{"Function":[]},"RuntimeError":{"Error":[]},"_AssertionError":{"Error":[]},"JsLinkedHashMap":{"LinkedHashMap":["1","2"],"MapMixin":["1","2"],"Map":["1","2"],"MapMixin.K":"1","MapMixin.V":"2"},"LinkedHashMapKeyIterable":{"EfficientLengthIterable":["1"],"Iterable":["1"],"Iterable.E":"1"},"LinkedHashMapKeyIterator":{"Iterator":["1"]},"JSSyntaxRegExp":{"RegExp":[],"Pattern":[]},"NativeByteBuffer":{"ByteBuffer":[]},"NativeTypedData":{"TypedData":[]},"NativeTypedArray":{"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"TypedData":[],"JSIndexable":["@"]},"NativeTypedArrayOfDouble":{"ListMixin":["double"],"JavaScriptIndexingBehavior":["@"],"List":["double"],"NativeTypedData":[],"EfficientLengthIterable":["double"],"FixedLengthListMixin":["double"],"TypedData":[],"JSIndexable":["@"],"Iterable":["double"],"ListMixin.E":"double","FixedLengthListMixin.E":"double"},"NativeTypedArrayOfInt":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"]},"NativeFloat32List":{"Float32List":[],"ListMixin":["double"],"JavaScriptIndexingBehavior":["@"],"List":["double"],"NativeTypedData":[],"EfficientLengthIterable":["double"],"FixedLengthListMixin":["double"],"TypedData":[],"JSIndexable":["@"],"Iterable":["double"],"ListMixin.E":"double","FixedLengthListMixin.E":"double"},"NativeInt16List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeInt32List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeInt8List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint16List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint32List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint8ClampedList":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint8List":{"Uint8List":[],"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"_Error":{"Error":[]},"_TypeError":{"Error":[]},"_TimerImpl":{"Timer":[]},"_BroadcastStream":{"_ControllerStream":["1"],"_StreamImpl":["1"],"Stream":["1"]},"_BroadcastSubscription":{"_ControllerSubscription":["1"],"_BufferingStreamSubscription":["1"],"_EventDispatch":["1"],"StreamSubscription":["1"]},"_BroadcastStreamController":{"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_SyncBroadcastStreamController":{"_BroadcastStreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_AsyncBroadcastStreamController":{"_BroadcastStreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_AsyncCompleter":{"_Completer":["1"]},"_SyncCompleter":{"_Completer":["1"]},"_Future":{"Future":["1"]},"_StreamController":{"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_AsyncStreamController":{"_AsyncStreamControllerDispatch":["1"],"_StreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_SyncStreamController":{"_SyncStreamControllerDispatch":["1"],"_StreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_ControllerStream":{"_StreamImpl":["1"],"Stream":["1"]},"_ControllerSubscription":{"_BufferingStreamSubscription":["1"],"_EventDispatch":["1"],"StreamSubscription":["1"]},"_BufferingStreamSubscription":{"_EventDispatch":["1"],"StreamSubscription":["1"]},"_StreamImpl":{"Stream":["1"]},"_DelayedData":{"_DelayedEvent":["1"]},"_DelayedDone":{"_DelayedEvent":["@"]},"_StreamImplEvents":{"_PendingEvents":["1"]},"_DoneStreamSubscription":{"StreamSubscription":["1"]},"AsyncError":{"Error":[]},"_Zone":{"Zone":[]},"_RootZone":{"Zone":[]},"_LinkedHashSet":{"_SetBase":["1"],"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_LinkedHashSetIterator":{"Iterator":["1"]},"ListBase":{"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"MapBase":{"MapMixin":["1","2"],"Map":["1","2"]},"MapMixin":{"Map":["1","2"]},"MapView":{"Map":["1","2"]},"UnmodifiableMapView":{"_UnmodifiableMapView_MapView__UnmodifiableMapMixin":["1","2"],"MapView":["1","2"],"_UnmodifiableMapMixin":["1","2"],"Map":["1","2"]},"ListQueue":{"ListIterable":["1"],"Queue":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"ListIterable.E":"1","Iterable.E":"1"},"_ListQueueIterator":{"Iterator":["1"]},"SetBase":{"SetMixin":["1"],"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_SetBase":{"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_JsonMap":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"_JsonMapKeyIterable":{"ListIterable":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"ListIterable.E":"String","Iterable.E":"String"},"Base64Codec":{"Codec":["List<int>","String"],"Codec.S":"List<int>"},"Base64Encoder":{"Converter":["List<int>","String"]},"Base64Decoder":{"Converter":["String","List<int>"]},"JsonUnsupportedObjectError":{"Error":[]},"JsonCyclicError":{"Error":[]},"JsonCodec":{"Codec":["Object","String"],"Codec.S":"Object"},"JsonEncoder":{"Converter":["Object","String"]},"JsonDecoder":{"Converter":["String","Object"]},"double":{"num":[]},"AssertionError":{"Error":[]},"NullThrownError":{"Error":[]},"ArgumentError":{"Error":[]},"RangeError":{"Error":[]},"IndexError":{"Error":[]},"NoSuchMethodError":{"Error":[]},"UnsupportedError":{"Error":[]},"UnimplementedError":{"Error":[]},"StateError":{"Error":[]},"ConcurrentModificationError":{"Error":[]},"OutOfMemoryError":{"Error":[]},"StackOverflowError":{"Error":[]},"CyclicInitializationError":{"Error":[]},"_Exception":{"Exception":[]},"FormatException":{"Exception":[]},"int":{"num":[]},"List":{"EfficientLengthIterable":["1"],"Iterable":["1"]},"Set":{"EfficientLengthIterable":["1"],"Iterable":["1"]},"_StringStackTrace":{"StackTrace":[]},"String":{"Pattern":[]},"StringBuffer":{"StringSink":[]},"HtmlElement":{"Element":[],"Node":[],"EventTarget":[]},"AnchorElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"Animation":{"EventTarget":[]},"AreaElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"AudioElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"BackgroundFetchEvent":{"Event":[]},"BackgroundFetchRegistration":{"EventTarget":[]},"BaseElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"BeforeUnloadEvent":{"Event":[]},"BlobEvent":{"Event":[]},"BodyElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"ButtonElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"CharacterData":{"Node":[],"EventTarget":[]},"CompositionEvent":{"Event":[]},"DivElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"Document":{"Node":[],"EventTarget":[]},"DocumentFragment":{"Node":[],"EventTarget":[]},"DomRectList":{"ImmutableListMixin":["Rectangle<num>"],"ListMixin":["Rectangle<num>"],"JavaScriptIndexingBehavior":["Rectangle<num>"],"List":["Rectangle<num>"],"EfficientLengthIterable":["Rectangle<num>"],"Iterable":["Rectangle<num>"],"JSIndexable":["Rectangle<num>"],"ListMixin.E":"Rectangle<num>","ImmutableListMixin.E":"Rectangle<num>"},"DomRectReadOnly":{"Rectangle":["num"]},"DomStringList":{"ImmutableListMixin":["String"],"ListMixin":["String"],"List":["String"],"JavaScriptIndexingBehavior":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"JSIndexable":["String"],"ListMixin.E":"String","ImmutableListMixin.E":"String"},"_ChildrenElementList":{"ListMixin":["Element"],"List":["Element"],"EfficientLengthIterable":["Element"],"Iterable":["Element"],"ListMixin.E":"Element"},"_FrozenElementList":{"ElementList":["1"],"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"ListMixin.E":"1"},"Element":{"Node":[],"EventTarget":[]},"ExtendableEvent":{"Event":[]},"ExtendableMessageEvent":{"Event":[]},"File":{"Blob":[]},"FileList":{"ImmutableListMixin":["File"],"ListMixin":["File"],"JavaScriptIndexingBehavior":["File"],"List":["File"],"EfficientLengthIterable":["File"],"Iterable":["File"],"JSIndexable":["File"],"ListMixin.E":"File","ImmutableListMixin.E":"File"},"FileReader":{"EventTarget":[]},"FileWriter":{"EventTarget":[]},"FormElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"HtmlCollection":{"ImmutableListMixin":["Node"],"ListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"JSIndexable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"HtmlDocument":{"Document":[],"Node":[],"EventTarget":[]},"HttpRequest":{"EventTarget":[]},"HttpRequestEventTarget":{"EventTarget":[]},"InputElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"KeyboardEvent":{"Event":[]},"LIElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"MediaElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"MediaKeySession":{"EventTarget":[]},"MediaStream":{"EventTarget":[]},"MediaStreamTrack":{"EventTarget":[]},"MessageEvent":{"Event":[]},"MessagePort":{"EventTarget":[]},"MidiInputMap":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"MidiMessageEvent":{"Event":[]},"MidiOutputMap":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"MidiPort":{"EventTarget":[]},"MimeTypeArray":{"ImmutableListMixin":["MimeType"],"ListMixin":["MimeType"],"JavaScriptIndexingBehavior":["MimeType"],"List":["MimeType"],"EfficientLengthIterable":["MimeType"],"Iterable":["MimeType"],"JSIndexable":["MimeType"],"ListMixin.E":"MimeType","ImmutableListMixin.E":"MimeType"},"MouseEvent":{"Event":[]},"_ChildNodeListLazy":{"ListMixin":["Node"],"List":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"ListMixin.E":"Node"},"Node":{"EventTarget":[]},"NodeList":{"ImmutableListMixin":["Node"],"ListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"JSIndexable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"PaymentRequest":{"EventTarget":[]},"PluginArray":{"ImmutableListMixin":["Plugin"],"ListMixin":["Plugin"],"List":["Plugin"],"JavaScriptIndexingBehavior":["Plugin"],"EfficientLengthIterable":["Plugin"],"Iterable":["Plugin"],"JSIndexable":["Plugin"],"ListMixin.E":"Plugin","ImmutableListMixin.E":"Plugin"},"PreElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"PresentationConnection":{"EventTarget":[]},"ProgressEvent":{"Event":[]},"PushEvent":{"Event":[]},"RtcDataChannel":{"EventTarget":[]},"RtcStatsReport":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"SelectElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"ShadowRoot":{"DocumentFragment":[],"Node":[],"EventTarget":[]},"SourceBuffer":{"EventTarget":[]},"SourceBufferList":{"ImmutableListMixin":["SourceBuffer"],"ListMixin":["SourceBuffer"],"List":["SourceBuffer"],"JavaScriptIndexingBehavior":["SourceBuffer"],"EventTarget":[],"EfficientLengthIterable":["SourceBuffer"],"Iterable":["SourceBuffer"],"JSIndexable":["SourceBuffer"],"ListMixin.E":"SourceBuffer","ImmutableListMixin.E":"SourceBuffer"},"SpanElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"SpeechGrammarList":{"ImmutableListMixin":["SpeechGrammar"],"ListMixin":["SpeechGrammar"],"List":["SpeechGrammar"],"JavaScriptIndexingBehavior":["SpeechGrammar"],"EfficientLengthIterable":["SpeechGrammar"],"Iterable":["SpeechGrammar"],"JSIndexable":["SpeechGrammar"],"ListMixin.E":"SpeechGrammar","ImmutableListMixin.E":"SpeechGrammar"},"Storage":{"MapMixin":["String","String"],"Map":["String","String"],"MapMixin.K":"String","MapMixin.V":"String"},"TableElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TableRowElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TableSectionElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TemplateElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextAreaElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextEvent":{"Event":[]},"TextTrack":{"EventTarget":[]},"TextTrackCue":{"EventTarget":[]},"TextTrackCueList":{"ImmutableListMixin":["TextTrackCue"],"ListMixin":["TextTrackCue"],"JavaScriptIndexingBehavior":["TextTrackCue"],"List":["TextTrackCue"],"EfficientLengthIterable":["TextTrackCue"],"Iterable":["TextTrackCue"],"JSIndexable":["TextTrackCue"],"ListMixin.E":"TextTrackCue","ImmutableListMixin.E":"TextTrackCue"},"TextTrackList":{"ImmutableListMixin":["TextTrack"],"ListMixin":["TextTrack"],"JavaScriptIndexingBehavior":["TextTrack"],"List":["TextTrack"],"EventTarget":[],"EfficientLengthIterable":["TextTrack"],"Iterable":["TextTrack"],"JSIndexable":["TextTrack"],"ListMixin.E":"TextTrack","ImmutableListMixin.E":"TextTrack"},"TouchList":{"ImmutableListMixin":["Touch"],"ListMixin":["Touch"],"List":["Touch"],"JavaScriptIndexingBehavior":["Touch"],"EfficientLengthIterable":["Touch"],"Iterable":["Touch"],"JSIndexable":["Touch"],"ListMixin.E":"Touch","ImmutableListMixin.E":"Touch"},"UIEvent":{"Event":[]},"UListElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"VideoTrackList":{"EventTarget":[]},"WebSocket":{"EventTarget":[]},"Window":{"WindowBase":[],"EventTarget":[]},"_BeforeUnloadEvent":{"BeforeUnloadEvent":[],"Event":[]},"Worker":{"EventTarget":[]},"WorkerGlobalScope":{"EventTarget":[]},"_Attr":{"Node":[],"EventTarget":[]},"_CssRuleList":{"ImmutableListMixin":["CssRule"],"ListMixin":["CssRule"],"List":["CssRule"],"JavaScriptIndexingBehavior":["CssRule"],"EfficientLengthIterable":["CssRule"],"Iterable":["CssRule"],"JSIndexable":["CssRule"],"ListMixin.E":"CssRule","ImmutableListMixin.E":"CssRule"},"_DomRect":{"Rectangle":["num"]},"_GamepadList":{"ImmutableListMixin":["Gamepad"],"ListMixin":["Gamepad"],"JavaScriptIndexingBehavior":["Gamepad"],"List":["Gamepad"],"EfficientLengthIterable":["Gamepad"],"Iterable":["Gamepad"],"JSIndexable":["Gamepad"],"ListMixin.E":"Gamepad","ImmutableListMixin.E":"Gamepad"},"_NamedNodeMap":{"ImmutableListMixin":["Node"],"ListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"JSIndexable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"_SpeechRecognitionResultList":{"ImmutableListMixin":["SpeechRecognitionResult"],"ListMixin":["SpeechRecognitionResult"],"List":["SpeechRecognitionResult"],"JavaScriptIndexingBehavior":["SpeechRecognitionResult"],"EfficientLengthIterable":["SpeechRecognitionResult"],"Iterable":["SpeechRecognitionResult"],"JSIndexable":["SpeechRecognitionResult"],"ListMixin.E":"SpeechRecognitionResult","ImmutableListMixin.E":"SpeechRecognitionResult"},"_StyleSheetList":{"ImmutableListMixin":["StyleSheet"],"ListMixin":["StyleSheet"],"JavaScriptIndexingBehavior":["StyleSheet"],"List":["StyleSheet"],"EfficientLengthIterable":["StyleSheet"],"Iterable":["StyleSheet"],"JSIndexable":["StyleSheet"],"ListMixin.E":"StyleSheet","ImmutableListMixin.E":"StyleSheet"},"_AttributeMap":{"MapMixin":["String","String"],"Map":["String","String"]},"_ElementAttributeMap":{"MapMixin":["String","String"],"Map":["String","String"],"MapMixin.K":"String","MapMixin.V":"String"},"_DataAttributeMap":{"MapMixin":["String","String"],"Map":["String","String"],"MapMixin.K":"String","MapMixin.V":"String"},"CssClassSet":{"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"_MultiElementCssClassSet":{"CssClassSetImpl":[],"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"_ElementCssClassSet":{"CssClassSetImpl":[],"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"_EventStream":{"Stream":["1"]},"_ElementEventStreamImpl":{"_EventStream":["1"],"Stream":["1"]},"_ElementListEventStreamImpl":{"Stream":["1"]},"_EventStreamSubscription":{"StreamSubscription":["1"]},"_Html5NodeValidator":{"NodeValidator":[]},"NodeValidatorBuilder":{"NodeValidator":[]},"_SimpleNodeValidator":{"NodeValidator":[]},"_TemplatingNodeValidator":{"NodeValidator":[]},"_SvgNodeValidator":{"NodeValidator":[]},"FixedSizeListIterator":{"Iterator":["1"]},"_DOMWindowCrossFrame":{"WindowBase":[],"EventTarget":[]},"_WrappedEvent":{"Event":[]},"_SameOriginUriPolicy":{"UriPolicy":[]},"_ValidatingTreeSanitizer":{"NodeTreeSanitizer":[]},"CssClassSetImpl":{"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"FilteredElementList":{"ListMixin":["Element"],"List":["Element"],"EfficientLengthIterable":["Element"],"Iterable":["Element"],"ListMixin.E":"Element"},"VersionChangeEvent":{"Event":[]},"JsFunction":{"JsObject":[]},"JsArray":{"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"JsObject":[],"Iterable":["1"],"ListMixin.E":"1"},"_JSRandom":{"Random":[]},"CircleElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"GElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"GeometryElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"GraphicsElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"ImageElement0":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"LengthList":{"ImmutableListMixin":["Length"],"ListMixin":["Length"],"List":["Length"],"EfficientLengthIterable":["Length"],"Iterable":["Length"],"ListMixin.E":"Length","ImmutableListMixin.E":"Length"},"LineElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"NumberList":{"ImmutableListMixin":["Number"],"ListMixin":["Number"],"List":["Number"],"EfficientLengthIterable":["Number"],"Iterable":["Number"],"ListMixin.E":"Number","ImmutableListMixin.E":"Number"},"PathElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"RectElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"ScriptElement0":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"StringList":{"ImmutableListMixin":["String"],"ListMixin":["String"],"List":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"ListMixin.E":"String","ImmutableListMixin.E":"String"},"AttributeClassSet":{"CssClassSetImpl":[],"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"SvgElement":{"Element":[],"Node":[],"EventTarget":[]},"SvgSvgElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextContentElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextPositioningElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TransformList":{"ImmutableListMixin":["Transform"],"ListMixin":["Transform"],"List":["Transform"],"EfficientLengthIterable":["Transform"],"Iterable":["Transform"],"ListMixin.E":"Transform","ImmutableListMixin.E":"Transform"},"Float32List":{"List":["double"],"EfficientLengthIterable":["double"],"TypedData":[],"Iterable":["double"]},"AnalyserNode":{"AudioNode":[],"EventTarget":[]},"AudioBufferSourceNode":{"AudioNode":[],"EventTarget":[]},"AudioContext":{"BaseAudioContext":[],"EventTarget":[]},"AudioNode":{"EventTarget":[]},"AudioParamMap":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"AudioProcessingEvent":{"Event":[]},"AudioScheduledSourceNode":{"AudioNode":[],"EventTarget":[]},"AudioTrackList":{"EventTarget":[]},"BaseAudioContext":{"EventTarget":[]},"BiquadFilterNode":{"AudioNode":[],"EventTarget":[]},"ConvolverNode":{"AudioNode":[],"EventTarget":[]},"DelayNode":{"AudioNode":[],"EventTarget":[]},"DynamicsCompressorNode":{"AudioNode":[],"EventTarget":[]},"GainNode":{"AudioNode":[],"EventTarget":[]},"MediaStreamAudioSourceNode":{"AudioNode":[],"EventTarget":[]},"OfflineAudioContext":{"BaseAudioContext":[],"EventTarget":[]},"OscillatorNode":{"AudioNode":[],"EventTarget":[]},"ScriptProcessorNode":{"AudioNode":[],"EventTarget":[]},"StereoPannerNode":{"AudioNode":[],"EventTarget":[]},"SqlResultSetRowList":{"ImmutableListMixin":["Map<@,@>"],"ListMixin":["Map<@,@>"],"List":["Map<@,@>"],"EfficientLengthIterable":["Map<@,@>"],"Iterable":["Map<@,@>"],"ListMixin.E":"Map<@,@>","ImmutableListMixin.E":"Map<@,@>"},"HexCodec":{"Codec":["List<int>","String"],"Codec.S":"List<int>"},"HexEncoder":{"Converter":["List<int>","String"]},"DrumKit":{"Instrument":[]},"Drums":{"Instrument":[]},"Piano":{"Instrument":[]},"BiquadFilter":{"Effect":[]},"PitchBendEffect":{"Effect":[]},"PanEffect":{"Effect":[]},"GainEffect":{"Effect":[]},"ADSRNode":{"SynthNode":[]},"FMNode":{"SynthNode":[]},"SynthSampleNode":{"SynthNode":[]},"SynthDelayNode":{"SynthNode":[]},"SynthCompressorNode":{"SynthNode":[]},"FilterNode":{"SynthNode":[]},"SchedulerSynth":{"Synthesizer":[]},"PythonCell":{"Metronome":[],"ClockSubscriber":[],"TimelineListener":[],"CodeMirrorListener":[],"DataModel":[],"PythonListener":[]},"DatastoreException":{"Exception":[]},"Project":{"DataModel":[],"ClockSubscriber":[]},"NoteRecorder":{"ClockSubscriber":[]},"Recording":{"DataModel":[]},"User":{"DataModel":[]}}'));
+  H._Universe_addErasedTypes(init.typeUniverse, JSON.parse('{"EfficientLengthIterable":1,"UnmodifiableListBase":1,"StreamTransformerBase":2,"ListBase":1,"MapBase":2,"SetBase":1,"_ListBase_Object_ListMixin":1,"_SetBase_Object_SetMixin":1,"_JsArray_JsObject_ListMixin":1,"_RectangleBase":1}'));
   var type$ = (function rtii() {
     var findType = H.findType;
     return {
@@ -22990,6 +27979,7 @@
       ClockSubscriber: findType("ClockSubscriber"),
       ConstantMapView_Symbol_dynamic: findType("ConstantMapView<Symbol0,@>"),
       CssClassSetImpl: findType("CssClassSetImpl"),
+      CssRule: findType("CssRule"),
       DivElement: findType("DivElement"),
       Document: findType("Document"),
       DocumentFragment: findType("DocumentFragment"),
@@ -23004,6 +27994,7 @@
       EventTarget: findType("EventTarget"),
       Exception: findType("Exception"),
       File: findType("File"),
+      FileList: findType("FileList"),
       FormElement: findType("FormElement"),
       Function: findType("Function"),
       FutureOr_List_dynamic: findType("List<@>/"),
@@ -23012,6 +28003,7 @@
       Future_dynamic: findType("Future<@>"),
       GElement: findType("GElement"),
       GainNode: findType("GainNode"),
+      Gamepad: findType("Gamepad"),
       GrowableAudioBuffer: findType("GrowableAudioBuffer"),
       HexCodec: findType("HexCodec"),
       HtmlElement: findType("HtmlElement"),
@@ -23024,6 +28016,7 @@
       Iterable_Node: findType("Iterable<Node>"),
       Iterable_dynamic: findType("Iterable<@>"),
       JSArray_AudioNode: findType("JSArray<AudioNode>"),
+      JSArray_CircleElement: findType("JSArray<CircleElement>"),
       JSArray_Drum: findType("JSArray<Drum>"),
       JSArray_DrumPad: findType("JSArray<DrumPad>"),
       JSArray_Effect: findType("JSArray<Effect>"),
@@ -23036,6 +28029,8 @@
       JSArray_NoteSpacer: findType("JSArray<NoteSpacer>"),
       JSArray_PianoKey: findType("JSArray<PianoKey>"),
       JSArray_PythonCell: findType("JSArray<PythonCell>"),
+      JSArray_Recording: findType("JSArray<Recording>"),
+      JSArray_RectElement: findType("JSArray<RectElement>"),
       JSArray_String: findType("JSArray<String>"),
       JSArray_SynthChain: findType("JSArray<SynthChain>"),
       JSArray_SynthEvent: findType("JSArray<SynthEvent>"),
@@ -23051,8 +28046,10 @@
       JsArray_dynamic: findType("JsArray<@>"),
       JsLinkedHashMap_String_dynamic: findType("JsLinkedHashMap<String,@>"),
       JsLinkedHashMap_String_int: findType("JsLinkedHashMap<String,int>"),
+      JsLinkedHashMap_String_num: findType("JsLinkedHashMap<String,num>"),
       JsLinkedHashMap_Symbol_dynamic: findType("JsLinkedHashMap<Symbol0,@>"),
       JsLinkedHashMap_TraceEvent_SvgElement: findType("JsLinkedHashMap<TraceEvent,SvgElement>"),
+      JsLinkedHashMap_dynamic_dynamic: findType("JsLinkedHashMap<@,@>"),
       JsLinkedHashMap_int_AudioBuffer: findType("JsLinkedHashMap<int,AudioBuffer>"),
       JsLinkedHashMap_int_SynthNode: findType("JsLinkedHashMap<int,SynthNode>"),
       JsLinkedHashMap_int_int: findType("JsLinkedHashMap<int,int>"),
@@ -23060,10 +28057,12 @@
       KeyRange: findType("KeyRange"),
       KeyboardEvent: findType("KeyboardEvent"),
       LIElement: findType("LIElement"),
+      Length: findType("Length"),
       LineElement: findType("LineElement"),
-      ListQueue_List_num: findType("ListQueue<List<num>>"),
       List_Element: findType("List<Element>"),
       List_Object: findType("List<Object>"),
+      List_Recording: findType("List<Recording>"),
+      List_RectElement: findType("List<RectElement>"),
       List_String: findType("List<String>"),
       List_dynamic: findType("List<@>"),
       List_int: findType("List<int>"),
@@ -23072,40 +28071,51 @@
       Map_String_String: findType("Map<String,String>"),
       Map_String_dynamic: findType("Map<String,@>"),
       Map_String_int: findType("Map<String,int>"),
+      Map_String_num: findType("Map<String,num>"),
       Map_Symbol_dynamic: findType("Map<Symbol0,@>"),
       Map_dynamic_dynamic: findType("Map<@,@>"),
       MappedListIterable_String_String: findType("MappedListIterable<String,String>"),
+      MediaStream: findType("MediaStream"),
       MessageEvent: findType("MessageEvent"),
       MessagePort: findType("MessagePort"),
       Metronome: findType("Metronome"),
+      MimeType: findType("MimeType"),
       MixSlider: findType("MixSlider"),
       MouseEvent: findType("MouseEvent"),
       NativeByteBuffer: findType("NativeByteBuffer"),
       NativeTypedData: findType("NativeTypedData"),
       NativeUint8List: findType("NativeUint8List"),
+      NavigatorUserMediaError: findType("NavigatorUserMediaError"),
       Node: findType("Node"),
       NodeValidator: findType("NodeValidator"),
       Note: findType("Note"),
       NoteEvent: findType("NoteEvent"),
       Null: findType("Null"),
+      Number: findType("Number"),
       Object: findType("Object"),
       PathElement: findType("PathElement"),
       PianoKey: findType("PianoKey"),
+      Plugin: findType("Plugin"),
       PreElement: findType("PreElement"),
       ProgressEvent: findType("ProgressEvent"),
       PythonCell: findType("PythonCell"),
+      Recording: findType("Recording"),
       RectElement: findType("RectElement"),
       Rectangle_num: findType("Rectangle<num>"),
       RegExp: findType("RegExp"),
       Rti: findType("Rti"),
       ScriptElement: findType("ScriptElement0"),
       Set_String: findType("Set<String>"),
+      SourceBuffer: findType("SourceBuffer"),
       SpanElement: findType("SpanElement"),
+      SpeechGrammar: findType("SpeechGrammar"),
+      SpeechRecognitionResult: findType("SpeechRecognitionResult"),
       StackTrace: findType("StackTrace"),
       StereoPannerNode: findType("StereoPannerNode"),
       StreamController_MIDIEvent: findType("StreamController<MIDIEvent>"),
       String: findType("String"),
       String_Function_String: findType("String(String)"),
+      StyleSheet: findType("StyleSheet"),
       SvgElement: findType("SvgElement"),
       SvgSvgElement: findType("SvgSvgElement"),
       Symbol: findType("Symbol0"),
@@ -23114,7 +28124,11 @@
       TemplateElement: findType("TemplateElement"),
       TextAreaElement: findType("TextAreaElement"),
       TextElement: findType("TextElement"),
+      TextTrack: findType("TextTrack"),
+      TextTrackCue: findType("TextTrackCue"),
       Timer: findType("Timer"),
+      Touch: findType("Touch"),
+      Transform: findType("Transform"),
       TypedData: findType("TypedData"),
       UListElement: findType("UListElement"),
       Uint8List: findType("Uint8List"),
@@ -23125,6 +28139,8 @@
       WorkerGlobalScope: findType("WorkerGlobalScope"),
       _AsyncCompleter_AudioBuffer: findType("_AsyncCompleter<AudioBuffer>"),
       _AsyncCompleter_HttpRequest: findType("_AsyncCompleter<HttpRequest>"),
+      _AsyncCompleter_MediaStream: findType("_AsyncCompleter<MediaStream>"),
+      _AsyncCompleter_dynamic: findType("_AsyncCompleter<@>"),
       _Attr: findType("_Attr"),
       _ChildNodeListLazy: findType("_ChildNodeListLazy"),
       _DelayedEvent_dynamic: findType("_DelayedEvent<@>"),
@@ -23135,12 +28151,14 @@
       _ElementListEventStreamImpl_KeyboardEvent: findType("_ElementListEventStreamImpl<KeyboardEvent>"),
       _ElementListEventStreamImpl_MouseEvent: findType("_ElementListEventStreamImpl<MouseEvent>"),
       _EventStream_AudioProcessingEvent: findType("_EventStream<AudioProcessingEvent>"),
+      _EventStream_Event: findType("_EventStream<Event>"),
       _EventStream_MessageEvent: findType("_EventStream<MessageEvent>"),
       _EventStream_MouseEvent: findType("_EventStream<MouseEvent>"),
       _FrozenElementList_Element: findType("_FrozenElementList<Element>"),
       _FutureListener_dynamic_dynamic: findType("_FutureListener<@,@>"),
       _Future_AudioBuffer: findType("_Future<AudioBuffer>"),
       _Future_HttpRequest: findType("_Future<HttpRequest>"),
+      _Future_MediaStream: findType("_Future<MediaStream>"),
       _Future_bool: findType("_Future<bool>"),
       _Future_dynamic: findType("_Future<@>"),
       _Future_int: findType("_Future<int>"),
@@ -23166,12 +28184,15 @@
       void: findType("~"),
       void_Function: findType("~()"),
       void_Function_AudioBuffer: findType("~(AudioBuffer)"),
+      void_Function_AudioProcessingEvent: findType("~(AudioProcessingEvent)"),
       void_Function_BeforeUnloadEvent: findType("~(BeforeUnloadEvent)"),
       void_Function_DomException: findType("~(DomException)"),
       void_Function_Element: findType("~(Element)"),
       void_Function_Event: findType("~(Event)"),
+      void_Function_MediaStream: findType("~(MediaStream)"),
       void_Function_MessageEvent: findType("~(MessageEvent)"),
       void_Function_MouseEvent: findType("~(MouseEvent)"),
+      void_Function_NavigatorUserMediaError: findType("~(NavigatorUserMediaError)"),
       void_Function_Object: findType("~(Object)"),
       void_Function_Object_StackTrace: findType("~(Object,StackTrace)"),
       void_Function_ProgressEvent: findType("~(ProgressEvent)"),
@@ -23191,6 +28212,7 @@
     C.CircleElement_methods = P.CircleElement.prototype;
     C.CssStyleDeclaration_methods = W.CssStyleDeclaration.prototype;
     C.DivElement_methods = W.DivElement.prototype;
+    C.FileReader_methods = W.FileReader.prototype;
     C.GElement_methods = P.GElement.prototype;
     C.HtmlDocument_methods = W.HtmlDocument.prototype;
     C.HttpRequest_methods = W.HttpRequest.prototype;
@@ -23204,6 +28226,7 @@
     C.JSString_methods = J.JSString.prototype;
     C.JavaScriptFunction_methods = J.JavaScriptFunction.prototype;
     C.LineElement_methods = P.LineElement.prototype;
+    C.Navigator_methods = W.Navigator.prototype;
     C.NodeList_methods = W.NodeList.prototype;
     C.PathElement_methods = P.PathElement.prototype;
     C.PlainJavaScriptObject_methods = J.PlainJavaScriptObject.prototype;
@@ -23413,6 +28436,7 @@
     $.project = null;
     $.userlist = null;
     $.library = null;
+    $.rstudio = null;
     $.socket = null;
   })();
   (function lazyInitializers() {
@@ -23575,8 +28599,8 @@
       }
       init.dispatchPropertyName = init.getIsolateTag("dispatch_record");
     }();
-    hunkHelpers.setOrUpdateInterceptorsByTag({DOMError: J.Interceptor, DOMImplementation: J.Interceptor, MediaError: J.Interceptor, Navigator: J.Interceptor, NavigatorConcurrentHardware: J.Interceptor, NavigatorUserMediaError: J.Interceptor, OverconstrainedError: J.Interceptor, PositionError: J.Interceptor, PushMessageData: J.Interceptor, Range: J.Interceptor, SVGMatrix: J.Interceptor, SVGPoint: J.Interceptor, SQLError: J.Interceptor, ArrayBuffer: H.NativeByteBuffer, DataView: H.NativeTypedData, ArrayBufferView: H.NativeTypedData, Float64Array: H.NativeTypedArrayOfDouble, Float32Array: H.NativeFloat32List, Int16Array: H.NativeInt16List, Int32Array: H.NativeInt32List, Int8Array: H.NativeInt8List, Uint16Array: H.NativeUint16List, Uint32Array: H.NativeUint32List, Uint8ClampedArray: H.NativeUint8ClampedList, CanvasPixelArray: H.NativeUint8ClampedList, Uint8Array: H.NativeUint8List, HTMLBRElement: W.HtmlElement, HTMLCanvasElement: W.HtmlElement, HTMLContentElement: W.HtmlElement, HTMLDListElement: W.HtmlElement, HTMLDataElement: W.HtmlElement, HTMLDataListElement: W.HtmlElement, HTMLDetailsElement: W.HtmlElement, HTMLDialogElement: W.HtmlElement, HTMLEmbedElement: W.HtmlElement, HTMLFieldSetElement: W.HtmlElement, HTMLHRElement: W.HtmlElement, HTMLHeadElement: W.HtmlElement, HTMLHeadingElement: W.HtmlElement, HTMLHtmlElement: W.HtmlElement, HTMLIFrameElement: W.HtmlElement, HTMLImageElement: W.HtmlElement, HTMLLabelElement: W.HtmlElement, HTMLLegendElement: W.HtmlElement, HTMLLinkElement: W.HtmlElement, HTMLMapElement: W.HtmlElement, HTMLMenuElement: W.HtmlElement, HTMLMetaElement: W.HtmlElement, HTMLMeterElement: W.HtmlElement, HTMLModElement: W.HtmlElement, HTMLOListElement: W.HtmlElement, HTMLObjectElement: W.HtmlElement, HTMLOptGroupElement: W.HtmlElement, HTMLOptionElement: W.HtmlElement, HTMLOutputElement: W.HtmlElement, HTMLParagraphElement: W.HtmlElement, HTMLParamElement: W.HtmlElement, HTMLPictureElement: W.HtmlElement, HTMLProgressElement: W.HtmlElement, HTMLQuoteElement: W.HtmlElement, HTMLScriptElement: W.HtmlElement, HTMLShadowElement: W.HtmlElement, HTMLSlotElement: W.HtmlElement, HTMLSourceElement: W.HtmlElement, HTMLStyleElement: W.HtmlElement, HTMLTableCaptionElement: W.HtmlElement, HTMLTableCellElement: W.HtmlElement, HTMLTableDataCellElement: W.HtmlElement, HTMLTableHeaderCellElement: W.HtmlElement, HTMLTableColElement: W.HtmlElement, HTMLTimeElement: W.HtmlElement, HTMLTitleElement: W.HtmlElement, HTMLTrackElement: W.HtmlElement, HTMLUnknownElement: W.HtmlElement, HTMLDirectoryElement: W.HtmlElement, HTMLFontElement: W.HtmlElement, HTMLFrameElement: W.HtmlElement, HTMLFrameSetElement: W.HtmlElement, HTMLMarqueeElement: W.HtmlElement, HTMLElement: W.HtmlElement, HTMLAnchorElement: W.AnchorElement, HTMLAreaElement: W.AreaElement, HTMLAudioElement: W.AudioElement, BackgroundFetchClickEvent: W.BackgroundFetchEvent, BackgroundFetchEvent: W.BackgroundFetchEvent, BackgroundFetchFailEvent: W.BackgroundFetchEvent, BackgroundFetchedEvent: W.BackgroundFetchEvent, HTMLBaseElement: W.BaseElement, BeforeUnloadEvent: W.BeforeUnloadEvent, Blob: W.Blob, BlobEvent: W.BlobEvent, HTMLBodyElement: W.BodyElement, HTMLButtonElement: W.ButtonElement, CDATASection: W.CharacterData, CharacterData: W.CharacterData, Comment: W.CharacterData, ProcessingInstruction: W.CharacterData, Text: W.CharacterData, CompositionEvent: W.CompositionEvent, CSSStyleDeclaration: W.CssStyleDeclaration, MSStyleCSSProperties: W.CssStyleDeclaration, CSS2Properties: W.CssStyleDeclaration, HTMLDivElement: W.DivElement, XMLDocument: W.Document, Document: W.Document, DocumentFragment: W.DocumentFragment, DOMException: W.DomException, DOMRectReadOnly: W.DomRectReadOnly, DOMTokenList: W.DomTokenList, Element: W.Element, AnimationEvent: W.Event, AnimationPlaybackEvent: W.Event, ApplicationCacheErrorEvent: W.Event, BeforeInstallPromptEvent: W.Event, ClipboardEvent: W.Event, CloseEvent: W.Event, CustomEvent: W.Event, DeviceMotionEvent: W.Event, DeviceOrientationEvent: W.Event, ErrorEvent: W.Event, FontFaceSetLoadEvent: W.Event, GamepadEvent: W.Event, HashChangeEvent: W.Event, MediaEncryptedEvent: W.Event, MediaKeyMessageEvent: W.Event, MediaQueryListEvent: W.Event, MediaStreamEvent: W.Event, MediaStreamTrackEvent: W.Event, MIDIConnectionEvent: W.Event, MutationEvent: W.Event, PageTransitionEvent: W.Event, PaymentRequestUpdateEvent: W.Event, PopStateEvent: W.Event, PresentationConnectionAvailableEvent: W.Event, PresentationConnectionCloseEvent: W.Event, PromiseRejectionEvent: W.Event, RTCDataChannelEvent: W.Event, RTCDTMFToneChangeEvent: W.Event, RTCPeerConnectionIceEvent: W.Event, RTCTrackEvent: W.Event, SecurityPolicyViolationEvent: W.Event, SensorErrorEvent: W.Event, SpeechRecognitionError: W.Event, SpeechRecognitionEvent: W.Event, SpeechSynthesisEvent: W.Event, StorageEvent: W.Event, TrackEvent: W.Event, TransitionEvent: W.Event, WebKitTransitionEvent: W.Event, VRDeviceEvent: W.Event, VRDisplayEvent: W.Event, VRSessionEvent: W.Event, MojoInterfaceRequestEvent: W.Event, USBConnectionEvent: W.Event, IDBVersionChangeEvent: W.Event, OfflineAudioCompletionEvent: W.Event, WebGLContextEvent: W.Event, Event: W.Event, InputEvent: W.Event, SubmitEvent: W.Event, Clipboard: W.EventTarget, EventTarget: W.EventTarget, AbortPaymentEvent: W.ExtendableEvent, CanMakePaymentEvent: W.ExtendableEvent, FetchEvent: W.ExtendableEvent, ForeignFetchEvent: W.ExtendableEvent, InstallEvent: W.ExtendableEvent, NotificationEvent: W.ExtendableEvent, PaymentRequestEvent: W.ExtendableEvent, SyncEvent: W.ExtendableEvent, ExtendableEvent: W.ExtendableEvent, ExtendableMessageEvent: W.ExtendableMessageEvent, File: W.File, HTMLFormElement: W.FormElement, HTMLCollection: W.HtmlCollection, HTMLFormControlsCollection: W.HtmlCollection, HTMLOptionsCollection: W.HtmlCollection, HTMLDocument: W.HtmlDocument, XMLHttpRequest: W.HttpRequest, XMLHttpRequestEventTarget: W.HttpRequestEventTarget, ImageData: W.ImageData, HTMLInputElement: W.InputElement, KeyboardEvent: W.KeyboardEvent, HTMLLIElement: W.LIElement, Location: W.Location, HTMLVideoElement: W.MediaElement, HTMLMediaElement: W.MediaElement, MessageEvent: W.MessageEvent, MessagePort: W.MessagePort, MIDIMessageEvent: W.MidiMessageEvent, MouseEvent: W.MouseEvent, DragEvent: W.MouseEvent, PointerEvent: W.MouseEvent, WheelEvent: W.MouseEvent, DocumentType: W.Node, Node: W.Node, NodeList: W.NodeList, RadioNodeList: W.NodeList, HTMLPreElement: W.PreElement, ProgressEvent: W.ProgressEvent, ResourceProgressEvent: W.ProgressEvent, PushEvent: W.PushEvent, HTMLSelectElement: W.SelectElement, ShadowRoot: W.ShadowRoot, HTMLSpanElement: W.SpanElement, Storage: W.Storage, HTMLTableElement: W.TableElement, HTMLTableRowElement: W.TableRowElement, HTMLTableSectionElement: W.TableSectionElement, HTMLTemplateElement: W.TemplateElement, HTMLTextAreaElement: W.TextAreaElement, TextEvent: W.TextEvent, FocusEvent: W.UIEvent, TouchEvent: W.UIEvent, UIEvent: W.UIEvent, HTMLUListElement: W.UListElement, WebSocket: W.WebSocket, Window: W.Window, DOMWindow: W.Window, Worker: W.Worker, DedicatedWorkerGlobalScope: W.WorkerGlobalScope, ServiceWorkerGlobalScope: W.WorkerGlobalScope, SharedWorkerGlobalScope: W.WorkerGlobalScope, WorkerGlobalScope: W.WorkerGlobalScope, Attr: W._Attr, ClientRect: W._DomRect, DOMRect: W._DomRect, NamedNodeMap: W._NamedNodeMap, MozNamedAttrMap: W._NamedNodeMap, IDBKeyRange: P.KeyRange, SVGCircleElement: P.CircleElement, SVGGElement: P.GElement, SVGEllipseElement: P.GeometryElement, SVGPolygonElement: P.GeometryElement, SVGPolylineElement: P.GeometryElement, SVGGeometryElement: P.GeometryElement, SVGAElement: P.GraphicsElement, SVGClipPathElement: P.GraphicsElement, SVGDefsElement: P.GraphicsElement, SVGForeignObjectElement: P.GraphicsElement, SVGSwitchElement: P.GraphicsElement, SVGUseElement: P.GraphicsElement, SVGGraphicsElement: P.GraphicsElement, SVGImageElement: P.ImageElement0, SVGLineElement: P.LineElement, SVGPathElement: P.PathElement, SVGRectElement: P.RectElement, SVGScriptElement: P.ScriptElement0, SVGAnimateElement: P.SvgElement, SVGAnimateMotionElement: P.SvgElement, SVGAnimateTransformElement: P.SvgElement, SVGAnimationElement: P.SvgElement, SVGDescElement: P.SvgElement, SVGDiscardElement: P.SvgElement, SVGFEBlendElement: P.SvgElement, SVGFEColorMatrixElement: P.SvgElement, SVGFEComponentTransferElement: P.SvgElement, SVGFECompositeElement: P.SvgElement, SVGFEConvolveMatrixElement: P.SvgElement, SVGFEDiffuseLightingElement: P.SvgElement, SVGFEDisplacementMapElement: P.SvgElement, SVGFEDistantLightElement: P.SvgElement, SVGFEFloodElement: P.SvgElement, SVGFEFuncAElement: P.SvgElement, SVGFEFuncBElement: P.SvgElement, SVGFEFuncGElement: P.SvgElement, SVGFEFuncRElement: P.SvgElement, SVGFEGaussianBlurElement: P.SvgElement, SVGFEImageElement: P.SvgElement, SVGFEMergeElement: P.SvgElement, SVGFEMergeNodeElement: P.SvgElement, SVGFEMorphologyElement: P.SvgElement, SVGFEOffsetElement: P.SvgElement, SVGFEPointLightElement: P.SvgElement, SVGFESpecularLightingElement: P.SvgElement, SVGFESpotLightElement: P.SvgElement, SVGFETileElement: P.SvgElement, SVGFETurbulenceElement: P.SvgElement, SVGFilterElement: P.SvgElement, SVGLinearGradientElement: P.SvgElement, SVGMarkerElement: P.SvgElement, SVGMaskElement: P.SvgElement, SVGMetadataElement: P.SvgElement, SVGPatternElement: P.SvgElement, SVGRadialGradientElement: P.SvgElement, SVGSetElement: P.SvgElement, SVGStopElement: P.SvgElement, SVGStyleElement: P.SvgElement, SVGSymbolElement: P.SvgElement, SVGTitleElement: P.SvgElement, SVGViewElement: P.SvgElement, SVGGradientElement: P.SvgElement, SVGComponentTransferFunctionElement: P.SvgElement, SVGFEDropShadowElement: P.SvgElement, SVGMPathElement: P.SvgElement, SVGElement: P.SvgElement, SVGSVGElement: P.SvgSvgElement, SVGTextPathElement: P.TextContentElement, SVGTextContentElement: P.TextContentElement, SVGTextElement: P.TextElement, SVGTSpanElement: P.TextPositioningElement, SVGTextPositioningElement: P.TextPositioningElement, AudioBuffer: P.AudioBuffer, AudioBufferSourceNode: P.AudioBufferSourceNode, AudioContext: P.AudioContext, webkitAudioContext: P.AudioContext, AnalyserNode: P.AudioNode, RealtimeAnalyserNode: P.AudioNode, AudioDestinationNode: P.AudioNode, AudioWorkletNode: P.AudioNode, ChannelMergerNode: P.AudioNode, AudioChannelMerger: P.AudioNode, ChannelSplitterNode: P.AudioNode, AudioChannelSplitter: P.AudioNode, ConvolverNode: P.AudioNode, IIRFilterNode: P.AudioNode, MediaElementAudioSourceNode: P.AudioNode, MediaStreamAudioDestinationNode: P.AudioNode, MediaStreamAudioSourceNode: P.AudioNode, PannerNode: P.AudioNode, AudioPannerNode: P.AudioNode, webkitAudioPannerNode: P.AudioNode, ScriptProcessorNode: P.AudioNode, JavaScriptAudioNode: P.AudioNode, WaveShaperNode: P.AudioNode, AudioNode: P.AudioNode, AudioParam: P.AudioParam, AudioProcessingEvent: P.AudioProcessingEvent, ConstantSourceNode: P.AudioScheduledSourceNode, AudioScheduledSourceNode: P.AudioScheduledSourceNode, BaseAudioContext: P.BaseAudioContext, BiquadFilterNode: P.BiquadFilterNode, DelayNode: P.DelayNode, DynamicsCompressorNode: P.DynamicsCompressorNode, GainNode: P.GainNode, AudioGainNode: P.GainNode, OfflineAudioContext: P.OfflineAudioContext, OscillatorNode: P.OscillatorNode, Oscillator: P.OscillatorNode, StereoPannerNode: P.StereoPannerNode});
-    hunkHelpers.setOrUpdateLeafTags({DOMError: true, DOMImplementation: true, MediaError: true, Navigator: true, NavigatorConcurrentHardware: true, NavigatorUserMediaError: true, OverconstrainedError: true, PositionError: true, PushMessageData: true, Range: true, SVGMatrix: true, SVGPoint: true, SQLError: true, ArrayBuffer: true, DataView: true, ArrayBufferView: false, Float64Array: true, Float32Array: true, Int16Array: true, Int32Array: true, Int8Array: true, Uint16Array: true, Uint32Array: true, Uint8ClampedArray: true, CanvasPixelArray: true, Uint8Array: false, HTMLBRElement: true, HTMLCanvasElement: true, HTMLContentElement: true, HTMLDListElement: true, HTMLDataElement: true, HTMLDataListElement: true, HTMLDetailsElement: true, HTMLDialogElement: true, HTMLEmbedElement: true, HTMLFieldSetElement: true, HTMLHRElement: true, HTMLHeadElement: true, HTMLHeadingElement: true, HTMLHtmlElement: true, HTMLIFrameElement: true, HTMLImageElement: true, HTMLLabelElement: true, HTMLLegendElement: true, HTMLLinkElement: true, HTMLMapElement: true, HTMLMenuElement: true, HTMLMetaElement: true, HTMLMeterElement: true, HTMLModElement: true, HTMLOListElement: true, HTMLObjectElement: true, HTMLOptGroupElement: true, HTMLOptionElement: true, HTMLOutputElement: true, HTMLParagraphElement: true, HTMLParamElement: true, HTMLPictureElement: true, HTMLProgressElement: true, HTMLQuoteElement: true, HTMLScriptElement: true, HTMLShadowElement: true, HTMLSlotElement: true, HTMLSourceElement: true, HTMLStyleElement: true, HTMLTableCaptionElement: true, HTMLTableCellElement: true, HTMLTableDataCellElement: true, HTMLTableHeaderCellElement: true, HTMLTableColElement: true, HTMLTimeElement: true, HTMLTitleElement: true, HTMLTrackElement: true, HTMLUnknownElement: true, HTMLDirectoryElement: true, HTMLFontElement: true, HTMLFrameElement: true, HTMLFrameSetElement: true, HTMLMarqueeElement: true, HTMLElement: false, HTMLAnchorElement: true, HTMLAreaElement: true, HTMLAudioElement: true, BackgroundFetchClickEvent: true, BackgroundFetchEvent: true, BackgroundFetchFailEvent: true, BackgroundFetchedEvent: true, HTMLBaseElement: true, BeforeUnloadEvent: true, Blob: false, BlobEvent: true, HTMLBodyElement: true, HTMLButtonElement: true, CDATASection: true, CharacterData: true, Comment: true, ProcessingInstruction: true, Text: true, CompositionEvent: true, CSSStyleDeclaration: true, MSStyleCSSProperties: true, CSS2Properties: true, HTMLDivElement: true, XMLDocument: true, Document: false, DocumentFragment: false, DOMException: true, DOMRectReadOnly: false, DOMTokenList: true, Element: false, AnimationEvent: true, AnimationPlaybackEvent: true, ApplicationCacheErrorEvent: true, BeforeInstallPromptEvent: true, ClipboardEvent: true, CloseEvent: true, CustomEvent: true, DeviceMotionEvent: true, DeviceOrientationEvent: true, ErrorEvent: true, FontFaceSetLoadEvent: true, GamepadEvent: true, HashChangeEvent: true, MediaEncryptedEvent: true, MediaKeyMessageEvent: true, MediaQueryListEvent: true, MediaStreamEvent: true, MediaStreamTrackEvent: true, MIDIConnectionEvent: true, MutationEvent: true, PageTransitionEvent: true, PaymentRequestUpdateEvent: true, PopStateEvent: true, PresentationConnectionAvailableEvent: true, PresentationConnectionCloseEvent: true, PromiseRejectionEvent: true, RTCDataChannelEvent: true, RTCDTMFToneChangeEvent: true, RTCPeerConnectionIceEvent: true, RTCTrackEvent: true, SecurityPolicyViolationEvent: true, SensorErrorEvent: true, SpeechRecognitionError: true, SpeechRecognitionEvent: true, SpeechSynthesisEvent: true, StorageEvent: true, TrackEvent: true, TransitionEvent: true, WebKitTransitionEvent: true, VRDeviceEvent: true, VRDisplayEvent: true, VRSessionEvent: true, MojoInterfaceRequestEvent: true, USBConnectionEvent: true, IDBVersionChangeEvent: true, OfflineAudioCompletionEvent: true, WebGLContextEvent: true, Event: false, InputEvent: false, SubmitEvent: false, Clipboard: true, EventTarget: false, AbortPaymentEvent: true, CanMakePaymentEvent: true, FetchEvent: true, ForeignFetchEvent: true, InstallEvent: true, NotificationEvent: true, PaymentRequestEvent: true, SyncEvent: true, ExtendableEvent: false, ExtendableMessageEvent: true, File: true, HTMLFormElement: true, HTMLCollection: true, HTMLFormControlsCollection: true, HTMLOptionsCollection: true, HTMLDocument: true, XMLHttpRequest: true, XMLHttpRequestEventTarget: false, ImageData: true, HTMLInputElement: true, KeyboardEvent: true, HTMLLIElement: true, Location: true, HTMLVideoElement: true, HTMLMediaElement: false, MessageEvent: true, MessagePort: true, MIDIMessageEvent: true, MouseEvent: true, DragEvent: true, PointerEvent: true, WheelEvent: true, DocumentType: true, Node: false, NodeList: true, RadioNodeList: true, HTMLPreElement: true, ProgressEvent: true, ResourceProgressEvent: true, PushEvent: true, HTMLSelectElement: true, ShadowRoot: true, HTMLSpanElement: true, Storage: true, HTMLTableElement: true, HTMLTableRowElement: true, HTMLTableSectionElement: true, HTMLTemplateElement: true, HTMLTextAreaElement: true, TextEvent: true, FocusEvent: true, TouchEvent: true, UIEvent: false, HTMLUListElement: true, WebSocket: true, Window: true, DOMWindow: true, Worker: true, DedicatedWorkerGlobalScope: true, ServiceWorkerGlobalScope: true, SharedWorkerGlobalScope: true, WorkerGlobalScope: true, Attr: true, ClientRect: true, DOMRect: true, NamedNodeMap: true, MozNamedAttrMap: true, IDBKeyRange: true, SVGCircleElement: true, SVGGElement: true, SVGEllipseElement: true, SVGPolygonElement: true, SVGPolylineElement: true, SVGGeometryElement: false, SVGAElement: true, SVGClipPathElement: true, SVGDefsElement: true, SVGForeignObjectElement: true, SVGSwitchElement: true, SVGUseElement: true, SVGGraphicsElement: false, SVGImageElement: true, SVGLineElement: true, SVGPathElement: true, SVGRectElement: true, SVGScriptElement: true, SVGAnimateElement: true, SVGAnimateMotionElement: true, SVGAnimateTransformElement: true, SVGAnimationElement: true, SVGDescElement: true, SVGDiscardElement: true, SVGFEBlendElement: true, SVGFEColorMatrixElement: true, SVGFEComponentTransferElement: true, SVGFECompositeElement: true, SVGFEConvolveMatrixElement: true, SVGFEDiffuseLightingElement: true, SVGFEDisplacementMapElement: true, SVGFEDistantLightElement: true, SVGFEFloodElement: true, SVGFEFuncAElement: true, SVGFEFuncBElement: true, SVGFEFuncGElement: true, SVGFEFuncRElement: true, SVGFEGaussianBlurElement: true, SVGFEImageElement: true, SVGFEMergeElement: true, SVGFEMergeNodeElement: true, SVGFEMorphologyElement: true, SVGFEOffsetElement: true, SVGFEPointLightElement: true, SVGFESpecularLightingElement: true, SVGFESpotLightElement: true, SVGFETileElement: true, SVGFETurbulenceElement: true, SVGFilterElement: true, SVGLinearGradientElement: true, SVGMarkerElement: true, SVGMaskElement: true, SVGMetadataElement: true, SVGPatternElement: true, SVGRadialGradientElement: true, SVGSetElement: true, SVGStopElement: true, SVGStyleElement: true, SVGSymbolElement: true, SVGTitleElement: true, SVGViewElement: true, SVGGradientElement: true, SVGComponentTransferFunctionElement: true, SVGFEDropShadowElement: true, SVGMPathElement: true, SVGElement: false, SVGSVGElement: true, SVGTextPathElement: true, SVGTextContentElement: false, SVGTextElement: true, SVGTSpanElement: true, SVGTextPositioningElement: false, AudioBuffer: true, AudioBufferSourceNode: true, AudioContext: true, webkitAudioContext: true, AnalyserNode: true, RealtimeAnalyserNode: true, AudioDestinationNode: true, AudioWorkletNode: true, ChannelMergerNode: true, AudioChannelMerger: true, ChannelSplitterNode: true, AudioChannelSplitter: true, ConvolverNode: true, IIRFilterNode: true, MediaElementAudioSourceNode: true, MediaStreamAudioDestinationNode: true, MediaStreamAudioSourceNode: true, PannerNode: true, AudioPannerNode: true, webkitAudioPannerNode: true, ScriptProcessorNode: true, JavaScriptAudioNode: true, WaveShaperNode: true, AudioNode: false, AudioParam: true, AudioProcessingEvent: true, ConstantSourceNode: true, AudioScheduledSourceNode: false, BaseAudioContext: false, BiquadFilterNode: true, DelayNode: true, DynamicsCompressorNode: true, GainNode: true, AudioGainNode: true, OfflineAudioContext: true, OscillatorNode: true, Oscillator: true, StereoPannerNode: true});
+    hunkHelpers.setOrUpdateInterceptorsByTag({AnimationEffectReadOnly: J.Interceptor, AnimationEffectTiming: J.Interceptor, AnimationEffectTimingReadOnly: J.Interceptor, AnimationTimeline: J.Interceptor, AnimationWorkletGlobalScope: J.Interceptor, AuthenticatorAssertionResponse: J.Interceptor, AuthenticatorAttestationResponse: J.Interceptor, AuthenticatorResponse: J.Interceptor, BackgroundFetchFetch: J.Interceptor, BackgroundFetchManager: J.Interceptor, BackgroundFetchSettledFetch: J.Interceptor, BarProp: J.Interceptor, BarcodeDetector: J.Interceptor, BluetoothRemoteGATTDescriptor: J.Interceptor, Body: J.Interceptor, BudgetState: J.Interceptor, CanvasGradient: J.Interceptor, CanvasPattern: J.Interceptor, CanvasRenderingContext2D: J.Interceptor, Clients: J.Interceptor, CookieStore: J.Interceptor, Coordinates: J.Interceptor, CredentialUserData: J.Interceptor, CredentialsContainer: J.Interceptor, Crypto: J.Interceptor, CryptoKey: J.Interceptor, CSS: J.Interceptor, CSSVariableReferenceValue: J.Interceptor, CustomElementRegistry: J.Interceptor, DataTransfer: J.Interceptor, DataTransferItem: J.Interceptor, DeprecatedStorageInfo: J.Interceptor, DeprecatedStorageQuota: J.Interceptor, DeprecationReport: J.Interceptor, DetectedBarcode: J.Interceptor, DetectedFace: J.Interceptor, DetectedText: J.Interceptor, DeviceAcceleration: J.Interceptor, DeviceRotationRate: J.Interceptor, DirectoryReader: J.Interceptor, DocumentOrShadowRoot: J.Interceptor, DocumentTimeline: J.Interceptor, DOMError: J.Interceptor, DOMImplementation: J.Interceptor, Iterator: J.Interceptor, DOMMatrix: J.Interceptor, DOMMatrixReadOnly: J.Interceptor, DOMParser: J.Interceptor, DOMPoint: J.Interceptor, DOMPointReadOnly: J.Interceptor, DOMQuad: J.Interceptor, DOMStringMap: J.Interceptor, External: J.Interceptor, FaceDetector: J.Interceptor, DOMFileSystem: J.Interceptor, FontFace: J.Interceptor, FontFaceSource: J.Interceptor, FormData: J.Interceptor, GamepadButton: J.Interceptor, GamepadPose: J.Interceptor, Geolocation: J.Interceptor, Position: J.Interceptor, Headers: J.Interceptor, HTMLHyperlinkElementUtils: J.Interceptor, IdleDeadline: J.Interceptor, ImageBitmap: J.Interceptor, ImageBitmapRenderingContext: J.Interceptor, ImageCapture: J.Interceptor, InputDeviceCapabilities: J.Interceptor, IntersectionObserver: J.Interceptor, IntersectionObserverEntry: J.Interceptor, InterventionReport: J.Interceptor, KeyframeEffect: J.Interceptor, KeyframeEffectReadOnly: J.Interceptor, MediaCapabilities: J.Interceptor, MediaCapabilitiesInfo: J.Interceptor, MediaDeviceInfo: J.Interceptor, MediaError: J.Interceptor, MediaKeyStatusMap: J.Interceptor, MediaKeySystemAccess: J.Interceptor, MediaKeys: J.Interceptor, MediaKeysPolicy: J.Interceptor, MediaMetadata: J.Interceptor, MediaSession: J.Interceptor, MediaSettingsRange: J.Interceptor, MemoryInfo: J.Interceptor, MessageChannel: J.Interceptor, Metadata: J.Interceptor, MutationObserver: J.Interceptor, WebKitMutationObserver: J.Interceptor, MutationRecord: J.Interceptor, NavigationPreloadManager: J.Interceptor, NavigatorAutomationInformation: J.Interceptor, NavigatorCookies: J.Interceptor, NodeFilter: J.Interceptor, NodeIterator: J.Interceptor, NonDocumentTypeChildNode: J.Interceptor, NonElementParentNode: J.Interceptor, NoncedElement: J.Interceptor, OffscreenCanvasRenderingContext2D: J.Interceptor, OverconstrainedError: J.Interceptor, PaintRenderingContext2D: J.Interceptor, PaintSize: J.Interceptor, PaintWorkletGlobalScope: J.Interceptor, Path2D: J.Interceptor, PaymentAddress: J.Interceptor, PaymentManager: J.Interceptor, PaymentResponse: J.Interceptor, PerformanceEntry: J.Interceptor, PerformanceLongTaskTiming: J.Interceptor, PerformanceMark: J.Interceptor, PerformanceMeasure: J.Interceptor, PerformanceNavigation: J.Interceptor, PerformanceNavigationTiming: J.Interceptor, PerformanceObserver: J.Interceptor, PerformanceObserverEntryList: J.Interceptor, PerformancePaintTiming: J.Interceptor, PerformanceResourceTiming: J.Interceptor, PerformanceServerTiming: J.Interceptor, PerformanceTiming: J.Interceptor, Permissions: J.Interceptor, PhotoCapabilities: J.Interceptor, PositionError: J.Interceptor, Presentation: J.Interceptor, PresentationReceiver: J.Interceptor, PushManager: J.Interceptor, PushMessageData: J.Interceptor, PushSubscription: J.Interceptor, PushSubscriptionOptions: J.Interceptor, Range: J.Interceptor, ReportBody: J.Interceptor, ReportingObserver: J.Interceptor, ResizeObserver: J.Interceptor, ResizeObserverEntry: J.Interceptor, RTCCertificate: J.Interceptor, RTCIceCandidate: J.Interceptor, mozRTCIceCandidate: J.Interceptor, RTCRtpContributingSource: J.Interceptor, RTCRtpReceiver: J.Interceptor, RTCRtpSender: J.Interceptor, RTCSessionDescription: J.Interceptor, mozRTCSessionDescription: J.Interceptor, RTCStatsResponse: J.Interceptor, Screen: J.Interceptor, ScrollState: J.Interceptor, ScrollTimeline: J.Interceptor, Selection: J.Interceptor, SharedArrayBuffer: J.Interceptor, SpeechRecognitionAlternative: J.Interceptor, SpeechSynthesisVoice: J.Interceptor, StaticRange: J.Interceptor, StorageManager: J.Interceptor, StyleMedia: J.Interceptor, StylePropertyMap: J.Interceptor, StylePropertyMapReadonly: J.Interceptor, SyncManager: J.Interceptor, TaskAttributionTiming: J.Interceptor, TextDetector: J.Interceptor, TextMetrics: J.Interceptor, TrackDefault: J.Interceptor, TreeWalker: J.Interceptor, TrustedHTML: J.Interceptor, TrustedScriptURL: J.Interceptor, TrustedURL: J.Interceptor, UnderlyingSourceBase: J.Interceptor, URLSearchParams: J.Interceptor, VRCoordinateSystem: J.Interceptor, VRDisplayCapabilities: J.Interceptor, VREyeParameters: J.Interceptor, VRFrameData: J.Interceptor, VRFrameOfReference: J.Interceptor, VRPose: J.Interceptor, VRStageBounds: J.Interceptor, VRStageBoundsPoint: J.Interceptor, VRStageParameters: J.Interceptor, ValidityState: J.Interceptor, VideoPlaybackQuality: J.Interceptor, WorkletAnimation: J.Interceptor, WorkletGlobalScope: J.Interceptor, XPathEvaluator: J.Interceptor, XPathExpression: J.Interceptor, XPathNSResolver: J.Interceptor, XPathResult: J.Interceptor, XMLSerializer: J.Interceptor, XSLTProcessor: J.Interceptor, Bluetooth: J.Interceptor, BluetoothCharacteristicProperties: J.Interceptor, BluetoothRemoteGATTServer: J.Interceptor, BluetoothRemoteGATTService: J.Interceptor, BluetoothUUID: J.Interceptor, BudgetService: J.Interceptor, Cache: J.Interceptor, DOMFileSystemSync: J.Interceptor, DirectoryEntrySync: J.Interceptor, DirectoryReaderSync: J.Interceptor, EntrySync: J.Interceptor, FileEntrySync: J.Interceptor, FileReaderSync: J.Interceptor, FileWriterSync: J.Interceptor, HTMLAllCollection: J.Interceptor, Mojo: J.Interceptor, MojoHandle: J.Interceptor, MojoWatcher: J.Interceptor, NFC: J.Interceptor, PagePopupController: J.Interceptor, Report: J.Interceptor, Request: J.Interceptor, Response: J.Interceptor, SubtleCrypto: J.Interceptor, USBAlternateInterface: J.Interceptor, USBConfiguration: J.Interceptor, USBDevice: J.Interceptor, USBEndpoint: J.Interceptor, USBInTransferResult: J.Interceptor, USBInterface: J.Interceptor, USBIsochronousInTransferPacket: J.Interceptor, USBIsochronousInTransferResult: J.Interceptor, USBIsochronousOutTransferPacket: J.Interceptor, USBIsochronousOutTransferResult: J.Interceptor, USBOutTransferResult: J.Interceptor, WorkerLocation: J.Interceptor, Worklet: J.Interceptor, IDBCursor: J.Interceptor, IDBCursorWithValue: J.Interceptor, IDBFactory: J.Interceptor, IDBIndex: J.Interceptor, IDBObjectStore: J.Interceptor, IDBObservation: J.Interceptor, IDBObserver: J.Interceptor, IDBObserverChanges: J.Interceptor, SVGAngle: J.Interceptor, SVGAnimatedAngle: J.Interceptor, SVGAnimatedBoolean: J.Interceptor, SVGAnimatedEnumeration: J.Interceptor, SVGAnimatedInteger: J.Interceptor, SVGAnimatedLength: J.Interceptor, SVGAnimatedLengthList: J.Interceptor, SVGAnimatedNumber: J.Interceptor, SVGAnimatedNumberList: J.Interceptor, SVGAnimatedPreserveAspectRatio: J.Interceptor, SVGAnimatedRect: J.Interceptor, SVGAnimatedString: J.Interceptor, SVGAnimatedTransformList: J.Interceptor, SVGMatrix: J.Interceptor, SVGPoint: J.Interceptor, SVGPreserveAspectRatio: J.Interceptor, SVGRect: J.Interceptor, SVGUnitTypes: J.Interceptor, AudioListener: J.Interceptor, AudioWorkletGlobalScope: J.Interceptor, AudioWorkletProcessor: J.Interceptor, PeriodicWave: J.Interceptor, WebGLActiveInfo: J.Interceptor, ANGLEInstancedArrays: J.Interceptor, ANGLE_instanced_arrays: J.Interceptor, WebGLBuffer: J.Interceptor, WebGLCanvas: J.Interceptor, WebGLColorBufferFloat: J.Interceptor, WebGLCompressedTextureASTC: J.Interceptor, WebGLCompressedTextureATC: J.Interceptor, WEBGL_compressed_texture_atc: J.Interceptor, WebGLCompressedTextureETC1: J.Interceptor, WEBGL_compressed_texture_etc1: J.Interceptor, WebGLCompressedTextureETC: J.Interceptor, WebGLCompressedTexturePVRTC: J.Interceptor, WEBGL_compressed_texture_pvrtc: J.Interceptor, WebGLCompressedTextureS3TC: J.Interceptor, WEBGL_compressed_texture_s3tc: J.Interceptor, WebGLCompressedTextureS3TCsRGB: J.Interceptor, WebGLDebugRendererInfo: J.Interceptor, WEBGL_debug_renderer_info: J.Interceptor, WebGLDebugShaders: J.Interceptor, WEBGL_debug_shaders: J.Interceptor, WebGLDepthTexture: J.Interceptor, WEBGL_depth_texture: J.Interceptor, WebGLDrawBuffers: J.Interceptor, WEBGL_draw_buffers: J.Interceptor, EXTsRGB: J.Interceptor, EXT_sRGB: J.Interceptor, EXTBlendMinMax: J.Interceptor, EXT_blend_minmax: J.Interceptor, EXTColorBufferFloat: J.Interceptor, EXTColorBufferHalfFloat: J.Interceptor, EXTDisjointTimerQuery: J.Interceptor, EXTDisjointTimerQueryWebGL2: J.Interceptor, EXTFragDepth: J.Interceptor, EXT_frag_depth: J.Interceptor, EXTShaderTextureLOD: J.Interceptor, EXT_shader_texture_lod: J.Interceptor, EXTTextureFilterAnisotropic: J.Interceptor, EXT_texture_filter_anisotropic: J.Interceptor, WebGLFramebuffer: J.Interceptor, WebGLGetBufferSubDataAsync: J.Interceptor, WebGLLoseContext: J.Interceptor, WebGLExtensionLoseContext: J.Interceptor, WEBGL_lose_context: J.Interceptor, OESElementIndexUint: J.Interceptor, OES_element_index_uint: J.Interceptor, OESStandardDerivatives: J.Interceptor, OES_standard_derivatives: J.Interceptor, OESTextureFloat: J.Interceptor, OES_texture_float: J.Interceptor, OESTextureFloatLinear: J.Interceptor, OES_texture_float_linear: J.Interceptor, OESTextureHalfFloat: J.Interceptor, OES_texture_half_float: J.Interceptor, OESTextureHalfFloatLinear: J.Interceptor, OES_texture_half_float_linear: J.Interceptor, OESVertexArrayObject: J.Interceptor, OES_vertex_array_object: J.Interceptor, WebGLProgram: J.Interceptor, WebGLQuery: J.Interceptor, WebGLRenderbuffer: J.Interceptor, WebGLRenderingContext: J.Interceptor, WebGL2RenderingContext: J.Interceptor, WebGLSampler: J.Interceptor, WebGLShader: J.Interceptor, WebGLShaderPrecisionFormat: J.Interceptor, WebGLSync: J.Interceptor, WebGLTexture: J.Interceptor, WebGLTimerQueryEXT: J.Interceptor, WebGLTransformFeedback: J.Interceptor, WebGLUniformLocation: J.Interceptor, WebGLVertexArrayObject: J.Interceptor, WebGLVertexArrayObjectOES: J.Interceptor, WebGL: J.Interceptor, WebGL2RenderingContextBase: J.Interceptor, Database: J.Interceptor, SQLError: J.Interceptor, SQLResultSet: J.Interceptor, SQLTransaction: J.Interceptor, ArrayBuffer: H.NativeByteBuffer, DataView: H.NativeTypedData, ArrayBufferView: H.NativeTypedData, Float64Array: H.NativeTypedArrayOfDouble, Float32Array: H.NativeFloat32List, Int16Array: H.NativeInt16List, Int32Array: H.NativeInt32List, Int8Array: H.NativeInt8List, Uint16Array: H.NativeUint16List, Uint32Array: H.NativeUint32List, Uint8ClampedArray: H.NativeUint8ClampedList, CanvasPixelArray: H.NativeUint8ClampedList, Uint8Array: H.NativeUint8List, HTMLBRElement: W.HtmlElement, HTMLCanvasElement: W.HtmlElement, HTMLContentElement: W.HtmlElement, HTMLDListElement: W.HtmlElement, HTMLDataElement: W.HtmlElement, HTMLDataListElement: W.HtmlElement, HTMLDetailsElement: W.HtmlElement, HTMLDialogElement: W.HtmlElement, HTMLEmbedElement: W.HtmlElement, HTMLFieldSetElement: W.HtmlElement, HTMLHRElement: W.HtmlElement, HTMLHeadElement: W.HtmlElement, HTMLHeadingElement: W.HtmlElement, HTMLHtmlElement: W.HtmlElement, HTMLIFrameElement: W.HtmlElement, HTMLImageElement: W.HtmlElement, HTMLLabelElement: W.HtmlElement, HTMLLegendElement: W.HtmlElement, HTMLLinkElement: W.HtmlElement, HTMLMapElement: W.HtmlElement, HTMLMenuElement: W.HtmlElement, HTMLMetaElement: W.HtmlElement, HTMLMeterElement: W.HtmlElement, HTMLModElement: W.HtmlElement, HTMLOListElement: W.HtmlElement, HTMLObjectElement: W.HtmlElement, HTMLOptGroupElement: W.HtmlElement, HTMLOptionElement: W.HtmlElement, HTMLOutputElement: W.HtmlElement, HTMLParagraphElement: W.HtmlElement, HTMLParamElement: W.HtmlElement, HTMLPictureElement: W.HtmlElement, HTMLProgressElement: W.HtmlElement, HTMLQuoteElement: W.HtmlElement, HTMLScriptElement: W.HtmlElement, HTMLShadowElement: W.HtmlElement, HTMLSlotElement: W.HtmlElement, HTMLSourceElement: W.HtmlElement, HTMLStyleElement: W.HtmlElement, HTMLTableCaptionElement: W.HtmlElement, HTMLTableCellElement: W.HtmlElement, HTMLTableDataCellElement: W.HtmlElement, HTMLTableHeaderCellElement: W.HtmlElement, HTMLTableColElement: W.HtmlElement, HTMLTimeElement: W.HtmlElement, HTMLTitleElement: W.HtmlElement, HTMLTrackElement: W.HtmlElement, HTMLUnknownElement: W.HtmlElement, HTMLDirectoryElement: W.HtmlElement, HTMLFontElement: W.HtmlElement, HTMLFrameElement: W.HtmlElement, HTMLFrameSetElement: W.HtmlElement, HTMLMarqueeElement: W.HtmlElement, HTMLElement: W.HtmlElement, AccessibleNodeList: W.AccessibleNodeList, HTMLAnchorElement: W.AnchorElement, Animation: W.Animation, HTMLAreaElement: W.AreaElement, HTMLAudioElement: W.AudioElement, BackgroundFetchClickEvent: W.BackgroundFetchEvent, BackgroundFetchEvent: W.BackgroundFetchEvent, BackgroundFetchFailEvent: W.BackgroundFetchEvent, BackgroundFetchedEvent: W.BackgroundFetchEvent, BackgroundFetchRegistration: W.BackgroundFetchRegistration, HTMLBaseElement: W.BaseElement, BeforeUnloadEvent: W.BeforeUnloadEvent, Blob: W.Blob, BlobEvent: W.BlobEvent, HTMLBodyElement: W.BodyElement, HTMLButtonElement: W.ButtonElement, CacheStorage: W.CacheStorage, CDATASection: W.CharacterData, CharacterData: W.CharacterData, Comment: W.CharacterData, ProcessingInstruction: W.CharacterData, Text: W.CharacterData, Client: W.Client, WindowClient: W.Client, CompositionEvent: W.CompositionEvent, Credential: W.Credential, FederatedCredential: W.Credential, PasswordCredential: W.Credential, PublicKeyCredential: W.Credential, CSSPerspective: W.CssPerspective, CSSCharsetRule: W.CssRule, CSSConditionRule: W.CssRule, CSSFontFaceRule: W.CssRule, CSSGroupingRule: W.CssRule, CSSImportRule: W.CssRule, CSSKeyframeRule: W.CssRule, MozCSSKeyframeRule: W.CssRule, WebKitCSSKeyframeRule: W.CssRule, CSSKeyframesRule: W.CssRule, MozCSSKeyframesRule: W.CssRule, WebKitCSSKeyframesRule: W.CssRule, CSSMediaRule: W.CssRule, CSSNamespaceRule: W.CssRule, CSSPageRule: W.CssRule, CSSRule: W.CssRule, CSSStyleRule: W.CssRule, CSSSupportsRule: W.CssRule, CSSViewportRule: W.CssRule, CSSStyleDeclaration: W.CssStyleDeclaration, MSStyleCSSProperties: W.CssStyleDeclaration, CSS2Properties: W.CssStyleDeclaration, CSSImageValue: W.CssStyleValue, CSSKeywordValue: W.CssStyleValue, CSSNumericValue: W.CssStyleValue, CSSPositionValue: W.CssStyleValue, CSSResourceValue: W.CssStyleValue, CSSUnitValue: W.CssStyleValue, CSSURLImageValue: W.CssStyleValue, CSSStyleValue: W.CssStyleValue, CSSMatrixComponent: W.CssTransformComponent, CSSRotation: W.CssTransformComponent, CSSScale: W.CssTransformComponent, CSSSkew: W.CssTransformComponent, CSSTranslation: W.CssTransformComponent, CSSTransformComponent: W.CssTransformComponent, CSSTransformValue: W.CssTransformValue, CSSUnparsedValue: W.CssUnparsedValue, DataTransferItemList: W.DataTransferItemList, HTMLDivElement: W.DivElement, XMLDocument: W.Document, Document: W.Document, DocumentFragment: W.DocumentFragment, DOMException: W.DomException, ClientRectList: W.DomRectList, DOMRectList: W.DomRectList, DOMRectReadOnly: W.DomRectReadOnly, DOMStringList: W.DomStringList, DOMTokenList: W.DomTokenList, Element: W.Element, DirectoryEntry: W.Entry, Entry: W.Entry, FileEntry: W.Entry, AnimationEvent: W.Event, AnimationPlaybackEvent: W.Event, ApplicationCacheErrorEvent: W.Event, BeforeInstallPromptEvent: W.Event, ClipboardEvent: W.Event, CloseEvent: W.Event, CustomEvent: W.Event, DeviceMotionEvent: W.Event, DeviceOrientationEvent: W.Event, ErrorEvent: W.Event, FontFaceSetLoadEvent: W.Event, GamepadEvent: W.Event, HashChangeEvent: W.Event, MediaEncryptedEvent: W.Event, MediaKeyMessageEvent: W.Event, MediaQueryListEvent: W.Event, MediaStreamEvent: W.Event, MediaStreamTrackEvent: W.Event, MIDIConnectionEvent: W.Event, MutationEvent: W.Event, PageTransitionEvent: W.Event, PaymentRequestUpdateEvent: W.Event, PopStateEvent: W.Event, PresentationConnectionAvailableEvent: W.Event, PresentationConnectionCloseEvent: W.Event, PromiseRejectionEvent: W.Event, RTCDataChannelEvent: W.Event, RTCDTMFToneChangeEvent: W.Event, RTCPeerConnectionIceEvent: W.Event, RTCTrackEvent: W.Event, SecurityPolicyViolationEvent: W.Event, SensorErrorEvent: W.Event, SpeechRecognitionError: W.Event, SpeechRecognitionEvent: W.Event, SpeechSynthesisEvent: W.Event, StorageEvent: W.Event, TrackEvent: W.Event, TransitionEvent: W.Event, WebKitTransitionEvent: W.Event, VRDeviceEvent: W.Event, VRDisplayEvent: W.Event, VRSessionEvent: W.Event, MojoInterfaceRequestEvent: W.Event, USBConnectionEvent: W.Event, OfflineAudioCompletionEvent: W.Event, WebGLContextEvent: W.Event, Event: W.Event, InputEvent: W.Event, SubmitEvent: W.Event, AbsoluteOrientationSensor: W.EventTarget, Accelerometer: W.EventTarget, AccessibleNode: W.EventTarget, AmbientLightSensor: W.EventTarget, ApplicationCache: W.EventTarget, DOMApplicationCache: W.EventTarget, OfflineResourceList: W.EventTarget, BatteryManager: W.EventTarget, BroadcastChannel: W.EventTarget, EventSource: W.EventTarget, FontFaceSet: W.EventTarget, Gyroscope: W.EventTarget, LinearAccelerationSensor: W.EventTarget, Magnetometer: W.EventTarget, MediaDevices: W.EventTarget, MediaQueryList: W.EventTarget, MediaRecorder: W.EventTarget, MediaSource: W.EventTarget, MIDIAccess: W.EventTarget, NetworkInformation: W.EventTarget, Notification: W.EventTarget, OffscreenCanvas: W.EventTarget, OrientationSensor: W.EventTarget, Performance: W.EventTarget, PermissionStatus: W.EventTarget, PresentationAvailability: W.EventTarget, PresentationConnectionList: W.EventTarget, PresentationRequest: W.EventTarget, RelativeOrientationSensor: W.EventTarget, RemotePlayback: W.EventTarget, RTCDTMFSender: W.EventTarget, RTCPeerConnection: W.EventTarget, webkitRTCPeerConnection: W.EventTarget, mozRTCPeerConnection: W.EventTarget, ScreenOrientation: W.EventTarget, Sensor: W.EventTarget, ServiceWorker: W.EventTarget, ServiceWorkerContainer: W.EventTarget, ServiceWorkerRegistration: W.EventTarget, SharedWorker: W.EventTarget, SpeechRecognition: W.EventTarget, SpeechSynthesis: W.EventTarget, SpeechSynthesisUtterance: W.EventTarget, VR: W.EventTarget, VRDevice: W.EventTarget, VRDisplay: W.EventTarget, VRSession: W.EventTarget, VisualViewport: W.EventTarget, WorkerPerformance: W.EventTarget, BluetoothDevice: W.EventTarget, BluetoothRemoteGATTCharacteristic: W.EventTarget, Clipboard: W.EventTarget, MojoInterfaceInterceptor: W.EventTarget, USB: W.EventTarget, IDBDatabase: W.EventTarget, IDBOpenDBRequest: W.EventTarget, IDBVersionChangeRequest: W.EventTarget, IDBRequest: W.EventTarget, IDBTransaction: W.EventTarget, EventTarget: W.EventTarget, AbortPaymentEvent: W.ExtendableEvent, CanMakePaymentEvent: W.ExtendableEvent, FetchEvent: W.ExtendableEvent, ForeignFetchEvent: W.ExtendableEvent, InstallEvent: W.ExtendableEvent, NotificationEvent: W.ExtendableEvent, PaymentRequestEvent: W.ExtendableEvent, SyncEvent: W.ExtendableEvent, ExtendableEvent: W.ExtendableEvent, ExtendableMessageEvent: W.ExtendableMessageEvent, File: W.File, FileList: W.FileList, FileReader: W.FileReader, FileWriter: W.FileWriter, HTMLFormElement: W.FormElement, Gamepad: W.Gamepad, History: W.History, HTMLCollection: W.HtmlCollection, HTMLFormControlsCollection: W.HtmlCollection, HTMLOptionsCollection: W.HtmlCollection, HTMLDocument: W.HtmlDocument, XMLHttpRequest: W.HttpRequest, XMLHttpRequestUpload: W.HttpRequestEventTarget, XMLHttpRequestEventTarget: W.HttpRequestEventTarget, ImageData: W.ImageData, HTMLInputElement: W.InputElement, KeyboardEvent: W.KeyboardEvent, HTMLLIElement: W.LIElement, Location: W.Location, HTMLVideoElement: W.MediaElement, HTMLMediaElement: W.MediaElement, MediaKeySession: W.MediaKeySession, MediaList: W.MediaList, MediaStream: W.MediaStream, CanvasCaptureMediaStreamTrack: W.MediaStreamTrack, MediaStreamTrack: W.MediaStreamTrack, MessageEvent: W.MessageEvent, MessagePort: W.MessagePort, MIDIInputMap: W.MidiInputMap, MIDIMessageEvent: W.MidiMessageEvent, MIDIOutputMap: W.MidiOutputMap, MIDIInput: W.MidiPort, MIDIOutput: W.MidiPort, MIDIPort: W.MidiPort, MimeType: W.MimeType, MimeTypeArray: W.MimeTypeArray, MouseEvent: W.MouseEvent, DragEvent: W.MouseEvent, PointerEvent: W.MouseEvent, WheelEvent: W.MouseEvent, Navigator: W.Navigator, WorkerNavigator: W.NavigatorConcurrentHardware, NavigatorConcurrentHardware: W.NavigatorConcurrentHardware, NavigatorUserMediaError: W.NavigatorUserMediaError, DocumentType: W.Node, Node: W.Node, NodeList: W.NodeList, RadioNodeList: W.NodeList, PaymentInstruments: W.PaymentInstruments, PaymentRequest: W.PaymentRequest, Plugin: W.Plugin, PluginArray: W.PluginArray, HTMLPreElement: W.PreElement, PresentationConnection: W.PresentationConnection, ProgressEvent: W.ProgressEvent, ResourceProgressEvent: W.ProgressEvent, PushEvent: W.PushEvent, RelatedApplication: W.RelatedApplication, RTCDataChannel: W.RtcDataChannel, DataChannel: W.RtcDataChannel, RTCLegacyStatsReport: W.RtcLegacyStatsReport, RTCStatsReport: W.RtcStatsReport, HTMLSelectElement: W.SelectElement, ShadowRoot: W.ShadowRoot, SourceBuffer: W.SourceBuffer, SourceBufferList: W.SourceBufferList, HTMLSpanElement: W.SpanElement, SpeechGrammar: W.SpeechGrammar, SpeechGrammarList: W.SpeechGrammarList, SpeechRecognitionResult: W.SpeechRecognitionResult, Storage: W.Storage, CSSStyleSheet: W.StyleSheet, StyleSheet: W.StyleSheet, HTMLTableElement: W.TableElement, HTMLTableRowElement: W.TableRowElement, HTMLTableSectionElement: W.TableSectionElement, HTMLTemplateElement: W.TemplateElement, HTMLTextAreaElement: W.TextAreaElement, TextEvent: W.TextEvent, TextTrack: W.TextTrack, TextTrackCue: W.TextTrackCue, VTTCue: W.TextTrackCue, TextTrackCueList: W.TextTrackCueList, TextTrackList: W.TextTrackList, TimeRanges: W.TimeRanges, Touch: W.Touch, TouchList: W.TouchList, TrackDefaultList: W.TrackDefaultList, FocusEvent: W.UIEvent, TouchEvent: W.UIEvent, UIEvent: W.UIEvent, HTMLUListElement: W.UListElement, URL: W.Url, VideoTrack: W.VideoTrack, VideoTrackList: W.VideoTrackList, VTTRegion: W.VttRegion, WebSocket: W.WebSocket, Window: W.Window, DOMWindow: W.Window, Worker: W.Worker, DedicatedWorkerGlobalScope: W.WorkerGlobalScope, ServiceWorkerGlobalScope: W.WorkerGlobalScope, SharedWorkerGlobalScope: W.WorkerGlobalScope, WorkerGlobalScope: W.WorkerGlobalScope, Attr: W._Attr, CSSRuleList: W._CssRuleList, ClientRect: W._DomRect, DOMRect: W._DomRect, GamepadList: W._GamepadList, NamedNodeMap: W._NamedNodeMap, MozNamedAttrMap: W._NamedNodeMap, SpeechRecognitionResultList: W._SpeechRecognitionResultList, StyleSheetList: W._StyleSheetList, IDBKeyRange: P.KeyRange, IDBVersionChangeEvent: P.VersionChangeEvent, SVGCircleElement: P.CircleElement, SVGGElement: P.GElement, SVGEllipseElement: P.GeometryElement, SVGPolygonElement: P.GeometryElement, SVGPolylineElement: P.GeometryElement, SVGGeometryElement: P.GeometryElement, SVGAElement: P.GraphicsElement, SVGClipPathElement: P.GraphicsElement, SVGDefsElement: P.GraphicsElement, SVGForeignObjectElement: P.GraphicsElement, SVGSwitchElement: P.GraphicsElement, SVGUseElement: P.GraphicsElement, SVGGraphicsElement: P.GraphicsElement, SVGImageElement: P.ImageElement0, SVGLength: P.Length, SVGLengthList: P.LengthList, SVGLineElement: P.LineElement, SVGNumber: P.Number, SVGNumberList: P.NumberList, SVGPathElement: P.PathElement, SVGPointList: P.PointList, SVGRectElement: P.RectElement, SVGScriptElement: P.ScriptElement0, SVGStringList: P.StringList, SVGAnimateElement: P.SvgElement, SVGAnimateMotionElement: P.SvgElement, SVGAnimateTransformElement: P.SvgElement, SVGAnimationElement: P.SvgElement, SVGDescElement: P.SvgElement, SVGDiscardElement: P.SvgElement, SVGFEBlendElement: P.SvgElement, SVGFEColorMatrixElement: P.SvgElement, SVGFEComponentTransferElement: P.SvgElement, SVGFECompositeElement: P.SvgElement, SVGFEConvolveMatrixElement: P.SvgElement, SVGFEDiffuseLightingElement: P.SvgElement, SVGFEDisplacementMapElement: P.SvgElement, SVGFEDistantLightElement: P.SvgElement, SVGFEFloodElement: P.SvgElement, SVGFEFuncAElement: P.SvgElement, SVGFEFuncBElement: P.SvgElement, SVGFEFuncGElement: P.SvgElement, SVGFEFuncRElement: P.SvgElement, SVGFEGaussianBlurElement: P.SvgElement, SVGFEImageElement: P.SvgElement, SVGFEMergeElement: P.SvgElement, SVGFEMergeNodeElement: P.SvgElement, SVGFEMorphologyElement: P.SvgElement, SVGFEOffsetElement: P.SvgElement, SVGFEPointLightElement: P.SvgElement, SVGFESpecularLightingElement: P.SvgElement, SVGFESpotLightElement: P.SvgElement, SVGFETileElement: P.SvgElement, SVGFETurbulenceElement: P.SvgElement, SVGFilterElement: P.SvgElement, SVGLinearGradientElement: P.SvgElement, SVGMarkerElement: P.SvgElement, SVGMaskElement: P.SvgElement, SVGMetadataElement: P.SvgElement, SVGPatternElement: P.SvgElement, SVGRadialGradientElement: P.SvgElement, SVGSetElement: P.SvgElement, SVGStopElement: P.SvgElement, SVGStyleElement: P.SvgElement, SVGSymbolElement: P.SvgElement, SVGTitleElement: P.SvgElement, SVGViewElement: P.SvgElement, SVGGradientElement: P.SvgElement, SVGComponentTransferFunctionElement: P.SvgElement, SVGFEDropShadowElement: P.SvgElement, SVGMPathElement: P.SvgElement, SVGElement: P.SvgElement, SVGSVGElement: P.SvgSvgElement, SVGTextPathElement: P.TextContentElement, SVGTextContentElement: P.TextContentElement, SVGTextElement: P.TextElement, SVGTSpanElement: P.TextPositioningElement, SVGTextPositioningElement: P.TextPositioningElement, SVGTransform: P.Transform, SVGTransformList: P.TransformList, AnalyserNode: P.AnalyserNode, RealtimeAnalyserNode: P.AnalyserNode, AudioBuffer: P.AudioBuffer, AudioBufferSourceNode: P.AudioBufferSourceNode, AudioContext: P.AudioContext, webkitAudioContext: P.AudioContext, AudioDestinationNode: P.AudioNode, AudioWorkletNode: P.AudioNode, ChannelMergerNode: P.AudioNode, AudioChannelMerger: P.AudioNode, ChannelSplitterNode: P.AudioNode, AudioChannelSplitter: P.AudioNode, IIRFilterNode: P.AudioNode, MediaElementAudioSourceNode: P.AudioNode, MediaStreamAudioDestinationNode: P.AudioNode, PannerNode: P.AudioNode, AudioPannerNode: P.AudioNode, webkitAudioPannerNode: P.AudioNode, WaveShaperNode: P.AudioNode, AudioNode: P.AudioNode, AudioParam: P.AudioParam, AudioParamMap: P.AudioParamMap, AudioProcessingEvent: P.AudioProcessingEvent, ConstantSourceNode: P.AudioScheduledSourceNode, AudioScheduledSourceNode: P.AudioScheduledSourceNode, AudioTrack: P.AudioTrack, AudioTrackList: P.AudioTrackList, BaseAudioContext: P.BaseAudioContext, BiquadFilterNode: P.BiquadFilterNode, ConvolverNode: P.ConvolverNode, DelayNode: P.DelayNode, DynamicsCompressorNode: P.DynamicsCompressorNode, GainNode: P.GainNode, AudioGainNode: P.GainNode, MediaStreamAudioSourceNode: P.MediaStreamAudioSourceNode, OfflineAudioContext: P.OfflineAudioContext, OscillatorNode: P.OscillatorNode, Oscillator: P.OscillatorNode, ScriptProcessorNode: P.ScriptProcessorNode, JavaScriptAudioNode: P.ScriptProcessorNode, StereoPannerNode: P.StereoPannerNode, SQLResultSetRowList: P.SqlResultSetRowList});
+    hunkHelpers.setOrUpdateLeafTags({AnimationEffectReadOnly: true, AnimationEffectTiming: true, AnimationEffectTimingReadOnly: true, AnimationTimeline: true, AnimationWorkletGlobalScope: true, AuthenticatorAssertionResponse: true, AuthenticatorAttestationResponse: true, AuthenticatorResponse: true, BackgroundFetchFetch: true, BackgroundFetchManager: true, BackgroundFetchSettledFetch: true, BarProp: true, BarcodeDetector: true, BluetoothRemoteGATTDescriptor: true, Body: true, BudgetState: true, CanvasGradient: true, CanvasPattern: true, CanvasRenderingContext2D: true, Clients: true, CookieStore: true, Coordinates: true, CredentialUserData: true, CredentialsContainer: true, Crypto: true, CryptoKey: true, CSS: true, CSSVariableReferenceValue: true, CustomElementRegistry: true, DataTransfer: true, DataTransferItem: true, DeprecatedStorageInfo: true, DeprecatedStorageQuota: true, DeprecationReport: true, DetectedBarcode: true, DetectedFace: true, DetectedText: true, DeviceAcceleration: true, DeviceRotationRate: true, DirectoryReader: true, DocumentOrShadowRoot: true, DocumentTimeline: true, DOMError: true, DOMImplementation: true, Iterator: true, DOMMatrix: true, DOMMatrixReadOnly: true, DOMParser: true, DOMPoint: true, DOMPointReadOnly: true, DOMQuad: true, DOMStringMap: true, External: true, FaceDetector: true, DOMFileSystem: true, FontFace: true, FontFaceSource: true, FormData: true, GamepadButton: true, GamepadPose: true, Geolocation: true, Position: true, Headers: true, HTMLHyperlinkElementUtils: true, IdleDeadline: true, ImageBitmap: true, ImageBitmapRenderingContext: true, ImageCapture: true, InputDeviceCapabilities: true, IntersectionObserver: true, IntersectionObserverEntry: true, InterventionReport: true, KeyframeEffect: true, KeyframeEffectReadOnly: true, MediaCapabilities: true, MediaCapabilitiesInfo: true, MediaDeviceInfo: true, MediaError: true, MediaKeyStatusMap: true, MediaKeySystemAccess: true, MediaKeys: true, MediaKeysPolicy: true, MediaMetadata: true, MediaSession: true, MediaSettingsRange: true, MemoryInfo: true, MessageChannel: true, Metadata: true, MutationObserver: true, WebKitMutationObserver: true, MutationRecord: true, NavigationPreloadManager: true, NavigatorAutomationInformation: true, NavigatorCookies: true, NodeFilter: true, NodeIterator: true, NonDocumentTypeChildNode: true, NonElementParentNode: true, NoncedElement: true, OffscreenCanvasRenderingContext2D: true, OverconstrainedError: true, PaintRenderingContext2D: true, PaintSize: true, PaintWorkletGlobalScope: true, Path2D: true, PaymentAddress: true, PaymentManager: true, PaymentResponse: true, PerformanceEntry: true, PerformanceLongTaskTiming: true, PerformanceMark: true, PerformanceMeasure: true, PerformanceNavigation: true, PerformanceNavigationTiming: true, PerformanceObserver: true, PerformanceObserverEntryList: true, PerformancePaintTiming: true, PerformanceResourceTiming: true, PerformanceServerTiming: true, PerformanceTiming: true, Permissions: true, PhotoCapabilities: true, PositionError: true, Presentation: true, PresentationReceiver: true, PushManager: true, PushMessageData: true, PushSubscription: true, PushSubscriptionOptions: true, Range: true, ReportBody: true, ReportingObserver: true, ResizeObserver: true, ResizeObserverEntry: true, RTCCertificate: true, RTCIceCandidate: true, mozRTCIceCandidate: true, RTCRtpContributingSource: true, RTCRtpReceiver: true, RTCRtpSender: true, RTCSessionDescription: true, mozRTCSessionDescription: true, RTCStatsResponse: true, Screen: true, ScrollState: true, ScrollTimeline: true, Selection: true, SharedArrayBuffer: true, SpeechRecognitionAlternative: true, SpeechSynthesisVoice: true, StaticRange: true, StorageManager: true, StyleMedia: true, StylePropertyMap: true, StylePropertyMapReadonly: true, SyncManager: true, TaskAttributionTiming: true, TextDetector: true, TextMetrics: true, TrackDefault: true, TreeWalker: true, TrustedHTML: true, TrustedScriptURL: true, TrustedURL: true, UnderlyingSourceBase: true, URLSearchParams: true, VRCoordinateSystem: true, VRDisplayCapabilities: true, VREyeParameters: true, VRFrameData: true, VRFrameOfReference: true, VRPose: true, VRStageBounds: true, VRStageBoundsPoint: true, VRStageParameters: true, ValidityState: true, VideoPlaybackQuality: true, WorkletAnimation: true, WorkletGlobalScope: true, XPathEvaluator: true, XPathExpression: true, XPathNSResolver: true, XPathResult: true, XMLSerializer: true, XSLTProcessor: true, Bluetooth: true, BluetoothCharacteristicProperties: true, BluetoothRemoteGATTServer: true, BluetoothRemoteGATTService: true, BluetoothUUID: true, BudgetService: true, Cache: true, DOMFileSystemSync: true, DirectoryEntrySync: true, DirectoryReaderSync: true, EntrySync: true, FileEntrySync: true, FileReaderSync: true, FileWriterSync: true, HTMLAllCollection: true, Mojo: true, MojoHandle: true, MojoWatcher: true, NFC: true, PagePopupController: true, Report: true, Request: true, Response: true, SubtleCrypto: true, USBAlternateInterface: true, USBConfiguration: true, USBDevice: true, USBEndpoint: true, USBInTransferResult: true, USBInterface: true, USBIsochronousInTransferPacket: true, USBIsochronousInTransferResult: true, USBIsochronousOutTransferPacket: true, USBIsochronousOutTransferResult: true, USBOutTransferResult: true, WorkerLocation: true, Worklet: true, IDBCursor: true, IDBCursorWithValue: true, IDBFactory: true, IDBIndex: true, IDBObjectStore: true, IDBObservation: true, IDBObserver: true, IDBObserverChanges: true, SVGAngle: true, SVGAnimatedAngle: true, SVGAnimatedBoolean: true, SVGAnimatedEnumeration: true, SVGAnimatedInteger: true, SVGAnimatedLength: true, SVGAnimatedLengthList: true, SVGAnimatedNumber: true, SVGAnimatedNumberList: true, SVGAnimatedPreserveAspectRatio: true, SVGAnimatedRect: true, SVGAnimatedString: true, SVGAnimatedTransformList: true, SVGMatrix: true, SVGPoint: true, SVGPreserveAspectRatio: true, SVGRect: true, SVGUnitTypes: true, AudioListener: true, AudioWorkletGlobalScope: true, AudioWorkletProcessor: true, PeriodicWave: true, WebGLActiveInfo: true, ANGLEInstancedArrays: true, ANGLE_instanced_arrays: true, WebGLBuffer: true, WebGLCanvas: true, WebGLColorBufferFloat: true, WebGLCompressedTextureASTC: true, WebGLCompressedTextureATC: true, WEBGL_compressed_texture_atc: true, WebGLCompressedTextureETC1: true, WEBGL_compressed_texture_etc1: true, WebGLCompressedTextureETC: true, WebGLCompressedTexturePVRTC: true, WEBGL_compressed_texture_pvrtc: true, WebGLCompressedTextureS3TC: true, WEBGL_compressed_texture_s3tc: true, WebGLCompressedTextureS3TCsRGB: true, WebGLDebugRendererInfo: true, WEBGL_debug_renderer_info: true, WebGLDebugShaders: true, WEBGL_debug_shaders: true, WebGLDepthTexture: true, WEBGL_depth_texture: true, WebGLDrawBuffers: true, WEBGL_draw_buffers: true, EXTsRGB: true, EXT_sRGB: true, EXTBlendMinMax: true, EXT_blend_minmax: true, EXTColorBufferFloat: true, EXTColorBufferHalfFloat: true, EXTDisjointTimerQuery: true, EXTDisjointTimerQueryWebGL2: true, EXTFragDepth: true, EXT_frag_depth: true, EXTShaderTextureLOD: true, EXT_shader_texture_lod: true, EXTTextureFilterAnisotropic: true, EXT_texture_filter_anisotropic: true, WebGLFramebuffer: true, WebGLGetBufferSubDataAsync: true, WebGLLoseContext: true, WebGLExtensionLoseContext: true, WEBGL_lose_context: true, OESElementIndexUint: true, OES_element_index_uint: true, OESStandardDerivatives: true, OES_standard_derivatives: true, OESTextureFloat: true, OES_texture_float: true, OESTextureFloatLinear: true, OES_texture_float_linear: true, OESTextureHalfFloat: true, OES_texture_half_float: true, OESTextureHalfFloatLinear: true, OES_texture_half_float_linear: true, OESVertexArrayObject: true, OES_vertex_array_object: true, WebGLProgram: true, WebGLQuery: true, WebGLRenderbuffer: true, WebGLRenderingContext: true, WebGL2RenderingContext: true, WebGLSampler: true, WebGLShader: true, WebGLShaderPrecisionFormat: true, WebGLSync: true, WebGLTexture: true, WebGLTimerQueryEXT: true, WebGLTransformFeedback: true, WebGLUniformLocation: true, WebGLVertexArrayObject: true, WebGLVertexArrayObjectOES: true, WebGL: true, WebGL2RenderingContextBase: true, Database: true, SQLError: true, SQLResultSet: true, SQLTransaction: true, ArrayBuffer: true, DataView: true, ArrayBufferView: false, Float64Array: true, Float32Array: true, Int16Array: true, Int32Array: true, Int8Array: true, Uint16Array: true, Uint32Array: true, Uint8ClampedArray: true, CanvasPixelArray: true, Uint8Array: false, HTMLBRElement: true, HTMLCanvasElement: true, HTMLContentElement: true, HTMLDListElement: true, HTMLDataElement: true, HTMLDataListElement: true, HTMLDetailsElement: true, HTMLDialogElement: true, HTMLEmbedElement: true, HTMLFieldSetElement: true, HTMLHRElement: true, HTMLHeadElement: true, HTMLHeadingElement: true, HTMLHtmlElement: true, HTMLIFrameElement: true, HTMLImageElement: true, HTMLLabelElement: true, HTMLLegendElement: true, HTMLLinkElement: true, HTMLMapElement: true, HTMLMenuElement: true, HTMLMetaElement: true, HTMLMeterElement: true, HTMLModElement: true, HTMLOListElement: true, HTMLObjectElement: true, HTMLOptGroupElement: true, HTMLOptionElement: true, HTMLOutputElement: true, HTMLParagraphElement: true, HTMLParamElement: true, HTMLPictureElement: true, HTMLProgressElement: true, HTMLQuoteElement: true, HTMLScriptElement: true, HTMLShadowElement: true, HTMLSlotElement: true, HTMLSourceElement: true, HTMLStyleElement: true, HTMLTableCaptionElement: true, HTMLTableCellElement: true, HTMLTableDataCellElement: true, HTMLTableHeaderCellElement: true, HTMLTableColElement: true, HTMLTimeElement: true, HTMLTitleElement: true, HTMLTrackElement: true, HTMLUnknownElement: true, HTMLDirectoryElement: true, HTMLFontElement: true, HTMLFrameElement: true, HTMLFrameSetElement: true, HTMLMarqueeElement: true, HTMLElement: false, AccessibleNodeList: true, HTMLAnchorElement: true, Animation: true, HTMLAreaElement: true, HTMLAudioElement: true, BackgroundFetchClickEvent: true, BackgroundFetchEvent: true, BackgroundFetchFailEvent: true, BackgroundFetchedEvent: true, BackgroundFetchRegistration: true, HTMLBaseElement: true, BeforeUnloadEvent: true, Blob: false, BlobEvent: true, HTMLBodyElement: true, HTMLButtonElement: true, CacheStorage: true, CDATASection: true, CharacterData: true, Comment: true, ProcessingInstruction: true, Text: true, Client: true, WindowClient: true, CompositionEvent: true, Credential: true, FederatedCredential: true, PasswordCredential: true, PublicKeyCredential: true, CSSPerspective: true, CSSCharsetRule: true, CSSConditionRule: true, CSSFontFaceRule: true, CSSGroupingRule: true, CSSImportRule: true, CSSKeyframeRule: true, MozCSSKeyframeRule: true, WebKitCSSKeyframeRule: true, CSSKeyframesRule: true, MozCSSKeyframesRule: true, WebKitCSSKeyframesRule: true, CSSMediaRule: true, CSSNamespaceRule: true, CSSPageRule: true, CSSRule: true, CSSStyleRule: true, CSSSupportsRule: true, CSSViewportRule: true, CSSStyleDeclaration: true, MSStyleCSSProperties: true, CSS2Properties: true, CSSImageValue: true, CSSKeywordValue: true, CSSNumericValue: true, CSSPositionValue: true, CSSResourceValue: true, CSSUnitValue: true, CSSURLImageValue: true, CSSStyleValue: false, CSSMatrixComponent: true, CSSRotation: true, CSSScale: true, CSSSkew: true, CSSTranslation: true, CSSTransformComponent: false, CSSTransformValue: true, CSSUnparsedValue: true, DataTransferItemList: true, HTMLDivElement: true, XMLDocument: true, Document: false, DocumentFragment: false, DOMException: true, ClientRectList: true, DOMRectList: true, DOMRectReadOnly: false, DOMStringList: true, DOMTokenList: true, Element: false, DirectoryEntry: true, Entry: true, FileEntry: true, AnimationEvent: true, AnimationPlaybackEvent: true, ApplicationCacheErrorEvent: true, BeforeInstallPromptEvent: true, ClipboardEvent: true, CloseEvent: true, CustomEvent: true, DeviceMotionEvent: true, DeviceOrientationEvent: true, ErrorEvent: true, FontFaceSetLoadEvent: true, GamepadEvent: true, HashChangeEvent: true, MediaEncryptedEvent: true, MediaKeyMessageEvent: true, MediaQueryListEvent: true, MediaStreamEvent: true, MediaStreamTrackEvent: true, MIDIConnectionEvent: true, MutationEvent: true, PageTransitionEvent: true, PaymentRequestUpdateEvent: true, PopStateEvent: true, PresentationConnectionAvailableEvent: true, PresentationConnectionCloseEvent: true, PromiseRejectionEvent: true, RTCDataChannelEvent: true, RTCDTMFToneChangeEvent: true, RTCPeerConnectionIceEvent: true, RTCTrackEvent: true, SecurityPolicyViolationEvent: true, SensorErrorEvent: true, SpeechRecognitionError: true, SpeechRecognitionEvent: true, SpeechSynthesisEvent: true, StorageEvent: true, TrackEvent: true, TransitionEvent: true, WebKitTransitionEvent: true, VRDeviceEvent: true, VRDisplayEvent: true, VRSessionEvent: true, MojoInterfaceRequestEvent: true, USBConnectionEvent: true, OfflineAudioCompletionEvent: true, WebGLContextEvent: true, Event: false, InputEvent: false, SubmitEvent: false, AbsoluteOrientationSensor: true, Accelerometer: true, AccessibleNode: true, AmbientLightSensor: true, ApplicationCache: true, DOMApplicationCache: true, OfflineResourceList: true, BatteryManager: true, BroadcastChannel: true, EventSource: true, FontFaceSet: true, Gyroscope: true, LinearAccelerationSensor: true, Magnetometer: true, MediaDevices: true, MediaQueryList: true, MediaRecorder: true, MediaSource: true, MIDIAccess: true, NetworkInformation: true, Notification: true, OffscreenCanvas: true, OrientationSensor: true, Performance: true, PermissionStatus: true, PresentationAvailability: true, PresentationConnectionList: true, PresentationRequest: true, RelativeOrientationSensor: true, RemotePlayback: true, RTCDTMFSender: true, RTCPeerConnection: true, webkitRTCPeerConnection: true, mozRTCPeerConnection: true, ScreenOrientation: true, Sensor: true, ServiceWorker: true, ServiceWorkerContainer: true, ServiceWorkerRegistration: true, SharedWorker: true, SpeechRecognition: true, SpeechSynthesis: true, SpeechSynthesisUtterance: true, VR: true, VRDevice: true, VRDisplay: true, VRSession: true, VisualViewport: true, WorkerPerformance: true, BluetoothDevice: true, BluetoothRemoteGATTCharacteristic: true, Clipboard: true, MojoInterfaceInterceptor: true, USB: true, IDBDatabase: true, IDBOpenDBRequest: true, IDBVersionChangeRequest: true, IDBRequest: true, IDBTransaction: true, EventTarget: false, AbortPaymentEvent: true, CanMakePaymentEvent: true, FetchEvent: true, ForeignFetchEvent: true, InstallEvent: true, NotificationEvent: true, PaymentRequestEvent: true, SyncEvent: true, ExtendableEvent: false, ExtendableMessageEvent: true, File: true, FileList: true, FileReader: true, FileWriter: true, HTMLFormElement: true, Gamepad: true, History: true, HTMLCollection: true, HTMLFormControlsCollection: true, HTMLOptionsCollection: true, HTMLDocument: true, XMLHttpRequest: true, XMLHttpRequestUpload: true, XMLHttpRequestEventTarget: false, ImageData: true, HTMLInputElement: true, KeyboardEvent: true, HTMLLIElement: true, Location: true, HTMLVideoElement: true, HTMLMediaElement: false, MediaKeySession: true, MediaList: true, MediaStream: true, CanvasCaptureMediaStreamTrack: true, MediaStreamTrack: true, MessageEvent: true, MessagePort: true, MIDIInputMap: true, MIDIMessageEvent: true, MIDIOutputMap: true, MIDIInput: true, MIDIOutput: true, MIDIPort: true, MimeType: true, MimeTypeArray: true, MouseEvent: true, DragEvent: true, PointerEvent: true, WheelEvent: true, Navigator: true, WorkerNavigator: true, NavigatorConcurrentHardware: false, NavigatorUserMediaError: true, DocumentType: true, Node: false, NodeList: true, RadioNodeList: true, PaymentInstruments: true, PaymentRequest: true, Plugin: true, PluginArray: true, HTMLPreElement: true, PresentationConnection: true, ProgressEvent: true, ResourceProgressEvent: true, PushEvent: true, RelatedApplication: true, RTCDataChannel: true, DataChannel: true, RTCLegacyStatsReport: true, RTCStatsReport: true, HTMLSelectElement: true, ShadowRoot: true, SourceBuffer: true, SourceBufferList: true, HTMLSpanElement: true, SpeechGrammar: true, SpeechGrammarList: true, SpeechRecognitionResult: true, Storage: true, CSSStyleSheet: true, StyleSheet: true, HTMLTableElement: true, HTMLTableRowElement: true, HTMLTableSectionElement: true, HTMLTemplateElement: true, HTMLTextAreaElement: true, TextEvent: true, TextTrack: true, TextTrackCue: true, VTTCue: true, TextTrackCueList: true, TextTrackList: true, TimeRanges: true, Touch: true, TouchList: true, TrackDefaultList: true, FocusEvent: true, TouchEvent: true, UIEvent: false, HTMLUListElement: true, URL: true, VideoTrack: true, VideoTrackList: true, VTTRegion: true, WebSocket: true, Window: true, DOMWindow: true, Worker: true, DedicatedWorkerGlobalScope: true, ServiceWorkerGlobalScope: true, SharedWorkerGlobalScope: true, WorkerGlobalScope: true, Attr: true, CSSRuleList: true, ClientRect: true, DOMRect: true, GamepadList: true, NamedNodeMap: true, MozNamedAttrMap: true, SpeechRecognitionResultList: true, StyleSheetList: true, IDBKeyRange: true, IDBVersionChangeEvent: true, SVGCircleElement: true, SVGGElement: true, SVGEllipseElement: true, SVGPolygonElement: true, SVGPolylineElement: true, SVGGeometryElement: false, SVGAElement: true, SVGClipPathElement: true, SVGDefsElement: true, SVGForeignObjectElement: true, SVGSwitchElement: true, SVGUseElement: true, SVGGraphicsElement: false, SVGImageElement: true, SVGLength: true, SVGLengthList: true, SVGLineElement: true, SVGNumber: true, SVGNumberList: true, SVGPathElement: true, SVGPointList: true, SVGRectElement: true, SVGScriptElement: true, SVGStringList: true, SVGAnimateElement: true, SVGAnimateMotionElement: true, SVGAnimateTransformElement: true, SVGAnimationElement: true, SVGDescElement: true, SVGDiscardElement: true, SVGFEBlendElement: true, SVGFEColorMatrixElement: true, SVGFEComponentTransferElement: true, SVGFECompositeElement: true, SVGFEConvolveMatrixElement: true, SVGFEDiffuseLightingElement: true, SVGFEDisplacementMapElement: true, SVGFEDistantLightElement: true, SVGFEFloodElement: true, SVGFEFuncAElement: true, SVGFEFuncBElement: true, SVGFEFuncGElement: true, SVGFEFuncRElement: true, SVGFEGaussianBlurElement: true, SVGFEImageElement: true, SVGFEMergeElement: true, SVGFEMergeNodeElement: true, SVGFEMorphologyElement: true, SVGFEOffsetElement: true, SVGFEPointLightElement: true, SVGFESpecularLightingElement: true, SVGFESpotLightElement: true, SVGFETileElement: true, SVGFETurbulenceElement: true, SVGFilterElement: true, SVGLinearGradientElement: true, SVGMarkerElement: true, SVGMaskElement: true, SVGMetadataElement: true, SVGPatternElement: true, SVGRadialGradientElement: true, SVGSetElement: true, SVGStopElement: true, SVGStyleElement: true, SVGSymbolElement: true, SVGTitleElement: true, SVGViewElement: true, SVGGradientElement: true, SVGComponentTransferFunctionElement: true, SVGFEDropShadowElement: true, SVGMPathElement: true, SVGElement: false, SVGSVGElement: true, SVGTextPathElement: true, SVGTextContentElement: false, SVGTextElement: true, SVGTSpanElement: true, SVGTextPositioningElement: false, SVGTransform: true, SVGTransformList: true, AnalyserNode: true, RealtimeAnalyserNode: true, AudioBuffer: true, AudioBufferSourceNode: true, AudioContext: true, webkitAudioContext: true, AudioDestinationNode: true, AudioWorkletNode: true, ChannelMergerNode: true, AudioChannelMerger: true, ChannelSplitterNode: true, AudioChannelSplitter: true, IIRFilterNode: true, MediaElementAudioSourceNode: true, MediaStreamAudioDestinationNode: true, PannerNode: true, AudioPannerNode: true, webkitAudioPannerNode: true, WaveShaperNode: true, AudioNode: false, AudioParam: true, AudioParamMap: true, AudioProcessingEvent: true, ConstantSourceNode: true, AudioScheduledSourceNode: false, AudioTrack: true, AudioTrackList: true, BaseAudioContext: false, BiquadFilterNode: true, ConvolverNode: true, DelayNode: true, DynamicsCompressorNode: true, GainNode: true, AudioGainNode: true, MediaStreamAudioSourceNode: true, OfflineAudioContext: true, OscillatorNode: true, Oscillator: true, ScriptProcessorNode: true, JavaScriptAudioNode: true, StereoPannerNode: true, SQLResultSetRowList: true});
     H.NativeTypedArray.$nativeSuperclassTag = "ArrayBufferView";
     H._NativeTypedArrayOfDouble_NativeTypedArray_ListMixin.$nativeSuperclassTag = "ArrayBufferView";
     H._NativeTypedArrayOfDouble_NativeTypedArray_ListMixin_FixedLengthListMixin.$nativeSuperclassTag = "ArrayBufferView";
@@ -23584,6 +28608,10 @@
     H._NativeTypedArrayOfInt_NativeTypedArray_ListMixin.$nativeSuperclassTag = "ArrayBufferView";
     H._NativeTypedArrayOfInt_NativeTypedArray_ListMixin_FixedLengthListMixin.$nativeSuperclassTag = "ArrayBufferView";
     H.NativeTypedArrayOfInt.$nativeSuperclassTag = "ArrayBufferView";
+    W._SourceBufferList_EventTarget_ListMixin.$nativeSuperclassTag = "EventTarget";
+    W._SourceBufferList_EventTarget_ListMixin_ImmutableListMixin.$nativeSuperclassTag = "EventTarget";
+    W._TextTrackList_EventTarget_ListMixin.$nativeSuperclassTag = "EventTarget";
+    W._TextTrackList_EventTarget_ListMixin_ImmutableListMixin.$nativeSuperclassTag = "EventTarget";
   })();
   convertAllToFastObject(holders);
   convertToFastObject($);

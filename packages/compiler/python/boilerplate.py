@@ -53,7 +53,10 @@ def playNote(note, beats = 1, velocity = 90, sustain = 0, line = -1):
     params = { "velocity" : velocity, "sustain" : sustain }
     if line >= 0: params['line'] = line
     for n in note:
-        params['note'] = n
+        if type(n) is CustomSound:
+            params['sound'] = n.to_json()
+        else:
+            params['note'] = n
         printEvent("play", playhead, duration = beats, params = params)
 
     _last_playhead = playhead
@@ -102,10 +105,40 @@ def synthPatch(name, patch):
 
 
 #---------------------------------------------------------------------
-# set the CSS color for a puck (e.g. "pink", "#335599", "rgb(0, 20, 100)")
+# used to include custom sounds in tunepad tracks
 #---------------------------------------------------------------------
-def setColor(color):
-    printEvent("color", playhead, params = { "color" : color })
+class CustomSound:
+    def __init__(self, sid):
+        self.sid = sid
+        self.ops = [ ]
+
+    def reverse(self):
+        return self.append({ "op" : "reverse" })
+
+    def clip(self, start, end):
+        return self.append({ "op" : "clip", "start" : start, "end" : end })
+
+    def __add__(self, o):
+        return self.append({ "op" : "step", "value" : o })
+
+    def append(self, op):
+        b = CustomSound(self.sid)
+        for o in self.ops: b.ops.append(o)
+        b.ops.append(op)
+        return b
+
+    def to_json(self):
+        return { "sid" : self.sid, "ops" : self.ops }
+
+    def __str__(self):
+        return "{{ 'sid' : {}, 'ops' : {} }}".format(self.sid, self.ops)
+
+
+#---------------------------------------------------------------------
+# load a custom sound
+#---------------------------------------------------------------------
+def loadSound(sid):
+    return CustomSound(sid)
 
 
 #---------------------------------------------------------------------

@@ -60,6 +60,7 @@
   <link rel="stylesheet" href="css/mixer.css" />
   <link rel="stylesheet" href="css/login.css" />
   <link rel="stylesheet" href="css/library.css" />
+  <link rel="stylesheet" href="css/recorder.css" />
   <link rel="stylesheet" href="packages/ui/css/dialog.css" />
 
   <!-- TUNEPAD App -->
@@ -193,6 +194,7 @@
   <div class="tunepad-logo"></div>
   <button id="profile-button" class="side-button" title="Profile"><i class="far fa-user"></i></button>
   <button id="library-button" class="side-button" title="Track Library"></button>
+  <button id="recorder-button" class="side-button" title="Audio Recorder"><i class="fas fa-microphone"></i></button>
   <button id="help-button" class="side-button" title="Help"><i class="far fa-question-circle"></i></button>
   <button id="login-button" class="side-button" title="Sign In"><i class="fas fa-sign-in-alt"></i></button>
   <button id="logout-button" class="side-button hidden" title="Sign Out"><i class="fas fa-sign-out-alt"></i></button>
@@ -381,6 +383,117 @@
       <button class="confirm-button">Sign In</button>
     </div>
   </div>
+</template>
+
+
+<template id="recording-studio-template">
+  <div class="dialog recording-studio">
+    <button class="close-button"><i class="fas fa-times"></i></button>
+    <h1 class="dialog-title">TunePad Sound Recorder</h1>
+    <div class="recorder">
+      <div class="left-column">
+        <div id="eq-container">
+          <svg height="125" viewBox="0 0 200 200" preserveAspectRatio="none"></svg>
+        </div>
+        <button id="record-button"><i class="fas fa-lg fa-microphone"></i>RECORD</button>
+        <button id="stop-button" class="hidden"><i class="fas fa-lg fa-circle"></i>STOP</button>
+        <button id="upload-button"><i class="fas fa-lg fa-upload"></i>UPLOAD</button>
+      </div>
+      <div class="right-column">
+        <div id="waveform-container">
+          <svg width="470" viewBox="0 0 470 125" preserveAspectRatio="none"></svg>
+        </div>
+        <div class="button-row">
+          <button id="trim-button" disabled><i class="fas fa-lg fa-crop-alt"></i>TRIM</button>
+          <button id="reset-button">REVERT</button>
+          <input type="file" id="file-input" style="display: none;">
+          <div class="expander"></div>
+          <button id="loop-button">
+            <i class="fas fa-lg fa-check-square"></i>
+            <i class="fas fa-lg fa-square"></i>
+            LOOP
+          </button>
+          <button id="play-button"><i class="fas fa-play"></i>PLAY</button>
+          <button id="pause-button" class="hidden"><i class="fas fa-pause"></i>PAUSE</button>
+        </div>
+
+        <div id="effects-container" class="hidden">
+          <div id="volume-dial" class="ui-dial">
+            <div class="label">VOLUME</div>
+            <div class="value"></div>
+          </div>
+          <div id="pitch-dial" class="ui-dial">
+            <div class="label">PITCH</div>
+            <div class="value"></div>
+          </div>
+          <div id="reverb-dial" class="ui-dial">
+            <div class="label">REVERB</div>
+            <div class="value"></div>
+          </div>
+          <div id="bass-dial" class="ui-dial">
+            <div class="label">BASS</div>
+            <div class="value"></div>
+          </div>
+          <div id="mid-dial" class="ui-dial">
+            <div class="label">MID</div>
+            <div class="value"></div>
+          </div>
+          <div id="treble-dial" class="ui-dial">
+            <div class="label">TREBLE</div>
+            <div class="value"></div>
+          </div>
+          <div id="crush-dial" class="ui-dial">
+            <div class="label">CRUSHER</div>
+            <div class="value"></div>
+          </div>
+        </div>
+
+        <div class="button-row">
+          <input type="text" id="edit-name" value="">
+          <div class="expander"></div>
+          <button id="save-button" disabled>SAVE</button>
+        </div>
+      </div>
+    </div>
+    <h2 class="dialog-title">My Sounds (<span id="sample-count">0</span> sounds)</h2>
+    <ul class="sample-list"></ul>
+    <div class="zero-sound-message">
+      Click the Record or Upload button to add your own audio clips.
+    </div>
+  </div>
+</template>
+
+
+<template id="recording-studio-item-template">
+  <li class="sample-item">
+    <div class="sample-summary">
+      <div class="sample-badge"><i class="fas fa-play"></i></div>
+      <div class="sample-name"></div>
+      <div class="sample-duration"></div>
+      <audio></audio>
+      <div class="sample-menu-button" title="Sound Menu"><i class="fas fa-ellipsis-h"></i>
+        <ul class="context-menu hidden">
+          <li class="menu-item" data-action="edit"><i class="fas fa-pen"></i>Edit Sound</li>
+          <li class="menu-item" data-action="copy"><i class="fas fa-clone"></i>Create Copy</li>
+          <li class="menu-item" data-action="delete"><i class="fas fa-trash"></i>Delete</li>
+          <li class="menu-item" data-action="wav"><i class="fas fa-download"></i>Download WAV</li>
+          <li class="menu-item" data-action="mp3"><i class="fas fa-download"></i>Download MP3</li>
+        </ul>
+      </div>
+      <button class="add-sample-button">Use Sound <i class="fas fa-angle-down"></i></button>
+    </div>
+    <div class="use-it hidden">
+      To use this sound, copy this line of code to the top of your track.
+      <div class="code-snippet">
+        sound = loadSound(<span class="sound-id">13664</span>) # load custom sound
+      </div>
+      You can then play your sound with the <code>playNote</code> function...
+      <div class="code-snippet">
+        playNote(sound)
+      </div>
+      For more information read the programming guide.
+    </div>
+  </li>
 </template>
 
 
