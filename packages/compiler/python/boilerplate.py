@@ -44,7 +44,7 @@ def trace(line):
 
 
 #---------------------------------------------------------------------
-# plays a single midi note
+# plays a midi note (number) or list of notes
 #---------------------------------------------------------------------
 def playNote(note, beats = 1, velocity = 90, sustain = 0, line = -1):
     global playhead, _last_playhead
@@ -53,11 +53,25 @@ def playNote(note, beats = 1, velocity = 90, sustain = 0, line = -1):
     params = { "velocity" : velocity, "sustain" : sustain }
     if line >= 0: params['line'] = line
     for n in note:
-        if type(n) is CustomSound:
-            params['sound'] = n.to_json()
-        else:
-            params['note'] = n
+        params['note'] = n
         printEvent("play", playhead, duration = beats, params = params)
+
+    _last_playhead = playhead
+    playhead += beats
+
+
+#---------------------------------------------------------------------
+# plays a custom recorded sample or sound (by sound ID number)
+#---------------------------------------------------------------------
+def playSound(sound, beats = 1, pitch = 0, velocity = 90, sustain = 0, line = -1):
+    global playhead, _last_playhead
+
+    if type(sound) is not list: sound = [ sound ]
+    params = { "pitch" : pitch, "velocity" : velocity, "sustain" : sustain }
+    if line >= 0: params['line'] = line
+    for s in sound:
+        params['sound'] = s
+        printEvent("sound", playhead, duration = beats, params = params)
 
     _last_playhead = playhead
     playhead += beats
@@ -108,37 +122,28 @@ def synthPatch(name, patch):
 # used to include custom sounds in tunepad tracks
 #---------------------------------------------------------------------
 class CustomSound:
-    def __init__(self, sid):
+    def __init__(self, sid, note):
         self.sid = sid
+        self.note = note
         self.ops = [ ]
 
     def reverse(self):
-        return self.append({ "op" : "reverse" })
+        return self._append({ "op" : "reverse" })
 
     def clip(self, start, end):
-        return self.append({ "op" : "clip", "start" : start, "end" : end })
+        return self._append({ "op" : "clip", "start" : start, "end" : end })
 
-    def __add__(self, o):
-        return self.append({ "op" : "step", "value" : o })
+    def to_json(self):
+        return { "sid" : self.sid, "note" : self.note, "ops" : self.ops }
 
-    def append(self, op):
-        b = CustomSound(self.sid)
+    def _append(self, op):
+        b = CustomSound(self.sid, self.note)
         for o in self.ops: b.ops.append(o)
         b.ops.append(op)
         return b
 
-    def to_json(self):
-        return { "sid" : self.sid, "ops" : self.ops }
-
     def __str__(self):
-        return "{{ 'sid' : {}, 'ops' : {} }}".format(self.sid, self.ops)
-
-
-#---------------------------------------------------------------------
-# load a custom sound
-#---------------------------------------------------------------------
-def loadSound(sid):
-    return CustomSound(sid)
+        return "{{ 'sid' : {}, 'note': {}, 'ops' : {} }}".format(self.sid, self.note, self.ops)
 
 
 #---------------------------------------------------------------------

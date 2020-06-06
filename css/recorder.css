@@ -328,6 +328,12 @@
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  text-align: left;
+  font-size: 15px;
+  font-weight: normal;
+}
+
+.recording-studio .sample-id {
   flex: 1;
   text-align: left;
   font-size: 15px;

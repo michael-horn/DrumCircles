@@ -1634,10 +1634,36 @@
       var t1 = receiver.indexOf(other, startIndex);
       return t1 >= 0;
     },
+    escapeReplacement: function(replacement) {
+      if (replacement.indexOf("$", 0) >= 0)
+        return replacement.replace(/\$/g, "$$$$");
+      return replacement;
+    },
     quoteStringForRegExp: function(string) {
       if (/[[\]{}()*+?.\\^$|]/.test(string))
         return string.replace(/[[\]{}()*+?.\\^$|]/g, "\\$&");
       return string;
+    },
+    stringReplaceAllUnchecked: function(receiver, pattern, replacement) {
+      var t1 = H.stringReplaceAllUncheckedString(receiver, pattern, replacement);
+      return t1;
+    },
+    stringReplaceAllUncheckedString: function(receiver, pattern, replacement) {
+      var $length, t1, i, index;
+      if (pattern === "") {
+        if (receiver === "")
+          return replacement;
+        $length = receiver.length;
+        for (t1 = replacement, i = 0; i < $length; ++i)
+          t1 = t1 + receiver[i] + replacement;
+        return t1.charCodeAt(0) == 0 ? t1 : t1;
+      }
+      index = receiver.indexOf(pattern, 0);
+      if (index < 0)
+        return receiver;
+      if (receiver.length < 500 || replacement.indexOf("$", 0) >= 0)
+        return receiver.split(pattern).join(replacement);
+      return receiver.replace(new RegExp(H.quoteStringForRegExp(pattern), 'g'), H.escapeReplacement(replacement));
     },
     ConstantMapView: function ConstantMapView(t0, t1) {
       this._collection$_map = t0;
@@ -6458,11 +6484,6 @@
     MIDIEvent: function MIDIEvent(t0) {
       this.data = t0;
     },
-    SynthChain$: function(synth, context, config) {
-      var t1 = new U.SynthChain(context, new H.JsLinkedHashMap(type$.JsLinkedHashMap_int_SynthNode));
-      t1.SynthChain$3(synth, context, config);
-      return t1;
-    },
     SynthChain: function SynthChain(t0, t1) {
       var _ = this;
       _.context = t0;
@@ -7053,9 +7074,19 @@
       _.enabled = true;
       _.id = 0;
     },
+    LFONode: function LFONode(t0) {
+      var _ = this;
+      _.osc = null;
+      _.frequency = 1;
+      _.context = t0;
+      _.level = null;
+      _._level = 1;
+      _.enabled = true;
+      _.id = 0;
+    },
     SynthSampleNode: function SynthSampleNode(t0) {
       var _ = this;
-      _.samples = _.source = _.synth = null;
+      _.samples = _.pIn = _.dIn = _.source = null;
       _.sampleDuration = 0;
       _.context = t0;
       _.level = null;
@@ -7094,14 +7125,13 @@
       _.enabled = true;
       _.id = 0;
     },
-    SchedulerSynth: function SchedulerSynth(t0, t1, t2, t3) {
+    SchedulerSynth: function SchedulerSynth(t0, t1, t2) {
       var _ = this;
       _._bpm = 120;
       _.effects = t0;
       _.notes = t1;
       _.config = null;
-      _.customRecordings = t2;
-      _._bank = t3;
+      _._bank = t2;
       _.voice = "";
     },
     UserList$: function(socket) {
@@ -7466,22 +7496,21 @@
     _updateCellMenu_closure: function _updateCellMenu_closure() {
     }
   },
-  L = {Synthesizer: function Synthesizer(t0, t1, t2, t3) {
+  L = {Synthesizer: function Synthesizer(t0, t1, t2) {
       var _ = this;
       _._bpm = 120;
       _.effects = t0;
       _.notes = t1;
       _.config = null;
-      _.customRecordings = t2;
-      _._bank = t3;
+      _._bank = t2;
       _.voice = "";
     }, Synthesizer_loadPatch_closure: function Synthesizer_loadPatch_closure(t0) {
       this._box_0 = t0;
-    }, Synthesizer_playNote_closure: function Synthesizer_playNote_closure(t0, t1, t2) {
+    }, Synthesizer__play_closure: function Synthesizer__play_closure(t0, t1, t2) {
       this._box_0 = t0;
       this.$this = t1;
       this.event = t2;
-    }, Synthesizer_scheduleNote_closure: function Synthesizer_scheduleNote_closure(t0, t1, t2) {
+    }, Synthesizer__schedule_closure: function Synthesizer__schedule_closure(t0, t1, t2) {
       this.$this = t0;
       this.nodes = t1;
       this.event = t2;
@@ -7494,6 +7523,11 @@
       _.name = t2;
       _.onLoaded = t3;
     }, Synthesizer_loadAudioBuffer_closure0: function Synthesizer_loadAudioBuffer_closure0() {
+    }, Synthesizer_loadCustomSound_closure: function Synthesizer_loadCustomSound_closure(t0, t1, t2) {
+      this.context = t0;
+      this.request = t1;
+      this.url = t2;
+    }, Synthesizer_loadCustomSound_closure0: function Synthesizer_loadCustomSound_closure0() {
     }},
   Y = {
     TraceEvent$fromJSON: function(json) {
@@ -7662,26 +7696,25 @@
       return el != null ? J.trim$0$s(el.value) : "";
     },
     PythonCell$: function(id, datastore, clock, container) {
-      var t9, t10, t11, t12,
+      var t8, t9, t10, t11,
         _s26_ = "http://www.w3.org/2000/svg",
         t1 = type$.dynamic,
         t2 = type$.JSArray_Effect,
         t3 = H.setRuntimeTypeInfo([], t2),
         t4 = type$.JSArray_SynthEvent,
         t5 = H.setRuntimeTypeInfo([], t4),
-        t6 = type$.JsLinkedHashMap_int_AudioBuffer,
-        t7 = type$.JSArray_SynthChain,
-        t8 = H.setRuntimeTypeInfo([], t7);
+        t6 = type$.JSArray_SynthChain,
+        t7 = H.setRuntimeTypeInfo([], t6);
       t2 = H.setRuntimeTypeInfo([], t2);
       t4 = H.setRuntimeTypeInfo([], t4);
-      t7 = H.setRuntimeTypeInfo([], t7);
-      t9 = H.setRuntimeTypeInfo([], type$.JSArray_PianoKey);
-      t10 = document;
-      t11 = type$.SvgElement;
-      t12 = type$.GElement;
-      t10 = new Y.PythonCell(datastore, P.LinkedHashMap_LinkedHashMap$_empty(t1, t1), new B.SchedulerSynth(t3, t5, new H.JsLinkedHashMap(t6), t8), new L.Synthesizer(t2, t4, new H.JsLinkedHashMap(t6), t7), new Z.Piano(t9, t12._as(t11._as(C.HtmlDocument_methods.createElementNS$2(t10, _s26_, "g"))), "piano", P.StreamController_StreamController(false, type$.NoteEvent), t12._as(t11._as(C.HtmlDocument_methods.createElementNS$2(t10, _s26_, "g")))), clock, new Y.Trace(H.setRuntimeTypeInfo([], type$.JSArray_TraceEvent)), $.$get$MIDIManager__singleton(), id, new P.DateTime(Date.now(), false), new P.DateTime(Date.now(), false));
-      t10.PythonCell$4(id, datastore, clock, container);
-      return t10;
+      t6 = H.setRuntimeTypeInfo([], t6);
+      t8 = H.setRuntimeTypeInfo([], type$.JSArray_PianoKey);
+      t9 = document;
+      t10 = type$.SvgElement;
+      t11 = type$.GElement;
+      t9 = new Y.PythonCell(datastore, P.LinkedHashMap_LinkedHashMap$_empty(t1, t1), new B.SchedulerSynth(t3, t5, t7), new L.Synthesizer(t2, t4, t6), new Z.Piano(t8, t11._as(t10._as(C.HtmlDocument_methods.createElementNS$2(t9, _s26_, "g"))), "piano", P.StreamController_StreamController(false, type$.NoteEvent), t11._as(t10._as(C.HtmlDocument_methods.createElementNS$2(t9, _s26_, "g")))), clock, new Y.Trace(H.setRuntimeTypeInfo([], type$.JSArray_TraceEvent)), $.$get$MIDIManager__singleton(), id, new P.DateTime(Date.now(), false), new P.DateTime(Date.now(), false));
+      t9.PythonCell$4(id, datastore, clock, container);
+      return t9;
     },
     toggleContextMenu: function(menu) {
       var t1, t2;
@@ -9350,7 +9383,7 @@
       C.JSArray_methods.add$1(this.$arguments, argument);
       ++t1.argumentCount;
     },
-    $signature: 82
+    $signature: 83
   };
   H.TypeErrorDecoder.prototype = {
     matchTypeError$1: function(message) {
@@ -9960,7 +9993,7 @@
       t2 = this.span;
       t1.firstChild ? t1.removeChild(t2) : t1.appendChild(t2);
     },
-    $signature: 76
+    $signature: 75
   };
   P._AsyncRun__scheduleImmediateJsOverride_internalCallback.prototype = {
     call$0: function() {
@@ -10071,13 +10104,13 @@
     },
     "call*": "call$2",
     $requiredArgCount: 2,
-    $signature: 83
+    $signature: 85
   };
   P._wrapJsFunctionForAsync_closure.prototype = {
     call$2: function(errorCode, result) {
       this.$protected(H._asIntNullable(errorCode), result);
     },
-    $signature: 58
+    $signature: 57
   };
   P._BroadcastStream.prototype = {};
   P._BroadcastSubscription.prototype = {
@@ -12394,7 +12427,7 @@
     call$2: function(key, value) {
       this.result.$indexSet(0, type$.Symbol._as(key).__internal$_name, value);
     },
-    $signature: 29
+    $signature: 27
   };
   P.NoSuchMethodError_toString_closure.prototype = {
     call$2: function(key, value) {
@@ -12408,7 +12441,7 @@
       t1._contents += P.Error_safeToString(value);
       t2.comma = ", ";
     },
-    $signature: 29
+    $signature: 27
   };
   P.bool.prototype = {};
   P.DateTime.prototype = {
@@ -12453,7 +12486,7 @@
         return 0;
       return P.int_parse(matched);
     },
-    $signature: 38
+    $signature: 36
   };
   P.DateTime_parse_parseMilliAndMicroseconds.prototype = {
     call$1: function(matched) {
@@ -12467,7 +12500,7 @@
       }
       return result;
     },
-    $signature: 38
+    $signature: 36
   };
   P.double.prototype = {};
   P.Duration.prototype = {
@@ -13284,7 +13317,7 @@
     call$1: function(e) {
       return type$.Element._is(type$.Node._as(e));
     },
-    $signature: 26
+    $signature: 33
   };
   W.Entry.prototype = {
     _html$_remove$2: function(receiver, successCallback, errorCallback) {
@@ -13311,7 +13344,7 @@
     call$1: function(error) {
       this.completer.completeError$1(type$.DomException._as(error));
     },
-    $signature: 37
+    $signature: 38
   };
   W.Event.prototype = {
     get$target: function(receiver) {
@@ -13440,7 +13473,7 @@
     call$1: function(xhr) {
       return type$.HttpRequest._as(xhr).responseText;
     },
-    $signature: 72
+    $signature: 70
   };
   W.HttpRequest_request_closure.prototype = {
     call$1: function(e) {
@@ -13459,7 +13492,7 @@
       else
         t3.completeError$1(e);
     },
-    $signature: 75
+    $signature: 72
   };
   W.HttpRequestEventTarget.prototype = {};
   W.ImageData.prototype = {$isImageData: 1};
@@ -13648,13 +13681,13 @@
     call$1: function(stream) {
       this.completer.complete$1(0, type$.MediaStream._as(stream));
     },
-    $signature: 87
+    $signature: 76
   };
   W.Navigator_getUserMedia_closure0.prototype = {
     call$1: function(error) {
       this.completer.completeError$1(type$.NavigatorUserMediaError._as(error));
     },
-    $signature: 47
+    $signature: 87
   };
   W.NavigatorConcurrentHardware.prototype = {};
   W.NavigatorUserMediaError.prototype = {$isNavigatorUserMediaError: 1};
@@ -14250,7 +14283,7 @@
     call$1: function($event) {
       this.controller.add$1(0, new W._BeforeUnloadEvent(type$.BeforeUnloadEvent._as($event)));
     },
-    $signature: 70
+    $signature: 82
   };
   W.Worker.prototype = {
     postMessage$1: function(receiver, message) {
@@ -14525,14 +14558,14 @@
       if (J.getInterceptor$s(key).startsWith$1(key, "data-"))
         this.f.call$2(this.$this._toCamelCase$1(C.JSString_methods.substring$1(key, 5)), value);
     },
-    $signature: 27
+    $signature: 28
   };
   W._DataAttributeMap_keys_closure.prototype = {
     call$2: function(key, value) {
       if (J.getInterceptor$s(key).startsWith$1(key, "data-"))
         C.JSArray_methods.add$1(this.keys, this.$this._toCamelCase$1(C.JSString_methods.substring$1(key, 5)));
     },
-    $signature: 27
+    $signature: 28
   };
   W.CssClassSet.prototype = {$isEfficientLengthIterable: 1, $isIterable: 1, $isSet: 1};
   W._MultiElementCssClassSet.prototype = {
@@ -14570,7 +14603,7 @@
     call$1: function(e) {
       return this.s.addAll$1(0, type$.CssClassSetImpl._as(e).readClasses$0());
     },
-    $signature: 64
+    $signature: 65
   };
   W._MultiElementCssClassSet_modify_closure.prototype = {
     call$1: function(e) {
@@ -14583,14 +14616,14 @@
       H._asBoolNullable(changed);
       return H.boolConversionCheck(type$.CssClassSetImpl._as(e).toggle$2(0, this.value, this.shouldAdd)) || H.boolConversionCheck(changed);
     },
-    $signature: 28
+    $signature: 29
   };
   W._MultiElementCssClassSet_remove_closure.prototype = {
     call$2: function(changed, e) {
       H._asBoolNullable(changed);
       return H.boolConversionCheck(type$.CssClassSetImpl._as(e).remove$1(0, this.value)) || H.boolConversionCheck(changed);
     },
-    $signature: 28
+    $signature: 29
   };
   W._ElementCssClassSet.prototype = {
     readClasses$0: function() {
@@ -14710,7 +14743,7 @@
     call$1: function(e) {
       return this.onData.call$1(type$.Event._as(e));
     },
-    $signature: 88
+    $signature: 58
   };
   W._StreamPool.prototype = {
     add$1: function(_, stream) {
@@ -15491,7 +15524,7 @@
     call$1: function(n) {
       return type$.Element._is(type$.Node._as(n));
     },
-    $signature: 26
+    $signature: 33
   };
   P.FilteredElementList__iterable_closure0.prototype = {
     call$1: function(n) {
@@ -15547,7 +15580,7 @@
     call$1: function(o) {
       return new P.JsObject(o);
     },
-    $signature: 57
+    $signature: 88
   };
   P.JsObject.prototype = {
     $index: function(_, property) {
@@ -15916,7 +15949,7 @@
       else
         t1.completeError$1(error);
     },
-    $signature: 37
+    $signature: 38
   };
   P.AudioNode.prototype = {
     _connect$3: function(receiver, destination, output, input) {
@@ -16393,8 +16426,10 @@
               return H.ioore(rightSource, i);
             sample = rightSource[i];
           }
+          sample = Math.max(-1, Math.min(1, sample));
+          sample = sample < 0 ? sample * 32768 : sample * 32767;
           t3 = t2 + c + 23;
-          t4 = C.JSNumber_methods.round$0(Math.max(-1, Math.min(1, sample)) * 32768);
+          t4 = C.JSNumber_methods.round$0(sample);
           if (t3 < 0 || t3 >= t1)
             return H.ioore(wav, t3);
           wav[t3] = t4;
@@ -16807,6 +16842,8 @@
         }
         t5 = t2.length === 0;
         if (t5 && C.JSString_methods.indexOf$2(line, "playNote(", i) === i)
+          matchingPlayNote = true;
+        else if (t5 && C.JSString_methods.indexOf$2(line, "playSound(", i) === i)
           matchingPlayNote = true;
         if (!(!t5 && C.JSArray_methods.contains$1(H.setRuntimeTypeInfo(['"', "'", "'''", '"""'], t4), C.JSArray_methods.get$last(t2))) && C.JSString_methods.indexOf$2(line, "return", i) === i)
           returnLine = true;
@@ -17371,7 +17408,7 @@
     call$1: function(e) {
       return this.$this._resize$0();
     },
-    $signature: 19
+    $signature: 20
   };
   Z.Instrument_unload_closure.prototype = {
     call$1: function(child) {
@@ -17819,9 +17856,11 @@
     $signature: 0
   };
   U.SynthChain.prototype = {
-    SynthChain$3: function(synth, context, config) {
+    loadPatch$1: function(config) {
       var t1, t2, t3, t4, t5, t6, t7, node, t8, t9, t10, t11, adsr, r, source, dest, _this = this,
-        _s9_ = "frequency";
+        _s9_ = "frequency",
+        _s6_ = "detune",
+        _s8_ = "waveform";
       _this.out = null;
       t1 = J.getInterceptor$asx(config);
       t2 = type$.List_dynamic;
@@ -17834,8 +17873,13 @@
               case "sample":
                 t9 = new B.SynthSampleNode(t5);
                 t9.SynthNode$2(t5, node);
-                t9.synth = synth;
                 t9.samples = t2._as(t8.$index(node, "samples"));
+                t8 = t7.createGain$0(t5);
+                t9.dIn = t8;
+                t8.gain.value = 1;
+                t8 = t7.createGain$0(t5);
+                t9.pIn = t8;
+                t8.gain.value = 1;
                 t9.enabled = false;
                 t6.$indexSet(0, t9.id, t9);
                 break;
@@ -17847,9 +17891,9 @@
                 t10 = t5.createOscillator();
                 t9.osc = t10;
                 t10.frequency.value = 1800;
-                t9.osc.detune.value = B.toNum(t8.$index(node, "detune"), 0);
+                t9.osc.detune.value = B.toNum(t8.$index(node, _s6_), 0);
                 t10 = t9.osc;
-                t11 = t8.$index(node, "waveform");
+                t11 = t8.$index(node, _s8_);
                 t10.type = t11 == null ? "sine" : J.toString$0$(t11);
                 t9.osc.start();
                 t10 = t7.createGain$0(t5);
@@ -17860,6 +17904,22 @@
                 t10.gain.value = B.toNum(t8.$index(node, "fIn"), 100);
                 t9.dIn.connect(t9.osc.detune, 0);
                 t9.fIn.connect(t9.osc.frequency, 0);
+                t9.osc.connect(t9.level, 0, 0);
+                t9.enabled = false;
+                t6.$indexSet(0, t9.id, t9);
+                break;
+              case "lfo":
+                t9 = new B.LFONode(t5);
+                t9.SynthNode$2(t5, node);
+                t9.frequency = B.toNum(t8.$index(node, _s9_), 1);
+                t10 = t5.createOscillator();
+                t9.osc = t10;
+                t10.frequency.value = t9.frequency;
+                t9.osc.detune.value = B.toNum(t8.$index(node, _s6_), 0);
+                t10 = t9.osc;
+                t8 = t8.$index(node, _s8_);
+                t10.type = t8 == null ? "sine" : J.toString$0$(t8);
+                t9.osc.start();
                 t9.osc.connect(t9.level, 0, 0);
                 t9.enabled = false;
                 t6.$indexSet(0, t9.id, t9);
@@ -17910,7 +17970,7 @@
                 t9.filter = t10;
                 t10.connect(t9.level, 0, 0);
                 t9.filter.frequency.value = B.toNum(t8.$index(node, _s9_), 350);
-                t9.filter.detune.value = B.toNum(t8.$index(node, "detune"), 0);
+                t9.filter.detune.value = B.toNum(t8.$index(node, _s6_), 0);
                 t9.filter.Q.value = B.toNum(t8.$index(node, "Q"), 1);
                 t9.filter.gain.value = B.toNum(t8.$index(node, "gain"), 0);
                 t10 = t9.filter;
@@ -17942,6 +18002,11 @@
           dest.connectFromSource$2(source, H._asStringNullable(t3.$index(r, "type")));
         }
       }
+    },
+    loadCustomPatch$1: function(soundURL) {
+      if (typeof soundURL != "string")
+        H.throwExpression(H.argumentErrorValue(soundURL));
+      this.loadPatch$1(type$.Map_dynamic_dynamic._as(C.C_JsonCodec.decode$2$reviver(0, H.stringReplaceAllUnchecked('    {\n      "nodes": [\n        { "type": "out", "id": 0 },\n        {\n          "type": "sample",\n          "samples": [\n            {\n              "sample": "<SOUNDURL>",\n              "step": 60\n            }\n          ],\n          "id": 1,\n          "level": 1\n        },\n        {\n          "type": "adsr",\n          "A": 0.01,\n          "D": 0.1,\n          "S": 1,\n          "R": 0.3,\n          "level": 1,\n          "id": 2\n        }\n      ],\n      "routing": [\n        { "source": 1, "dest": 2, "type": "in" },\n        { "source": 2, "dest": 0, "type": "out" }\n      ]\n    }', "<SOUNDURL>", soundURL), null)));
     },
     playNote$6: function(note, dest, when, offset, duration, sustain) {
       var _this = this,
@@ -17989,13 +18054,13 @@
     call$1: function(node) {
       return type$.SynthNode._as(node).pitchBend$1(this.cents);
     },
-    $signature: 20
+    $signature: 21
   };
   U.SynthChain_schedulePitchBend_closure.prototype = {
     call$1: function(node) {
       return type$.SynthNode._as(node).schedulePitchBend$3(this.start, this.duration, this.cents);
     },
-    $signature: 20
+    $signature: 21
   };
   U.SynthChain_releaseNote_closure.prototype = {
     call$1: function(node) {
@@ -18007,7 +18072,7 @@
     call$1: function(node) {
       return type$.SynthNode._as(node).destroy$0();
     },
-    $signature: 20
+    $signature: 21
   };
   E.ClockSubscriber.prototype = {};
   E.Metronome.prototype = {};
@@ -18687,6 +18752,41 @@
         source.level.connect(this.level.gain, 0);
     }
   };
+  B.LFONode.prototype = {
+    start$5: function(_, note, when, offset, duration, sustain) {
+      var _this = this,
+        t1 = _this.osc;
+      if (t1 == null || !_this.enabled)
+        return;
+      t1.frequency.cancelScheduledValues(0);
+      t1 = _this.osc;
+      t1.frequency.setValueAtTime(_this.frequency, t1.context.currentTime);
+      _this.osc.detune.cancelScheduledValues(0);
+      t1 = _this.osc;
+      t1.detune.setValueAtTime(0, t1.context.currentTime);
+    },
+    destroy$0: function() {
+      var t1, _this = this;
+      _this.super$SynthNode$destroy();
+      t1 = _this.osc;
+      if (t1 == null || !_this.enabled)
+        return;
+      t1.stop();
+      _this.osc.disconnect();
+      _this.osc = null;
+    },
+    connectFromSource$2: function(incoming, type) {
+      var t1 = this.osc;
+      if (t1 == null)
+        return;
+      if (type === "detune")
+        incoming.level.connect(t1.detune, 0);
+      else if (type === "frequency")
+        incoming.level.connect(t1.frequency, 0);
+      else if (type === "amplitude")
+        incoming.level.connect(this.level.gain, 0);
+    }
+  };
   B.SynthSampleNode.prototype = {
     start$5: function(_, note, when, offset, duration, sustain) {
       var t1, step, score, delta, sample, s, t2, t3, t4, d, buffer, playback, _this = this;
@@ -18698,6 +18798,8 @@
       t1 = _this.context.createBufferSource();
       _this.source = t1;
       t1.connect(_this.level, 0, 0);
+      _this.dIn.connect(_this.source.detune, 0);
+      _this.pIn.connect(_this.source.playbackRate, 0);
       for (t1 = J.get$iterator$ax(_this.samples), step = -1, score = 100000, delta = 0, sample = null; t1.moveNext$0();) {
         s = t1.get$current(t1);
         t2 = note._note;
@@ -18718,10 +18820,7 @@
           score = d;
         }
       }
-      if (_this.synth.customRecordings.containsKey$1(0, step))
-        buffer = _this.synth.customRecordings.$index(0, step);
-      else
-        buffer = sample != null ? type$.AudioBuffer._as($.$get$Synthesizer_sounds().$index(0, sample)) : null;
+      buffer = sample != null ? type$.AudioBuffer._as($.$get$Synthesizer_sounds().$index(0, sample)) : null;
       if (buffer != null) {
         playback = Math.pow(2, delta / 12);
         _this.source.buffer = buffer;
@@ -18801,6 +18900,12 @@
       if (t1 != null)
         t1.disconnect();
       this.source = null;
+    },
+    connectFromSource$2: function(incoming, type) {
+      if (type === "detune")
+        incoming.level.connect(this.dIn, 0, 0);
+      else if (type === "playbackRate")
+        incoming.level.connect(this.pIn, 0, 0);
     }
   };
   B.SynthSampleNode_schedulePitchBend_closure.prototype = {
@@ -18857,52 +18962,78 @@
   };
   B.SchedulerSynth.prototype = {
     scheduleNotes$4$delay$offset: function(trace, dest, delay, offset) {
-      var t1, t2, t3, t4, t5, t6, t7, _i, t, t8, t9, delta;
-      for (t1 = trace.trace, t2 = t1.length, t3 = this.effects, t4 = type$.Map_dynamic_dynamic, t5 = type$.AudioContext, t6 = type$.Note, t7 = delay > 0, _i = 0; _i < t1.length; t1.length === t2 || (0, H.throwConcurrentModificationError)(t1), ++_i) {
+      var delta, t1, t2, t3, t4, t5, t6, t7, _i, t, t8, t9, t10, t11, generator, _this = this;
+      if (delay > 0)
+        delta = delay;
+      else {
+        if (typeof offset !== "number")
+          return offset.$gt();
+        delta = offset > 0 ? -offset : 0;
+      }
+      for (t1 = trace.trace, t2 = t1.length, t3 = _this.effects, t4 = type$.Map_dynamic_dynamic, t5 = type$.AudioContext, t6 = type$.JsLinkedHashMap_int_SynthNode, t7 = type$.Note, _i = 0; _i < t1.length; t1.length === t2 || (0, H.throwConcurrentModificationError)(t1), ++_i) {
         t = t1[_i];
         t8 = t.command;
         if (t8 === "start")
           C.JSArray_methods.set$length(t3, 0);
-        else if (t8 === "play") {
-          t8 = t.time;
-          t9 = t.duration;
-          if (typeof t8 !== "number")
-            return t8.$add();
-          if (typeof t9 !== "number")
-            return H.iae(t9);
-          if (typeof offset !== "number")
-            return H.iae(offset);
-          t8 = t8 + t9 >= offset;
-          if (!t8)
-            t8 = false;
-          else
-            t8 = true;
-          if (t8) {
-            if (t7)
-              delta = delay;
-            else {
+        else {
+          if (t8 === "play") {
+            t9 = t.time;
+            t10 = t.duration;
+            if (typeof t9 !== "number")
+              return t9.$add();
+            if (typeof t10 !== "number")
+              return H.iae(t10);
+            if (typeof offset !== "number")
+              return H.iae(offset);
+            t10 = t9 + t10 >= offset;
+            t9 = t10;
+          } else
+            t9 = false;
+          if (t9)
+            _this._synth$_schedule$5(t7._as(t.params.$index(0, "note")), dest, t.time, delta, null);
+          else {
+            if (t8 === "sound") {
+              t9 = t.time;
+              t10 = t.duration;
+              if (typeof t9 !== "number")
+                return t9.$add();
+              if (typeof t10 !== "number")
+                return H.iae(t10);
               if (typeof offset !== "number")
-                return offset.$gt();
-              delta = offset > 0 ? -offset : 0;
-            }
-            this.scheduleNote$4(t6._as(t.params.$index(0, "note")), dest, t.time, delta);
+                return H.iae(offset);
+              t10 = t9 + t10 >= offset;
+              t9 = t10;
+            } else
+              t9 = false;
+            if (t9) {
+              t8 = t.params;
+              t9 = t7._as(t8.$index(0, "note"));
+              t8 = H._asStringNullable(t8.$index(0, "sound-url"));
+              t10 = t.time;
+              t11 = dest.context;
+              generator = new U.SynthChain(t11, new H.JsLinkedHashMap(t6));
+              if (typeof t8 != "string")
+                H.throwExpression(H.argumentErrorValue(t8));
+              generator.loadPatch$1(t4._as(C.C_JsonCodec.decode$2$reviver(0, H.stringReplaceAllUnchecked('    {\n      "nodes": [\n        { "type": "out", "id": 0 },\n        {\n          "type": "sample",\n          "samples": [\n            {\n              "sample": "<SOUNDURL>",\n              "step": 60\n            }\n          ],\n          "id": 1,\n          "level": 1\n        },\n        {\n          "type": "adsr",\n          "A": 0.01,\n          "D": 0.1,\n          "S": 1,\n          "R": 0.3,\n          "level": 1,\n          "id": 2\n        }\n      ],\n      "routing": [\n        { "source": 1, "dest": 2, "type": "in" },\n        { "source": 2, "dest": 0, "type": "out" }\n      ]\n    }', "<SOUNDURL>", t8), null)));
+              _this._synth$_schedule$5(t9, dest, t10, delta, generator);
+            } else if (t8 === "patch")
+              _this.loadPatch$3("custom", t4._as(t.params.$index(0, "patch")), t5._as(dest.context));
+            else if (t8 === "push_fx") {
+              t8 = t.params;
+              t8 = K.Effect_Effect(H._asStringNullable(t8.$index(0, "effect")), t8);
+              if (t8 != null)
+                C.JSArray_methods.add$1(t3, t8);
+            } else if (t8 === "pop_fx") {
+              t8 = t3.length;
+              if (t8 !== 0) {
+                if (0 >= t8)
+                  return H.ioore(t3, -1);
+                t3.pop();
+              }
+            } else if (t8 === "stop")
+              C.JSArray_methods.set$length(t3, 0);
           }
-        } else if (t8 === "patch")
-          this.loadPatch$3("custom", t4._as(t.params.$index(0, "patch")), t5._as(dest.context));
-        else if (t8 === "push_fx") {
-          t8 = t.params;
-          t8 = K.Effect_Effect(H._asStringNullable(t8.$index(0, "effect")), t8);
-          if (t8 != null)
-            C.JSArray_methods.add$1(t3, t8);
-        } else if (t8 === "pop_fx") {
-          t8 = t3.length;
-          if (t8 !== 0) {
-            if (0 >= t8)
-              return H.ioore(t3, -1);
-            t3.pop();
-          }
-        } else if (t8 === "stop")
-          C.JSArray_methods.set$length(t3, 0);
+        }
       }
     },
     scheduleNotes$3$offset: function(trace, dest, offset) {
@@ -18957,13 +19088,19 @@
       });
       return P._asyncStartSync($async$loadPatch$3, $async$completer);
     },
-    playNote$2: function(note, dest) {
+    playSound$3: function(note, soundURL, dest) {
+      var t1 = dest.context,
+        generator = new U.SynthChain(t1, new H.JsLinkedHashMap(type$.JsLinkedHashMap_int_SynthNode));
+      generator.loadCustomPatch$1(soundURL);
+      return this._play$3(note, dest, generator);
+    },
+    _play$3: function(note, dest, generator) {
       var t2, $event, gain, t3, _this = this, t1 = {};
       if (_this.config == null)
         return null;
       t2 = dest.context;
       $event = new X.SynthEvent(note, t2);
-      t2 = $event.chain = _this.allocateGenerator$1(t2);
+      t2 = generator != null ? $event.chain = generator : $event.chain = _this.allocateGenerator$1(t2);
       if (t2 == null)
         return null;
       gain = J.createGain$0$x(dest.context);
@@ -18974,7 +19111,7 @@
       $event.start = t3.currentTime;
       t2.playNote$6(note, gain, 0, 0, 0, true);
       C.JSArray_methods.add$1(_this.notes, $event);
-      $event.onEnded = new L.Synthesizer_playNote_closure(t1, _this, $event);
+      $event.onEnded = new L.Synthesizer__play_closure(t1, _this, $event);
       return $event;
     },
     releaseNote$1: function(note) {
@@ -18995,11 +19132,11 @@
         t1[i].releaseNote$0();
       }
     },
-    scheduleNote$4: function(note, dest, start, delta) {
+    _synth$_schedule$5: function(note, dest, start, delta, generator) {
       var $async$goto = 0,
         $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic),
         $async$returnValue, $async$self = this, t1, now, t2, t3, offset, off, delay, $event, fx, t4, t5, _i, e, slept, nodes, i, gain;
-      var $async$scheduleNote$4 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+      var $async$_synth$_schedule$5 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
         if ($async$errorCode === 1)
           return P._asyncRethrow($async$result, $async$completer);
         while (true)
@@ -19046,7 +19183,7 @@
               case 3:
                 // then
                 $async$goto = 6;
-                return P._asyncAwait(P.Future_Future$delayed(P.Duration$(C.JSNumber_methods.floor$0((start - 0.25) * 1000)), type$.dynamic), $async$scheduleNote$4);
+                return P._asyncAwait(P.Future_Future$delayed(P.Duration$(C.JSNumber_methods.floor$0((start - 0.25) * 1000)), type$.dynamic), $async$_synth$_schedule$5);
               case 6:
                 // returning from await.
                 t4 = dest.context.currentTime;
@@ -19082,9 +19219,7 @@
                   $async$goto = 1;
                   break;
                 }
-                t4 = $async$self.allocateGenerator$1(dest.context);
-                $event.chain = t4;
-                if (t4 == null) {
+                if ((generator != null ? $event.chain = generator : $event.chain = $async$self.allocateGenerator$1(dest.context)) == null) {
                   C.JSArray_methods.remove$1(t1, $event);
                   // goto return
                   $async$goto = 1;
@@ -19114,16 +19249,13 @@
                 $event.scheduleNote$4(gain, now + start, off, t2 * t3);
                 for (t1 = fx.length, _i = 0; _i < fx.length; fx.length === t1 || (0, H.throwConcurrentModificationError)(fx), ++_i)
                   fx[_i].afterEffect$4($event, $async$self._bpm, delay, offset);
-                $event.onEnded = new L.Synthesizer_scheduleNote_closure($async$self, nodes, $event);
+                $event.onEnded = new L.Synthesizer__schedule_closure($async$self, nodes, $event);
               case 1:
                 // return
                 return P._asyncReturn($async$returnValue, $async$completer);
             }
       });
-      return P._asyncStartSync($async$scheduleNote$4, $async$completer);
-    },
-    scheduleNote$3: function(note, dest, start) {
-      return this.scheduleNote$4(note, dest, start, 0);
+      return P._asyncStartSync($async$_synth$_schedule$5, $async$completer);
     },
     cancelAllNotes$0: function() {
       var t1, i, t2, t3;
@@ -19143,8 +19275,8 @@
       C.JSArray_methods.forEach$1(this.notes, new L.Synthesizer_pitchBend_closure(cents));
     },
     allocateGenerator$1: function(context) {
-      var _i, chain, t3, _this = this,
-        t1 = _this._bank,
+      var _i, chain, t3,
+        t1 = this._bank,
         t2 = t1.length;
       if (t2 !== 0) {
         if (0 >= t2)
@@ -19154,7 +19286,7 @@
       } else
         t2 = false;
       if (t2)
-        _this.destroyAllGenerators$0();
+        this.destroyAllGenerators$0();
       for (t2 = t1.length, _i = 0; _i < t2; ++_i) {
         chain = t1[_i];
         if (chain.free) {
@@ -19168,7 +19300,8 @@
         }
       }
       if (t2 < 16) {
-        chain = U.SynthChain$(_this, context, _this.config);
+        chain = new U.SynthChain(context, new H.JsLinkedHashMap(type$.JsLinkedHashMap_int_SynthNode));
+        chain.loadPatch$1(this.config);
         chain.free = false;
         C.JSArray_methods.add$1(t1, chain);
         return chain;
@@ -19225,6 +19358,21 @@
           }
       });
       return P._asyncStartSync($async$loadAudioBuffer$3, $async$completer);
+    },
+    loadCustomSound$2: function(url, context) {
+      var request, t1, t2, t3;
+      if ($.$get$Synthesizer_sounds().$index(0, url) != null)
+        return;
+      request = new XMLHttpRequest();
+      C.HttpRequest_methods.open$3$async(request, "GET", url, true);
+      request.responseType = "arraybuffer";
+      t1 = type$.void_Function_ProgressEvent;
+      t2 = t1._as(new L.Synthesizer_loadCustomSound_closure(context, request, url));
+      type$.void_Function._as(null);
+      t3 = type$.ProgressEvent;
+      W._EventStreamSubscription$(request, "load", t2, false, t3);
+      W._EventStreamSubscription$(request, "error", t1._as(new L.Synthesizer_loadCustomSound_closure0()), false, t3);
+      request.send();
     }
   };
   L.Synthesizer_loadPatch_closure.prototype = {
@@ -19233,7 +19381,7 @@
     },
     $signature: 6
   };
-  L.Synthesizer_playNote_closure.prototype = {
+  L.Synthesizer__play_closure.prototype = {
     call$0: function() {
       var t2,
         t1 = this.event;
@@ -19254,7 +19402,7 @@
     $requiredArgCount: 0,
     $signature: 1
   };
-  L.Synthesizer_scheduleNote_closure.prototype = {
+  L.Synthesizer__schedule_closure.prototype = {
     call$0: function() {
       var t1, t2, _i;
       for (t1 = this.nodes, t2 = t1.length, _i = 0; _i < t1.length; t1.length === t2 || (0, H.throwConcurrentModificationError)(t1), ++_i)
@@ -19309,14 +19457,52 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 21
+    $signature: 17
   };
   L.Synthesizer_loadAudioBuffer_closure0.prototype = {
     call$1: function(e) {
       type$.ProgressEvent._as(e);
       return P.print("BufferLoader: XHR error");
     },
-    $signature: 33
+    $signature: 22
+  };
+  L.Synthesizer_loadCustomSound_closure.prototype = {
+    call$1: function(e) {
+      return this.$call$body$Synthesizer_loadCustomSound_closure(type$.ProgressEvent._as(e));
+    },
+    $call$body$Synthesizer_loadCustomSound_closure: function(e) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.Null),
+        $async$self = this, t1, buffer;
+      var $async$call$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              t1 = $async$self.context;
+              $async$goto = 2;
+              return P._asyncAwait((t1 && C.AudioContext_methods).decodeAudioData$1(t1, type$.ByteBuffer._as(W._convertNativeToDart_XHR_Response($async$self.request.response))), $async$call$1);
+            case 2:
+              // returning from await.
+              buffer = $async$result;
+              if (buffer != null)
+                $.$get$Synthesizer_sounds().$indexSet(0, $async$self.url, buffer);
+              // implicit return
+              return P._asyncReturn(null, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$call$1, $async$completer);
+    },
+    $signature: 17
+  };
+  L.Synthesizer_loadCustomSound_closure0.prototype = {
+    call$1: function(e) {
+      type$.ProgressEvent._as(e);
+      return P.print("BufferLoader: XHR error");
+    },
+    $signature: 22
   };
   Y.Trace.prototype = {
     get$length: function(_) {
@@ -19374,14 +19560,15 @@
       return this.advanceToEvent$1(target);
     },
     addEvent$1: function(jsonString) {
-      var json, t1, t2, exception, _this = this, _s4_ = "note", $event = null;
+      var json, cmd, t1, t2, exception, _this = this, _s4_ = "note", $event = null;
       try {
         json = type$.Map_dynamic_dynamic._as(C.C_JsonCodec.decode$2$reviver(0, jsonString, null));
         $event = Y.TraceEvent$fromJSON(json);
         C.JSArray_methods.add$1(_this.trace, $event);
-        if ($event.command === "trace")
+        cmd = $event.command;
+        if (J.$eq$(cmd, "trace"))
           _this._timer = $event.time;
-        else if ($event.command === "play") {
+        else if (J.$eq$(cmd, "play")) {
           t1 = $event.time;
           t2 = $event.duration;
           if (typeof t1 !== "number")
@@ -19392,6 +19579,14 @@
           if (_this._minNote < 0 || type$.Note._as($event.params.$index(0, _s4_))._note < _this._minNote)
             _this._minNote = type$.Note._as($event.params.$index(0, _s4_))._note;
           _this._maxNote = Math.max(_this._maxNote, type$.Note._as($event.params.$index(0, _s4_))._note);
+        } else if (J.$eq$(cmd, "sound")) {
+          t1 = $event.time;
+          t2 = $event.duration;
+          if (typeof t1 !== "number")
+            return t1.$add();
+          if (typeof t2 !== "number")
+            return H.iae(t2);
+          _this._beats = Math.max(t1 + t2, _this._beats);
         }
       } catch (exception) {
         H.unwrapException(exception);
@@ -19410,7 +19605,7 @@
       return this.params.$index(0, H._asStringNullable(key));
     },
     TraceEvent$fromJSON$1: function(json) {
-      var t3, note, key, sustain, _this = this, _s6_ = "params",
+      var t3, note, key, pitch, sustain, _this = this, _s6_ = "params",
         _s8_ = "velocity",
         t1 = J.getInterceptor$asx(json),
         t2 = t1.$index(json, "command");
@@ -19426,8 +19621,11 @@
             note.duration = _this.duration;
             t3.$indexSet(0, key, note);
           } else if (key === "sound") {
+            pitch = B.toNum(J.$index$asx(t1.$index(json, _s6_), "pitch"), 60);
+            if (typeof pitch !== "number")
+              return H.iae(pitch);
             note = new F.Note();
-            note._note = Math.max(0, 48);
+            note._note = Math.max(0, 60 + pitch);
             note.duration = _this.duration;
             t3.$indexSet(0, "note", note);
             t3.$indexSet(0, key, J.$index$asx(t1.$index(json, _s6_), key));
@@ -19660,6 +19858,7 @@
       t1._listeners.add$1(0, _this);
       _this.setVoice$2(H._asStringNullable(J.$index$asx(_this.settings, "voice")), H._asStringNullable(J.$index$asx(_this.settings, "instrument")));
       _this.metronome.loadPatch$3(_s9_, $.patches.$index(0, _s9_), t1.context);
+      _this._loadCustomSounds$0();
     },
     load$1: function(_, data) {
       var t1, t2, nameField, _this = this,
@@ -19847,6 +20046,7 @@
           }
         }
       }
+      _this._loadCustomSounds$0();
       t4 = _this.clock;
       t5 = t4._beatsPerMeasure;
       t6 = t1._beats;
@@ -19938,6 +20138,23 @@
         }
       }
       _this.trace.bug = 0;
+    },
+    _loadCustomSounds$0: function() {
+      var t2, t3, t4, t5, _i, e, t6, url, _this = this, _s5_ = "sound",
+        t1 = _this.clock;
+      if (t1.context == null)
+        return;
+      for (t2 = _this.trace.trace, t3 = t2.length, t4 = _this.datastore, t5 = _this.synth, _i = 0; _i < t2.length; t2.length === t3 || (0, H.throwConcurrentModificationError)(t2), ++_i) {
+        e = t2[_i];
+        if (e.command === "sound") {
+          t6 = e.params;
+          if (t6.containsKey$1(0, _s5_) && typeof t6.$index(0, _s5_) == "number") {
+            url = t4.host + "/recorder/audio/" + H.S(t6.$index(0, _s5_));
+            t6.$indexSet(0, "sound-url", url);
+            t5.loadCustomSound$2(url, t1.context);
+          }
+        }
+      }
     },
     stop$0: function(_) {
       var t1, _this = this;
@@ -20286,7 +20503,7 @@
               n = new F.Note();
               n._note = Math.max(0, 20);
             }
-            t2.scheduleNote$3(n, t1.context.destination, i);
+            t2._synth$_schedule$5(n, t1.context.destination, i, 0, null);
             ++i;
           }
         }
@@ -20772,7 +20989,7 @@
             t5 = new F.Note();
             t5._note = Math.max(0, H.checkNum(U._toInt(t4.$index(t3, _s4_), 0)));
             t5._velocity = J.clamp$2$n(U._toInt(t4.$index(t3, _s8_), 0), 0, 127);
-            t1.synth.playNote$2(t5, t2.context.destination);
+            t1.synth._play$3(t5, t2.context.destination, null);
           }
         } else {
           if (U._toInt(t4.$index(t3, _s7_), 0) !== 8)
@@ -21133,7 +21350,7 @@
         t2 = new F.Note();
         t2._note = Math.max(0, t3);
         t2._velocity = C.JSInt_methods.clamp$2(t4, 0, 127);
-        t1.synth.playNote$2(t2, t1.clock.context.destination);
+        t1.synth._play$3(t2, t1.clock.context.destination, null);
       } else if (t2 === "off" && t1.clock.context != null) {
         if (H.boolConversionCheck(out)) {
           t2 = J.round$0$n(e.note);
@@ -21259,7 +21476,7 @@
       if (this.menu !== m)
         J.get$classes$x(m).add$1(0, "hidden");
     },
-    $signature: 17
+    $signature: 18
   };
   Y.DataModel.prototype = {
     $eq: function(_, other) {
@@ -22199,25 +22416,25 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 25
+    $signature: 26
   };
   Y.Datastore_addUpdateCallback_closure.prototype = {
     call$0: function() {
       return H.setRuntimeTypeInfo([], type$.JSArray_Function);
     },
-    $signature: 23
+    $signature: 24
   };
   Y.Datastore_addRemovedCallback_closure.prototype = {
     call$0: function() {
       return H.setRuntimeTypeInfo([], type$.JSArray_Function);
     },
-    $signature: 23
+    $signature: 24
   };
   Y.Datastore_addAddedCallback_closure.prototype = {
     call$0: function() {
       return H.setRuntimeTypeInfo([], type$.JSArray_Function);
     },
-    $signature: 23
+    $signature: 24
   };
   Y.DatastoreException.prototype = {$isException: 1};
   Y.Project.prototype = {
@@ -22454,13 +22671,13 @@
     call$1: function(cell) {
       type$.PythonCell._as(cell).initAudio$0();
     },
-    $signature: 24
+    $signature: 25
   };
   Y.Project_playAll_closure.prototype = {
     call$1: function(cell) {
       type$.PythonCell._as(cell).play$0(0);
     },
-    $signature: 24
+    $signature: 25
   };
   Y.Project_pauseAll_closure.prototype = {
     call$1: function(cell) {
@@ -22468,7 +22685,7 @@
       cell._pauseHelper$0();
       cell.clock.pause$1(0, cell);
     },
-    $signature: 24
+    $signature: 25
   };
   Y.Project__registerEvents_closure.prototype = {
     call$1: function(e) {
@@ -23152,14 +23369,14 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 21
+    $signature: 17
   };
   Y.EffectsChain_loadSoundEffects_closure0.prototype = {
     call$1: function(e) {
       type$.ProgressEvent._as(e);
       return P.print("BufferLoader: XHR error");
     },
-    $signature: 33
+    $signature: 22
   };
   Y.GraphicEq.prototype = {
     GraphicEq$2: function(container, onColor) {
@@ -24365,10 +24582,13 @@
           item.toString;
           t2 = H.S(rec.id);
           item.setAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(item))._toHyphenedName$1("id"), t2);
-          sid = type$.SpanElement._as(item.querySelector(".sound-id"));
-          if (sid != null)
-            C.SpanElement_methods.setInnerHtml$1(sid, H.S(rec.id));
           t2 = type$.HtmlElement;
+          sid = t2._as(item.querySelector(".sound-id"));
+          if (sid != null)
+            J.setInnerHtml$1$x(sid, H.S(rec.id));
+          sid = t2._as(item.querySelector(".sample-id"));
+          if (sid != null)
+            J.setInnerHtml$1$x(sid, "(" + H.S(rec.id) + ")");
           $name = t2._as(item.querySelector(".sample-name"));
           if ($name != null)
             J.setInnerHtml$1$x($name, rec.name);
@@ -24652,7 +24872,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 21
+    $signature: 17
   };
   Y.RecordingStudio__registerEvents_closure.prototype = {
     call$1: function(e) {
@@ -25212,7 +25432,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 25
+    $signature: 26
   };
   Y.RecordingStudio__playPreview_closure.prototype = {
     call$1: function(e) {
@@ -25575,7 +25795,7 @@
       return t1 / t3;
     },
     set$playhead: function(p) {
-      var t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, _this = this,
+      var t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, generator, _this = this,
         _s11_ = "highlighted",
         _s4_ = "note";
       _this._playhead = p;
@@ -25616,44 +25836,58 @@
           }
         }
       }
-      for (t2 = t1.get$keys(t1), t2 = t2.get$iterator(t2), t6 = t3.clock; t2.moveNext$0();) {
-        t7 = t2.get$current(t2);
+      for (t2 = t1.get$keys(t1), t2 = t2.get$iterator(t2), t6 = type$.Map_dynamic_dynamic, t7 = type$.JsLinkedHashMap_int_SynthNode, t8 = t3.clock; t2.moveNext$0();) {
+        t9 = t2.get$current(t2);
         if (typeof p !== "number")
           return p.$gt();
         if (p > 0) {
-          t8 = t7.time;
-          if (typeof t8 !== "number")
-            return t8.$le();
-          if (t8 <= p) {
-            t9 = t7.duration;
-            if (typeof t9 !== "number")
-              return H.iae(t9);
-            t9 = t8 + t9 > p;
-            t8 = t9;
+          t10 = t9.time;
+          if (typeof t10 !== "number")
+            return t10.$le();
+          if (t10 <= p) {
+            t11 = t9.duration;
+            if (typeof t11 !== "number")
+              return H.iae(t11);
+            t11 = t10 + t11 > p;
+            t10 = t11;
           } else
-            t8 = false;
+            t10 = false;
         } else
-          t8 = false;
-        if (t8) {
-          t8 = t1.$index(0, t7);
-          t8.toString;
-          if (!new P.AttributeClassSet(t8).contains$1(0, _s11_)) {
+          t10 = false;
+        if (t10) {
+          t10 = t1.$index(0, t9);
+          t10.toString;
+          if (!new P.AttributeClassSet(t10).contains$1(0, _s11_)) {
             if (_this._down) {
-              t8 = t7.params;
-              if (t8.containsKey$1(0, "line")) {
-                t9 = t3.editor;
-                t10 = H._asIntNullable(t8.$index(0, "line"));
-                t9.toString;
-                if (t10 != null && t10 > 0)
-                  $.$get$_context().callMethod$2("setTraceMarker", [t9.id, t10]);
+              t10 = t9.params;
+              if (t10.containsKey$1(0, "line")) {
+                t11 = t3.editor;
+                t12 = H._asIntNullable(t10.$index(0, "line"));
+                t11.toString;
+                if (t12 != null && t12 > 0)
+                  $.$get$_context().callMethod$2("setTraceMarker", [t11.id, t12]);
               }
-              if (t6.context != null)
-                t4.playNote$2(t5._as(t8.$index(0, _s4_)), t6.context.destination);
-              t3.instrument.noteOn$1(t5._as(t8.$index(0, _s4_))._note);
+              if (t8.context != null) {
+                t11 = t9.command;
+                if (t11 === "play")
+                  t4._play$3(t5._as(t10.$index(0, _s4_)), t8.context.destination, null);
+                else if (t11 === "sound") {
+                  t11 = t5._as(t10.$index(0, _s4_));
+                  t12 = H._asStringNullable(t10.$index(0, "sound-url"));
+                  t13 = t8.context.destination;
+                  t14 = t13.context;
+                  generator = new U.SynthChain(t14, new H.JsLinkedHashMap(t7));
+                  if (typeof t12 != "string")
+                    H.throwExpression(H.argumentErrorValue(t12));
+                  generator.loadPatch$1(t6._as(C.C_JsonCodec.decode$2$reviver(0, H.stringReplaceAllUnchecked('    {\n      "nodes": [\n        { "type": "out", "id": 0 },\n        {\n          "type": "sample",\n          "samples": [\n            {\n              "sample": "<SOUNDURL>",\n              "step": 60\n            }\n          ],\n          "id": 1,\n          "level": 1\n        },\n        {\n          "type": "adsr",\n          "A": 0.01,\n          "D": 0.1,\n          "S": 1,\n          "R": 0.3,\n          "level": 1,\n          "id": 2\n        }\n      ],\n      "routing": [\n        { "source": 1, "dest": 2, "type": "in" },\n        { "source": 2, "dest": 0, "type": "out" }\n      ]\n    }', "<SOUNDURL>", t12), null)));
+                  t4._play$3(t11, t13, generator);
+                }
+              }
+              t3.instrument.noteOn$1(t5._as(t10.$index(0, _s4_))._note);
             }
-            t7 = t1.$index(0, t7);
-            t7.toString;
-            new P.AttributeClassSet(t7).add$1(0, _s11_);
+            t9 = t1.$index(0, t9);
+            t9.toString;
+            new P.AttributeClassSet(t9).add$1(0, _s11_);
           }
         }
       }
@@ -25692,7 +25926,7 @@
       _this._registerTouchEvents$0();
     },
     _render$0: function() {
-      var scrollContainer, rect, t2, t3, t4, beatNumbers, beatBacker, t5, t6, t7, i, t8, x, temp, _i, t, _this = this,
+      var scrollContainer, t2, t3, t4, beatNumbers, beatBacker, t5, t6, t7, i, t8, x, temp, _i, t, _this = this,
         _s26_ = "http://www.w3.org/2000/svg",
         t1 = _this.container;
       if (t1 == null)
@@ -25700,9 +25934,8 @@
       t1 = t1.parentElement;
       scrollContainer = type$.DivElement._as(t1.parentElement);
       if (scrollContainer != null) {
-        rect = scrollContainer.getBoundingClientRect();
-        t1 = _this.width = rect.width;
-        t2 = rect.height;
+        t1 = _this.width = scrollContainer.getBoundingClientRect().width;
+        t2 = _this.tracks * 10;
         _this.height = t2;
         if (t1 === 0)
           t1 = _this.width = 800;
@@ -25714,7 +25947,7 @@
           return t1.$div();
         if (typeof t3 !== "number")
           return H.iae(t3);
-        t2.setAttribute("viewBox", "0 0 " + H.S(Math.max(40, t1 / t3) * t3) + " " + H.S(_this.height));
+        t2.setAttribute("viewBox", "0 0 " + H.S(Math.max(40, t1 / t3) * t3) + " " + _this.height);
         t3 = _this.container.parentElement.style;
         t1 = _this.width;
         t2 = _this.beats;
@@ -25724,6 +25957,9 @@
           return H.iae(t2);
         t2 = H.S(Math.max(40, t1 / t2) * t2 - 2) + "px";
         t3.width = t2;
+        t1 = _this.container.parentElement.style;
+        t2 = "" + _this.height + "px";
+        t1.height = t2;
       }
       t1 = _this.parent;
       if (t1 != null)
@@ -25782,7 +26018,7 @@
             break c$0;
           temp = t1.createElementNS("http://www.w3.org/2000/svg", "line");
           temp = t4._as(t2._as(temp));
-          C.LineElement_methods.set$attributes(temp, P.LinkedHashMap_LinkedHashMap$_literal(["class", "beat-line", "x1", H.S(x), "y1", "0", "x2", H.S(x), "y2", H.S(_this.height)], t7, t7));
+          C.LineElement_methods.set$attributes(temp, P.LinkedHashMap_LinkedHashMap$_literal(["class", "beat-line", "x1", H.S(x), "y1", "0", "x2", H.S(x), "y2", "" + _this.height], t7, t7));
           beatNumbers.appendChild(temp);
         }
         ++i;
@@ -25793,7 +26029,8 @@
         t4.clear$0(0);
         for (t5 = _this.trace.trace, t6 = t5.length, _i = 0; _i < t5.length; t5.length === t6 || (0, H.throwConcurrentModificationError)(t5), ++_i) {
           t = t5[_i];
-          if (t.command === "play")
+          t7 = t.command;
+          if (t7 === "play" || t7 === "sound")
             t4.$indexSet(0, t, _this._renderNote$1(t));
         }
         t4.get$values(t4).forEach$1(0, new Y.Timeline__render_closure0(_this));
@@ -25827,7 +26064,7 @@
     },
     _renderPlayhead$0: function() {
       var _this = this,
-        h = Math.max(100, H.checkNum(_this.height)),
+        h = Math.max(100, _this.height),
         t1 = _this._playhead,
         t2 = _this.width,
         t3 = _this.beats;
@@ -25843,7 +26080,7 @@
       t2.setAttribute("class", "playhead");
     },
     _renderNote$1: function(t) {
-      var t4, t5, n, t6, minNote, t7, t8, t9, tt, _this = this, _s4_ = "note",
+      var t4, n, t5, minNote, t6, tt, _this = this, _s4_ = "note",
         rect = type$.RectElement._as(type$.SvgElement._as(C.HtmlDocument_methods.createElementNS$2(document, "http://www.w3.org/2000/svg", "rect"))),
         t1 = t.duration,
         t2 = _this.width,
@@ -25856,34 +26093,26 @@
       if (typeof t1 !== "number")
         return t1.$mul();
       t3 = H.S(Math.max(0, t1 * t3 - 2));
-      t1 = _this.height;
-      if (typeof t1 !== "number")
-        return t1.$sub();
-      t1 = H.S(Math.max(5, (t1 - 20) / _this.tracks) - 2);
-      t2 = t.time;
-      t4 = _this.width;
-      t5 = _this.beats;
-      if (typeof t4 !== "number")
-        return t4.$div();
-      if (typeof t5 !== "number")
-        return H.iae(t5);
-      t5 = Math.max(40, t4 / t5);
+      t1 = t.time;
+      t2 = _this.width;
+      t4 = _this.beats;
       if (typeof t2 !== "number")
-        return t2.$mul();
-      t5 = H.S(t2 * t5);
-      t2 = t.params;
-      t4 = type$.Note;
-      n = C.JSNumber_methods.round$0(t4._as(t2.$index(0, _s4_))._note);
-      t6 = _this.trace;
-      minNote = t6 == null || t6._minNote < 0 ? 0 : C.JSNumber_methods.round$0(t6._minNote);
-      t6 = _this.tracks;
-      t7 = C.JSInt_methods.$mod(n - minNote, t6);
-      t8 = _this.height;
-      if (typeof t8 !== "number")
-        return t8.$sub();
-      t9 = type$.String;
-      (rect && C.RectElement_methods).set$attributes(rect, P.LinkedHashMap_LinkedHashMap$_literal(["class", "timeline-note", "width", t3, "height", t1, "x", t5, "y", H.S((t6 - t7 - 1) * Math.max(5, (t8 - 20) / t6) + 20 + 1)], t9, t9));
-      tt = H._isInt(t4._as(t2.$index(0, _s4_))._note) ? H.S(t4._as(t2.$index(0, _s4_))._note) : C.JSNumber_methods.toStringAsFixed$1(t4._as(t2.$index(0, _s4_))._note, 2);
+        return t2.$div();
+      if (typeof t4 !== "number")
+        return H.iae(t4);
+      t4 = Math.max(40, t2 / t4);
+      if (typeof t1 !== "number")
+        return t1.$mul();
+      t4 = H.S(t1 * t4);
+      t1 = t.params;
+      t2 = type$.Note;
+      n = C.JSNumber_methods.round$0(t2._as(t1.$index(0, _s4_))._note);
+      t5 = _this.trace;
+      minNote = t5 == null || t5._minNote < 0 ? 0 : C.JSNumber_methods.round$0(t5._minNote);
+      t5 = _this.tracks;
+      t6 = type$.String;
+      (rect && C.RectElement_methods).set$attributes(rect, P.LinkedHashMap_LinkedHashMap$_literal(["class", "timeline-note", "width", t3, "height", "8", "x", t4, "y", "" + ((t5 - C.JSInt_methods.$mod(n - minNote, t5) - 1) * 10 + 20 + 1)], t6, t6));
+      tt = H._isInt(t2._as(t1.$index(0, _s4_))._note) ? H.S(t2._as(t1.$index(0, _s4_))._note) : C.JSNumber_methods.toStringAsFixed$1(t2._as(t1.$index(0, _s4_))._note, 2);
       t1 = type$._ElementEventStreamImpl_MouseEvent;
       t2 = t1._eval$1("~(1)");
       t3 = t2._as(new Y.Timeline__renderNote_closure(_this, t, tt));
@@ -25922,7 +26151,7 @@
     call$1: function(e) {
       return this.$this._render$0();
     },
-    $signature: 19
+    $signature: 20
   };
   Y.Timeline__render_closure.prototype = {
     call$1: function(e) {
@@ -26048,17 +26277,24 @@
   };
   Y.Timeline__renderNote_closure1.prototype = {
     call$1: function(e) {
-      var t1, t2, t3;
+      var t1, t2, t3, t4, _s4_ = "note";
       type$.MouseEvent._as(e);
       t1 = this.$this.listener;
       t2 = this.t;
       t3 = t1.clock;
-      if (t3.context != null)
-        t1.synth.playNote$2(type$.Note._as(t2.params.$index(0, "note")), t3.context.destination);
+      if (t3.context != null) {
+        t4 = t2.command;
+        if (t4 === "play")
+          t1.synth._play$3(type$.Note._as(t2.params.$index(0, _s4_)), t3.context.destination, null);
+        else if (t4 === "sound") {
+          t4 = t2.params;
+          t1.synth.playSound$3(type$.Note._as(t4.$index(0, _s4_)), H._asStringNullable(t4.$index(0, "sound-url")), t3.context.destination);
+        }
+      }
       t2 = t2.params;
       if (t2.containsKey$1(0, "line"))
         t1.editor.setTraceMarker$1(H._asIntNullable(t2.$index(0, "line")));
-      t1.instrument.noteOn$1(type$.Note._as(t2.$index(0, "note"))._note);
+      t1.instrument.noteOn$1(type$.Note._as(t2.$index(0, _s4_))._note);
     },
     $signature: 0
   };
@@ -26340,7 +26576,7 @@
     call$1: function(o) {
       J.remove$0$ax(type$.Element._as(o));
     },
-    $signature: 17
+    $signature: 18
   };
   E.Dialog__showModal_closure.prototype = {
     call$1: function(e) {
@@ -26395,7 +26631,7 @@
       if (this.menu !== m)
         J.get$classes$x(m).add$1(0, "hidden");
     },
-    $signature: 17
+    $signature: 18
   };
   R.MixSlider.prototype = {
     get$value: function(_) {
@@ -26959,7 +27195,7 @@
       type$.void_Function._as(null);
       W._EventStreamSubscription$(t2._target, t2._eventType, t1, false, t3._precomputed1);
     },
-    $signature: 17
+    $signature: 18
   };
   O.TrackLibrary_show__closure.prototype = {
     call$1: function(e) {
@@ -27215,7 +27451,7 @@
         W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t2.querySelectorAll(_s4_), t3)).add$1(0, "authenticated");
       }
     },
-    $signature: 36
+    $signature: 37
   };
   F.main_closure2.prototype = {
     call$1: function(user) {
@@ -27241,7 +27477,7 @@
       H.checkTypeBound(t2, t2, "T", _s16_);
       W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("main"), t3)).clear$0(0);
     },
-    $signature: 36
+    $signature: 37
   };
   F.main_closure3.prototype = {
     call$1: function(e) {
@@ -27607,7 +27843,7 @@
       type$.Event._as(e);
       return this.$this._sendAction$1("userlist-leave");
     },
-    $signature: 19
+    $signature: 20
   };
   B.UserList__buildUserList_closure.prototype = {
     call$2: function(a, b) {
@@ -27656,9 +27892,9 @@
       _instance_0_i = hunkHelpers._instance_0i,
       _static_2 = hunkHelpers._static_2,
       _instance_2_u = hunkHelpers._instance_2u;
-    _static_1(P, "async__AsyncRun__scheduleImmediateJsOverride$closure", "_AsyncRun__scheduleImmediateJsOverride", 18);
-    _static_1(P, "async__AsyncRun__scheduleImmediateWithSetImmediate$closure", "_AsyncRun__scheduleImmediateWithSetImmediate", 18);
-    _static_1(P, "async__AsyncRun__scheduleImmediateWithTimer$closure", "_AsyncRun__scheduleImmediateWithTimer", 18);
+    _static_1(P, "async__AsyncRun__scheduleImmediateJsOverride$closure", "_AsyncRun__scheduleImmediateJsOverride", 19);
+    _static_1(P, "async__AsyncRun__scheduleImmediateWithSetImmediate$closure", "_AsyncRun__scheduleImmediateWithSetImmediate", 19);
+    _static_1(P, "async__AsyncRun__scheduleImmediateWithTimer$closure", "_AsyncRun__scheduleImmediateWithTimer", 19);
     _static_0(P, "async___startMicrotaskLoop$closure", "_startMicrotaskLoop", 2);
     _static(P, "async___nullErrorHandler$closure", 1, null, ["call$2", "call$1"], ["_nullErrorHandler", function(error) {
       return P._nullErrorHandler(error, null);
@@ -27685,8 +27921,8 @@
     _static_1(P, "convert___defaultToEncodable$closure", "_defaultToEncodable", 7);
     _static(W, "html__Html5NodeValidator__standardAttributeValidator$closure", 4, null, ["call$4"], ["_Html5NodeValidator__standardAttributeValidator"], 32, 0);
     _static(W, "html__Html5NodeValidator__uriAttributeValidator$closure", 4, null, ["call$4"], ["_Html5NodeValidator__uriAttributeValidator"], 32, 0);
-    _instance_0_i(W.CacheStorage.prototype, "get$keys", "keys$0", 65);
-    _instance_0_i(W.PaymentInstruments.prototype, "get$keys", "keys$0", 85);
+    _instance_0_i(W.CacheStorage.prototype, "get$keys", "keys$0", 64);
+    _instance_0_i(W.PaymentInstruments.prototype, "get$keys", "keys$0", 47);
     _instance_0_i(W._StreamPool.prototype, "get$close", "close$0", 2);
     _static_1(P, "js___convertToJS$closure", "_convertToJS", 7);
     _static_1(P, "js___convertToDart$closure", "_convertToDart", 59);
@@ -27705,16 +27941,16 @@
     _instance_1_u(_ = Z.Piano.prototype, "get$_onKeyDown", "_onKeyDown$1", 9);
     _instance_1_u(_, "get$_onKeyUp", "_onKeyUp$1", 9);
     _instance_1_i(_ = Y.PythonCell.prototype, "get$load", "load$1", 15);
-    _instance_1_i(_, "get$animate", "animate$1", 22);
+    _instance_1_i(_, "get$animate", "animate$1", 23);
     _instance_1_u(_ = Y.Datastore.prototype, "get$_onLogin", "_onLogin$1", 11);
     _instance_1_u(_, "get$_onConnect", "_onConnect$1", 11);
     _instance_0_u(_, "get$_onLogout", "_onLogout$0", 2);
     _instance_2_u(_, "get$_onUpdated", "_onUpdated$2", 10);
     _instance(_, "get$_onAdded", 0, 4, null, ["call$4"], ["_onAdded$4"], 73, 0);
     _instance_2_u(_, "get$_onRemoved", "_onRemoved$2", 10);
-    _instance_1_i(_ = Y.Project.prototype, "get$animate", "animate$1", 22);
+    _instance_1_i(_ = Y.Project.prototype, "get$animate", "animate$1", 23);
     _instance_1_i(_, "get$load", "load$1", 15);
-    _instance_1_u(Y.RecordingStudio.prototype, "get$tick", "tick$1", 22);
+    _instance_1_u(Y.RecordingStudio.prototype, "get$tick", "tick$1", 23);
     _instance_1_u(B.UserList.prototype, "get$_handleMessage", "_handleMessage$1", 12);
   })();
   (function inheritance() {
@@ -27741,7 +27977,7 @@
     _inherit(P.UnmodifiableMapView, P._UnmodifiableMapView_MapView__UnmodifiableMapMixin);
     _inherit(H.ConstantMapView, P.UnmodifiableMapView);
     _inherit(H.ConstantStringMap, H.ConstantMap);
-    _inheritMany(H.Closure, [H.Primitives_functionNoSuchMethod_closure, H.unwrapException_saveStackTrace, H.TearOffClosure, H.JsLinkedHashMap_values_closure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P._TimerImpl$periodic_closure, P._awaitOnObject_closure, P._awaitOnObject_closure0, P._wrapJsFunctionForAsync_closure, P._SyncBroadcastStreamController__sendData_closure, P._SyncBroadcastStreamController__sendDone_closure, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__asyncComplete_closure, P._Future__chainFuture_closure, P._Future__asyncCompleteError_closure, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P.Stream_length_closure, P.Stream_length_closure0, P.Stream_first_closure, P.Stream_first_closure0, P._StreamController__subscribe_closure, P._StreamController__recordCancel_complete, P._BufferingStreamSubscription__sendDone_sendDone, P._PendingEvents_schedule_closure, P._cancelAndValue_closure, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P._RootZone_bindUnaryCallbackGuarded_closure, P.LinkedHashMap_LinkedHashMap$from_closure, P.MapBase_mapToString_closure, P._JsonStringifier_writeMap_closure, P._symbolMapToStringMap_closure, P.NoSuchMethodError_toString_closure, P.DateTime_parse_parseIntOrZero, P.DateTime_parse_parseMilliAndMicroseconds, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, W.Element_Element$html_closure, W.Entry_remove_closure, W.Entry_remove_closure0, W.HttpRequest_getString_closure, W.HttpRequest_request_closure, W.MidiInputMap_keys_closure, W.MidiOutputMap_keys_closure, W.Navigator_getUserMedia_closure, W.Navigator_getUserMedia_closure0, W.RtcStatsReport_keys_closure, W.Storage_keys_closure, W.Window_animationFrame_closure, W._BeforeUnloadEventStreamProvider_forTarget_closure, W._DataAttributeMap_forEach_closure, W._DataAttributeMap_keys_closure, W._MultiElementCssClassSet__MultiElementCssClassSet_closure, W._MultiElementCssClassSet_readClasses_closure, W._MultiElementCssClassSet_modify_closure, W._MultiElementCssClassSet_toggle_closure, W._MultiElementCssClassSet_remove_closure, W._EventStreamSubscription_closure, W._StreamPool_add_closure, W.NodeValidatorBuilder_allowsElement_closure, W.NodeValidatorBuilder_allowsAttribute_closure, W._SimpleNodeValidator_closure, W._SimpleNodeValidator_closure0, W._TemplatingNodeValidator_closure, W._ValidatingTreeSanitizer_sanitizeTree_walk, P._StructuredClone_walk_closure, P._StructuredClone_walk_closure0, P._AcceptStructuredClone_walk_closure, P.convertDartToNative_Dictionary_closure, P.CssClassSetImpl_add_closure, P.CssClassSetImpl_removeWhere_closure, P.CssClassSetImpl_clear_closure, P.FilteredElementList__iterable_closure, P.FilteredElementList__iterable_closure0, P.FilteredElementList_removeRange_closure, P._convertToJS_closure, P._convertToJS_closure0, P._wrapToDart_closure, P._wrapToDart_closure0, P._wrapToDart_closure1, P.promiseToFuture_closure, P.promiseToFuture_closure0, P.AudioContext_decodeAudioData_closure, P.AudioContext_decodeAudioData_closure0, P.AudioParamMap_keys_closure, Z.DrumKit__render_closure, Z.DrumKit__render_closure0, Z.DrumKit__render_closure1, Z.DrumKit__render_closure2, Z.DrumPad_closure, Z.DrumPad_closure0, Z.DrumPad_closure1, Z.DrumPad_closure2, Z.Instrument_insert_closure, Z.Instrument_unload_closure, Z.Piano__render_closure, Z.Piano__render_closure0, Z.Piano__slideKeyboard_closure, Z.MiniPiano_slide_closure, Z.PianoKey_closure, Z.PianoKey_closure0, Z.PianoKey_closure1, Z.PianoKey_closure2, U.SynthChain_playNote_closure, U.SynthChain_pitchBend_closure, U.SynthChain_schedulePitchBend_closure, U.SynthChain_releaseNote_closure, U.SynthChain_destroy_closure, E.PlayClock_stopAll_closure, E.PlayClock_setTime_closure, E.PlayClock_setTempo_closure, E.PlayClock_setTimeSignature_closure, E.PlayClock_startMetronome_closure, E.PlayClock_startMetronome_closure0, E.PlayClock_startMetronome__closure, X.SynthEvent_releaseNote_closure, X.SynthEvent_scheduleNote_closure, B.SynthSampleNode_schedulePitchBend_closure, L.Synthesizer_loadPatch_closure, L.Synthesizer_playNote_closure, L.Synthesizer_scheduleNote_closure, L.Synthesizer_pitchBend_closure, L.Synthesizer_loadAudioBuffer_closure, L.Synthesizer_loadAudioBuffer_closure0, Y.UserAccounts_login_closure, Y.UserAccounts_login_closure0, Y.UserAccounts_login_closure1, Y.UserAccounts_login_closure2, Y.PythonCell_closure, Y.PythonCell_closure0, Y.PythonCell_closure1, Y.PythonCell_closure2, Y.PythonCell_closure3, Y.PythonCell_closure4, Y.PythonCell_closure5, Y.PythonCell_closure6, Y.PythonCell_closure7, Y.PythonCell_closure8, Y.PythonCell_closure9, Y.PythonCell_closure10, Y.PythonCell_closure11, Y.PythonCell_closure12, Y.PythonCell_closure13, Y.PythonCell_closure14, Y.PythonCell_closure15, Y.PythonCell_closure16, Y.PythonCell_closure17, Y.PythonCell_closure18, Y.PythonCell_closure19, Y.PythonCell_closure20, Y.PythonCell_onPythonDone_closure, Y.PythonCell__setInstrument_closure, Y.PythonCell__setInstrument_closure0, Y.PythonCell__shareTrack_closure, Y.PythonCell__shareTrack_closure0, Y.PythonCell__doContextMenu_closure, Y.toggleContextMenu_closure, Y.Datastore_loginWithGoogle_closure, Y.Datastore_addUpdateCallback_closure, Y.Datastore_addRemovedCallback_closure, Y.Datastore_addAddedCallback_closure, Y.Project_closure, Y.Project__closure, Y.Project_playAll_closure, Y.Project_pauseAll_closure, Y.Project__registerEvents_closure, Y.Project__registerEvents_closure0, Y.Project__registerEvents_closure1, Y.Project__registerEvents_closure2, Y.Project__registerEvents_closure3, Y.Project__registerEvents_closure4, Y.Project__registerEvents_closure5, Y.Project__registerEvents_closure6, Y.Project__registerEvents_closure7, Y.Project__registerEvents_closure8, Y.Project__registerEvents_closure9, Y.Project__registerEvents_closure10, Y.EffectsChain_closure, Y.EffectsChain_closure0, Y.EffectsChain_closure1, Y.EffectsChain_closure2, Y.EffectsChain_closure3, Y.EffectsChain_closure4, Y.EffectsChain_closure5, Y.EffectsChain_playAudio_closure, Y.EffectsChain_playSlice_closure, Y.EffectsChain_loadSoundEffects_closure, Y.EffectsChain_loadSoundEffects_closure0, Y.RecordingStudio_show_closure, Y.RecordingStudio_loadUserRecordings_closure, Y.RecordingStudio_uploadAudioFile_closure, Y.RecordingStudio__registerEvents_closure, Y.RecordingStudio__registerEvents_closure0, Y.RecordingStudio__registerEvents_closure1, Y.RecordingStudio__registerEvents_closure2, Y.RecordingStudio__registerEvents_closure3, Y.RecordingStudio__registerEvents_closure4, Y.RecordingStudio__registerEvents_closure5, Y.RecordingStudio__registerEvents_closure6, Y.RecordingStudio__registerEvents_closure7, Y.RecordingStudio__registerEvents_closure8, Y.RecordingStudio__registerEvents_closure9, Y.RecordingStudio__registerEvents_closure10, Y.RecordingStudio__registerEvents_closure11, Y.RecordingStudio__registerEvents_closure12, Y.RecordingStudio__registerRowEvents_closure, Y.RecordingStudio__registerRowEvents_closure0, Y.RecordingStudio__registerRowEvents_closure1, Y.RecordingStudio__registerRowEvents_closure2, Y.RecordingStudio__playPreview_closure, Y.RecordingStudio__playPreview_closure0, Y.RecordingStudio__playPreview_closure1, Y.WaveformTrace__buildClipLine_closure, Y.WaveformTrace__buildClipLine_closure0, Y.WaveformTrace__buildClipLine_closure1, Y.Timeline_setInstrument_closure, Y.Timeline_insert_closure, Y.Timeline__render_closure, Y.Timeline__render_closure0, Y.Timeline__registerTouchEvents_closure, Y.Timeline__registerTouchEvents_closure0, Y.Timeline__registerTouchEvents_closure1, Y.Timeline__registerTouchEvents_closure2, Y.Timeline__renderNote_closure, Y.Timeline__renderNote_closure0, Y.Timeline__renderNote_closure1, Y.Timeline__renderNote_closure2, V.EffectsDial_buildUI_closure, V.EffectsDial_buildUI_closure0, V.EffectsDial_buildUI_closure1, E.Dialog_message_closure, E.Dialog_closeModal_closure, E.Dialog__showModal_closure, E.Dialog__showModal_closure0, E.Dialog__showModal_closure1, E.Dialog__showModal_closure2, D.DropdownMenu_armMenu_closure, D.DropdownMenu_armMenu_closure0, D.DropdownMenu__toggleMenu_closure, R.MixSlider_buildUI_closure, R.MixSlider_buildUI_closure0, R.MixSlider_buildUI_closure1, O.TrackLibrary_show_closure, O.TrackLibrary_show__closure, O.TrackLibrary_show_closure0, O.TrackLibrary__buildTrack__toggleStar, O.TrackLibrary__buildTrack_closure, O.TrackLibrary__buildTrack_closure0, O.TrackLibrary__buildTrack_closure1, O.TrackLibrary__buildTrack_closure2, O.TrackLibrary__buildTrack_closure3, O.TrackLibrary__buildTrack_closure4, O.TrackLibrary__playTrackPreview_closure, O.TrackLibrary__playTrackPreview_closure0, O.TrackLibrary__playTrackPreview_closure1, F.main_closure, F.main__closure, F.main__closure0, F.main_closure0, F.main_closure1, F.main_closure2, F.main_closure3, F.main_closure4, F.main_closure5, F.main_closure6, F.main_closure7, F.main_closure8, F._addMixTrack_closure, F._addMixTrack_closure0, F._addMixTrack_closure1, F._addMixTrack_closure2, F._addMixTrack_closure3, F._addMixTrack_closure4, F._addMixTrack_closure5, F._addMixTrack_closure6, F._addMixTrack_closure7, F._addMixTrack__closure, F._addCellMenu_closure, F._addCellMenu_closure0, F._addCellMenu_closure1, F._updateCellMenu_closure, B.UserList_closure, B.UserList_closure0, B.UserList_closure1, B.UserList__buildUserList_closure]);
+    _inheritMany(H.Closure, [H.Primitives_functionNoSuchMethod_closure, H.unwrapException_saveStackTrace, H.TearOffClosure, H.JsLinkedHashMap_values_closure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P._TimerImpl$periodic_closure, P._awaitOnObject_closure, P._awaitOnObject_closure0, P._wrapJsFunctionForAsync_closure, P._SyncBroadcastStreamController__sendData_closure, P._SyncBroadcastStreamController__sendDone_closure, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__asyncComplete_closure, P._Future__chainFuture_closure, P._Future__asyncCompleteError_closure, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P.Stream_length_closure, P.Stream_length_closure0, P.Stream_first_closure, P.Stream_first_closure0, P._StreamController__subscribe_closure, P._StreamController__recordCancel_complete, P._BufferingStreamSubscription__sendDone_sendDone, P._PendingEvents_schedule_closure, P._cancelAndValue_closure, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P._RootZone_bindUnaryCallbackGuarded_closure, P.LinkedHashMap_LinkedHashMap$from_closure, P.MapBase_mapToString_closure, P._JsonStringifier_writeMap_closure, P._symbolMapToStringMap_closure, P.NoSuchMethodError_toString_closure, P.DateTime_parse_parseIntOrZero, P.DateTime_parse_parseMilliAndMicroseconds, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, W.Element_Element$html_closure, W.Entry_remove_closure, W.Entry_remove_closure0, W.HttpRequest_getString_closure, W.HttpRequest_request_closure, W.MidiInputMap_keys_closure, W.MidiOutputMap_keys_closure, W.Navigator_getUserMedia_closure, W.Navigator_getUserMedia_closure0, W.RtcStatsReport_keys_closure, W.Storage_keys_closure, W.Window_animationFrame_closure, W._BeforeUnloadEventStreamProvider_forTarget_closure, W._DataAttributeMap_forEach_closure, W._DataAttributeMap_keys_closure, W._MultiElementCssClassSet__MultiElementCssClassSet_closure, W._MultiElementCssClassSet_readClasses_closure, W._MultiElementCssClassSet_modify_closure, W._MultiElementCssClassSet_toggle_closure, W._MultiElementCssClassSet_remove_closure, W._EventStreamSubscription_closure, W._StreamPool_add_closure, W.NodeValidatorBuilder_allowsElement_closure, W.NodeValidatorBuilder_allowsAttribute_closure, W._SimpleNodeValidator_closure, W._SimpleNodeValidator_closure0, W._TemplatingNodeValidator_closure, W._ValidatingTreeSanitizer_sanitizeTree_walk, P._StructuredClone_walk_closure, P._StructuredClone_walk_closure0, P._AcceptStructuredClone_walk_closure, P.convertDartToNative_Dictionary_closure, P.CssClassSetImpl_add_closure, P.CssClassSetImpl_removeWhere_closure, P.CssClassSetImpl_clear_closure, P.FilteredElementList__iterable_closure, P.FilteredElementList__iterable_closure0, P.FilteredElementList_removeRange_closure, P._convertToJS_closure, P._convertToJS_closure0, P._wrapToDart_closure, P._wrapToDart_closure0, P._wrapToDart_closure1, P.promiseToFuture_closure, P.promiseToFuture_closure0, P.AudioContext_decodeAudioData_closure, P.AudioContext_decodeAudioData_closure0, P.AudioParamMap_keys_closure, Z.DrumKit__render_closure, Z.DrumKit__render_closure0, Z.DrumKit__render_closure1, Z.DrumKit__render_closure2, Z.DrumPad_closure, Z.DrumPad_closure0, Z.DrumPad_closure1, Z.DrumPad_closure2, Z.Instrument_insert_closure, Z.Instrument_unload_closure, Z.Piano__render_closure, Z.Piano__render_closure0, Z.Piano__slideKeyboard_closure, Z.MiniPiano_slide_closure, Z.PianoKey_closure, Z.PianoKey_closure0, Z.PianoKey_closure1, Z.PianoKey_closure2, U.SynthChain_playNote_closure, U.SynthChain_pitchBend_closure, U.SynthChain_schedulePitchBend_closure, U.SynthChain_releaseNote_closure, U.SynthChain_destroy_closure, E.PlayClock_stopAll_closure, E.PlayClock_setTime_closure, E.PlayClock_setTempo_closure, E.PlayClock_setTimeSignature_closure, E.PlayClock_startMetronome_closure, E.PlayClock_startMetronome_closure0, E.PlayClock_startMetronome__closure, X.SynthEvent_releaseNote_closure, X.SynthEvent_scheduleNote_closure, B.SynthSampleNode_schedulePitchBend_closure, L.Synthesizer_loadPatch_closure, L.Synthesizer__play_closure, L.Synthesizer__schedule_closure, L.Synthesizer_pitchBend_closure, L.Synthesizer_loadAudioBuffer_closure, L.Synthesizer_loadAudioBuffer_closure0, L.Synthesizer_loadCustomSound_closure, L.Synthesizer_loadCustomSound_closure0, Y.UserAccounts_login_closure, Y.UserAccounts_login_closure0, Y.UserAccounts_login_closure1, Y.UserAccounts_login_closure2, Y.PythonCell_closure, Y.PythonCell_closure0, Y.PythonCell_closure1, Y.PythonCell_closure2, Y.PythonCell_closure3, Y.PythonCell_closure4, Y.PythonCell_closure5, Y.PythonCell_closure6, Y.PythonCell_closure7, Y.PythonCell_closure8, Y.PythonCell_closure9, Y.PythonCell_closure10, Y.PythonCell_closure11, Y.PythonCell_closure12, Y.PythonCell_closure13, Y.PythonCell_closure14, Y.PythonCell_closure15, Y.PythonCell_closure16, Y.PythonCell_closure17, Y.PythonCell_closure18, Y.PythonCell_closure19, Y.PythonCell_closure20, Y.PythonCell_onPythonDone_closure, Y.PythonCell__setInstrument_closure, Y.PythonCell__setInstrument_closure0, Y.PythonCell__shareTrack_closure, Y.PythonCell__shareTrack_closure0, Y.PythonCell__doContextMenu_closure, Y.toggleContextMenu_closure, Y.Datastore_loginWithGoogle_closure, Y.Datastore_addUpdateCallback_closure, Y.Datastore_addRemovedCallback_closure, Y.Datastore_addAddedCallback_closure, Y.Project_closure, Y.Project__closure, Y.Project_playAll_closure, Y.Project_pauseAll_closure, Y.Project__registerEvents_closure, Y.Project__registerEvents_closure0, Y.Project__registerEvents_closure1, Y.Project__registerEvents_closure2, Y.Project__registerEvents_closure3, Y.Project__registerEvents_closure4, Y.Project__registerEvents_closure5, Y.Project__registerEvents_closure6, Y.Project__registerEvents_closure7, Y.Project__registerEvents_closure8, Y.Project__registerEvents_closure9, Y.Project__registerEvents_closure10, Y.EffectsChain_closure, Y.EffectsChain_closure0, Y.EffectsChain_closure1, Y.EffectsChain_closure2, Y.EffectsChain_closure3, Y.EffectsChain_closure4, Y.EffectsChain_closure5, Y.EffectsChain_playAudio_closure, Y.EffectsChain_playSlice_closure, Y.EffectsChain_loadSoundEffects_closure, Y.EffectsChain_loadSoundEffects_closure0, Y.RecordingStudio_show_closure, Y.RecordingStudio_loadUserRecordings_closure, Y.RecordingStudio_uploadAudioFile_closure, Y.RecordingStudio__registerEvents_closure, Y.RecordingStudio__registerEvents_closure0, Y.RecordingStudio__registerEvents_closure1, Y.RecordingStudio__registerEvents_closure2, Y.RecordingStudio__registerEvents_closure3, Y.RecordingStudio__registerEvents_closure4, Y.RecordingStudio__registerEvents_closure5, Y.RecordingStudio__registerEvents_closure6, Y.RecordingStudio__registerEvents_closure7, Y.RecordingStudio__registerEvents_closure8, Y.RecordingStudio__registerEvents_closure9, Y.RecordingStudio__registerEvents_closure10, Y.RecordingStudio__registerEvents_closure11, Y.RecordingStudio__registerEvents_closure12, Y.RecordingStudio__registerRowEvents_closure, Y.RecordingStudio__registerRowEvents_closure0, Y.RecordingStudio__registerRowEvents_closure1, Y.RecordingStudio__registerRowEvents_closure2, Y.RecordingStudio__playPreview_closure, Y.RecordingStudio__playPreview_closure0, Y.RecordingStudio__playPreview_closure1, Y.WaveformTrace__buildClipLine_closure, Y.WaveformTrace__buildClipLine_closure0, Y.WaveformTrace__buildClipLine_closure1, Y.Timeline_setInstrument_closure, Y.Timeline_insert_closure, Y.Timeline__render_closure, Y.Timeline__render_closure0, Y.Timeline__registerTouchEvents_closure, Y.Timeline__registerTouchEvents_closure0, Y.Timeline__registerTouchEvents_closure1, Y.Timeline__registerTouchEvents_closure2, Y.Timeline__renderNote_closure, Y.Timeline__renderNote_closure0, Y.Timeline__renderNote_closure1, Y.Timeline__renderNote_closure2, V.EffectsDial_buildUI_closure, V.EffectsDial_buildUI_closure0, V.EffectsDial_buildUI_closure1, E.Dialog_message_closure, E.Dialog_closeModal_closure, E.Dialog__showModal_closure, E.Dialog__showModal_closure0, E.Dialog__showModal_closure1, E.Dialog__showModal_closure2, D.DropdownMenu_armMenu_closure, D.DropdownMenu_armMenu_closure0, D.DropdownMenu__toggleMenu_closure, R.MixSlider_buildUI_closure, R.MixSlider_buildUI_closure0, R.MixSlider_buildUI_closure1, O.TrackLibrary_show_closure, O.TrackLibrary_show__closure, O.TrackLibrary_show_closure0, O.TrackLibrary__buildTrack__toggleStar, O.TrackLibrary__buildTrack_closure, O.TrackLibrary__buildTrack_closure0, O.TrackLibrary__buildTrack_closure1, O.TrackLibrary__buildTrack_closure2, O.TrackLibrary__buildTrack_closure3, O.TrackLibrary__buildTrack_closure4, O.TrackLibrary__playTrackPreview_closure, O.TrackLibrary__playTrackPreview_closure0, O.TrackLibrary__playTrackPreview_closure1, F.main_closure, F.main__closure, F.main__closure0, F.main_closure0, F.main_closure1, F.main_closure2, F.main_closure3, F.main_closure4, F.main_closure5, F.main_closure6, F.main_closure7, F.main_closure8, F._addMixTrack_closure, F._addMixTrack_closure0, F._addMixTrack_closure1, F._addMixTrack_closure2, F._addMixTrack_closure3, F._addMixTrack_closure4, F._addMixTrack_closure5, F._addMixTrack_closure6, F._addMixTrack_closure7, F._addMixTrack__closure, F._addCellMenu_closure, F._addCellMenu_closure0, F._addCellMenu_closure1, F._updateCellMenu_closure, B.UserList_closure, B.UserList_closure0, B.UserList_closure1, B.UserList__buildUserList_closure]);
     _inheritMany(P.Error, [H.NullError, H.JsNoSuchMethodError, H.UnknownJsTypeError, H.RuntimeError, P.AssertionError, H._Error, P.JsonUnsupportedObjectError, P.NullThrownError, P.ArgumentError, P.NoSuchMethodError, P.UnsupportedError, P.UnimplementedError, P.StateError, P.ConcurrentModificationError, P.CyclicInitializationError]);
     _inheritMany(H.TearOffClosure, [H.StaticClosure, H.BoundClosure]);
     _inherit(H._AssertionError, P.AssertionError);
@@ -27864,7 +28100,7 @@
     _inherit(P.SqlResultSetRowList, P._SqlResultSetRowList_Interceptor_ListMixin_ImmutableListMixin);
     _inheritMany(Z.Instrument, [Z.DrumKit, Z.Drums, Z.Piano]);
     _inheritMany(K.Effect, [K.BiquadFilter, K.PitchBendEffect, K.PanEffect, K.GainEffect]);
-    _inheritMany(B.SynthNode, [B.ADSRNode, B.FMNode, B.SynthSampleNode, B.SynthDelayNode, B.SynthCompressorNode, B.FilterNode]);
+    _inheritMany(B.SynthNode, [B.ADSRNode, B.FMNode, B.LFONode, B.SynthSampleNode, B.SynthDelayNode, B.SynthCompressorNode, B.FilterNode]);
     _inherit(B.SchedulerSynth, L.Synthesizer);
     _inheritMany(Y.DataModel, [Y._PythonCell_DataModel_PythonListener, Y._Project_DataModel_ClockSubscriber, Y.Recording, Y.User]);
     _inherit(Y._PythonCell_DataModel_PythonListener_CodeMirrorListener, Y._PythonCell_DataModel_PythonListener);
@@ -27949,12 +28185,12 @@
     mangledNames: {},
     getTypeFromName: getGlobalFromName,
     metadata: [],
-    types: ["Null(MouseEvent)", "Null()", "~()", "Null(Event)", "Null(@,@)", "Future<Null>(MouseEvent)", "Null(@)", "@(@)", "bool(String)", "~(KeyboardEvent)", "~(String,String)", "~(String)", "~(@)", "~(Object[StackTrace])", "~(String,@)", "~(Map<@,@>)", "~(ClockSubscriber)", "Null(Element)", "~(~())", "~(Event)", "~(SynthNode)", "Future<Null>(ProgressEvent)", "~(num)", "List<Function>()", "Null(PythonCell)", "Future<Null>(@)", "bool(Node)", "Null(String,String)", "bool(bool,CssClassSetImpl)", "Null(Symbol0,@)", "bool(NodeValidator)", "Null(MixSlider,num)", "bool(Element,String,String,_Html5NodeValidator)", "~(ProgressEvent)", "String(int)", "Null(EffectsDial,num)", "Null(User)", "Null(DomException)", "int(String)", "Null(SynthNode)", "~(Object)", "~(Metronome)", "~(Set<String>)", "bool(Set<String>)", "@(@,@)", "JsFunction(@)", "JsArray<@>(@)", "Null(NavigatorUserMediaError)", "Null(AudioBuffer)", "~(Node,Node)", "@(String)", "Null(@[StackTrace])", "_Future<@>(@)", "@(@,String)", "~(Element)", "~(PianoKey)", "String(String)", "JsObject(@)", "Null(int,@)", "Object(@)", "Null(Timer)", "num(num)", "~(SynthEvent)", "@(CssClassSetImpl)", "~(CssClassSetImpl)", "Future<@>()", "bool(Event)", "CssClassSet(Element)", "Null(MIDIEvent)", "Null(KeyboardEvent)", "Null(BeforeUnloadEvent)", "Null(NoteEvent)", "String(HttpRequest)", "~(String,String,String,String)", "Null(num)", "Null(ProgressEvent)", "Null(~())", "Null(AudioProcessingEvent)", "~(Recording)", "Future<Null>(Event)", "Node(SvgElement)", "~(LIElement,int)", "Null(String,@)", "Null(@,StackTrace)", "Null(int)", "Future<List<@>>()", "int(User,User)", "Null(MediaStream)", "@(Event)", "Element(Node)"],
+    types: ["Null(MouseEvent)", "Null()", "~()", "Null(Event)", "Null(@,@)", "Future<Null>(MouseEvent)", "Null(@)", "@(@)", "bool(String)", "~(KeyboardEvent)", "~(String,String)", "~(String)", "~(@)", "~(Object[StackTrace])", "~(String,@)", "~(Map<@,@>)", "~(ClockSubscriber)", "Future<Null>(ProgressEvent)", "Null(Element)", "~(~())", "~(Event)", "~(SynthNode)", "~(ProgressEvent)", "~(num)", "List<Function>()", "Null(PythonCell)", "Future<Null>(@)", "Null(Symbol0,@)", "Null(String,String)", "bool(bool,CssClassSetImpl)", "bool(NodeValidator)", "Null(MixSlider,num)", "bool(Element,String,String,_Html5NodeValidator)", "bool(Node)", "String(int)", "Null(EffectsDial,num)", "int(String)", "Null(User)", "Null(DomException)", "Null(SynthNode)", "~(Object)", "~(Metronome)", "~(Set<String>)", "bool(Set<String>)", "@(@,@)", "JsFunction(@)", "JsArray<@>(@)", "Future<List<@>>()", "Null(AudioBuffer)", "~(Node,Node)", "@(String)", "Null(@[StackTrace])", "_Future<@>(@)", "@(@,String)", "~(Element)", "~(PianoKey)", "String(String)", "Null(int,@)", "@(Event)", "Object(@)", "Null(Timer)", "num(num)", "~(SynthEvent)", "@(CssClassSetImpl)", "Future<@>()", "~(CssClassSetImpl)", "bool(Event)", "CssClassSet(Element)", "Null(MIDIEvent)", "Null(KeyboardEvent)", "String(HttpRequest)", "Null(NoteEvent)", "Null(ProgressEvent)", "~(String,String,String,String)", "Null(num)", "Null(~())", "Null(MediaStream)", "Null(AudioProcessingEvent)", "~(Recording)", "Future<Null>(Event)", "Node(SvgElement)", "~(LIElement,int)", "Null(BeforeUnloadEvent)", "Null(String,@)", "Null(int)", "Null(@,StackTrace)", "int(User,User)", "Null(NavigatorUserMediaError)", "JsObject(@)", "Element(Node)"],
     interceptorsByTag: null,
     leafTags: null,
     arrayRti: typeof Symbol == "function" && typeof Symbol() == "symbol" ? Symbol("$ti") : "$ti"
   };
-  H._Universe_addRules(init.typeUniverse, JSON.parse('{"JavaScriptFunction":"JavaScriptObject","PlainJavaScriptObject":"JavaScriptObject","UnknownJavaScriptObject":"JavaScriptObject","AnimationEvent":"Event","AudioDestinationNode":"AudioNode","ConstantSourceNode":"AudioScheduledSourceNode","AnimateElement":"SvgElement","AnimationElement":"SvgElement","AElement":"GraphicsElement","TextPathElement":"TextContentElement","TSpanElement":"TextPositioningElement","EllipseElement":"GeometryElement","AbsoluteOrientationSensor":"EventTarget","OrientationSensor":"EventTarget","Sensor":"EventTarget","_ResourceProgressEvent":"ProgressEvent","BRElement":"HtmlElement","_DocumentType":"Node","XmlDocument":"Document","PointerEvent":"MouseEvent","VttCue":"TextTrackCue","VideoElement":"MediaElement","FocusEvent":"UIEvent","AbortPaymentEvent":"ExtendableEvent","DedicatedWorkerGlobalScope":"WorkerGlobalScope","CDataSection":"CharacterData","Text":"CharacterData","MidiInput":"MidiPort","HttpRequestUpload":"HttpRequestEventTarget","HtmlFormControlsCollection":"HtmlCollection","CssCharsetRule":"CssRule","CssStyleSheet":"StyleSheet","CanvasCaptureMediaStreamTrack":"MediaStreamTrack","BackgroundFetchClickEvent":"BackgroundFetchEvent","NativeFloat64List":"NativeTypedArrayOfDouble","NativeByteData":"NativeTypedData","JSBool":{"bool":[]},"JSNull":{"Null":[]},"JavaScriptObject":{"JSObject":[],"Function":[]},"JSArray":{"List":["1"],"EfficientLengthIterable":["1"],"JSIndexable":["@"],"Iterable":["1"]},"JSUnmodifiableArray":{"JSArray":["1"],"List":["1"],"EfficientLengthIterable":["1"],"JSIndexable":["@"],"Iterable":["1"]},"ArrayIterator":{"Iterator":["1"]},"JSNumber":{"double":[],"num":[]},"JSInt":{"int":[],"double":[],"num":[]},"JSDouble":{"double":[],"num":[]},"JSString":{"String":[],"JSIndexable":["@"],"Pattern":[]},"CodeUnits":{"UnmodifiableListMixin":["int"],"ListMixin":["int"],"List":["int"],"EfficientLengthIterable":["int"],"Iterable":["int"],"ListMixin.E":"int","UnmodifiableListMixin.E":"int"},"EfficientLengthIterable":{"Iterable":["1"]},"ListIterable":{"EfficientLengthIterable":["1"],"Iterable":["1"]},"ListIterator":{"Iterator":["1"]},"MappedIterable":{"Iterable":["2"],"Iterable.E":"2"},"EfficientLengthMappedIterable":{"MappedIterable":["1","2"],"EfficientLengthIterable":["2"],"Iterable":["2"],"Iterable.E":"2"},"MappedIterator":{"Iterator":["2"]},"MappedListIterable":{"ListIterable":["2"],"EfficientLengthIterable":["2"],"Iterable":["2"],"ListIterable.E":"2","Iterable.E":"2"},"WhereIterable":{"Iterable":["1"],"Iterable.E":"1"},"WhereIterator":{"Iterator":["1"]},"TakeIterable":{"Iterable":["1"],"Iterable.E":"1"},"EfficientLengthTakeIterable":{"TakeIterable":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"Iterable.E":"1"},"TakeIterator":{"Iterator":["1"]},"SkipIterable":{"Iterable":["1"],"Iterable.E":"1"},"EfficientLengthSkipIterable":{"SkipIterable":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"Iterable.E":"1"},"SkipIterator":{"Iterator":["1"]},"UnmodifiableListBase":{"UnmodifiableListMixin":["1"],"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"Symbol":{"Symbol0":[]},"ConstantMapView":{"UnmodifiableMapView":["1","2"],"_UnmodifiableMapView_MapView__UnmodifiableMapMixin":["1","2"],"MapView":["1","2"],"_UnmodifiableMapMixin":["1","2"],"Map":["1","2"]},"ConstantMap":{"Map":["1","2"]},"ConstantStringMap":{"ConstantMap":["1","2"],"Map":["1","2"]},"_ConstantMapKeyIterable":{"Iterable":["1"],"Iterable.E":"1"},"JSInvocationMirror":{"Invocation":[]},"NullError":{"Error":[]},"JsNoSuchMethodError":{"Error":[]},"UnknownJsTypeError":{"Error":[]},"_StackTrace":{"StackTrace":[]},"Closure":{"Function":[]},"TearOffClosure":{"Function":[]},"StaticClosure":{"Function":[]},"BoundClosure":{"Function":[]},"RuntimeError":{"Error":[]},"_AssertionError":{"Error":[]},"JsLinkedHashMap":{"LinkedHashMap":["1","2"],"MapMixin":["1","2"],"Map":["1","2"],"MapMixin.K":"1","MapMixin.V":"2"},"LinkedHashMapKeyIterable":{"EfficientLengthIterable":["1"],"Iterable":["1"],"Iterable.E":"1"},"LinkedHashMapKeyIterator":{"Iterator":["1"]},"JSSyntaxRegExp":{"RegExp":[],"Pattern":[]},"NativeByteBuffer":{"ByteBuffer":[]},"NativeTypedData":{"TypedData":[]},"NativeTypedArray":{"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"TypedData":[],"JSIndexable":["@"]},"NativeTypedArrayOfDouble":{"ListMixin":["double"],"JavaScriptIndexingBehavior":["@"],"List":["double"],"NativeTypedData":[],"EfficientLengthIterable":["double"],"FixedLengthListMixin":["double"],"TypedData":[],"JSIndexable":["@"],"Iterable":["double"],"ListMixin.E":"double","FixedLengthListMixin.E":"double"},"NativeTypedArrayOfInt":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"]},"NativeFloat32List":{"Float32List":[],"ListMixin":["double"],"JavaScriptIndexingBehavior":["@"],"List":["double"],"NativeTypedData":[],"EfficientLengthIterable":["double"],"FixedLengthListMixin":["double"],"TypedData":[],"JSIndexable":["@"],"Iterable":["double"],"ListMixin.E":"double","FixedLengthListMixin.E":"double"},"NativeInt16List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeInt32List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeInt8List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint16List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint32List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint8ClampedList":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint8List":{"Uint8List":[],"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"_Error":{"Error":[]},"_TypeError":{"Error":[]},"_TimerImpl":{"Timer":[]},"_BroadcastStream":{"_ControllerStream":["1"],"_StreamImpl":["1"],"Stream":["1"]},"_BroadcastSubscription":{"_ControllerSubscription":["1"],"_BufferingStreamSubscription":["1"],"_EventDispatch":["1"],"StreamSubscription":["1"]},"_BroadcastStreamController":{"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_SyncBroadcastStreamController":{"_BroadcastStreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_AsyncBroadcastStreamController":{"_BroadcastStreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_AsyncCompleter":{"_Completer":["1"]},"_SyncCompleter":{"_Completer":["1"]},"_Future":{"Future":["1"]},"_StreamController":{"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_AsyncStreamController":{"_AsyncStreamControllerDispatch":["1"],"_StreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_SyncStreamController":{"_SyncStreamControllerDispatch":["1"],"_StreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_ControllerStream":{"_StreamImpl":["1"],"Stream":["1"]},"_ControllerSubscription":{"_BufferingStreamSubscription":["1"],"_EventDispatch":["1"],"StreamSubscription":["1"]},"_BufferingStreamSubscription":{"_EventDispatch":["1"],"StreamSubscription":["1"]},"_StreamImpl":{"Stream":["1"]},"_DelayedData":{"_DelayedEvent":["1"]},"_DelayedDone":{"_DelayedEvent":["@"]},"_StreamImplEvents":{"_PendingEvents":["1"]},"_DoneStreamSubscription":{"StreamSubscription":["1"]},"AsyncError":{"Error":[]},"_Zone":{"Zone":[]},"_RootZone":{"Zone":[]},"_LinkedHashSet":{"_SetBase":["1"],"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_LinkedHashSetIterator":{"Iterator":["1"]},"ListBase":{"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"MapBase":{"MapMixin":["1","2"],"Map":["1","2"]},"MapMixin":{"Map":["1","2"]},"MapView":{"Map":["1","2"]},"UnmodifiableMapView":{"_UnmodifiableMapView_MapView__UnmodifiableMapMixin":["1","2"],"MapView":["1","2"],"_UnmodifiableMapMixin":["1","2"],"Map":["1","2"]},"ListQueue":{"ListIterable":["1"],"Queue":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"ListIterable.E":"1","Iterable.E":"1"},"_ListQueueIterator":{"Iterator":["1"]},"SetBase":{"SetMixin":["1"],"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_SetBase":{"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_JsonMap":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"_JsonMapKeyIterable":{"ListIterable":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"ListIterable.E":"String","Iterable.E":"String"},"Base64Codec":{"Codec":["List<int>","String"],"Codec.S":"List<int>"},"Base64Encoder":{"Converter":["List<int>","String"]},"Base64Decoder":{"Converter":["String","List<int>"]},"JsonUnsupportedObjectError":{"Error":[]},"JsonCyclicError":{"Error":[]},"JsonCodec":{"Codec":["Object","String"],"Codec.S":"Object"},"JsonEncoder":{"Converter":["Object","String"]},"JsonDecoder":{"Converter":["String","Object"]},"double":{"num":[]},"AssertionError":{"Error":[]},"NullThrownError":{"Error":[]},"ArgumentError":{"Error":[]},"RangeError":{"Error":[]},"IndexError":{"Error":[]},"NoSuchMethodError":{"Error":[]},"UnsupportedError":{"Error":[]},"UnimplementedError":{"Error":[]},"StateError":{"Error":[]},"ConcurrentModificationError":{"Error":[]},"OutOfMemoryError":{"Error":[]},"StackOverflowError":{"Error":[]},"CyclicInitializationError":{"Error":[]},"_Exception":{"Exception":[]},"FormatException":{"Exception":[]},"int":{"num":[]},"List":{"EfficientLengthIterable":["1"],"Iterable":["1"]},"Set":{"EfficientLengthIterable":["1"],"Iterable":["1"]},"_StringStackTrace":{"StackTrace":[]},"String":{"Pattern":[]},"StringBuffer":{"StringSink":[]},"HtmlElement":{"Element":[],"Node":[],"EventTarget":[]},"AnchorElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"Animation":{"EventTarget":[]},"AreaElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"AudioElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"BackgroundFetchEvent":{"Event":[]},"BackgroundFetchRegistration":{"EventTarget":[]},"BaseElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"BeforeUnloadEvent":{"Event":[]},"BlobEvent":{"Event":[]},"BodyElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"ButtonElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"CharacterData":{"Node":[],"EventTarget":[]},"CompositionEvent":{"Event":[]},"DivElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"Document":{"Node":[],"EventTarget":[]},"DocumentFragment":{"Node":[],"EventTarget":[]},"DomRectList":{"ImmutableListMixin":["Rectangle<num>"],"ListMixin":["Rectangle<num>"],"JavaScriptIndexingBehavior":["Rectangle<num>"],"List":["Rectangle<num>"],"EfficientLengthIterable":["Rectangle<num>"],"Iterable":["Rectangle<num>"],"JSIndexable":["Rectangle<num>"],"ListMixin.E":"Rectangle<num>","ImmutableListMixin.E":"Rectangle<num>"},"DomRectReadOnly":{"Rectangle":["num"]},"DomStringList":{"ImmutableListMixin":["String"],"ListMixin":["String"],"List":["String"],"JavaScriptIndexingBehavior":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"JSIndexable":["String"],"ListMixin.E":"String","ImmutableListMixin.E":"String"},"_ChildrenElementList":{"ListMixin":["Element"],"List":["Element"],"EfficientLengthIterable":["Element"],"Iterable":["Element"],"ListMixin.E":"Element"},"_FrozenElementList":{"ElementList":["1"],"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"ListMixin.E":"1"},"Element":{"Node":[],"EventTarget":[]},"ExtendableEvent":{"Event":[]},"ExtendableMessageEvent":{"Event":[]},"File":{"Blob":[]},"FileList":{"ImmutableListMixin":["File"],"ListMixin":["File"],"JavaScriptIndexingBehavior":["File"],"List":["File"],"EfficientLengthIterable":["File"],"Iterable":["File"],"JSIndexable":["File"],"ListMixin.E":"File","ImmutableListMixin.E":"File"},"FileReader":{"EventTarget":[]},"FileWriter":{"EventTarget":[]},"FormElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"HtmlCollection":{"ImmutableListMixin":["Node"],"ListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"JSIndexable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"HtmlDocument":{"Document":[],"Node":[],"EventTarget":[]},"HttpRequest":{"EventTarget":[]},"HttpRequestEventTarget":{"EventTarget":[]},"InputElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"KeyboardEvent":{"Event":[]},"LIElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"MediaElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"MediaKeySession":{"EventTarget":[]},"MediaStream":{"EventTarget":[]},"MediaStreamTrack":{"EventTarget":[]},"MessageEvent":{"Event":[]},"MessagePort":{"EventTarget":[]},"MidiInputMap":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"MidiMessageEvent":{"Event":[]},"MidiOutputMap":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"MidiPort":{"EventTarget":[]},"MimeTypeArray":{"ImmutableListMixin":["MimeType"],"ListMixin":["MimeType"],"JavaScriptIndexingBehavior":["MimeType"],"List":["MimeType"],"EfficientLengthIterable":["MimeType"],"Iterable":["MimeType"],"JSIndexable":["MimeType"],"ListMixin.E":"MimeType","ImmutableListMixin.E":"MimeType"},"MouseEvent":{"Event":[]},"_ChildNodeListLazy":{"ListMixin":["Node"],"List":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"ListMixin.E":"Node"},"Node":{"EventTarget":[]},"NodeList":{"ImmutableListMixin":["Node"],"ListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"JSIndexable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"PaymentRequest":{"EventTarget":[]},"PluginArray":{"ImmutableListMixin":["Plugin"],"ListMixin":["Plugin"],"List":["Plugin"],"JavaScriptIndexingBehavior":["Plugin"],"EfficientLengthIterable":["Plugin"],"Iterable":["Plugin"],"JSIndexable":["Plugin"],"ListMixin.E":"Plugin","ImmutableListMixin.E":"Plugin"},"PreElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"PresentationConnection":{"EventTarget":[]},"ProgressEvent":{"Event":[]},"PushEvent":{"Event":[]},"RtcDataChannel":{"EventTarget":[]},"RtcStatsReport":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"SelectElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"ShadowRoot":{"DocumentFragment":[],"Node":[],"EventTarget":[]},"SourceBuffer":{"EventTarget":[]},"SourceBufferList":{"ImmutableListMixin":["SourceBuffer"],"ListMixin":["SourceBuffer"],"List":["SourceBuffer"],"JavaScriptIndexingBehavior":["SourceBuffer"],"EventTarget":[],"EfficientLengthIterable":["SourceBuffer"],"Iterable":["SourceBuffer"],"JSIndexable":["SourceBuffer"],"ListMixin.E":"SourceBuffer","ImmutableListMixin.E":"SourceBuffer"},"SpanElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"SpeechGrammarList":{"ImmutableListMixin":["SpeechGrammar"],"ListMixin":["SpeechGrammar"],"List":["SpeechGrammar"],"JavaScriptIndexingBehavior":["SpeechGrammar"],"EfficientLengthIterable":["SpeechGrammar"],"Iterable":["SpeechGrammar"],"JSIndexable":["SpeechGrammar"],"ListMixin.E":"SpeechGrammar","ImmutableListMixin.E":"SpeechGrammar"},"Storage":{"MapMixin":["String","String"],"Map":["String","String"],"MapMixin.K":"String","MapMixin.V":"String"},"TableElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TableRowElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TableSectionElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TemplateElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextAreaElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextEvent":{"Event":[]},"TextTrack":{"EventTarget":[]},"TextTrackCue":{"EventTarget":[]},"TextTrackCueList":{"ImmutableListMixin":["TextTrackCue"],"ListMixin":["TextTrackCue"],"JavaScriptIndexingBehavior":["TextTrackCue"],"List":["TextTrackCue"],"EfficientLengthIterable":["TextTrackCue"],"Iterable":["TextTrackCue"],"JSIndexable":["TextTrackCue"],"ListMixin.E":"TextTrackCue","ImmutableListMixin.E":"TextTrackCue"},"TextTrackList":{"ImmutableListMixin":["TextTrack"],"ListMixin":["TextTrack"],"JavaScriptIndexingBehavior":["TextTrack"],"List":["TextTrack"],"EventTarget":[],"EfficientLengthIterable":["TextTrack"],"Iterable":["TextTrack"],"JSIndexable":["TextTrack"],"ListMixin.E":"TextTrack","ImmutableListMixin.E":"TextTrack"},"TouchList":{"ImmutableListMixin":["Touch"],"ListMixin":["Touch"],"List":["Touch"],"JavaScriptIndexingBehavior":["Touch"],"EfficientLengthIterable":["Touch"],"Iterable":["Touch"],"JSIndexable":["Touch"],"ListMixin.E":"Touch","ImmutableListMixin.E":"Touch"},"UIEvent":{"Event":[]},"UListElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"VideoTrackList":{"EventTarget":[]},"WebSocket":{"EventTarget":[]},"Window":{"WindowBase":[],"EventTarget":[]},"_BeforeUnloadEvent":{"BeforeUnloadEvent":[],"Event":[]},"Worker":{"EventTarget":[]},"WorkerGlobalScope":{"EventTarget":[]},"_Attr":{"Node":[],"EventTarget":[]},"_CssRuleList":{"ImmutableListMixin":["CssRule"],"ListMixin":["CssRule"],"List":["CssRule"],"JavaScriptIndexingBehavior":["CssRule"],"EfficientLengthIterable":["CssRule"],"Iterable":["CssRule"],"JSIndexable":["CssRule"],"ListMixin.E":"CssRule","ImmutableListMixin.E":"CssRule"},"_DomRect":{"Rectangle":["num"]},"_GamepadList":{"ImmutableListMixin":["Gamepad"],"ListMixin":["Gamepad"],"JavaScriptIndexingBehavior":["Gamepad"],"List":["Gamepad"],"EfficientLengthIterable":["Gamepad"],"Iterable":["Gamepad"],"JSIndexable":["Gamepad"],"ListMixin.E":"Gamepad","ImmutableListMixin.E":"Gamepad"},"_NamedNodeMap":{"ImmutableListMixin":["Node"],"ListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"JSIndexable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"_SpeechRecognitionResultList":{"ImmutableListMixin":["SpeechRecognitionResult"],"ListMixin":["SpeechRecognitionResult"],"List":["SpeechRecognitionResult"],"JavaScriptIndexingBehavior":["SpeechRecognitionResult"],"EfficientLengthIterable":["SpeechRecognitionResult"],"Iterable":["SpeechRecognitionResult"],"JSIndexable":["SpeechRecognitionResult"],"ListMixin.E":"SpeechRecognitionResult","ImmutableListMixin.E":"SpeechRecognitionResult"},"_StyleSheetList":{"ImmutableListMixin":["StyleSheet"],"ListMixin":["StyleSheet"],"JavaScriptIndexingBehavior":["StyleSheet"],"List":["StyleSheet"],"EfficientLengthIterable":["StyleSheet"],"Iterable":["StyleSheet"],"JSIndexable":["StyleSheet"],"ListMixin.E":"StyleSheet","ImmutableListMixin.E":"StyleSheet"},"_AttributeMap":{"MapMixin":["String","String"],"Map":["String","String"]},"_ElementAttributeMap":{"MapMixin":["String","String"],"Map":["String","String"],"MapMixin.K":"String","MapMixin.V":"String"},"_DataAttributeMap":{"MapMixin":["String","String"],"Map":["String","String"],"MapMixin.K":"String","MapMixin.V":"String"},"CssClassSet":{"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"_MultiElementCssClassSet":{"CssClassSetImpl":[],"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"_ElementCssClassSet":{"CssClassSetImpl":[],"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"_EventStream":{"Stream":["1"]},"_ElementEventStreamImpl":{"_EventStream":["1"],"Stream":["1"]},"_ElementListEventStreamImpl":{"Stream":["1"]},"_EventStreamSubscription":{"StreamSubscription":["1"]},"_Html5NodeValidator":{"NodeValidator":[]},"NodeValidatorBuilder":{"NodeValidator":[]},"_SimpleNodeValidator":{"NodeValidator":[]},"_TemplatingNodeValidator":{"NodeValidator":[]},"_SvgNodeValidator":{"NodeValidator":[]},"FixedSizeListIterator":{"Iterator":["1"]},"_DOMWindowCrossFrame":{"WindowBase":[],"EventTarget":[]},"_WrappedEvent":{"Event":[]},"_SameOriginUriPolicy":{"UriPolicy":[]},"_ValidatingTreeSanitizer":{"NodeTreeSanitizer":[]},"CssClassSetImpl":{"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"FilteredElementList":{"ListMixin":["Element"],"List":["Element"],"EfficientLengthIterable":["Element"],"Iterable":["Element"],"ListMixin.E":"Element"},"VersionChangeEvent":{"Event":[]},"JsFunction":{"JsObject":[]},"JsArray":{"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"JsObject":[],"Iterable":["1"],"ListMixin.E":"1"},"_JSRandom":{"Random":[]},"CircleElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"GElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"GeometryElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"GraphicsElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"ImageElement0":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"LengthList":{"ImmutableListMixin":["Length"],"ListMixin":["Length"],"List":["Length"],"EfficientLengthIterable":["Length"],"Iterable":["Length"],"ListMixin.E":"Length","ImmutableListMixin.E":"Length"},"LineElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"NumberList":{"ImmutableListMixin":["Number"],"ListMixin":["Number"],"List":["Number"],"EfficientLengthIterable":["Number"],"Iterable":["Number"],"ListMixin.E":"Number","ImmutableListMixin.E":"Number"},"PathElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"RectElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"ScriptElement0":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"StringList":{"ImmutableListMixin":["String"],"ListMixin":["String"],"List":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"ListMixin.E":"String","ImmutableListMixin.E":"String"},"AttributeClassSet":{"CssClassSetImpl":[],"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"SvgElement":{"Element":[],"Node":[],"EventTarget":[]},"SvgSvgElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextContentElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextPositioningElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TransformList":{"ImmutableListMixin":["Transform"],"ListMixin":["Transform"],"List":["Transform"],"EfficientLengthIterable":["Transform"],"Iterable":["Transform"],"ListMixin.E":"Transform","ImmutableListMixin.E":"Transform"},"Float32List":{"List":["double"],"EfficientLengthIterable":["double"],"TypedData":[],"Iterable":["double"]},"AnalyserNode":{"AudioNode":[],"EventTarget":[]},"AudioBufferSourceNode":{"AudioNode":[],"EventTarget":[]},"AudioContext":{"BaseAudioContext":[],"EventTarget":[]},"AudioNode":{"EventTarget":[]},"AudioParamMap":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"AudioProcessingEvent":{"Event":[]},"AudioScheduledSourceNode":{"AudioNode":[],"EventTarget":[]},"AudioTrackList":{"EventTarget":[]},"BaseAudioContext":{"EventTarget":[]},"BiquadFilterNode":{"AudioNode":[],"EventTarget":[]},"ConvolverNode":{"AudioNode":[],"EventTarget":[]},"DelayNode":{"AudioNode":[],"EventTarget":[]},"DynamicsCompressorNode":{"AudioNode":[],"EventTarget":[]},"GainNode":{"AudioNode":[],"EventTarget":[]},"MediaStreamAudioSourceNode":{"AudioNode":[],"EventTarget":[]},"OfflineAudioContext":{"BaseAudioContext":[],"EventTarget":[]},"OscillatorNode":{"AudioNode":[],"EventTarget":[]},"ScriptProcessorNode":{"AudioNode":[],"EventTarget":[]},"StereoPannerNode":{"AudioNode":[],"EventTarget":[]},"SqlResultSetRowList":{"ImmutableListMixin":["Map<@,@>"],"ListMixin":["Map<@,@>"],"List":["Map<@,@>"],"EfficientLengthIterable":["Map<@,@>"],"Iterable":["Map<@,@>"],"ListMixin.E":"Map<@,@>","ImmutableListMixin.E":"Map<@,@>"},"HexCodec":{"Codec":["List<int>","String"],"Codec.S":"List<int>"},"HexEncoder":{"Converter":["List<int>","String"]},"DrumKit":{"Instrument":[]},"Drums":{"Instrument":[]},"Piano":{"Instrument":[]},"BiquadFilter":{"Effect":[]},"PitchBendEffect":{"Effect":[]},"PanEffect":{"Effect":[]},"GainEffect":{"Effect":[]},"ADSRNode":{"SynthNode":[]},"FMNode":{"SynthNode":[]},"SynthSampleNode":{"SynthNode":[]},"SynthDelayNode":{"SynthNode":[]},"SynthCompressorNode":{"SynthNode":[]},"FilterNode":{"SynthNode":[]},"SchedulerSynth":{"Synthesizer":[]},"PythonCell":{"Metronome":[],"ClockSubscriber":[],"TimelineListener":[],"CodeMirrorListener":[],"DataModel":[],"PythonListener":[]},"DatastoreException":{"Exception":[]},"Project":{"DataModel":[],"ClockSubscriber":[]},"NoteRecorder":{"ClockSubscriber":[]},"Recording":{"DataModel":[]},"User":{"DataModel":[]}}'));
+  H._Universe_addRules(init.typeUniverse, JSON.parse('{"JavaScriptFunction":"JavaScriptObject","PlainJavaScriptObject":"JavaScriptObject","UnknownJavaScriptObject":"JavaScriptObject","AnimationEvent":"Event","AudioDestinationNode":"AudioNode","ConstantSourceNode":"AudioScheduledSourceNode","AnimateElement":"SvgElement","AnimationElement":"SvgElement","AElement":"GraphicsElement","TextPathElement":"TextContentElement","TSpanElement":"TextPositioningElement","EllipseElement":"GeometryElement","AbsoluteOrientationSensor":"EventTarget","OrientationSensor":"EventTarget","Sensor":"EventTarget","_ResourceProgressEvent":"ProgressEvent","BRElement":"HtmlElement","_DocumentType":"Node","XmlDocument":"Document","PointerEvent":"MouseEvent","VttCue":"TextTrackCue","VideoElement":"MediaElement","FocusEvent":"UIEvent","AbortPaymentEvent":"ExtendableEvent","DedicatedWorkerGlobalScope":"WorkerGlobalScope","CDataSection":"CharacterData","Text":"CharacterData","MidiInput":"MidiPort","HttpRequestUpload":"HttpRequestEventTarget","HtmlFormControlsCollection":"HtmlCollection","CssCharsetRule":"CssRule","CssStyleSheet":"StyleSheet","CanvasCaptureMediaStreamTrack":"MediaStreamTrack","BackgroundFetchClickEvent":"BackgroundFetchEvent","NativeFloat64List":"NativeTypedArrayOfDouble","NativeByteData":"NativeTypedData","JSBool":{"bool":[]},"JSNull":{"Null":[]},"JavaScriptObject":{"JSObject":[],"Function":[]},"JSArray":{"List":["1"],"EfficientLengthIterable":["1"],"JSIndexable":["@"],"Iterable":["1"]},"JSUnmodifiableArray":{"JSArray":["1"],"List":["1"],"EfficientLengthIterable":["1"],"JSIndexable":["@"],"Iterable":["1"]},"ArrayIterator":{"Iterator":["1"]},"JSNumber":{"double":[],"num":[]},"JSInt":{"int":[],"double":[],"num":[]},"JSDouble":{"double":[],"num":[]},"JSString":{"String":[],"JSIndexable":["@"],"Pattern":[]},"CodeUnits":{"UnmodifiableListMixin":["int"],"ListMixin":["int"],"List":["int"],"EfficientLengthIterable":["int"],"Iterable":["int"],"ListMixin.E":"int","UnmodifiableListMixin.E":"int"},"EfficientLengthIterable":{"Iterable":["1"]},"ListIterable":{"EfficientLengthIterable":["1"],"Iterable":["1"]},"ListIterator":{"Iterator":["1"]},"MappedIterable":{"Iterable":["2"],"Iterable.E":"2"},"EfficientLengthMappedIterable":{"MappedIterable":["1","2"],"EfficientLengthIterable":["2"],"Iterable":["2"],"Iterable.E":"2"},"MappedIterator":{"Iterator":["2"]},"MappedListIterable":{"ListIterable":["2"],"EfficientLengthIterable":["2"],"Iterable":["2"],"ListIterable.E":"2","Iterable.E":"2"},"WhereIterable":{"Iterable":["1"],"Iterable.E":"1"},"WhereIterator":{"Iterator":["1"]},"TakeIterable":{"Iterable":["1"],"Iterable.E":"1"},"EfficientLengthTakeIterable":{"TakeIterable":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"Iterable.E":"1"},"TakeIterator":{"Iterator":["1"]},"SkipIterable":{"Iterable":["1"],"Iterable.E":"1"},"EfficientLengthSkipIterable":{"SkipIterable":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"Iterable.E":"1"},"SkipIterator":{"Iterator":["1"]},"UnmodifiableListBase":{"UnmodifiableListMixin":["1"],"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"Symbol":{"Symbol0":[]},"ConstantMapView":{"UnmodifiableMapView":["1","2"],"_UnmodifiableMapView_MapView__UnmodifiableMapMixin":["1","2"],"MapView":["1","2"],"_UnmodifiableMapMixin":["1","2"],"Map":["1","2"]},"ConstantMap":{"Map":["1","2"]},"ConstantStringMap":{"ConstantMap":["1","2"],"Map":["1","2"]},"_ConstantMapKeyIterable":{"Iterable":["1"],"Iterable.E":"1"},"JSInvocationMirror":{"Invocation":[]},"NullError":{"Error":[]},"JsNoSuchMethodError":{"Error":[]},"UnknownJsTypeError":{"Error":[]},"_StackTrace":{"StackTrace":[]},"Closure":{"Function":[]},"TearOffClosure":{"Function":[]},"StaticClosure":{"Function":[]},"BoundClosure":{"Function":[]},"RuntimeError":{"Error":[]},"_AssertionError":{"Error":[]},"JsLinkedHashMap":{"LinkedHashMap":["1","2"],"MapMixin":["1","2"],"Map":["1","2"],"MapMixin.K":"1","MapMixin.V":"2"},"LinkedHashMapKeyIterable":{"EfficientLengthIterable":["1"],"Iterable":["1"],"Iterable.E":"1"},"LinkedHashMapKeyIterator":{"Iterator":["1"]},"JSSyntaxRegExp":{"RegExp":[],"Pattern":[]},"NativeByteBuffer":{"ByteBuffer":[]},"NativeTypedData":{"TypedData":[]},"NativeTypedArray":{"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"TypedData":[],"JSIndexable":["@"]},"NativeTypedArrayOfDouble":{"ListMixin":["double"],"JavaScriptIndexingBehavior":["@"],"List":["double"],"NativeTypedData":[],"EfficientLengthIterable":["double"],"FixedLengthListMixin":["double"],"TypedData":[],"JSIndexable":["@"],"Iterable":["double"],"ListMixin.E":"double","FixedLengthListMixin.E":"double"},"NativeTypedArrayOfInt":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"]},"NativeFloat32List":{"Float32List":[],"ListMixin":["double"],"JavaScriptIndexingBehavior":["@"],"List":["double"],"NativeTypedData":[],"EfficientLengthIterable":["double"],"FixedLengthListMixin":["double"],"TypedData":[],"JSIndexable":["@"],"Iterable":["double"],"ListMixin.E":"double","FixedLengthListMixin.E":"double"},"NativeInt16List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeInt32List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeInt8List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint16List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint32List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint8ClampedList":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint8List":{"Uint8List":[],"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"_Error":{"Error":[]},"_TypeError":{"Error":[]},"_TimerImpl":{"Timer":[]},"_BroadcastStream":{"_ControllerStream":["1"],"_StreamImpl":["1"],"Stream":["1"]},"_BroadcastSubscription":{"_ControllerSubscription":["1"],"_BufferingStreamSubscription":["1"],"_EventDispatch":["1"],"StreamSubscription":["1"]},"_BroadcastStreamController":{"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_SyncBroadcastStreamController":{"_BroadcastStreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_AsyncBroadcastStreamController":{"_BroadcastStreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_AsyncCompleter":{"_Completer":["1"]},"_SyncCompleter":{"_Completer":["1"]},"_Future":{"Future":["1"]},"_StreamController":{"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_AsyncStreamController":{"_AsyncStreamControllerDispatch":["1"],"_StreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_SyncStreamController":{"_SyncStreamControllerDispatch":["1"],"_StreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_ControllerStream":{"_StreamImpl":["1"],"Stream":["1"]},"_ControllerSubscription":{"_BufferingStreamSubscription":["1"],"_EventDispatch":["1"],"StreamSubscription":["1"]},"_BufferingStreamSubscription":{"_EventDispatch":["1"],"StreamSubscription":["1"]},"_StreamImpl":{"Stream":["1"]},"_DelayedData":{"_DelayedEvent":["1"]},"_DelayedDone":{"_DelayedEvent":["@"]},"_StreamImplEvents":{"_PendingEvents":["1"]},"_DoneStreamSubscription":{"StreamSubscription":["1"]},"AsyncError":{"Error":[]},"_Zone":{"Zone":[]},"_RootZone":{"Zone":[]},"_LinkedHashSet":{"_SetBase":["1"],"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_LinkedHashSetIterator":{"Iterator":["1"]},"ListBase":{"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"MapBase":{"MapMixin":["1","2"],"Map":["1","2"]},"MapMixin":{"Map":["1","2"]},"MapView":{"Map":["1","2"]},"UnmodifiableMapView":{"_UnmodifiableMapView_MapView__UnmodifiableMapMixin":["1","2"],"MapView":["1","2"],"_UnmodifiableMapMixin":["1","2"],"Map":["1","2"]},"ListQueue":{"ListIterable":["1"],"Queue":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"ListIterable.E":"1","Iterable.E":"1"},"_ListQueueIterator":{"Iterator":["1"]},"SetBase":{"SetMixin":["1"],"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_SetBase":{"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_JsonMap":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"_JsonMapKeyIterable":{"ListIterable":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"ListIterable.E":"String","Iterable.E":"String"},"Base64Codec":{"Codec":["List<int>","String"],"Codec.S":"List<int>"},"Base64Encoder":{"Converter":["List<int>","String"]},"Base64Decoder":{"Converter":["String","List<int>"]},"JsonUnsupportedObjectError":{"Error":[]},"JsonCyclicError":{"Error":[]},"JsonCodec":{"Codec":["Object","String"],"Codec.S":"Object"},"JsonEncoder":{"Converter":["Object","String"]},"JsonDecoder":{"Converter":["String","Object"]},"double":{"num":[]},"AssertionError":{"Error":[]},"NullThrownError":{"Error":[]},"ArgumentError":{"Error":[]},"RangeError":{"Error":[]},"IndexError":{"Error":[]},"NoSuchMethodError":{"Error":[]},"UnsupportedError":{"Error":[]},"UnimplementedError":{"Error":[]},"StateError":{"Error":[]},"ConcurrentModificationError":{"Error":[]},"OutOfMemoryError":{"Error":[]},"StackOverflowError":{"Error":[]},"CyclicInitializationError":{"Error":[]},"_Exception":{"Exception":[]},"FormatException":{"Exception":[]},"int":{"num":[]},"List":{"EfficientLengthIterable":["1"],"Iterable":["1"]},"Set":{"EfficientLengthIterable":["1"],"Iterable":["1"]},"_StringStackTrace":{"StackTrace":[]},"String":{"Pattern":[]},"StringBuffer":{"StringSink":[]},"HtmlElement":{"Element":[],"Node":[],"EventTarget":[]},"AnchorElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"Animation":{"EventTarget":[]},"AreaElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"AudioElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"BackgroundFetchEvent":{"Event":[]},"BackgroundFetchRegistration":{"EventTarget":[]},"BaseElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"BeforeUnloadEvent":{"Event":[]},"BlobEvent":{"Event":[]},"BodyElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"ButtonElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"CharacterData":{"Node":[],"EventTarget":[]},"CompositionEvent":{"Event":[]},"DivElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"Document":{"Node":[],"EventTarget":[]},"DocumentFragment":{"Node":[],"EventTarget":[]},"DomRectList":{"ImmutableListMixin":["Rectangle<num>"],"ListMixin":["Rectangle<num>"],"JavaScriptIndexingBehavior":["Rectangle<num>"],"List":["Rectangle<num>"],"EfficientLengthIterable":["Rectangle<num>"],"Iterable":["Rectangle<num>"],"JSIndexable":["Rectangle<num>"],"ListMixin.E":"Rectangle<num>","ImmutableListMixin.E":"Rectangle<num>"},"DomRectReadOnly":{"Rectangle":["num"]},"DomStringList":{"ImmutableListMixin":["String"],"ListMixin":["String"],"List":["String"],"JavaScriptIndexingBehavior":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"JSIndexable":["String"],"ListMixin.E":"String","ImmutableListMixin.E":"String"},"_ChildrenElementList":{"ListMixin":["Element"],"List":["Element"],"EfficientLengthIterable":["Element"],"Iterable":["Element"],"ListMixin.E":"Element"},"_FrozenElementList":{"ElementList":["1"],"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"ListMixin.E":"1"},"Element":{"Node":[],"EventTarget":[]},"ExtendableEvent":{"Event":[]},"ExtendableMessageEvent":{"Event":[]},"File":{"Blob":[]},"FileList":{"ImmutableListMixin":["File"],"ListMixin":["File"],"JavaScriptIndexingBehavior":["File"],"List":["File"],"EfficientLengthIterable":["File"],"Iterable":["File"],"JSIndexable":["File"],"ListMixin.E":"File","ImmutableListMixin.E":"File"},"FileReader":{"EventTarget":[]},"FileWriter":{"EventTarget":[]},"FormElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"HtmlCollection":{"ImmutableListMixin":["Node"],"ListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"JSIndexable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"HtmlDocument":{"Document":[],"Node":[],"EventTarget":[]},"HttpRequest":{"EventTarget":[]},"HttpRequestEventTarget":{"EventTarget":[]},"InputElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"KeyboardEvent":{"Event":[]},"LIElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"MediaElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"MediaKeySession":{"EventTarget":[]},"MediaStream":{"EventTarget":[]},"MediaStreamTrack":{"EventTarget":[]},"MessageEvent":{"Event":[]},"MessagePort":{"EventTarget":[]},"MidiInputMap":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"MidiMessageEvent":{"Event":[]},"MidiOutputMap":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"MidiPort":{"EventTarget":[]},"MimeTypeArray":{"ImmutableListMixin":["MimeType"],"ListMixin":["MimeType"],"JavaScriptIndexingBehavior":["MimeType"],"List":["MimeType"],"EfficientLengthIterable":["MimeType"],"Iterable":["MimeType"],"JSIndexable":["MimeType"],"ListMixin.E":"MimeType","ImmutableListMixin.E":"MimeType"},"MouseEvent":{"Event":[]},"_ChildNodeListLazy":{"ListMixin":["Node"],"List":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"ListMixin.E":"Node"},"Node":{"EventTarget":[]},"NodeList":{"ImmutableListMixin":["Node"],"ListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"JSIndexable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"PaymentRequest":{"EventTarget":[]},"PluginArray":{"ImmutableListMixin":["Plugin"],"ListMixin":["Plugin"],"List":["Plugin"],"JavaScriptIndexingBehavior":["Plugin"],"EfficientLengthIterable":["Plugin"],"Iterable":["Plugin"],"JSIndexable":["Plugin"],"ListMixin.E":"Plugin","ImmutableListMixin.E":"Plugin"},"PreElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"PresentationConnection":{"EventTarget":[]},"ProgressEvent":{"Event":[]},"PushEvent":{"Event":[]},"RtcDataChannel":{"EventTarget":[]},"RtcStatsReport":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"SelectElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"ShadowRoot":{"DocumentFragment":[],"Node":[],"EventTarget":[]},"SourceBuffer":{"EventTarget":[]},"SourceBufferList":{"ImmutableListMixin":["SourceBuffer"],"ListMixin":["SourceBuffer"],"List":["SourceBuffer"],"JavaScriptIndexingBehavior":["SourceBuffer"],"EventTarget":[],"EfficientLengthIterable":["SourceBuffer"],"Iterable":["SourceBuffer"],"JSIndexable":["SourceBuffer"],"ListMixin.E":"SourceBuffer","ImmutableListMixin.E":"SourceBuffer"},"SpanElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"SpeechGrammarList":{"ImmutableListMixin":["SpeechGrammar"],"ListMixin":["SpeechGrammar"],"List":["SpeechGrammar"],"JavaScriptIndexingBehavior":["SpeechGrammar"],"EfficientLengthIterable":["SpeechGrammar"],"Iterable":["SpeechGrammar"],"JSIndexable":["SpeechGrammar"],"ListMixin.E":"SpeechGrammar","ImmutableListMixin.E":"SpeechGrammar"},"Storage":{"MapMixin":["String","String"],"Map":["String","String"],"MapMixin.K":"String","MapMixin.V":"String"},"TableElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TableRowElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TableSectionElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TemplateElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextAreaElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextEvent":{"Event":[]},"TextTrack":{"EventTarget":[]},"TextTrackCue":{"EventTarget":[]},"TextTrackCueList":{"ImmutableListMixin":["TextTrackCue"],"ListMixin":["TextTrackCue"],"JavaScriptIndexingBehavior":["TextTrackCue"],"List":["TextTrackCue"],"EfficientLengthIterable":["TextTrackCue"],"Iterable":["TextTrackCue"],"JSIndexable":["TextTrackCue"],"ListMixin.E":"TextTrackCue","ImmutableListMixin.E":"TextTrackCue"},"TextTrackList":{"ImmutableListMixin":["TextTrack"],"ListMixin":["TextTrack"],"JavaScriptIndexingBehavior":["TextTrack"],"List":["TextTrack"],"EventTarget":[],"EfficientLengthIterable":["TextTrack"],"Iterable":["TextTrack"],"JSIndexable":["TextTrack"],"ListMixin.E":"TextTrack","ImmutableListMixin.E":"TextTrack"},"TouchList":{"ImmutableListMixin":["Touch"],"ListMixin":["Touch"],"List":["Touch"],"JavaScriptIndexingBehavior":["Touch"],"EfficientLengthIterable":["Touch"],"Iterable":["Touch"],"JSIndexable":["Touch"],"ListMixin.E":"Touch","ImmutableListMixin.E":"Touch"},"UIEvent":{"Event":[]},"UListElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"VideoTrackList":{"EventTarget":[]},"WebSocket":{"EventTarget":[]},"Window":{"WindowBase":[],"EventTarget":[]},"_BeforeUnloadEvent":{"BeforeUnloadEvent":[],"Event":[]},"Worker":{"EventTarget":[]},"WorkerGlobalScope":{"EventTarget":[]},"_Attr":{"Node":[],"EventTarget":[]},"_CssRuleList":{"ImmutableListMixin":["CssRule"],"ListMixin":["CssRule"],"List":["CssRule"],"JavaScriptIndexingBehavior":["CssRule"],"EfficientLengthIterable":["CssRule"],"Iterable":["CssRule"],"JSIndexable":["CssRule"],"ListMixin.E":"CssRule","ImmutableListMixin.E":"CssRule"},"_DomRect":{"Rectangle":["num"]},"_GamepadList":{"ImmutableListMixin":["Gamepad"],"ListMixin":["Gamepad"],"JavaScriptIndexingBehavior":["Gamepad"],"List":["Gamepad"],"EfficientLengthIterable":["Gamepad"],"Iterable":["Gamepad"],"JSIndexable":["Gamepad"],"ListMixin.E":"Gamepad","ImmutableListMixin.E":"Gamepad"},"_NamedNodeMap":{"ImmutableListMixin":["Node"],"ListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"JSIndexable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"_SpeechRecognitionResultList":{"ImmutableListMixin":["SpeechRecognitionResult"],"ListMixin":["SpeechRecognitionResult"],"List":["SpeechRecognitionResult"],"JavaScriptIndexingBehavior":["SpeechRecognitionResult"],"EfficientLengthIterable":["SpeechRecognitionResult"],"Iterable":["SpeechRecognitionResult"],"JSIndexable":["SpeechRecognitionResult"],"ListMixin.E":"SpeechRecognitionResult","ImmutableListMixin.E":"SpeechRecognitionResult"},"_StyleSheetList":{"ImmutableListMixin":["StyleSheet"],"ListMixin":["StyleSheet"],"JavaScriptIndexingBehavior":["StyleSheet"],"List":["StyleSheet"],"EfficientLengthIterable":["StyleSheet"],"Iterable":["StyleSheet"],"JSIndexable":["StyleSheet"],"ListMixin.E":"StyleSheet","ImmutableListMixin.E":"StyleSheet"},"_AttributeMap":{"MapMixin":["String","String"],"Map":["String","String"]},"_ElementAttributeMap":{"MapMixin":["String","String"],"Map":["String","String"],"MapMixin.K":"String","MapMixin.V":"String"},"_DataAttributeMap":{"MapMixin":["String","String"],"Map":["String","String"],"MapMixin.K":"String","MapMixin.V":"String"},"CssClassSet":{"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"_MultiElementCssClassSet":{"CssClassSetImpl":[],"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"_ElementCssClassSet":{"CssClassSetImpl":[],"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"_EventStream":{"Stream":["1"]},"_ElementEventStreamImpl":{"_EventStream":["1"],"Stream":["1"]},"_ElementListEventStreamImpl":{"Stream":["1"]},"_EventStreamSubscription":{"StreamSubscription":["1"]},"_Html5NodeValidator":{"NodeValidator":[]},"NodeValidatorBuilder":{"NodeValidator":[]},"_SimpleNodeValidator":{"NodeValidator":[]},"_TemplatingNodeValidator":{"NodeValidator":[]},"_SvgNodeValidator":{"NodeValidator":[]},"FixedSizeListIterator":{"Iterator":["1"]},"_DOMWindowCrossFrame":{"WindowBase":[],"EventTarget":[]},"_WrappedEvent":{"Event":[]},"_SameOriginUriPolicy":{"UriPolicy":[]},"_ValidatingTreeSanitizer":{"NodeTreeSanitizer":[]},"CssClassSetImpl":{"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"FilteredElementList":{"ListMixin":["Element"],"List":["Element"],"EfficientLengthIterable":["Element"],"Iterable":["Element"],"ListMixin.E":"Element"},"VersionChangeEvent":{"Event":[]},"JsFunction":{"JsObject":[]},"JsArray":{"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"JsObject":[],"Iterable":["1"],"ListMixin.E":"1"},"_JSRandom":{"Random":[]},"CircleElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"GElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"GeometryElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"GraphicsElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"ImageElement0":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"LengthList":{"ImmutableListMixin":["Length"],"ListMixin":["Length"],"List":["Length"],"EfficientLengthIterable":["Length"],"Iterable":["Length"],"ListMixin.E":"Length","ImmutableListMixin.E":"Length"},"LineElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"NumberList":{"ImmutableListMixin":["Number"],"ListMixin":["Number"],"List":["Number"],"EfficientLengthIterable":["Number"],"Iterable":["Number"],"ListMixin.E":"Number","ImmutableListMixin.E":"Number"},"PathElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"RectElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"ScriptElement0":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"StringList":{"ImmutableListMixin":["String"],"ListMixin":["String"],"List":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"ListMixin.E":"String","ImmutableListMixin.E":"String"},"AttributeClassSet":{"CssClassSetImpl":[],"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"SvgElement":{"Element":[],"Node":[],"EventTarget":[]},"SvgSvgElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextContentElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextPositioningElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TransformList":{"ImmutableListMixin":["Transform"],"ListMixin":["Transform"],"List":["Transform"],"EfficientLengthIterable":["Transform"],"Iterable":["Transform"],"ListMixin.E":"Transform","ImmutableListMixin.E":"Transform"},"Float32List":{"List":["double"],"EfficientLengthIterable":["double"],"TypedData":[],"Iterable":["double"]},"AnalyserNode":{"AudioNode":[],"EventTarget":[]},"AudioBufferSourceNode":{"AudioNode":[],"EventTarget":[]},"AudioContext":{"BaseAudioContext":[],"EventTarget":[]},"AudioNode":{"EventTarget":[]},"AudioParamMap":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"AudioProcessingEvent":{"Event":[]},"AudioScheduledSourceNode":{"AudioNode":[],"EventTarget":[]},"AudioTrackList":{"EventTarget":[]},"BaseAudioContext":{"EventTarget":[]},"BiquadFilterNode":{"AudioNode":[],"EventTarget":[]},"ConvolverNode":{"AudioNode":[],"EventTarget":[]},"DelayNode":{"AudioNode":[],"EventTarget":[]},"DynamicsCompressorNode":{"AudioNode":[],"EventTarget":[]},"GainNode":{"AudioNode":[],"EventTarget":[]},"MediaStreamAudioSourceNode":{"AudioNode":[],"EventTarget":[]},"OfflineAudioContext":{"BaseAudioContext":[],"EventTarget":[]},"OscillatorNode":{"AudioNode":[],"EventTarget":[]},"ScriptProcessorNode":{"AudioNode":[],"EventTarget":[]},"StereoPannerNode":{"AudioNode":[],"EventTarget":[]},"SqlResultSetRowList":{"ImmutableListMixin":["Map<@,@>"],"ListMixin":["Map<@,@>"],"List":["Map<@,@>"],"EfficientLengthIterable":["Map<@,@>"],"Iterable":["Map<@,@>"],"ListMixin.E":"Map<@,@>","ImmutableListMixin.E":"Map<@,@>"},"HexCodec":{"Codec":["List<int>","String"],"Codec.S":"List<int>"},"HexEncoder":{"Converter":["List<int>","String"]},"DrumKit":{"Instrument":[]},"Drums":{"Instrument":[]},"Piano":{"Instrument":[]},"BiquadFilter":{"Effect":[]},"PitchBendEffect":{"Effect":[]},"PanEffect":{"Effect":[]},"GainEffect":{"Effect":[]},"ADSRNode":{"SynthNode":[]},"FMNode":{"SynthNode":[]},"LFONode":{"SynthNode":[]},"SynthSampleNode":{"SynthNode":[]},"SynthDelayNode":{"SynthNode":[]},"SynthCompressorNode":{"SynthNode":[]},"FilterNode":{"SynthNode":[]},"SchedulerSynth":{"Synthesizer":[]},"PythonCell":{"Metronome":[],"ClockSubscriber":[],"TimelineListener":[],"CodeMirrorListener":[],"DataModel":[],"PythonListener":[]},"DatastoreException":{"Exception":[]},"Project":{"DataModel":[],"ClockSubscriber":[]},"NoteRecorder":{"ClockSubscriber":[]},"Recording":{"DataModel":[]},"User":{"DataModel":[]}}'));
   H._Universe_addErasedTypes(init.typeUniverse, JSON.parse('{"EfficientLengthIterable":1,"UnmodifiableListBase":1,"StreamTransformerBase":2,"ListBase":1,"MapBase":2,"SetBase":1,"_ListBase_Object_ListMixin":1,"_SetBase_Object_SetMixin":1,"_JsArray_JsObject_ListMixin":1,"_RectangleBase":1}'));
   var type$ = (function rtii() {
     var findType = H.findType;
@@ -28050,7 +28286,6 @@
       JsLinkedHashMap_Symbol_dynamic: findType("JsLinkedHashMap<Symbol0,@>"),
       JsLinkedHashMap_TraceEvent_SvgElement: findType("JsLinkedHashMap<TraceEvent,SvgElement>"),
       JsLinkedHashMap_dynamic_dynamic: findType("JsLinkedHashMap<@,@>"),
-      JsLinkedHashMap_int_AudioBuffer: findType("JsLinkedHashMap<int,AudioBuffer>"),
       JsLinkedHashMap_int_SynthNode: findType("JsLinkedHashMap<int,SynthNode>"),
       JsLinkedHashMap_int_int: findType("JsLinkedHashMap<int,int>"),
       JsLinkedHashMap_of_String_and_List_Function: findType("JsLinkedHashMap<String,List<Function>>"),

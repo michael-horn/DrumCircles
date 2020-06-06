@@ -57,6 +57,25 @@ playNote([36, 40, 43])
 playNote([36, 40, 43], beats = 2)</pre>
 
 
+<h3 class="help-function-name">playSound(sound, beats = 1.0, pitch = 0, velocity = 100)</h3>
+<div class="help-summary">
+  Play a custom sound using its ID number. You can also
+  call <span class="help-param-name">playSound</span> with a list of
+  sounds that will be played at the same time. The optional parameter
+  <span class="help-param-name">beats</span> sets how long the will note last,
+  and the optional parameter <span class="help-param-name">velocity</span> sets
+  how hard/loud the will note sounds. Velocity can be any number between 0 and 127.
+  The optional <span class="help-param-name">pitch</span> parameter changes the
+  pitch of the sound by the given number of semi-tones. For example, a pitch value of
+  3.0 would be the same as the difference from a C to a D&sharp; on the piano keyboard.
+</div>
+<pre class="help-examples">
+playSound(1203)
+playSound(1203, beats = 0.5, velocity = 20)
+playSound(1203, beats = 2, pitch = 3, velocity = 80)
+playSound([1203, 559, 43])</pre>
+
+
 
 
 <h3 class="help-function-name">rest(beats = 1)</h3>

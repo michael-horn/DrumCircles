@@ -469,6 +469,7 @@
     <div class="sample-summary">
       <div class="sample-badge"><i class="fas fa-play"></i></div>
       <div class="sample-name"></div>
+      <div class="sample-id"></div>
       <div class="sample-duration"></div>
       <audio></audio>
       <div class="sample-menu-button" title="Sound Menu"><i class="fas fa-ellipsis-h"></i>
@@ -483,15 +484,11 @@
       <button class="add-sample-button">Use Sound <i class="fas fa-angle-down"></i></button>
     </div>
     <div class="use-it hidden">
-      To use this sound, copy this line of code to the top of your track.
+      Use this line of code to play this sound.
       <div class="code-snippet">
-        sound = loadSound(<span class="sound-id">13664</span>) # load custom sound
+        playSound(<span class="sound-id"></span>)
       </div>
-      You can then play your sound with the <code>playNote</code> function...
-      <div class="code-snippet">
-        playNote(sound)
-      </div>
-      For more information read the programming guide.
+      For more information take a look at the <a href="help.html#playSound" target="_blank">programming guide</a>.
     </div>
   </li>
 </template>
