@@ -28,6 +28,7 @@ function codemirror(selector) {
       lineNumbers: true,
       theme: "tunepad-dark",
       foldGutter: true,
+      fixedGutter: false,  // gutters scroll along with horizontal content
       gutters: ["trace", "CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"],
       styleActiveLine: true,
       indentUnit: 4,

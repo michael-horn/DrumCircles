@@ -281,22 +281,37 @@
 
 <template id="library-template">
   <div class="dialog library">
-    <h1 class="dialog-title">TunePad Track Library</h1>
+    <h1 class="dialog-title">TunePad Library</h1>
     <button class="close-button"><i class="fas fa-times"></i></button>
     <div class="columns">
       <div class="left-col">
+        <div class="search-container">
+          <input type="text" placeholder="Search">
+          <i class="fas fa-search"></i>
+        </div>
         <h2>Type</h2>
-        <ul class="filters">
+        <ul class="filters" data-tab="tracks">
           <li class="filter-option" data-filter="bass"><i class="fas fa-check-square"></i>Bass</li>
           <li class="filter-option" data-filter="drums"><i class="fas fa-check-square"></i>Drums</li>
           <li class="filter-option" data-filter="guitar"><i class="fas fa-check-square"></i>Guitar</li>
           <li class="filter-option" data-filter="piano"><i class="fas fa-check-square"></i>Keys</li>
           <li class="filter-option" data-filter="marimba"><i class="fas fa-check-square"></i>Marimba</li>
           <li class="filter-option" data-filter="sequencer"><i class="fas fa-check-square"></i>Sequencer</li>
-          <li class="filter-option" data-filter="definitions"><i class="fas fa-check-square"></i>Code</li>
+        </ul>
+        <ul class="filters hidden" data-tab="sounds">
+          <li class="filter-option" data-filter="bass"><i class="fas fa-check-square"></i>Bass</li>
+          <li class="filter-option" data-filter="drums"><i class="fas fa-check-square"></i>Drums</li>
+          <li class="filter-option" data-filter="guitar"><i class="fas fa-check-square"></i>Guitar</li>
+          <li class="filter-option" data-filter="piano"><i class="fas fa-check-square"></i>Keys</li>
+          <li class="filter-option" data-filter="earsketch"><i class="fas fa-check-square"></i>EarSketch</li>
         </ul>
       </div>
       <div class="right-col">
+        <ul class="library-tabs">
+          <li class="library-tab selected" data-tab="tracks">Tracks</li>
+          <li class="library-tab" data-tab="sounds">Sounds</li>
+          <!-- <li class="library-tab" data-tab="code">Code</li> -->
+        </ul>
         <div class="result-header">
           <h2 class="track-count"></h2>
           <div class="sort-menu">
@@ -309,7 +324,7 @@
               <li class='menu-item' data-sort="duration-up">Duration (shortest)</li>
               <li class='menu-item' data-sort="duration-dn">Duration (longest)</li>
               <!-- <li class='menu-item' data-sort="my-favs">My Favorites</li> -->
-              <li class='menu-item' data-sort="my-tracks">My Tracks</li>
+              <li class='menu-item' data-sort="my-tracks">My Items</li>
             </ul>
           </div>
         </div>
@@ -323,7 +338,8 @@
   <li class="track-item">
     <div class="track-summary">
       <div class="gadget-icon"><i class="fas fa-play"></i></div>
-      <div class="track-title expander"></div>
+      <div class="track-title"></div>
+      <div class="track-id expander"></div>
       <div class="track-duration"></div>
       <button class="star-button" title="Favorite">
         <i class="far fa-star"></i><span class="star-count"></span>
@@ -336,13 +352,14 @@
     </div>
     <ul class="track-details hidden">
       <li class="author"></li>
-      <li class="code"></li>
-      <li class="music"></li>
+      <li class="code hidden"></li>
+      <li class="music hidden"></li>
       <li class="description"></li>
       <li class="modified"></li>
     </ul>
   </li>
 </template>
+
 
 <template id="share-dialog">
   <div class="dialog share">
@@ -488,7 +505,7 @@
       <div class="code-snippet">
         playSound(<span class="sound-id"></span>)
       </div>
-      For more information take a look at the <a href="help.html#playSound" target="_blank">programming guide</a>.
+      For more information read the <a href="help.html#playSound" target="_blank">programming guide</a>.
     </div>
   </li>
 </template>

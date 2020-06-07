@@ -92,6 +92,11 @@
   background-color: var(--drum-color);
   background-image: url('../images/instruments/drumkit.svg');
 }
+.gadget-icon.sound {
+  background-color: var(--sound-color);
+  background-image: url('../images/instruments/sampler.svg');
+}
+
 
 .header-bar .expander { flex: 1; }
 .header-bar .gadget-name {
