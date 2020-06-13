@@ -3352,6 +3352,7 @@ function maybeUpdateLineNumberWidth(cm) {
 // If an editor sits on the top or bottom of the window, partially
 // scrolled out of view, this ensures that the cursor is visible.
 function maybeScrollWindow(cm, rect) {
+/*
   if (signalDOMEvent(cm, "scrollCursorIntoView")) { return }
 
   var display = cm.display, box = display.sizer.getBoundingClientRect(), doScroll = null
@@ -3363,6 +3364,7 @@ function maybeScrollWindow(cm, rect) {
     scrollNode.scrollIntoView(doScroll)
     cm.display.lineSpace.removeChild(scrollNode)
   }
+*/
 }
 
 // Scroll a given position into view (immediately), verifying that
