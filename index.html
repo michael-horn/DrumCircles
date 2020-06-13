@@ -578,6 +578,8 @@
         <li class='menu-item' data-voice="808-drums" data-instrument="drums"><i class="fas"></i>808 Drumkit</li>
         <li class='menu-item' data-voice="rock-drums" data-instrument="drumkit"><i class="fas"></i>Rock Drumkit</li>
         <li class='menu-item' data-voice="shot-drums" data-instrument="drums"><i class="fas"></i>Percussion Sounds</li>
+        <li class="menu-separator">
+        <li class='menu-item' data-voice="sequencer" data-instrument="sequencer"><i class="fas"></i>Sequencer</li>
       </ul>
     </div>
     <div class="expander"></div>
@@ -670,7 +672,6 @@
     }
     .instrument {
       width: 100%;
-      height: 150px;
       position: relative;
       border: 2px solid rgba(0, 0, 0, 0.2);
       box-sizing: border-box;
@@ -680,14 +681,13 @@
     }
     .container {
       width: 100%;
-      height: 146px;
+      margin-bottom: -6px;
     }
     .piano-key.black {
       fill: #556;
       stroke: #222;
       stroke-width: 1.5;
       rx: 1.5;
-      filter: url(#drop-shadow);
     }
     .piano-key.black:hover { fill: #777; }
     .piano-key.black.pressed {
@@ -740,7 +740,7 @@
       position: absolute;
       font-size: 20px;
       width: 26px;
-      height: 134px;
+      height: 175px;
       border: none;
       border-radius: 13px;
       background-color: transparent;
@@ -763,7 +763,7 @@
         <button id="down-octave">❮</button><button id="up-octave">❯</button>
       </div>
     </div>
-    <svg class="container" version="1.1" viewBox="0 0 900 230">
+    <svg class="container" version="1.1" viewBox="0 0 700 190">
       <defs>
         <filter id="drop-shadow">
           <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
@@ -778,19 +778,111 @@
   </div>
 </template>
 
+<template id="bass-template">
+  <style>
+    @keyframes vibrate {
+      0% { transform: translateY(0px); }
+      33% { transform: translateY(-2px); }
+      66% { transform: translateY(2px); }
+      100% { transform: translateY(0px); }
+    }
+    .instrument {
+      width: 100%;
+      background-image: url('packages/instruments/images/fretboard-dark.png');
+      background-position: center;
+      background-size: cover;
+    }
+    .instrument svg { margin-bottom: -6px; }
+    .note-hint, .key-hint {
+      font-family: var(--main-font);
+      font-weight: bold;
+      font-size: 14px;
+      fill: #fffc;
+      text-anchor: middle;
+      pointer-events: none;
+      dominant-baseline: central;
+      user-select: none;
+      -moz-user-select: none;
+      -webkit-user-select: none;
+    }
+    .key-hint { opacity: 0.0; }
+    .key-hint.show { opacity: 0.6; }
+    .bass-string.vibrating {
+      animation: vibrate;
+      animation-duration: 0.05s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+    }
+    .bass-fret { opacity: 0; }
+    .bass-fret:hover, .bass-fret.pressed { opacity: 1.0; }
+  </style>
+  <div class="instrument">
+    <svg class="container" version="1.1" viewBox="0 0 750 200">
+      <pattern id="pattern-dash" x="0" y="0" width="3" height="20" patternUnits="userSpaceOnUse">
+        <rect x="0" width="2" height="20" y="0" fill="silver"></rect>
+        <rect x="2" width="1" height="20" y="0" fill="sienna"></rect>
+      </pattern>
+    </svg>
+  </div>
+</template>
 
+<template id="guitar-template">
+  <style>
+    @keyframes vibrate {
+      0% { transform: translateY(0px); }
+      33% { transform: translateY(-1.5px); }
+      66% { transform: translateY(1.5px); }
+      100% { transform: translateY(0px); }
+    }
+    .instrument {
+      width: 100%;
+      background-image: url('packages/instruments/images/fretboard.png');
+      background-position: center;
+      background-size: cover;
+    }
+    .instrument svg { margin-bottom: -6px; }
+    .note-hint, .key-hint {
+      font-family: var(--main-font);
+      font-weight: bold;
+      font-size: 14px;
+      fill: #fffc;
+      text-anchor: middle;
+      pointer-events: none;
+      dominant-baseline: central;
+      user-select: none;
+      -moz-user-select: none;
+      -webkit-user-select: none;
+    }
+    .key-hint { opacity: 0.0; }
+    .key-hint.show { opacity: 0.6; }
+    .guitar-string.vibrating {
+      animation: vibrate;
+      animation-duration: 0.05s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+    }
+    .guitar-fret { opacity: 0; }
+    .guitar-fret:hover, .guitar-fret.pressed { opacity: 1.0; }
+  </style>
+  <div class="instrument">
+    <svg class="container" version="1.1" viewBox="0 0 750 200">
+      <pattern id="pattern-dash" x="0" y="0" width="3" height="20" patternUnits="userSpaceOnUse">
+        <rect x="0" width="2" height="20" y="0" fill="silver"></rect>
+        <rect x="2" width="1" height="20" y="0" fill="sienna"></rect>
+      </pattern>
+    </svg>
+  </div>
+</template>
 
   <template id="drums-template">
     <style>
       .instrument {
         width: 100%;
-        height: 140px;
         position: relative;
         box-sizing: border-box;
       }
       .container {
         width: 100%;
-        height: 100%;
       }
       .drum-pad {
         fill: #fff2;
@@ -802,7 +894,7 @@
       .drum-pad:hover { fill: #fff4; }
       .drum-pad.pressed { fill: #fff8; filter: none; }
       .drum-name, .key-hint, .midi-hint {
-        font: 9pt sans-serif;
+        font: 13pt sans-serif;
         fill: #fffc;
         text-anchor: middle;
         pointer-events: none;
@@ -812,7 +904,7 @@
         -webkit-user-select: none;
       }
       .midi-hint, .key-hint { opacity: 0; }
-      .key-hint { font: 11pt sans-serif; fill: #fff6; }
+      .key-hint { font: 13pt sans-serif; fill: #fff6; }
       .show { opacity: 1.0; }
     </style>
     <div class="instrument">

@@ -6417,7 +6417,92 @@
       _.samples = 0;
       _._buffer = null;
       _.waveform = t1;
-    }, Key: function Key(t0, t1) {
+    },
+    SequencerRow$: function(instrument, position, sound, $name, color) {
+      var t1 = new D.SequencerRow(instrument, position, sound, color, H.setRuntimeTypeInfo([], type$.JSArray_SequencerButton));
+      t1.SequencerRow$5(instrument, position, sound, $name, color);
+      return t1;
+    },
+    SequencerDrumButton$: function(row) {
+      var t1 = new D.SequencerDrumButton(row);
+      t1.SequencerDrumButton$1(row);
+      return t1;
+    },
+    SequencerButton$: function(row, col, x) {
+      var t1 = new D.SequencerButton(row, col, x);
+      t1.SequencerButton$3(row, col, x);
+      return t1;
+    },
+    Sequencer: function Sequencer(t0, t1, t2, t3, t4) {
+      var _ = this;
+      _.rows = t0;
+      _.steps = 16;
+      _.controls = t1;
+      _.name = t2;
+      _._instrument$_stream = t3;
+      _.container = _.root = null;
+      _.parent = t4;
+      _.width = 700;
+      _.height = 300;
+      _._armed = false;
+      _._ports = null;
+    },
+    Sequencer_render_closure: function Sequencer_render_closure(t0) {
+      this.controls = t0;
+    },
+    SequencerRow: function SequencerRow(t0, t1, t2, t3, t4) {
+      var _ = this;
+      _.instrument = t0;
+      _.container = null;
+      _.position = t1;
+      _.sound = t2;
+      _.color = t3;
+      _.brushing = false;
+      _.brushVelocity = 0;
+      _.muteButton = _.volumeDial = _.pitchDial = null;
+      _.buttons = t4;
+      _.dbutton = null;
+    },
+    SequencerRow_closure: function SequencerRow_closure(t0) {
+      this.$this = t0;
+    },
+    SequencerRow_closure0: function SequencerRow_closure0(t0) {
+      this.$this = t0;
+    },
+    SequencerRow_closure1: function SequencerRow_closure1(t0) {
+      this.$this = t0;
+    },
+    SequencerRow_mute_closure: function SequencerRow_mute_closure() {
+    },
+    SequencerRow_unmute_closure: function SequencerRow_unmute_closure() {
+    },
+    SequencerDrumButton: function SequencerDrumButton(t0) {
+      var _ = this;
+      _.row = t0;
+      _.container = _.label = _.backing = null;
+    },
+    SequencerDrumButton_closure: function SequencerDrumButton_closure(t0) {
+      this.$this = t0;
+    },
+    SequencerButton: function SequencerButton(t0, t1, t2) {
+      var _ = this;
+      _.row = t0;
+      _.col = t1;
+      _.x = t2;
+      _.velocity = 0;
+      _.container = _.light = _.backing = null;
+      _._sequencer$_disabled = false;
+    },
+    SequencerButton_closure: function SequencerButton_closure(t0) {
+      this.$this = t0;
+    },
+    SequencerButton_closure0: function SequencerButton_closure0(t0) {
+      this.$this = t0;
+    },
+    SequencerButton_closure1: function SequencerButton_closure1(t0) {
+      this.$this = t0;
+    },
+    Key: function Key(t0, t1) {
       this.pattern = t0;
       this.name = t1;
     },
@@ -6539,9 +6624,71 @@
       _._output = t2;
       _._multiline = false;
       _._lastValidIndent = "";
+    }, Instrument: function Instrument() {
+    }, Instrument_unload_closure: function Instrument_unload_closure() {
+    }, NoteEvent: function NoteEvent(t0, t1, t2, t3) {
+      var _ = this;
+      _.message = t0;
+      _.source = t1;
+      _.note = t2;
+      _.velocity = t3;
     }},
   N = {HexCodec: function HexCodec() {
-    }},
+    },
+    Drums$: function(patch) {
+      var t1 = new N.Drums(H.setRuntimeTypeInfo([], type$.JSArray_DrumPad), "drums", P.StreamController_StreamController(false, type$.NoteEvent), type$.GElement._as(type$.SvgElement._as(C.HtmlDocument_methods.createElementNS$2(document, "http://www.w3.org/2000/svg", "g"))));
+      t1.Drums$1(patch);
+      return t1;
+    },
+    DrumPad$: function(drums, row, col, midi, $name) {
+      var _s4_ = "text",
+        _s26_ = "http://www.w3.org/2000/svg",
+        t1 = document,
+        t2 = type$.SvgElement,
+        t3 = type$.TextElement;
+      t1 = new N.DrumPad(drums, row, col, midi, $name, t3._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, _s4_))), t3._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, _s4_))), t3._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, _s4_))), type$.GElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g"))), type$.RectElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "rect"))));
+      t1.DrumPad$5(drums, row, col, midi, $name);
+      return t1;
+    },
+    Drums: function Drums(t0, t1, t2, t3) {
+      var _ = this;
+      _.pads = t0;
+      _.name = t1;
+      _._instrument$_stream = t2;
+      _.container = _.root = null;
+      _.parent = t3;
+      _.width = 700;
+      _.height = 300;
+      _._armed = false;
+      _._ports = null;
+    },
+    DrumPad: function DrumPad(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9) {
+      var _ = this;
+      _.drums = t0;
+      _.row = t1;
+      _.col = t2;
+      _.midi = t3;
+      _.name = t4;
+      _._keyHint = t5;
+      _._midiHint = t6;
+      _._text = t7;
+      _._group = t8;
+      _._rect = t9;
+      _._drums$_down = false;
+    },
+    DrumPad_closure: function DrumPad_closure(t0) {
+      this.$this = t0;
+    },
+    DrumPad_closure0: function DrumPad_closure0(t0) {
+      this.$this = t0;
+    },
+    DrumPad_closure1: function DrumPad_closure1(t0) {
+      this.$this = t0;
+    },
+    DrumPad_closure2: function DrumPad_closure2(t0) {
+      this.$this = t0;
+    }
+  },
   R = {
     _convert: function(bytes, start, end) {
       var t1, t2, i, bufferIndex, byteOr, byte, bufferIndex0, t3,
@@ -6629,41 +6776,22 @@
       this.$this = t0;
     }
   },
-  Z = {
-    DrumKit$: function(selector, patch) {
-      var t1 = new Z.DrumKit(H.setRuntimeTypeInfo([], type$.JSArray_Drum), selector, "drumkit", P.StreamController_StreamController(false, type$.NoteEvent), type$.GElement._as(type$.SvgElement._as(C.HtmlDocument_methods.createElementNS$2(document, "http://www.w3.org/2000/svg", "g"))));
-      t1.DrumKit$2(selector, patch);
-      return t1;
-    },
-    Drums$: function(patch) {
-      var t1 = new Z.Drums(H.setRuntimeTypeInfo([], type$.JSArray_DrumPad), "drums", P.StreamController_StreamController(false, type$.NoteEvent), type$.GElement._as(type$.SvgElement._as(C.HtmlDocument_methods.createElementNS$2(document, "http://www.w3.org/2000/svg", "g"))));
-      t1.Drums$1(patch);
-      return t1;
-    },
-    DrumPad$: function(drums, row, col, midi, $name) {
-      var _s4_ = "text",
-        _s26_ = "http://www.w3.org/2000/svg",
-        t1 = document,
-        t2 = type$.SvgElement,
-        t3 = type$.TextElement;
-      t1 = new Z.DrumPad(drums, row, col, midi, $name, t3._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, _s4_))), t3._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, _s4_))), t3._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, _s4_))), type$.GElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g"))), type$.RectElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "rect"))));
-      t1.DrumPad$5(drums, row, col, midi, $name);
-      return t1;
-    },
-    PianoKey$: function(key, piano) {
+  Y = {
+    BassFret$: function(bass, midi, $name, i, j) {
       var _s26_ = "http://www.w3.org/2000/svg",
         t1 = document,
         t2 = type$.SvgElement;
-      t1 = new Z.PianoKey(key, piano, type$.TextElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "text"))), H.setRuntimeTypeInfo([0, 0.45, 1, 1.55, 2, 3, 3.4, 4, 4.5, 5, 5.6, 6], type$.JSArray_num), type$.GElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g"))), type$.RectElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "rect"))));
-      t1.PianoKey$2(key, piano);
+      t1 = new Y.BassFret(bass, midi, $name, i, j, type$.TextElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "text"))), type$.GElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g"))));
+      t1.BassFret$5(bass, midi, $name, i, j);
       return t1;
     },
-    DrumKit: function DrumKit(t0, t1, t2, t3, t4) {
+    BassGuitar: function BassGuitar(t0, t1, t2, t3, t4) {
       var _ = this;
-      _.drums = t0;
-      _.selector = t1;
+      _._frets = t0;
+      _._bass$_strings = t1;
+      _.fretboard = null;
       _.name = t2;
-      _._instruments$_stream = t3;
+      _._instrument$_stream = t3;
       _.container = _.root = null;
       _.parent = t4;
       _.width = 700;
@@ -6671,865 +6799,30 @@
       _._armed = false;
       _._ports = null;
     },
-    DrumKit__render_closure: function DrumKit__render_closure(t0, t1, t2, t3) {
+    BassFret: function BassFret(t0, t1, t2, t3, t4, t5, t6) {
       var _ = this;
-      _._box_0 = t0;
-      _.$this = t1;
-      _.midi = t2;
-      _.drum = t3;
-    },
-    DrumKit__render_closure0: function DrumKit__render_closure0(t0, t1, t2, t3) {
-      var _ = this;
-      _._box_0 = t0;
-      _.$this = t1;
-      _.midi = t2;
-      _.drum = t3;
-    },
-    DrumKit__render_closure1: function DrumKit__render_closure1(t0, t1, t2) {
-      this.$this = t0;
-      this.drum = t1;
-      this.midi = t2;
-    },
-    DrumKit__render_closure2: function DrumKit__render_closure2(t0, t1, t2, t3) {
-      var _ = this;
-      _._box_0 = t0;
-      _.$this = t1;
-      _.midi = t2;
-      _.drum = t3;
-    },
-    Drum: function Drum(t0, t1, t2) {
-      var _ = this;
-      _.selector = t0;
-      _.name = t1;
-      _.midi = t2;
-      _.pressed = false;
-    },
-    Drums: function Drums(t0, t1, t2, t3) {
-      var _ = this;
-      _.pads = t0;
-      _.name = t1;
-      _._instruments$_stream = t2;
-      _.container = _.root = null;
-      _.parent = t3;
-      _.width = 700;
-      _.height = 300;
-      _._armed = false;
-      _._ports = null;
-    },
-    DrumPad: function DrumPad(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9) {
-      var _ = this;
-      _.drums = t0;
-      _.row = t1;
-      _.col = t2;
-      _.midi = t3;
-      _.name = t4;
-      _._keyHint = t5;
-      _._midiHint = t6;
-      _._text = t7;
-      _._group = t8;
-      _._rect = t9;
-      _._instruments$_down = false;
-    },
-    DrumPad_closure: function DrumPad_closure(t0) {
-      this.$this = t0;
-    },
-    DrumPad_closure0: function DrumPad_closure0(t0) {
-      this.$this = t0;
-    },
-    DrumPad_closure1: function DrumPad_closure1(t0) {
-      this.$this = t0;
-    },
-    DrumPad_closure2: function DrumPad_closure2(t0) {
-      this.$this = t0;
-    },
-    Instrument: function Instrument() {
-    },
-    Instrument_insert_closure: function Instrument_insert_closure(t0) {
-      this.$this = t0;
-    },
-    Instrument_unload_closure: function Instrument_unload_closure() {
-    },
-    NoteEvent: function NoteEvent(t0, t1, t2, t3) {
-      var _ = this;
-      _.message = t0;
-      _.source = t1;
-      _.note = t2;
-      _.velocity = t3;
-    },
-    Piano: function Piano(t0, t1, t2, t3, t4) {
-      var _ = this;
-      _.keys = t0;
-      _.offset = 0;
-      _.mini = null;
-      _.allKeys = t1;
+      _.bass = t0;
+      _.midi = t1;
       _.name = t2;
-      _._instruments$_stream = t3;
-      _.container = _.root = null;
-      _.parent = t4;
-      _.width = 700;
-      _.height = 300;
-      _._armed = false;
-      _._ports = null;
+      _.keyboardCode = "";
+      _.i = t3;
+      _.j = t4;
+      _.keyHint = t5;
+      _.el = t6;
+      _._bass$_down = false;
     },
-    Piano__render_closure: function Piano__render_closure(t0) {
+    BassFret_closure: function BassFret_closure(t0) {
       this.$this = t0;
     },
-    Piano__render_closure0: function Piano__render_closure0(t0) {
+    BassFret_closure0: function BassFret_closure0(t0) {
       this.$this = t0;
     },
-    Piano__slideKeyboard_closure: function Piano__slideKeyboard_closure() {
-    },
-    MiniPiano: function MiniPiano(t0, t1, t2, t3, t4) {
-      var _ = this;
-      _.piano = t0;
-      _.el = t1;
-      _.bkeys = t2;
-      _.wkeys = t3;
-      _.highlight = t4;
-      _._instruments$_timer = null;
-    },
-    MiniPiano_slide_closure: function MiniPiano_slide_closure(t0) {
+    BassFret_closure1: function BassFret_closure1(t0) {
       this.$this = t0;
     },
-    PianoKey: function PianoKey(t0, t1, t2, t3, t4, t5) {
-      var _ = this;
-      _.key = t0;
-      _.piano = t1;
-      _.keyHint = t2;
-      _._key_offsets = t3;
-      _.el = t4;
-      _.rect = t5;
-      _._instruments$_down = false;
-    },
-    PianoKey_closure: function PianoKey_closure(t0) {
+    BassFret_closure2: function BassFret_closure2(t0) {
       this.$this = t0;
     },
-    PianoKey_closure0: function PianoKey_closure0(t0) {
-      this.$this = t0;
-    },
-    PianoKey_closure1: function PianoKey_closure1(t0) {
-      this.$this = t0;
-    },
-    PianoKey_closure2: function PianoKey_closure2(t0) {
-      this.$this = t0;
-    }
-  },
-  E = {ClockSubscriber: function ClockSubscriber() {
-    }, Metronome: function Metronome() {
-    }, PlayClock: function PlayClock(t0, t1, t2, t3) {
-      var _ = this;
-      _._elapsedBeats = _._start = 0;
-      _._clock$_bpm = 120;
-      _._meter = "4/4";
-      _._beatValue = _._beatsPerMeasure = 4;
-      _._key = t0;
-      _._subscribers = t1;
-      _._listeners = t2;
-      _.context = null;
-      _._metronomes = t3;
-      _._clock$_timer = null;
-    }, PlayClock_stopAll_closure: function PlayClock_stopAll_closure() {
-    }, PlayClock_setTime_closure: function PlayClock_setTime_closure() {
-    }, PlayClock_setTempo_closure: function PlayClock_setTempo_closure() {
-    }, PlayClock_setTimeSignature_closure: function PlayClock_setTimeSignature_closure() {
-    }, PlayClock_startMetronome_closure: function PlayClock_startMetronome_closure() {
-    }, PlayClock_startMetronome_closure0: function PlayClock_startMetronome_closure0(t0, t1, t2) {
-      this._box_0 = t0;
-      this.$this = t1;
-      this.start_time = t2;
-    }, PlayClock_startMetronome__closure: function PlayClock_startMetronome__closure(t0) {
-      this._box_0 = t0;
-    },
-    Dialog_message: function(message, title, $confirm) {
-      var t1,
-        dialog = document.createElement("div");
-      dialog.className = "dialog";
-      C.DivElement_methods.setInnerHtml$1(dialog, '    <button class="close-button"><i class="fas fa-times"></i></button>\n    <h1 class="dialog-title">' + title + "</h1>\n    <p>" + message + '</p>\n    <div class="dialog-button-row">\n      <button class="confirm-button">' + $confirm + "</button>\n    </div>");
-      E.Dialog__showModal(dialog);
-      t1 = type$.Element;
-      H.checkTypeBound(t1, t1, "T", "querySelectorAll");
-      new W._ElementListEventStreamImpl(type$.ElementList_Element._as(new W._FrozenElementList(dialog.querySelectorAll(".confirm-button"), type$._FrozenElementList_Element)), false, "click", type$._ElementListEventStreamImpl_MouseEvent).listen$1(new E.Dialog_message_closure());
-      return dialog;
-    },
-    Dialog_openModal: function(templateSelector, fieldValues) {
-      var dialog, t1, t2, t3, el,
-        template = type$.TemplateElement._as(document.querySelector(templateSelector));
-      if (template != null) {
-        dialog = type$.DivElement._as(type$.DocumentFragment._as(template.content.cloneNode(true)).querySelector(".dialog"));
-        if (dialog != null && fieldValues != null)
-          for (t1 = fieldValues.get$keys(fieldValues), t1 = t1.get$iterator(t1), t2 = type$.HtmlElement; t1.moveNext$0();) {
-            t3 = t1.get$current(t1);
-            el = t2._as(dialog.querySelector(t3));
-            if (el != null)
-              J.setInnerHtml$1$x(el, H.S(fieldValues.$index(0, t3)));
-          }
-        E.Dialog__showModal(dialog);
-        return dialog;
-      }
-      return null;
-    },
-    Dialog_closeModal: function() {
-      var t3, t4,
-        _s16_ = "querySelectorAll",
-        t1 = type$.Element,
-        t2 = document;
-      H.checkTypeBound(t1, t1, "T", _s16_);
-      t3 = type$._FrozenElementList_Element;
-      t4 = new W._FrozenElementList(t2.querySelectorAll(".overlay"), t3);
-      t4.forEach$1(t4, new E.Dialog_closeModal_closure());
-      H.checkTypeBound(t1, t1, "T", _s16_);
-      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t2.querySelectorAll("body"), t3)).remove$1(0, "modal-open");
-    },
-    Dialog__showModal: function(dialog) {
-      var t1, overlay, t2, t3, t4, t5,
-        _s16_ = "querySelectorAll",
-        _s9_ = "mousedown";
-      E.Dialog_closeModal();
-      if (dialog != null) {
-        t1 = document;
-        overlay = t1.createElement("div");
-        overlay.className = "overlay";
-        t2 = type$.Element;
-        H.checkTypeBound(t2, t2, "T", _s16_);
-        t3 = type$._FrozenElementList_Element;
-        W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("body"), t3)).add$1(0, "modal-open");
-        H.checkTypeBound(t2, t2, "T", _s16_);
-        t4 = type$.ElementList_Element;
-        t5 = type$._ElementListEventStreamImpl_MouseEvent;
-        new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(dialog.querySelectorAll(".close-button"), t3)), false, "click", t5).listen$1(new E.Dialog__showModal_closure());
-        H.checkTypeBound(t2, t2, "T", _s16_);
-        new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(dialog.querySelectorAll(".cancel-button"), t3)), false, "click", t5).listen$1(new E.Dialog__showModal_closure0());
-        t5 = type$._ElementEventStreamImpl_MouseEvent;
-        t3 = t5._eval$1("~(1)");
-        t4 = t3._as(new E.Dialog__showModal_closure1());
-        type$.void_Function._as(null);
-        t5 = t5._precomputed1;
-        W._EventStreamSubscription$(overlay, _s9_, t4, false, t5);
-        W._EventStreamSubscription$(dialog, _s9_, t3._as(new E.Dialog__showModal_closure2()), false, t5);
-        overlay.appendChild(dialog);
-        t1.body.appendChild(overlay);
-      }
-    },
-    Dialog_message_closure: function Dialog_message_closure() {
-    },
-    Dialog_closeModal_closure: function Dialog_closeModal_closure() {
-    },
-    Dialog__showModal_closure: function Dialog__showModal_closure() {
-    },
-    Dialog__showModal_closure0: function Dialog__showModal_closure0() {
-    },
-    Dialog__showModal_closure1: function Dialog__showModal_closure1() {
-    },
-    Dialog__showModal_closure2: function Dialog__showModal_closure2() {
-    }
-  },
-  K = {
-    Effect_Effect: function($name, params) {
-      var t1, t2;
-      if ($name === "lowpass" || $name === "filter")
-        return K.BiquadFilter$("lowpass", params);
-      else if ($name === "highpass")
-        return K.BiquadFilter$("highpass", params);
-      else if ($name === "bandpass")
-        return K.BiquadFilter$("bandpass", params);
-      else if ($name === "notch")
-        return K.BiquadFilter$("notch", params);
-      else if ($name === "pan") {
-        t1 = H.setRuntimeTypeInfo([], type$.JSArray_List_num);
-        t2 = new K.PanEffect("pan", t1);
-        t2.Effect$_internal$2("pan", params);
-        if (0 >= t1.length)
-          return H.ioore(t1, 0);
-        t2.clampParam$3(t1[0], -1, 1);
-        return t2;
-      } else if ($name === "gain") {
-        t1 = new K.GainEffect("gain", H.setRuntimeTypeInfo([], type$.JSArray_List_num));
-        t1.Effect$_internal$2("gain", params);
-        return t1;
-      } else if ($name === "bend") {
-        t1 = new K.PitchBendEffect("bend", H.setRuntimeTypeInfo([], type$.JSArray_List_num));
-        t1.Effect$_internal$2("bend", params);
-        return t1;
-      } else
-        return null;
-    },
-    BiquadFilter$: function($name, params) {
-      var t1 = H.setRuntimeTypeInfo([], type$.JSArray_List_num),
-        t2 = new K.BiquadFilter($name, t1);
-      t2.Effect$_internal$2($name, params);
-      t2.type = $name;
-      if (t1.length === 0) {
-        C.JSArray_methods.add$1(t1, H.setRuntimeTypeInfo([], type$.JSArray_num));
-        if (0 >= t1.length)
-          return H.ioore(t1, 0);
-        C.JSArray_methods.add$1(t1[0], 1000);
-      }
-      if (t1.length < 2) {
-        C.JSArray_methods.add$1(t1, H.setRuntimeTypeInfo([], type$.JSArray_num));
-        if (1 >= t1.length)
-          return H.ioore(t1, 1);
-        C.JSArray_methods.add$1(t1[1], 0.8);
-      }
-      if (t1.length < 3) {
-        C.JSArray_methods.add$1(t1, H.setRuntimeTypeInfo([], type$.JSArray_num));
-        if (2 >= t1.length)
-          return H.ioore(t1, 2);
-        C.JSArray_methods.add$1(t1[2], 1);
-      }
-      if (0 >= t1.length)
-        return H.ioore(t1, 0);
-      t2.clampParam$3(t1[0], 10, 22050);
-      if ($name === "highpass" || $name === "lowpass") {
-        if (1 >= t1.length)
-          return H.ioore(t1, 1);
-        t2.clampParam$3(t1[1], -20, 20);
-      }
-      return t2;
-    },
-    Effect: function Effect() {
-    },
-    BiquadFilter: function BiquadFilter(t0, t1) {
-      var _ = this;
-      _.type = "lowpass";
-      _.name = t0;
-      _.params = t1;
-      _.start = 0;
-      _.beats = -1;
-      _.oparams = _.node = null;
-    },
-    PitchBendEffect: function PitchBendEffect(t0, t1) {
-      var _ = this;
-      _.name = t0;
-      _.params = t1;
-      _.start = 0;
-      _.beats = -1;
-      _.oparams = _.node = null;
-    },
-    PanEffect: function PanEffect(t0, t1) {
-      var _ = this;
-      _.name = t0;
-      _.params = t1;
-      _.start = 0;
-      _.beats = -1;
-      _.oparams = _.node = null;
-    },
-    GainEffect: function GainEffect(t0, t1) {
-      var _ = this;
-      _.name = t0;
-      _.params = t1;
-      _.start = 0;
-      _.beats = -1;
-      _.oparams = _.node = null;
-    },
-    Uuid$: function() {
-      var options, t2, t1 = {};
-      t1.options = options;
-      t1.options = null;
-      t2 = new K.Uuid();
-      t2.Uuid$1$options(t1);
-      return t2;
-    },
-    Uuid: function Uuid() {
-      var _ = this;
-      _._clockSeq = _._nodeId = _._seedBytes = null;
-      _._lastNSecs = _._lastMSecs = 0;
-      _._hexToByte = _._byteToHex = null;
-    }
-  },
-  B = {
-    SynthNode$: function(context, config) {
-      var t1 = new B.SynthNode(context);
-      t1.SynthNode$2(context, config);
-      return t1;
-    },
-    SynthNode: function SynthNode(t0) {
-      var _ = this;
-      _.context = t0;
-      _.level = null;
-      _._level = 1;
-      _.enabled = true;
-      _.id = 0;
-    },
-    ADSRNode: function ADSRNode(t0, t1, t2, t3) {
-      var _ = this;
-      _.A = t0;
-      _.D = t1;
-      _.S = 1;
-      _.R = t2;
-      _.adsr = null;
-      _.context = t3;
-      _.level = null;
-      _._level = 1;
-      _.enabled = true;
-      _.id = 0;
-    },
-    FMNode: function FMNode(t0) {
-      var _ = this;
-      _.fIn = _.dIn = _.osc = null;
-      _.frequency = 1;
-      _.relative = true;
-      _.context = t0;
-      _.level = null;
-      _._level = 1;
-      _.enabled = true;
-      _.id = 0;
-    },
-    LFONode: function LFONode(t0) {
-      var _ = this;
-      _.osc = null;
-      _.frequency = 1;
-      _.context = t0;
-      _.level = null;
-      _._level = 1;
-      _.enabled = true;
-      _.id = 0;
-    },
-    SynthSampleNode: function SynthSampleNode(t0) {
-      var _ = this;
-      _.samples = _.pIn = _.dIn = _.source = null;
-      _.sampleDuration = 0;
-      _.context = t0;
-      _.level = null;
-      _._level = 1;
-      _.enabled = true;
-      _.id = 0;
-    },
-    SynthSampleNode_schedulePitchBend_closure: function SynthSampleNode_schedulePitchBend_closure(t0) {
-      this.semitoneRatio = t0;
-    },
-    SynthDelayNode: function SynthDelayNode(t0, t1) {
-      var _ = this;
-      _.delay = null;
-      _.delayTime = t0;
-      _.context = t1;
-      _.level = null;
-      _._level = 1;
-      _.enabled = true;
-      _.id = 0;
-    },
-    SynthCompressorNode: function SynthCompressorNode(t0) {
-      var _ = this;
-      _.compressor = null;
-      _.context = t0;
-      _.level = null;
-      _._level = 1;
-      _.enabled = true;
-      _.id = 0;
-    },
-    FilterNode: function FilterNode(t0) {
-      var _ = this;
-      _.filter = null;
-      _.context = t0;
-      _.level = null;
-      _._level = 1;
-      _.enabled = true;
-      _.id = 0;
-    },
-    SchedulerSynth: function SchedulerSynth(t0, t1, t2) {
-      var _ = this;
-      _._bpm = 120;
-      _.effects = t0;
-      _.notes = t1;
-      _.config = null;
-      _._bank = t2;
-      _.voice = "";
-    },
-    UserList$: function(socket) {
-      var t1 = new B.UserList(socket, H.setRuntimeTypeInfo([], type$.JSArray_User));
-      t1.UserList$1(socket);
-      return t1;
-    },
-    UserList: function UserList(t0, t1) {
-      this.me = null;
-      this.socket = t0;
-      this.visitors = t1;
-    },
-    UserList_closure: function UserList_closure() {
-    },
-    UserList_closure0: function UserList_closure0(t0) {
-      this.$this = t0;
-    },
-    UserList_closure1: function UserList_closure1(t0) {
-      this.$this = t0;
-    },
-    UserList__buildUserList_closure: function UserList__buildUserList_closure() {
-    },
-    toInt: function(d, defaultValue) {
-      var t1, exception;
-      if (d == null)
-        return defaultValue;
-      else if (H._isInt(d))
-        return d;
-      else if (typeof d == "number")
-        return C.JSNumber_methods.round$0(d);
-      else
-        try {
-          t1 = P.int_parse(J.toString$0$(d));
-          return t1;
-        } catch (exception) {
-          if (type$.Exception._is(H.unwrapException(exception)))
-            return defaultValue;
-          else
-            throw exception;
-        }
-    },
-    toNum: function(d, defaultValue) {
-      var t1, exception;
-      if (d == null)
-        return defaultValue;
-      else if (typeof d == "number")
-        return d;
-      else
-        try {
-          t1 = P.num_parse(J.toString$0$(d));
-          return t1;
-        } catch (exception) {
-          if (type$.Exception._is(H.unwrapException(exception)))
-            return defaultValue;
-          else
-            throw exception;
-        }
-    },
-    toDateTime: function(d) {
-      var t1, exception;
-      if (d == null)
-        return new P.DateTime(Date.now(), false);
-      else if (H._isInt(d)) {
-        t1 = new P.DateTime(d, false);
-        t1.DateTime$_withValue$2$isUtc(d, false);
-        return t1;
-      } else if (typeof d == "string")
-        try {
-          t1 = P.DateTime_parse(d);
-          return t1;
-        } catch (exception) {
-          H.unwrapException(exception);
-          P.print("unable to parse datetime");
-        }
-      return new P.DateTime(Date.now(), false);
-    },
-    toBool: function(b, defaultValue) {
-      var s;
-      if (b == null)
-        return defaultValue;
-      else if (H._isBool(b))
-        return b;
-      else {
-        s = J.toString$0$(b);
-        if (s.toLowerCase() === "true" || s.toLowerCase() === "t")
-          return true;
-        else if (s.toLowerCase() === "false" || s.toLowerCase() === "f")
-          return false;
-      }
-      return defaultValue;
-    }
-  },
-  F = {Note: function Note() {
-      this._note = 60;
-      this.duration = 1;
-      this._velocity = 90;
-    },
-    main: function() {
-      var $async$goto = 0,
-        $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic),
-        t2, t3, t4, t5, t1;
-      var $async$main = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
-        if ($async$errorCode === 1)
-          return P._asyncRethrow($async$result, $async$completer);
-        while (true)
-          switch ($async$goto) {
-            case 0:
-              // Function start
-              t1 = type$.dynamic;
-              t1 = P.LinkedHashMap_LinkedHashMap$_literal(["apiKey", "AIzaSyBccCx1WaXXMqf8tq-_1dwO2qr76f6RHFo", "authDomain", "tunepadbeta.firebaseapp.com", "databaseURL", "https://tunepadbeta.firebaseio.com", "projectId", "tunepadbeta", "storageBucket", "tunepadbeta.appspot.com", "messagingSenderId", "803854221469", "appId", "1:803854221469:web:59b8d6beedab219d7bd474"], t1, t1);
-              t2 = Y.User$anonymous();
-              t3 = type$.JsLinkedHashMap_of_String_and_List_Function;
-              t4 = type$.JSArray_Function;
-              t4 = new Y.Datastore("https://tunepad.club", t1, t2, new H.JsLinkedHashMap(t3), new H.JsLinkedHashMap(t3), new H.JsLinkedHashMap(t3), H.setRuntimeTypeInfo([], t4), H.setRuntimeTypeInfo([], t4));
-              t3 = $.$get$_context();
-              t3.$indexSet(0, "onFirebaseUpdate", t4.get$_onUpdated());
-              t3.$indexSet(0, "onFirebaseAdded", t4.get$_onAdded());
-              t3.$indexSet(0, "onFirebaseRemoved", t4.get$_onRemoved());
-              t3.$indexSet(0, "onFirebaseLogin", t4.get$_onConnect());
-              t3.$indexSet(0, "onFirebaseLogout", t4.get$_onLogout());
-              t4.isEmpty = H._asBoolNullable(t3.callMethod$2("firebaseInit", [C.C_JsonCodec.encode$2$toEncodable(t1, null)]));
-              t4.root = t3.callMethod$2("firebaseRoot", []);
-              $.datastore = t4;
-              $.socket = W.WebSocket_WebSocket("wss://tunepad.club/websocket/");
-              t4 = $.datastore;
-              $.project = Y.Project$(t4.root, t4);
-              $.userlist = B.UserList$($.socket);
-              t4 = $.datastore;
-              $.library = new O.TrackLibrary(t4, new H.JsLinkedHashMap(type$.JsLinkedHashMap_of_String_and_Set_dynamic));
-              t1 = type$.JSArray_List_Float32List;
-              t2 = type$.List_num;
-              t3 = new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], t1), P.ListQueue$(t2));
-              t3.reshape$2(1, 44100);
-              t5 = new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], t1), P.ListQueue$(t2));
-              t5.reshape$2(1, 44100);
-              t3 = new Y.Recording(t3, t5, new H.JsLinkedHashMap(type$.JsLinkedHashMap_String_num), -1, new P.DateTime(Date.now(), false), new P.DateTime(Date.now(), false));
-              t3.name = "My Recording";
-              t2 = new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], t1), P.ListQueue$(t2));
-              t2.reshape$2(1, 44100);
-              $.rstudio = new Y.RecordingStudio(t3, t2, t4);
-              t1 = $.datastore;
-              if (H.boolConversionCheck(t1.isEmpty)) {
-                t1.save$1(0, $.project);
-                $.datastore.createPythonCell$0();
-                t1 = $.datastore;
-                t1.isEmpty = false;
-              }
-              t1.addAddedCallback$2("/" + H.S(t1.root) + "/cells", new F.main_closure());
-              t1 = type$.Element;
-              t2 = document;
-              H.checkTypeBound(t1, t1, "T", "querySelectorAll");
-              t3 = type$._FrozenElementList_Element;
-              t4 = type$.ElementList_Element;
-              t5 = type$._ElementListEventStreamImpl_MouseEvent;
-              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#add-cell-button"), t3)), false, "click", t5).listen$1(new F.main_closure0());
-              C.JSArray_methods.add$1($.datastore._logins, new F.main_closure1());
-              C.JSArray_methods.add$1($.datastore._logouts, new F.main_closure2());
-              H.checkTypeBound(t1, t1, "T", "querySelectorAll");
-              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#login-button"), t3)), false, "click", t5).listen$1(new F.main_closure3());
-              H.checkTypeBound(t1, t1, "T", "querySelectorAll");
-              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#logout-button"), t3)), false, "click", t5).listen$1(new F.main_closure4());
-              H.checkTypeBound(t1, t1, "T", "querySelectorAll");
-              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#help-button"), t3)), false, "click", t5).listen$1(new F.main_closure5());
-              H.checkTypeBound(t1, t1, "T", "querySelectorAll");
-              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#library-button"), t3)), false, "click", t5).listen$1(new F.main_closure6());
-              H.checkTypeBound(t1, t1, "T", "querySelectorAll");
-              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#recorder-button"), t3)), false, "click", t5).listen$1(new F.main_closure7());
-              t5 = type$.void_Function_MouseEvent._as(new F.main_closure8());
-              type$.void_Function._as(null);
-              W._EventStreamSubscription$(t2, "mousedown", t5, false, type$.MouseEvent);
-              $.datastore.connect$0();
-              // implicit return
-              return P._asyncReturn(null, $async$completer);
-          }
-      });
-      return P._asyncStartSync($async$main, $async$completer);
-    },
-    _addMixTrack: function(cell, prevKey) {
-      var track, prev, dial, dialContainer, t3, slider, t4, t5, t6, t7, slideContainer,
-        _s26_ = "http://www.w3.org/2000/svg",
-        _s16_ = "querySelectorAll",
-        _s5_ = "click",
-        t1 = document,
-        t2 = type$.DivElement,
-        container = t2._as(t1.querySelector("#mixer-container")),
-        template = type$.TemplateElement._as(t1.querySelector("#mixer-template"));
-      if (container != null && template != null) {
-        track = t2._as(type$.DocumentFragment._as(template.content.cloneNode(true)).querySelector(".mixer-track"));
-        if (track != null) {
-          track.id = "mixer-" + H.S(cell.id);
-          prev = t2._as(container.querySelector("#mixer-" + H.S(prevKey)));
-          if (prev != null)
-            C.DivElement_methods.insertAdjacentElement$2(prev, "afterEnd", track);
-          else
-            C.DivElement_methods.insertAdjacentElement$2(container, "afterBegin", track);
-          dial = V.EffectsDial$("PAN: 0.0");
-          dial.minValue = -1;
-          dial.maxValue = 1;
-          dial.set$value(0, cell._pan);
-          dial.step = 0.05;
-          dial.onAdjusted = new F._addMixTrack_closure(track, cell);
-          dial.onChanged = new F._addMixTrack_closure0(cell);
-          dialContainer = t2._as(track.querySelector(".mixer-dial"));
-          if (dialContainer != null)
-            dial.buildUI$1(dialContainer);
-          t3 = H.setRuntimeTypeInfo([], type$.JSArray_Map_dynamic_dynamic);
-          slider = new R.MixSlider(100, 300, t3);
-          t4 = P.SvgSvgElement_SvgSvgElement();
-          t5 = type$.String;
-          C.SvgSvgElement_methods.set$attributes(t4, P.LinkedHashMap_LinkedHashMap$_literal(["viewBox", "0 0 100 300", "preserveAspectRatio", "none"], t5, t5));
-          slider.parent = t4;
-          t4 = type$.SvgElement;
-          t6 = type$.LineElement._as(t4._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "line")));
-          (t6 && C.LineElement_methods).set$attributes(t6, P.LinkedHashMap_LinkedHashMap$_literal(["class", "slider-track", "x1", "50", "y1", "18", "x2", "50", "y2", "282"], t5, t5));
-          slider._slider$_line = t6;
-          t6 = type$.GElement._as(t4._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g")));
-          slider._knobGroup = t6;
-          t7 = type$.CircleElement._as(t4._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "circle")));
-          (t7 && C.CircleElement_methods).set$attributes(t7, P.LinkedHashMap_LinkedHashMap$_literal(["class", "slider-knob", "cx", "0", "cy", "0", "r", "18"], t5, t5));
-          slider._knob = t7;
-          t1 = type$.ImageElement._as(t4._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "image")));
-          (t1 && C.ImageElement_methods).set$attributes(t1, P.LinkedHashMap_LinkedHashMap$_literal(["x", "-12.6", "y", "-12.6", "width", "25.2", "height", "25.2", "pointer-events", "none", "href", "images/instruments/synth.svg"], t5, t5));
-          slider._knobImage = t1;
-          t6.appendChild(t7);
-          t6.appendChild(t1);
-          slider.set$value(0, Math.pow(10, 20 * Math.log(cell._gain) / 2.302585092994046 / 40) / 1.78);
-          C.JSArray_methods.forEach$1(H.setRuntimeTypeInfo([10, 5, 0, -5, -10, -20, -30], type$.JSArray_int), new F._addMixTrack_closure1(slider));
-          t1 = type$.dynamic;
-          C.JSArray_methods.add$1(t3, P.LinkedHashMap_LinkedHashMap$_literal(["label", "-INF \u2014", "value", 0], t1, t1));
-          slider.onAdjusted = new F._addMixTrack_closure2(cell, track);
-          slider.onChanged = new F._addMixTrack_closure3(cell);
-          slideContainer = t2._as(track.querySelector(".mixer-slider"));
-          if (slideContainer != null)
-            slider.buildUI$1(slideContainer);
-          t1 = type$.Element;
-          H.checkTypeBound(t1, t1, "T", _s16_);
-          t2 = type$._FrozenElementList_Element;
-          t3 = type$.ElementList_Element;
-          t4 = type$._ElementListEventStreamImpl_MouseEvent;
-          new W._ElementListEventStreamImpl(t3._as(new W._FrozenElementList(track.querySelectorAll(".mixer-play-button"), t2)), false, _s5_, t4).listen$1(new F._addMixTrack_closure4(cell));
-          H.checkTypeBound(t1, t1, "T", _s16_);
-          new W._ElementListEventStreamImpl(t3._as(new W._FrozenElementList(track.querySelectorAll(".mixer-pause-button"), t2)), false, _s5_, t4).listen$1(new F._addMixTrack_closure5(cell));
-          H.checkTypeBound(t1, t1, "T", _s16_);
-          new W._ElementListEventStreamImpl(t3._as(new W._FrozenElementList(track.querySelectorAll(".mixer-solo-button"), t2)), false, _s5_, t4).listen$1(new F._addMixTrack_closure6(cell));
-          $.datastore.addUpdateCallback$2(cell, new F._addMixTrack_closure7(track, cell, dial, slider));
-        }
-      }
-    },
-    _addCellMenu: function(cell, prevKey) {
-      var item, t2, t3, t4, prev,
-        _s16_ = "querySelectorAll",
-        _s5_ = "click",
-        t1 = document,
-        list = type$.UListElement._as(t1.querySelector(".cell-nav .cell-list")),
-        template = type$.TemplateElement._as(t1.querySelector("#cell-nav-template"));
-      if (list != null && template != null) {
-        item = type$.DocumentFragment._as(template.content.cloneNode(true)).querySelector("li");
-        if (item != null) {
-          item.id = "cell-nav-" + H.S(cell.id);
-          t1 = type$.Element;
-          H.checkTypeBound(t1, t1, "T", _s16_);
-          t2 = type$._FrozenElementList_Element;
-          t3 = type$.ElementList_Element;
-          t4 = type$._ElementListEventStreamImpl_MouseEvent;
-          new W._ElementListEventStreamImpl(t3._as(new W._FrozenElementList(item.querySelectorAll(".shortcut-play-button"), t2)), false, _s5_, t4).listen$1(new F._addCellMenu_closure(cell));
-          H.checkTypeBound(t1, t1, "T", _s16_);
-          new W._ElementListEventStreamImpl(t3._as(new W._FrozenElementList(item.querySelectorAll(".shortcut-pause-button"), t2)), false, _s5_, t4).listen$1(new F._addCellMenu_closure0(cell));
-          H.checkTypeBound(t1, t1, "T", _s16_);
-          new W._ElementListEventStreamImpl(t3._as(new W._FrozenElementList(item.querySelectorAll(".shortcut-cell-name"), t2)), false, _s5_, t4).listen$1(new F._addCellMenu_closure1(cell));
-          prev = list.querySelector("#cell-nav-" + H.S(prevKey));
-          if (prev != null)
-            J.insertAdjacentElement$2$x(prev, "afterEnd", item);
-          else
-            C.UListElement_methods.insertAdjacentElement$2(list, "afterBegin", item);
-        }
-      }
-    },
-    _updateCellMenu: function(cell) {
-      var cellName,
-        t1 = "#cell-nav-" + H.S(cell.id),
-        item = document.querySelector(t1);
-      if (item != null) {
-        cellName = type$.DivElement._as(item.querySelector(".shortcut-cell-name"));
-        if (cellName != null) {
-          C.DivElement_methods.setInnerHtml$1(cellName, cell.name);
-          W._ElementCssClassSet__removeWhere(cellName, type$.bool_Function_String._as(new F._updateCellMenu_closure()), true);
-          t1 = H._asStringNullable(J.$index$asx(cell.settings, "instrument"));
-          cellName.classList.add(t1);
-        }
-      }
-    },
-    main_closure: function main_closure() {
-    },
-    main__closure: function main__closure(t0) {
-      this.cell = t0;
-    },
-    main__closure0: function main__closure0(t0) {
-      this.cell = t0;
-    },
-    main_closure0: function main_closure0() {
-    },
-    main_closure1: function main_closure1() {
-    },
-    main_closure2: function main_closure2() {
-    },
-    main_closure3: function main_closure3() {
-    },
-    main_closure4: function main_closure4() {
-    },
-    main_closure5: function main_closure5() {
-    },
-    main_closure6: function main_closure6() {
-    },
-    main_closure7: function main_closure7() {
-    },
-    main_closure8: function main_closure8() {
-    },
-    _addMixTrack_closure: function _addMixTrack_closure(t0, t1) {
-      this.track = t0;
-      this.cell = t1;
-    },
-    _addMixTrack_closure0: function _addMixTrack_closure0(t0) {
-      this.cell = t0;
-    },
-    _addMixTrack_closure1: function _addMixTrack_closure1(t0) {
-      this.slider = t0;
-    },
-    _addMixTrack_closure2: function _addMixTrack_closure2(t0, t1) {
-      this.cell = t0;
-      this.track = t1;
-    },
-    _addMixTrack_closure3: function _addMixTrack_closure3(t0) {
-      this.cell = t0;
-    },
-    _addMixTrack_closure4: function _addMixTrack_closure4(t0) {
-      this.cell = t0;
-    },
-    _addMixTrack_closure5: function _addMixTrack_closure5(t0) {
-      this.cell = t0;
-    },
-    _addMixTrack_closure6: function _addMixTrack_closure6(t0) {
-      this.cell = t0;
-    },
-    _addMixTrack_closure7: function _addMixTrack_closure7(t0, t1, t2, t3) {
-      var _ = this;
-      _.track = t0;
-      _.cell = t1;
-      _.dial = t2;
-      _.slider = t3;
-    },
-    _addMixTrack__closure: function _addMixTrack__closure() {
-    },
-    _addCellMenu_closure: function _addCellMenu_closure(t0) {
-      this.cell = t0;
-    },
-    _addCellMenu_closure0: function _addCellMenu_closure0(t0) {
-      this.cell = t0;
-    },
-    _addCellMenu_closure1: function _addCellMenu_closure1(t0) {
-      this.cell = t0;
-    },
-    _updateCellMenu_closure: function _updateCellMenu_closure() {
-    }
-  },
-  L = {Synthesizer: function Synthesizer(t0, t1, t2) {
-      var _ = this;
-      _._bpm = 120;
-      _.effects = t0;
-      _.notes = t1;
-      _.config = null;
-      _._bank = t2;
-      _.voice = "";
-    }, Synthesizer_loadPatch_closure: function Synthesizer_loadPatch_closure(t0) {
-      this._box_0 = t0;
-    }, Synthesizer__play_closure: function Synthesizer__play_closure(t0, t1, t2) {
-      this._box_0 = t0;
-      this.$this = t1;
-      this.event = t2;
-    }, Synthesizer__schedule_closure: function Synthesizer__schedule_closure(t0, t1, t2) {
-      this.$this = t0;
-      this.nodes = t1;
-      this.event = t2;
-    }, Synthesizer_pitchBend_closure: function Synthesizer_pitchBend_closure(t0) {
-      this.cents = t0;
-    }, Synthesizer_loadAudioBuffer_closure: function Synthesizer_loadAudioBuffer_closure(t0, t1, t2, t3) {
-      var _ = this;
-      _.context = t0;
-      _.request = t1;
-      _.name = t2;
-      _.onLoaded = t3;
-    }, Synthesizer_loadAudioBuffer_closure0: function Synthesizer_loadAudioBuffer_closure0() {
-    }, Synthesizer_loadCustomSound_closure: function Synthesizer_loadCustomSound_closure(t0, t1, t2) {
-      this.context = t0;
-      this.request = t1;
-      this.url = t2;
-    }, Synthesizer_loadCustomSound_closure0: function Synthesizer_loadCustomSound_closure0() {
-    }},
-  Y = {
     TraceEvent$fromJSON: function(json) {
       var t1 = new Y.TraceEvent(null, 0, new H.JsLinkedHashMap(type$.JsLinkedHashMap_String_dynamic));
       t1.TraceEvent$fromJSON$1(json);
@@ -7712,7 +7005,9 @@
       t9 = document;
       t10 = type$.SvgElement;
       t11 = type$.GElement;
-      t9 = new Y.PythonCell(datastore, P.LinkedHashMap_LinkedHashMap$_empty(t1, t1), new B.SchedulerSynth(t3, t5, t7), new L.Synthesizer(t2, t4, t6), new Z.Piano(t8, t11._as(t10._as(C.HtmlDocument_methods.createElementNS$2(t9, _s26_, "g"))), "piano", P.StreamController_StreamController(false, type$.NoteEvent), t11._as(t10._as(C.HtmlDocument_methods.createElementNS$2(t9, _s26_, "g")))), clock, new Y.Trace(H.setRuntimeTypeInfo([], type$.JSArray_TraceEvent)), $.$get$MIDIManager__singleton(), id, new P.DateTime(Date.now(), false), new P.DateTime(Date.now(), false));
+      t9 = new B.Piano(t8, t11._as(t10._as(C.HtmlDocument_methods.createElementNS$2(t9, _s26_, "g"))), "piano", P.StreamController_StreamController(false, type$.NoteEvent), t11._as(t10._as(C.HtmlDocument_methods.createElementNS$2(t9, _s26_, "g"))));
+      t9.height = 190;
+      t9 = new Y.PythonCell(datastore, P.LinkedHashMap_LinkedHashMap$_empty(t1, t1), new B.SchedulerSynth(t3, t5, t7), new L.Synthesizer(t2, t4, t6), t9, clock, new Y.Trace(H.setRuntimeTypeInfo([], type$.JSArray_TraceEvent)), $.$get$MIDIManager__singleton(), id, new P.DateTime(Date.now(), false), new P.DateTime(Date.now(), false));
       t9.PythonCell$4(id, datastore, clock, container);
       return t9;
     },
@@ -8257,6 +7552,884 @@
     _PythonCell_DataModel_PythonListener_CodeMirrorListener_TimelineListener_ClockSubscriber_Metronome: function _PythonCell_DataModel_PythonListener_CodeMirrorListener_TimelineListener_ClockSubscriber_Metronome() {
     }
   },
+  F = {
+    DrumKit$: function(selector, patch) {
+      var t1 = new F.DrumKit(H.setRuntimeTypeInfo([], type$.JSArray_Drum), selector, "drumkit", P.StreamController_StreamController(false, type$.NoteEvent), type$.GElement._as(type$.SvgElement._as(C.HtmlDocument_methods.createElementNS$2(document, "http://www.w3.org/2000/svg", "g"))));
+      t1.DrumKit$2(selector, patch);
+      return t1;
+    },
+    DrumKit: function DrumKit(t0, t1, t2, t3, t4) {
+      var _ = this;
+      _.drums = t0;
+      _.selector = t1;
+      _.name = t2;
+      _._instrument$_stream = t3;
+      _.container = _.root = null;
+      _.parent = t4;
+      _.width = 700;
+      _.height = 300;
+      _._armed = false;
+      _._ports = null;
+    },
+    DrumKit_render_closure: function DrumKit_render_closure(t0, t1, t2, t3) {
+      var _ = this;
+      _._box_0 = t0;
+      _.$this = t1;
+      _.midi = t2;
+      _.drum = t3;
+    },
+    DrumKit_render_closure0: function DrumKit_render_closure0(t0, t1, t2, t3) {
+      var _ = this;
+      _._box_0 = t0;
+      _.$this = t1;
+      _.midi = t2;
+      _.drum = t3;
+    },
+    DrumKit_render_closure1: function DrumKit_render_closure1(t0, t1, t2) {
+      this.$this = t0;
+      this.drum = t1;
+      this.midi = t2;
+    },
+    DrumKit_render_closure2: function DrumKit_render_closure2(t0, t1, t2, t3) {
+      var _ = this;
+      _._box_0 = t0;
+      _.$this = t1;
+      _.midi = t2;
+      _.drum = t3;
+    },
+    Drum: function Drum(t0, t1, t2) {
+      var _ = this;
+      _.selector = t0;
+      _.name = t1;
+      _.midi = t2;
+      _.pressed = false;
+    },
+    GFret$: function(guitar, midi, $name, i, j) {
+      var _s26_ = "http://www.w3.org/2000/svg",
+        t1 = document,
+        t2 = type$.SvgElement;
+      t1 = new F.GFret(guitar, midi, $name, i, j, type$.TextElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "text"))), type$.GElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g"))));
+      t1.GFret$5(guitar, midi, $name, i, j);
+      return t1;
+    },
+    Guitar: function Guitar(t0, t1, t2, t3, t4) {
+      var _ = this;
+      _._guitar$_frets = t0;
+      _._guitar$_strings = t1;
+      _.fretboard = null;
+      _.name = t2;
+      _._instrument$_stream = t3;
+      _.container = _.root = null;
+      _.parent = t4;
+      _.width = 700;
+      _.height = 300;
+      _._armed = false;
+      _._ports = null;
+    },
+    GFret: function GFret(t0, t1, t2, t3, t4, t5, t6) {
+      var _ = this;
+      _.guitar = t0;
+      _.midi = t1;
+      _.name = t2;
+      _.keyboardCode = "";
+      _.i = t3;
+      _.j = t4;
+      _.keyHint = t5;
+      _.el = t6;
+      _._guitar$_down = false;
+    },
+    GFret_closure: function GFret_closure(t0) {
+      this.$this = t0;
+    },
+    GFret_closure0: function GFret_closure0(t0) {
+      this.$this = t0;
+    },
+    GFret_closure1: function GFret_closure1(t0) {
+      this.$this = t0;
+    },
+    GFret_closure2: function GFret_closure2(t0) {
+      this.$this = t0;
+    },
+    Note: function Note() {
+      this._note = 60;
+      this.duration = 1;
+      this._velocity = 90;
+    },
+    main: function() {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic),
+        t2, t3, t4, t5, t1;
+      var $async$main = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              t1 = type$.dynamic;
+              t1 = P.LinkedHashMap_LinkedHashMap$_literal(["apiKey", "AIzaSyBccCx1WaXXMqf8tq-_1dwO2qr76f6RHFo", "authDomain", "tunepadbeta.firebaseapp.com", "databaseURL", "https://tunepadbeta.firebaseio.com", "projectId", "tunepadbeta", "storageBucket", "tunepadbeta.appspot.com", "messagingSenderId", "803854221469", "appId", "1:803854221469:web:59b8d6beedab219d7bd474"], t1, t1);
+              t2 = Y.User$anonymous();
+              t3 = type$.JsLinkedHashMap_of_String_and_List_Function;
+              t4 = type$.JSArray_Function;
+              t4 = new Y.Datastore("https://tunepad.club", t1, t2, new H.JsLinkedHashMap(t3), new H.JsLinkedHashMap(t3), new H.JsLinkedHashMap(t3), H.setRuntimeTypeInfo([], t4), H.setRuntimeTypeInfo([], t4));
+              t3 = $.$get$_context();
+              t3.$indexSet(0, "onFirebaseUpdate", t4.get$_onUpdated());
+              t3.$indexSet(0, "onFirebaseAdded", t4.get$_onAdded());
+              t3.$indexSet(0, "onFirebaseRemoved", t4.get$_onRemoved());
+              t3.$indexSet(0, "onFirebaseLogin", t4.get$_onConnect());
+              t3.$indexSet(0, "onFirebaseLogout", t4.get$_onLogout());
+              t4.isEmpty = H._asBoolNullable(t3.callMethod$2("firebaseInit", [C.C_JsonCodec.encode$2$toEncodable(t1, null)]));
+              t4.root = t3.callMethod$2("firebaseRoot", []);
+              $.datastore = t4;
+              $.socket = W.WebSocket_WebSocket("wss://tunepad.club/websocket/");
+              t4 = $.datastore;
+              $.project = Y.Project$(t4.root, t4);
+              $.userlist = B.UserList$($.socket);
+              t4 = $.datastore;
+              $.library = new O.TrackLibrary(t4, new H.JsLinkedHashMap(type$.JsLinkedHashMap_of_String_and_Set_dynamic));
+              t1 = type$.JSArray_List_Float32List;
+              t2 = type$.List_num;
+              t3 = new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], t1), P.ListQueue$(t2));
+              t3.reshape$2(1, 44100);
+              t5 = new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], t1), P.ListQueue$(t2));
+              t5.reshape$2(1, 44100);
+              t3 = new Y.Recording(t3, t5, new H.JsLinkedHashMap(type$.JsLinkedHashMap_String_num), -1, new P.DateTime(Date.now(), false), new P.DateTime(Date.now(), false));
+              t3.name = "My Recording";
+              t2 = new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], t1), P.ListQueue$(t2));
+              t2.reshape$2(1, 44100);
+              $.rstudio = new Y.RecordingStudio(t3, t2, t4);
+              t1 = $.datastore;
+              if (H.boolConversionCheck(t1.isEmpty)) {
+                t1.save$1(0, $.project);
+                $.datastore.createPythonCell$0();
+                t1 = $.datastore;
+                t1.isEmpty = false;
+              }
+              t1.addAddedCallback$2("/" + H.S(t1.root) + "/cells", new F.main_closure());
+              t1 = type$.Element;
+              t2 = document;
+              H.checkTypeBound(t1, t1, "T", "querySelectorAll");
+              t3 = type$._FrozenElementList_Element;
+              t4 = type$.ElementList_Element;
+              t5 = type$._ElementListEventStreamImpl_MouseEvent;
+              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#add-cell-button"), t3)), false, "click", t5).listen$1(new F.main_closure0());
+              C.JSArray_methods.add$1($.datastore._logins, new F.main_closure1());
+              C.JSArray_methods.add$1($.datastore._logouts, new F.main_closure2());
+              H.checkTypeBound(t1, t1, "T", "querySelectorAll");
+              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#login-button"), t3)), false, "click", t5).listen$1(new F.main_closure3());
+              H.checkTypeBound(t1, t1, "T", "querySelectorAll");
+              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#logout-button"), t3)), false, "click", t5).listen$1(new F.main_closure4());
+              H.checkTypeBound(t1, t1, "T", "querySelectorAll");
+              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#help-button"), t3)), false, "click", t5).listen$1(new F.main_closure5());
+              H.checkTypeBound(t1, t1, "T", "querySelectorAll");
+              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#library-button"), t3)), false, "click", t5).listen$1(new F.main_closure6());
+              H.checkTypeBound(t1, t1, "T", "querySelectorAll");
+              new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#recorder-button"), t3)), false, "click", t5).listen$1(new F.main_closure7());
+              t5 = type$.void_Function_MouseEvent._as(new F.main_closure8());
+              type$.void_Function._as(null);
+              W._EventStreamSubscription$(t2, "mousedown", t5, false, type$.MouseEvent);
+              $.datastore.connect$0();
+              // implicit return
+              return P._asyncReturn(null, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$main, $async$completer);
+    },
+    _addMixTrack: function(cell, prevKey) {
+      var track, prev, dial, dialContainer, t3, slider, t4, t5, t6, t7, slideContainer,
+        _s26_ = "http://www.w3.org/2000/svg",
+        _s16_ = "querySelectorAll",
+        _s5_ = "click",
+        t1 = document,
+        t2 = type$.DivElement,
+        container = t2._as(t1.querySelector("#mixer-container")),
+        template = type$.TemplateElement._as(t1.querySelector("#mixer-template"));
+      if (container != null && template != null) {
+        track = t2._as(type$.DocumentFragment._as(template.content.cloneNode(true)).querySelector(".mixer-track"));
+        if (track != null) {
+          track.id = "mixer-" + H.S(cell.id);
+          prev = t2._as(container.querySelector("#mixer-" + H.S(prevKey)));
+          if (prev != null)
+            C.DivElement_methods.insertAdjacentElement$2(prev, "afterEnd", track);
+          else
+            C.DivElement_methods.insertAdjacentElement$2(container, "afterBegin", track);
+          dial = V.EffectsDial$("PAN: 0.0");
+          dial.minValue = -1;
+          dial.maxValue = 1;
+          dial.set$value(0, cell._pan);
+          dial.step = 0.05;
+          dial.onAdjusted = new F._addMixTrack_closure(track, cell);
+          dial.onChanged = new F._addMixTrack_closure0(cell);
+          dialContainer = t2._as(track.querySelector(".mixer-dial"));
+          if (dialContainer != null)
+            dial.buildUI$1(dialContainer);
+          t3 = H.setRuntimeTypeInfo([], type$.JSArray_Map_dynamic_dynamic);
+          slider = new R.MixSlider(100, 300, t3);
+          t4 = P.SvgSvgElement_SvgSvgElement();
+          t5 = type$.String;
+          C.SvgSvgElement_methods.set$attributes(t4, P.LinkedHashMap_LinkedHashMap$_literal(["viewBox", "0 0 100 300", "preserveAspectRatio", "none"], t5, t5));
+          slider.parent = t4;
+          t4 = type$.SvgElement;
+          t6 = type$.LineElement._as(t4._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "line")));
+          (t6 && C.LineElement_methods).set$attributes(t6, P.LinkedHashMap_LinkedHashMap$_literal(["class", "slider-track", "x1", "50", "y1", "18", "x2", "50", "y2", "282"], t5, t5));
+          slider._slider$_line = t6;
+          t6 = type$.GElement._as(t4._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g")));
+          slider._knobGroup = t6;
+          t7 = type$.CircleElement._as(t4._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "circle")));
+          (t7 && C.CircleElement_methods).set$attributes(t7, P.LinkedHashMap_LinkedHashMap$_literal(["class", "slider-knob", "cx", "0", "cy", "0", "r", "18"], t5, t5));
+          slider._knob = t7;
+          t1 = type$.ImageElement._as(t4._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "image")));
+          (t1 && C.ImageElement_methods).set$attributes(t1, P.LinkedHashMap_LinkedHashMap$_literal(["x", "-12.6", "y", "-12.6", "width", "25.2", "height", "25.2", "pointer-events", "none", "href", "images/instruments/synth.svg"], t5, t5));
+          slider._knobImage = t1;
+          t6.appendChild(t7);
+          t6.appendChild(t1);
+          slider.set$value(0, Math.pow(10, 20 * Math.log(cell._gain) / 2.302585092994046 / 40) / 1.78);
+          C.JSArray_methods.forEach$1(H.setRuntimeTypeInfo([10, 5, 0, -5, -10, -20, -30], type$.JSArray_int), new F._addMixTrack_closure1(slider));
+          t1 = type$.dynamic;
+          C.JSArray_methods.add$1(t3, P.LinkedHashMap_LinkedHashMap$_literal(["label", "-INF \u2014", "value", 0], t1, t1));
+          slider.onAdjusted = new F._addMixTrack_closure2(cell, track);
+          slider.onChanged = new F._addMixTrack_closure3(cell);
+          slideContainer = t2._as(track.querySelector(".mixer-slider"));
+          if (slideContainer != null)
+            slider.buildUI$1(slideContainer);
+          t1 = type$.Element;
+          H.checkTypeBound(t1, t1, "T", _s16_);
+          t2 = type$._FrozenElementList_Element;
+          t3 = type$.ElementList_Element;
+          t4 = type$._ElementListEventStreamImpl_MouseEvent;
+          new W._ElementListEventStreamImpl(t3._as(new W._FrozenElementList(track.querySelectorAll(".mixer-play-button"), t2)), false, _s5_, t4).listen$1(new F._addMixTrack_closure4(cell));
+          H.checkTypeBound(t1, t1, "T", _s16_);
+          new W._ElementListEventStreamImpl(t3._as(new W._FrozenElementList(track.querySelectorAll(".mixer-pause-button"), t2)), false, _s5_, t4).listen$1(new F._addMixTrack_closure5(cell));
+          H.checkTypeBound(t1, t1, "T", _s16_);
+          new W._ElementListEventStreamImpl(t3._as(new W._FrozenElementList(track.querySelectorAll(".mixer-solo-button"), t2)), false, _s5_, t4).listen$1(new F._addMixTrack_closure6(cell));
+          $.datastore.addUpdateCallback$2(cell, new F._addMixTrack_closure7(track, cell, dial, slider));
+        }
+      }
+    },
+    _addCellMenu: function(cell, prevKey) {
+      var item, t2, t3, t4, prev,
+        _s16_ = "querySelectorAll",
+        _s5_ = "click",
+        t1 = document,
+        list = type$.UListElement._as(t1.querySelector(".cell-nav .cell-list")),
+        template = type$.TemplateElement._as(t1.querySelector("#cell-nav-template"));
+      if (list != null && template != null) {
+        item = type$.DocumentFragment._as(template.content.cloneNode(true)).querySelector("li");
+        if (item != null) {
+          item.id = "cell-nav-" + H.S(cell.id);
+          t1 = type$.Element;
+          H.checkTypeBound(t1, t1, "T", _s16_);
+          t2 = type$._FrozenElementList_Element;
+          t3 = type$.ElementList_Element;
+          t4 = type$._ElementListEventStreamImpl_MouseEvent;
+          new W._ElementListEventStreamImpl(t3._as(new W._FrozenElementList(item.querySelectorAll(".shortcut-play-button"), t2)), false, _s5_, t4).listen$1(new F._addCellMenu_closure(cell));
+          H.checkTypeBound(t1, t1, "T", _s16_);
+          new W._ElementListEventStreamImpl(t3._as(new W._FrozenElementList(item.querySelectorAll(".shortcut-pause-button"), t2)), false, _s5_, t4).listen$1(new F._addCellMenu_closure0(cell));
+          H.checkTypeBound(t1, t1, "T", _s16_);
+          new W._ElementListEventStreamImpl(t3._as(new W._FrozenElementList(item.querySelectorAll(".shortcut-cell-name"), t2)), false, _s5_, t4).listen$1(new F._addCellMenu_closure1(cell));
+          prev = list.querySelector("#cell-nav-" + H.S(prevKey));
+          if (prev != null)
+            J.insertAdjacentElement$2$x(prev, "afterEnd", item);
+          else
+            C.UListElement_methods.insertAdjacentElement$2(list, "afterBegin", item);
+        }
+      }
+    },
+    _updateCellMenu: function(cell) {
+      var cellName,
+        t1 = "#cell-nav-" + H.S(cell.id),
+        item = document.querySelector(t1);
+      if (item != null) {
+        cellName = type$.DivElement._as(item.querySelector(".shortcut-cell-name"));
+        if (cellName != null) {
+          C.DivElement_methods.setInnerHtml$1(cellName, cell.name);
+          W._ElementCssClassSet__removeWhere(cellName, type$.bool_Function_String._as(new F._updateCellMenu_closure()), true);
+          t1 = H._asStringNullable(J.$index$asx(cell.settings, "instrument"));
+          cellName.classList.add(t1);
+        }
+      }
+    },
+    main_closure: function main_closure() {
+    },
+    main__closure: function main__closure(t0) {
+      this.cell = t0;
+    },
+    main__closure0: function main__closure0(t0) {
+      this.cell = t0;
+    },
+    main_closure0: function main_closure0() {
+    },
+    main_closure1: function main_closure1() {
+    },
+    main_closure2: function main_closure2() {
+    },
+    main_closure3: function main_closure3() {
+    },
+    main_closure4: function main_closure4() {
+    },
+    main_closure5: function main_closure5() {
+    },
+    main_closure6: function main_closure6() {
+    },
+    main_closure7: function main_closure7() {
+    },
+    main_closure8: function main_closure8() {
+    },
+    _addMixTrack_closure: function _addMixTrack_closure(t0, t1) {
+      this.track = t0;
+      this.cell = t1;
+    },
+    _addMixTrack_closure0: function _addMixTrack_closure0(t0) {
+      this.cell = t0;
+    },
+    _addMixTrack_closure1: function _addMixTrack_closure1(t0) {
+      this.slider = t0;
+    },
+    _addMixTrack_closure2: function _addMixTrack_closure2(t0, t1) {
+      this.cell = t0;
+      this.track = t1;
+    },
+    _addMixTrack_closure3: function _addMixTrack_closure3(t0) {
+      this.cell = t0;
+    },
+    _addMixTrack_closure4: function _addMixTrack_closure4(t0) {
+      this.cell = t0;
+    },
+    _addMixTrack_closure5: function _addMixTrack_closure5(t0) {
+      this.cell = t0;
+    },
+    _addMixTrack_closure6: function _addMixTrack_closure6(t0) {
+      this.cell = t0;
+    },
+    _addMixTrack_closure7: function _addMixTrack_closure7(t0, t1, t2, t3) {
+      var _ = this;
+      _.track = t0;
+      _.cell = t1;
+      _.dial = t2;
+      _.slider = t3;
+    },
+    _addMixTrack__closure: function _addMixTrack__closure() {
+    },
+    _addCellMenu_closure: function _addCellMenu_closure(t0) {
+      this.cell = t0;
+    },
+    _addCellMenu_closure0: function _addCellMenu_closure0(t0) {
+      this.cell = t0;
+    },
+    _addCellMenu_closure1: function _addCellMenu_closure1(t0) {
+      this.cell = t0;
+    },
+    _updateCellMenu_closure: function _updateCellMenu_closure() {
+    }
+  },
+  B = {
+    PianoKey$: function(key, piano) {
+      var _s26_ = "http://www.w3.org/2000/svg",
+        t1 = document,
+        t2 = type$.SvgElement;
+      t1 = new B.PianoKey(key, piano, type$.TextElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "text"))), H.setRuntimeTypeInfo([0, 0.45, 1, 1.55, 2, 3, 3.4, 4, 4.5, 5, 5.6, 6], type$.JSArray_num), type$.GElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g"))), type$.RectElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "rect"))));
+      t1.PianoKey$2(key, piano);
+      return t1;
+    },
+    Piano: function Piano(t0, t1, t2, t3, t4) {
+      var _ = this;
+      _.keys = t0;
+      _.offset = 0;
+      _.mini = null;
+      _.allKeys = t1;
+      _.name = t2;
+      _._instrument$_stream = t3;
+      _.container = _.root = null;
+      _.parent = t4;
+      _.width = 700;
+      _.height = 300;
+      _._armed = false;
+      _._ports = null;
+    },
+    Piano_render_closure: function Piano_render_closure(t0) {
+      this.$this = t0;
+    },
+    Piano_render_closure0: function Piano_render_closure0(t0) {
+      this.$this = t0;
+    },
+    Piano__slideKeyboard_closure: function Piano__slideKeyboard_closure() {
+    },
+    MiniPiano: function MiniPiano(t0, t1, t2, t3, t4) {
+      var _ = this;
+      _.piano = t0;
+      _.el = t1;
+      _.bkeys = t2;
+      _.wkeys = t3;
+      _.highlight = t4;
+      _._piano$_timer = null;
+    },
+    MiniPiano_slide_closure: function MiniPiano_slide_closure(t0) {
+      this.$this = t0;
+    },
+    PianoKey: function PianoKey(t0, t1, t2, t3, t4, t5) {
+      var _ = this;
+      _.key = t0;
+      _.piano = t1;
+      _.keyHint = t2;
+      _._key_offsets = t3;
+      _.el = t4;
+      _.rect = t5;
+      _._piano$_down = false;
+    },
+    PianoKey_closure: function PianoKey_closure(t0) {
+      this.$this = t0;
+    },
+    PianoKey_closure0: function PianoKey_closure0(t0) {
+      this.$this = t0;
+    },
+    PianoKey_closure1: function PianoKey_closure1(t0) {
+      this.$this = t0;
+    },
+    PianoKey_closure2: function PianoKey_closure2(t0) {
+      this.$this = t0;
+    },
+    SynthNode$: function(context, config) {
+      var t1 = new B.SynthNode(context);
+      t1.SynthNode$2(context, config);
+      return t1;
+    },
+    SynthNode: function SynthNode(t0) {
+      var _ = this;
+      _.context = t0;
+      _.level = null;
+      _._level = 1;
+      _.enabled = true;
+      _.id = 0;
+    },
+    ADSRNode: function ADSRNode(t0, t1, t2, t3) {
+      var _ = this;
+      _.A = t0;
+      _.D = t1;
+      _.S = 1;
+      _.R = t2;
+      _.adsr = null;
+      _.context = t3;
+      _.level = null;
+      _._level = 1;
+      _.enabled = true;
+      _.id = 0;
+    },
+    FMNode: function FMNode(t0) {
+      var _ = this;
+      _.fIn = _.dIn = _.osc = null;
+      _.frequency = 1;
+      _.relative = true;
+      _.context = t0;
+      _.level = null;
+      _._level = 1;
+      _.enabled = true;
+      _.id = 0;
+    },
+    LFONode: function LFONode(t0) {
+      var _ = this;
+      _.osc = null;
+      _.frequency = 1;
+      _.context = t0;
+      _.level = null;
+      _._level = 1;
+      _.enabled = true;
+      _.id = 0;
+    },
+    SynthSampleNode: function SynthSampleNode(t0) {
+      var _ = this;
+      _.samples = _.pIn = _.dIn = _.source = null;
+      _.sampleDuration = 0;
+      _.context = t0;
+      _.level = null;
+      _._level = 1;
+      _.enabled = true;
+      _.id = 0;
+    },
+    SynthSampleNode_schedulePitchBend_closure: function SynthSampleNode_schedulePitchBend_closure(t0) {
+      this.semitoneRatio = t0;
+    },
+    SynthDelayNode: function SynthDelayNode(t0, t1) {
+      var _ = this;
+      _.delay = null;
+      _.delayTime = t0;
+      _.context = t1;
+      _.level = null;
+      _._level = 1;
+      _.enabled = true;
+      _.id = 0;
+    },
+    SynthCompressorNode: function SynthCompressorNode(t0) {
+      var _ = this;
+      _.compressor = null;
+      _.context = t0;
+      _.level = null;
+      _._level = 1;
+      _.enabled = true;
+      _.id = 0;
+    },
+    FilterNode: function FilterNode(t0) {
+      var _ = this;
+      _.filter = null;
+      _.context = t0;
+      _.level = null;
+      _._level = 1;
+      _.enabled = true;
+      _.id = 0;
+    },
+    SchedulerSynth: function SchedulerSynth(t0, t1, t2) {
+      var _ = this;
+      _._bpm = 120;
+      _.effects = t0;
+      _.notes = t1;
+      _.config = null;
+      _._bank = t2;
+      _.voice = "";
+    },
+    UserList$: function(socket) {
+      var t1 = new B.UserList(socket, H.setRuntimeTypeInfo([], type$.JSArray_User));
+      t1.UserList$1(socket);
+      return t1;
+    },
+    UserList: function UserList(t0, t1) {
+      this.me = null;
+      this.socket = t0;
+      this.visitors = t1;
+    },
+    UserList_closure: function UserList_closure() {
+    },
+    UserList_closure0: function UserList_closure0(t0) {
+      this.$this = t0;
+    },
+    UserList_closure1: function UserList_closure1(t0) {
+      this.$this = t0;
+    },
+    UserList__buildUserList_closure: function UserList__buildUserList_closure() {
+    },
+    toInt: function(d, defaultValue) {
+      var t1, exception;
+      if (d == null)
+        return defaultValue;
+      else if (H._isInt(d))
+        return d;
+      else if (typeof d == "number")
+        return C.JSNumber_methods.round$0(d);
+      else
+        try {
+          t1 = P.int_parse(J.toString$0$(d));
+          return t1;
+        } catch (exception) {
+          if (type$.Exception._is(H.unwrapException(exception)))
+            return defaultValue;
+          else
+            throw exception;
+        }
+    },
+    toNum: function(d, defaultValue) {
+      var t1, exception;
+      if (d == null)
+        return defaultValue;
+      else if (typeof d == "number")
+        return d;
+      else
+        try {
+          t1 = P.num_parse(J.toString$0$(d));
+          return t1;
+        } catch (exception) {
+          if (type$.Exception._is(H.unwrapException(exception)))
+            return defaultValue;
+          else
+            throw exception;
+        }
+    },
+    toDateTime: function(d) {
+      var t1, exception;
+      if (d == null)
+        return new P.DateTime(Date.now(), false);
+      else if (H._isInt(d)) {
+        t1 = new P.DateTime(d, false);
+        t1.DateTime$_withValue$2$isUtc(d, false);
+        return t1;
+      } else if (typeof d == "string")
+        try {
+          t1 = P.DateTime_parse(d);
+          return t1;
+        } catch (exception) {
+          H.unwrapException(exception);
+          P.print("unable to parse datetime");
+        }
+      return new P.DateTime(Date.now(), false);
+    },
+    toBool: function(b, defaultValue) {
+      var s;
+      if (b == null)
+        return defaultValue;
+      else if (H._isBool(b))
+        return b;
+      else {
+        s = J.toString$0$(b);
+        if (s.toLowerCase() === "true" || s.toLowerCase() === "t")
+          return true;
+        else if (s.toLowerCase() === "false" || s.toLowerCase() === "f")
+          return false;
+      }
+      return defaultValue;
+    }
+  },
+  E = {ClockSubscriber: function ClockSubscriber() {
+    }, Metronome: function Metronome() {
+    }, PlayClock: function PlayClock(t0, t1, t2, t3) {
+      var _ = this;
+      _._elapsedBeats = _._start = 0;
+      _._clock$_bpm = 120;
+      _._meter = "4/4";
+      _._beatValue = _._beatsPerMeasure = 4;
+      _._key = t0;
+      _._subscribers = t1;
+      _._listeners = t2;
+      _.context = null;
+      _._metronomes = t3;
+      _._clock$_timer = null;
+    }, PlayClock_stopAll_closure: function PlayClock_stopAll_closure() {
+    }, PlayClock_setTime_closure: function PlayClock_setTime_closure() {
+    }, PlayClock_setTempo_closure: function PlayClock_setTempo_closure() {
+    }, PlayClock_setTimeSignature_closure: function PlayClock_setTimeSignature_closure() {
+    }, PlayClock_startMetronome_closure: function PlayClock_startMetronome_closure() {
+    }, PlayClock_startMetronome_closure0: function PlayClock_startMetronome_closure0(t0, t1, t2) {
+      this._box_0 = t0;
+      this.$this = t1;
+      this.start_time = t2;
+    }, PlayClock_startMetronome__closure: function PlayClock_startMetronome__closure(t0) {
+      this._box_0 = t0;
+    },
+    Dialog_message: function(message, title, $confirm) {
+      var t1,
+        dialog = document.createElement("div");
+      dialog.className = "dialog";
+      C.DivElement_methods.setInnerHtml$1(dialog, '    <button class="close-button"><i class="fas fa-times"></i></button>\n    <h1 class="dialog-title">' + title + "</h1>\n    <p>" + message + '</p>\n    <div class="dialog-button-row">\n      <button class="confirm-button">' + $confirm + "</button>\n    </div>");
+      E.Dialog__showModal(dialog);
+      t1 = type$.Element;
+      H.checkTypeBound(t1, t1, "T", "querySelectorAll");
+      new W._ElementListEventStreamImpl(type$.ElementList_Element._as(new W._FrozenElementList(dialog.querySelectorAll(".confirm-button"), type$._FrozenElementList_Element)), false, "click", type$._ElementListEventStreamImpl_MouseEvent).listen$1(new E.Dialog_message_closure());
+      return dialog;
+    },
+    Dialog_openModal: function(templateSelector, fieldValues) {
+      var dialog, t1, t2, t3, el,
+        template = type$.TemplateElement._as(document.querySelector(templateSelector));
+      if (template != null) {
+        dialog = type$.DivElement._as(type$.DocumentFragment._as(template.content.cloneNode(true)).querySelector(".dialog"));
+        if (dialog != null && fieldValues != null)
+          for (t1 = fieldValues.get$keys(fieldValues), t1 = t1.get$iterator(t1), t2 = type$.HtmlElement; t1.moveNext$0();) {
+            t3 = t1.get$current(t1);
+            el = t2._as(dialog.querySelector(t3));
+            if (el != null)
+              J.setInnerHtml$1$x(el, H.S(fieldValues.$index(0, t3)));
+          }
+        E.Dialog__showModal(dialog);
+        return dialog;
+      }
+      return null;
+    },
+    Dialog_closeModal: function() {
+      var t3, t4,
+        _s16_ = "querySelectorAll",
+        t1 = type$.Element,
+        t2 = document;
+      H.checkTypeBound(t1, t1, "T", _s16_);
+      t3 = type$._FrozenElementList_Element;
+      t4 = new W._FrozenElementList(t2.querySelectorAll(".overlay"), t3);
+      t4.forEach$1(t4, new E.Dialog_closeModal_closure());
+      H.checkTypeBound(t1, t1, "T", _s16_);
+      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t2.querySelectorAll("body"), t3)).remove$1(0, "modal-open");
+    },
+    Dialog__showModal: function(dialog) {
+      var t1, overlay, t2, t3, t4, t5,
+        _s16_ = "querySelectorAll",
+        _s9_ = "mousedown";
+      E.Dialog_closeModal();
+      if (dialog != null) {
+        t1 = document;
+        overlay = t1.createElement("div");
+        overlay.className = "overlay";
+        t2 = type$.Element;
+        H.checkTypeBound(t2, t2, "T", _s16_);
+        t3 = type$._FrozenElementList_Element;
+        W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("body"), t3)).add$1(0, "modal-open");
+        H.checkTypeBound(t2, t2, "T", _s16_);
+        t4 = type$.ElementList_Element;
+        t5 = type$._ElementListEventStreamImpl_MouseEvent;
+        new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(dialog.querySelectorAll(".close-button"), t3)), false, "click", t5).listen$1(new E.Dialog__showModal_closure());
+        H.checkTypeBound(t2, t2, "T", _s16_);
+        new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(dialog.querySelectorAll(".cancel-button"), t3)), false, "click", t5).listen$1(new E.Dialog__showModal_closure0());
+        t5 = type$._ElementEventStreamImpl_MouseEvent;
+        t3 = t5._eval$1("~(1)");
+        t4 = t3._as(new E.Dialog__showModal_closure1());
+        type$.void_Function._as(null);
+        t5 = t5._precomputed1;
+        W._EventStreamSubscription$(overlay, _s9_, t4, false, t5);
+        W._EventStreamSubscription$(dialog, _s9_, t3._as(new E.Dialog__showModal_closure2()), false, t5);
+        overlay.appendChild(dialog);
+        t1.body.appendChild(overlay);
+      }
+    },
+    Dialog_message_closure: function Dialog_message_closure() {
+    },
+    Dialog_closeModal_closure: function Dialog_closeModal_closure() {
+    },
+    Dialog__showModal_closure: function Dialog__showModal_closure() {
+    },
+    Dialog__showModal_closure0: function Dialog__showModal_closure0() {
+    },
+    Dialog__showModal_closure1: function Dialog__showModal_closure1() {
+    },
+    Dialog__showModal_closure2: function Dialog__showModal_closure2() {
+    }
+  },
+  K = {
+    Effect_Effect: function($name, params) {
+      var t1, t2;
+      if ($name === "lowpass" || $name === "filter")
+        return K.BiquadFilter$("lowpass", params);
+      else if ($name === "highpass")
+        return K.BiquadFilter$("highpass", params);
+      else if ($name === "bandpass")
+        return K.BiquadFilter$("bandpass", params);
+      else if ($name === "notch")
+        return K.BiquadFilter$("notch", params);
+      else if ($name === "pan") {
+        t1 = H.setRuntimeTypeInfo([], type$.JSArray_List_num);
+        t2 = new K.PanEffect("pan", t1);
+        t2.Effect$_internal$2("pan", params);
+        if (0 >= t1.length)
+          return H.ioore(t1, 0);
+        t2.clampParam$3(t1[0], -1, 1);
+        return t2;
+      } else if ($name === "gain") {
+        t1 = new K.GainEffect("gain", H.setRuntimeTypeInfo([], type$.JSArray_List_num));
+        t1.Effect$_internal$2("gain", params);
+        return t1;
+      } else if ($name === "bend") {
+        t1 = new K.PitchBendEffect("bend", H.setRuntimeTypeInfo([], type$.JSArray_List_num));
+        t1.Effect$_internal$2("bend", params);
+        return t1;
+      } else
+        return null;
+    },
+    BiquadFilter$: function($name, params) {
+      var t1 = H.setRuntimeTypeInfo([], type$.JSArray_List_num),
+        t2 = new K.BiquadFilter($name, t1);
+      t2.Effect$_internal$2($name, params);
+      t2.type = $name;
+      if (t1.length === 0) {
+        C.JSArray_methods.add$1(t1, H.setRuntimeTypeInfo([], type$.JSArray_num));
+        if (0 >= t1.length)
+          return H.ioore(t1, 0);
+        C.JSArray_methods.add$1(t1[0], 1000);
+      }
+      if (t1.length < 2) {
+        C.JSArray_methods.add$1(t1, H.setRuntimeTypeInfo([], type$.JSArray_num));
+        if (1 >= t1.length)
+          return H.ioore(t1, 1);
+        C.JSArray_methods.add$1(t1[1], 0.8);
+      }
+      if (t1.length < 3) {
+        C.JSArray_methods.add$1(t1, H.setRuntimeTypeInfo([], type$.JSArray_num));
+        if (2 >= t1.length)
+          return H.ioore(t1, 2);
+        C.JSArray_methods.add$1(t1[2], 1);
+      }
+      if (0 >= t1.length)
+        return H.ioore(t1, 0);
+      t2.clampParam$3(t1[0], 10, 22050);
+      if ($name === "highpass" || $name === "lowpass") {
+        if (1 >= t1.length)
+          return H.ioore(t1, 1);
+        t2.clampParam$3(t1[1], -20, 20);
+      }
+      return t2;
+    },
+    Effect: function Effect() {
+    },
+    BiquadFilter: function BiquadFilter(t0, t1) {
+      var _ = this;
+      _.type = "lowpass";
+      _.name = t0;
+      _.params = t1;
+      _.start = 0;
+      _.beats = -1;
+      _.oparams = _.node = null;
+    },
+    PitchBendEffect: function PitchBendEffect(t0, t1) {
+      var _ = this;
+      _.name = t0;
+      _.params = t1;
+      _.start = 0;
+      _.beats = -1;
+      _.oparams = _.node = null;
+    },
+    PanEffect: function PanEffect(t0, t1) {
+      var _ = this;
+      _.name = t0;
+      _.params = t1;
+      _.start = 0;
+      _.beats = -1;
+      _.oparams = _.node = null;
+    },
+    GainEffect: function GainEffect(t0, t1) {
+      var _ = this;
+      _.name = t0;
+      _.params = t1;
+      _.start = 0;
+      _.beats = -1;
+      _.oparams = _.node = null;
+    },
+    Uuid$: function() {
+      var options, t2, t1 = {};
+      t1.options = options;
+      t1.options = null;
+      t2 = new K.Uuid();
+      t2.Uuid$1$options(t1);
+      return t2;
+    },
+    Uuid: function Uuid() {
+      var _ = this;
+      _._clockSeq = _._nodeId = _._seedBytes = null;
+      _._lastNSecs = _._lastMSecs = 0;
+      _._hexToByte = _._byteToHex = null;
+    }
+  },
+  L = {Synthesizer: function Synthesizer(t0, t1, t2) {
+      var _ = this;
+      _._bpm = 120;
+      _.effects = t0;
+      _.notes = t1;
+      _.config = null;
+      _._bank = t2;
+      _.voice = "";
+    }, Synthesizer_loadPatch_closure: function Synthesizer_loadPatch_closure(t0) {
+      this._box_0 = t0;
+    }, Synthesizer__play_closure: function Synthesizer__play_closure(t0, t1, t2) {
+      this._box_0 = t0;
+      this.$this = t1;
+      this.event = t2;
+    }, Synthesizer__schedule_closure: function Synthesizer__schedule_closure(t0, t1, t2) {
+      this.$this = t0;
+      this.nodes = t1;
+      this.event = t2;
+    }, Synthesizer_pitchBend_closure: function Synthesizer_pitchBend_closure(t0) {
+      this.cents = t0;
+    }, Synthesizer_loadAudioBuffer_closure: function Synthesizer_loadAudioBuffer_closure(t0, t1, t2, t3) {
+      var _ = this;
+      _.context = t0;
+      _.request = t1;
+      _.name = t2;
+      _.onLoaded = t3;
+    }, Synthesizer_loadAudioBuffer_closure0: function Synthesizer_loadAudioBuffer_closure0() {
+    }, Synthesizer_loadCustomSound_closure: function Synthesizer_loadCustomSound_closure(t0, t1, t2) {
+      this.context = t0;
+      this.request = t1;
+      this.url = t2;
+    }, Synthesizer_loadCustomSound_closure0: function Synthesizer_loadCustomSound_closure0() {
+    }},
   V = {
     EffectsDial$: function($name) {
       var _s26_ = "http://www.w3.org/2000/svg",
@@ -8294,6 +8467,28 @@
       this.$this = t0;
     },
     EffectsDial_buildUI_closure1: function EffectsDial_buildUI_closure1(t0) {
+      this.$this = t0;
+    },
+    ToggleButton: function ToggleButton(t0, t1, t2) {
+      var _ = this;
+      _.cx = t0;
+      _.cy = t1;
+      _.radius = t2;
+      _.onChanged = _._button = null;
+      _._dial$_value = true;
+      _._color = "cyan";
+    },
+    ToggleButton_buildUI_closure: function ToggleButton_buildUI_closure(t0) {
+      this.outline = t0;
+    },
+    ToggleButton_buildUI_closure0: function ToggleButton_buildUI_closure0(t0, t1) {
+      this.$this = t0;
+      this.outline = t1;
+    },
+    ToggleButton_buildUI_closure1: function ToggleButton_buildUI_closure1(t0) {
+      this.$this = t0;
+    },
+    ToggleButton_buildUI_closure2: function ToggleButton_buildUI_closure2(t0) {
       this.$this = t0;
     }
   },
@@ -8361,7 +8556,7 @@
       return b;
     }
   };
-  var holders = [C, H, J, P, W, D, U, X, S, N, R, Z, E, K, B, F, L, Y, V, O, T];
+  var holders = [C, H, J, P, W, D, U, X, S, N, R, Y, F, B, E, K, L, V, O, T];
   hunkHelpers.setFunctionNamesIfNecessary(holders);
   var $ = {};
   H.JS_CONST.prototype = {};
@@ -9394,7 +9589,7 @@
       C.JSArray_methods.add$1(this.$arguments, argument);
       ++t1.argumentCount;
     },
-    $signature: 81
+    $signature: 65
   };
   H.TypeErrorDecoder.prototype = {
     matchTypeError$1: function(message) {
@@ -9456,7 +9651,7 @@
           error.$thrownJsError = this.ex;
       return error;
     },
-    $signature: 7
+    $signature: 8
   };
   H._StackTrace.prototype = {
     toString$0: function(_) {
@@ -9842,19 +10037,19 @@
     call$1: function(o) {
       return this.getTag(o);
     },
-    $signature: 7
+    $signature: 8
   };
   H.initHooks_closure0.prototype = {
     call$2: function(o, tag) {
       return this.getUnknownTag(o, tag);
     },
-    $signature: 51
+    $signature: 58
   };
   H.initHooks_closure1.prototype = {
     call$1: function(tag) {
       return this.prototypeForTag(H._asStringNullable(tag));
     },
-    $signature: 49
+    $signature: 50
   };
   H.JSSyntaxRegExp.prototype = {
     toString$0: function(_) {
@@ -9994,7 +10189,7 @@
       t1.storedCallback = null;
       f.call$0();
     },
-    $signature: 6
+    $signature: 7
   };
   P._AsyncRun__initializeScheduleImmediate_closure.prototype = {
     call$1: function(callback) {
@@ -10004,7 +10199,7 @@
       t2 = this.span;
       t1.firstChild ? t1.removeChild(t2) : t1.appendChild(t2);
     },
-    $signature: 52
+    $signature: 77
   };
   P._AsyncRun__scheduleImmediateJsOverride_internalCallback.prototype = {
     call$0: function() {
@@ -10115,13 +10310,13 @@
     },
     "call*": "call$2",
     $requiredArgCount: 2,
-    $signature: 75
+    $signature: 59
   };
   P._wrapJsFunctionForAsync_closure.prototype = {
     call$2: function(errorCode, result) {
       this.$protected(H._asIntNullable(errorCode), result);
     },
-    $signature: 84
+    $signature: 67
   };
   P._BroadcastStream.prototype = {};
   P._BroadcastSubscription.prototype = {
@@ -10600,7 +10795,7 @@
       t1._state = 0;
       t1._complete$1(value);
     },
-    $signature: 6
+    $signature: 7
   };
   P._Future__chainForeignFuture_closure0.prototype = {
     call$2: function(error, stackTrace) {
@@ -10614,7 +10809,7 @@
     $defaultValues: function() {
       return [null];
     },
-    $signature: 50
+    $signature: 51
   };
   P._Future__chainForeignFuture_closure1.prototype = {
     call$0: function() {
@@ -10686,7 +10881,7 @@
     call$1: function(_) {
       return this.originalSource;
     },
-    $signature: 88
+    $signature: 52
   };
   P._Future__propagateToListeners_handleValueCallback.prototype = {
     call$0: function() {
@@ -11693,7 +11888,7 @@
     call$2: function(k, v) {
       this.result.$indexSet(0, this.K._as(k), this.V._as(v));
     },
-    $signature: 4
+    $signature: 3
   };
   P.ListBase.prototype = {$isEfficientLengthIterable: 1, $isIterable: 1, $isList: 1};
   P.ListMixin.prototype = {
@@ -11785,7 +11980,7 @@
       t1._contents = t2 + ": ";
       t1._contents += H.S(v);
     },
-    $signature: 4
+    $signature: 3
   };
   P.MapMixin.prototype = {
     forEach$1: function(receiver, action) {
@@ -12439,7 +12634,7 @@
       C.JSArray_methods.$indexSet(t1, t2.i++, key);
       C.JSArray_methods.$indexSet(t1, t2.i++, value);
     },
-    $signature: 4
+    $signature: 3
   };
   P._JsonStringStringifier.prototype = {
     get$_partialResult: function() {
@@ -12451,7 +12646,7 @@
     call$2: function(key, value) {
       this.result.$indexSet(0, type$.Symbol._as(key).__internal$_name, value);
     },
-    $signature: 41
+    $signature: 35
   };
   P.NoSuchMethodError_toString_closure.prototype = {
     call$2: function(key, value) {
@@ -12465,7 +12660,7 @@
       t1._contents += P.Error_safeToString(value);
       t2.comma = ", ";
     },
-    $signature: 41
+    $signature: 35
   };
   P.bool.prototype = {};
   P.DateTime.prototype = {
@@ -12510,7 +12705,7 @@
         return 0;
       return P.int_parse(matched);
     },
-    $signature: 27
+    $signature: 36
   };
   P.DateTime_parse_parseMilliAndMicroseconds.prototype = {
     call$1: function(matched) {
@@ -12524,7 +12719,7 @@
       }
       return result;
     },
-    $signature: 27
+    $signature: 36
   };
   P.double.prototype = {};
   P.Duration.prototype = {
@@ -12577,7 +12772,7 @@
         return "0000" + n;
       return "00000" + n;
     },
-    $signature: 34
+    $signature: 37
   };
   P.Duration_toString_twoDigits.prototype = {
     call$1: function(n) {
@@ -12585,7 +12780,7 @@
         return "" + n;
       return "0" + n;
     },
-    $signature: 34
+    $signature: 37
   };
   P.Error.prototype = {
     get$stackTrace: function() {
@@ -13354,7 +13549,7 @@
     call$1: function(e) {
       return type$.Element._is(type$.Node._as(e));
     },
-    $signature: 33
+    $signature: 39
   };
   W.Entry.prototype = {
     _html$_remove$2: function(receiver, successCallback, errorCallback) {
@@ -13381,7 +13576,7 @@
     call$1: function(error) {
       this.completer.completeError$1(type$.DomException._as(error));
     },
-    $signature: 39
+    $signature: 40
   };
   W.Event.prototype = {
     get$target: function(receiver) {
@@ -13510,7 +13705,7 @@
     call$1: function(xhr) {
       return type$.HttpRequest._as(xhr).responseText;
     },
-    $signature: 70
+    $signature: 73
   };
   W.HttpRequest_request_closure.prototype = {
     call$1: function(e) {
@@ -13529,7 +13724,7 @@
       else
         t3.completeError$1(e);
     },
-    $signature: 72
+    $signature: 76
   };
   W.HttpRequestEventTarget.prototype = {};
   W.ImageData.prototype = {$isImageData: 1};
@@ -13617,7 +13812,7 @@
     call$2: function(k, v) {
       return C.JSArray_methods.add$1(this.keys, k);
     },
-    $signature: 16
+    $signature: 15
   };
   W.MidiMessageEvent.prototype = {
     get$data: function(receiver) {
@@ -13662,7 +13857,7 @@
     call$2: function(k, v) {
       return C.JSArray_methods.add$1(this.keys, k);
     },
-    $signature: 16
+    $signature: 15
   };
   W.MidiPort.prototype = {
     get$id: function(receiver) {
@@ -13718,13 +13913,13 @@
     call$1: function(stream) {
       this.completer.complete$1(0, type$.MediaStream._as(stream));
     },
-    $signature: 76
+    $signature: 88
   };
   W.Navigator_getUserMedia_closure0.prototype = {
     call$1: function(error) {
       this.completer.completeError$1(type$.NavigatorUserMediaError._as(error));
     },
-    $signature: 86
+    $signature: 47
   };
   W.NavigatorConcurrentHardware.prototype = {};
   W.NavigatorUserMediaError.prototype = {$isNavigatorUserMediaError: 1};
@@ -13937,7 +14132,7 @@
     call$2: function(k, v) {
       return C.JSArray_methods.add$1(this.keys, k);
     },
-    $signature: 16
+    $signature: 15
   };
   W.SelectElement.prototype = {
     get$length: function(receiver) {
@@ -14303,7 +14498,7 @@
     call$1: function(time) {
       this.completer.complete$1(0, H._asNumNullable(time));
     },
-    $signature: 82
+    $signature: 64
   };
   W._BeforeUnloadEvent.prototype = {$isBeforeUnloadEvent: 1};
   W._BeforeUnloadEventStreamProvider.prototype = {
@@ -14320,7 +14515,7 @@
     call$1: function($event) {
       this.controller.add$1(0, new W._BeforeUnloadEvent(type$.BeforeUnloadEvent._as($event)));
     },
-    $signature: 74
+    $signature: 75
   };
   W.Worker.prototype = {
     postMessage$1: function(receiver, message) {
@@ -14595,14 +14790,14 @@
       if (J.getInterceptor$s(key).startsWith$1(key, "data-"))
         this.f.call$2(this.$this._toCamelCase$1(C.JSString_methods.substring$1(key, 5)), value);
     },
-    $signature: 28
+    $signature: 27
   };
   W._DataAttributeMap_keys_closure.prototype = {
     call$2: function(key, value) {
       if (J.getInterceptor$s(key).startsWith$1(key, "data-"))
         C.JSArray_methods.add$1(this.keys, this.$this._toCamelCase$1(C.JSString_methods.substring$1(key, 5)));
     },
-    $signature: 28
+    $signature: 27
   };
   W.CssClassSet.prototype = {$isEfficientLengthIterable: 1, $isIterable: 1, $isSet: 1};
   W._MultiElementCssClassSet.prototype = {
@@ -14634,33 +14829,33 @@
     call$1: function(e) {
       return J.get$classes$x(type$.Element._as(e));
     },
-    $signature: 67
+    $signature: 45
   };
   W._MultiElementCssClassSet_readClasses_closure.prototype = {
     call$1: function(e) {
       return this.s.addAll$1(0, type$.CssClassSetImpl._as(e).readClasses$0());
     },
-    $signature: 65
+    $signature: 49
   };
   W._MultiElementCssClassSet_modify_closure.prototype = {
     call$1: function(e) {
       return type$.CssClassSetImpl._as(e).modify$1(0, this.f);
     },
-    $signature: 63
+    $signature: 56
   };
   W._MultiElementCssClassSet_toggle_closure.prototype = {
     call$2: function(changed, e) {
       H._asBoolNullable(changed);
       return H.boolConversionCheck(type$.CssClassSetImpl._as(e).toggle$2(0, this.value, this.shouldAdd)) || H.boolConversionCheck(changed);
     },
-    $signature: 29
+    $signature: 28
   };
   W._MultiElementCssClassSet_remove_closure.prototype = {
     call$2: function(changed, e) {
       H._asBoolNullable(changed);
       return H.boolConversionCheck(type$.CssClassSetImpl._as(e).remove$1(0, this.value)) || H.boolConversionCheck(changed);
     },
-    $signature: 29
+    $signature: 28
   };
   W._ElementCssClassSet.prototype = {
     readClasses$0: function() {
@@ -14784,7 +14979,7 @@
     call$1: function(e) {
       return this.onData.call$1(type$.Event._as(e));
     },
-    $signature: 59
+    $signature: 57
   };
   W._StreamPool.prototype = {
     add$1: function(_, stream) {
@@ -14914,13 +15109,13 @@
     call$1: function(x) {
       return !C.JSArray_methods.contains$1(C.List_yrN, H._asStringNullable(x));
     },
-    $signature: 8
+    $signature: 9
   };
   W._SimpleNodeValidator_closure0.prototype = {
     call$1: function(x) {
       return C.JSArray_methods.contains$1(C.List_yrN, H._asStringNullable(x));
     },
-    $signature: 8
+    $signature: 9
   };
   W._TemplatingNodeValidator.prototype = {
     allowsAttribute$3: function(element, attributeName, value) {
@@ -14937,7 +15132,7 @@
     call$1: function(attr) {
       return "TEMPLATE::" + H.S(H._asStringNullable(attr));
     },
-    $signature: 57
+    $signature: 68
   };
   W._SvgNodeValidator.prototype = {
     allowsElement$1: function(element) {
@@ -15165,7 +15360,7 @@
         child = nextChild;
       }
     },
-    $signature: 56
+    $signature: 71
   };
   W._CssStyleDeclaration_Interceptor_CssStyleDeclarationBase.prototype = {};
   W._DomRectList_Interceptor_ListMixin.prototype = {};
@@ -15300,13 +15495,13 @@
     call$2: function(key, value) {
       this._box_0.copy[key] = this.$this.walk$1(value);
     },
-    $signature: 4
+    $signature: 3
   };
   P._StructuredClone_walk_closure0.prototype = {
     call$2: function(key, value) {
       this._box_0.copy[key] = this.$this.walk$1(value);
     },
-    $signature: 4
+    $signature: 3
   };
   P._AcceptStructuredClone.prototype = {
     findSlot$1: function(value) {
@@ -15391,13 +15586,13 @@
       J.$indexSet$ax(t1, key, t2);
       return t2;
     },
-    $signature: 53
+    $signature: 81
   };
   P.convertDartToNative_Dictionary_closure.prototype = {
     call$2: function(key, value) {
       this.object[key] = value;
     },
-    $signature: 4
+    $signature: 3
   };
   P._StructuredCloneDart2Js.prototype = {
     forEachObjectKey$2: function(object, action) {
@@ -15504,7 +15699,7 @@
     call$1: function(s) {
       return type$.Set_String._as(s).add$1(0, this.value);
     },
-    $signature: 43
+    $signature: 83
   };
   P.CssClassSetImpl_removeWhere_closure.prototype = {
     call$1: function(s) {
@@ -15512,13 +15707,13 @@
       s._filterWhere$2(H._instanceType(s)._eval$1("bool(1)")._as(this.test), true);
       return null;
     },
-    $signature: 42
+    $signature: 31
   };
   P.CssClassSetImpl_clear_closure.prototype = {
     call$1: function(s) {
       return type$.Set_String._as(s).clear$0(0);
     },
-    $signature: 42
+    $signature: 31
   };
   P.FilteredElementList.prototype = {
     get$_html_common$_iterable: function() {
@@ -15575,19 +15770,19 @@
     call$1: function(n) {
       return type$.Element._is(type$.Node._as(n));
     },
-    $signature: 33
+    $signature: 39
   };
   P.FilteredElementList__iterable_closure0.prototype = {
     call$1: function(n) {
       return type$.Element._as(type$.Node._as(n));
     },
-    $signature: 44
+    $signature: 86
   };
   P.FilteredElementList_removeRange_closure.prototype = {
     call$1: function(el) {
       return J.remove$0$ax(el);
     },
-    $signature: 7
+    $signature: 8
   };
   P.KeyRange.prototype = {$isKeyRange: 1};
   P.VersionChangeEvent.prototype = {
@@ -15607,19 +15802,19 @@
       P._defineProperty(jsFunction, $.$get$DART_CLOSURE_PROPERTY_NAME(), o);
       return jsFunction;
     },
-    $signature: 7
+    $signature: 8
   };
   P._convertToJS_closure0.prototype = {
     call$1: function(o) {
       return new this.ctor(o);
     },
-    $signature: 7
+    $signature: 8
   };
   P._wrapToDart_closure.prototype = {
     call$1: function(o) {
       return new P.JsFunction(o);
     },
-    $signature: 45
+    $signature: 90
   };
   P._wrapToDart_closure0.prototype = {
     call$1: function(o) {
@@ -15631,7 +15826,7 @@
     call$1: function(o) {
       return new P.JsObject(o);
     },
-    $signature: 87
+    $signature: 44
   };
   P.JsObject.prototype = {
     $index: function(_, property) {
@@ -16000,7 +16195,7 @@
       else
         t1.completeError$1(error);
     },
-    $signature: 39
+    $signature: 40
   };
   P.AudioNode.prototype = {
     _connect$3: function(receiver, destination, output, input) {
@@ -16061,7 +16256,7 @@
     call$2: function(k, v) {
       return C.JSArray_methods.add$1(this.keys, k);
     },
-    $signature: 16
+    $signature: 15
   };
   P.AudioProcessingEvent.prototype = {$isAudioProcessingEvent: 1};
   P.AudioScheduledSourceNode.prototype = {};
@@ -16978,7 +17173,276 @@
       return this.id;
     }
   };
-  Z.DrumKit.prototype = {
+  Y.BassGuitar.prototype = {
+    noteOn$2: function(note, velocity) {
+      var fret = this._noteToFret$1(J.round$0$n(note));
+      if (fret != null)
+        fret.press$0();
+    },
+    noteOn$1: function(note) {
+      return this.noteOn$2(note, 90);
+    },
+    noteOff$1: function(note) {
+      var fret = this._noteToFret$1(J.round$0$n(note));
+      if (fret != null)
+        fret.release$0(0);
+    },
+    allNotesOff$0: function() {
+      var t1, t2, _i, fret, t3, t4, t5;
+      for (t1 = this._frets, t2 = t1.length, _i = 0; _i < t1.length; t1.length === t2 || (0, H.throwConcurrentModificationError)(t1), ++_i) {
+        fret = t1[_i];
+        if (fret._bass$_down) {
+          fret._bass$_down = false;
+          t3 = fret.el;
+          t3.toString;
+          new P.AttributeClassSet(t3).remove$1(0, "pressed");
+          t3 = fret.j;
+          t4 = fret.bass._bass$_strings;
+          t5 = t4.length;
+          if (t3 < t5)
+            new P.AttributeClassSet(t4[t3]).remove$1(0, "vibrating");
+        }
+      }
+    },
+    isNoteOn$1: function(note) {
+      var t1,
+        fret = this._noteToFret$1(C.JSNumber_methods.round$0(note));
+      if (fret != null) {
+        t1 = fret.el;
+        t1.toString;
+        t1 = new P.AttributeClassSet(t1).contains$1(0, "pressed");
+      } else
+        t1 = false;
+      return t1;
+    },
+    onKeyDown$1: function(_, e) {
+      var fret;
+      type$.KeyboardEvent._as(e);
+      if (!H.boolConversionCheck(e.repeat) && this._armed) {
+        fret = this._keyToFret$1(e.key.toLowerCase());
+        if (fret != null) {
+          this._instrument$_stream.add$1(0, new S.NoteEvent("on", "keyboard", fret.midi, 90));
+          fret.press$0();
+        }
+      }
+    },
+    onKeyUp$1: function(_, e) {
+      var fret, t1;
+      type$.KeyboardEvent._as(e);
+      if (this._armed) {
+        fret = this._keyToFret$1(e.key.toLowerCase());
+        if (fret != null) {
+          t1 = new S.NoteEvent("on", "keyboard", fret.midi, 0);
+          t1.message = "off";
+          this._instrument$_stream.add$1(0, t1);
+          fret.release$0(0);
+        }
+      }
+    },
+    _noteToFret$1: function(midi) {
+      var t1, t2, _i, fret;
+      for (t1 = this._frets, t2 = t1.length, _i = 0; _i < t2; ++_i) {
+        fret = t1[_i];
+        if (fret.midi === midi)
+          return fret;
+      }
+      return null;
+    },
+    _keyToFret$1: function(keyboardCode) {
+      var t1, t2, _i, fret;
+      for (t1 = this._frets, t2 = t1.length, _i = 0; _i < t2; ++_i) {
+        fret = t1[_i];
+        if (fret.keyboardCode === keyboardCode)
+          return fret;
+      }
+      return null;
+    },
+    render$0: function() {
+      var t1, t2, t3, i, x, w, temp, t4, t5, dot, t6, h, y, temp0, temp1, base, s, fret, _this = this,
+        _s26_ = "http://www.w3.org/2000/svg",
+        _s6_ = "circle";
+      for (t1 = type$.SvgElement, t2 = type$.RectElement, t3 = type$.String, i = 1; i < 20; ++i) {
+        x = 90 * i;
+        if (i === 1) {
+          x -= 25;
+          w = 30;
+        } else
+          w = 5;
+        temp = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        temp = t2._as(t1._as(temp));
+        C.RectElement_methods.set$attributes(temp, P.LinkedHashMap_LinkedHashMap$_literal(["x", "" + x, "y", "0", "width", "" + w, "height", "220", "fill", "silver", "opacity", "0.9"], t3, t3));
+        _this.fretboard.appendChild(temp);
+      }
+      t4 = document;
+      t5 = type$.CircleElement;
+      dot = t5._as(t1._as(C.HtmlDocument_methods.createElementNS$2(t4, _s26_, _s6_)));
+      (dot && C.CircleElement_methods).set$attributes(dot, P.LinkedHashMap_LinkedHashMap$_literal(["cy", "100", "cx", "315", "r", "10", "fill", "silver", "stroke", "#fff9"], t3, t3));
+      _this.fretboard.appendChild(dot);
+      dot = t5._as(t1._as(C.HtmlDocument_methods.createElementNS$2(t4, _s26_, _s6_)));
+      (dot && C.CircleElement_methods).set$attributes(dot, P.LinkedHashMap_LinkedHashMap$_literal(["cy", "100", "cx", "495", "r", "10", "fill", "silver"], t3, t3));
+      _this.fretboard.appendChild(dot);
+      dot = t5._as(t1._as(C.HtmlDocument_methods.createElementNS$2(t4, _s26_, _s6_)));
+      (dot && C.CircleElement_methods).set$attributes(dot, P.LinkedHashMap_LinkedHashMap$_literal(["cy", "100", "cx", "675", "r", "10", "fill", "silver"], t3, t3));
+      _this.fretboard.appendChild(dot);
+      for (t5 = _this._bass$_strings, t6 = type$.GElement, i = 0; i < 4; ++i) {
+        h = i + 2;
+        y = 50 * i + 25 - h / 2;
+        temp = t4.createElementNS("http://www.w3.org/2000/svg", "g");
+        temp = t6._as(t1._as(temp));
+        C.GElement_methods.set$attributes(temp, P.LinkedHashMap_LinkedHashMap$_literal(["class", "bass-string", "transform", "translate(0, 0)"], t3, t3));
+        temp0 = t4.createElementNS("http://www.w3.org/2000/svg", "rect");
+        temp0 = t2._as(t1._as(temp0));
+        C.RectElement_methods.set$attributes(temp0, P.LinkedHashMap_LinkedHashMap$_literal(["x", "0", "y", H.S(y), "width", "100%", "height", "" + h, "fill", "url(#pattern-dash)"], t3, t3));
+        temp1 = t4.createElementNS("http://www.w3.org/2000/svg", "rect");
+        temp1 = t2._as(t1._as(temp1));
+        C.RectElement_methods.set$attributes(temp1, P.LinkedHashMap_LinkedHashMap$_literal(["x", "0", "y", H.S(y + 2), "width", "100%", "height", "" + (i + 3), "fill", "black", "opacity", "0.5"], t3, t3));
+        temp.appendChild(temp1);
+        temp.appendChild(temp0);
+        _this.fretboard.appendChild(temp);
+        C.JSArray_methods.add$1(t5, temp);
+      }
+      for (t1 = _this._frets, base = 31, s = 0; s < 4; ++s) {
+        for (t2 = base + 12, i = base; i <= t2; ++i) {
+          fret = Y.BassFret$(_this, i, C.List_0[C.JSInt_methods.$mod(i, 12)], i - base, s);
+          C.JSArray_methods.add$1(t1, fret);
+          _this.fretboard.appendChild(fret.el);
+        }
+        base -= 5;
+      }
+      _this.parent.appendChild(_this.fretboard);
+    }
+  };
+  Y.BassFret.prototype = {
+    BassFret$5: function(bass, midi, $name, i, j) {
+      var t2, t3, t4, t5, t6, rect, t7, noteHint, keyHint, _this = this,
+        _s26_ = "http://www.w3.org/2000/svg",
+        t1 = _this.j;
+      if (4 > t1 && C.List_oqF[t1].length > _this.i) {
+        if (t1 >= 4)
+          return H.ioore(C.List_oqF, t1);
+        t2 = C.List_oqF[t1];
+        t3 = _this.i;
+        if (t3 < 0 || t3 >= t2.length)
+          return H.ioore(t2, t3);
+        _this.keyboardCode = t2[t3];
+      }
+      t2 = document;
+      t3 = type$.SvgElement;
+      t4 = type$.GElement._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, _s26_, "g")));
+      t5 = _this.i * 90;
+      t1 *= 50;
+      t6 = type$.String;
+      (t4 && C.GElement_methods).set$attributes(t4, P.LinkedHashMap_LinkedHashMap$_literal(["transform", "translate(" + t5 + ", " + t1 + ")", "class", "bass-fret"], t6, t6));
+      _this.el = t4;
+      rect = type$.RectElement._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, _s26_, "rect")));
+      (rect && C.RectElement_methods).set$attributes(rect, P.LinkedHashMap_LinkedHashMap$_literal(["x", "13", "y", "4", "width", "70", "height", "42", "rx", "21"], t6, t6));
+      t4 = _this.midi;
+      rect.setAttribute("fill", C.List_e2R[C.JSInt_methods.$mod(t4, 12)]);
+      _this.el.appendChild(rect);
+      t7 = type$.TextElement;
+      noteHint = t7._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, _s26_, "text")));
+      (noteHint && C.TextElement_methods).set$attributes(noteHint, P.LinkedHashMap_LinkedHashMap$_literal(["class", "note-hint", "x", "48", "y", "25"], t6, t6));
+      C.TextElement_methods.setInnerHtml$1(noteHint, "" + t4 + " " + _this.name);
+      _this.el.appendChild(noteHint);
+      keyHint = t7._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, _s26_, "text")));
+      (keyHint && C.TextElement_methods).set$attributes(keyHint, P.LinkedHashMap_LinkedHashMap$_literal(["class", "key-hint", "x", "" + (t5 + 18), "y", "" + (t1 + 25 - 14)], t6, t6));
+      C.TextElement_methods.setInnerHtml$1(keyHint, _this.keyboardCode);
+      _this.bass.fretboard.appendChild(keyHint);
+      t6 = _this.el;
+      t6.toString;
+      t1 = type$._ElementEventStreamImpl_MouseEvent;
+      t5 = t1._eval$1("~(1)");
+      t2 = t5._as(new Y.BassFret_closure(_this));
+      type$.void_Function._as(null);
+      t1 = t1._precomputed1;
+      W._EventStreamSubscription$(t6, "mousedown", t2, false, t1);
+      t2 = _this.el;
+      t2.toString;
+      W._EventStreamSubscription$(t2, "mouseup", t5._as(new Y.BassFret_closure0(_this)), false, t1);
+      t2 = _this.el;
+      t2.toString;
+      W._EventStreamSubscription$(t2, "mouseleave", t5._as(new Y.BassFret_closure1(_this)), false, t1);
+      t2 = _this.el;
+      t2.toString;
+      W._EventStreamSubscription$(t2, "mouseenter", t5._as(new Y.BassFret_closure2(_this)), false, t1);
+    },
+    press$0: function() {
+      var t1, t2, t3, _this = this;
+      _this._bass$_down = true;
+      t1 = _this.el;
+      t1.toString;
+      new P.AttributeClassSet(t1).add$1(0, "pressed");
+      t1 = _this.j;
+      t2 = _this.bass._bass$_strings;
+      t3 = t2.length;
+      if (t1 < t3)
+        new P.AttributeClassSet(t2[t1]).add$1(0, "vibrating");
+    },
+    release$0: function(_) {
+      var t1, t2, t3, _this = this;
+      if (_this._bass$_down) {
+        _this._bass$_down = false;
+        t1 = _this.el;
+        t1.toString;
+        new P.AttributeClassSet(t1).remove$1(0, "pressed");
+        t1 = _this.j;
+        t2 = _this.bass._bass$_strings;
+        t3 = t2.length;
+        if (t1 < t3)
+          new P.AttributeClassSet(t2[t1]).remove$1(0, "vibrating");
+      }
+    }
+  };
+  Y.BassFret_closure.prototype = {
+    call$1: function(e) {
+      var t1;
+      type$.MouseEvent._as(e);
+      t1 = this.$this;
+      t1.bass._instrument$_stream.add$1(0, new S.NoteEvent("on", "mouse", t1.midi, 90));
+      t1.press$0();
+    },
+    $signature: 0
+  };
+  Y.BassFret_closure0.prototype = {
+    call$1: function(e) {
+      var t1, t2;
+      type$.MouseEvent._as(e);
+      t1 = this.$this;
+      t2 = new S.NoteEvent("on", "mouse", t1.midi, 0);
+      t2.message = "off";
+      t1.bass._instrument$_stream.add$1(0, t2);
+      t1.release$0(0);
+    },
+    $signature: 0
+  };
+  Y.BassFret_closure1.prototype = {
+    call$1: function(e) {
+      var t1, t2;
+      type$.MouseEvent._as(e);
+      t1 = this.$this;
+      if (t1._bass$_down) {
+        t2 = new S.NoteEvent("on", "mouse", t1.midi, 0);
+        t2.message = "off";
+        t1.bass._instrument$_stream.add$1(0, t2);
+        t1.release$0(0);
+      }
+    },
+    $signature: 0
+  };
+  Y.BassFret_closure2.prototype = {
+    call$1: function(e) {
+      var t1 = type$.MouseEvent._as(e).buttons;
+      if (typeof t1 !== "number")
+        return t1.$gt();
+      if (t1 > 0) {
+        t1 = this.$this;
+        t1.bass._instrument$_stream.add$1(0, new S.NoteEvent("on", "mouse", t1.midi, 90));
+        t1.press$0();
+      }
+    },
+    $signature: 0
+  };
+  F.DrumKit.prototype = {
     DrumKit$2: function(selector, patch) {
       var t2, t3, t4, t5, t6, t7, _i, t8, sample, t9, midi,
         t1 = type$.List_dynamic;
@@ -16991,7 +17455,7 @@
               t9 = J.getInterceptor$asx(sample);
               if (H._isInt(t9.$index(sample, "step"))) {
                 midi = H._asIntNullable(t9.$index(sample, "step"));
-                C.JSArray_methods.add$1(t7, new Z.Drum(t6, H.S(t9.$index(sample, "name")), midi));
+                C.JSArray_methods.add$1(t7, new F.Drum(t6, H.S(t9.$index(sample, "name")), midi));
               }
             }
         }
@@ -17018,7 +17482,7 @@
       var drum = this._noteToDrum$1(C.JSNumber_methods.round$0(note));
       return drum != null && drum.pressed;
     },
-    _onKeyDown$1: function(e) {
+    onKeyDown$1: function(_, e) {
       var index, t1, drum, _this = this;
       type$.KeyboardEvent._as(e);
       if (!H.boolConversionCheck(e.repeat) && _this._armed) {
@@ -17028,12 +17492,12 @@
           if (index < 0 || index >= t1.length)
             return H.ioore(t1, index);
           drum = t1[index];
-          _this._instruments$_stream.add$1(0, new Z.NoteEvent("on", "keyboard", drum.midi, 90));
+          _this._instrument$_stream.add$1(0, new S.NoteEvent("on", "keyboard", drum.midi, 90));
           drum.press$0();
         }
       }
     },
-    _onKeyUp$1: function(e) {
+    onKeyUp$1: function(_, e) {
       var index, t1, drum, _this = this;
       type$.KeyboardEvent._as(e);
       if (_this._armed) {
@@ -17043,9 +17507,9 @@
           if (index < 0 || index >= t1.length)
             return H.ioore(t1, index);
           drum = t1[index];
-          t1 = new Z.NoteEvent("on", "keyboard", drum.midi, 0);
+          t1 = new S.NoteEvent("on", "keyboard", drum.midi, 0);
           t1.message = "off";
-          _this._instruments$_stream.add$1(0, t1);
+          _this._instrument$_stream.add$1(0, t1);
           drum.pressed = false;
         }
       }
@@ -17059,11 +17523,11 @@
       }
       return null;
     },
-    _instruments$_render$0: function() {
+    render$0: function() {
       var t1, t2, t3, t4, t5, t6, _i, drum, midi, selector, t7, _this = this,
         _s16_ = "querySelectorAll",
         _box_0 = {};
-      _box_0._instruments$_down = false;
+      _box_0._drumkit$_down = false;
       for (t1 = _this.drums, t2 = t1.length, t3 = type$.Element, t4 = type$._FrozenElementList_Element, t5 = type$.ElementList_Element, t6 = type$._ElementListEventStreamImpl_MouseEvent, _i = 0; _i < t1.length; t1.length === t2 || (0, H.throwConcurrentModificationError)(t1), ++_i) {
         drum = t1[_i];
         midi = drum.midi;
@@ -17071,54 +17535,52 @@
         t7 = _this.root;
         t7.toString;
         H.checkTypeBound(t3, t3, "T", _s16_);
-        new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t7.querySelectorAll(selector), t4)), false, "mousedown", t6).listen$1(new Z.DrumKit__render_closure(_box_0, _this, midi, drum));
+        new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t7.querySelectorAll(selector), t4)), false, "mousedown", t6).listen$1(new F.DrumKit_render_closure(_box_0, _this, midi, drum));
         t7 = _this.root;
         t7.toString;
         H.checkTypeBound(t3, t3, "T", _s16_);
-        new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t7.querySelectorAll(selector), t4)), false, "mouseup", t6).listen$1(new Z.DrumKit__render_closure0(_box_0, _this, midi, drum));
+        new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t7.querySelectorAll(selector), t4)), false, "mouseup", t6).listen$1(new F.DrumKit_render_closure0(_box_0, _this, midi, drum));
         t7 = _this.root;
         t7.toString;
         H.checkTypeBound(t3, t3, "T", _s16_);
-        new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t7.querySelectorAll(selector), t4)), false, "mouseenter", t6).listen$1(new Z.DrumKit__render_closure1(_this, drum, midi));
+        new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t7.querySelectorAll(selector), t4)), false, "mouseenter", t6).listen$1(new F.DrumKit_render_closure1(_this, drum, midi));
         t7 = _this.root;
         t7.toString;
         H.checkTypeBound(t3, t3, "T", _s16_);
-        new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t7.querySelectorAll(selector), t4)), false, "mouseleave", t6).listen$1(new Z.DrumKit__render_closure2(_box_0, _this, midi, drum));
+        new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t7.querySelectorAll(selector), t4)), false, "mouseleave", t6).listen$1(new F.DrumKit_render_closure2(_box_0, _this, midi, drum));
       }
-    },
-    _resize$0: function() {
     }
   };
-  Z.DrumKit__render_closure.prototype = {
+  F.DrumKit_render_closure.prototype = {
     call$1: function(e) {
       var _this = this;
       type$.MouseEvent._as(e);
-      _this.$this._instruments$_stream.add$1(0, new Z.NoteEvent("on", "mouse", _this.midi, 90));
-      _this._box_0._instruments$_down = true;
+      _this.$this._instrument$_stream.add$1(0, new S.NoteEvent("on", "mouse", _this.midi, 90));
+      _this._box_0._drumkit$_down = true;
       _this.drum.press$0();
     },
     $signature: 0
   };
-  Z.DrumKit__render_closure0.prototype = {
+  F.DrumKit_render_closure0.prototype = {
     call$1: function(e) {
       var t1, _this = this;
       type$.MouseEvent._as(e);
-      t1 = new Z.NoteEvent("on", "mouse", _this.midi, 0);
+      t1 = new S.NoteEvent("on", "mouse", _this.midi, 0);
       t1.message = "off";
-      _this.$this._instruments$_stream.add$1(0, t1);
-      _this._box_0._instruments$_down = false;
+      _this.$this._instrument$_stream.add$1(0, t1);
+      _this._box_0._drumkit$_down = false;
       _this.drum.pressed = false;
     },
     $signature: 0
   };
-  Z.DrumKit__render_closure1.prototype = {
+  F.DrumKit_render_closure1.prototype = {
     call$1: function(e) {
       var div, _this = this,
         t1 = type$.MouseEvent._as(e).buttons;
       if (typeof t1 !== "number")
         return t1.$gt();
       if (t1 > 0 && !_this.drum.pressed) {
-        _this.$this._instruments$_stream.add$1(0, new Z.NoteEvent("on", "mouse", _this.midi, 90));
+        _this.$this._instrument$_stream.add$1(0, new S.NoteEvent("on", "mouse", _this.midi, 90));
         _this.drum.press$0();
       }
       t1 = _this.drum;
@@ -17130,14 +17592,14 @@
     },
     $signature: 0
   };
-  Z.DrumKit__render_closure2.prototype = {
+  F.DrumKit_render_closure2.prototype = {
     call$1: function(e) {
       var t1, t2, _this = this;
       type$.MouseEvent._as(e);
-      if (_this._box_0._instruments$_down) {
-        t1 = new Z.NoteEvent("on", "mouse", _this.midi, 0);
+      if (_this._box_0._drumkit$_down) {
+        t1 = new S.NoteEvent("on", "mouse", _this.midi, 0);
         t1.message = "off";
-        _this.$this._instruments$_stream.add$1(0, t1);
+        _this.$this._instrument$_stream.add$1(0, t1);
         _this.drum.pressed = false;
       }
       t1 = _this.$this.root;
@@ -17148,25 +17610,27 @@
     },
     $signature: 0
   };
-  Z.Drum.prototype = {
+  F.Drum.prototype = {
     press$0: function() {
       $.$get$_context().callMethod$2("animateDrum", [this.selector, this.name]);
       this.pressed = true;
     }
   };
-  Z.Drums.prototype = {
+  N.Drums.prototype = {
     Drums$1: function(patch) {
-      var t2, t3, t4, t5, t6, t7, index, _i, t8, sample, t9, pad,
-        t1 = type$.List_dynamic;
+      var t1, t2, t3, t4, t5, t6, t7, index, _i, t8, sample, t9, pad, _this = this;
+      _this.width = 900;
+      _this.height = 230;
+      t1 = type$.List_dynamic;
       if (t1._is(patch.$index(0, "nodes")))
-        for (t2 = patch.$index(0, "nodes"), t3 = t2.length, t4 = type$.Iterable_dynamic, t5 = type$.Map_dynamic_dynamic, t6 = this.pads, t7 = this.parent, index = 0, _i = 0; _i < t2.length; t2.length === t3 || (0, H.throwConcurrentModificationError)(t2), ++_i) {
+        for (t2 = patch.$index(0, "nodes"), t3 = t2.length, t4 = type$.Iterable_dynamic, t5 = type$.Map_dynamic_dynamic, t6 = _this.pads, t7 = _this.parent, index = 0, _i = 0; _i < t2.length; t2.length === t3 || (0, H.throwConcurrentModificationError)(t2), ++_i) {
           t8 = t2[_i];
           if (J.$eq$(t8.$index(0, "type"), "sample") && t1._is(t8.$index(0, "samples")))
             for (t8 = J.get$iterator$ax(t4._as(t8.$index(0, "samples"))); t8.moveNext$0();) {
               sample = t5._as(t8.get$current(t8));
               t9 = J.getInterceptor$asx(sample);
               if (H._isInt(t9.$index(sample, "step"))) {
-                pad = Z.DrumPad$(this, C.JSInt_methods._tdivFast$1(index, 6), C.JSInt_methods.$mod(index, 6), H._asIntNullable(t9.$index(sample, "step")), H.S(t9.$index(sample, "name")));
+                pad = N.DrumPad$(_this, C.JSInt_methods._tdivFast$1(index, 6), C.JSInt_methods.$mod(index, 6), H._asIntNullable(t9.$index(sample, "step")), H.S(t9.$index(sample, "name")));
                 C.JSArray_methods.add$1(t6, pad);
                 t7.appendChild(pad._group);
                 ++index;
@@ -17191,8 +17655,8 @@
       var t1, t2, _i, pad, t3;
       for (t1 = this.pads, t2 = t1.length, _i = 0; _i < t1.length; t1.length === t2 || (0, H.throwConcurrentModificationError)(t1), ++_i) {
         pad = t1[_i];
-        if (pad._instruments$_down) {
-          pad._instruments$_down = false;
+        if (pad._drums$_down) {
+          pad._drums$_down = false;
           t3 = pad._rect;
           t3.toString;
           new P.AttributeClassSet(t3).remove$1(0, "pressed");
@@ -17210,7 +17674,7 @@
         t1 = false;
       return t1;
     },
-    _onKeyDown$1: function(e) {
+    onKeyDown$1: function(_, e) {
       var index, t1, pad, _this = this;
       type$.KeyboardEvent._as(e);
       if (!H.boolConversionCheck(e.repeat) && _this._armed) {
@@ -17220,12 +17684,12 @@
           if (index < 0 || index >= t1.length)
             return H.ioore(t1, index);
           pad = t1[index];
-          _this._instruments$_stream.add$1(0, new Z.NoteEvent("on", "keyboard", pad.midi, 90));
+          _this._instrument$_stream.add$1(0, new S.NoteEvent("on", "keyboard", pad.midi, 90));
           pad.press$0();
         }
       }
     },
-    _onKeyUp$1: function(e) {
+    onKeyUp$1: function(_, e) {
       var index, t1, pad, _this = this;
       type$.KeyboardEvent._as(e);
       if (_this._armed) {
@@ -17235,9 +17699,9 @@
           if (index < 0 || index >= t1.length)
             return H.ioore(t1, index);
           pad = t1[index];
-          t1 = new Z.NoteEvent("on", "keyboard", pad.midi, 0);
+          t1 = new S.NoteEvent("on", "keyboard", pad.midi, 0);
           t1.message = "off";
-          _this._instruments$_stream.add$1(0, t1);
+          _this._instrument$_stream.add$1(0, t1);
           pad.release$0(0);
         }
       }
@@ -17251,146 +17715,387 @@
       }
       return null;
     },
-    _instruments$_render$0: function() {
-    },
-    _resize$0: function() {
-      var t1, t2, _i;
-      this.super$Instrument$_resize();
-      for (t1 = this.pads, t2 = t1.length, _i = 0; _i < t1.length; t1.length === t2 || (0, H.throwConcurrentModificationError)(t1), ++_i)
-        t1[_i].resize$0(0);
+    render$0: function() {
     }
   };
-  Z.DrumPad.prototype = {
+  N.DrumPad.prototype = {
     DrumPad$5: function(drums, row, col, midi, $name) {
-      var t3, t4, _this = this,
+      var t3, t4, t5, t6, t7, t8, width, height, _this = this,
         t1 = _this._rect,
         t2 = type$.String;
       (t1 && C.RectElement_methods).set$attributes(t1, P.LinkedHashMap_LinkedHashMap$_literal(["class", "drum-pad", "x", "5", "y", "5"], t2, t2));
       t3 = _this._group;
       t3.appendChild(t1);
-      t1 = _this._text;
-      (t1 && C.TextElement_methods).set$attributes(t1, P.LinkedHashMap_LinkedHashMap$_literal(["class", "drum-name"], t2, t2));
-      C.TextElement_methods.setInnerHtml$1(t1, _this.name.toUpperCase());
-      t3.appendChild(t1);
-      t1 = _this._keyHint;
-      (t1 && C.TextElement_methods).set$attributes(t1, P.LinkedHashMap_LinkedHashMap$_literal(["class", "key-hint"], t2, t2));
-      t4 = _this.row * 6 + _this.col;
-      if (t4 >= 12)
-        return H.ioore("qwertyasdfgh", t4);
-      C.TextElement_methods.setInnerHtml$1(t1, "qwertyasdfgh"[t4]);
-      t3.appendChild(t1);
-      t1 = _this._midiHint;
-      (t1 && C.TextElement_methods).set$attributes(t1, P.LinkedHashMap_LinkedHashMap$_literal(["class", "midi-hint show"], t2, t2));
-      C.TextElement_methods.setInnerHtml$1(t1, H.S(_this.midi));
-      t3.appendChild(t1);
-      _this.resize$0(0);
-      t1 = type$._ElementEventStreamImpl_MouseEvent;
-      t2 = t1._eval$1("~(1)");
-      t4 = t2._as(new Z.DrumPad_closure(_this));
-      type$.void_Function._as(null);
-      t1 = t1._precomputed1;
-      W._EventStreamSubscription$(t3, "mousedown", t4, false, t1);
-      W._EventStreamSubscription$(t3, "mouseup", t2._as(new Z.DrumPad_closure0(_this)), false, t1);
-      W._EventStreamSubscription$(t3, "mouseleave", t2._as(new Z.DrumPad_closure1(_this)), false, t1);
-      W._EventStreamSubscription$(t3, "mouseenter", t2._as(new Z.DrumPad_closure2(_this)), false, t1);
-    },
-    resize$0: function(_) {
-      var width, height, _this = this,
-        t1 = _this.drums,
-        t2 = t1.width;
-      if (typeof t2 !== "number")
-        return t2.$div();
-      width = Math.max(20, t2 / 6 + 0.8333333333333334);
-      t1 = t1.height;
-      if (typeof t1 !== "number")
-        return t1.$div();
-      height = Math.max(20, t1 / 2 + 0.8333333333333334);
-      t1 = _this._group;
-      t1.toString;
-      t1.setAttribute("transform", "translate(" + H.S(width * _this.col - 5) + ", " + H.S(height * _this.row) + ")");
-      t1 = _this._rect;
-      t1.toString;
+      t4 = _this._text;
+      (t4 && C.TextElement_methods).set$attributes(t4, P.LinkedHashMap_LinkedHashMap$_literal(["class", "drum-name"], t2, t2));
+      C.TextElement_methods.setInnerHtml$1(t4, _this.name.toUpperCase());
+      t3.appendChild(t4);
+      t5 = _this._keyHint;
+      (t5 && C.TextElement_methods).set$attributes(t5, P.LinkedHashMap_LinkedHashMap$_literal(["class", "key-hint"], t2, t2));
+      t6 = _this.row;
+      t7 = _this.col;
+      t8 = t6 * 6 + t7;
+      if (t8 >= 12)
+        return H.ioore("qwertyasdfgh", t8);
+      C.TextElement_methods.setInnerHtml$1(t5, "qwertyasdfgh"[t8]);
+      t3.appendChild(t5);
+      t8 = _this._midiHint;
+      (t8 && C.TextElement_methods).set$attributes(t8, P.LinkedHashMap_LinkedHashMap$_literal(["class", "midi-hint show"], t2, t2));
+      C.TextElement_methods.setInnerHtml$1(t8, H.S(_this.midi));
+      t3.appendChild(t8);
+      t2 = _this.drums;
+      width = Math.max(20, t2.width / 6 + 0.8333333333333334);
+      height = Math.max(20, t2.height / 2 + 0.8333333333333334);
+      t3.setAttribute("transform", "translate(" + H.S(width * t7 - 5) + ", " + H.S(height * t6) + ")");
       t1.setAttribute("width", H.S(width - 10));
       t1.setAttribute("height", H.S(height - 10));
-      t1 = _this._text;
-      t1.toString;
-      t1.setAttribute("x", H.S(width / 2));
-      t1.setAttribute("y", H.S(height / 2));
-      t1 = _this._keyHint;
-      t1.toString;
-      t1.setAttribute("x", H.S(width - 5 - 11));
-      t2 = height - 18;
-      t1.setAttribute("y", H.S(t2));
-      t1 = _this._midiHint;
-      t1.setAttribute("x", "16");
-      t1.setAttribute("y", H.S(t2));
+      t4.setAttribute("x", H.S(width / 2));
+      t4.setAttribute("y", H.S(height / 2));
+      t5.setAttribute("x", H.S(width - 5 - 11));
+      t4 = height - 18;
+      t5.setAttribute("y", H.S(t4));
+      t8.setAttribute("x", "16");
+      t8.setAttribute("y", H.S(t4));
+      t4 = type$._ElementEventStreamImpl_MouseEvent;
+      t8 = t4._eval$1("~(1)");
+      t5 = t8._as(new N.DrumPad_closure(_this));
+      type$.void_Function._as(null);
+      t4 = t4._precomputed1;
+      W._EventStreamSubscription$(t3, "mousedown", t5, false, t4);
+      W._EventStreamSubscription$(t3, "mouseup", t8._as(new N.DrumPad_closure0(_this)), false, t4);
+      W._EventStreamSubscription$(t3, "mouseleave", t8._as(new N.DrumPad_closure1(_this)), false, t4);
+      W._EventStreamSubscription$(t3, "mouseenter", t8._as(new N.DrumPad_closure2(_this)), false, t4);
     },
     press$0: function() {
-      this._instruments$_down = true;
+      this._drums$_down = true;
       var t1 = this._rect;
       t1.toString;
       new P.AttributeClassSet(t1).add$1(0, "pressed");
     },
     release$0: function(_) {
       var t1;
-      if (this._instruments$_down) {
-        this._instruments$_down = false;
+      if (this._drums$_down) {
+        this._drums$_down = false;
         t1 = this._rect;
         t1.toString;
         new P.AttributeClassSet(t1).remove$1(0, "pressed");
       }
     }
   };
-  Z.DrumPad_closure.prototype = {
+  N.DrumPad_closure.prototype = {
     call$1: function(e) {
       var t1;
       type$.MouseEvent._as(e);
       t1 = this.$this;
-      t1.drums._instruments$_stream.add$1(0, new Z.NoteEvent("on", "mouse", t1.midi, 90));
+      t1.drums._instrument$_stream.add$1(0, new S.NoteEvent("on", "mouse", t1.midi, 90));
       t1.press$0();
     },
     $signature: 0
   };
-  Z.DrumPad_closure0.prototype = {
+  N.DrumPad_closure0.prototype = {
     call$1: function(e) {
       var t1, t2;
       type$.MouseEvent._as(e);
       t1 = this.$this;
-      t2 = new Z.NoteEvent("on", "mouse", t1.midi, 0);
+      t2 = new S.NoteEvent("on", "mouse", t1.midi, 0);
       t2.message = "off";
-      t1.drums._instruments$_stream.add$1(0, t2);
+      t1.drums._instrument$_stream.add$1(0, t2);
       t1.release$0(0);
     },
     $signature: 0
   };
-  Z.DrumPad_closure1.prototype = {
+  N.DrumPad_closure1.prototype = {
     call$1: function(e) {
       var t1, t2;
       type$.MouseEvent._as(e);
       t1 = this.$this;
-      if (t1._instruments$_down) {
-        t2 = new Z.NoteEvent("on", "mouse", t1.midi, 0);
+      if (t1._drums$_down) {
+        t2 = new S.NoteEvent("on", "mouse", t1.midi, 0);
         t2.message = "off";
-        t1.drums._instruments$_stream.add$1(0, t2);
+        t1.drums._instrument$_stream.add$1(0, t2);
         t1.release$0(0);
       }
     },
     $signature: 0
   };
-  Z.DrumPad_closure2.prototype = {
+  N.DrumPad_closure2.prototype = {
     call$1: function(e) {
       var t1 = type$.MouseEvent._as(e).buttons;
       if (typeof t1 !== "number")
         return t1.$gt();
       if (t1 > 0) {
         t1 = this.$this;
-        t1.drums._instruments$_stream.add$1(0, new Z.NoteEvent("on", "mouse", t1.midi, 90));
+        t1.drums._instrument$_stream.add$1(0, new S.NoteEvent("on", "mouse", t1.midi, 90));
         t1.press$0();
       }
     },
     $signature: 0
   };
-  Z.Instrument.prototype = {
+  F.Guitar.prototype = {
+    noteOn$2: function(note, velocity) {
+      var fret = this._guitar$_noteToFret$1(J.round$0$n(note));
+      if (fret != null)
+        fret.press$0();
+    },
+    noteOn$1: function(note) {
+      return this.noteOn$2(note, 90);
+    },
+    noteOff$1: function(note) {
+      var fret = this._guitar$_noteToFret$1(J.round$0$n(note));
+      if (fret != null)
+        fret.release$0(0);
+    },
+    allNotesOff$0: function() {
+      var t1, t2, _i, fret, t3, t4, t5;
+      for (t1 = this._guitar$_frets, t2 = t1.length, _i = 0; _i < t1.length; t1.length === t2 || (0, H.throwConcurrentModificationError)(t1), ++_i) {
+        fret = t1[_i];
+        if (fret._guitar$_down) {
+          fret._guitar$_down = false;
+          t3 = fret.el;
+          t3.toString;
+          new P.AttributeClassSet(t3).remove$1(0, "pressed");
+          t3 = fret.j;
+          t4 = fret.guitar._guitar$_strings;
+          t5 = t4.length;
+          if (t3 < t5)
+            new P.AttributeClassSet(t4[t3]).remove$1(0, "vibrating");
+        }
+      }
+    },
+    isNoteOn$1: function(note) {
+      var t1,
+        fret = this._guitar$_noteToFret$1(C.JSNumber_methods.round$0(note));
+      if (fret != null) {
+        t1 = fret.el;
+        t1.toString;
+        t1 = new P.AttributeClassSet(t1).contains$1(0, "pressed");
+      } else
+        t1 = false;
+      return t1;
+    },
+    onKeyDown$1: function(_, e) {
+      var fret;
+      type$.KeyboardEvent._as(e);
+      if (!H.boolConversionCheck(e.repeat) && this._armed) {
+        fret = this._guitar$_keyToFret$1(e.key.toLowerCase());
+        if (fret != null) {
+          this._instrument$_stream.add$1(0, new S.NoteEvent("on", "keyboard", fret.midi, 90));
+          fret.press$0();
+        }
+      }
+    },
+    onKeyUp$1: function(_, e) {
+      var fret, t1;
+      type$.KeyboardEvent._as(e);
+      if (this._armed) {
+        fret = this._guitar$_keyToFret$1(e.key.toLowerCase());
+        if (fret != null) {
+          t1 = new S.NoteEvent("on", "keyboard", fret.midi, 0);
+          t1.message = "off";
+          this._instrument$_stream.add$1(0, t1);
+          fret.release$0(0);
+        }
+      }
+    },
+    _guitar$_noteToFret$1: function(midi) {
+      var t1, t2, _i, fret;
+      for (t1 = this._guitar$_frets, t2 = t1.length, _i = 0; _i < t2; ++_i) {
+        fret = t1[_i];
+        if (fret.midi === midi)
+          return fret;
+      }
+      return null;
+    },
+    _guitar$_keyToFret$1: function(keyboardCode) {
+      var t1, t2, _i, fret;
+      for (t1 = this._guitar$_frets, t2 = t1.length, _i = 0; _i < t2; ++_i) {
+        fret = t1[_i];
+        if (fret.keyboardCode === keyboardCode)
+          return fret;
+      }
+      return null;
+    },
+    render$0: function() {
+      var t1, t2, t3, i, x, w, temp, t4, t5, h, y, t6, temp0, temp1, open_strings, s, base, fret, _this = this;
+      for (t1 = type$.SvgElement, t2 = type$.RectElement, t3 = type$.String, i = 1; i < 20; ++i) {
+        x = 70 * i;
+        if (i === 1) {
+          x -= 25;
+          w = 28;
+        } else
+          w = 3;
+        temp = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        temp = t2._as(t1._as(temp));
+        C.RectElement_methods.set$attributes(temp, P.LinkedHashMap_LinkedHashMap$_literal(["x", "" + x, "y", "0", "width", "" + w, "height", "220", "fill", "silver", "opacity", "0.9"], t3, t3));
+        _this.fretboard.appendChild(temp);
+      }
+      for (t4 = type$.CircleElement, i = 3; i <= 9; i += 2) {
+        temp = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        temp = t4._as(t1._as(temp));
+        C.CircleElement_methods.set$attributes(temp, P.LinkedHashMap_LinkedHashMap$_literal(["cy", "100", "cx", H.S(70 * (i + 0.5)), "r", "10", "fill", "silver", "stroke", "#fff9"], t3, t3));
+        _this.fretboard.appendChild(temp);
+      }
+      for (t4 = _this._guitar$_strings, t5 = type$.GElement, i = 0; i < 6; ++i) {
+        h = i + 2;
+        y = 33.333333333333336 * i + 16.666666666666668 - h / 2;
+        t6 = document;
+        temp = t6.createElementNS("http://www.w3.org/2000/svg", "g");
+        temp = t5._as(t1._as(temp));
+        C.GElement_methods.set$attributes(temp, P.LinkedHashMap_LinkedHashMap$_literal(["class", "guitar-string", "transform", "translate(0, 0)"], t3, t3));
+        temp0 = t6.createElementNS("http://www.w3.org/2000/svg", "rect");
+        temp0 = t2._as(t1._as(temp0));
+        C.RectElement_methods.set$attributes(temp0, P.LinkedHashMap_LinkedHashMap$_literal(["x", "0", "y", H.S(y), "width", "100%", "height", H.S(i * 0.5 + 2), "fill", "url(#pattern-dash)"], t3, t3));
+        temp1 = t6.createElementNS("http://www.w3.org/2000/svg", "rect");
+        temp1 = t2._as(t1._as(temp1));
+        C.RectElement_methods.set$attributes(temp1, P.LinkedHashMap_LinkedHashMap$_literal(["x", "0", "y", H.S(y + 2), "width", "100%", "height", "" + h, "fill", "black", "opacity", "0.5"], t3, t3));
+        temp.appendChild(temp1);
+        temp.appendChild(temp0);
+        _this.fretboard.appendChild(temp);
+        C.JSArray_methods.add$1(t4, temp);
+      }
+      open_strings = [64, 59, 55, 50, 45, 40];
+      for (t1 = _this._guitar$_frets, s = 0; s < 6; ++s) {
+        base = open_strings[s];
+        for (t2 = base + 12, i = base; i <= t2; ++i) {
+          fret = F.GFret$(_this, i, C.List_0[C.JSInt_methods.$mod(i, 12)], i - base, s);
+          C.JSArray_methods.add$1(t1, fret);
+          _this.fretboard.appendChild(fret.el);
+        }
+      }
+      _this.parent.appendChild(_this.fretboard);
+    }
+  };
+  F.GFret.prototype = {
+    GFret$5: function(guitar, midi, $name, i, j) {
+      var t2, t3, t4, t5, t6, rect, t7, noteHint, keyHint, _this = this,
+        _s26_ = "http://www.w3.org/2000/svg",
+        _s18_ = "16.666666666666668",
+        t1 = _this.j;
+      if (4 > t1 && C.List_oqF[t1].length > _this.i) {
+        if (t1 >= 4)
+          return H.ioore(C.List_oqF, t1);
+        t2 = C.List_oqF[t1];
+        t3 = _this.i;
+        if (t3 < 0 || t3 >= t2.length)
+          return H.ioore(t2, t3);
+        _this.keyboardCode = t2[t3];
+      }
+      t2 = document;
+      t3 = type$.SvgElement;
+      t4 = type$.GElement._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, _s26_, "g")));
+      t5 = _this.i * 70;
+      t1 *= 33.333333333333336;
+      t6 = type$.String;
+      (t4 && C.GElement_methods).set$attributes(t4, P.LinkedHashMap_LinkedHashMap$_literal(["transform", "translate(" + t5 + ", " + H.S(t1) + ")", "class", "guitar-fret"], t6, t6));
+      _this.el = t4;
+      rect = type$.RectElement._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, _s26_, "rect")));
+      (rect && C.RectElement_methods).set$attributes(rect, P.LinkedHashMap_LinkedHashMap$_literal(["x", "2", "y", "0", "width", "66", "height", "33.333333333333336", "rx", _s18_], t6, t6));
+      t4 = _this.midi;
+      rect.setAttribute("fill", C.List_e2R[C.JSInt_methods.$mod(t4, 12)]);
+      _this.el.appendChild(rect);
+      t7 = type$.TextElement;
+      noteHint = t7._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, _s26_, "text")));
+      (noteHint && C.TextElement_methods).set$attributes(noteHint, P.LinkedHashMap_LinkedHashMap$_literal(["class", "note-hint", "x", "35", "y", _s18_], t6, t6));
+      C.TextElement_methods.setInnerHtml$1(noteHint, "" + t4 + " " + _this.name);
+      _this.el.appendChild(noteHint);
+      keyHint = t7._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, _s26_, "text")));
+      (keyHint && C.TextElement_methods).set$attributes(keyHint, P.LinkedHashMap_LinkedHashMap$_literal(["class", "key-hint", "x", "" + (t5 + 18), "y", H.S(t1 + 16.666666666666668 - 14)], t6, t6));
+      C.TextElement_methods.setInnerHtml$1(keyHint, _this.keyboardCode);
+      t6 = _this.el;
+      t6.toString;
+      t1 = type$._ElementEventStreamImpl_MouseEvent;
+      t5 = t1._eval$1("~(1)");
+      t2 = t5._as(new F.GFret_closure(_this));
+      type$.void_Function._as(null);
+      t1 = t1._precomputed1;
+      W._EventStreamSubscription$(t6, "mousedown", t2, false, t1);
+      t2 = _this.el;
+      t2.toString;
+      W._EventStreamSubscription$(t2, "mouseup", t5._as(new F.GFret_closure0(_this)), false, t1);
+      t2 = _this.el;
+      t2.toString;
+      W._EventStreamSubscription$(t2, "mouseleave", t5._as(new F.GFret_closure1(_this)), false, t1);
+      t2 = _this.el;
+      t2.toString;
+      W._EventStreamSubscription$(t2, "mouseenter", t5._as(new F.GFret_closure2(_this)), false, t1);
+    },
+    press$0: function() {
+      var t1, t2, t3, _this = this;
+      _this._guitar$_down = true;
+      t1 = _this.el;
+      t1.toString;
+      new P.AttributeClassSet(t1).add$1(0, "pressed");
+      t1 = _this.j;
+      t2 = _this.guitar._guitar$_strings;
+      t3 = t2.length;
+      if (t1 < t3)
+        new P.AttributeClassSet(t2[t1]).add$1(0, "vibrating");
+    },
+    release$0: function(_) {
+      var t1, t2, t3, _this = this;
+      if (_this._guitar$_down) {
+        _this._guitar$_down = false;
+        t1 = _this.el;
+        t1.toString;
+        new P.AttributeClassSet(t1).remove$1(0, "pressed");
+        t1 = _this.j;
+        t2 = _this.guitar._guitar$_strings;
+        t3 = t2.length;
+        if (t1 < t3)
+          new P.AttributeClassSet(t2[t1]).remove$1(0, "vibrating");
+      }
+    }
+  };
+  F.GFret_closure.prototype = {
+    call$1: function(e) {
+      var t1;
+      type$.MouseEvent._as(e);
+      t1 = this.$this;
+      t1.guitar._instrument$_stream.add$1(0, new S.NoteEvent("on", "mouse", t1.midi, 90));
+      t1.press$0();
+    },
+    $signature: 0
+  };
+  F.GFret_closure0.prototype = {
+    call$1: function(e) {
+      var t1, t2;
+      type$.MouseEvent._as(e);
+      t1 = this.$this;
+      t2 = new S.NoteEvent("on", "mouse", t1.midi, 0);
+      t2.message = "off";
+      t1.guitar._instrument$_stream.add$1(0, t2);
+      t1.release$0(0);
+    },
+    $signature: 0
+  };
+  F.GFret_closure1.prototype = {
+    call$1: function(e) {
+      var t1, t2;
+      type$.MouseEvent._as(e);
+      t1 = this.$this;
+      if (t1._guitar$_down) {
+        t2 = new S.NoteEvent("on", "mouse", t1.midi, 0);
+        t2.message = "off";
+        t1.guitar._instrument$_stream.add$1(0, t2);
+        t1.release$0(0);
+      }
+    },
+    $signature: 0
+  };
+  F.GFret_closure2.prototype = {
+    call$1: function(e) {
+      var t1 = type$.MouseEvent._as(e).buttons;
+      if (typeof t1 !== "number")
+        return t1.$gt();
+      if (t1 > 0) {
+        t1 = this.$this;
+        t1.guitar._instrument$_stream.add$1(0, new S.NoteEvent("on", "mouse", t1.midi, 90));
+        t1.press$0();
+      }
+    },
+    $signature: 0
+  };
+  S.Instrument.prototype = {
     isMidiArmed$1: function(port) {
       var t1;
       if (this._ports != null)
@@ -17403,7 +18108,7 @@
       return this.isMidiArmed$1(0);
     },
     insert$1: function(_, element) {
-      var t2, _this = this,
+      var t2, t3, _this = this,
         t1 = "#" + _this.name + "-template",
         template = type$.TemplateElement._as(document.querySelector(t1));
       if (template == null || false)
@@ -17417,63 +18122,40 @@
       t1 = type$.SvgSvgElement._as(_this.root.querySelector("svg.container"));
       _this.container = t1;
       t1.appendChild(_this.parent);
-      t1 = window;
-      t2 = type$.void_Function_Event._as(new Z.Instrument_insert_closure(_this));
+      _this.render$0();
+      t1 = type$._ElementEventStreamImpl_KeyboardEvent;
+      t2 = t1._eval$1("~(1)");
+      t3 = t2._as(_this.get$onKeyDown(_this));
       type$.void_Function._as(null);
-      W._EventStreamSubscription$(t1, "resize", t2, false, type$.Event);
-      _this._resize$0();
-      _this._instruments$_render$0();
-      t2 = type$._ElementEventStreamImpl_KeyboardEvent;
-      t1 = t2._eval$1("~(1)");
-      t2 = t2._precomputed1;
-      W._EventStreamSubscription$(element, "keydown", t1._as(_this.get$_onKeyDown()), false, t2);
-      W._EventStreamSubscription$(element, "keyup", t1._as(_this.get$_onKeyUp()), false, t2);
+      t1 = t1._precomputed1;
+      W._EventStreamSubscription$(element, "keydown", t3, false, t1);
+      W._EventStreamSubscription$(element, "keyup", t2._as(_this.get$onKeyUp(_this)), false, t1);
     },
     unload$0: function() {
       var t1 = this.root;
       if (t1 != null) {
         if (t1._docChildren == null)
           C.ShadowRoot_methods.set$_docChildren(t1, new P.FilteredElementList(t1, new W._ChildNodeListLazy(t1)));
-        J.forEach$1$ax(t1._docChildren, new Z.Instrument_unload_closure());
-      }
-    },
-    _resize$0: function() {
-      var rect, t2, _this = this,
-        t1 = _this.container;
-      if (t1 != null) {
-        rect = t1.getBoundingClientRect();
-        t1 = _this.width;
-        t2 = rect.width;
-        if (t1 != t2 || _this.height != rect.height) {
-          _this.width = t2;
-          _this.height = rect.height;
-          _this.container.setAttribute("viewBox", "0 0 " + H.S(t2) + " " + H.S(_this.height));
-        }
+        J.forEach$1$ax(t1._docChildren, new S.Instrument_unload_closure());
       }
     },
     set$_ports: function(_ports) {
       this._ports = type$.List_int._as(_ports);
     }
   };
-  Z.Instrument_insert_closure.prototype = {
-    call$1: function(e) {
-      return this.$this._resize$0();
-    },
-    $signature: 20
-  };
-  Z.Instrument_unload_closure.prototype = {
+  S.Instrument_unload_closure.prototype = {
     call$1: function(child) {
       return J.remove$0$ax(type$.Element._as(child));
     },
-    $signature: 54
+    $signature: 53
   };
-  Z.NoteEvent.prototype = {
+  S.NoteEvent.prototype = {
     toString$0: function(_) {
       var _this = this;
       return _this.message + " (" + _this.source + ") [" + J.round$0$n(_this.note) + ", " + _this.velocity + ", 0]";
     }
   };
-  Z.Piano.prototype = {
+  B.Piano.prototype = {
     noteOn$2: function(note, velocity) {
       var key = this._noteToKey$1(J.round$0$n(note));
       if (key != null)
@@ -17491,8 +18173,8 @@
       var t1, t2, _i, key, t3;
       for (t1 = this.keys, t2 = t1.length, _i = 0; _i < t1.length; t1.length === t2 || (0, H.throwConcurrentModificationError)(t1), ++_i) {
         key = t1[_i];
-        if (key._instruments$_down) {
-          key._instruments$_down = false;
+        if (key._piano$_down) {
+          key._piano$_down = false;
           t3 = key.rect;
           t3.toString;
           new P.AttributeClassSet(t3).remove$1(0, "pressed");
@@ -17510,7 +18192,7 @@
         t1 = false;
       return t1;
     },
-    _onKeyDown$1: function(e) {
+    onKeyDown$1: function(_, e) {
       var index, t1, t2, key, _this = this;
       type$.KeyboardEvent._as(e);
       if (!H.boolConversionCheck(e.repeat) && _this._armed) {
@@ -17521,7 +18203,7 @@
           if (t2 < 0 || t2 >= t1.length)
             return H.ioore(t1, t2);
           key = t1[t2];
-          _this._instruments$_stream.add$1(0, new Z.NoteEvent("on", "keyboard", key.key + 12, 90));
+          _this._instrument$_stream.add$1(0, new S.NoteEvent("on", "keyboard", key.key + 12, 90));
           key.press$0();
         } else {
           t1 = e.keyCode;
@@ -17536,7 +18218,7 @@
         }
       }
     },
-    _onKeyUp$1: function(e) {
+    onKeyUp$1: function(_, e) {
       var index, t1, t2, key, _this = this;
       type$.KeyboardEvent._as(e);
       if (_this._armed) {
@@ -17547,9 +18229,9 @@
           if (t2 < 0 || t2 >= t1.length)
             return H.ioore(t1, t2);
           key = t1[t2];
-          t2 = new Z.NoteEvent("on", "keyboard", key.key + 12, 0);
+          t2 = new S.NoteEvent("on", "keyboard", key.key + 12, 0);
           t2.message = "off";
-          _this._instruments$_stream.add$1(0, t2);
+          _this._instrument$_stream.add$1(0, t2);
           key.release$0(0);
         }
       }
@@ -17567,8 +18249,8 @@
       }
       return t1;
     },
-    _instruments$_render$0: function() {
-      var t5, t6, t7, whiteKeys, blackKeys, t8, t9, i, key, t10, t11, felt, shelf, _this = this, _s4_ = "rect",
+    render$0: function() {
+      var t5, t6, t7, whiteKeys, blackKeys, t8, t9, i, key, t10, t11, shelf, _this = this, _s4_ = "rect",
         _s26_ = "http://www.w3.org/2000/svg",
         _s16_ = "querySelectorAll",
         t1 = document,
@@ -17586,7 +18268,7 @@
       whiteKeys = t7._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g")));
       blackKeys = t7._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g")));
       for (t8 = type$.JSArray_int, t9 = _this.keys, i = 0; i < 96; ++i) {
-        key = Z.PianoKey$(i, _this);
+        key = B.PianoKey$(i, _this);
         C.JSArray_methods.add$1(t9, key);
         t10 = C.JSArray_methods.contains$1(H.setRuntimeTypeInfo([1, 3, 6, 8, 10], t8), (key.key + 12) % 12);
         t11 = key.el;
@@ -17598,13 +18280,10 @@
       t6.appendChild(whiteKeys);
       t6.appendChild(blackKeys);
       t5.appendChild(t6);
-      felt = t3._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, _s4_)));
-      (felt && C.RectElement_methods).set$attributes(felt, P.LinkedHashMap_LinkedHashMap$_literal(["class", "felt", "width", "100%", "height", "2", "x", "0", "y", "0"], t4, t4));
-      t5.appendChild(felt);
       shelf = t3._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, _s4_)));
-      (shelf && C.RectElement_methods).set$attributes(shelf, P.LinkedHashMap_LinkedHashMap$_literal(["width", "100%", "height", "8", "x", "0", "y", "0", "fill", "black", "fill-opacity", "0.05", "filter", "url(#drop-shadow)"], t4, t4));
+      (shelf && C.RectElement_methods).set$attributes(shelf, P.LinkedHashMap_LinkedHashMap$_literal(["width", "100%", "height", "5", "x", "0", "y", "0", "fill", "black", "fill-opacity", "0.2"], t4, t4));
       t5.appendChild(shelf);
-      t1 = new Z.MiniPiano(_this, t7._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g"))), t7._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g"))), t7._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g"))), t3._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, _s4_))));
+      t1 = new B.MiniPiano(_this, t7._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g"))), t7._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g"))), t7._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g"))), t3._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, _s4_))));
       _this.mini = t1;
       t1.render$0();
       _this._slideKeyboard$1(36);
@@ -17615,11 +18294,11 @@
       t3 = type$._FrozenElementList_Element;
       t4 = type$.ElementList_Element;
       t6 = type$._ElementListEventStreamImpl_MouseEvent;
-      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll("#up-octave"), t3)), false, "click", t6).listen$1(new Z.Piano__render_closure(_this));
+      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll("#up-octave"), t3)), false, "click", t6).listen$1(new B.Piano_render_closure(_this));
       t1 = _this.root;
       t1.toString;
       H.checkTypeBound(t2, t2, "T", _s16_);
-      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll("#down-octave"), t3)), false, "click", t6).listen$1(new Z.Piano__render_closure0(_this));
+      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll("#down-octave"), t3)), false, "click", t6).listen$1(new B.Piano_render_closure0(_this));
       t6 = _this.mini.el;
       t6.toString;
       new P.AttributeClassSet(t6).remove$1(0, "show");
@@ -17628,14 +18307,14 @@
     _slideKeyboard$1: function(delta) {
       var t2, dx, _this = this,
         t1 = _this.keys;
-      C.JSArray_methods.forEach$1(t1, new Z.Piano__slideKeyboard_closure());
+      C.JSArray_methods.forEach$1(t1, new B.Piano__slideKeyboard_closure());
       t2 = _this.offset += delta;
       t2 = H._asIntNullable(C.JSInt_methods.clamp$2(t2, 0, t1.length - 24));
       _this.offset = t2;
       if (t2 < 0 || t2 >= t1.length)
         return H.ioore(t1, t2);
       t2 = t1[t2];
-      dx = t2.get$offset(t2) * 35;
+      dx = t2.get$offset(t2) * 45;
       _this._updateKeymap$0();
       t2 = _this.allKeys.style;
       t1 = "translateX(" + H.S(-dx) + "px)";
@@ -17644,7 +18323,7 @@
       t1 = _this.mini;
       t2 = t1.highlight;
       t2.toString;
-      t2.setAttribute("width", H.S(t1.piano.width));
+      t2.setAttribute("width", "" + t1.piano.width);
       t1 = t1.el;
       t1.toString;
       new P.AttributeClassSet(t1).add$1(0, "show");
@@ -17675,39 +18354,39 @@
       return this.keys;
     }
   };
-  Z.Piano__render_closure.prototype = {
+  B.Piano_render_closure.prototype = {
     call$1: function(e) {
       type$.MouseEvent._as(e);
       this.$this._slideKeyboard$1(12);
     },
     $signature: 0
   };
-  Z.Piano__render_closure0.prototype = {
+  B.Piano_render_closure0.prototype = {
     call$1: function(e) {
       type$.MouseEvent._as(e);
       this.$this._slideKeyboard$1(-12);
     },
     $signature: 0
   };
-  Z.Piano__slideKeyboard_closure.prototype = {
+  B.Piano__slideKeyboard_closure.prototype = {
     call$1: function(key) {
       var t1, t2;
       type$.PianoKey._as(key);
-      if (key._instruments$_down) {
+      if (key._piano$_down) {
         t1 = key.piano;
-        t2 = new Z.NoteEvent("on", "system", key.key + 12, 0);
+        t2 = new S.NoteEvent("on", "system", key.key + 12, 0);
         t2.message = "off";
-        t1._instruments$_stream.add$1(0, t2);
-        key._instruments$_down = false;
+        t1._instrument$_stream.add$1(0, t2);
+        key._piano$_down = false;
         t2 = key.rect;
         t2.toString;
         new P.AttributeClassSet(t2).remove$1(0, "pressed");
       }
       return null;
     },
-    $signature: 55
+    $signature: 54
   };
-  Z.MiniPiano.prototype = {
+  B.MiniPiano.prototype = {
     slide$1: function(dx) {
       var t1, t2, _this = this;
       dx = Math.max(0, dx);
@@ -17715,17 +18394,17 @@
       t2 = "translateX(" + H.S(dx) + "px)";
       t1.toString;
       C.CssStyleDeclaration_methods._setPropertyHelper$3(t1, C.CssStyleDeclaration_methods._browserPropertyName$1(t1, "transform"), t2, "");
-      t1 = _this._instruments$_timer;
+      t1 = _this._piano$_timer;
       if (t1 != null)
         t1.cancel$0(0);
-      _this._instruments$_timer = P.Timer_Timer(C.Duration_2000000, new Z.MiniPiano_slide_closure(_this));
+      _this._piano$_timer = P.Timer_Timer(C.Duration_2000000, new B.MiniPiano_slide_closure(_this));
     },
     render$0: function() {
       var t2, t3, t4, backdrop, t5, t6, t7, t8, t9, t10, t11, _i, key, t12, t13, pad, fill, temp, t14, _this = this,
         t1 = _this.el;
       t1.toString;
       new P.AttributeClassSet(t1).add$1(0, "mini-piano");
-      t1.setAttribute("transform", "translate(0, 8) scale(0.2)");
+      t1.setAttribute("transform", "translate(2, 2) scale(0.2)");
       t2 = document;
       t3 = type$.SvgElement;
       t4 = type$.RectElement;
@@ -17734,45 +18413,43 @@
       t6 = t5.keys;
       t7 = C.JSArray_methods.get$last(t6);
       t8 = type$.String;
-      (backdrop && C.RectElement_methods).set$attributes(backdrop, P.LinkedHashMap_LinkedHashMap$_literal(["x", "175", "fill", "black", "width", H.S(t7.get$offset(t7) * 35 + 35 - 200), "height", H.S(t5.height)], t8, t8));
+      (backdrop && C.RectElement_methods).set$attributes(backdrop, P.LinkedHashMap_LinkedHashMap$_literal(["x", "0", "fill", "black", "width", H.S(t7.get$offset(t7) * 45 + 45), "height", "" + (t5.height + 5)], t8, t8));
       t1.appendChild(backdrop);
-      for (t7 = t6.length, t9 = type$.JSArray_int, t10 = _this.wkeys, t11 = _this.bkeys, _i = 0; _i < t6.length; t6.length === t7 || (0, H.throwConcurrentModificationError)(t6), ++_i) {
+      for (t7 = t6.length, t9 = _this.wkeys, t10 = type$.JSArray_int, t11 = _this.bkeys, _i = 0; _i < t6.length; t6.length === t7 || (0, H.throwConcurrentModificationError)(t6), ++_i) {
         key = t6[_i];
         t12 = key.key;
         t13 = (t12 + 12) % 12;
-        pad = C.JSArray_methods.contains$1(H.setRuntimeTypeInfo([1, 3, 6, 8, 10], t9), t13) ? 6 : 1;
-        fill = C.JSArray_methods.contains$1(H.setRuntimeTypeInfo([1, 3, 6, 8, 10], t9), t13) ? "black" : "white";
-        if (t12 > 8) {
-          temp = t2.createElementNS("http://www.w3.org/2000/svg", "rect");
-          temp = t4._as(t3._as(temp));
-          t12 = H.S((C.JSInt_methods._tdivFast$1(t12, 12) * 7 + key._key_offsets[t13]) * 35 + pad);
-          t14 = "" + (35 - pad * 2);
-          C.RectElement_methods.set$attributes(temp, P.LinkedHashMap_LinkedHashMap$_literal(["fill", fill, "x", t12, "y", "2", "width", t14, "height", "" + (C.JSArray_methods.contains$1(H.setRuntimeTypeInfo([1, 3, 6, 8, 10], t9), t13) ? 92 : 148)], t8, t8));
-          if (C.JSArray_methods.contains$1(H.setRuntimeTypeInfo([1, 3, 6, 8, 10], t9), t13))
-            t11.appendChild(temp);
-          else
-            t10.appendChild(temp);
-        }
+        pad = C.JSArray_methods.contains$1(H.setRuntimeTypeInfo([1, 3, 6, 8, 10], t10), t13) ? 6 : 1;
+        fill = C.JSArray_methods.contains$1(H.setRuntimeTypeInfo([1, 3, 6, 8, 10], t10), t13) ? "black" : "white";
+        temp = t2.createElementNS("http://www.w3.org/2000/svg", "rect");
+        temp = t4._as(t3._as(temp));
+        t12 = H.S((C.JSInt_methods._tdivFast$1(t12, 12) * 7 + key._key_offsets[t13]) * 45 + pad);
+        t14 = "" + (45 - pad * 2);
+        C.RectElement_methods.set$attributes(temp, P.LinkedHashMap_LinkedHashMap$_literal(["fill", fill, "x", t12, "y", "0", "width", t14, "height", "" + (C.JSArray_methods.contains$1(H.setRuntimeTypeInfo([1, 3, 6, 8, 10], t10), t13) ? 125 : 195)], t8, t8));
+        if (C.JSArray_methods.contains$1(H.setRuntimeTypeInfo([1, 3, 6, 8, 10], t10), t13))
+          t11.appendChild(temp);
+        else
+          t9.appendChild(temp);
       }
-      t1.appendChild(t10);
+      t1.appendChild(t9);
       t1.appendChild(t11);
       t2 = _this.highlight;
-      (t2 && C.RectElement_methods).set$attributes(t2, P.LinkedHashMap_LinkedHashMap$_literal(["fill", "#900", "fill-opacity", "0.35", "stroke", "#900", "width", H.S(t5.width), "height", H.S(t5.height), "x", "0", "y", "0"], t8, t8));
+      (t2 && C.RectElement_methods).set$attributes(t2, P.LinkedHashMap_LinkedHashMap$_literal(["fill", "#900", "fill-opacity", "0.35", "stroke", "#900", "width", "" + t5.width, "height", "" + (t5.height + 5), "x", "0", "y", "0"], t8, t8));
       new P.AttributeClassSet(t2).add$1(0, "animated-slide");
       t1.appendChild(t2);
     }
   };
-  Z.MiniPiano_slide_closure.prototype = {
+  B.MiniPiano_slide_closure.prototype = {
     call$0: function() {
       var t1 = this.$this,
         t2 = t1.el;
       t2.toString;
       new P.AttributeClassSet(t2).remove$1(0, "show");
-      t1._instruments$_timer = null;
+      t1._piano$_timer = null;
     },
     $signature: 1
   };
-  Z.PianoKey.prototype = {
+  B.PianoKey.prototype = {
     get$offset: function(_) {
       var t1 = this.key;
       return C.JSInt_methods._tdivFast$1(t1, 12) * 7 + this._key_offsets[(t1 + 12) % 12];
@@ -17784,42 +18461,42 @@
         t2 = type$.SvgElement,
         t3 = type$.GElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g"))),
         t4 = type$.String;
-      (t3 && C.GElement_methods).set$attributes(t3, P.LinkedHashMap_LinkedHashMap$_literal(["transform", "translate(" + H.S(_this.get$offset(_this) * 35) + ", 0)"], t4, t4));
+      (t3 && C.GElement_methods).set$attributes(t3, P.LinkedHashMap_LinkedHashMap$_literal(["transform", "translate(" + H.S(_this.get$offset(_this) * 45) + ", 0)"], t4, t4));
       _this.el = t3;
       t3 = type$.JSArray_int;
       t5 = _this.key;
       t6 = t5 + 12;
       t7 = t6 % 12;
       pad = C.JSArray_methods.contains$1(H.setRuntimeTypeInfo([1, 3, 6, 8, 10], t3), t7) ? 6 : 1.5;
-      w = 35 - pad * 2;
-      h = C.JSArray_methods.contains$1(H.setRuntimeTypeInfo([1, 3, 6, 8, 10], t3), t7) ? 92 : 148;
+      w = 45 - pad * 2;
+      h = C.JSArray_methods.contains$1(H.setRuntimeTypeInfo([1, 3, 6, 8, 10], t3), t7) ? 125 : 195;
       t8 = _this.rect;
       t9 = C.JSArray_methods.contains$1(H.setRuntimeTypeInfo([1, 3, 6, 8, 10], t3), t7) ? "piano-key black" : "piano-key white";
-      (t8 && C.RectElement_methods).set$attributes(t8, P.LinkedHashMap_LinkedHashMap$_literal(["class", t9, "x", H.S(pad), "y", "-3", "width", H.S(w), "height", "" + h], t4, t4));
+      (t8 && C.RectElement_methods).set$attributes(t8, P.LinkedHashMap_LinkedHashMap$_literal(["class", t9, "x", H.S(pad), "y", "-8", "width", H.S(w), "height", "" + h], t4, t4));
       _this.el.appendChild(t8);
       if (C.JSArray_methods.contains$1(H.setRuntimeTypeInfo([1, 3, 6, 8, 10], t3), t7)) {
         x0 = pad + 2;
         w -= 4;
         r = type$.RectElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "rect")));
-        (r && C.RectElement_methods).set$attributes(r, P.LinkedHashMap_LinkedHashMap$_literal(["x", H.S(x0), "y", "2", "width", H.S(w), "height", "" + (h - 15), "fill", "#334", "pointer-events", "none"], t4, t4));
+        (r && C.RectElement_methods).set$attributes(r, P.LinkedHashMap_LinkedHashMap$_literal(["x", H.S(x0), "y", "-5", "width", H.S(w), "height", "" + (h - 12), "fill", "#334", "pointer-events", "none"], t4, t4));
         _this.el.appendChild(r);
       } else {
         t8 = type$.TextElement;
         noteHint = t8._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "text")));
         t9 = pad + w / 2;
-        (noteHint && C.TextElement_methods).set$attributes(noteHint, P.LinkedHashMap_LinkedHashMap$_literal(["class", "note-hint", "x", H.S(t9), "y", "" + (h - 8)], t4, t4));
+        (noteHint && C.TextElement_methods).set$attributes(noteHint, P.LinkedHashMap_LinkedHashMap$_literal(["class", "note-hint", "x", H.S(t9), "y", "" + (h - 17)], t4, t4));
         C.TextElement_methods.setInnerHtml$1(noteHint, $.PianoKey_NOTES[t7] + C.JSInt_methods._tdivFast$1(t5, 12));
         if (t7 === 0)
           new P.AttributeClassSet(noteHint).add$1(0, "always-show");
         _this.el.appendChild(noteHint);
         midiHint = t8._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "text")));
-        (midiHint && C.TextElement_methods).set$attributes(midiHint, P.LinkedHashMap_LinkedHashMap$_literal(["class", "midi-hint show", "x", H.S(t9), "y", "" + (h - 24)], t4, t4));
+        (midiHint && C.TextElement_methods).set$attributes(midiHint, P.LinkedHashMap_LinkedHashMap$_literal(["class", "midi-hint show", "x", H.S(t9), "y", "" + (h - 35)], t4, t4));
         C.TextElement_methods.setInnerHtml$1(midiHint, "" + t6);
         _this.el.appendChild(midiHint);
         x0 = pad;
       }
       t1 = _this.keyHint;
-      (t1 && C.TextElement_methods).set$attributes(t1, P.LinkedHashMap_LinkedHashMap$_literal(["class", "key-hint", "x", H.S(x0 + w / 2), "y", "" + (h - 42)], t4, t4));
+      (t1 && C.TextElement_methods).set$attributes(t1, P.LinkedHashMap_LinkedHashMap$_literal(["class", "key-hint", "x", H.S(x0 + w / 2), "y", "" + (h - 57)], t4, t4));
       if (C.JSArray_methods.contains$1(H.setRuntimeTypeInfo([1, 3, 6, 8, 10], t3), t7))
         new P.AttributeClassSet(t1).add$1(0, "black");
       _this.el.appendChild(t1);
@@ -17827,82 +18504,405 @@
       t1.toString;
       t2 = type$._ElementEventStreamImpl_MouseEvent;
       t3 = t2._eval$1("~(1)");
-      t4 = t3._as(new Z.PianoKey_closure(_this));
+      t4 = t3._as(new B.PianoKey_closure(_this));
       type$.void_Function._as(null);
       t2 = t2._precomputed1;
       W._EventStreamSubscription$(t1, "mousedown", t4, false, t2);
       t4 = _this.el;
       t4.toString;
-      W._EventStreamSubscription$(t4, "mouseup", t3._as(new Z.PianoKey_closure0(_this)), false, t2);
+      W._EventStreamSubscription$(t4, "mouseup", t3._as(new B.PianoKey_closure0(_this)), false, t2);
       t4 = _this.el;
       t4.toString;
-      W._EventStreamSubscription$(t4, "mouseleave", t3._as(new Z.PianoKey_closure1(_this)), false, t2);
+      W._EventStreamSubscription$(t4, "mouseleave", t3._as(new B.PianoKey_closure1(_this)), false, t2);
       t4 = _this.el;
       t4.toString;
-      W._EventStreamSubscription$(t4, "mouseenter", t3._as(new Z.PianoKey_closure2(_this)), false, t2);
+      W._EventStreamSubscription$(t4, "mouseenter", t3._as(new B.PianoKey_closure2(_this)), false, t2);
     },
     press$0: function() {
-      this._instruments$_down = true;
+      this._piano$_down = true;
       var t1 = this.rect;
       t1.toString;
       new P.AttributeClassSet(t1).add$1(0, "pressed");
     },
     release$0: function(_) {
       var t1;
-      if (this._instruments$_down) {
-        this._instruments$_down = false;
+      if (this._piano$_down) {
+        this._piano$_down = false;
         t1 = this.rect;
         t1.toString;
         new P.AttributeClassSet(t1).remove$1(0, "pressed");
       }
     }
   };
-  Z.PianoKey_closure.prototype = {
+  B.PianoKey_closure.prototype = {
     call$1: function(e) {
       var t1;
       type$.MouseEvent._as(e);
       t1 = this.$this;
-      t1.piano._instruments$_stream.add$1(0, new Z.NoteEvent("on", "mouse", t1.key + 12, 90));
+      t1.piano._instrument$_stream.add$1(0, new S.NoteEvent("on", "mouse", t1.key + 12, 90));
       t1.press$0();
     },
     $signature: 0
   };
-  Z.PianoKey_closure0.prototype = {
+  B.PianoKey_closure0.prototype = {
     call$1: function(e) {
       var t1, t2;
       type$.MouseEvent._as(e);
       t1 = this.$this;
-      t2 = new Z.NoteEvent("on", "mouse", t1.key + 12, 0);
+      t2 = new S.NoteEvent("on", "mouse", t1.key + 12, 0);
       t2.message = "off";
-      t1.piano._instruments$_stream.add$1(0, t2);
+      t1.piano._instrument$_stream.add$1(0, t2);
       t1.release$0(0);
     },
     $signature: 0
   };
-  Z.PianoKey_closure1.prototype = {
+  B.PianoKey_closure1.prototype = {
     call$1: function(e) {
       var t1, t2;
       type$.MouseEvent._as(e);
       t1 = this.$this;
-      if (t1._instruments$_down) {
-        t2 = new Z.NoteEvent("on", "mouse", t1.key + 12, 0);
+      if (t1._piano$_down) {
+        t2 = new S.NoteEvent("on", "mouse", t1.key + 12, 0);
         t2.message = "off";
-        t1.piano._instruments$_stream.add$1(0, t2);
+        t1.piano._instrument$_stream.add$1(0, t2);
         t1.release$0(0);
       }
     },
     $signature: 0
   };
-  Z.PianoKey_closure2.prototype = {
+  B.PianoKey_closure2.prototype = {
     call$1: function(e) {
       var t1 = type$.MouseEvent._as(e).buttons;
       if (typeof t1 !== "number")
         return t1.$gt();
       if (t1 > 0) {
         t1 = this.$this;
-        t1.piano._instruments$_stream.add$1(0, new Z.NoteEvent("on", "mouse", t1.key + 12, 90));
+        t1.piano._instrument$_stream.add$1(0, new S.NoteEvent("on", "mouse", t1.key + 12, 90));
         t1.press$0();
       }
+    },
+    $signature: 0
+  };
+  D.Sequencer.prototype = {
+    noteOn$2: function(note, velocity) {
+    },
+    noteOn$1: function(note) {
+      return this.noteOn$2(note, 90);
+    },
+    noteOff$1: function(note) {
+    },
+    allNotesOff$0: function() {
+    },
+    isNoteOn$1: function(note) {
+      return false;
+    },
+    onKeyDown$1: function(_, e) {
+      type$.KeyboardEvent._as(e);
+    },
+    onKeyUp$1: function(_, e) {
+      type$.KeyboardEvent._as(e);
+    },
+    render$0: function() {
+      var t1, t2, w, container, t3, t4, chassis, controls, t5, t6, label, i, t7, t8, temp, _this = this,
+        _s26_ = "http://www.w3.org/2000/svg",
+        _s4_ = "text";
+      _this.steps = 16;
+      t1 = _this.steps;
+      t2 = Math.min(50, 600 / t1);
+      $.SequencerButton_WIDTH = t2;
+      w = t2 * t1 + 260;
+      t1 = _this.parent;
+      if (t1 != null) {
+        t1.removeAttribute("tabindex");
+        new P.AttributeClassSet(t1).add$1(0, "sequencer");
+        C.GElement_methods._clearChildren$0(t1);
+        container = P.SvgSvgElement_SvgSvgElement();
+        t2 = type$.String;
+        C.SvgSvgElement_methods.set$attributes(container, P.LinkedHashMap_LinkedHashMap$_literal(["width", "100%", "viewBox", "0 0 " + H.S(w) + " 250", "preserveAspectRatio", "none"], t2, t2));
+        t3 = document;
+        t4 = type$.SvgElement;
+        chassis = type$.RectElement._as(t4._as(C.HtmlDocument_methods.createElementNS$2(t3, _s26_, "rect")));
+        (chassis && C.RectElement_methods).set$attributes(chassis, P.LinkedHashMap_LinkedHashMap$_literal(["x", "0", "y", "0", "width", H.S(w), "height", "250", "fill", "#111"], t2, t2));
+        controls = type$.GElement._as(t4._as(C.HtmlDocument_methods.createElementNS$2(t3, _s26_, "g")));
+        (controls && C.GElement_methods).set$attributes(controls, P.LinkedHashMap_LinkedHashMap$_literal(["transform", "translate(20, 30)"], t2, t2));
+        container.appendChild(chassis);
+        container.appendChild(controls);
+        t5 = _this.rows;
+        C.JSArray_methods.set$length(t5, 0);
+        C.JSArray_methods.add$1(t5, D.SequencerRow$(_this, 0, 4, "hat", "gold"));
+        C.JSArray_methods.add$1(t5, D.SequencerRow$(_this, 1, 7, "tom", "#2f2"));
+        C.JSArray_methods.add$1(t5, D.SequencerRow$(_this, 2, 2, "snare", "magenta"));
+        C.JSArray_methods.add$1(t5, D.SequencerRow$(_this, 3, 1, "kick", "cyan"));
+        C.JSArray_methods.forEach$1(t5, new D.Sequencer_render_closure(controls));
+        t6 = type$.TextElement;
+        label = t6._as(t4._as(C.HtmlDocument_methods.createElementNS$2(t3, _s26_, _s4_)));
+        (label && C.TextElement_methods).set$attributes(label, P.LinkedHashMap_LinkedHashMap$_literal(["x", H.S(w - 38), "y", "20", "class", "sequencer-text"], t2, t2));
+        C.TextElement_methods.setInnerHtml$1(label, "PITCH");
+        container.appendChild(label);
+        label = t6._as(t4._as(C.HtmlDocument_methods.createElementNS$2(t3, _s26_, _s4_)));
+        (label && C.TextElement_methods).set$attributes(label, P.LinkedHashMap_LinkedHashMap$_literal(["x", H.S(w - 100), "y", "20", "class", "sequencer-text"], t2, t2));
+        C.TextElement_methods.setInnerHtml$1(label, "VOLUME");
+        container.appendChild(label);
+        label = t6._as(t4._as(C.HtmlDocument_methods.createElementNS$2(t3, _s26_, _s4_)));
+        (label && C.TextElement_methods).set$attributes(label, P.LinkedHashMap_LinkedHashMap$_literal(["x", "109", "y", "20", "class", "sequencer-text"], t2, t2));
+        C.TextElement_methods.setInnerHtml$1(label, "MUTE");
+        container.appendChild(label);
+        if (0 >= t5.length)
+          return H.ioore(t5, 0);
+        for (t5 = t5[0].buttons, i = 1; i <= _this.steps; ++i) {
+          t7 = i - 1;
+          if (t7 >= t5.length)
+            return H.ioore(t5, t7);
+          t7 = t5[t7];
+          t8 = $.SequencerButton_WIDTH;
+          temp = t3.createElementNS("http://www.w3.org/2000/svg", "text");
+          temp = t6._as(t4._as(temp));
+          C.TextElement_methods.set$attributes(temp, P.LinkedHashMap_LinkedHashMap$_literal(["x", H.S(18 + t7.x + t8 / 2), "y", "20", "class", "sequencer-text"], t2, t2));
+          C.TextElement_methods.setInnerHtml$1(temp, "" + i);
+          container.appendChild(temp);
+        }
+        t1.appendChild(container);
+      }
+    }
+  };
+  D.Sequencer_render_closure.prototype = {
+    call$1: function(row) {
+      this.controls.appendChild(type$.SequencerRow._as(row).container);
+    },
+    $signature: 55
+  };
+  D.SequencerRow.prototype = {
+    SequencerRow$5: function(instrument, position, sound, $name, color) {
+      var x, c, sb, _this = this,
+        _s26_ = "http://www.w3.org/2000/svg",
+        w = $.SequencerButton_WIDTH,
+        t1 = document,
+        t2 = type$.SvgElement,
+        t3 = type$.GElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g"))),
+        t4 = type$.String;
+      (t3 && C.GElement_methods).set$attributes(t3, P.LinkedHashMap_LinkedHashMap$_literal(["transform", "translate(0, " + 50 * _this.position + ")"], t4, t4));
+      _this.container = t3;
+      t3 = D.SequencerDrumButton$(_this);
+      _this.dbutton = t3;
+      _this.container.appendChild(t3.container);
+      t3 = new V.ToggleButton(90, 25, 10);
+      t1 = type$.CircleElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "circle")));
+      (t1 && C.CircleElement_methods).set$attributes(t1, P.LinkedHashMap_LinkedHashMap$_literal(["cx", "90", "cy", "25", "r", "7", "fill", "cyan", "class", "mute-button"], t4, t4));
+      t3._button = t1;
+      t4 = _this.color;
+      t3._color = t4;
+      t1.setAttribute("fill", t4);
+      _this.muteButton = t3;
+      t3.buildUI$1(_this.container);
+      _this.muteButton.onChanged = new D.SequencerRow_closure(_this);
+      for (t1 = _this.instrument, t2 = _this.buttons, x = 110, c = 0; c < t1.steps; ++c) {
+        sb = D.SequencerButton$(_this, c, x);
+        _this.container.appendChild(sb.container);
+        C.JSArray_methods.add$1(t2, sb);
+        x += w;
+      }
+      t1 = V.EffectsDial$("VOLUME");
+      t1.set$value(0, 1);
+      _this.volumeDial = t1;
+      t1.buildUI$1(_this.container);
+      _this.volumeDial.onChanged = new D.SequencerRow_closure0(_this);
+      t1 = V.EffectsDial$("PITCH");
+      t1.minValue = -1;
+      t1.maxValue = 1;
+      t1.set$value(0, 0);
+      _this.pitchDial = t1;
+      t1.buildUI$1(_this.container);
+      _this.pitchDial.onChanged = new D.SequencerRow_closure1(_this);
+    },
+    mute$0: function() {
+      var _this = this,
+        t1 = _this.muteButton;
+      if (t1._dial$_value)
+        t1.set$value(0, false);
+      t1 = _this.volumeDial;
+      t1._disabled = true;
+      t1._updateDrawing$0();
+      t1 = _this.pitchDial;
+      t1._disabled = true;
+      t1._updateDrawing$0();
+      C.JSArray_methods.forEach$1(_this.buttons, new D.SequencerRow_mute_closure());
+    },
+    unmute$0: function() {
+      var _this = this,
+        t1 = _this.muteButton;
+      if (!t1._dial$_value)
+        t1.set$value(0, true);
+      t1 = _this.volumeDial;
+      t1._disabled = false;
+      t1._updateDrawing$0();
+      t1 = _this.pitchDial;
+      t1._disabled = false;
+      t1._updateDrawing$0();
+      C.JSArray_methods.forEach$1(_this.buttons, new D.SequencerRow_unmute_closure());
+    }
+  };
+  D.SequencerRow_closure.prototype = {
+    call$2: function(button, value) {
+      var t1 = this.$this;
+      if (H.boolConversionCheck(H._asBoolNullable(value)))
+        t1.unmute$0();
+      else
+        t1.mute$0();
+    },
+    "call*": "call$2",
+    $requiredArgCount: 2,
+    $signature: 3
+  };
+  D.SequencerRow_closure0.prototype = {
+    call$2: function(dial, value) {
+    },
+    "call*": "call$2",
+    $requiredArgCount: 2,
+    $signature: 3
+  };
+  D.SequencerRow_closure1.prototype = {
+    call$2: function(dial, value) {
+    },
+    "call*": "call$2",
+    $requiredArgCount: 2,
+    $signature: 3
+  };
+  D.SequencerRow_mute_closure.prototype = {
+    call$1: function(button) {
+      type$.SequencerButton._as(button);
+      button._sequencer$_disabled = true;
+      button.setVelocity$1(button.velocity);
+    },
+    $signature: 34
+  };
+  D.SequencerRow_unmute_closure.prototype = {
+    call$1: function(button) {
+      type$.SequencerButton._as(button);
+      button._sequencer$_disabled = false;
+      button.setVelocity$1(button.velocity);
+    },
+    $signature: 34
+  };
+  D.SequencerDrumButton.prototype = {
+    SequencerDrumButton$1: function(row) {
+      var t3, t4, _this = this,
+        _s26_ = "http://www.w3.org/2000/svg",
+        t1 = document,
+        t2 = type$.SvgElement;
+      _this.container = type$.GElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g")));
+      t3 = type$.RectElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "rect")));
+      t4 = type$.String;
+      (t3 && C.RectElement_methods).set$attributes(t3, P.LinkedHashMap_LinkedHashMap$_literal(["x", "0", "y", "0", "rx", "4", "width", "70", "height", "45", "fill", "#fff", "fill-opacity", "0.1", "class", "sequencer-button"], t4, t4));
+      _this.backing = t3;
+      t1 = type$.TextElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "text")));
+      (t1 && C.TextElement_methods).set$attributes(t1, P.LinkedHashMap_LinkedHashMap$_literal(["x", "5", "y", "5", "fill", "#fff", "text-anchor", "left", "dominant-baseline", "hanging", "font-family", "sans-serif", "font-weight", "100", "font-size", "12px", "style", "user-select: none; pointer-events: none;"], t4, t4));
+      _this.label = t1;
+      C.TextElement_methods.setInnerHtml$1(t1, "" + _this.row.sound);
+      _this.container.appendChild(_this.backing);
+      _this.container.appendChild(_this.label);
+      t1 = _this.backing;
+      t4 = type$._ElementEventStreamImpl_MouseEvent;
+      t2 = t4._eval$1("~(1)")._as(new D.SequencerDrumButton_closure(_this));
+      type$.void_Function._as(null);
+      W._EventStreamSubscription$(t1, "click", t2, false, t4._precomputed1);
+    }
+  };
+  D.SequencerDrumButton_closure.prototype = {
+    call$1: function(e) {
+      type$.MouseEvent._as(e);
+    },
+    $signature: 0
+  };
+  D.SequencerButton.prototype = {
+    SequencerButton$3: function(row, col, x) {
+      var fill, t3, t4, t5, t6, _this = this,
+        _s26_ = "http://www.w3.org/2000/svg",
+        t1 = document,
+        t2 = type$.SvgElement;
+      _this.container = type$.GElement._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "g")));
+      fill = C.JSInt_methods.$mod(C.JSInt_methods._tdivFast$1(_this.col, 4), 2) === 1 ? 0.1 : 0.2;
+      t3 = type$.RectElement;
+      t4 = t3._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "rect")));
+      t5 = _this.x;
+      t6 = type$.String;
+      (t4 && C.RectElement_methods).set$attributes(t4, P.LinkedHashMap_LinkedHashMap$_literal(["x", H.S(t5), "y", "0", "rx", "4", "width", H.S($.SequencerButton_WIDTH - 5), "height", "45", "fill", "#fff", "fill-opacity", H.S(fill)], t6, t6));
+      _this.backing = t4;
+      t1 = t3._as(t2._as(C.HtmlDocument_methods.createElementNS$2(t1, _s26_, "rect")));
+      (t1 && C.RectElement_methods).set$attributes(t1, P.LinkedHashMap_LinkedHashMap$_literal(["x", H.S(t5), "y", "0", "rx", "4", "width", H.S($.SequencerButton_WIDTH - 5), "height", "45", "fill", _this.row.color, "fill-opacity", "0.0", "class", "sequencer-button"], t6, t6));
+      _this.light = t1;
+      _this.container.appendChild(_this.backing);
+      _this.container.appendChild(_this.light);
+      t1 = _this.light;
+      t6 = type$._ElementEventStreamImpl_MouseEvent;
+      t5 = t6._eval$1("~(1)");
+      t2 = t5._as(new D.SequencerButton_closure(_this));
+      type$.void_Function._as(null);
+      t6 = t6._precomputed1;
+      W._EventStreamSubscription$(t1, "mousedown", t2, false, t6);
+      W._EventStreamSubscription$(_this.light, "mouseup", t5._as(new D.SequencerButton_closure0(_this)), false, t6);
+      W._EventStreamSubscription$(_this.light, "mouseenter", t5._as(new D.SequencerButton_closure1(_this)), false, t6);
+    },
+    setVelocity$1: function(v) {
+      var t1, t2, _this = this,
+        _s12_ = "fill-opacity";
+      _this.velocity = v;
+      if (v > 100)
+        _this.velocity = 0;
+      t1 = _this._sequencer$_disabled;
+      t2 = _this.light;
+      if (t1) {
+        t2.setAttribute("fill", "#777");
+        _this.light.setAttribute(_s12_, "1.0");
+      } else {
+        t2.setAttribute("fill", _this.row.color);
+        _this.light.setAttribute(_s12_, H.S(_this.velocity / 100));
+      }
+    }
+  };
+  D.SequencerButton_closure.prototype = {
+    call$1: function(e) {
+      var t1, t2;
+      type$.MouseEvent._as(e);
+      t1 = this.$this;
+      if (!t1._sequencer$_disabled) {
+        t2 = t1.row;
+        t2.brushing = true;
+        t1.setVelocity$1(t1.velocity + 50);
+        t2.instrument._instrument$_stream.add$1(0, new S.NoteEvent("on", "system", t2.sound, t1.velocity));
+        t2.brushVelocity = t1.velocity;
+      }
+    },
+    $signature: 0
+  };
+  D.SequencerButton_closure0.prototype = {
+    call$1: function(e) {
+      var t1, t2;
+      type$.MouseEvent._as(e);
+      t1 = this.$this.row;
+      t1.brushing = false;
+      t2 = new S.NoteEvent("on", "system", t1.sound, 0);
+      t2.message = "off";
+      t1.instrument._instrument$_stream.add$1(0, t2);
+    },
+    $signature: 0
+  };
+  D.SequencerButton_closure1.prototype = {
+    call$1: function(e) {
+      var t1, t2;
+      type$.MouseEvent._as(e);
+      t1 = this.$this;
+      if (!t1._sequencer$_disabled)
+        if (t1.row.brushing) {
+          t2 = e.buttons;
+          if (typeof t2 !== "number")
+            return t2.$gt();
+          t2 = t2 > 0;
+        } else
+          t2 = false;
+      else
+        t2 = false;
+      if (t2)
+        t1.setVelocity$1(t1.row.brushVelocity);
     },
     $signature: 0
   };
@@ -18099,31 +19099,31 @@
         t1.maxD = Math.max(t1.maxD, node.sampleDuration);
       }
     },
-    $signature: 40
+    $signature: 29
   };
   U.SynthChain_pitchBend_closure.prototype = {
     call$1: function(node) {
       return type$.SynthNode._as(node).pitchBend$1(this.cents);
     },
-    $signature: 21
+    $signature: 20
   };
   U.SynthChain_schedulePitchBend_closure.prototype = {
     call$1: function(node) {
       return type$.SynthNode._as(node).schedulePitchBend$3(this.start, this.duration, this.cents);
     },
-    $signature: 21
+    $signature: 20
   };
   U.SynthChain_releaseNote_closure.prototype = {
     call$1: function(node) {
       type$.SynthNode._as(node).release$0(0);
     },
-    $signature: 40
+    $signature: 29
   };
   U.SynthChain_destroy_closure.prototype = {
     call$1: function(node) {
       return type$.SynthNode._as(node).destroy$0();
     },
-    $signature: 21
+    $signature: 20
   };
   E.ClockSubscriber.prototype = {};
   E.Metronome.prototype = {};
@@ -18245,31 +19245,31 @@
     call$1: function(s) {
       return type$.ClockSubscriber._as(s).onClockReset$0();
     },
-    $signature: 15
+    $signature: 17
   };
   E.PlayClock_setTime_closure.prototype = {
     call$1: function(s) {
       return type$.ClockSubscriber._as(s).onClockTimeChange$0();
     },
-    $signature: 15
+    $signature: 17
   };
   E.PlayClock_setTempo_closure.prototype = {
     call$1: function(s) {
       return type$.ClockSubscriber._as(s).onTempoChange$0();
     },
-    $signature: 15
+    $signature: 17
   };
   E.PlayClock_setTimeSignature_closure.prototype = {
     call$1: function(s) {
       return type$.ClockSubscriber._as(s).onTimeSignatureChange$0();
     },
-    $signature: 15
+    $signature: 17
   };
   E.PlayClock_startMetronome_closure.prototype = {
     call$1: function(m) {
       return type$.Metronome._as(m).pulse$1(0);
     },
-    $signature: 36
+    $signature: 32
   };
   E.PlayClock_startMetronome_closure0.prototype = {
     call$1: function(t) {
@@ -18300,13 +19300,13 @@
         }
       }
     },
-    $signature: 60
+    $signature: 61
   };
   E.PlayClock_startMetronome__closure.prototype = {
     call$1: function(m) {
       return type$.Metronome._as(m).pulse$1(this._box_0.beat);
     },
-    $signature: 36
+    $signature: 32
   };
   K.Effect.prototype = {
     Effect$_internal$2: function($name, params) {
@@ -18967,7 +19967,7 @@
       H.checkNum(t1);
       return Math.pow(this.semitoneRatio, t1);
     },
-    $signature: 61
+    $signature: 62
   };
   B.SynthDelayNode.prototype = {
     connectFromSource$2: function(source, type) {
@@ -19430,7 +20430,7 @@
     call$1: function(n) {
       --this._box_0.load_count;
     },
-    $signature: 6
+    $signature: 7
   };
   L.Synthesizer__play_closure.prototype = {
     call$0: function() {
@@ -19474,7 +20474,7 @@
     call$1: function($event) {
       return type$.SynthEvent._as($event).pitchBend$1(this.cents);
     },
-    $signature: 62
+    $signature: 63
   };
   L.Synthesizer_loadAudioBuffer_closure.prototype = {
     call$1: function(e) {
@@ -19515,7 +20515,7 @@
       type$.ProgressEvent._as(e);
       return P.print("BufferLoader: XHR error");
     },
-    $signature: 22
+    $signature: 21
   };
   L.Synthesizer_loadCustomSound_closure.prototype = {
     call$1: function(e) {
@@ -19553,7 +20553,7 @@
       type$.ProgressEvent._as(e);
       return P.print("BufferLoader: XHR error");
     },
-    $signature: 22
+    $signature: 21
   };
   Y.Trace.prototype = {
     get$length: function(_) {
@@ -19731,7 +20731,7 @@
       H.checkTypeBound(t1, t1, "T", "querySelectorAll");
       W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(this.dialog.querySelectorAll(".message"), type$._FrozenElementList_Element)).add$1(0, "hidden");
     },
-    $signature: 3
+    $signature: 4
   };
   Y.UserAccounts_login_closure2.prototype = {
     call$1: function(e) {
@@ -19739,7 +20739,7 @@
       Y.UserAccounts__onSubmit(this.dialog, this.datastore);
       return false;
     },
-    $signature: 66
+    $signature: 89
   };
   Y.PythonCell.prototype = {
     set$gain: function(_, g) {
@@ -20441,7 +21441,7 @@
       return P._asyncStartSync($async$setVoice$2, $async$completer);
     },
     _setInstrument$2: function(voice, instr) {
-      var old, t1, t2, t3, t4, _this = this,
+      var old, t1, t2, t3, t4, t5, t6, _this = this, _null = null, _s1_ = "g",
         _s26_ = "http://www.w3.org/2000/svg",
         _s12_ = ".gadget-icon",
         _s16_ = "querySelectorAll",
@@ -20450,26 +21450,77 @@
         return;
       if (instr === "drums") {
         old = _this.instrument;
-        if (!(old instanceof Z.Drums))
-          _this.instrument = Z.Drums$($.patches.$index(0, voice));
+        if (!(old instanceof N.Drums))
+          _this.instrument = N.Drums$($.patches.$index(0, voice));
         else
-          old = null;
+          old = _null;
       } else if (instr === "drumkit") {
         old = _this.instrument;
-        if (!(old instanceof Z.DrumKit))
-          _this.instrument = Z.DrumKit$("#gadget-" + H.S(_this.id), $.patches.$index(0, voice));
+        if (!(old instanceof F.DrumKit))
+          _this.instrument = F.DrumKit$("#gadget-" + H.S(_this.id), $.patches.$index(0, voice));
         else
-          old = null;
+          old = _null;
+      } else if (instr === "guitar") {
+        old = _this.instrument;
+        if (!(old instanceof F.Guitar)) {
+          t1 = H.setRuntimeTypeInfo([], type$.JSArray_GFret);
+          t2 = H.setRuntimeTypeInfo([], type$.JSArray_SvgElement);
+          t3 = P.StreamController_StreamController(false, type$.NoteEvent);
+          t4 = document;
+          t5 = type$.SvgElement;
+          t6 = type$.GElement;
+          t3 = new F.Guitar(t1, t2, "guitar", t3, t6._as(t5._as(C.HtmlDocument_methods.createElementNS$2(t4, _s26_, _s1_))));
+          t3.fretboard = t6._as(t5._as(C.HtmlDocument_methods.createElementNS$2(t4, _s26_, _s1_)));
+          _this.instrument = t3;
+        } else
+          old = _null;
+      } else if (instr === "bass") {
+        old = _this.instrument;
+        if (!(old instanceof Y.BassGuitar)) {
+          t1 = H.setRuntimeTypeInfo([], type$.JSArray_BassFret);
+          t2 = H.setRuntimeTypeInfo([], type$.JSArray_SvgElement);
+          t3 = P.StreamController_StreamController(false, type$.NoteEvent);
+          t4 = document;
+          t5 = type$.SvgElement;
+          t6 = type$.GElement;
+          t3 = new Y.BassGuitar(t1, t2, "bass", t3, t6._as(t5._as(C.HtmlDocument_methods.createElementNS$2(t4, _s26_, _s1_))));
+          t3.fretboard = t6._as(t5._as(C.HtmlDocument_methods.createElementNS$2(t4, _s26_, _s1_)));
+          _this.instrument = t3;
+        } else
+          old = _null;
+      } else if (instr === "sequencer") {
+        old = _this.instrument;
+        if (!(old instanceof D.Sequencer)) {
+          t1 = H.setRuntimeTypeInfo([], type$.JSArray_SequencerRow);
+          t2 = document;
+          t3 = type$.SvgElement;
+          t4 = type$.GElement;
+          t5 = t4._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, _s26_, _s1_)));
+          t6 = P.StreamController_StreamController(false, type$.NoteEvent);
+          t2 = t4._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, _s26_, _s1_)));
+          t6 = new D.Sequencer(t1, t5, "sequencer", t6, t2);
+          t3 = type$.String;
+          (t5 && C.GElement_methods).set$attributes(t5, P.LinkedHashMap_LinkedHashMap$_literal(["transform", "translate(20, 30)"], t3, t3));
+          t2.appendChild(t5);
+          C.JSArray_methods.add$1(t1, D.SequencerRow$(t6, 0, 4, "hat", "gold"));
+          C.JSArray_methods.add$1(t1, D.SequencerRow$(t6, 1, 7, "tom", "#2f2"));
+          C.JSArray_methods.add$1(t1, D.SequencerRow$(t6, 2, 2, "snare", "magenta"));
+          C.JSArray_methods.add$1(t1, D.SequencerRow$(t6, 3, 1, "kick", "cyan"));
+          _this.instrument = t6;
+        } else
+          old = _null;
       } else {
         old = _this.instrument;
-        if (!(old instanceof Z.Piano) || old.root == null) {
+        if (!(old instanceof B.Piano) || old.root == null) {
           t1 = H.setRuntimeTypeInfo([], type$.JSArray_PianoKey);
           t2 = document;
           t3 = type$.SvgElement;
           t4 = type$.GElement;
-          _this.instrument = new Z.Piano(t1, t4._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, _s26_, "g"))), "piano", P.StreamController_StreamController(false, type$.NoteEvent), t4._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, _s26_, "g"))));
+          t2 = new B.Piano(t1, t4._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, _s26_, _s1_))), "piano", P.StreamController_StreamController(false, type$.NoteEvent), t4._as(t3._as(C.HtmlDocument_methods.createElementNS$2(t2, _s26_, _s1_))));
+          t2.height = 190;
+          _this.instrument = t2;
         } else
-          old = null;
+          old = _null;
       }
       t1 = _this.root;
       t2 = type$.Element;
@@ -20488,7 +21539,7 @@
         old.unload$0();
         _this.instrument.insert$1(0, container);
         _this._setMidiInput$1(B.toBool(J.$index$asx(_this.settings, "midi-input"), false));
-        t1 = _this.instrument._instruments$_stream;
+        t1 = _this.instrument._instrument$_stream;
         new P._ControllerStream(t1, H._instanceType(t1)._eval$1("_ControllerStream<1>")).listen$1(new Y.PythonCell__setInstrument_closure0(_this));
       }
     },
@@ -21011,7 +22062,7 @@
   Y.PythonCell_closure.prototype = {
     call$1: function(data) {
     },
-    $signature: 6
+    $signature: 7
   };
   Y.PythonCell_closure0.prototype = {
     call$1: function(e) {
@@ -21067,7 +22118,7 @@
           t1.updateRecording$0();
       }
     },
-    $signature: 68
+    $signature: 69
   };
   Y.PythonCell_closure1.prototype = {
     call$1: function(e) {
@@ -21109,7 +22160,7 @@
       H.checkTypeBound(t3, t3, "T", _s16_);
       W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll(".instrument-container"), t4)).remove$1(0, "armed");
     },
-    $signature: 3
+    $signature: 4
   };
   Y.PythonCell_closure3.prototype = {
     call$1: function(e) {
@@ -21281,14 +22332,14 @@
         t1.datastore.save$1(0, t1);
       }
     },
-    $signature: 3
+    $signature: 4
   };
   Y.PythonCell_closure16.prototype = {
     call$1: function(e) {
       if (type$.KeyboardEvent._as(e).keyCode === 13)
         J.blur$0$x(this.$this.root.querySelector(".gadget-name"));
     },
-    $signature: 69
+    $signature: 70
   };
   Y.PythonCell_closure17.prototype = {
     call$1: function(e) {
@@ -21333,7 +22384,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 5
+    $signature: 6
   };
   Y.PythonCell_closure20.prototype = {
     call$1: function(e) {
@@ -21361,7 +22412,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 5
+    $signature: 6
   };
   Y.PythonCell_onPythonDone_closure.prototype = {
     call$0: function() {
@@ -21377,7 +22428,7 @@
     call$1: function(item) {
       return H._asStringNullable(item) !== "gadget-icon";
     },
-    $signature: 8
+    $signature: 9
   };
   Y.PythonCell__setInstrument_closure0.prototype = {
     call$1: function(e) {
@@ -21418,7 +22469,7 @@
       if (t1.recorder.recording)
         t1.updateRecording$0();
     },
-    $signature: 71
+    $signature: 72
   };
   Y.PythonCell__shareTrack_closure.prototype = {
     call$1: function(e) {
@@ -21503,7 +22554,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 5
+    $signature: 6
   };
   Y.PythonCell__doContextMenu_closure.prototype = {
     call$0: function() {
@@ -22548,25 +23599,25 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 26
+    $signature: 25
   };
   Y.Datastore_addUpdateCallback_closure.prototype = {
     call$0: function() {
       return H.setRuntimeTypeInfo([], type$.JSArray_Function);
     },
-    $signature: 24
+    $signature: 23
   };
   Y.Datastore_addRemovedCallback_closure.prototype = {
     call$0: function() {
       return H.setRuntimeTypeInfo([], type$.JSArray_Function);
     },
-    $signature: 24
+    $signature: 23
   };
   Y.Datastore_addAddedCallback_closure.prototype = {
     call$0: function() {
       return H.setRuntimeTypeInfo([], type$.JSArray_Function);
     },
-    $signature: 24
+    $signature: 23
   };
   Y.DatastoreException.prototype = {$isException: 1};
   Y.Project.prototype = {
@@ -22803,13 +23854,13 @@
     call$1: function(cell) {
       type$.PythonCell._as(cell).initAudio$0();
     },
-    $signature: 25
+    $signature: 24
   };
   Y.Project_playAll_closure.prototype = {
     call$1: function(cell) {
       type$.PythonCell._as(cell).play$0(0);
     },
-    $signature: 25
+    $signature: 24
   };
   Y.Project_pauseAll_closure.prototype = {
     call$1: function(cell) {
@@ -22817,7 +23868,7 @@
       cell._pauseHelper$0();
       cell.clock.pause$1(0, cell);
     },
-    $signature: 25
+    $signature: 24
   };
   Y.Project__registerEvents_closure.prototype = {
     call$1: function(e) {
@@ -23337,7 +24388,7 @@
     },
     "call*": "call$2",
     $requiredArgCount: 2,
-    $signature: 4
+    $signature: 3
   };
   Y.EffectsChain_closure0.prototype = {
     call$2: function(d, v) {
@@ -23359,7 +24410,7 @@
     },
     "call*": "call$2",
     $requiredArgCount: 2,
-    $signature: 4
+    $signature: 3
   };
   Y.EffectsChain_closure1.prototype = {
     call$2: function(d, v) {
@@ -23367,7 +24418,7 @@
     },
     "call*": "call$2",
     $requiredArgCount: 2,
-    $signature: 4
+    $signature: 3
   };
   Y.EffectsChain_closure2.prototype = {
     call$2: function(d, v) {
@@ -23383,7 +24434,7 @@
     },
     "call*": "call$2",
     $requiredArgCount: 2,
-    $signature: 4
+    $signature: 3
   };
   Y.EffectsChain_closure3.prototype = {
     call$2: function(d, v) {
@@ -23399,7 +24450,7 @@
     },
     "call*": "call$2",
     $requiredArgCount: 2,
-    $signature: 4
+    $signature: 3
   };
   Y.EffectsChain_closure4.prototype = {
     call$2: function(d, v) {
@@ -23415,7 +24466,7 @@
     },
     "call*": "call$2",
     $requiredArgCount: 2,
-    $signature: 4
+    $signature: 3
   };
   Y.EffectsChain_closure5.prototype = {
     call$2: function(d, v) {
@@ -23431,7 +24482,7 @@
     },
     "call*": "call$2",
     $requiredArgCount: 2,
-    $signature: 4
+    $signature: 3
   };
   Y.EffectsChain_playAudio_closure.prototype = {
     call$1: function(e) {
@@ -23462,7 +24513,7 @@
       if (countdown < 0)
         this.$this._stop$0();
     },
-    $signature: 77
+    $signature: 78
   };
   Y.EffectsChain_playSlice_closure.prototype = {
     call$1: function(e) {
@@ -23470,7 +24521,7 @@
       t1._absn.disconnect();
       t1._absn = null;
     },
-    $signature: 3
+    $signature: 4
   };
   Y.EffectsChain_loadSoundEffects_closure.prototype = {
     call$1: function(e) {
@@ -23508,7 +24559,7 @@
       type$.ProgressEvent._as(e);
       return P.print("BufferLoader: XHR error");
     },
-    $signature: 22
+    $signature: 21
   };
   Y.GraphicEq.prototype = {
     GraphicEq$2: function(container, onColor) {
@@ -23912,6 +24963,7 @@
       new D.GrowableAudioBuffer(H.setRuntimeTypeInfo([], t1), P.ListQueue$(t2)).reshape$2(1, 44100);
       Date.now();
       Date.now();
+      _this.buffer.clear$0(0);
       t1 = type$.SvgElement._as(_this.dialog.querySelector("#waveform-container svg"));
       t2 = new Y.WaveformTrace(470, 125, _s7_, _this);
       t3 = new Array(94);
@@ -24941,7 +25993,7 @@
     call$1: function(r) {
       return this.$this.addRow$1(0, type$.Recording._as(r));
     },
-    $signature: 78
+    $signature: 79
   };
   Y.RecordingStudio_uploadAudioFile_closure.prototype = {
     call$1: function(e) {
@@ -25063,7 +26115,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 79
+    $signature: 80
   };
   Y.RecordingStudio__registerEvents_closure2.prototype = {
     call$1: function(e) {
@@ -25107,7 +26159,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 5
+    $signature: 6
   };
   Y.RecordingStudio__registerEvents_closure4.prototype = {
     call$1: function(e) {
@@ -25133,7 +26185,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 5
+    $signature: 6
   };
   Y.RecordingStudio__registerEvents_closure5.prototype = {
     call$1: function(e) {
@@ -25174,7 +26226,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 5
+    $signature: 6
   };
   Y.RecordingStudio__registerEvents_closure7.prototype = {
     call$1: function(e) {
@@ -25200,7 +26252,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 5
+    $signature: 6
   };
   Y.RecordingStudio__registerEvents_closure8.prototype = {
     call$1: function(e) {
@@ -25227,7 +26279,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 5
+    $signature: 6
   };
   Y.RecordingStudio__registerEvents_closure9.prototype = {
     call$1: function(e) {
@@ -25323,7 +26375,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 5
+    $signature: 6
   };
   Y.RecordingStudio__registerEvents_closure10.prototype = {
     call$1: function(e) {
@@ -25355,7 +26407,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 5
+    $signature: 6
   };
   Y.RecordingStudio__registerEvents_closure11.prototype = {
     call$1: function(e) {
@@ -25365,14 +26417,14 @@
       t1.recording.name = type$.InputElement._as(J.get$target$x(e)).value;
       t1.set$dirty(true);
     },
-    $signature: 3
+    $signature: 4
   };
   Y.RecordingStudio__registerEvents_closure12.prototype = {
     call$1: function(e) {
       type$.Event._as(e);
       this.$this.set$dirty(true);
     },
-    $signature: 3
+    $signature: 4
   };
   Y.RecordingStudio__registerRowEvents_closure.prototype = {
     call$1: function(e) {
@@ -25411,7 +26463,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 5
+    $signature: 6
   };
   Y.RecordingStudio__registerRowEvents_closure1.prototype = {
     call$1: function(e) {
@@ -25443,7 +26495,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 5
+    $signature: 6
   };
   Y.RecordingStudio__registerRowEvents_closure2.prototype = {
     call$1: function(menu) {
@@ -25577,7 +26629,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 26
+    $signature: 25
   };
   Y.RecordingStudio__playPreview_closure.prototype = {
     call$1: function(e) {
@@ -25595,19 +26647,19 @@
       H.checkTypeBound(t2, t2, "T", _s16_);
       W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll(".sample-badge"), t3)).add$1(0, "playing");
     },
-    $signature: 3
+    $signature: 4
   };
   Y.RecordingStudio__playPreview_closure0.prototype = {
     call$1: function(e) {
       this.$this._hideLoading$1(this.item);
     },
-    $signature: 3
+    $signature: 4
   };
   Y.RecordingStudio__playPreview_closure1.prototype = {
     call$1: function(e) {
       this.$this._hideLoading$1(this.item);
     },
-    $signature: 3
+    $signature: 4
   };
   Y.WaveformTrace.prototype = {
     clear$0: function(_) {
@@ -26296,13 +27348,13 @@
     call$1: function(c) {
       return H._asStringNullable(c) !== "container";
     },
-    $signature: 8
+    $signature: 9
   };
   Y.Timeline_insert_closure.prototype = {
     call$1: function(e) {
       return this.$this._render$0();
     },
-    $signature: 20
+    $signature: 41
   };
   Y.Timeline__render_closure.prototype = {
     call$1: function(e) {
@@ -26326,7 +27378,7 @@
       type$.SvgElement._as(note);
       return this.$this.parent.appendChild(note);
     },
-    $signature: 80
+    $signature: 82
   };
   Y.Timeline__registerTouchEvents_closure.prototype = {
     call$1: function(e) {
@@ -26713,6 +27765,69 @@
         if (t2 != null)
           P.Function_apply(t2, [t1, t1.get$value(t1)], null);
       }
+    },
+    $signature: 0
+  };
+  V.ToggleButton.prototype = {
+    set$value: function(_, b) {
+      var t1;
+      this._dial$_value = b;
+      t1 = this._button;
+      t1.setAttribute("fill", b ? this._color : "#555");
+    },
+    buildUI$1: function(container) {
+      var t2, t3, t4, _this = this,
+        outline = type$.CircleElement._as(type$.SvgElement._as(C.HtmlDocument_methods.createElementNS$2(document, "http://www.w3.org/2000/svg", "circle"))),
+        t1 = type$.String;
+      (outline && C.CircleElement_methods).set$attributes(outline, P.LinkedHashMap_LinkedHashMap$_literal(["cx", "" + _this.cx, "cy", H.S(_this.cy), "r", "" + _this.radius, "stroke", "white", "stroke-width", "2", "stroke-opacity", "0.5"], t1, t1));
+      container.appendChild(outline);
+      container.appendChild(_this._button);
+      t1 = _this._button;
+      t2 = type$._ElementEventStreamImpl_MouseEvent;
+      t3 = t2._eval$1("~(1)");
+      t4 = t3._as(new V.ToggleButton_buildUI_closure(outline));
+      type$.void_Function._as(null);
+      t2 = t2._precomputed1;
+      W._EventStreamSubscription$(t1, "mouseenter", t4, false, t2);
+      W._EventStreamSubscription$(_this._button, "mouseleave", t3._as(new V.ToggleButton_buildUI_closure0(_this, outline)), false, t2);
+      W._EventStreamSubscription$(_this._button, "mousedown", t3._as(new V.ToggleButton_buildUI_closure1(_this)), false, t2);
+      W._EventStreamSubscription$(_this._button, "click", t3._as(new V.ToggleButton_buildUI_closure2(_this)), false, t2);
+    }
+  };
+  V.ToggleButton_buildUI_closure.prototype = {
+    call$1: function(e) {
+      type$.MouseEvent._as(e);
+      this.outline.setAttribute("stroke-opacity", "1.0");
+    },
+    $signature: 0
+  };
+  V.ToggleButton_buildUI_closure0.prototype = {
+    call$1: function(e) {
+      var t1, t2;
+      type$.MouseEvent._as(e);
+      this.outline.setAttribute("stroke-opacity", "0.5");
+      t1 = this.$this;
+      t2 = t1._button;
+      t2.setAttribute("fill", t1._dial$_value ? t1._color : "#555");
+    },
+    $signature: 0
+  };
+  V.ToggleButton_buildUI_closure1.prototype = {
+    call$1: function(e) {
+      type$.MouseEvent._as(e);
+      this.$this._button.setAttribute("fill", "white");
+    },
+    $signature: 0
+  };
+  V.ToggleButton_buildUI_closure2.prototype = {
+    call$1: function(e) {
+      var t1, t2;
+      type$.MouseEvent._as(e);
+      t1 = this.$this;
+      t1.set$value(0, !t1._dial$_value);
+      t2 = t1.onChanged;
+      if (t2 != null)
+        P.Function_apply(t2, [t1, t1._dial$_value], null);
     },
     $signature: 0
   };
@@ -27561,7 +28676,7 @@
       t1.sort = t2;
       t1._search$3(t1.tab, t1.filter, t2);
     },
-    $signature: 6
+    $signature: 7
   };
   O.TrackLibrary__buildTrack_closure.prototype = {
     call$1: function(e) {
@@ -27650,7 +28765,7 @@
       H.checkTypeBound(t2, t2, "T", _s16_);
       W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll(_s12_), t3)).add$1(0, "playing");
     },
-    $signature: 3
+    $signature: 4
   };
   O.TrackLibrary__playTrackPreview_closure0.prototype = {
     call$1: function(e) {
@@ -27672,7 +28787,7 @@
       H.checkTypeBound(t2, t2, "T", _s16_);
       W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll(_s12_), t3)).remove$1(0, "playing");
     },
-    $signature: 3
+    $signature: 4
   };
   O.TrackLibrary__playTrackPreview_closure1.prototype = {
     call$1: function(e) {
@@ -27694,7 +28809,7 @@
       H.checkTypeBound(t2, t2, "T", _s16_);
       W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll(_s12_), t3)).remove$1(0, "playing");
     },
-    $signature: 3
+    $signature: 4
   };
   F.main_closure.prototype = {
     call$3: function(key, prevKey, data) {
@@ -27716,7 +28831,7 @@
     call$1: function(data) {
       F._updateCellMenu(this.cell);
     },
-    $signature: 6
+    $signature: 7
   };
   F.main__closure0.prototype = {
     call$1: function(data) {
@@ -27731,7 +28846,7 @@
       if (track != null)
         C.DivElement_methods.remove$0(track);
     },
-    $signature: 6
+    $signature: 7
   };
   F.main_closure0.prototype = {
     call$1: function(e) {
@@ -27793,7 +28908,7 @@
         W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t2.querySelectorAll(_s4_), t3)).add$1(0, "authenticated");
       }
     },
-    $signature: 37
+    $signature: 42
   };
   F.main_closure2.prototype = {
     call$1: function(user) {
@@ -27819,7 +28934,7 @@
       H.checkTypeBound(t2, t2, "T", _s16_);
       W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll("main"), t3)).clear$0(0);
     },
-    $signature: 37
+    $signature: 42
   };
   F.main_closure3.prototype = {
     call$1: function(e) {
@@ -27884,7 +28999,7 @@
     },
     "call*": "call$2",
     $requiredArgCount: 2,
-    $signature: 35
+    $signature: 43
   };
   F._addMixTrack_closure0.prototype = {
     call$2: function(d, value) {
@@ -27894,7 +29009,7 @@
     },
     "call*": "call$2",
     $requiredArgCount: 2,
-    $signature: 35
+    $signature: 43
   };
   F._addMixTrack_closure1.prototype = {
     call$1: function(db) {
@@ -27906,7 +29021,7 @@
       t2 = type$.dynamic;
       C.JSArray_methods.add$1(this.slider.ticks, P.LinkedHashMap_LinkedHashMap$_literal(["label", t1, "value", Math.pow(10, db / 40) / 1.78], t2, t2));
     },
-    $signature: 83
+    $signature: 85
   };
   F._addMixTrack_closure2.prototype = {
     call$2: function(s, value) {
@@ -27923,7 +29038,7 @@
     },
     "call*": "call$2",
     $requiredArgCount: 2,
-    $signature: 38
+    $signature: 26
   };
   F._addMixTrack_closure3.prototype = {
     call$2: function(s, value) {
@@ -27933,7 +29048,7 @@
     },
     "call*": "call$2",
     $requiredArgCount: 2,
-    $signature: 38
+    $signature: 26
   };
   F._addMixTrack_closure4.prototype = {
     call$1: function(e) {
@@ -27993,13 +29108,13 @@
       t2 = "images/instruments/" + H.S(J.$index$asx(t2.settings, _s10_)) + ".svg";
       t1._knobImage.setAttribute("href", t2);
     },
-    $signature: 6
+    $signature: 7
   };
   F._addMixTrack__closure.prototype = {
     call$1: function(cname) {
       return cname !== "mixer-track";
     },
-    $signature: 8
+    $signature: 9
   };
   F._addCellMenu_closure.prototype = {
     call$1: function(e) {
@@ -28036,7 +29151,7 @@
     call$1: function(cname) {
       return cname !== "shortcut-cell-name";
     },
-    $signature: 8
+    $signature: 9
   };
   B.UserList.prototype = {
     UserList$1: function(socket) {
@@ -28168,7 +29283,7 @@
     call$1: function(e) {
       P.print("Socket error: " + H.S(e));
     },
-    $signature: 3
+    $signature: 4
   };
   B.UserList_closure0.prototype = {
     call$1: function(e) {
@@ -28178,14 +29293,14 @@
         t1._sendAction$1("userlist-rollcall");
       }
     },
-    $signature: 3
+    $signature: 4
   };
   B.UserList_closure1.prototype = {
     call$1: function(e) {
       type$.Event._as(e);
       return this.$this._sendAction$1("userlist-leave");
     },
-    $signature: 20
+    $signature: 41
   };
   B.UserList__buildUserList_closure.prototype = {
     call$2: function(a, b) {
@@ -28194,7 +29309,7 @@
       t1._as(b);
       return J.compareTo$1$ns(J.toString$0$(a.id), J.toString$0$(b.id));
     },
-    $signature: 85
+    $signature: 87
   };
   (function aliases() {
     var _ = J.Interceptor.prototype;
@@ -28217,8 +29332,6 @@
     _ = P.JsObject.prototype;
     _.super$JsObject$$index = _.$index;
     _.super$JsObject$$indexSet = _.$indexSet;
-    _ = Z.Instrument.prototype;
-    _.super$Instrument$_resize = _._resize$0;
     _ = B.SynthNode.prototype;
     _.super$SynthNode$release = _.release$0;
     _.super$SynthNode$destroy = _.destroy$0;
@@ -28245,7 +29358,7 @@
     var _;
     _instance_0_u(_ = P._BroadcastSubscription.prototype, "get$_onPause", "_onPause$0", 2);
     _instance_0_u(_, "get$_onResume", "_onResume$0", 2);
-    _instance_1_i(P._BroadcastStreamController.prototype, "get$add", "add$1", 31);
+    _instance_1_i(P._BroadcastStreamController.prototype, "get$add", "add$1", 33);
     _instance(P._Completer.prototype, "get$completeError", 0, 1, null, ["call$2", "call$1"], ["completeError$2", "completeError$1"], 14, 0);
     _instance(P._Future.prototype, "get$_completeError", 0, 1, function() {
       return [null];
@@ -28255,44 +29368,50 @@
     _instance_0_u(_ = P._BufferingStreamSubscription.prototype, "get$_onPause", "_onPause$0", 2);
     _instance_0_u(_, "get$_onResume", "_onResume$0", 2);
     _instance_0_u(P._DoneStreamSubscription.prototype, "get$_sendDone", "_sendDone$0", 2);
-    _instance_1_u(_ = P._StreamIterator.prototype, "get$_async$_onData", "_async$_onData$1", 31);
+    _instance_1_u(_ = P._StreamIterator.prototype, "get$_async$_onData", "_async$_onData$1", 33);
     _instance(_, "get$_onError", 0, 1, function() {
       return [null];
     }, ["call$2", "call$1"], ["_onError$2", "_onError$1"], 14, 0);
     _instance_0_u(_, "get$_onDone", "_onDone$0", 2);
-    _static_1(P, "convert___defaultToEncodable$closure", "_defaultToEncodable", 7);
-    _static(W, "html__Html5NodeValidator__standardAttributeValidator$closure", 4, null, ["call$4"], ["_Html5NodeValidator__standardAttributeValidator"], 32, 0);
-    _static(W, "html__Html5NodeValidator__uriAttributeValidator$closure", 4, null, ["call$4"], ["_Html5NodeValidator__uriAttributeValidator"], 32, 0);
-    _instance_0_i(W.CacheStorage.prototype, "get$keys", "keys$0", 64);
-    _instance_0_i(W.PaymentInstruments.prototype, "get$keys", "keys$0", 47);
+    _static_1(P, "convert___defaultToEncodable$closure", "_defaultToEncodable", 8);
+    _static(W, "html__Html5NodeValidator__standardAttributeValidator$closure", 4, null, ["call$4"], ["_Html5NodeValidator__standardAttributeValidator"], 38, 0);
+    _static(W, "html__Html5NodeValidator__uriAttributeValidator$closure", 4, null, ["call$4"], ["_Html5NodeValidator__uriAttributeValidator"], 38, 0);
+    _instance_0_i(W.CacheStorage.prototype, "get$keys", "keys$0", 66);
+    _instance_0_i(W.PaymentInstruments.prototype, "get$keys", "keys$0", 84);
     _instance_0_i(W._StreamPool.prototype, "get$close", "close$0", 2);
-    _static_1(P, "js___convertToJS$closure", "_convertToJS", 7);
-    _static_1(P, "js___convertToDart$closure", "_convertToDart", 58);
+    _static_1(P, "js___convertToJS$closure", "_convertToJS", 8);
+    _static_1(P, "js___convertToDart$closure", "_convertToDart", 60);
     _instance_1_u(_ = U.MIDIManager.prototype, "get$_midiConnection", "_midiConnection$1", 11);
     _instance_1_u(_, "get$_midiEvent", "_midiEvent$1", 11);
     _static_2(R, "codemirror_CodeMirror_onProgramUpdate$closure", "CodeMirror_onProgramUpdate", 10);
     _static_2(R, "codemirror_CodeMirror_onCursorActivity$closure", "CodeMirror_onCursorActivity", 10);
     _static_1(R, "codemirror_CodeMirror_onEditorBlur$closure", "CodeMirror_onEditorBlur", 11);
-    _instance_1_u(_ = R.CodeMirror.prototype, "get$_onProgramUpdate", "_onProgramUpdate$1", 17);
-    _instance_1_u(_, "get$_onCursorActivity", "_onCursorActivity$1", 17);
+    _instance_1_u(_ = R.CodeMirror.prototype, "get$_onProgramUpdate", "_onProgramUpdate$1", 16);
+    _instance_1_u(_, "get$_onCursorActivity", "_onCursorActivity$1", 16);
     _instance_0_u(_, "get$_onEditorBlur", "_onEditorBlur$0", 2);
-    _instance_1_u(_ = Z.DrumKit.prototype, "get$_onKeyDown", "_onKeyDown$1", 9);
-    _instance_1_u(_, "get$_onKeyUp", "_onKeyUp$1", 9);
-    _instance_1_u(_ = Z.Drums.prototype, "get$_onKeyDown", "_onKeyDown$1", 9);
-    _instance_1_u(_, "get$_onKeyUp", "_onKeyUp$1", 9);
-    _instance_1_u(_ = Z.Piano.prototype, "get$_onKeyDown", "_onKeyDown$1", 9);
-    _instance_1_u(_, "get$_onKeyUp", "_onKeyUp$1", 9);
-    _instance_1_i(_ = Y.PythonCell.prototype, "get$load", "load$1", 17);
-    _instance_1_i(_, "get$animate", "animate$1", 23);
+    _instance_1_i(_ = Y.BassGuitar.prototype, "get$onKeyDown", "onKeyDown$1", 5);
+    _instance_1_i(_, "get$onKeyUp", "onKeyUp$1", 5);
+    _instance_1_i(_ = F.DrumKit.prototype, "get$onKeyDown", "onKeyDown$1", 5);
+    _instance_1_i(_, "get$onKeyUp", "onKeyUp$1", 5);
+    _instance_1_i(_ = N.Drums.prototype, "get$onKeyDown", "onKeyDown$1", 5);
+    _instance_1_i(_, "get$onKeyUp", "onKeyUp$1", 5);
+    _instance_1_i(_ = F.Guitar.prototype, "get$onKeyDown", "onKeyDown$1", 5);
+    _instance_1_i(_, "get$onKeyUp", "onKeyUp$1", 5);
+    _instance_1_i(_ = B.Piano.prototype, "get$onKeyDown", "onKeyDown$1", 5);
+    _instance_1_i(_, "get$onKeyUp", "onKeyUp$1", 5);
+    _instance_1_i(_ = D.Sequencer.prototype, "get$onKeyDown", "onKeyDown$1", 5);
+    _instance_1_i(_, "get$onKeyUp", "onKeyUp$1", 5);
+    _instance_1_i(_ = Y.PythonCell.prototype, "get$load", "load$1", 16);
+    _instance_1_i(_, "get$animate", "animate$1", 22);
     _instance_1_u(_ = Y.Datastore.prototype, "get$_onLogin", "_onLogin$1", 11);
     _instance_1_u(_, "get$_onConnect", "_onConnect$1", 11);
     _instance_0_u(_, "get$_onLogout", "_onLogout$0", 2);
     _instance_2_u(_, "get$_onUpdated", "_onUpdated$2", 10);
-    _instance(_, "get$_onAdded", 0, 4, null, ["call$4"], ["_onAdded$4"], 73, 0);
+    _instance(_, "get$_onAdded", 0, 4, null, ["call$4"], ["_onAdded$4"], 74, 0);
     _instance_2_u(_, "get$_onRemoved", "_onRemoved$2", 10);
-    _instance_1_i(_ = Y.Project.prototype, "get$animate", "animate$1", 23);
-    _instance_1_i(_, "get$load", "load$1", 17);
-    _instance_1_u(Y.RecordingStudio.prototype, "get$tick", "tick$1", 23);
+    _instance_1_i(_ = Y.Project.prototype, "get$animate", "animate$1", 22);
+    _instance_1_i(_, "get$load", "load$1", 16);
+    _instance_1_u(Y.RecordingStudio.prototype, "get$tick", "tick$1", 22);
     _instance_1_u(B.UserList.prototype, "get$_handleMessage", "_handleMessage$1", 13);
   })();
   (function inheritance() {
@@ -28300,7 +29419,7 @@
       _inherit = hunkHelpers.inherit,
       _inheritMany = hunkHelpers.inheritMany;
     _inherit(P.Object, null);
-    _inheritMany(P.Object, [H.JS_CONST, J.Interceptor, J.ArrayIterator, P._ListBase_Object_ListMixin, P.Iterable, H.ListIterator, P.Iterator, H.FixedLengthListMixin, H.UnmodifiableListMixin, H.Symbol, P.MapView, H.ConstantMap, H.JSInvocationMirror, H.Closure, H.TypeErrorDecoder, P.Error, H.ExceptionAndStackTrace, H._StackTrace, P.MapMixin, H.LinkedHashMapCell, H.LinkedHashMapKeyIterator, H.JSSyntaxRegExp, H._MatchImplementation, H.Rti, H._FunctionParameters, P._TimerImpl, P._AsyncAwaitCompleter, P.Stream, P._BufferingStreamSubscription, P._BroadcastStreamController, P.Future, P._Completer, P._FutureListener, P._Future, P._AsyncCallbackEntry, P.StreamSubscription, P.StreamTransformerBase, P._StreamController, P._SyncStreamControllerDispatch, P._AsyncStreamControllerDispatch, P._DelayedEvent, P._DelayedDone, P._PendingEvents, P._DoneStreamSubscription, P._StreamIterator, P.Timer, P.AsyncError, P._Zone, P._SetBase, P._LinkedHashSetCell, P._LinkedHashSetIterator, P.ListMixin, P._UnmodifiableMapMixin, P._ListQueueIterator, P.SetMixin, P._SetBase_Object_SetMixin, P.Codec, P._Base64Encoder, P._Base64Decoder, P._JsonStringifier, P.bool, P.DateTime, P.num, P.Duration, P.OutOfMemoryError, P.StackOverflowError, P._Exception, P.FormatException, P.Function, P.List, P.Map, P.Null, P.StackTrace, P._StringStackTrace, P.String, P.StringBuffer, P.Symbol0, W.CssStyleDeclarationBase, W._WrappedEvent, W._BeforeUnloadEventStreamProvider, W.CssClassSet, W.EventStreamProvider, W._StreamPool, W._Html5NodeValidator, W.ImmutableListMixin, W.NodeValidatorBuilder, W._SimpleNodeValidator, W._SvgNodeValidator, W.FixedSizeListIterator, W._DOMWindowCrossFrame, W.NodeValidator, W._SameOriginUriPolicy, W._ValidatingTreeSanitizer, P._StructuredClone, P._AcceptStructuredClone, P.JsObject, P._JSRandom, P._RectangleBase, P.Float32List, D.GrowableAudioBuffer, U.MIDIManager, U.MIDIEvent, X.PythonListener, X.PythonCompiler, S.Preprocessor, R.CodeMirrorListener, R.CodeMirror, Z.Instrument, Z.Drum, Z.DrumPad, Z.NoteEvent, Z.MiniPiano, Z.PianoKey, U.SynthChain, E.ClockSubscriber, E.Metronome, E.PlayClock, K.Effect, X.SynthEvent, D.Key, B.SynthNode, F.Note, L.Synthesizer, Y.Trace, Y.TraceEvent, Y.DataModel, Y.Datastore, Y.DatastoreException, Y._NoteRecorder_Object_ClockSubscriber, Y.NoteSpacer, Y.EffectsChain, Y.GraphicEq, Y.AudioRecorder, Y.RecordingStudio, Y.WaveformTrace, Y.TimelineListener, Y.Timeline, V.EffectsDial, R.MixSlider, K.Uuid, O.TrackLibrary, B.UserList]);
+    _inheritMany(P.Object, [H.JS_CONST, J.Interceptor, J.ArrayIterator, P._ListBase_Object_ListMixin, P.Iterable, H.ListIterator, P.Iterator, H.FixedLengthListMixin, H.UnmodifiableListMixin, H.Symbol, P.MapView, H.ConstantMap, H.JSInvocationMirror, H.Closure, H.TypeErrorDecoder, P.Error, H.ExceptionAndStackTrace, H._StackTrace, P.MapMixin, H.LinkedHashMapCell, H.LinkedHashMapKeyIterator, H.JSSyntaxRegExp, H._MatchImplementation, H.Rti, H._FunctionParameters, P._TimerImpl, P._AsyncAwaitCompleter, P.Stream, P._BufferingStreamSubscription, P._BroadcastStreamController, P.Future, P._Completer, P._FutureListener, P._Future, P._AsyncCallbackEntry, P.StreamSubscription, P.StreamTransformerBase, P._StreamController, P._SyncStreamControllerDispatch, P._AsyncStreamControllerDispatch, P._DelayedEvent, P._DelayedDone, P._PendingEvents, P._DoneStreamSubscription, P._StreamIterator, P.Timer, P.AsyncError, P._Zone, P._SetBase, P._LinkedHashSetCell, P._LinkedHashSetIterator, P.ListMixin, P._UnmodifiableMapMixin, P._ListQueueIterator, P.SetMixin, P._SetBase_Object_SetMixin, P.Codec, P._Base64Encoder, P._Base64Decoder, P._JsonStringifier, P.bool, P.DateTime, P.num, P.Duration, P.OutOfMemoryError, P.StackOverflowError, P._Exception, P.FormatException, P.Function, P.List, P.Map, P.Null, P.StackTrace, P._StringStackTrace, P.String, P.StringBuffer, P.Symbol0, W.CssStyleDeclarationBase, W._WrappedEvent, W._BeforeUnloadEventStreamProvider, W.CssClassSet, W.EventStreamProvider, W._StreamPool, W._Html5NodeValidator, W.ImmutableListMixin, W.NodeValidatorBuilder, W._SimpleNodeValidator, W._SvgNodeValidator, W.FixedSizeListIterator, W._DOMWindowCrossFrame, W.NodeValidator, W._SameOriginUriPolicy, W._ValidatingTreeSanitizer, P._StructuredClone, P._AcceptStructuredClone, P.JsObject, P._JSRandom, P._RectangleBase, P.Float32List, D.GrowableAudioBuffer, U.MIDIManager, U.MIDIEvent, X.PythonListener, X.PythonCompiler, S.Preprocessor, R.CodeMirrorListener, R.CodeMirror, S.Instrument, Y.BassFret, F.Drum, N.DrumPad, F.GFret, S.NoteEvent, B.MiniPiano, B.PianoKey, D.SequencerRow, D.SequencerDrumButton, D.SequencerButton, U.SynthChain, E.ClockSubscriber, E.Metronome, E.PlayClock, K.Effect, X.SynthEvent, D.Key, B.SynthNode, F.Note, L.Synthesizer, Y.Trace, Y.TraceEvent, Y.DataModel, Y.Datastore, Y.DatastoreException, Y._NoteRecorder_Object_ClockSubscriber, Y.NoteSpacer, Y.EffectsChain, Y.GraphicEq, Y.AudioRecorder, Y.RecordingStudio, Y.WaveformTrace, Y.TimelineListener, Y.Timeline, V.EffectsDial, V.ToggleButton, R.MixSlider, K.Uuid, O.TrackLibrary, B.UserList]);
     _inheritMany(J.Interceptor, [J.JSBool, J.JSNull, J.JavaScriptObject, J.JSArray, J.JSNumber, J.JSString, H.NativeByteBuffer, H.NativeTypedData, W.EventTarget, W.AccessibleNodeList, W.Event, W.Blob, W.CacheStorage, W.Client, W.Credential, W.CssTransformComponent, W.CssRule, W._CssStyleDeclaration_Interceptor_CssStyleDeclarationBase, W.CssStyleValue, W.DataTransferItemList, W.DomException, W._DomRectList_Interceptor_ListMixin, W.DomRectReadOnly, W._DomStringList_Interceptor_ListMixin, W.DomTokenList, W.Entry, W._FileList_Interceptor_ListMixin, W.Gamepad, W.History, W._HtmlCollection_Interceptor_ListMixin, W.ImageData, W.Location, W.MediaList, W._MidiInputMap_Interceptor_MapMixin, W._MidiOutputMap_Interceptor_MapMixin, W.MimeType, W._MimeTypeArray_Interceptor_ListMixin, W.NavigatorConcurrentHardware, W.NavigatorUserMediaError, W._NodeList_Interceptor_ListMixin, W.PaymentInstruments, W.Plugin, W._PluginArray_Interceptor_ListMixin, W.RelatedApplication, W.RtcLegacyStatsReport, W._RtcStatsReport_Interceptor_MapMixin, W.SpeechGrammar, W._SpeechGrammarList_Interceptor_ListMixin, W.SpeechRecognitionResult, W._Storage_Interceptor_MapMixin, W.StyleSheet, W._TextTrackCueList_Interceptor_ListMixin, W.TimeRanges, W.Touch, W._TouchList_Interceptor_ListMixin, W.TrackDefaultList, W.Url, W.VideoTrack, W.VttRegion, W.__CssRuleList_Interceptor_ListMixin, W.__GamepadList_Interceptor_ListMixin, W.__NamedNodeMap_Interceptor_ListMixin, W.__SpeechRecognitionResultList_Interceptor_ListMixin, W.__StyleSheetList_Interceptor_ListMixin, P.KeyRange, P.Length, P._LengthList_Interceptor_ListMixin, P.Number, P._NumberList_Interceptor_ListMixin, P.PointList, P._StringList_Interceptor_ListMixin, P.Transform, P._TransformList_Interceptor_ListMixin, P.AudioBuffer, P.AudioParam, P._AudioParamMap_Interceptor_MapMixin, P.AudioTrack, P._SqlResultSetRowList_Interceptor_ListMixin]);
     _inheritMany(J.JavaScriptObject, [J.PlainJavaScriptObject, J.UnknownJavaScriptObject, J.JavaScriptFunction]);
     _inherit(J.JSUnmodifiableArray, J.JSArray);
@@ -28319,7 +29438,7 @@
     _inherit(P.UnmodifiableMapView, P._UnmodifiableMapView_MapView__UnmodifiableMapMixin);
     _inherit(H.ConstantMapView, P.UnmodifiableMapView);
     _inherit(H.ConstantStringMap, H.ConstantMap);
-    _inheritMany(H.Closure, [H.Primitives_functionNoSuchMethod_closure, H.unwrapException_saveStackTrace, H.TearOffClosure, H.JsLinkedHashMap_values_closure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P._TimerImpl$periodic_closure, P._awaitOnObject_closure, P._awaitOnObject_closure0, P._wrapJsFunctionForAsync_closure, P._SyncBroadcastStreamController__sendData_closure, P._SyncBroadcastStreamController__sendDone_closure, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__asyncComplete_closure, P._Future__chainFuture_closure, P._Future__asyncCompleteError_closure, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P.Stream_length_closure, P.Stream_length_closure0, P.Stream_first_closure, P.Stream_first_closure0, P._StreamController__subscribe_closure, P._StreamController__recordCancel_complete, P._BufferingStreamSubscription__sendDone_sendDone, P._PendingEvents_schedule_closure, P._cancelAndValue_closure, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P._RootZone_bindUnaryCallbackGuarded_closure, P.LinkedHashMap_LinkedHashMap$from_closure, P.MapBase_mapToString_closure, P._JsonStringifier_writeMap_closure, P._symbolMapToStringMap_closure, P.NoSuchMethodError_toString_closure, P.DateTime_parse_parseIntOrZero, P.DateTime_parse_parseMilliAndMicroseconds, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, W.Element_Element$html_closure, W.Entry_remove_closure, W.Entry_remove_closure0, W.HttpRequest_getString_closure, W.HttpRequest_request_closure, W.MidiInputMap_keys_closure, W.MidiOutputMap_keys_closure, W.Navigator_getUserMedia_closure, W.Navigator_getUserMedia_closure0, W.RtcStatsReport_keys_closure, W.Storage_keys_closure, W.Window_animationFrame_closure, W._BeforeUnloadEventStreamProvider_forTarget_closure, W._DataAttributeMap_forEach_closure, W._DataAttributeMap_keys_closure, W._MultiElementCssClassSet__MultiElementCssClassSet_closure, W._MultiElementCssClassSet_readClasses_closure, W._MultiElementCssClassSet_modify_closure, W._MultiElementCssClassSet_toggle_closure, W._MultiElementCssClassSet_remove_closure, W._EventStreamSubscription_closure, W._StreamPool_add_closure, W.NodeValidatorBuilder_allowsElement_closure, W.NodeValidatorBuilder_allowsAttribute_closure, W._SimpleNodeValidator_closure, W._SimpleNodeValidator_closure0, W._TemplatingNodeValidator_closure, W._ValidatingTreeSanitizer_sanitizeTree_walk, P._StructuredClone_walk_closure, P._StructuredClone_walk_closure0, P._AcceptStructuredClone_walk_closure, P.convertDartToNative_Dictionary_closure, P.CssClassSetImpl_add_closure, P.CssClassSetImpl_removeWhere_closure, P.CssClassSetImpl_clear_closure, P.FilteredElementList__iterable_closure, P.FilteredElementList__iterable_closure0, P.FilteredElementList_removeRange_closure, P._convertToJS_closure, P._convertToJS_closure0, P._wrapToDart_closure, P._wrapToDart_closure0, P._wrapToDart_closure1, P.promiseToFuture_closure, P.promiseToFuture_closure0, P.AudioContext_decodeAudioData_closure, P.AudioContext_decodeAudioData_closure0, P.AudioParamMap_keys_closure, Z.DrumKit__render_closure, Z.DrumKit__render_closure0, Z.DrumKit__render_closure1, Z.DrumKit__render_closure2, Z.DrumPad_closure, Z.DrumPad_closure0, Z.DrumPad_closure1, Z.DrumPad_closure2, Z.Instrument_insert_closure, Z.Instrument_unload_closure, Z.Piano__render_closure, Z.Piano__render_closure0, Z.Piano__slideKeyboard_closure, Z.MiniPiano_slide_closure, Z.PianoKey_closure, Z.PianoKey_closure0, Z.PianoKey_closure1, Z.PianoKey_closure2, U.SynthChain_playNote_closure, U.SynthChain_pitchBend_closure, U.SynthChain_schedulePitchBend_closure, U.SynthChain_releaseNote_closure, U.SynthChain_destroy_closure, E.PlayClock_stopAll_closure, E.PlayClock_setTime_closure, E.PlayClock_setTempo_closure, E.PlayClock_setTimeSignature_closure, E.PlayClock_startMetronome_closure, E.PlayClock_startMetronome_closure0, E.PlayClock_startMetronome__closure, X.SynthEvent_releaseNote_closure, X.SynthEvent_scheduleNote_closure, B.SynthSampleNode_schedulePitchBend_closure, L.Synthesizer_loadPatch_closure, L.Synthesizer__play_closure, L.Synthesizer__schedule_closure, L.Synthesizer_pitchBend_closure, L.Synthesizer_loadAudioBuffer_closure, L.Synthesizer_loadAudioBuffer_closure0, L.Synthesizer_loadCustomSound_closure, L.Synthesizer_loadCustomSound_closure0, Y.UserAccounts_login_closure, Y.UserAccounts_login_closure0, Y.UserAccounts_login_closure1, Y.UserAccounts_login_closure2, Y.PythonCell_closure, Y.PythonCell_closure0, Y.PythonCell_closure1, Y.PythonCell_closure2, Y.PythonCell_closure3, Y.PythonCell_closure4, Y.PythonCell_closure5, Y.PythonCell_closure6, Y.PythonCell_closure7, Y.PythonCell_closure8, Y.PythonCell_closure9, Y.PythonCell_closure10, Y.PythonCell_closure11, Y.PythonCell_closure12, Y.PythonCell_closure13, Y.PythonCell_closure14, Y.PythonCell_closure15, Y.PythonCell_closure16, Y.PythonCell_closure17, Y.PythonCell_closure18, Y.PythonCell_closure19, Y.PythonCell_closure20, Y.PythonCell_onPythonDone_closure, Y.PythonCell__setInstrument_closure, Y.PythonCell__setInstrument_closure0, Y.PythonCell__shareTrack_closure, Y.PythonCell__shareTrack_closure0, Y.PythonCell__doContextMenu_closure, Y.toggleContextMenu_closure, Y.Datastore_loginWithGoogle_closure, Y.Datastore_addUpdateCallback_closure, Y.Datastore_addRemovedCallback_closure, Y.Datastore_addAddedCallback_closure, Y.Project_closure, Y.Project__closure, Y.Project_playAll_closure, Y.Project_pauseAll_closure, Y.Project__registerEvents_closure, Y.Project__registerEvents_closure0, Y.Project__registerEvents_closure1, Y.Project__registerEvents_closure2, Y.Project__registerEvents_closure3, Y.Project__registerEvents_closure4, Y.Project__registerEvents_closure5, Y.Project__registerEvents_closure6, Y.Project__registerEvents_closure7, Y.Project__registerEvents_closure8, Y.Project__registerEvents_closure9, Y.Project__registerEvents_closure10, Y.EffectsChain_closure, Y.EffectsChain_closure0, Y.EffectsChain_closure1, Y.EffectsChain_closure2, Y.EffectsChain_closure3, Y.EffectsChain_closure4, Y.EffectsChain_closure5, Y.EffectsChain_playAudio_closure, Y.EffectsChain_playSlice_closure, Y.EffectsChain_loadSoundEffects_closure, Y.EffectsChain_loadSoundEffects_closure0, Y.RecordingStudio_show_closure, Y.RecordingStudio_loadUserRecordings_closure, Y.RecordingStudio_uploadAudioFile_closure, Y.RecordingStudio__registerEvents_closure, Y.RecordingStudio__registerEvents_closure0, Y.RecordingStudio__registerEvents_closure1, Y.RecordingStudio__registerEvents_closure2, Y.RecordingStudio__registerEvents_closure3, Y.RecordingStudio__registerEvents_closure4, Y.RecordingStudio__registerEvents_closure5, Y.RecordingStudio__registerEvents_closure6, Y.RecordingStudio__registerEvents_closure7, Y.RecordingStudio__registerEvents_closure8, Y.RecordingStudio__registerEvents_closure9, Y.RecordingStudio__registerEvents_closure10, Y.RecordingStudio__registerEvents_closure11, Y.RecordingStudio__registerEvents_closure12, Y.RecordingStudio__registerRowEvents_closure, Y.RecordingStudio__registerRowEvents_closure0, Y.RecordingStudio__registerRowEvents_closure1, Y.RecordingStudio__registerRowEvents_closure2, Y.RecordingStudio__playPreview_closure, Y.RecordingStudio__playPreview_closure0, Y.RecordingStudio__playPreview_closure1, Y.WaveformTrace__buildClipLine_closure, Y.WaveformTrace__buildClipLine_closure0, Y.WaveformTrace__buildClipLine_closure1, Y.Timeline_setInstrument_closure, Y.Timeline_insert_closure, Y.Timeline__render_closure, Y.Timeline__render_closure0, Y.Timeline__registerTouchEvents_closure, Y.Timeline__registerTouchEvents_closure0, Y.Timeline__registerTouchEvents_closure1, Y.Timeline__registerTouchEvents_closure2, Y.Timeline__renderNote_closure, Y.Timeline__renderNote_closure0, Y.Timeline__renderNote_closure1, Y.Timeline__renderNote_closure2, V.EffectsDial_buildUI_closure, V.EffectsDial_buildUI_closure0, V.EffectsDial_buildUI_closure1, E.Dialog_message_closure, E.Dialog_closeModal_closure, E.Dialog__showModal_closure, E.Dialog__showModal_closure0, E.Dialog__showModal_closure1, E.Dialog__showModal_closure2, D.DropdownMenu_armMenu_closure, D.DropdownMenu_armMenu_closure0, D.DropdownMenu__toggleMenu_closure, R.MixSlider_buildUI_closure, R.MixSlider_buildUI_closure0, R.MixSlider_buildUI_closure1, O.TrackLibrary_show_closure, O.TrackLibrary_show__closure, O.TrackLibrary_show__closure0, O.TrackLibrary_show___closure, O.TrackLibrary_show_closure0, O.TrackLibrary__buildTrack_closure, O.TrackLibrary__buildTrack_closure0, O.TrackLibrary__buildTrack_closure1, O.TrackLibrary__buildTrack_closure2, O.TrackLibrary__buildTrack_closure3, O.TrackLibrary__buildTrack_closure4, O.TrackLibrary__playTrackPreview_closure, O.TrackLibrary__playTrackPreview_closure0, O.TrackLibrary__playTrackPreview_closure1, F.main_closure, F.main__closure, F.main__closure0, F.main_closure0, F.main_closure1, F.main_closure2, F.main_closure3, F.main_closure4, F.main_closure5, F.main_closure6, F.main_closure7, F.main_closure8, F._addMixTrack_closure, F._addMixTrack_closure0, F._addMixTrack_closure1, F._addMixTrack_closure2, F._addMixTrack_closure3, F._addMixTrack_closure4, F._addMixTrack_closure5, F._addMixTrack_closure6, F._addMixTrack_closure7, F._addMixTrack__closure, F._addCellMenu_closure, F._addCellMenu_closure0, F._addCellMenu_closure1, F._updateCellMenu_closure, B.UserList_closure, B.UserList_closure0, B.UserList_closure1, B.UserList__buildUserList_closure]);
+    _inheritMany(H.Closure, [H.Primitives_functionNoSuchMethod_closure, H.unwrapException_saveStackTrace, H.TearOffClosure, H.JsLinkedHashMap_values_closure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P._TimerImpl$periodic_closure, P._awaitOnObject_closure, P._awaitOnObject_closure0, P._wrapJsFunctionForAsync_closure, P._SyncBroadcastStreamController__sendData_closure, P._SyncBroadcastStreamController__sendDone_closure, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__asyncComplete_closure, P._Future__chainFuture_closure, P._Future__asyncCompleteError_closure, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P.Stream_length_closure, P.Stream_length_closure0, P.Stream_first_closure, P.Stream_first_closure0, P._StreamController__subscribe_closure, P._StreamController__recordCancel_complete, P._BufferingStreamSubscription__sendDone_sendDone, P._PendingEvents_schedule_closure, P._cancelAndValue_closure, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P._RootZone_bindUnaryCallbackGuarded_closure, P.LinkedHashMap_LinkedHashMap$from_closure, P.MapBase_mapToString_closure, P._JsonStringifier_writeMap_closure, P._symbolMapToStringMap_closure, P.NoSuchMethodError_toString_closure, P.DateTime_parse_parseIntOrZero, P.DateTime_parse_parseMilliAndMicroseconds, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, W.Element_Element$html_closure, W.Entry_remove_closure, W.Entry_remove_closure0, W.HttpRequest_getString_closure, W.HttpRequest_request_closure, W.MidiInputMap_keys_closure, W.MidiOutputMap_keys_closure, W.Navigator_getUserMedia_closure, W.Navigator_getUserMedia_closure0, W.RtcStatsReport_keys_closure, W.Storage_keys_closure, W.Window_animationFrame_closure, W._BeforeUnloadEventStreamProvider_forTarget_closure, W._DataAttributeMap_forEach_closure, W._DataAttributeMap_keys_closure, W._MultiElementCssClassSet__MultiElementCssClassSet_closure, W._MultiElementCssClassSet_readClasses_closure, W._MultiElementCssClassSet_modify_closure, W._MultiElementCssClassSet_toggle_closure, W._MultiElementCssClassSet_remove_closure, W._EventStreamSubscription_closure, W._StreamPool_add_closure, W.NodeValidatorBuilder_allowsElement_closure, W.NodeValidatorBuilder_allowsAttribute_closure, W._SimpleNodeValidator_closure, W._SimpleNodeValidator_closure0, W._TemplatingNodeValidator_closure, W._ValidatingTreeSanitizer_sanitizeTree_walk, P._StructuredClone_walk_closure, P._StructuredClone_walk_closure0, P._AcceptStructuredClone_walk_closure, P.convertDartToNative_Dictionary_closure, P.CssClassSetImpl_add_closure, P.CssClassSetImpl_removeWhere_closure, P.CssClassSetImpl_clear_closure, P.FilteredElementList__iterable_closure, P.FilteredElementList__iterable_closure0, P.FilteredElementList_removeRange_closure, P._convertToJS_closure, P._convertToJS_closure0, P._wrapToDart_closure, P._wrapToDart_closure0, P._wrapToDart_closure1, P.promiseToFuture_closure, P.promiseToFuture_closure0, P.AudioContext_decodeAudioData_closure, P.AudioContext_decodeAudioData_closure0, P.AudioParamMap_keys_closure, Y.BassFret_closure, Y.BassFret_closure0, Y.BassFret_closure1, Y.BassFret_closure2, F.DrumKit_render_closure, F.DrumKit_render_closure0, F.DrumKit_render_closure1, F.DrumKit_render_closure2, N.DrumPad_closure, N.DrumPad_closure0, N.DrumPad_closure1, N.DrumPad_closure2, F.GFret_closure, F.GFret_closure0, F.GFret_closure1, F.GFret_closure2, S.Instrument_unload_closure, B.Piano_render_closure, B.Piano_render_closure0, B.Piano__slideKeyboard_closure, B.MiniPiano_slide_closure, B.PianoKey_closure, B.PianoKey_closure0, B.PianoKey_closure1, B.PianoKey_closure2, D.Sequencer_render_closure, D.SequencerRow_closure, D.SequencerRow_closure0, D.SequencerRow_closure1, D.SequencerRow_mute_closure, D.SequencerRow_unmute_closure, D.SequencerDrumButton_closure, D.SequencerButton_closure, D.SequencerButton_closure0, D.SequencerButton_closure1, U.SynthChain_playNote_closure, U.SynthChain_pitchBend_closure, U.SynthChain_schedulePitchBend_closure, U.SynthChain_releaseNote_closure, U.SynthChain_destroy_closure, E.PlayClock_stopAll_closure, E.PlayClock_setTime_closure, E.PlayClock_setTempo_closure, E.PlayClock_setTimeSignature_closure, E.PlayClock_startMetronome_closure, E.PlayClock_startMetronome_closure0, E.PlayClock_startMetronome__closure, X.SynthEvent_releaseNote_closure, X.SynthEvent_scheduleNote_closure, B.SynthSampleNode_schedulePitchBend_closure, L.Synthesizer_loadPatch_closure, L.Synthesizer__play_closure, L.Synthesizer__schedule_closure, L.Synthesizer_pitchBend_closure, L.Synthesizer_loadAudioBuffer_closure, L.Synthesizer_loadAudioBuffer_closure0, L.Synthesizer_loadCustomSound_closure, L.Synthesizer_loadCustomSound_closure0, Y.UserAccounts_login_closure, Y.UserAccounts_login_closure0, Y.UserAccounts_login_closure1, Y.UserAccounts_login_closure2, Y.PythonCell_closure, Y.PythonCell_closure0, Y.PythonCell_closure1, Y.PythonCell_closure2, Y.PythonCell_closure3, Y.PythonCell_closure4, Y.PythonCell_closure5, Y.PythonCell_closure6, Y.PythonCell_closure7, Y.PythonCell_closure8, Y.PythonCell_closure9, Y.PythonCell_closure10, Y.PythonCell_closure11, Y.PythonCell_closure12, Y.PythonCell_closure13, Y.PythonCell_closure14, Y.PythonCell_closure15, Y.PythonCell_closure16, Y.PythonCell_closure17, Y.PythonCell_closure18, Y.PythonCell_closure19, Y.PythonCell_closure20, Y.PythonCell_onPythonDone_closure, Y.PythonCell__setInstrument_closure, Y.PythonCell__setInstrument_closure0, Y.PythonCell__shareTrack_closure, Y.PythonCell__shareTrack_closure0, Y.PythonCell__doContextMenu_closure, Y.toggleContextMenu_closure, Y.Datastore_loginWithGoogle_closure, Y.Datastore_addUpdateCallback_closure, Y.Datastore_addRemovedCallback_closure, Y.Datastore_addAddedCallback_closure, Y.Project_closure, Y.Project__closure, Y.Project_playAll_closure, Y.Project_pauseAll_closure, Y.Project__registerEvents_closure, Y.Project__registerEvents_closure0, Y.Project__registerEvents_closure1, Y.Project__registerEvents_closure2, Y.Project__registerEvents_closure3, Y.Project__registerEvents_closure4, Y.Project__registerEvents_closure5, Y.Project__registerEvents_closure6, Y.Project__registerEvents_closure7, Y.Project__registerEvents_closure8, Y.Project__registerEvents_closure9, Y.Project__registerEvents_closure10, Y.EffectsChain_closure, Y.EffectsChain_closure0, Y.EffectsChain_closure1, Y.EffectsChain_closure2, Y.EffectsChain_closure3, Y.EffectsChain_closure4, Y.EffectsChain_closure5, Y.EffectsChain_playAudio_closure, Y.EffectsChain_playSlice_closure, Y.EffectsChain_loadSoundEffects_closure, Y.EffectsChain_loadSoundEffects_closure0, Y.RecordingStudio_show_closure, Y.RecordingStudio_loadUserRecordings_closure, Y.RecordingStudio_uploadAudioFile_closure, Y.RecordingStudio__registerEvents_closure, Y.RecordingStudio__registerEvents_closure0, Y.RecordingStudio__registerEvents_closure1, Y.RecordingStudio__registerEvents_closure2, Y.RecordingStudio__registerEvents_closure3, Y.RecordingStudio__registerEvents_closure4, Y.RecordingStudio__registerEvents_closure5, Y.RecordingStudio__registerEvents_closure6, Y.RecordingStudio__registerEvents_closure7, Y.RecordingStudio__registerEvents_closure8, Y.RecordingStudio__registerEvents_closure9, Y.RecordingStudio__registerEvents_closure10, Y.RecordingStudio__registerEvents_closure11, Y.RecordingStudio__registerEvents_closure12, Y.RecordingStudio__registerRowEvents_closure, Y.RecordingStudio__registerRowEvents_closure0, Y.RecordingStudio__registerRowEvents_closure1, Y.RecordingStudio__registerRowEvents_closure2, Y.RecordingStudio__playPreview_closure, Y.RecordingStudio__playPreview_closure0, Y.RecordingStudio__playPreview_closure1, Y.WaveformTrace__buildClipLine_closure, Y.WaveformTrace__buildClipLine_closure0, Y.WaveformTrace__buildClipLine_closure1, Y.Timeline_setInstrument_closure, Y.Timeline_insert_closure, Y.Timeline__render_closure, Y.Timeline__render_closure0, Y.Timeline__registerTouchEvents_closure, Y.Timeline__registerTouchEvents_closure0, Y.Timeline__registerTouchEvents_closure1, Y.Timeline__registerTouchEvents_closure2, Y.Timeline__renderNote_closure, Y.Timeline__renderNote_closure0, Y.Timeline__renderNote_closure1, Y.Timeline__renderNote_closure2, V.EffectsDial_buildUI_closure, V.EffectsDial_buildUI_closure0, V.EffectsDial_buildUI_closure1, V.ToggleButton_buildUI_closure, V.ToggleButton_buildUI_closure0, V.ToggleButton_buildUI_closure1, V.ToggleButton_buildUI_closure2, E.Dialog_message_closure, E.Dialog_closeModal_closure, E.Dialog__showModal_closure, E.Dialog__showModal_closure0, E.Dialog__showModal_closure1, E.Dialog__showModal_closure2, D.DropdownMenu_armMenu_closure, D.DropdownMenu_armMenu_closure0, D.DropdownMenu__toggleMenu_closure, R.MixSlider_buildUI_closure, R.MixSlider_buildUI_closure0, R.MixSlider_buildUI_closure1, O.TrackLibrary_show_closure, O.TrackLibrary_show__closure, O.TrackLibrary_show__closure0, O.TrackLibrary_show___closure, O.TrackLibrary_show_closure0, O.TrackLibrary__buildTrack_closure, O.TrackLibrary__buildTrack_closure0, O.TrackLibrary__buildTrack_closure1, O.TrackLibrary__buildTrack_closure2, O.TrackLibrary__buildTrack_closure3, O.TrackLibrary__buildTrack_closure4, O.TrackLibrary__playTrackPreview_closure, O.TrackLibrary__playTrackPreview_closure0, O.TrackLibrary__playTrackPreview_closure1, F.main_closure, F.main__closure, F.main__closure0, F.main_closure0, F.main_closure1, F.main_closure2, F.main_closure3, F.main_closure4, F.main_closure5, F.main_closure6, F.main_closure7, F.main_closure8, F._addMixTrack_closure, F._addMixTrack_closure0, F._addMixTrack_closure1, F._addMixTrack_closure2, F._addMixTrack_closure3, F._addMixTrack_closure4, F._addMixTrack_closure5, F._addMixTrack_closure6, F._addMixTrack_closure7, F._addMixTrack__closure, F._addCellMenu_closure, F._addCellMenu_closure0, F._addCellMenu_closure1, F._updateCellMenu_closure, B.UserList_closure, B.UserList_closure0, B.UserList_closure1, B.UserList__buildUserList_closure]);
     _inheritMany(P.Error, [H.NullError, H.JsNoSuchMethodError, H.UnknownJsTypeError, H.RuntimeError, P.AssertionError, H._Error, P.JsonUnsupportedObjectError, P.NullThrownError, P.ArgumentError, P.NoSuchMethodError, P.UnsupportedError, P.UnimplementedError, P.StateError, P.ConcurrentModificationError, P.CyclicInitializationError]);
     _inheritMany(H.TearOffClosure, [H.StaticClosure, H.BoundClosure]);
     _inherit(H._AssertionError, P.AssertionError);
@@ -28440,7 +29559,7 @@
     _inherit(P.AudioParamMap, P._AudioParamMap_Interceptor_MapMixin);
     _inherit(P._SqlResultSetRowList_Interceptor_ListMixin_ImmutableListMixin, P._SqlResultSetRowList_Interceptor_ListMixin);
     _inherit(P.SqlResultSetRowList, P._SqlResultSetRowList_Interceptor_ListMixin_ImmutableListMixin);
-    _inheritMany(Z.Instrument, [Z.DrumKit, Z.Drums, Z.Piano]);
+    _inheritMany(S.Instrument, [Y.BassGuitar, F.DrumKit, N.Drums, F.Guitar, B.Piano, D.Sequencer]);
     _inheritMany(K.Effect, [K.BiquadFilter, K.PitchBendEffect, K.PanEffect, K.GainEffect]);
     _inheritMany(B.SynthNode, [B.ADSRNode, B.FMNode, B.LFONode, B.SynthSampleNode, B.SynthDelayNode, B.SynthCompressorNode, B.FilterNode]);
     _inherit(B.SchedulerSynth, L.Synthesizer);
@@ -28527,12 +29646,12 @@
     mangledNames: {},
     getTypeFromName: getGlobalFromName,
     metadata: [],
-    types: ["Null(MouseEvent)", "Null()", "~()", "Null(Event)", "Null(@,@)", "Future<Null>(MouseEvent)", "Null(@)", "@(@)", "bool(String)", "~(KeyboardEvent)", "~(String,String)", "~(String)", "Null(Element)", "~(@)", "~(Object[StackTrace])", "~(ClockSubscriber)", "~(String,@)", "~(Map<@,@>)", "Future<Null>(ProgressEvent)", "~(~())", "~(Event)", "~(SynthNode)", "~(ProgressEvent)", "~(num)", "List<Function>()", "Null(PythonCell)", "Future<Null>(@)", "int(String)", "Null(String,String)", "bool(bool,CssClassSetImpl)", "bool(NodeValidator)", "~(Object)", "bool(Element,String,String,_Html5NodeValidator)", "bool(Node)", "String(int)", "Null(EffectsDial,num)", "~(Metronome)", "Null(User)", "Null(MixSlider,num)", "Null(DomException)", "Null(SynthNode)", "Null(Symbol0,@)", "~(Set<String>)", "bool(Set<String>)", "Element(Node)", "JsFunction(@)", "JsArray<@>(@)", "Future<List<@>>()", "Null(AudioBuffer)", "@(String)", "Null(@[StackTrace])", "@(@,String)", "Null(~())", "@(@,@)", "~(Element)", "~(PianoKey)", "~(Node,Node)", "String(String)", "Object(@)", "@(Event)", "Null(Timer)", "num(num)", "~(SynthEvent)", "@(CssClassSetImpl)", "Future<@>()", "~(CssClassSetImpl)", "bool(Event)", "CssClassSet(Element)", "Null(MIDIEvent)", "Null(KeyboardEvent)", "String(HttpRequest)", "Null(NoteEvent)", "Null(ProgressEvent)", "~(String,String,String,String)", "Null(BeforeUnloadEvent)", "Null(@,StackTrace)", "Null(MediaStream)", "Null(AudioProcessingEvent)", "~(Recording)", "Future<Null>(Event)", "Node(SvgElement)", "Null(String,@)", "Null(num)", "Null(int)", "Null(int,@)", "int(User,User)", "Null(NavigatorUserMediaError)", "JsObject(@)", "_Future<@>(@)"],
+    types: ["Null(MouseEvent)", "Null()", "~()", "Null(@,@)", "Null(Event)", "~(KeyboardEvent)", "Future<Null>(MouseEvent)", "Null(@)", "@(@)", "bool(String)", "~(String,String)", "~(String)", "Null(Element)", "~(@)", "~(Object[StackTrace])", "~(String,@)", "~(Map<@,@>)", "~(ClockSubscriber)", "Future<Null>(ProgressEvent)", "~(~())", "~(SynthNode)", "~(ProgressEvent)", "~(num)", "List<Function>()", "Null(PythonCell)", "Future<Null>(@)", "Null(MixSlider,num)", "Null(String,String)", "bool(bool,CssClassSetImpl)", "Null(SynthNode)", "bool(NodeValidator)", "~(Set<String>)", "~(Metronome)", "~(Object)", "Null(SequencerButton)", "Null(Symbol0,@)", "int(String)", "String(int)", "bool(Element,String,String,_Html5NodeValidator)", "bool(Node)", "Null(DomException)", "~(Event)", "Null(User)", "Null(EffectsDial,num)", "JsObject(@)", "CssClassSet(Element)", "JsArray<@>(@)", "Null(NavigatorUserMediaError)", "Null(AudioBuffer)", "~(CssClassSetImpl)", "@(String)", "Null(@[StackTrace])", "_Future<@>(@)", "~(Element)", "~(PianoKey)", "Null(SequencerRow)", "@(CssClassSetImpl)", "@(Event)", "@(@,String)", "Null(@,StackTrace)", "Object(@)", "Null(Timer)", "num(num)", "~(SynthEvent)", "Null(num)", "Null(String,@)", "Future<@>()", "Null(int,@)", "String(String)", "Null(MIDIEvent)", "Null(KeyboardEvent)", "~(Node,Node)", "Null(NoteEvent)", "String(HttpRequest)", "~(String,String,String,String)", "Null(BeforeUnloadEvent)", "Null(ProgressEvent)", "Null(~())", "Null(AudioProcessingEvent)", "~(Recording)", "Future<Null>(Event)", "@(@,@)", "Node(SvgElement)", "bool(Set<String>)", "Future<List<@>>()", "Null(int)", "Element(Node)", "int(User,User)", "Null(MediaStream)", "bool(Event)", "JsFunction(@)"],
     interceptorsByTag: null,
     leafTags: null,
     arrayRti: typeof Symbol == "function" && typeof Symbol() == "symbol" ? Symbol("$ti") : "$ti"
   };
-  H._Universe_addRules(init.typeUniverse, JSON.parse('{"JavaScriptFunction":"JavaScriptObject","PlainJavaScriptObject":"JavaScriptObject","UnknownJavaScriptObject":"JavaScriptObject","AnimationEvent":"Event","AudioDestinationNode":"AudioNode","ConstantSourceNode":"AudioScheduledSourceNode","AnimateElement":"SvgElement","AnimationElement":"SvgElement","AElement":"GraphicsElement","TextPathElement":"TextContentElement","TSpanElement":"TextPositioningElement","EllipseElement":"GeometryElement","AbsoluteOrientationSensor":"EventTarget","OrientationSensor":"EventTarget","Sensor":"EventTarget","_ResourceProgressEvent":"ProgressEvent","BRElement":"HtmlElement","_DocumentType":"Node","XmlDocument":"Document","PointerEvent":"MouseEvent","VttCue":"TextTrackCue","VideoElement":"MediaElement","FocusEvent":"UIEvent","AbortPaymentEvent":"ExtendableEvent","DedicatedWorkerGlobalScope":"WorkerGlobalScope","CDataSection":"CharacterData","Text":"CharacterData","MidiInput":"MidiPort","HttpRequestUpload":"HttpRequestEventTarget","HtmlFormControlsCollection":"HtmlCollection","CssCharsetRule":"CssRule","CssStyleSheet":"StyleSheet","CanvasCaptureMediaStreamTrack":"MediaStreamTrack","BackgroundFetchClickEvent":"BackgroundFetchEvent","NativeFloat64List":"NativeTypedArrayOfDouble","NativeByteData":"NativeTypedData","JSBool":{"bool":[]},"JSNull":{"Null":[]},"JavaScriptObject":{"JSObject":[],"Function":[]},"JSArray":{"List":["1"],"EfficientLengthIterable":["1"],"JSIndexable":["@"],"Iterable":["1"]},"JSUnmodifiableArray":{"JSArray":["1"],"List":["1"],"EfficientLengthIterable":["1"],"JSIndexable":["@"],"Iterable":["1"]},"ArrayIterator":{"Iterator":["1"]},"JSNumber":{"double":[],"num":[]},"JSInt":{"int":[],"double":[],"num":[]},"JSDouble":{"double":[],"num":[]},"JSString":{"String":[],"JSIndexable":["@"],"Pattern":[]},"CodeUnits":{"UnmodifiableListMixin":["int"],"ListMixin":["int"],"List":["int"],"EfficientLengthIterable":["int"],"Iterable":["int"],"ListMixin.E":"int","UnmodifiableListMixin.E":"int"},"EfficientLengthIterable":{"Iterable":["1"]},"ListIterable":{"EfficientLengthIterable":["1"],"Iterable":["1"]},"ListIterator":{"Iterator":["1"]},"MappedIterable":{"Iterable":["2"],"Iterable.E":"2"},"EfficientLengthMappedIterable":{"MappedIterable":["1","2"],"EfficientLengthIterable":["2"],"Iterable":["2"],"Iterable.E":"2"},"MappedIterator":{"Iterator":["2"]},"MappedListIterable":{"ListIterable":["2"],"EfficientLengthIterable":["2"],"Iterable":["2"],"ListIterable.E":"2","Iterable.E":"2"},"WhereIterable":{"Iterable":["1"],"Iterable.E":"1"},"WhereIterator":{"Iterator":["1"]},"TakeIterable":{"Iterable":["1"],"Iterable.E":"1"},"EfficientLengthTakeIterable":{"TakeIterable":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"Iterable.E":"1"},"TakeIterator":{"Iterator":["1"]},"SkipIterable":{"Iterable":["1"],"Iterable.E":"1"},"EfficientLengthSkipIterable":{"SkipIterable":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"Iterable.E":"1"},"SkipIterator":{"Iterator":["1"]},"UnmodifiableListBase":{"UnmodifiableListMixin":["1"],"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"Symbol":{"Symbol0":[]},"ConstantMapView":{"UnmodifiableMapView":["1","2"],"_UnmodifiableMapView_MapView__UnmodifiableMapMixin":["1","2"],"MapView":["1","2"],"_UnmodifiableMapMixin":["1","2"],"Map":["1","2"]},"ConstantMap":{"Map":["1","2"]},"ConstantStringMap":{"ConstantMap":["1","2"],"Map":["1","2"]},"_ConstantMapKeyIterable":{"Iterable":["1"],"Iterable.E":"1"},"JSInvocationMirror":{"Invocation":[]},"NullError":{"Error":[]},"JsNoSuchMethodError":{"Error":[]},"UnknownJsTypeError":{"Error":[]},"_StackTrace":{"StackTrace":[]},"Closure":{"Function":[]},"TearOffClosure":{"Function":[]},"StaticClosure":{"Function":[]},"BoundClosure":{"Function":[]},"RuntimeError":{"Error":[]},"_AssertionError":{"Error":[]},"JsLinkedHashMap":{"LinkedHashMap":["1","2"],"MapMixin":["1","2"],"Map":["1","2"],"MapMixin.K":"1","MapMixin.V":"2"},"LinkedHashMapKeyIterable":{"EfficientLengthIterable":["1"],"Iterable":["1"],"Iterable.E":"1"},"LinkedHashMapKeyIterator":{"Iterator":["1"]},"JSSyntaxRegExp":{"RegExp":[],"Pattern":[]},"NativeByteBuffer":{"ByteBuffer":[]},"NativeTypedData":{"TypedData":[]},"NativeTypedArray":{"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"TypedData":[],"JSIndexable":["@"]},"NativeTypedArrayOfDouble":{"ListMixin":["double"],"JavaScriptIndexingBehavior":["@"],"List":["double"],"NativeTypedData":[],"EfficientLengthIterable":["double"],"FixedLengthListMixin":["double"],"TypedData":[],"JSIndexable":["@"],"Iterable":["double"],"ListMixin.E":"double","FixedLengthListMixin.E":"double"},"NativeTypedArrayOfInt":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"]},"NativeFloat32List":{"Float32List":[],"ListMixin":["double"],"JavaScriptIndexingBehavior":["@"],"List":["double"],"NativeTypedData":[],"EfficientLengthIterable":["double"],"FixedLengthListMixin":["double"],"TypedData":[],"JSIndexable":["@"],"Iterable":["double"],"ListMixin.E":"double","FixedLengthListMixin.E":"double"},"NativeInt16List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeInt32List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeInt8List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint16List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint32List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint8ClampedList":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint8List":{"Uint8List":[],"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"_Error":{"Error":[]},"_TypeError":{"Error":[]},"_TimerImpl":{"Timer":[]},"_BroadcastStream":{"_ControllerStream":["1"],"_StreamImpl":["1"],"Stream":["1"]},"_BroadcastSubscription":{"_ControllerSubscription":["1"],"_BufferingStreamSubscription":["1"],"_EventDispatch":["1"],"StreamSubscription":["1"]},"_BroadcastStreamController":{"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_SyncBroadcastStreamController":{"_BroadcastStreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_AsyncBroadcastStreamController":{"_BroadcastStreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_AsyncCompleter":{"_Completer":["1"]},"_SyncCompleter":{"_Completer":["1"]},"_Future":{"Future":["1"]},"_StreamController":{"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_AsyncStreamController":{"_AsyncStreamControllerDispatch":["1"],"_StreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_SyncStreamController":{"_SyncStreamControllerDispatch":["1"],"_StreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_ControllerStream":{"_StreamImpl":["1"],"Stream":["1"]},"_ControllerSubscription":{"_BufferingStreamSubscription":["1"],"_EventDispatch":["1"],"StreamSubscription":["1"]},"_BufferingStreamSubscription":{"_EventDispatch":["1"],"StreamSubscription":["1"]},"_StreamImpl":{"Stream":["1"]},"_DelayedData":{"_DelayedEvent":["1"]},"_DelayedDone":{"_DelayedEvent":["@"]},"_StreamImplEvents":{"_PendingEvents":["1"]},"_DoneStreamSubscription":{"StreamSubscription":["1"]},"AsyncError":{"Error":[]},"_Zone":{"Zone":[]},"_RootZone":{"Zone":[]},"_LinkedHashSet":{"_SetBase":["1"],"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_LinkedHashSetIterator":{"Iterator":["1"]},"ListBase":{"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"MapBase":{"MapMixin":["1","2"],"Map":["1","2"]},"MapMixin":{"Map":["1","2"]},"MapView":{"Map":["1","2"]},"UnmodifiableMapView":{"_UnmodifiableMapView_MapView__UnmodifiableMapMixin":["1","2"],"MapView":["1","2"],"_UnmodifiableMapMixin":["1","2"],"Map":["1","2"]},"ListQueue":{"ListIterable":["1"],"Queue":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"ListIterable.E":"1","Iterable.E":"1"},"_ListQueueIterator":{"Iterator":["1"]},"SetBase":{"SetMixin":["1"],"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_SetBase":{"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_JsonMap":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"_JsonMapKeyIterable":{"ListIterable":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"ListIterable.E":"String","Iterable.E":"String"},"Base64Codec":{"Codec":["List<int>","String"],"Codec.S":"List<int>"},"Base64Encoder":{"Converter":["List<int>","String"]},"Base64Decoder":{"Converter":["String","List<int>"]},"JsonUnsupportedObjectError":{"Error":[]},"JsonCyclicError":{"Error":[]},"JsonCodec":{"Codec":["Object","String"],"Codec.S":"Object"},"JsonEncoder":{"Converter":["Object","String"]},"JsonDecoder":{"Converter":["String","Object"]},"double":{"num":[]},"AssertionError":{"Error":[]},"NullThrownError":{"Error":[]},"ArgumentError":{"Error":[]},"RangeError":{"Error":[]},"IndexError":{"Error":[]},"NoSuchMethodError":{"Error":[]},"UnsupportedError":{"Error":[]},"UnimplementedError":{"Error":[]},"StateError":{"Error":[]},"ConcurrentModificationError":{"Error":[]},"OutOfMemoryError":{"Error":[]},"StackOverflowError":{"Error":[]},"CyclicInitializationError":{"Error":[]},"_Exception":{"Exception":[]},"FormatException":{"Exception":[]},"int":{"num":[]},"List":{"EfficientLengthIterable":["1"],"Iterable":["1"]},"Set":{"EfficientLengthIterable":["1"],"Iterable":["1"]},"_StringStackTrace":{"StackTrace":[]},"String":{"Pattern":[]},"StringBuffer":{"StringSink":[]},"HtmlElement":{"Element":[],"Node":[],"EventTarget":[]},"AnchorElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"Animation":{"EventTarget":[]},"AreaElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"AudioElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"BackgroundFetchEvent":{"Event":[]},"BackgroundFetchRegistration":{"EventTarget":[]},"BaseElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"BeforeUnloadEvent":{"Event":[]},"BlobEvent":{"Event":[]},"BodyElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"ButtonElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"CharacterData":{"Node":[],"EventTarget":[]},"CompositionEvent":{"Event":[]},"DivElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"Document":{"Node":[],"EventTarget":[]},"DocumentFragment":{"Node":[],"EventTarget":[]},"DomRectList":{"ImmutableListMixin":["Rectangle<num>"],"ListMixin":["Rectangle<num>"],"JavaScriptIndexingBehavior":["Rectangle<num>"],"List":["Rectangle<num>"],"EfficientLengthIterable":["Rectangle<num>"],"Iterable":["Rectangle<num>"],"JSIndexable":["Rectangle<num>"],"ListMixin.E":"Rectangle<num>","ImmutableListMixin.E":"Rectangle<num>"},"DomRectReadOnly":{"Rectangle":["num"]},"DomStringList":{"ImmutableListMixin":["String"],"ListMixin":["String"],"List":["String"],"JavaScriptIndexingBehavior":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"JSIndexable":["String"],"ListMixin.E":"String","ImmutableListMixin.E":"String"},"_ChildrenElementList":{"ListMixin":["Element"],"List":["Element"],"EfficientLengthIterable":["Element"],"Iterable":["Element"],"ListMixin.E":"Element"},"_FrozenElementList":{"ElementList":["1"],"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"ListMixin.E":"1"},"Element":{"Node":[],"EventTarget":[]},"ExtendableEvent":{"Event":[]},"ExtendableMessageEvent":{"Event":[]},"File":{"Blob":[]},"FileList":{"ImmutableListMixin":["File"],"ListMixin":["File"],"JavaScriptIndexingBehavior":["File"],"List":["File"],"EfficientLengthIterable":["File"],"Iterable":["File"],"JSIndexable":["File"],"ListMixin.E":"File","ImmutableListMixin.E":"File"},"FileReader":{"EventTarget":[]},"FileWriter":{"EventTarget":[]},"FormElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"HtmlCollection":{"ImmutableListMixin":["Node"],"ListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"JSIndexable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"HtmlDocument":{"Document":[],"Node":[],"EventTarget":[]},"HttpRequest":{"EventTarget":[]},"HttpRequestEventTarget":{"EventTarget":[]},"InputElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"KeyboardEvent":{"Event":[]},"LIElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"MediaElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"MediaKeySession":{"EventTarget":[]},"MediaStream":{"EventTarget":[]},"MediaStreamTrack":{"EventTarget":[]},"MessageEvent":{"Event":[]},"MessagePort":{"EventTarget":[]},"MidiInputMap":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"MidiMessageEvent":{"Event":[]},"MidiOutputMap":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"MidiPort":{"EventTarget":[]},"MimeTypeArray":{"ImmutableListMixin":["MimeType"],"ListMixin":["MimeType"],"JavaScriptIndexingBehavior":["MimeType"],"List":["MimeType"],"EfficientLengthIterable":["MimeType"],"Iterable":["MimeType"],"JSIndexable":["MimeType"],"ListMixin.E":"MimeType","ImmutableListMixin.E":"MimeType"},"MouseEvent":{"Event":[]},"_ChildNodeListLazy":{"ListMixin":["Node"],"List":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"ListMixin.E":"Node"},"Node":{"EventTarget":[]},"NodeList":{"ImmutableListMixin":["Node"],"ListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"JSIndexable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"PaymentRequest":{"EventTarget":[]},"PluginArray":{"ImmutableListMixin":["Plugin"],"ListMixin":["Plugin"],"List":["Plugin"],"JavaScriptIndexingBehavior":["Plugin"],"EfficientLengthIterable":["Plugin"],"Iterable":["Plugin"],"JSIndexable":["Plugin"],"ListMixin.E":"Plugin","ImmutableListMixin.E":"Plugin"},"PreElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"PresentationConnection":{"EventTarget":[]},"ProgressEvent":{"Event":[]},"PushEvent":{"Event":[]},"RtcDataChannel":{"EventTarget":[]},"RtcStatsReport":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"SelectElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"ShadowRoot":{"DocumentFragment":[],"Node":[],"EventTarget":[]},"SourceBuffer":{"EventTarget":[]},"SourceBufferList":{"ImmutableListMixin":["SourceBuffer"],"ListMixin":["SourceBuffer"],"List":["SourceBuffer"],"JavaScriptIndexingBehavior":["SourceBuffer"],"EventTarget":[],"EfficientLengthIterable":["SourceBuffer"],"Iterable":["SourceBuffer"],"JSIndexable":["SourceBuffer"],"ListMixin.E":"SourceBuffer","ImmutableListMixin.E":"SourceBuffer"},"SpanElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"SpeechGrammarList":{"ImmutableListMixin":["SpeechGrammar"],"ListMixin":["SpeechGrammar"],"List":["SpeechGrammar"],"JavaScriptIndexingBehavior":["SpeechGrammar"],"EfficientLengthIterable":["SpeechGrammar"],"Iterable":["SpeechGrammar"],"JSIndexable":["SpeechGrammar"],"ListMixin.E":"SpeechGrammar","ImmutableListMixin.E":"SpeechGrammar"},"Storage":{"MapMixin":["String","String"],"Map":["String","String"],"MapMixin.K":"String","MapMixin.V":"String"},"TableElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TableRowElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TableSectionElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TemplateElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextAreaElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextEvent":{"Event":[]},"TextTrack":{"EventTarget":[]},"TextTrackCue":{"EventTarget":[]},"TextTrackCueList":{"ImmutableListMixin":["TextTrackCue"],"ListMixin":["TextTrackCue"],"JavaScriptIndexingBehavior":["TextTrackCue"],"List":["TextTrackCue"],"EfficientLengthIterable":["TextTrackCue"],"Iterable":["TextTrackCue"],"JSIndexable":["TextTrackCue"],"ListMixin.E":"TextTrackCue","ImmutableListMixin.E":"TextTrackCue"},"TextTrackList":{"ImmutableListMixin":["TextTrack"],"ListMixin":["TextTrack"],"JavaScriptIndexingBehavior":["TextTrack"],"List":["TextTrack"],"EventTarget":[],"EfficientLengthIterable":["TextTrack"],"Iterable":["TextTrack"],"JSIndexable":["TextTrack"],"ListMixin.E":"TextTrack","ImmutableListMixin.E":"TextTrack"},"TouchList":{"ImmutableListMixin":["Touch"],"ListMixin":["Touch"],"List":["Touch"],"JavaScriptIndexingBehavior":["Touch"],"EfficientLengthIterable":["Touch"],"Iterable":["Touch"],"JSIndexable":["Touch"],"ListMixin.E":"Touch","ImmutableListMixin.E":"Touch"},"UIEvent":{"Event":[]},"UListElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"VideoTrackList":{"EventTarget":[]},"WebSocket":{"EventTarget":[]},"Window":{"WindowBase":[],"EventTarget":[]},"_BeforeUnloadEvent":{"BeforeUnloadEvent":[],"Event":[]},"Worker":{"EventTarget":[]},"WorkerGlobalScope":{"EventTarget":[]},"_Attr":{"Node":[],"EventTarget":[]},"_CssRuleList":{"ImmutableListMixin":["CssRule"],"ListMixin":["CssRule"],"List":["CssRule"],"JavaScriptIndexingBehavior":["CssRule"],"EfficientLengthIterable":["CssRule"],"Iterable":["CssRule"],"JSIndexable":["CssRule"],"ListMixin.E":"CssRule","ImmutableListMixin.E":"CssRule"},"_DomRect":{"Rectangle":["num"]},"_GamepadList":{"ImmutableListMixin":["Gamepad"],"ListMixin":["Gamepad"],"JavaScriptIndexingBehavior":["Gamepad"],"List":["Gamepad"],"EfficientLengthIterable":["Gamepad"],"Iterable":["Gamepad"],"JSIndexable":["Gamepad"],"ListMixin.E":"Gamepad","ImmutableListMixin.E":"Gamepad"},"_NamedNodeMap":{"ImmutableListMixin":["Node"],"ListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"JSIndexable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"_SpeechRecognitionResultList":{"ImmutableListMixin":["SpeechRecognitionResult"],"ListMixin":["SpeechRecognitionResult"],"List":["SpeechRecognitionResult"],"JavaScriptIndexingBehavior":["SpeechRecognitionResult"],"EfficientLengthIterable":["SpeechRecognitionResult"],"Iterable":["SpeechRecognitionResult"],"JSIndexable":["SpeechRecognitionResult"],"ListMixin.E":"SpeechRecognitionResult","ImmutableListMixin.E":"SpeechRecognitionResult"},"_StyleSheetList":{"ImmutableListMixin":["StyleSheet"],"ListMixin":["StyleSheet"],"JavaScriptIndexingBehavior":["StyleSheet"],"List":["StyleSheet"],"EfficientLengthIterable":["StyleSheet"],"Iterable":["StyleSheet"],"JSIndexable":["StyleSheet"],"ListMixin.E":"StyleSheet","ImmutableListMixin.E":"StyleSheet"},"_AttributeMap":{"MapMixin":["String","String"],"Map":["String","String"]},"_ElementAttributeMap":{"MapMixin":["String","String"],"Map":["String","String"],"MapMixin.K":"String","MapMixin.V":"String"},"_DataAttributeMap":{"MapMixin":["String","String"],"Map":["String","String"],"MapMixin.K":"String","MapMixin.V":"String"},"CssClassSet":{"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"_MultiElementCssClassSet":{"CssClassSetImpl":[],"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"SetMixin.E":"String"},"_ElementCssClassSet":{"CssClassSetImpl":[],"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"SetMixin.E":"String"},"_EventStream":{"Stream":["1"]},"_ElementEventStreamImpl":{"_EventStream":["1"],"Stream":["1"]},"_ElementListEventStreamImpl":{"Stream":["1"]},"_EventStreamSubscription":{"StreamSubscription":["1"]},"_Html5NodeValidator":{"NodeValidator":[]},"NodeValidatorBuilder":{"NodeValidator":[]},"_SimpleNodeValidator":{"NodeValidator":[]},"_TemplatingNodeValidator":{"NodeValidator":[]},"_SvgNodeValidator":{"NodeValidator":[]},"FixedSizeListIterator":{"Iterator":["1"]},"_DOMWindowCrossFrame":{"WindowBase":[],"EventTarget":[]},"_WrappedEvent":{"Event":[]},"_SameOriginUriPolicy":{"UriPolicy":[]},"_ValidatingTreeSanitizer":{"NodeTreeSanitizer":[]},"CssClassSetImpl":{"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"FilteredElementList":{"ListMixin":["Element"],"List":["Element"],"EfficientLengthIterable":["Element"],"Iterable":["Element"],"ListMixin.E":"Element"},"VersionChangeEvent":{"Event":[]},"JsFunction":{"JsObject":[]},"JsArray":{"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"JsObject":[],"Iterable":["1"],"ListMixin.E":"1"},"_JSRandom":{"Random":[]},"CircleElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"GElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"GeometryElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"GraphicsElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"ImageElement0":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"LengthList":{"ImmutableListMixin":["Length"],"ListMixin":["Length"],"List":["Length"],"EfficientLengthIterable":["Length"],"Iterable":["Length"],"ListMixin.E":"Length","ImmutableListMixin.E":"Length"},"LineElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"NumberList":{"ImmutableListMixin":["Number"],"ListMixin":["Number"],"List":["Number"],"EfficientLengthIterable":["Number"],"Iterable":["Number"],"ListMixin.E":"Number","ImmutableListMixin.E":"Number"},"PathElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"RectElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"ScriptElement0":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"StringList":{"ImmutableListMixin":["String"],"ListMixin":["String"],"List":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"ListMixin.E":"String","ImmutableListMixin.E":"String"},"AttributeClassSet":{"CssClassSetImpl":[],"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"SetMixin.E":"String"},"SvgElement":{"Element":[],"Node":[],"EventTarget":[]},"SvgSvgElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextContentElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextPositioningElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TransformList":{"ImmutableListMixin":["Transform"],"ListMixin":["Transform"],"List":["Transform"],"EfficientLengthIterable":["Transform"],"Iterable":["Transform"],"ListMixin.E":"Transform","ImmutableListMixin.E":"Transform"},"Float32List":{"List":["double"],"EfficientLengthIterable":["double"],"TypedData":[],"Iterable":["double"]},"AnalyserNode":{"AudioNode":[],"EventTarget":[]},"AudioBufferSourceNode":{"AudioNode":[],"EventTarget":[]},"AudioContext":{"BaseAudioContext":[],"EventTarget":[]},"AudioNode":{"EventTarget":[]},"AudioParamMap":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"AudioProcessingEvent":{"Event":[]},"AudioScheduledSourceNode":{"AudioNode":[],"EventTarget":[]},"AudioTrackList":{"EventTarget":[]},"BaseAudioContext":{"EventTarget":[]},"BiquadFilterNode":{"AudioNode":[],"EventTarget":[]},"ConvolverNode":{"AudioNode":[],"EventTarget":[]},"DelayNode":{"AudioNode":[],"EventTarget":[]},"DynamicsCompressorNode":{"AudioNode":[],"EventTarget":[]},"GainNode":{"AudioNode":[],"EventTarget":[]},"MediaStreamAudioSourceNode":{"AudioNode":[],"EventTarget":[]},"OfflineAudioContext":{"BaseAudioContext":[],"EventTarget":[]},"OscillatorNode":{"AudioNode":[],"EventTarget":[]},"ScriptProcessorNode":{"AudioNode":[],"EventTarget":[]},"StereoPannerNode":{"AudioNode":[],"EventTarget":[]},"SqlResultSetRowList":{"ImmutableListMixin":["Map<@,@>"],"ListMixin":["Map<@,@>"],"List":["Map<@,@>"],"EfficientLengthIterable":["Map<@,@>"],"Iterable":["Map<@,@>"],"ListMixin.E":"Map<@,@>","ImmutableListMixin.E":"Map<@,@>"},"HexCodec":{"Codec":["List<int>","String"],"Codec.S":"List<int>"},"HexEncoder":{"Converter":["List<int>","String"]},"DrumKit":{"Instrument":[]},"Drums":{"Instrument":[]},"Piano":{"Instrument":[]},"BiquadFilter":{"Effect":[]},"PitchBendEffect":{"Effect":[]},"PanEffect":{"Effect":[]},"GainEffect":{"Effect":[]},"ADSRNode":{"SynthNode":[]},"FMNode":{"SynthNode":[]},"LFONode":{"SynthNode":[]},"SynthSampleNode":{"SynthNode":[]},"SynthDelayNode":{"SynthNode":[]},"SynthCompressorNode":{"SynthNode":[]},"FilterNode":{"SynthNode":[]},"SchedulerSynth":{"Synthesizer":[]},"PythonCell":{"Metronome":[],"ClockSubscriber":[],"TimelineListener":[],"CodeMirrorListener":[],"DataModel":[],"PythonListener":[]},"DatastoreException":{"Exception":[]},"Project":{"DataModel":[],"ClockSubscriber":[]},"NoteRecorder":{"ClockSubscriber":[]},"Recording":{"DataModel":[]},"User":{"DataModel":[]}}'));
+  H._Universe_addRules(init.typeUniverse, JSON.parse('{"JavaScriptFunction":"JavaScriptObject","PlainJavaScriptObject":"JavaScriptObject","UnknownJavaScriptObject":"JavaScriptObject","AnimationEvent":"Event","AudioDestinationNode":"AudioNode","ConstantSourceNode":"AudioScheduledSourceNode","AnimateElement":"SvgElement","AnimationElement":"SvgElement","AElement":"GraphicsElement","TextPathElement":"TextContentElement","TSpanElement":"TextPositioningElement","EllipseElement":"GeometryElement","AbsoluteOrientationSensor":"EventTarget","OrientationSensor":"EventTarget","Sensor":"EventTarget","_ResourceProgressEvent":"ProgressEvent","BRElement":"HtmlElement","_DocumentType":"Node","XmlDocument":"Document","PointerEvent":"MouseEvent","VttCue":"TextTrackCue","VideoElement":"MediaElement","FocusEvent":"UIEvent","AbortPaymentEvent":"ExtendableEvent","DedicatedWorkerGlobalScope":"WorkerGlobalScope","CDataSection":"CharacterData","Text":"CharacterData","MidiInput":"MidiPort","HttpRequestUpload":"HttpRequestEventTarget","HtmlFormControlsCollection":"HtmlCollection","CssCharsetRule":"CssRule","CssStyleSheet":"StyleSheet","CanvasCaptureMediaStreamTrack":"MediaStreamTrack","BackgroundFetchClickEvent":"BackgroundFetchEvent","NativeFloat64List":"NativeTypedArrayOfDouble","NativeByteData":"NativeTypedData","JSBool":{"bool":[]},"JSNull":{"Null":[]},"JavaScriptObject":{"JSObject":[],"Function":[]},"JSArray":{"List":["1"],"EfficientLengthIterable":["1"],"JSIndexable":["@"],"Iterable":["1"]},"JSUnmodifiableArray":{"JSArray":["1"],"List":["1"],"EfficientLengthIterable":["1"],"JSIndexable":["@"],"Iterable":["1"]},"ArrayIterator":{"Iterator":["1"]},"JSNumber":{"double":[],"num":[]},"JSInt":{"int":[],"double":[],"num":[]},"JSDouble":{"double":[],"num":[]},"JSString":{"String":[],"JSIndexable":["@"],"Pattern":[]},"CodeUnits":{"UnmodifiableListMixin":["int"],"ListMixin":["int"],"List":["int"],"EfficientLengthIterable":["int"],"Iterable":["int"],"ListMixin.E":"int","UnmodifiableListMixin.E":"int"},"EfficientLengthIterable":{"Iterable":["1"]},"ListIterable":{"EfficientLengthIterable":["1"],"Iterable":["1"]},"ListIterator":{"Iterator":["1"]},"MappedIterable":{"Iterable":["2"],"Iterable.E":"2"},"EfficientLengthMappedIterable":{"MappedIterable":["1","2"],"EfficientLengthIterable":["2"],"Iterable":["2"],"Iterable.E":"2"},"MappedIterator":{"Iterator":["2"]},"MappedListIterable":{"ListIterable":["2"],"EfficientLengthIterable":["2"],"Iterable":["2"],"ListIterable.E":"2","Iterable.E":"2"},"WhereIterable":{"Iterable":["1"],"Iterable.E":"1"},"WhereIterator":{"Iterator":["1"]},"TakeIterable":{"Iterable":["1"],"Iterable.E":"1"},"EfficientLengthTakeIterable":{"TakeIterable":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"Iterable.E":"1"},"TakeIterator":{"Iterator":["1"]},"SkipIterable":{"Iterable":["1"],"Iterable.E":"1"},"EfficientLengthSkipIterable":{"SkipIterable":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"Iterable.E":"1"},"SkipIterator":{"Iterator":["1"]},"UnmodifiableListBase":{"UnmodifiableListMixin":["1"],"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"Symbol":{"Symbol0":[]},"ConstantMapView":{"UnmodifiableMapView":["1","2"],"_UnmodifiableMapView_MapView__UnmodifiableMapMixin":["1","2"],"MapView":["1","2"],"_UnmodifiableMapMixin":["1","2"],"Map":["1","2"]},"ConstantMap":{"Map":["1","2"]},"ConstantStringMap":{"ConstantMap":["1","2"],"Map":["1","2"]},"_ConstantMapKeyIterable":{"Iterable":["1"],"Iterable.E":"1"},"JSInvocationMirror":{"Invocation":[]},"NullError":{"Error":[]},"JsNoSuchMethodError":{"Error":[]},"UnknownJsTypeError":{"Error":[]},"_StackTrace":{"StackTrace":[]},"Closure":{"Function":[]},"TearOffClosure":{"Function":[]},"StaticClosure":{"Function":[]},"BoundClosure":{"Function":[]},"RuntimeError":{"Error":[]},"_AssertionError":{"Error":[]},"JsLinkedHashMap":{"LinkedHashMap":["1","2"],"MapMixin":["1","2"],"Map":["1","2"],"MapMixin.K":"1","MapMixin.V":"2"},"LinkedHashMapKeyIterable":{"EfficientLengthIterable":["1"],"Iterable":["1"],"Iterable.E":"1"},"LinkedHashMapKeyIterator":{"Iterator":["1"]},"JSSyntaxRegExp":{"RegExp":[],"Pattern":[]},"NativeByteBuffer":{"ByteBuffer":[]},"NativeTypedData":{"TypedData":[]},"NativeTypedArray":{"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"TypedData":[],"JSIndexable":["@"]},"NativeTypedArrayOfDouble":{"ListMixin":["double"],"JavaScriptIndexingBehavior":["@"],"List":["double"],"NativeTypedData":[],"EfficientLengthIterable":["double"],"FixedLengthListMixin":["double"],"TypedData":[],"JSIndexable":["@"],"Iterable":["double"],"ListMixin.E":"double","FixedLengthListMixin.E":"double"},"NativeTypedArrayOfInt":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"]},"NativeFloat32List":{"Float32List":[],"ListMixin":["double"],"JavaScriptIndexingBehavior":["@"],"List":["double"],"NativeTypedData":[],"EfficientLengthIterable":["double"],"FixedLengthListMixin":["double"],"TypedData":[],"JSIndexable":["@"],"Iterable":["double"],"ListMixin.E":"double","FixedLengthListMixin.E":"double"},"NativeInt16List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeInt32List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeInt8List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint16List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint32List":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint8ClampedList":{"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"NativeUint8List":{"Uint8List":[],"ListMixin":["int"],"List":["int"],"JavaScriptIndexingBehavior":["@"],"NativeTypedData":[],"EfficientLengthIterable":["int"],"FixedLengthListMixin":["int"],"TypedData":[],"JSIndexable":["@"],"Iterable":["int"],"ListMixin.E":"int","FixedLengthListMixin.E":"int"},"_Error":{"Error":[]},"_TypeError":{"Error":[]},"_TimerImpl":{"Timer":[]},"_BroadcastStream":{"_ControllerStream":["1"],"_StreamImpl":["1"],"Stream":["1"]},"_BroadcastSubscription":{"_ControllerSubscription":["1"],"_BufferingStreamSubscription":["1"],"_EventDispatch":["1"],"StreamSubscription":["1"]},"_BroadcastStreamController":{"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_SyncBroadcastStreamController":{"_BroadcastStreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_AsyncBroadcastStreamController":{"_BroadcastStreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_AsyncCompleter":{"_Completer":["1"]},"_SyncCompleter":{"_Completer":["1"]},"_Future":{"Future":["1"]},"_StreamController":{"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_AsyncStreamController":{"_AsyncStreamControllerDispatch":["1"],"_StreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_SyncStreamController":{"_SyncStreamControllerDispatch":["1"],"_StreamController":["1"],"StreamController":["1"],"_EventDispatch":["1"],"_StreamControllerLifecycle":["1"]},"_ControllerStream":{"_StreamImpl":["1"],"Stream":["1"]},"_ControllerSubscription":{"_BufferingStreamSubscription":["1"],"_EventDispatch":["1"],"StreamSubscription":["1"]},"_BufferingStreamSubscription":{"_EventDispatch":["1"],"StreamSubscription":["1"]},"_StreamImpl":{"Stream":["1"]},"_DelayedData":{"_DelayedEvent":["1"]},"_DelayedDone":{"_DelayedEvent":["@"]},"_StreamImplEvents":{"_PendingEvents":["1"]},"_DoneStreamSubscription":{"StreamSubscription":["1"]},"AsyncError":{"Error":[]},"_Zone":{"Zone":[]},"_RootZone":{"Zone":[]},"_LinkedHashSet":{"_SetBase":["1"],"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_LinkedHashSetIterator":{"Iterator":["1"]},"ListBase":{"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"MapBase":{"MapMixin":["1","2"],"Map":["1","2"]},"MapMixin":{"Map":["1","2"]},"MapView":{"Map":["1","2"]},"UnmodifiableMapView":{"_UnmodifiableMapView_MapView__UnmodifiableMapMixin":["1","2"],"MapView":["1","2"],"_UnmodifiableMapMixin":["1","2"],"Map":["1","2"]},"ListQueue":{"ListIterable":["1"],"Queue":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"ListIterable.E":"1","Iterable.E":"1"},"_ListQueueIterator":{"Iterator":["1"]},"SetBase":{"SetMixin":["1"],"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_SetBase":{"Set":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"]},"_JsonMap":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"_JsonMapKeyIterable":{"ListIterable":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"ListIterable.E":"String","Iterable.E":"String"},"Base64Codec":{"Codec":["List<int>","String"],"Codec.S":"List<int>"},"Base64Encoder":{"Converter":["List<int>","String"]},"Base64Decoder":{"Converter":["String","List<int>"]},"JsonUnsupportedObjectError":{"Error":[]},"JsonCyclicError":{"Error":[]},"JsonCodec":{"Codec":["Object","String"],"Codec.S":"Object"},"JsonEncoder":{"Converter":["Object","String"]},"JsonDecoder":{"Converter":["String","Object"]},"double":{"num":[]},"AssertionError":{"Error":[]},"NullThrownError":{"Error":[]},"ArgumentError":{"Error":[]},"RangeError":{"Error":[]},"IndexError":{"Error":[]},"NoSuchMethodError":{"Error":[]},"UnsupportedError":{"Error":[]},"UnimplementedError":{"Error":[]},"StateError":{"Error":[]},"ConcurrentModificationError":{"Error":[]},"OutOfMemoryError":{"Error":[]},"StackOverflowError":{"Error":[]},"CyclicInitializationError":{"Error":[]},"_Exception":{"Exception":[]},"FormatException":{"Exception":[]},"int":{"num":[]},"List":{"EfficientLengthIterable":["1"],"Iterable":["1"]},"Set":{"EfficientLengthIterable":["1"],"Iterable":["1"]},"_StringStackTrace":{"StackTrace":[]},"String":{"Pattern":[]},"StringBuffer":{"StringSink":[]},"HtmlElement":{"Element":[],"Node":[],"EventTarget":[]},"AnchorElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"Animation":{"EventTarget":[]},"AreaElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"AudioElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"BackgroundFetchEvent":{"Event":[]},"BackgroundFetchRegistration":{"EventTarget":[]},"BaseElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"BeforeUnloadEvent":{"Event":[]},"BlobEvent":{"Event":[]},"BodyElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"ButtonElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"CharacterData":{"Node":[],"EventTarget":[]},"CompositionEvent":{"Event":[]},"DivElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"Document":{"Node":[],"EventTarget":[]},"DocumentFragment":{"Node":[],"EventTarget":[]},"DomRectList":{"ImmutableListMixin":["Rectangle<num>"],"ListMixin":["Rectangle<num>"],"JavaScriptIndexingBehavior":["Rectangle<num>"],"List":["Rectangle<num>"],"EfficientLengthIterable":["Rectangle<num>"],"Iterable":["Rectangle<num>"],"JSIndexable":["Rectangle<num>"],"ListMixin.E":"Rectangle<num>","ImmutableListMixin.E":"Rectangle<num>"},"DomRectReadOnly":{"Rectangle":["num"]},"DomStringList":{"ImmutableListMixin":["String"],"ListMixin":["String"],"List":["String"],"JavaScriptIndexingBehavior":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"JSIndexable":["String"],"ListMixin.E":"String","ImmutableListMixin.E":"String"},"_ChildrenElementList":{"ListMixin":["Element"],"List":["Element"],"EfficientLengthIterable":["Element"],"Iterable":["Element"],"ListMixin.E":"Element"},"_FrozenElementList":{"ElementList":["1"],"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"Iterable":["1"],"ListMixin.E":"1"},"Element":{"Node":[],"EventTarget":[]},"ExtendableEvent":{"Event":[]},"ExtendableMessageEvent":{"Event":[]},"File":{"Blob":[]},"FileList":{"ImmutableListMixin":["File"],"ListMixin":["File"],"JavaScriptIndexingBehavior":["File"],"List":["File"],"EfficientLengthIterable":["File"],"Iterable":["File"],"JSIndexable":["File"],"ListMixin.E":"File","ImmutableListMixin.E":"File"},"FileReader":{"EventTarget":[]},"FileWriter":{"EventTarget":[]},"FormElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"HtmlCollection":{"ImmutableListMixin":["Node"],"ListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"JSIndexable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"HtmlDocument":{"Document":[],"Node":[],"EventTarget":[]},"HttpRequest":{"EventTarget":[]},"HttpRequestEventTarget":{"EventTarget":[]},"InputElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"KeyboardEvent":{"Event":[]},"LIElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"MediaElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"MediaKeySession":{"EventTarget":[]},"MediaStream":{"EventTarget":[]},"MediaStreamTrack":{"EventTarget":[]},"MessageEvent":{"Event":[]},"MessagePort":{"EventTarget":[]},"MidiInputMap":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"MidiMessageEvent":{"Event":[]},"MidiOutputMap":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"MidiPort":{"EventTarget":[]},"MimeTypeArray":{"ImmutableListMixin":["MimeType"],"ListMixin":["MimeType"],"JavaScriptIndexingBehavior":["MimeType"],"List":["MimeType"],"EfficientLengthIterable":["MimeType"],"Iterable":["MimeType"],"JSIndexable":["MimeType"],"ListMixin.E":"MimeType","ImmutableListMixin.E":"MimeType"},"MouseEvent":{"Event":[]},"_ChildNodeListLazy":{"ListMixin":["Node"],"List":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"ListMixin.E":"Node"},"Node":{"EventTarget":[]},"NodeList":{"ImmutableListMixin":["Node"],"ListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"JSIndexable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"PaymentRequest":{"EventTarget":[]},"PluginArray":{"ImmutableListMixin":["Plugin"],"ListMixin":["Plugin"],"List":["Plugin"],"JavaScriptIndexingBehavior":["Plugin"],"EfficientLengthIterable":["Plugin"],"Iterable":["Plugin"],"JSIndexable":["Plugin"],"ListMixin.E":"Plugin","ImmutableListMixin.E":"Plugin"},"PreElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"PresentationConnection":{"EventTarget":[]},"ProgressEvent":{"Event":[]},"PushEvent":{"Event":[]},"RtcDataChannel":{"EventTarget":[]},"RtcStatsReport":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"SelectElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"ShadowRoot":{"DocumentFragment":[],"Node":[],"EventTarget":[]},"SourceBuffer":{"EventTarget":[]},"SourceBufferList":{"ImmutableListMixin":["SourceBuffer"],"ListMixin":["SourceBuffer"],"List":["SourceBuffer"],"JavaScriptIndexingBehavior":["SourceBuffer"],"EventTarget":[],"EfficientLengthIterable":["SourceBuffer"],"Iterable":["SourceBuffer"],"JSIndexable":["SourceBuffer"],"ListMixin.E":"SourceBuffer","ImmutableListMixin.E":"SourceBuffer"},"SpanElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"SpeechGrammarList":{"ImmutableListMixin":["SpeechGrammar"],"ListMixin":["SpeechGrammar"],"List":["SpeechGrammar"],"JavaScriptIndexingBehavior":["SpeechGrammar"],"EfficientLengthIterable":["SpeechGrammar"],"Iterable":["SpeechGrammar"],"JSIndexable":["SpeechGrammar"],"ListMixin.E":"SpeechGrammar","ImmutableListMixin.E":"SpeechGrammar"},"Storage":{"MapMixin":["String","String"],"Map":["String","String"],"MapMixin.K":"String","MapMixin.V":"String"},"TableElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TableRowElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TableSectionElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TemplateElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextAreaElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextEvent":{"Event":[]},"TextTrack":{"EventTarget":[]},"TextTrackCue":{"EventTarget":[]},"TextTrackCueList":{"ImmutableListMixin":["TextTrackCue"],"ListMixin":["TextTrackCue"],"JavaScriptIndexingBehavior":["TextTrackCue"],"List":["TextTrackCue"],"EfficientLengthIterable":["TextTrackCue"],"Iterable":["TextTrackCue"],"JSIndexable":["TextTrackCue"],"ListMixin.E":"TextTrackCue","ImmutableListMixin.E":"TextTrackCue"},"TextTrackList":{"ImmutableListMixin":["TextTrack"],"ListMixin":["TextTrack"],"JavaScriptIndexingBehavior":["TextTrack"],"List":["TextTrack"],"EventTarget":[],"EfficientLengthIterable":["TextTrack"],"Iterable":["TextTrack"],"JSIndexable":["TextTrack"],"ListMixin.E":"TextTrack","ImmutableListMixin.E":"TextTrack"},"TouchList":{"ImmutableListMixin":["Touch"],"ListMixin":["Touch"],"List":["Touch"],"JavaScriptIndexingBehavior":["Touch"],"EfficientLengthIterable":["Touch"],"Iterable":["Touch"],"JSIndexable":["Touch"],"ListMixin.E":"Touch","ImmutableListMixin.E":"Touch"},"UIEvent":{"Event":[]},"UListElement":{"HtmlElement":[],"Element":[],"Node":[],"EventTarget":[]},"VideoTrackList":{"EventTarget":[]},"WebSocket":{"EventTarget":[]},"Window":{"WindowBase":[],"EventTarget":[]},"_BeforeUnloadEvent":{"BeforeUnloadEvent":[],"Event":[]},"Worker":{"EventTarget":[]},"WorkerGlobalScope":{"EventTarget":[]},"_Attr":{"Node":[],"EventTarget":[]},"_CssRuleList":{"ImmutableListMixin":["CssRule"],"ListMixin":["CssRule"],"List":["CssRule"],"JavaScriptIndexingBehavior":["CssRule"],"EfficientLengthIterable":["CssRule"],"Iterable":["CssRule"],"JSIndexable":["CssRule"],"ListMixin.E":"CssRule","ImmutableListMixin.E":"CssRule"},"_DomRect":{"Rectangle":["num"]},"_GamepadList":{"ImmutableListMixin":["Gamepad"],"ListMixin":["Gamepad"],"JavaScriptIndexingBehavior":["Gamepad"],"List":["Gamepad"],"EfficientLengthIterable":["Gamepad"],"Iterable":["Gamepad"],"JSIndexable":["Gamepad"],"ListMixin.E":"Gamepad","ImmutableListMixin.E":"Gamepad"},"_NamedNodeMap":{"ImmutableListMixin":["Node"],"ListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"EfficientLengthIterable":["Node"],"Iterable":["Node"],"JSIndexable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"_SpeechRecognitionResultList":{"ImmutableListMixin":["SpeechRecognitionResult"],"ListMixin":["SpeechRecognitionResult"],"List":["SpeechRecognitionResult"],"JavaScriptIndexingBehavior":["SpeechRecognitionResult"],"EfficientLengthIterable":["SpeechRecognitionResult"],"Iterable":["SpeechRecognitionResult"],"JSIndexable":["SpeechRecognitionResult"],"ListMixin.E":"SpeechRecognitionResult","ImmutableListMixin.E":"SpeechRecognitionResult"},"_StyleSheetList":{"ImmutableListMixin":["StyleSheet"],"ListMixin":["StyleSheet"],"JavaScriptIndexingBehavior":["StyleSheet"],"List":["StyleSheet"],"EfficientLengthIterable":["StyleSheet"],"Iterable":["StyleSheet"],"JSIndexable":["StyleSheet"],"ListMixin.E":"StyleSheet","ImmutableListMixin.E":"StyleSheet"},"_AttributeMap":{"MapMixin":["String","String"],"Map":["String","String"]},"_ElementAttributeMap":{"MapMixin":["String","String"],"Map":["String","String"],"MapMixin.K":"String","MapMixin.V":"String"},"_DataAttributeMap":{"MapMixin":["String","String"],"Map":["String","String"],"MapMixin.K":"String","MapMixin.V":"String"},"CssClassSet":{"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"_MultiElementCssClassSet":{"CssClassSetImpl":[],"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"SetMixin.E":"String"},"_ElementCssClassSet":{"CssClassSetImpl":[],"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"SetMixin.E":"String"},"_EventStream":{"Stream":["1"]},"_ElementEventStreamImpl":{"_EventStream":["1"],"Stream":["1"]},"_ElementListEventStreamImpl":{"Stream":["1"]},"_EventStreamSubscription":{"StreamSubscription":["1"]},"_Html5NodeValidator":{"NodeValidator":[]},"NodeValidatorBuilder":{"NodeValidator":[]},"_SimpleNodeValidator":{"NodeValidator":[]},"_TemplatingNodeValidator":{"NodeValidator":[]},"_SvgNodeValidator":{"NodeValidator":[]},"FixedSizeListIterator":{"Iterator":["1"]},"_DOMWindowCrossFrame":{"WindowBase":[],"EventTarget":[]},"_WrappedEvent":{"Event":[]},"_SameOriginUriPolicy":{"UriPolicy":[]},"_ValidatingTreeSanitizer":{"NodeTreeSanitizer":[]},"CssClassSetImpl":{"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"]},"FilteredElementList":{"ListMixin":["Element"],"List":["Element"],"EfficientLengthIterable":["Element"],"Iterable":["Element"],"ListMixin.E":"Element"},"VersionChangeEvent":{"Event":[]},"JsFunction":{"JsObject":[]},"JsArray":{"ListMixin":["1"],"List":["1"],"EfficientLengthIterable":["1"],"JsObject":[],"Iterable":["1"],"ListMixin.E":"1"},"_JSRandom":{"Random":[]},"CircleElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"GElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"GeometryElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"GraphicsElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"ImageElement0":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"LengthList":{"ImmutableListMixin":["Length"],"ListMixin":["Length"],"List":["Length"],"EfficientLengthIterable":["Length"],"Iterable":["Length"],"ListMixin.E":"Length","ImmutableListMixin.E":"Length"},"LineElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"NumberList":{"ImmutableListMixin":["Number"],"ListMixin":["Number"],"List":["Number"],"EfficientLengthIterable":["Number"],"Iterable":["Number"],"ListMixin.E":"Number","ImmutableListMixin.E":"Number"},"PathElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"RectElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"ScriptElement0":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"StringList":{"ImmutableListMixin":["String"],"ListMixin":["String"],"List":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"ListMixin.E":"String","ImmutableListMixin.E":"String"},"AttributeClassSet":{"CssClassSetImpl":[],"SetMixin":["String"],"Set":["String"],"EfficientLengthIterable":["String"],"Iterable":["String"],"SetMixin.E":"String"},"SvgElement":{"Element":[],"Node":[],"EventTarget":[]},"SvgSvgElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextContentElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TextPositioningElement":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"TransformList":{"ImmutableListMixin":["Transform"],"ListMixin":["Transform"],"List":["Transform"],"EfficientLengthIterable":["Transform"],"Iterable":["Transform"],"ListMixin.E":"Transform","ImmutableListMixin.E":"Transform"},"Float32List":{"List":["double"],"EfficientLengthIterable":["double"],"TypedData":[],"Iterable":["double"]},"AnalyserNode":{"AudioNode":[],"EventTarget":[]},"AudioBufferSourceNode":{"AudioNode":[],"EventTarget":[]},"AudioContext":{"BaseAudioContext":[],"EventTarget":[]},"AudioNode":{"EventTarget":[]},"AudioParamMap":{"MapMixin":["String","@"],"Map":["String","@"],"MapMixin.K":"String","MapMixin.V":"@"},"AudioProcessingEvent":{"Event":[]},"AudioScheduledSourceNode":{"AudioNode":[],"EventTarget":[]},"AudioTrackList":{"EventTarget":[]},"BaseAudioContext":{"EventTarget":[]},"BiquadFilterNode":{"AudioNode":[],"EventTarget":[]},"ConvolverNode":{"AudioNode":[],"EventTarget":[]},"DelayNode":{"AudioNode":[],"EventTarget":[]},"DynamicsCompressorNode":{"AudioNode":[],"EventTarget":[]},"GainNode":{"AudioNode":[],"EventTarget":[]},"MediaStreamAudioSourceNode":{"AudioNode":[],"EventTarget":[]},"OfflineAudioContext":{"BaseAudioContext":[],"EventTarget":[]},"OscillatorNode":{"AudioNode":[],"EventTarget":[]},"ScriptProcessorNode":{"AudioNode":[],"EventTarget":[]},"StereoPannerNode":{"AudioNode":[],"EventTarget":[]},"SqlResultSetRowList":{"ImmutableListMixin":["Map<@,@>"],"ListMixin":["Map<@,@>"],"List":["Map<@,@>"],"EfficientLengthIterable":["Map<@,@>"],"Iterable":["Map<@,@>"],"ListMixin.E":"Map<@,@>","ImmutableListMixin.E":"Map<@,@>"},"HexCodec":{"Codec":["List<int>","String"],"Codec.S":"List<int>"},"HexEncoder":{"Converter":["List<int>","String"]},"BassGuitar":{"Instrument":[]},"DrumKit":{"Instrument":[]},"Drums":{"Instrument":[]},"Guitar":{"Instrument":[]},"Piano":{"Instrument":[]},"Sequencer":{"Instrument":[]},"BiquadFilter":{"Effect":[]},"PitchBendEffect":{"Effect":[]},"PanEffect":{"Effect":[]},"GainEffect":{"Effect":[]},"ADSRNode":{"SynthNode":[]},"FMNode":{"SynthNode":[]},"LFONode":{"SynthNode":[]},"SynthSampleNode":{"SynthNode":[]},"SynthDelayNode":{"SynthNode":[]},"SynthCompressorNode":{"SynthNode":[]},"FilterNode":{"SynthNode":[]},"SchedulerSynth":{"Synthesizer":[]},"PythonCell":{"Metronome":[],"ClockSubscriber":[],"TimelineListener":[],"CodeMirrorListener":[],"DataModel":[],"PythonListener":[]},"DatastoreException":{"Exception":[]},"Project":{"DataModel":[],"ClockSubscriber":[]},"NoteRecorder":{"ClockSubscriber":[]},"Recording":{"DataModel":[]},"User":{"DataModel":[]}}'));
   H._Universe_addErasedTypes(init.typeUniverse, JSON.parse('{"EfficientLengthIterable":1,"UnmodifiableListBase":1,"StreamTransformerBase":2,"ListBase":1,"MapBase":2,"SetBase":1,"_ListBase_Object_ListMixin":1,"_SetBase_Object_SetMixin":1,"_JsArray_JsObject_ListMixin":1,"_RectangleBase":1}'));
   var type$ = (function rtii() {
     var findType = H.findType;
@@ -28594,12 +29713,14 @@
       Iterable_Node: findType("Iterable<Node>"),
       Iterable_dynamic: findType("Iterable<@>"),
       JSArray_AudioNode: findType("JSArray<AudioNode>"),
+      JSArray_BassFret: findType("JSArray<BassFret>"),
       JSArray_CircleElement: findType("JSArray<CircleElement>"),
       JSArray_Drum: findType("JSArray<Drum>"),
       JSArray_DrumPad: findType("JSArray<DrumPad>"),
       JSArray_Effect: findType("JSArray<Effect>"),
       JSArray_Float32List: findType("JSArray<Float32List>"),
       JSArray_Function: findType("JSArray<Function>"),
+      JSArray_GFret: findType("JSArray<GFret>"),
       JSArray_List_Float32List: findType("JSArray<List<Float32List>>"),
       JSArray_List_num: findType("JSArray<List<num>>"),
       JSArray_Map_dynamic_dynamic: findType("JSArray<Map<@,@>>"),
@@ -28609,7 +29730,10 @@
       JSArray_PythonCell: findType("JSArray<PythonCell>"),
       JSArray_Recording: findType("JSArray<Recording>"),
       JSArray_RectElement: findType("JSArray<RectElement>"),
+      JSArray_SequencerButton: findType("JSArray<SequencerButton>"),
+      JSArray_SequencerRow: findType("JSArray<SequencerRow>"),
       JSArray_String: findType("JSArray<String>"),
+      JSArray_SvgElement: findType("JSArray<SvgElement>"),
       JSArray_SynthChain: findType("JSArray<SynthChain>"),
       JSArray_SynthEvent: findType("JSArray<SynthEvent>"),
       JSArray_TraceEvent: findType("JSArray<TraceEvent>"),
@@ -28683,6 +29807,8 @@
       RegExp: findType("RegExp"),
       Rti: findType("Rti"),
       ScriptElement: findType("ScriptElement0"),
+      SequencerButton: findType("SequencerButton"),
+      SequencerRow: findType("SequencerRow"),
       Set_String: findType("Set<String>"),
       Set_dynamic: findType("Set<@>"),
       SourceBuffer: findType("SourceBuffer"),
@@ -28961,9 +30087,11 @@
     C.JsonEncoder_null = new P.JsonEncoder(null);
     C.List_0 = H.setRuntimeTypeInfo(makeConstList(["C", "C\u266f", "D", "D\u266f", "E", "F", "F\u266f", "G", "G\u266f", "A", "A\u266f", "B"]), type$.JSArray_String);
     C.List_2Zi = H.setRuntimeTypeInfo(makeConstList(["*::class", "*::dir", "*::draggable", "*::hidden", "*::id", "*::inert", "*::itemprop", "*::itemref", "*::itemscope", "*::lang", "*::spellcheck", "*::title", "*::translate", "A::accesskey", "A::coords", "A::hreflang", "A::name", "A::shape", "A::tabindex", "A::target", "A::type", "AREA::accesskey", "AREA::alt", "AREA::coords", "AREA::nohref", "AREA::shape", "AREA::tabindex", "AREA::target", "AUDIO::controls", "AUDIO::loop", "AUDIO::mediagroup", "AUDIO::muted", "AUDIO::preload", "BDO::dir", "BODY::alink", "BODY::bgcolor", "BODY::link", "BODY::text", "BODY::vlink", "BR::clear", "BUTTON::accesskey", "BUTTON::disabled", "BUTTON::name", "BUTTON::tabindex", "BUTTON::type", "BUTTON::value", "CANVAS::height", "CANVAS::width", "CAPTION::align", "COL::align", "COL::char", "COL::charoff", "COL::span", "COL::valign", "COL::width", "COLGROUP::align", "COLGROUP::char", "COLGROUP::charoff", "COLGROUP::span", "COLGROUP::valign", "COLGROUP::width", "COMMAND::checked", "COMMAND::command", "COMMAND::disabled", "COMMAND::label", "COMMAND::radiogroup", "COMMAND::type", "DATA::value", "DEL::datetime", "DETAILS::open", "DIR::compact", "DIV::align", "DL::compact", "FIELDSET::disabled", "FONT::color", "FONT::face", "FONT::size", "FORM::accept", "FORM::autocomplete", "FORM::enctype", "FORM::method", "FORM::name", "FORM::novalidate", "FORM::target", "FRAME::name", "H1::align", "H2::align", "H3::align", "H4::align", "H5::align", "H6::align", "HR::align", "HR::noshade", "HR::size", "HR::width", "HTML::version", "IFRAME::align", "IFRAME::frameborder", "IFRAME::height", "IFRAME::marginheight", "IFRAME::marginwidth", "IFRAME::width", "IMG::align", "IMG::alt", "IMG::border", "IMG::height", "IMG::hspace", "IMG::ismap", "IMG::name", "IMG::usemap", "IMG::vspace", "IMG::width", "INPUT::accept", "INPUT::accesskey", "INPUT::align", "INPUT::alt", "INPUT::autocomplete", "INPUT::autofocus", "INPUT::checked", "INPUT::disabled", "INPUT::inputmode", "INPUT::ismap", "INPUT::list", "INPUT::max", "INPUT::maxlength", "INPUT::min", "INPUT::multiple", "INPUT::name", "INPUT::placeholder", "INPUT::readonly", "INPUT::required", "INPUT::size", "INPUT::step", "INPUT::tabindex", "INPUT::type", "INPUT::usemap", "INPUT::value", "INS::datetime", "KEYGEN::disabled", "KEYGEN::keytype", "KEYGEN::name", "LABEL::accesskey", "LABEL::for", "LEGEND::accesskey", "LEGEND::align", "LI::type", "LI::value", "LINK::sizes", "MAP::name", "MENU::compact", "MENU::label", "MENU::type", "METER::high", "METER::low", "METER::max", "METER::min", "METER::value", "OBJECT::typemustmatch", "OL::compact", "OL::reversed", "OL::start", "OL::type", "OPTGROUP::disabled", "OPTGROUP::label", "OPTION::disabled", "OPTION::label", "OPTION::selected", "OPTION::value", "OUTPUT::for", "OUTPUT::name", "P::align", "PRE::width", "PROGRESS::max", "PROGRESS::min", "PROGRESS::value", "SELECT::autocomplete", "SELECT::disabled", "SELECT::multiple", "SELECT::name", "SELECT::required", "SELECT::size", "SELECT::tabindex", "SOURCE::type", "TABLE::align", "TABLE::bgcolor", "TABLE::border", "TABLE::cellpadding", "TABLE::cellspacing", "TABLE::frame", "TABLE::rules", "TABLE::summary", "TABLE::width", "TBODY::align", "TBODY::char", "TBODY::charoff", "TBODY::valign", "TD::abbr", "TD::align", "TD::axis", "TD::bgcolor", "TD::char", "TD::charoff", "TD::colspan", "TD::headers", "TD::height", "TD::nowrap", "TD::rowspan", "TD::scope", "TD::valign", "TD::width", "TEXTAREA::accesskey", "TEXTAREA::autocomplete", "TEXTAREA::cols", "TEXTAREA::disabled", "TEXTAREA::inputmode", "TEXTAREA::name", "TEXTAREA::placeholder", "TEXTAREA::readonly", "TEXTAREA::required", "TEXTAREA::rows", "TEXTAREA::tabindex", "TEXTAREA::wrap", "TFOOT::align", "TFOOT::char", "TFOOT::charoff", "TFOOT::valign", "TH::abbr", "TH::align", "TH::axis", "TH::bgcolor", "TH::char", "TH::charoff", "TH::colspan", "TH::headers", "TH::height", "TH::nowrap", "TH::rowspan", "TH::scope", "TH::valign", "TH::width", "THEAD::align", "THEAD::char", "THEAD::charoff", "THEAD::valign", "TR::align", "TR::bgcolor", "TR::char", "TR::charoff", "TR::valign", "TRACK::default", "TRACK::kind", "TRACK::label", "TRACK::srclang", "UL::compact", "UL::type", "VIDEO::controls", "VIDEO::height", "VIDEO::loop", "VIDEO::mediagroup", "VIDEO::muted", "VIDEO::preload", "VIDEO::width"]), type$.JSArray_String);
+    C.List_e2R = H.setRuntimeTypeInfo(makeConstList(["rgb(229, 76, 78)", "rgb(223, 132, 74)", "rgb(228, 171, 81)", "rgb(227, 199, 73)", "rgb(223, 228, 78)", "rgb(174, 215, 71)", "rgb(63, 188, 70)", "rgb(63, 169, 180)", "rgb(64, 124, 180)", "rgb(78, 69, 179)", "rgb(141, 69, 183)", "rgb(202, 69, 147)"]), type$.JSArray_String);
     C.List_ego = H.setRuntimeTypeInfo(makeConstList(["HEAD", "AREA", "BASE", "BASEFONT", "BR", "COL", "COLGROUP", "EMBED", "FRAME", "FRAMESET", "HR", "IMAGE", "IMG", "INPUT", "ISINDEX", "LINK", "META", "PARAM", "SOURCE", "STYLE", "TITLE", "WBR"]), type$.JSArray_String);
     C.List_empty0 = H.setRuntimeTypeInfo(makeConstList([]), type$.JSArray_String);
     C.List_empty = H.setRuntimeTypeInfo(makeConstList([]), type$.JSArray_dynamic);
+    C.List_oqF = H.setRuntimeTypeInfo(makeConstList(["1234567890-=", "qwertyuiop[]", "asdfghjkl;'", "zxcvbnm,./"]), type$.JSArray_String);
     C.List_wSV = H.setRuntimeTypeInfo(makeConstList(["bind", "if", "ref", "repeat", "syntax"]), type$.JSArray_String);
     C.List_yrN = H.setRuntimeTypeInfo(makeConstList(["A::href", "AREA::href", "BLOCKQUOTE::cite", "BODY::background", "COMMAND::icon", "DEL::cite", "FORM::action", "IMG::src", "INPUT::src", "INS::cite", "Q::cite", "VIDEO::poster"]), type$.JSArray_String);
     C.List_empty1 = H.setRuntimeTypeInfo(makeConstList([]), H.findType("JSArray<Symbol0>"));
@@ -28996,6 +30124,7 @@
     $.Device__isFirefox = null;
     $.Device__cachedCssPrefix = null;
     $.PianoKey_NOTES = H.setRuntimeTypeInfo(["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"], type$.JSArray_String);
+    $.SequencerButton_WIDTH = 50;
     $.PythonCell_boilerplate = null;
     $.PythonCell_DEFAULT_SETTINGS = function() {
       var t1 = type$.dynamic;
