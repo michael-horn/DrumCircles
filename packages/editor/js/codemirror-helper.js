@@ -51,6 +51,9 @@ function codemirror(selector) {
     editor.on('blur', function() {
       onBlur(selector);
     });
+    editor.on('scrollCursorIntoView', function(cMirror, event){
+      event.preventDefault();  // prevent phantom scrolling in drumcircles
+    });
     _cmEditors[selector] = editor;
     _errorLines[selector] = [ ];
     _traceLine[selector] = null;
@@ -65,9 +68,7 @@ function connectFirepad(selector, directory) {
   if (_cmEditors[selector]) {
     editor = _cmEditors[selector];
     let ref = firebase.database().ref(directory);
-
-    //let firepad = Firepad.fromCodeMirror(ref, editor, { defaultText: '# TunePad Track', userId : userId });
-    let firepad = Firepad.fromCodeMirror(ref, editor, { defaultText: "# New TunePad track \n\n"});
+    Firepad.fromCodeMirror(ref, editor);
   }
 }
 
