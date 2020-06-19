@@ -112,10 +112,10 @@ def fastForward(beats):
 
 
 #---------------------------------------------------------------------
-# changes the synthesizer patch configuration (voice name, JSON object)
+# changes the synthesizer patch configuration (patch ID)
 #---------------------------------------------------------------------
-def synthPatch(name, patch):
-    printEvent("patch", playhead, params = { "name" : name, "patch" : patch })
+def synthPatch(patch):
+    printEvent("patch", playhead, params = { "patch" : patch })
 
 
 #---------------------------------------------------------------------
