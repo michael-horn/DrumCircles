@@ -54,7 +54,10 @@ def playNote(note, beats = 1, velocity = 90, sustain = 0, line = -1):
     if line >= 0: params['line'] = line
     for n in note:
         params['note'] = n
-        printEvent("play", playhead, duration = beats, params = params)
+        if n is None:
+            printEvent("rest", playhead, duration = beats)
+        else:
+            printEvent("play", playhead, duration = beats, params = params)
 
     _last_playhead = playhead
     playhead += beats

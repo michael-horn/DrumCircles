@@ -209,6 +209,7 @@
   left: unset;
   top: 15px;
   right: 0;
+  min-width: 200px;
 }
 .menu-button {
   line-height: 28px;
