@@ -6651,10 +6651,9 @@
     SynthChain_pitchBend_closure: function SynthChain_pitchBend_closure(t0) {
       this.cents = t0;
     },
-    SynthChain_schedulePitchBend_closure: function SynthChain_schedulePitchBend_closure(t0, t1, t2) {
+    SynthChain_schedulePitchBend_closure: function SynthChain_schedulePitchBend_closure(t0, t1) {
       this.start = t0;
-      this.duration = t1;
-      this.cents = t2;
+      this.cents = t1;
     },
     SynthChain_releaseNote_closure: function SynthChain_releaseNote_closure() {
     },
@@ -8510,6 +8509,11 @@
       }
       return t2;
     },
+    EffectCurve$: function(values, duration) {
+      var t1 = new K.EffectCurve(values, duration);
+      t1.EffectCurve$2(values, duration);
+      return t1;
+    },
     Effect: function Effect() {
     },
     BiquadFilter: function BiquadFilter(t0, t1) {
@@ -8544,6 +8548,11 @@
       _.start = 0;
       _.beats = -1;
       _.oparams = _.node = null;
+    },
+    EffectCurve: function EffectCurve(t0, t1) {
+      this.values = t0;
+      this.curve = null;
+      this.duration = t1;
     },
     Uuid$: function() {
       var options, t2, t1 = {};
@@ -8859,6 +8868,17 @@
     },
     elementAt$1: function(receiver, index) {
       return this.$index(receiver, index);
+    },
+    sublist$2: function(receiver, start, end) {
+      if (start < 0 || start > receiver.length)
+        throw H.wrapException(P.RangeError$range(start, 0, receiver.length, "start", null));
+      end = receiver.length;
+      if (start === end)
+        return H.setRuntimeTypeInfo([], H._arrayInstanceType(receiver));
+      return H.setRuntimeTypeInfo(receiver.slice(start, end), H._arrayInstanceType(receiver));
+    },
+    sublist$1: function($receiver, start) {
+      return this.sublist$2($receiver, start, null);
     },
     get$last: function(receiver) {
       var t1 = receiver.length;
@@ -9427,25 +9447,6 @@
     },
     where$1: function(_, test) {
       return this.super$Iterable$where(0, H._instanceType(this)._eval$1("bool(ListIterable.E)")._as(test));
-    },
-    toList$1$growable: function(_, growable) {
-      var i, t1, _this = this,
-        result = H.setRuntimeTypeInfo([], H._instanceType(_this)._eval$1("JSArray<ListIterable.E>"));
-      C.JSArray_methods.set$length(result, _this.get$length(_this));
-      i = 0;
-      while (true) {
-        t1 = _this.get$length(_this);
-        if (typeof t1 !== "number")
-          return H.iae(t1);
-        if (!(i < t1))
-          break;
-        C.JSArray_methods.$indexSet(result, i, _this.elementAt$1(0, i));
-        ++i;
-      }
-      return result;
-    },
-    toList$0: function($receiver) {
-      return this.toList$1$growable($receiver, true);
     }
   };
   H.ListIterator.prototype = {
@@ -16589,12 +16590,6 @@
     $isAudioNode: 1
   };
   P.AudioParam.prototype = {
-    set$value: function(receiver, value) {
-      receiver.value = value;
-    },
-    cancelScheduledValues$1: function(receiver, startTime) {
-      return receiver.cancelScheduledValues(startTime);
-    },
     setValueCurveAtTime$3: function(receiver, values, time, duration) {
       return receiver.setValueCurveAtTime(type$.List_num._as(values), time, duration);
     },
@@ -19487,11 +19482,9 @@
       var t1 = this.nodes;
       t1.get$values(t1).forEach$1(0, new U.SynthChain_pitchBend_closure(cents));
     },
-    schedulePitchBend$3: function(start, duration, cents) {
-      var t1;
-      type$.List_num._as(cents);
-      t1 = this.nodes;
-      t1.get$values(t1).forEach$1(0, new U.SynthChain_schedulePitchBend_closure(start, duration, cents));
+    schedulePitchBend$2: function(start, cents) {
+      var t1 = this.nodes;
+      t1.get$values(t1).forEach$1(0, new U.SynthChain_schedulePitchBend_closure(start, cents));
     },
     releaseNote$0: function() {
       var t1 = this.nodes;
@@ -19522,7 +19515,7 @@
   };
   U.SynthChain_schedulePitchBend_closure.prototype = {
     call$1: function(node) {
-      return type$.SynthNode._as(node).schedulePitchBend$3(this.start, this.duration, this.cents);
+      return type$.SynthNode._as(node).schedulePitchBend$2(this.start, this.cents);
     },
     $signature: 21
   };
@@ -19759,7 +19752,7 @@
   };
   K.BiquadFilter.prototype = {
     connect$4: function(dest, bpm, delay, offset) {
-      var fp, qp, gp, t2, when, t3, t4, _this = this,
+      var fp, qp, gp, t2, t3, t4, fcurve, qcurve, gcurve, delta, _this = this,
         t1 = dest.context.createBiquadFilter();
       t1.type = _this.type;
       _this.node = t1;
@@ -19768,87 +19761,34 @@
       fp = t1.frequency;
       qp = t1.Q;
       gp = t1.gain;
-      t1 = dest.context.currentTime;
-      if (typeof t1 !== "number")
-        return t1.$add();
-      t2 = 60 / bpm;
-      when = t1 + delay + _this.start * t2 - offset;
       t1 = _this.params;
       if (0 >= t1.length)
         return H.ioore(t1, 0);
-      t3 = t1[0];
-      if (0 >= t3.length)
-        return H.ioore(t3, 0);
-      (fp && C.AudioParam_methods).set$value(fp, t3[0]);
+      t2 = t1[0];
+      t3 = _this.beats;
+      t4 = 60 / bpm;
+      if (typeof t3 !== "number")
+        return t3.$mul();
+      fcurve = K.EffectCurve$(t2, t3 * t4);
       if (1 >= t1.length)
         return H.ioore(t1, 1);
       t3 = t1[1];
-      if (0 >= t3.length)
-        return H.ioore(t3, 0);
-      (qp && C.AudioParam_methods).set$value(qp, t3[0]);
+      t2 = _this.beats;
+      if (typeof t2 !== "number")
+        return t2.$mul();
+      qcurve = K.EffectCurve$(t3, t2 * t4);
       if (2 >= t1.length)
         return H.ioore(t1, 2);
-      t3 = t1[2];
-      if (0 >= t3.length)
-        return H.ioore(t3, 0);
-      (gp && C.AudioParam_methods).set$value(gp, t3[0]);
-      t3 = _this.beats;
-      if (typeof t3 !== "number")
-        return t3.$gt();
-      if (t3 > 0) {
-        if (0 >= t1.length)
-          return H.ioore(t1, 0);
-        t3 = t1[0].length > 1;
-      } else
-        t3 = false;
-      if (t3) {
-        fp.cancelScheduledValues(0);
-        if (0 >= t1.length)
-          return H.ioore(t1, 0);
-        t3 = t1[0];
-        t4 = _this.beats;
-        if (typeof t4 !== "number")
-          return t4.$mul();
-        C.AudioParam_methods.setValueCurveAtTime$3(fp, t3, when, t4 * t2);
-      }
-      t3 = _this.beats;
-      if (typeof t3 !== "number")
-        return t3.$gt();
-      if (t3 > 0) {
-        if (1 >= t1.length)
-          return H.ioore(t1, 1);
-        t3 = t1[1].length > 1;
-      } else
-        t3 = false;
-      if (t3) {
-        qp.cancelScheduledValues(0);
-        if (1 >= t1.length)
-          return H.ioore(t1, 1);
-        t3 = t1[1];
-        t4 = _this.beats;
-        if (typeof t4 !== "number")
-          return t4.$mul();
-        C.AudioParam_methods.setValueCurveAtTime$3(qp, t3, when, t4 * t2);
-      }
-      t3 = _this.beats;
-      if (typeof t3 !== "number")
-        return t3.$gt();
-      if (t3 > 0) {
-        if (2 >= t1.length)
-          return H.ioore(t1, 2);
-        t3 = t1[2].length > 1;
-      } else
-        t3 = false;
-      if (t3) {
-        gp.cancelScheduledValues(0);
-        if (2 >= t1.length)
-          return H.ioore(t1, 2);
-        t1 = t1[2];
-        t3 = _this.beats;
-        if (typeof t3 !== "number")
-          return t3.$mul();
-        C.AudioParam_methods.setValueCurveAtTime$3(gp, t1, when, t3 * t2);
-      }
+      t1 = t1[2];
+      t2 = _this.beats;
+      if (typeof t2 !== "number")
+        return t2.$mul();
+      gcurve = K.EffectCurve$(t1, t2 * t4);
+      delta = delay + _this.start * t4 - offset;
+      t4 = type$.AudioContext;
+      fcurve.apply$3(fp, delta, t4._as(dest.context));
+      qcurve.apply$3(qp, delta, t4._as(dest.context));
+      gcurve.apply$3(gp, delta, t4._as(dest.context));
       return _this.node;
     },
     get$type: function(receiver) {
@@ -19857,7 +19797,7 @@
   };
   K.PitchBendEffect.prototype = {
     afterEffect$4: function($event, bpm, delay, offset) {
-      var t2, t3, t4, t5, _this = this,
+      var t2, t3, t4, curve, _this = this,
         t1 = _this.params;
       if (0 >= t1.length)
         return H.ioore(t1, 0);
@@ -19879,108 +19819,154 @@
             H.throwExpression(P.UnsupportedError$("insert"));
           t2.splice(0, 0, 0);
         }
-        t2 = 60 / bpm;
-        t3 = Math.max(0, delay + _this.start * t2 - offset);
-        t4 = _this.beats;
-        if (typeof t4 !== "number")
-          return t4.$mul();
         if (0 >= t1.length)
           return H.ioore(t1, 0);
-        t1 = type$.List_num._as(t1[0]);
-        t5 = $event.chain;
-        if (t5 != null)
-          t5.schedulePitchBend$3(t3, t4 * t2, t1);
+        t1 = t1[0];
+        t2 = _this.beats;
+        t3 = 60 / bpm;
+        if (typeof t2 !== "number")
+          return t2.$mul();
+        curve = K.EffectCurve$(t1, t2 * t3);
+        t2 = _this.start;
+        t1 = $event.chain;
+        if (t1 != null)
+          t1.schedulePitchBend$2(delay + t2 * t3 - offset, curve);
       }
     }
   };
   K.PanEffect.prototype = {
     connect$4: function(dest, bpm, delay, offset) {
-      var p, t2, t3, t4, t5, _this = this,
+      var p, t2, t3, _this = this,
         t1 = dest.context.createStereoPanner();
       _this.node = t1;
       t1.connect(dest, 0, 0);
-      t1 = type$.StereoPannerNode._as(_this.node);
-      p = t1.pan;
-      t2 = _this.params;
-      if (0 >= t2.length)
-        return H.ioore(t2, 0);
-      t3 = t2[0];
-      t4 = t3.length;
-      if (t4 === 0)
-        return t1;
-      if (0 >= t4)
-        return H.ioore(t3, 0);
-      (p && C.AudioParam_methods).set$value(p, t3[0]);
-      t1 = _this.beats;
-      if (typeof t1 !== "number")
-        return t1.$gt();
-      if (t1 > 0) {
-        if (0 >= t2.length)
-          return H.ioore(t2, 0);
-        t1 = t2[0].length > 1;
-      } else
-        t1 = false;
-      if (t1) {
-        t1 = dest.context.currentTime;
-        if (typeof t1 !== "number")
-          return t1.$add();
-        t3 = _this.start;
-        t4 = 60 / bpm;
-        p.cancelScheduledValues(0);
-        if (0 >= t2.length)
-          return H.ioore(t2, 0);
-        t2 = t2[0];
-        t5 = _this.beats;
-        if (typeof t5 !== "number")
-          return t5.$mul();
-        C.AudioParam_methods.setValueCurveAtTime$3(p, t2, t1 + delay + t3 * t4 - offset, t5 * t4);
-      }
+      p = type$.StereoPannerNode._as(_this.node).pan;
+      t1 = _this.params;
+      if (0 >= t1.length)
+        return H.ioore(t1, 0);
+      t1 = t1[0];
+      t2 = _this.beats;
+      t3 = 60 / bpm;
+      if (typeof t2 !== "number")
+        return t2.$mul();
+      K.EffectCurve$(t1, t2 * t3).apply$3(p, delay + _this.start * t3 - offset, type$.AudioContext._as(dest.context));
       return _this.node;
     }
   };
   K.GainEffect.prototype = {
     connect$4: function(dest, bpm, delay, offset) {
-      var param, t2, t3, t4, t5, _this = this,
+      var param, t2, t3, _this = this,
         t1 = J.createGain$0$x(dest.context);
       _this.node = t1;
       t1.connect(dest, 0, 0);
-      t1 = type$.GainNode._as(_this.node);
-      param = t1.gain;
-      t2 = _this.params;
-      if (0 >= t2.length)
-        return H.ioore(t2, 0);
-      t3 = t2[0];
-      t4 = t3.length;
-      if (t4 === 0)
-        return t1;
-      if (0 >= t4)
-        return H.ioore(t3, 0);
-      (param && C.AudioParam_methods).set$value(param, t3[0]);
-      t1 = _this.beats;
-      if (typeof t1 !== "number")
-        return t1.$gt();
-      if (t1 > 0) {
-        if (0 >= t2.length)
-          return H.ioore(t2, 0);
-        t1 = t2[0].length > 1;
-      } else
-        t1 = false;
-      if (t1) {
-        t1 = dest.context.currentTime;
-        if (typeof t1 !== "number")
-          return t1.$add();
-        t3 = _this.start;
-        t4 = 60 / bpm;
-        param.cancelScheduledValues(0);
-        if (0 >= t2.length)
-          return H.ioore(t2, 0);
-        t2 = t2[0];
-        t5 = _this.beats;
-        if (typeof t5 !== "number")
-          return t5.$mul();
-        C.AudioParam_methods.setValueCurveAtTime$3(param, t2, t1 + delay + t3 * t4 - offset, t5 * t4);
-      }
+      param = type$.GainNode._as(_this.node).gain;
+      t1 = _this.params;
+      if (0 >= t1.length)
+        return H.ioore(t1, 0);
+      t1 = t1[0];
+      t2 = _this.beats;
+      t3 = 60 / bpm;
+      if (typeof t2 !== "number")
+        return t2.$mul();
+      K.EffectCurve$(t1, t2 * t3).apply$3(param, delay + _this.start * t3 - offset, type$.AudioContext._as(dest.context));
       return _this.node;
+    }
+  };
+  K.EffectCurve.prototype = {
+    EffectCurve$2: function(values, duration) {
+      var t2, samples, srci, dsti, y0, y1, t10, index, t00, t, i, t11, y10, _this = this,
+        t1 = _this.values;
+      if (t1.length > 1) {
+        t2 = _this.duration;
+        if (typeof t2 !== "number")
+          return t2.$gt();
+        t2 = t2 > 0;
+      } else
+        t2 = false;
+      if (t2) {
+        t2 = _this.duration;
+        if (typeof t2 !== "number")
+          return H.iae(t2);
+        samples = C.JSNumber_methods.ceil$0(100 * t2);
+        t2 = new Array(samples);
+        t2.fixed$length = Array;
+        _this.set$curve(0, H.setRuntimeTypeInfo(t2, type$.JSArray_num));
+        t2 = t1.length;
+        srci = 1 / (t2 - 1);
+        dsti = 1 / (samples - 1);
+        if (0 >= t2)
+          return H.ioore(t1, 0);
+        y0 = t1[0];
+        if (1 >= t2)
+          return H.ioore(t1, 1);
+        y1 = t1[1];
+        for (t10 = srci, index = 1, t00 = 0, t = 0, i = 0; i < samples; ++i) {
+          t2 = _this.curve;
+          if (typeof y1 !== "number")
+            return y1.$sub();
+          if (typeof y0 !== "number")
+            return H.iae(y0);
+          (t2 && C.JSArray_methods).$indexSet(t2, i, y0 + (y1 - y0) * ((t - t00) / srci));
+          t += dsti;
+          if (t >= t10) {
+            t11 = t10 + srci;
+            ++index;
+            if (index < t1.length)
+              y10 = t1[index];
+            else
+              y10 = y1;
+            t00 = t10;
+            t10 = t11;
+            y0 = y1;
+            y1 = y10;
+          }
+        }
+      }
+    },
+    apply$3: function(param, timeDelta, context) {
+      var t3, p, i, _this = this,
+        time = context.currentTime,
+        t1 = _this.values,
+        t2 = t1.length;
+      if (t2 === 0)
+        return;
+      else {
+        if (t2 > 1) {
+          t3 = _this.duration;
+          if (typeof t3 !== "number")
+            return t3.$gt();
+          t3 = t3 > 0;
+        } else
+          t3 = false;
+        if (t3) {
+          param.cancelScheduledValues(0);
+          t1 = _this.duration;
+          if (timeDelta >= 0) {
+            t2 = _this.curve;
+            if (typeof time !== "number")
+              return time.$add();
+            C.AudioParam_methods.setValueCurveAtTime$3(param, t2, time + timeDelta, t1);
+          } else {
+            if (typeof t1 !== "number")
+              return H.iae(t1);
+            p = -timeDelta / t1;
+            if (p < 1) {
+              t2 = _this.curve;
+              t3 = t2.length;
+              i = C.JSNumber_methods.round$0(t3 * p);
+              if (i < t3)
+                C.AudioParam_methods.setValueCurveAtTime$3(param, (t2 && C.JSArray_methods).sublist$1(t2, i), time, t1);
+            }
+          }
+        } else {
+          if (0 >= t2)
+            return H.ioore(t1, 0);
+          param.value = t1[0];
+        }
+      }
+    },
+    set$curve: function(_, curve) {
+      this.curve = type$.List_num._as(curve);
     }
   };
   X.SynthEvent.prototype = {
@@ -20052,8 +20038,7 @@
     },
     pitchBend$1: function(cents) {
     },
-    schedulePitchBend$3: function(start, duration, cents) {
-      type$.List_num._as(cents);
+    schedulePitchBend$2: function(start, cents) {
     },
     get$id: function(receiver) {
       return this.id;
@@ -20187,16 +20172,9 @@
         return when.$add();
       t1.linearRampToValueAtTime(cents, when + 0.01);
     },
-    schedulePitchBend$3: function(start, duration, cents) {
-      var t1, when;
-      type$.List_num._as(cents);
-      t1 = this.osc;
-      when = t1.context.currentTime;
-      t1.detune.cancelScheduledValues(when);
-      t1 = this.osc.detune;
-      if (typeof when !== "number")
-        return when.$add();
-      (t1 && C.AudioParam_methods).setValueCurveAtTime$3(t1, cents, when + start, duration);
+    schedulePitchBend$2: function(start, cents) {
+      var t1 = this.osc;
+      cents.apply$3(t1.detune, start, type$.AudioContext._as(t1.context));
     },
     destroy$0: function() {
       var t1, _this = this;
@@ -20387,21 +20365,12 @@
         }
       }
     },
-    schedulePitchBend$3: function(start, duration, cents) {
-      var when, semitoneRatio, t1, t2, t3, exception, _this = this;
-      type$.List_num._as(cents);
-      t1 = _this.source;
-      if (t1 != null && _this.enabled) {
-        when = t1.context.currentTime;
+    schedulePitchBend$2: function(start, cents) {
+      var semitoneRatio, exception, fx, t2, t3,
+        t1 = this.source;
+      if (t1 != null && this.enabled)
         try {
-          t1 = t1.detune;
-          (t1 && C.AudioParam_methods).cancelScheduledValues$1(t1, when);
-          t1 = _this.source.detune;
-          t2 = cents;
-          t3 = when;
-          if (typeof t3 !== "number")
-            return t3.$add();
-          (t1 && C.AudioParam_methods).setValueCurveAtTime$3(t1, t2, t3 + start, duration);
+          cents.apply$3(t1.detune, start, type$.AudioContext._as(t1.context));
         } catch (exception) {
           H.unwrapException(exception);
           window;
@@ -20409,16 +20378,17 @@
             window.console.info("The browser does not support detune; Using playbackrate");
           semitoneRatio = Math.pow(2, 0.0008333333333333334);
           t1 = cents;
-          t2 = H.instanceType(t1);
-          cents = new H.MappedListIterable(t1, t2._eval$1("num(1)")._as(new B.SynthSampleNode_schedulePitchBend_closure(semitoneRatio)), t2._eval$1("MappedListIterable<1,num>")).toList$0(0);
-          t2 = _this.source.playbackRate;
-          t1 = cents;
-          t3 = when;
-          if (typeof t3 !== "number")
-            return t3.$add();
-          (t2 && C.AudioParam_methods).setValueCurveAtTime$3(t2, t1, t3 + start, duration);
+          fx = K.EffectCurve$(t1.values, t1.duration);
+          t1 = t1.curve;
+          t2 = type$.dynamic_Function_num._as(new B.SynthSampleNode_schedulePitchBend_closure(semitoneRatio));
+          t1.toString;
+          t3 = H._arrayInstanceType(t1);
+          fx.set$curve(0, type$.List_num._as(new H.MappedListIterable(t1, t3._eval$1("@(1)")._as(t2), t3._eval$1("MappedListIterable<1,@>"))));
+          cents = fx;
+          t3 = cents;
+          t2 = this.source;
+          t3.apply$3(t2.playbackRate, start, type$.AudioContext._as(t2.context));
         }
-      }
     },
     destroy$0: function() {
       this.super$SynthNode$destroy();
@@ -20436,11 +20406,9 @@
   };
   B.SynthSampleNode_schedulePitchBend_closure.prototype = {
     call$1: function(cent) {
-      var t1;
       H._asNumNullable(cent);
-      t1 = cent;
-      H.checkNum(t1);
-      return Math.pow(this.semitoneRatio, t1);
+      H.checkNum(cent);
+      return Math.pow(this.semitoneRatio, cent);
     },
     $signature: 64
   };
@@ -30444,7 +30412,7 @@
       _inherit = hunkHelpers.inherit,
       _inheritMany = hunkHelpers.inheritMany;
     _inherit(P.Object, null);
-    _inheritMany(P.Object, [H.JS_CONST, J.Interceptor, J.ArrayIterator, P._ListBase_Object_ListMixin, P.Iterable, H.ListIterator, P.Iterator, H.FixedLengthListMixin, H.UnmodifiableListMixin, H.Symbol, P.MapView, H.ConstantMap, H.JSInvocationMirror, H.Closure, H.TypeErrorDecoder, P.Error, H.ExceptionAndStackTrace, H._StackTrace, P.MapMixin, H.LinkedHashMapCell, H.LinkedHashMapKeyIterator, H.JSSyntaxRegExp, H._MatchImplementation, H.Rti, H._FunctionParameters, P._TimerImpl, P._AsyncAwaitCompleter, P.Stream, P._BufferingStreamSubscription, P._BroadcastStreamController, P.Future, P._Completer, P._FutureListener, P._Future, P._AsyncCallbackEntry, P.StreamSubscription, P.StreamTransformerBase, P._StreamController, P._SyncStreamControllerDispatch, P._AsyncStreamControllerDispatch, P._DelayedEvent, P._DelayedDone, P._PendingEvents, P._DoneStreamSubscription, P._StreamIterator, P.Timer, P.AsyncError, P._Zone, P._SetBase, P._LinkedHashSetCell, P._LinkedHashSetIterator, P.ListMixin, P._UnmodifiableMapMixin, P._ListQueueIterator, P.SetMixin, P._SetBase_Object_SetMixin, P.Codec, P._Base64Encoder, P._Base64Decoder, P._JsonStringifier, P.bool, P.DateTime, P.num, P.Duration, P.OutOfMemoryError, P.StackOverflowError, P._Exception, P.FormatException, P.Function, P.List, P.Map, P.Null, P.StackTrace, P._StringStackTrace, P.String, P.StringBuffer, P.Symbol0, W.CssStyleDeclarationBase, W._WrappedEvent, W._BeforeUnloadEventStreamProvider, W.CssClassSet, W.EventStreamProvider, W._StreamPool, W._Html5NodeValidator, W.ImmutableListMixin, W.NodeValidatorBuilder, W._SimpleNodeValidator, W._SvgNodeValidator, W.FixedSizeListIterator, W._DOMWindowCrossFrame, W.NodeValidator, W._SameOriginUriPolicy, W._ValidatingTreeSanitizer, P._StructuredClone, P._AcceptStructuredClone, P.JsObject, P._JSRandom, P._RectangleBase, P.Float32List, D.GrowableAudioBuffer, U.MIDIManager, U.MIDIEvent, X.PythonListener, X.PythonCompiler, S.Preprocessor, R.CodeMirrorListener, R.CodeMirror, S.Instrument, Y.BassFret, F.Drum, N.DrumPad, F.GFret, S.NoteEvent, B.MiniPiano, B.PianoKey, D.SequencerRow, D.SequencerDrumButton, D.SequencerButton, U.SynthChain, E.ClockSubscriber, E.Metronome, E.PlayClock, K.Effect, X.SynthEvent, D.Key, B.SynthNode, F.Note, L.Synthesizer, Y.Trace, Y.TraceEvent, Y.DataModel, Y.Datastore, Y.DatastoreEvent, Y.DatastoreException, Y._NoteRecorder_Object_ClockSubscriber, Y.NoteSpacer, Y.EffectsChain, Y.GraphicEq, Y.AudioRecorder, Y.RecordingStudio, Y.WaveformTrace, Y.TimelineListener, Y.Timeline, V.EffectsDial, V.ToggleButton, R.MixSlider, K.Uuid, O.TrackLibrary, B.UserList]);
+    _inheritMany(P.Object, [H.JS_CONST, J.Interceptor, J.ArrayIterator, P._ListBase_Object_ListMixin, P.Iterable, H.ListIterator, P.Iterator, H.FixedLengthListMixin, H.UnmodifiableListMixin, H.Symbol, P.MapView, H.ConstantMap, H.JSInvocationMirror, H.Closure, H.TypeErrorDecoder, P.Error, H.ExceptionAndStackTrace, H._StackTrace, P.MapMixin, H.LinkedHashMapCell, H.LinkedHashMapKeyIterator, H.JSSyntaxRegExp, H._MatchImplementation, H.Rti, H._FunctionParameters, P._TimerImpl, P._AsyncAwaitCompleter, P.Stream, P._BufferingStreamSubscription, P._BroadcastStreamController, P.Future, P._Completer, P._FutureListener, P._Future, P._AsyncCallbackEntry, P.StreamSubscription, P.StreamTransformerBase, P._StreamController, P._SyncStreamControllerDispatch, P._AsyncStreamControllerDispatch, P._DelayedEvent, P._DelayedDone, P._PendingEvents, P._DoneStreamSubscription, P._StreamIterator, P.Timer, P.AsyncError, P._Zone, P._SetBase, P._LinkedHashSetCell, P._LinkedHashSetIterator, P.ListMixin, P._UnmodifiableMapMixin, P._ListQueueIterator, P.SetMixin, P._SetBase_Object_SetMixin, P.Codec, P._Base64Encoder, P._Base64Decoder, P._JsonStringifier, P.bool, P.DateTime, P.num, P.Duration, P.OutOfMemoryError, P.StackOverflowError, P._Exception, P.FormatException, P.Function, P.List, P.Map, P.Null, P.StackTrace, P._StringStackTrace, P.String, P.StringBuffer, P.Symbol0, W.CssStyleDeclarationBase, W._WrappedEvent, W._BeforeUnloadEventStreamProvider, W.CssClassSet, W.EventStreamProvider, W._StreamPool, W._Html5NodeValidator, W.ImmutableListMixin, W.NodeValidatorBuilder, W._SimpleNodeValidator, W._SvgNodeValidator, W.FixedSizeListIterator, W._DOMWindowCrossFrame, W.NodeValidator, W._SameOriginUriPolicy, W._ValidatingTreeSanitizer, P._StructuredClone, P._AcceptStructuredClone, P.JsObject, P._JSRandom, P._RectangleBase, P.Float32List, D.GrowableAudioBuffer, U.MIDIManager, U.MIDIEvent, X.PythonListener, X.PythonCompiler, S.Preprocessor, R.CodeMirrorListener, R.CodeMirror, S.Instrument, Y.BassFret, F.Drum, N.DrumPad, F.GFret, S.NoteEvent, B.MiniPiano, B.PianoKey, D.SequencerRow, D.SequencerDrumButton, D.SequencerButton, U.SynthChain, E.ClockSubscriber, E.Metronome, E.PlayClock, K.Effect, K.EffectCurve, X.SynthEvent, D.Key, B.SynthNode, F.Note, L.Synthesizer, Y.Trace, Y.TraceEvent, Y.DataModel, Y.Datastore, Y.DatastoreEvent, Y.DatastoreException, Y._NoteRecorder_Object_ClockSubscriber, Y.NoteSpacer, Y.EffectsChain, Y.GraphicEq, Y.AudioRecorder, Y.RecordingStudio, Y.WaveformTrace, Y.TimelineListener, Y.Timeline, V.EffectsDial, V.ToggleButton, R.MixSlider, K.Uuid, O.TrackLibrary, B.UserList]);
     _inheritMany(J.Interceptor, [J.JSBool, J.JSNull, J.JavaScriptObject, J.JSArray, J.JSNumber, J.JSString, H.NativeByteBuffer, H.NativeTypedData, W.EventTarget, W.AccessibleNodeList, W.Event, W.Blob, W.CacheStorage, W.Client, W.Credential, W.CryptoKey, W.CssStyleValue, W.CssTransformComponent, W.CssRule, W._CssStyleDeclaration_Interceptor_CssStyleDeclarationBase, W.DataTransferItem, W.DataTransferItemList, W.DomException, W._DomRectList_Interceptor_ListMixin, W.DomRectReadOnly, W._DomStringList_Interceptor_ListMixin, W.DomTokenList, W.Entry, W._FileList_Interceptor_ListMixin, W.Gamepad, W.History, W._HtmlCollection_Interceptor_ListMixin, W.ImageData, W.Location, W.MediaList, W._MidiInputMap_Interceptor_MapMixin, W._MidiOutputMap_Interceptor_MapMixin, W.MimeType, W._MimeTypeArray_Interceptor_ListMixin, W.MutationRecord, W.NavigatorConcurrentHardware, W.NavigatorUserMediaError, W._NodeList_Interceptor_ListMixin, W.PaymentInstruments, W.PerformanceEntry, W.PerformanceNavigation, W.Plugin, W._PluginArray_Interceptor_ListMixin, W.RelatedApplication, W.RtcLegacyStatsReport, W.RtcSessionDescription, W._RtcStatsReport_Interceptor_MapMixin, W.Selection, W.SpeechGrammar, W._SpeechGrammarList_Interceptor_ListMixin, W.SpeechRecognitionResult, W._Storage_Interceptor_MapMixin, W.StyleMedia, W.StyleSheet, W._TextTrackCueList_Interceptor_ListMixin, W.TimeRanges, W.Touch, W._TouchList_Interceptor_ListMixin, W.TrackDefault, W.TrackDefaultList, W.Url, W.VideoTrack, W.VttRegion, W.__CssRuleList_Interceptor_ListMixin, W.__GamepadList_Interceptor_ListMixin, W.__NamedNodeMap_Interceptor_ListMixin, W._Report, W.__SpeechRecognitionResultList_Interceptor_ListMixin, W.__StyleSheetList_Interceptor_ListMixin, P.KeyRange, P.Observation, P.Length, P._LengthList_Interceptor_ListMixin, P.Number, P._NumberList_Interceptor_ListMixin, P.PointList, P._StringList_Interceptor_ListMixin, P.Transform, P._TransformList_Interceptor_ListMixin, P.AudioBuffer, P.AudioParam, P._AudioParamMap_Interceptor_MapMixin, P.AudioTrack, P.ActiveInfo, P._SqlResultSetRowList_Interceptor_ListMixin]);
     _inheritMany(J.JavaScriptObject, [J.PlainJavaScriptObject, J.UnknownJavaScriptObject, J.JavaScriptFunction]);
     _inherit(J.JSUnmodifiableArray, J.JSArray);
@@ -30674,7 +30642,7 @@
     mangledNames: {},
     getTypeFromName: getGlobalFromName,
     metadata: [],
-    types: ["Null(MouseEvent)", "Null()", "~()", "Null(@,@)", "Null(Event)", "~(KeyboardEvent)", "Future<Null>(MouseEvent)", "Null(@)", "@(@)", "bool(String)", "~(@)", "~(String,String)", "Null(Element)", "~(Object[StackTrace])", "~(String,@)", "~(Map<@,@>)", "~(ClockSubscriber)", "Future<Null>(ProgressEvent)", "~(~())", "int(String)", "~(String)", "~(SynthNode)", "~(ProgressEvent)", "~(num)", "List<Function>()", "Null(PythonCell)", "~(Metronome)", "Null(Symbol0,@)", "Null(String,String)", "bool(bool,CssClassSetImpl)", "bool(NodeValidator)", "~(Object)", "~(Set<String>)", "Future<Null>(@)", "Null(DomException)", "Null(EffectsDial,num)", "bool(Element,String,String,_Html5NodeValidator)", "Null(DatastoreEvent)", "Null(MixSlider,num)", "String(int)", "Null(AudioProcessingEvent)", "bool(Node)", "Null(SynthNode)", "~(Event)", "Null(SequencerButton)", "Null(BeforeUnloadEvent)", "JsArray<@>(@)", "JsObject(@)", "Future<List<@>>()", "@(String)", "Null(@[StackTrace])", "_Future<@>(@)", "@(@,String)", "~(Element)", "~(PianoKey)", "Null(SequencerRow)", "Element(Node)", "bool(Set<String>)", "@(@,@)", "Null(~())", "Object(@)", "Null(Timer)", "~(Node,Node)", "double(@)", "num(num)", "~(SynthEvent)", "String(String)", "Future<@>()", "@(Event)", "bool(Event)", "@(CssClassSetImpl)", "Null(MIDIEvent)", "Null(KeyboardEvent)", "String(HttpRequest)", "Null(NoteEvent)", "Null(ProgressEvent)", "~(String,String,String,String)", "~(CssClassSetImpl)", "Null(@,StackTrace)", "Null(MediaStream)", "~(Recording)", "Future<Null>(Event)", "CssClassSet(Element)", "Node(SvgElement)", "Null(String,@)", "Null(num)", "Null(int)", "Null(int,@)", "int(User,User)", "Null(NavigatorUserMediaError)", "Null(AudioBuffer)", "JsFunction(@)"],
+    types: ["Null(MouseEvent)", "Null()", "~()", "Null(@,@)", "Null(Event)", "~(KeyboardEvent)", "Future<Null>(MouseEvent)", "Null(@)", "@(@)", "bool(String)", "~(@)", "~(String,String)", "Null(Element)", "~(Object[StackTrace])", "~(String,@)", "~(Map<@,@>)", "~(ClockSubscriber)", "Future<Null>(ProgressEvent)", "~(~())", "int(String)", "~(String)", "~(SynthNode)", "~(ProgressEvent)", "~(num)", "List<Function>()", "Null(PythonCell)", "~(Metronome)", "Null(Symbol0,@)", "Null(String,String)", "bool(bool,CssClassSetImpl)", "bool(NodeValidator)", "~(Object)", "~(Set<String>)", "Future<Null>(@)", "Null(DomException)", "Null(EffectsDial,num)", "bool(Element,String,String,_Html5NodeValidator)", "Null(DatastoreEvent)", "Null(MixSlider,num)", "String(int)", "Null(AudioProcessingEvent)", "bool(Node)", "Null(SynthNode)", "~(Event)", "Null(SequencerButton)", "Null(BeforeUnloadEvent)", "JsArray<@>(@)", "JsObject(@)", "Future<List<@>>()", "@(String)", "Null(@[StackTrace])", "_Future<@>(@)", "@(@,String)", "~(Element)", "~(PianoKey)", "Null(SequencerRow)", "Element(Node)", "bool(Set<String>)", "@(@,@)", "Null(~())", "Object(@)", "Null(Timer)", "~(Node,Node)", "double(@)", "num(@)", "~(SynthEvent)", "String(String)", "Future<@>()", "@(Event)", "bool(Event)", "@(CssClassSetImpl)", "Null(MIDIEvent)", "Null(KeyboardEvent)", "String(HttpRequest)", "Null(NoteEvent)", "Null(ProgressEvent)", "~(String,String,String,String)", "~(CssClassSetImpl)", "Null(@,StackTrace)", "Null(MediaStream)", "~(Recording)", "Future<Null>(Event)", "CssClassSet(Element)", "Node(SvgElement)", "Null(String,@)", "Null(num)", "Null(int)", "Null(int,@)", "int(User,User)", "Null(NavigatorUserMediaError)", "Null(AudioBuffer)", "JsFunction(@)"],
     interceptorsByTag: null,
     leafTags: null,
     arrayRti: typeof Symbol == "function" && typeof Symbol() == "symbol" ? Symbol("$ti") : "$ti"
@@ -30922,6 +30890,7 @@
       dynamic_Function_Set_String: findType("@(Set<String>)"),
       dynamic_Function_dynamic: findType("@(@)"),
       dynamic_Function_dynamic_dynamic: findType("@(@,@)"),
+      dynamic_Function_num: findType("@(num)"),
       int: findType("int"),
       num: findType("num"),
       void: findType("~"),
